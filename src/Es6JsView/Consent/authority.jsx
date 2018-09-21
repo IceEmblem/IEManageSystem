@@ -28,6 +28,10 @@ export default class Authority extends React.Component{
 		if(data.isSuccess == true){
 			this.setState({ authorityInfo: data.value });
 		}
+		else{
+			let errorMessage = "发生了一个错误：" + data.message;
+			$("#error").text(errorMessage);
+		}
 	}
 
 	// 获取授权信息
@@ -47,6 +51,10 @@ export default class Authority extends React.Component{
 		else{
 			if(data.redirectHref != null){
 				$(location).attr('href', data.redirectHref);
+			}
+			else{
+				let errorMessage = "发生了一个错误：" + data.message;
+				$("#error").text(errorMessage);
 			}
 		}
 	}
@@ -130,7 +138,10 @@ export default class Authority extends React.Component{
 		}
 
 		return(<div className="col-md-8 card float-left authority">
-                        <div className="card-header"> { authorityInfo.clientName } 申请一下权限</div>
+                        <div className="card-header"> 
+                        	<span>{ authorityInfo.clientName } 申请以下权限</span> 
+                        	<span id="error" className="text-danger float-right"></span>
+                        </div>
                         <div className="card-body">
                             <div className="col-md-12 authority-list">
                                 <div className="col-md-2"></div>
