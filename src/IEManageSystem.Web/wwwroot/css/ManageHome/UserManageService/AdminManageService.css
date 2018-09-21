@@ -1,0 +1,136 @@
+﻿body {
+}
+
+.commoncontent {
+}
+
+.commonheadercss {
+    margin-top: 10px;
+    background-color: #00EEEE;
+}
+
+    .commonheadercss h4 {
+        color: #FFFFFF;
+        display: inline-block;
+    }
+
+    .commonheadercss .form-control {
+        width: 20%;
+        margin-top: 4px;
+        height: 30px;
+    }
+
+    .commonheadercss .btn {
+        margin-top: 4px;
+        margin-left: 3px;
+        height: 30px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+
+
+.commonbodycss {
+    border: 1px solid #00EEEE;
+    border-top: 0px;
+}
+
+    .commonbodycss input {
+        margin-right: 5px;
+    }
+
+
+.commonfootercss {
+}
+
+
+.popupbox {
+    display: none;
+    position: absolute;
+    left: 350px;
+    top: 200px;
+}
+
+    .popupbox > div {
+        width: 250px;
+        height: 150px;
+    }
+
+    .popupbox .card-text {
+        padding:10px 0px 10px 0px;
+    }
+
+    .popupbox .pull-left {
+        margin-left: 0px;
+    }
+
+    .popupbox .pull-right {
+        margin-right: 20px;
+    }
+
+.userInfopopupbox {
+    display: none;
+    position: absolute;
+    left: 250px;
+    top: 100px;
+    width:400px;
+}
+
+    .userInfopopupbox label {
+        color: #000000;
+    }
+
+    .userInfopopupbox li {
+        height: 50px;
+        padding-left:0px;
+        padding-right:0px;
+    }
+        .userInfopopupbox li > div {
+            float:left;
+            color:#000000;
+        }
+        .addAdminPopupbox {
+            display: none;
+            position: absolute;
+            width: 500px;
+            top: 100px;
+            left: 200px;
+            box-shadow: 0px 0px 5px gray;
+            background-color: #FFFFFF;
+            border-radius: 0px 20px 0px 0px;
+            overflow: hidden;
+        }
+
+    .addAdminPopupbox .aP_header {
+        background: linear-gradient(to right, #00C5CD, #00EEEE);
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .addAdminPopupbox .aP_body {
+        height: 250px;
+    }
+
+        .addAdminPopupbox .aP_body .licss {
+            height: 40px;
+        }
+            .addAdminPopupbox .licss > div {
+                float:left;
+            }
+            .addAdminPopupbox .aP_body .text-info {
+                padding: 0px 0px 10px 25px;
+            }
+
+        .addAdminPopupbox .aP_body .form-control {
+            height: 25px;
+        }
+
+    .addAdminPopupbox .aP_footer {
+        display: block;
+        border-top: 10px;
+        border-top-color: #00EEEE;
+    }
+
+        .addAdminPopupbox .aP_footer input {
+            margin: 0px 7px 5px 0px;
+        }

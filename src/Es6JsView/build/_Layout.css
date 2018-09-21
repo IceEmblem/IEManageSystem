@@ -1,0 +1,105 @@
+﻿body {
+    font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+a {
+    color: #777
+}
+
+    a:hover {
+        color: #F00;
+        text-decoration: none
+    }
+/* 鼠标经过悬停字体颜色 */
+div {
+}
+
+.navtop {
+    background-image: url(/BackgroundPic/Layout/Layout_BackPic.jpg);
+}
+
+    .navtop a {
+        display: inline-block;
+        margin: auto 10px auto auto;
+    }
+
+.flex-container-col {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+}
+
+.flex-container-row {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+.navmain {
+}
+
+    .navmain ul {
+        width: 100%;
+    }
+
+    .navmain li {
+        margin: auto;
+        border-radius: 10px;
+    }
+
+        .navmain li:hover {
+            background-color: #00C5CD;
+        }
+
+        .navmain li a {
+            color: white;
+        }
+
+.navbom {
+}
+
+    .navbom ul {
+        margin: auto;
+    }
+
+.Content {
+    margin-top: 20px;
+    margin-bottom: 70px;
+}
+
+
+.CardImgBackItem {
+    overflow: hidden;
+}
+
+    .CardImgBackItem a {
+        border-radius: 20px;
+        margin-left: 10px;
+    }
+
+    .CardImgBackItem .card-title {
+        margin: 0px;
+    }
+
+    .CardImgBackItem > div {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: stretch;
+        align-items: stretch;
+        padding: 2%;
+    }
+
+        .CardImgBackItem > div > div {
+            width: 100%;
+            margin-top: auto;
+            padding: 0px 5px 5px 5px;
+            color: white;
+            background-color: rgba(0,0,0,0.3);
+        }

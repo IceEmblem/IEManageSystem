@@ -1,0 +1,9 @@
+{
+"react": "../lib/react.min.js",
+"react-dom": "../lib/react-dom.min.js",
+"babel": "../lib/babel.min.js",
+"jquery":"../lib/jquery-3.3.1.min.js",
+"bootstrap":"../lib/bootstrap.min.js",
+"popper":"../lib/popper.min",
+"jqueryform":"../lib/jquery.form.js"
+}

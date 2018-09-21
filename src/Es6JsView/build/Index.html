@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="_Layout.css">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="jquery.form.js"></script>
+    <title>冰纹</title>
+    <style type="text/css">
+        li{
+            list-style-type: none;
+        }
+        .class-list{
+            box-shadow: 0px 2px 2px gray;
+        }
+        .class-list ul{
+            display: flex;
+        }
+        .class-list li{
+            float: left;
+        }
+        .class-list li button{
+            color: #000000
+        }
+        .class-list li button:first-child{
+
+        }
+
+        .select-sort{
+            margin-top:20px;
+        }
+        .select-sort li{
+            float: left;
+        }
+        .select-sort li button{
+            margin-right: 10px;
+        }
+        .select-sort li.sort-button button:hover{
+            background-color: #87cefa;
+        }
+
+        .game{
+            margin-top: 20px;
+        }
+        .game>div{
+            float:left;
+        }
+        .game-list>div{
+            float: left;
+        }
+        .game-list>div>div{
+            margin:5px;
+            display: inline-block;
+            box-shadow: 0px 0px 2px gray;
+            border-radius: 5px;
+        }
+        .game-list>div>div>div{
+            float: left;
+        }
+
+        .game-recommend>div{
+            width: 100%;
+            background-size:100% 100%;
+            background-image: url();
+            box-shadow: 0px 0px 3px; background: linear-gradient(to bottom right, #00C5CD , #00EEEE);
+            color: #ffffff;
+        }
+        .game-recommend .list-group{
+            width: 100%;
+        }
+        .game-recommend a{
+            padding:5px 5px 5px 5px;
+            margin: 5px 0px 5px 0px;
+            border: 0px;
+            border-radius: 10px;
+            text-align: left;
+            opacity:0.8;
+            /*background-color: #00EEEE;
+            color: #ffffff;*/
+        }
+        .game-recommend h5{
+            padding: 5px 5px 5px 5px;
+            margin: -6px -6px 5px -6px;
+        }
+
+        .pading-btn{
+            margin-top:20px;
+        }
+        .pading-btn ul{
+            display: flex;
+        }
+        .pading-btn ul li:first-child{
+            margin-left:auto;
+        }
+        .pading-btn ul li:last-child{
+            margin-right:auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-white navbar-white navtop">
+        <div style="width: 100%;">
+            <a class="navbar-brand" href="#">IceEmblem</a>
+            <form class="form-inline float-right">
+                <div class="input-group">
+                    <!-- <span class="input-group-addon">@@</span> -->
+                    <div class="flex-container-col mx-auto">
+                        <a class="flex-item" href="/Account"><span class="glyphicon glyphicon-user"></span>登录</a></li>
+                        <a class="flex-item" href="/Account">注册</a>
+                    </div>
+                    <input type="text" class="form-control" placeholder="输入搜索内容">
+                    <button class="btn btn-outline-info" type="submit">搜索一下</button>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-md bg-info navbar-primary navbar-fixed-top navmain">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="flex-container-row navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">IceEmblem</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">小游戏</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">手机游戏</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PC游戏</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">VR游戏</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cosplay</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">游戏解说</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">消息推送</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid Content">
+        <div id="RJContainer" class="w-100">
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom mx-auto navbom flex-container-row">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">关于我们</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">加入我们</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+            由冰纹工作室开发
+        </span>
+    </nav>
+<script type="text/javascript" src="gama.bundle.js"></script></body>
+</html>

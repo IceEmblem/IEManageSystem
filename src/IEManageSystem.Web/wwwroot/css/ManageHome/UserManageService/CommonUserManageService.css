@@ -1,0 +1,99 @@
+﻿body {
+}
+
+.commoncontent {
+}
+
+.commonheadercss {
+    margin-top: 10px;
+    background-color: #00EEEE;
+}
+
+    .commonheadercss h4 {
+        color: #FFFFFF;
+        display: inline-block;
+        padding:0px;
+    }
+
+    .commonheadercss .form-control {
+        display:inline-block;
+        width: 20%;
+        margin-top: 4px;
+        height: 30px;
+    }
+
+    .commonheadercss .btn {
+        margin-top: 4px;
+        margin-left: 3px;
+        height: 30px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+
+
+.commonbodycss {
+    border: 1px solid #00EEEE;
+    border-top: 0px;
+}
+
+    .commonbodycss input {
+        margin-right: 5px;
+    }
+
+
+.commonfootercss {
+}
+
+
+.popupbox {
+    display: none;
+    position: absolute;
+    left: 350px;
+    top: 200px;
+}
+
+    .popupbox > div {
+        width: 250px;
+    }
+
+    .popupbox .panel-heading {
+        background-color: #0ACEEE;
+    }
+
+    .popupbox .card-text {
+        padding:20px 10px 20px 10px;
+    }
+
+    .popupbox .pull-left {
+        margin-left: 20px;
+    }
+
+    .popupbox .pull-right {
+        margin-right: 20px;
+    }
+
+.userInfopopupbox {
+    display: none;
+    position: absolute;
+    left: 350px;
+    top: 80px;
+    width:400px;
+}
+    .userInfopopupbox .list-group-item div {
+        float:left;
+    }
+    .userInfopopupbox label {
+        color: #000000;
+    }
+
+    .userInfopopupbox .card-body {
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .userInfopopupbox li {
+        height: 50px;
+        background-color:rgba(255,255,255,0);
+        color:white;
+        border-color:white
+    }

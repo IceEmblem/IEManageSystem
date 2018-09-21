@@ -1,0 +1,1106 @@
+DEBUG 2018-08-14 23:01:54,554 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-14 23:01:54,870 [1    ] Abp.Modules.AbpModuleManager             - Found 7 ABP modules in total.
+DEBUG 2018-08-14 23:01:54,900 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:01:54,906 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:01:54,906 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:01:54,907 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:01:54,907 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:01:54,908 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:01:54,909 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:01:54,914 [1    ] Abp.Modules.AbpModuleManager             - 7 modules loaded.
+DEBUG 2018-08-14 23:01:56,365 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2018-08-14 23:01:56,719 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-14 23:01:56,856 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-14 23:01:56,880 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+FATAL 2018-08-14 23:01:57,861 [1    ] Abp.AbpBootstrapper                      - Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+DEBUG 2018-08-14 23:02:41,712 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-14 23:02:41,733 [1    ] Abp.Modules.AbpModuleManager             - Found 7 ABP modules in total.
+DEBUG 2018-08-14 23:02:41,740 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:02:41,828 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:02:41,831 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:02:41,832 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:02:41,833 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:02:41,834 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:02:41,837 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:02:41,850 [1    ] Abp.Modules.AbpModuleManager             - 7 modules loaded.
+DEBUG 2018-08-14 23:02:42,121 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2018-08-14 23:02:42,168 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-14 23:02:42,214 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-14 23:02:42,239 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+FATAL 2018-08-14 23:02:42,270 [1    ] Abp.AbpBootstrapper                      - Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+FATAL 2018-08-14 23:02:42,830 [1    ] soft.AspNetCore.Hosting.Internal.WebHost - Application startup exception
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app) in D:\Github\aspnetboilerplate\src\Abp.AspNetCore\AspNetCore\AbpApplicationBuilderExtensions.cs:line 67
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction) in D:\Github\aspnetboilerplate\src\Abp.AspNetCore\AspNetCore\AbpApplicationBuilderExtensions.cs:line 38
+   at IEManageSystem.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\Startup\Startup.cs:line 93
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.Configure(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.BuildApplication()
+INFO  2018-08-14 23:02:44,441 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:02:44,642 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 202.3986ms 500 text/html; charset=utf-8
+INFO  2018-08-14 23:02:47,049 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/favicon.ico  
+INFO  2018-08-14 23:02:47,068 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 19.4318ms 500 text/html; charset=utf-8
+DEBUG 2018-08-14 23:04:10,987 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-14 23:04:11,041 [1    ] Abp.Modules.AbpModuleManager             - Found 7 ABP modules in total.
+DEBUG 2018-08-14 23:04:11,046 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:11,049 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:11,049 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:11,049 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:11,049 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:11,050 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:11,050 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:11,053 [1    ] Abp.Modules.AbpModuleManager             - 7 modules loaded.
+DEBUG 2018-08-14 23:04:11,593 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2018-08-14 23:04:11,653 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-14 23:04:11,695 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-14 23:04:11,718 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+FATAL 2018-08-14 23:04:11,793 [1    ] Abp.AbpBootstrapper                      - Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+DEBUG 2018-08-14 23:04:35,458 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-14 23:04:35,573 [1    ] Abp.Modules.AbpModuleManager             - Found 7 ABP modules in total.
+DEBUG 2018-08-14 23:04:35,578 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:35,581 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:35,581 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:35,582 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:35,582 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:35,582 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:35,583 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:04:35,586 [1    ] Abp.Modules.AbpModuleManager             - 7 modules loaded.
+DEBUG 2018-08-14 23:04:35,822 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2018-08-14 23:04:35,870 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-14 23:04:35,920 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-14 23:04:35,948 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+FATAL 2018-08-14 23:04:35,982 [1    ] Abp.AbpBootstrapper                      - Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+FATAL 2018-08-14 23:04:36,023 [1    ] soft.AspNetCore.Hosting.Internal.WebHost - Application startup exception
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'Abp.BackgroundJobs.BackgroundJobStore' as it has dependencies to be satisfied.
+
+'Abp.BackgroundJobs.BackgroundJobStore' is waiting for the following dependencies:
+- Service 'Abp.Domain.Repositories.IRepository`2[[Abp.BackgroundJobs.BackgroundJobInfo, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null],[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.AbpKernelModule.PostInitialize() in D:\Github\aspnetboilerplate\src\Abp\AbpKernelModule.cs:line 79
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at Abp.AbpBootstrapper.Initialize() in D:\Github\aspnetboilerplate\src\Abp\AbpBootstrapper.cs:line 155
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.InitializeAbp(IApplicationBuilder app) in D:\Github\aspnetboilerplate\src\Abp.AspNetCore\AspNetCore\AbpApplicationBuilderExtensions.cs:line 67
+   at Abp.AspNetCore.AbpApplicationBuilderExtensions.UseAbp(IApplicationBuilder app, Action`1 optionsAction) in D:\Github\aspnetboilerplate\src\Abp.AspNetCore\AspNetCore\AbpApplicationBuilderExtensions.cs:line 38
+   at IEManageSystem.Web.Host.Startup.Startup.Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\Startup\Startup.cs:line 70
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.Configure(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.BuildApplication()
+INFO  2018-08-14 23:04:36,522 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:04:36,639 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 120.3829ms 500 text/html; charset=utf-8
+INFO  2018-08-14 23:04:37,505 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/favicon.ico  
+INFO  2018-08-14 23:04:37,512 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 7.7724ms 500 text/html; charset=utf-8
+DEBUG 2018-08-14 23:14:22,352 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-14 23:14:22,664 [1    ] Abp.Modules.AbpModuleManager             - Found 14 ABP modules in total.
+DEBUG 2018-08-14 23:14:22,674 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,678 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,679 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,679 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,680 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,680 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,681 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,698 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.EntityFrameworkCore.IEManageSystemEntityFrameworkModule, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,698 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,699 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,699 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,699 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,699 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,699 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:22,702 [1    ] Abp.Modules.AbpModuleManager             - 14 modules loaded.
+DEBUG 2018-08-14 23:14:23,026 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:14:23,026 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:14:23,027 [1    ] o.Configuration.LanguageManagementConfig - Converted IEManageSystem (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:14:23,027 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:14:23,574 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: IEManageSystem.EntityFrameworkCore.IEManageSystemDbContext, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:14:24,986 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2018-08-14 23:14:25,160 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-14 23:14:25,241 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-14 23:14:25,331 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+DEBUG 2018-08-14 23:14:25,396 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2018-08-14 23:14:25,540 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2018-08-14 23:14:25,628 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 9 classes define auto mapping attributes
+DEBUG 2018-08-14 23:14:25,628 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.CreateUserDto
+DEBUG 2018-08-14 23:14:25,633 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.UserDto
+DEBUG 2018-08-14 23:14:25,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2018-08-14 23:14:25,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.UserLoginInfoDto
+DEBUG 2018-08-14 23:14:25,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.CreateRoleDto
+DEBUG 2018-08-14 23:14:25,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.PermissionDto
+DEBUG 2018-08-14 23:14:25,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.RoleDto
+DEBUG 2018-08-14 23:14:25,635 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2018-08-14 23:14:25,635 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.TenantDto
+INFO  2018-08-14 23:14:43,429 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:14:43,429 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 DEBUG http://localhost:21021/  0
+INFO  2018-08-14 23:14:43,606 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 173.658ms 200 
+INFO  2018-08-14 23:14:44,156 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 738.2186ms 404 
+INFO  2018-08-14 23:14:44,651 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:14:44,660 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 6.2382ms 404 
+INFO  2018-08-14 23:15:00,658 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/favicon.ico  
+INFO  2018-08-14 23:15:00,663 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 5.5924ms 404 
+INFO  2018-08-14 23:15:09,957 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swarger  
+INFO  2018-08-14 23:15:09,965 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 2.7365ms 404 
+INFO  2018-08-14 23:15:10,185 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swarger  
+INFO  2018-08-14 23:15:10,189 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 3.0512ms 404 
+INFO  2018-08-14 23:15:34,912 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger  
+INFO  2018-08-14 23:15:34,922 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 11.4167ms 301 
+INFO  2018-08-14 23:15:35,107 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/index.html  
+INFO  2018-08-14 23:15:35,192 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 86.2406ms 200 text/html
+INFO  2018-08-14 23:15:35,678 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui.css  
+INFO  2018-08-14 23:15:35,759 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-bundle.js  
+INFO  2018-08-14 23:15:35,829 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-standalone-preset.js  
+INFO  2018-08-14 23:15:35,906 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.js  
+INFO  2018-08-14 23:15:35,908 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.swagger.js  
+INFO  2018-08-14 23:15:35,954 [11   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+INFO  2018-08-14 23:15:35,965 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 287.5516ms 200 text/css
+INFO  2018-08-14 23:15:36,040 [15   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+INFO  2018-08-14 23:15:36,045 [15   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 212.3545ms 200 application/javascript
+INFO  2018-08-14 23:15:36,057 [6    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\wwwroot\swagger\ui\abp.js'
+INFO  2018-08-14 23:15:36,060 [11   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\wwwroot\swagger\ui\abp.swagger.js'
+INFO  2018-08-14 23:15:36,156 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 177.2058ms 200 application/javascript
+INFO  2018-08-14 23:15:36,160 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 177.2065ms 200 application/javascript
+INFO  2018-08-14 23:15:36,194 [7    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+INFO  2018-08-14 23:15:36,196 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 436.6943ms 200 application/javascript
+INFO  2018-08-14 23:15:38,589 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/v1/swagger.json  
+INFO  2018-08-14 23:15:38,887 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 300.2013ms 200 application/json;charset=utf-8
+INFO  2018-08-14 23:15:40,748 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/favicon-16x16.png  
+INFO  2018-08-14 23:15:40,777 [7    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+INFO  2018-08-14 23:15:40,782 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 32.0781ms 200 image/png
+INFO  2018-08-14 23:18:59,128 [34   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:21021/api/Account/RegisterAsync application/json-patch+json 58
+INFO  2018-08-14 23:18:59,636 [34   ] ore.Mvc.Internal.ControllerActionInvoker - Route matched with {action = "RegisterAsync", controller = "Account"}. Executing action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host)
+INFO  2018-08-14 23:18:59,705 [34   ] ore.Mvc.Internal.ControllerActionInvoker - Executed action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) in 61.8325ms
+ERROR 2018-08-14 23:19:00,243 [34   ] Microsoft.AspNetCore.Server.Kestrel      - Connection id "0HLG1V2KSKIVU", Request id "0HLG1V2KSKIVU:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: A CORS policy named 'localhost' could not be found.
+   at Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Abp.AspNetCore.Security.AbpSecurityHeadersMiddleware.Invoke(HttpContext httpContext) in D:\Github\aspnetboilerplate\src\Abp.AspNetCore\AspNetCore\Security\AbpSecurityHeadersMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+INFO  2018-08-14 23:19:00,265 [34   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 1153.0043ms 500 
+INFO  2018-08-14 23:19:00,318 [34   ] Microsoft.AspNetCore.Server.Kestrel      - Connection id "0HLG1V2KSKIVU", Request id "0HLG1V2KSKIVU:00000001": the application completed without reading the entire request body.
+DEBUG 2018-08-14 23:20:26,974 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-14 23:20:27,084 [1    ] Abp.Modules.AbpModuleManager             - Found 14 ABP modules in total.
+DEBUG 2018-08-14 23:20:27,092 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,095 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,095 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,095 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,096 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,096 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,096 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,096 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.EntityFrameworkCore.IEManageSystemEntityFrameworkModule, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,097 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,097 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,097 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,097 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,097 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,097 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:27,100 [1    ] Abp.Modules.AbpModuleManager             - 14 modules loaded.
+DEBUG 2018-08-14 23:20:27,159 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:20:27,159 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:20:27,159 [1    ] o.Configuration.LanguageManagementConfig - Converted IEManageSystem (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:20:27,159 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:20:27,505 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: IEManageSystem.EntityFrameworkCore.IEManageSystemDbContext, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:20:28,290 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2018-08-14 23:20:28,365 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-14 23:20:28,406 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-14 23:20:28,429 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+DEBUG 2018-08-14 23:20:28,458 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2018-08-14 23:20:28,604 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2018-08-14 23:20:28,780 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 9 classes define auto mapping attributes
+DEBUG 2018-08-14 23:20:28,780 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.CreateUserDto
+DEBUG 2018-08-14 23:20:28,784 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.UserDto
+DEBUG 2018-08-14 23:20:28,784 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2018-08-14 23:20:28,784 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.UserLoginInfoDto
+DEBUG 2018-08-14 23:20:28,784 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.CreateRoleDto
+DEBUG 2018-08-14 23:20:28,784 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.PermissionDto
+DEBUG 2018-08-14 23:20:28,784 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.RoleDto
+DEBUG 2018-08-14 23:20:28,785 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2018-08-14 23:20:28,785 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.TenantDto
+INFO  2018-08-14 23:20:34,884 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 DEBUG http://localhost:21021/  0
+INFO  2018-08-14 23:20:34,884 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:20:35,539 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 663.0852ms 200 
+INFO  2018-08-14 23:20:35,834 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 961.694ms 404 
+INFO  2018-08-14 23:20:36,323 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:20:36,342 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 16.9157ms 404 
+INFO  2018-08-14 23:20:51,815 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:21021/api/Account/RegisterAsync application/json-patch+json 58
+INFO  2018-08-14 23:20:52,316 [7    ] ore.Mvc.Internal.ControllerActionInvoker - Route matched with {action = "RegisterAsync", controller = "Account"}. Executing action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host)
+ERROR 2018-08-14 23:20:52,427 [7    ] Mvc.ExceptionHandling.AbpExceptionFilter - Can't create component 'IEManageSystem.Authorization.Users.UserRegistrationManager' as it has dependencies to be satisfied.
+
+'IEManageSystem.Authorization.Users.UserRegistrationManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Users.UserManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Users.UserManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Roles.RoleManager' is waiting for the following dependencies:
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'IEManageSystem.Authorization.Users.UserRegistrationManager' as it has dependencies to be satisfied.
+
+'IEManageSystem.Authorization.Users.UserRegistrationManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Users.UserManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Users.UserManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Roles.RoleManager' is waiting for the following dependencies:
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.MsDependencyInjection.ScopedWindsorServiceProvider.GetServiceInternal(Type serviceType, Boolean isOptional) in D:\Github\castle-windsor-ms-adapter\src\Castle.Windsor.MsDependencyInjection\ScopedWindsorServiceProvider.cs:line 55
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+INFO  2018-08-14 23:20:52,544 [7    ] ore.Mvc.Internal.ControllerActionInvoker - Executed action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) in 223.7329ms
+ERROR 2018-08-14 23:20:52,570 [7    ] Microsoft.AspNetCore.Server.Kestrel      - Connection id "0HLG1V5TL329D", Request id "0HLG1V5TL329D:00000002": An unhandled exception was thrown by the application.
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'IEManageSystem.Authorization.Users.UserRegistrationManager' as it has dependencies to be satisfied.
+
+'IEManageSystem.Authorization.Users.UserRegistrationManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Users.UserManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Users.UserManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Roles.RoleManager' is waiting for the following dependencies:
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.MsDependencyInjection.ScopedWindsorServiceProvider.GetServiceInternal(Type serviceType, Boolean isOptional) in D:\Github\castle-windsor-ms-adapter\src\Castle.Windsor.MsDependencyInjection\ScopedWindsorServiceProvider.cs:line 55
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ExceptionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Abp.AspNetCore.Security.AbpSecurityHeadersMiddleware.Invoke(HttpContext httpContext) in D:\Github\aspnetboilerplate\src\Abp.AspNetCore\AspNetCore\Security\AbpSecurityHeadersMiddleware.cs:line 26
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+INFO  2018-08-14 23:20:52,576 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 762.2548ms 500 
+INFO  2018-08-14 23:20:52,607 [7    ] Microsoft.AspNetCore.Server.Kestrel      - Connection id "0HLG1V5TL329D", Request id "0HLG1V5TL329D:00000002": the application completed without reading the entire request body.
+DEBUG 2018-08-14 23:22:03,758 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-14 23:22:03,833 [1    ] Abp.Modules.AbpModuleManager             - Found 14 ABP modules in total.
+DEBUG 2018-08-14 23:22:03,841 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,844 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,844 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,844 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,844 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,844 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,845 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,845 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.EntityFrameworkCore.IEManageSystemEntityFrameworkModule, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,845 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,846 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,846 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,846 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,846 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,846 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:03,849 [1    ] Abp.Modules.AbpModuleManager             - 14 modules loaded.
+DEBUG 2018-08-14 23:22:03,905 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:22:03,905 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:22:03,905 [1    ] o.Configuration.LanguageManagementConfig - Converted IEManageSystem (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:22:03,905 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:22:04,195 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: IEManageSystem.EntityFrameworkCore.IEManageSystemDbContext, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:22:04,881 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2018-08-14 23:22:04,928 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-14 23:22:04,968 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-14 23:22:04,991 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+DEBUG 2018-08-14 23:22:05,023 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2018-08-14 23:22:05,166 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2018-08-14 23:22:05,218 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 9 classes define auto mapping attributes
+DEBUG 2018-08-14 23:22:05,218 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.CreateUserDto
+DEBUG 2018-08-14 23:22:05,225 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.UserDto
+DEBUG 2018-08-14 23:22:05,227 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2018-08-14 23:22:05,227 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.UserLoginInfoDto
+DEBUG 2018-08-14 23:22:05,227 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.CreateRoleDto
+DEBUG 2018-08-14 23:22:05,227 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.PermissionDto
+DEBUG 2018-08-14 23:22:05,227 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.RoleDto
+DEBUG 2018-08-14 23:22:05,228 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2018-08-14 23:22:05,228 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.TenantDto
+INFO  2018-08-14 23:22:09,212 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 DEBUG http://localhost:21021/  0
+INFO  2018-08-14 23:22:09,212 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:22:09,305 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 113.6221ms 200 
+INFO  2018-08-14 23:22:09,571 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 382.0844ms 404 
+INFO  2018-08-14 23:22:09,627 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/favicon.ico  
+INFO  2018-08-14 23:22:09,628 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:22:09,631 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 3.6282ms 404 
+INFO  2018-08-14 23:22:09,639 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 16.0775ms 404 
+INFO  2018-08-14 23:22:17,517 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/index.html  
+INFO  2018-08-14 23:22:17,562 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 54.9876ms 200 text/html
+INFO  2018-08-14 23:22:17,659 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui.css  
+INFO  2018-08-14 23:22:17,662 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-bundle.js  
+INFO  2018-08-14 23:22:17,666 [14   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-standalone-preset.js  
+INFO  2018-08-14 23:22:17,701 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.swagger.js  
+INFO  2018-08-14 23:22:17,709 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.js  
+INFO  2018-08-14 23:22:17,784 [6    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\wwwroot\swagger\ui\abp.js'
+INFO  2018-08-14 23:22:17,785 [7    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+INFO  2018-08-14 23:22:17,787 [10   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+INFO  2018-08-14 23:22:17,792 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 92.4808ms 200 application/javascript
+INFO  2018-08-14 23:22:17,800 [6    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\wwwroot\swagger\ui\abp.swagger.js'
+INFO  2018-08-14 23:22:17,834 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 174.4925ms 200 text/css
+INFO  2018-08-14 23:22:17,835 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 122.6059ms 200 application/javascript
+INFO  2018-08-14 23:22:17,839 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 145.8533ms 200 application/javascript
+INFO  2018-08-14 23:22:17,891 [11   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+INFO  2018-08-14 23:22:17,893 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 250.3763ms 200 application/javascript
+INFO  2018-08-14 23:22:18,285 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/v1/swagger.json  
+INFO  2018-08-14 23:22:18,344 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/favicon-16x16.png  
+INFO  2018-08-14 23:22:18,360 [10   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+INFO  2018-08-14 23:22:18,363 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 19.276ms 200 image/png
+INFO  2018-08-14 23:22:18,484 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 197.3531ms 200 application/json;charset=utf-8
+INFO  2018-08-14 23:22:27,450 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:21021/api/Account/RegisterAsync application/json-patch+json 58
+INFO  2018-08-14 23:22:28,022 [10   ] ore.Mvc.Internal.ControllerActionInvoker - Route matched with {action = "RegisterAsync", controller = "Account"}. Executing action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host)
+ERROR 2018-08-14 23:22:28,063 [10   ] Mvc.ExceptionHandling.AbpExceptionFilter - Can't create component 'IEManageSystem.Authorization.Users.UserRegistrationManager' as it has dependencies to be satisfied.
+
+'IEManageSystem.Authorization.Users.UserRegistrationManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Users.UserManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Users.UserManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Roles.RoleManager' is waiting for the following dependencies:
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'IEManageSystem.Authorization.Users.UserRegistrationManager' as it has dependencies to be satisfied.
+
+'IEManageSystem.Authorization.Users.UserRegistrationManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Users.UserManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Users.UserManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Roles.RoleManager' is waiting for the following dependencies:
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.MsDependencyInjection.ScopedWindsorServiceProvider.GetServiceInternal(Type serviceType, Boolean isOptional) in D:\Github\castle-windsor-ms-adapter\src\Castle.Windsor.MsDependencyInjection\ScopedWindsorServiceProvider.cs:line 55
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+INFO  2018-08-14 23:22:28,111 [10   ] ore.Mvc.Internal.ControllerActionInvoker - Executed action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) in 82.8298ms
+ERROR 2018-08-14 23:22:28,165 [10   ] nostics.DeveloperExceptionPageMiddleware - An unhandled exception has occurred while executing the request.
+Castle.MicroKernel.Handlers.HandlerException: Can't create component 'IEManageSystem.Authorization.Users.UserRegistrationManager' as it has dependencies to be satisfied.
+
+'IEManageSystem.Authorization.Users.UserRegistrationManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Users.UserManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Users.UserManager' is waiting for the following dependencies:
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.
+'IEManageSystem.Authorization.Roles.RoleManager' is waiting for the following dependencies:
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.ILookupNormalizer' which was not registered.
+- Service 'Microsoft.AspNetCore.Identity.IdentityErrorDescriber' which was not registered.
+- Service 'IEManageSystem.Authorization.Roles.RoleManager' which was registered but is also waiting for dependencies.- Service 'Microsoft.AspNetCore.Identity.IPasswordHasher`1[[IEManageSystem.Authorization.Users.User, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' which was not registered.
+
+   at Castle.MicroKernel.Handlers.DefaultHandler.AssertNotWaitingForDependency()
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Resolve(CreationContext context, ISubDependencyResolver contextHandlerResolver, ComponentModel model, DependencyModel dependency)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.CreateConstructorArguments(ConstructorCandidate constructor, CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.Instantiate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.DefaultHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.Windsor.MsDependencyInjection.ScopedWindsorServiceProvider.GetServiceInternal(Type serviceType, Boolean isOptional) in D:\Github\castle-windsor-ms-adapter\src\Castle.Windsor.MsDependencyInjection\ScopedWindsorServiceProvider.cs:line 55
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ExceptionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+INFO  2018-08-14 23:22:28,342 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 892.1338ms 500 text/html; charset=utf-8
+INFO  2018-08-14 23:22:28,377 [10   ] Microsoft.AspNetCore.Server.Kestrel      - Connection id "0HLG1V6POM698", Request id "0HLG1V6POM698:00000002": the application completed without reading the entire request body.
+DEBUG 2018-08-14 23:33:50,805 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-14 23:33:51,089 [1    ] Abp.Modules.AbpModuleManager             - Found 14 ABP modules in total.
+DEBUG 2018-08-14 23:33:51,102 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,105 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,105 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,105 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,105 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,105 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,106 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,117 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.EntityFrameworkCore.IEManageSystemEntityFrameworkModule, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,117 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,118 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,118 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,118 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,119 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,119 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:51,122 [1    ] Abp.Modules.AbpModuleManager             - 14 modules loaded.
+DEBUG 2018-08-14 23:33:51,322 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:33:51,322 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:33:51,322 [1    ] o.Configuration.LanguageManagementConfig - Converted IEManageSystem (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:33:51,322 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-14 23:33:51,938 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: IEManageSystem.EntityFrameworkCore.IEManageSystemDbContext, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-14 23:33:53,188 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2018-08-14 23:33:53,342 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-14 23:33:53,427 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-14 23:33:53,451 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+DEBUG 2018-08-14 23:33:53,485 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2018-08-14 23:33:53,659 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2018-08-14 23:33:53,744 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 9 classes define auto mapping attributes
+DEBUG 2018-08-14 23:33:53,744 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.CreateUserDto
+DEBUG 2018-08-14 23:33:53,747 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.UserDto
+DEBUG 2018-08-14 23:33:53,748 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2018-08-14 23:33:53,748 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.UserLoginInfoDto
+DEBUG 2018-08-14 23:33:53,748 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.CreateRoleDto
+DEBUG 2018-08-14 23:33:53,748 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.PermissionDto
+DEBUG 2018-08-14 23:33:53,748 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.RoleDto
+DEBUG 2018-08-14 23:33:53,748 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2018-08-14 23:33:53,748 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.TenantDto
+INFO  2018-08-14 23:34:03,424 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 DEBUG http://localhost:21021/  0
+INFO  2018-08-14 23:34:03,424 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:34:03,654 [11   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 237.3185ms 200 
+INFO  2018-08-14 23:34:04,099 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 684.6581ms 404 
+INFO  2018-08-14 23:34:04,520 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-14 23:34:04,526 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 3.5073ms 404 
+INFO  2018-08-14 23:34:28,245 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/index.html  
+INFO  2018-08-14 23:34:28,419 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 174.1014ms 200 text/html
+INFO  2018-08-14 23:34:28,509 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-bundle.js  
+INFO  2018-08-14 23:34:28,509 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-standalone-preset.js  
+INFO  2018-08-14 23:34:28,522 [14   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui.css  
+INFO  2018-08-14 23:34:28,524 [16   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.js  
+INFO  2018-08-14 23:34:28,578 [16   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.swagger.js  
+INFO  2018-08-14 23:34:28,606 [6    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\wwwroot\swagger\ui\abp.js'
+INFO  2018-08-14 23:34:28,621 [7    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\wwwroot\swagger\ui\abp.swagger.js'
+INFO  2018-08-14 23:34:28,631 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 89.2335ms 200 application/javascript
+INFO  2018-08-14 23:34:28,635 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 44.8423ms 200 application/javascript
+INFO  2018-08-14 23:34:28,637 [16   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+INFO  2018-08-14 23:34:28,649 [16   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 131.5853ms 200 text/css
+INFO  2018-08-14 23:34:28,677 [6    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+INFO  2018-08-14 23:34:28,680 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 170.0756ms 200 application/javascript
+INFO  2018-08-14 23:34:28,686 [16   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+INFO  2018-08-14 23:34:28,687 [16   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 180.587ms 200 application/javascript
+INFO  2018-08-14 23:34:29,084 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/v1/swagger.json  
+INFO  2018-08-14 23:34:29,112 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/favicon-16x16.png  
+INFO  2018-08-14 23:34:29,126 [7    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+INFO  2018-08-14 23:34:29,129 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 17.6615ms 200 image/png
+INFO  2018-08-14 23:34:29,310 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 224.9705ms 200 application/json;charset=utf-8
+INFO  2018-08-14 23:34:36,784 [14   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:21021/api/Account/RegisterAsync application/json-patch+json 58
+INFO  2018-08-14 23:34:39,237 [14   ] ore.Mvc.Internal.ControllerActionInvoker - Route matched with {action = "RegisterAsync", controller = "Account"}. Executing action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host)
+INFO  2018-08-14 23:34:39,841 [14   ] ore.Mvc.Internal.ControllerActionInvoker - Executing action method IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) with arguments (IEManageSystem.Web.Host.Models.AccountModels.RegisterApiModel) - Validation state: Valid
+ERROR 2018-08-14 23:35:50,434 [17   ] Mvc.ExceptionHandling.AbpExceptionFilter - Can not register host users!
+System.InvalidOperationException: Can not register host users!
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.CheckForTenant() in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 79
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.RegisterAsync(String name, String surname, String emailAddress, String userName, String plainPassword, Boolean isEmailConfirmed) in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 42
+   at IEManageSystem.Authorization.Accounts.AccountAppService.Register(RegisterInput input) in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Application\Authorization\Accounts\AccountAppService.cs:line 37
+   at IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync(RegisterApiModel model) in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\Controllers\AccountController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+INFO  2018-08-14 23:35:50,448 [17   ] ore.Mvc.Internal.ControllerActionInvoker - Executed action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) in 71203.4161ms
+ERROR 2018-08-14 23:35:50,467 [17   ] nostics.DeveloperExceptionPageMiddleware - An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Can not register host users!
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.CheckForTenant() in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 79
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.RegisterAsync(String name, String surname, String emailAddress, String userName, String plainPassword, Boolean isEmailConfirmed) in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 42
+   at IEManageSystem.Authorization.Accounts.AccountAppService.Register(RegisterInput input) in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Application\Authorization\Accounts\AccountAppService.cs:line 37
+   at IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync(RegisterApiModel model) in D:\VSProject\IEManageSystemCore\3.9.0\aspnet-core\src\IEManageSystem.Web.Host\Controllers\AccountController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ExceptionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+INFO  2018-08-14 23:35:50,701 [17   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 73902.0859ms 500 text/html; charset=utf-8
+DEBUG 2018-08-15 20:37:11,443 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-15 20:37:12,285 [1    ] Abp.Modules.AbpModuleManager             - Found 14 ABP modules in total.
+DEBUG 2018-08-15 20:37:12,305 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,309 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,309 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,309 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,310 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,310 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,311 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,327 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.EntityFrameworkCore.IEManageSystemEntityFrameworkModule, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,347 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,348 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,348 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,348 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,349 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,349 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:12,353 [1    ] Abp.Modules.AbpModuleManager             - 14 modules loaded.
+DEBUG 2018-08-15 20:37:13,945 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-15 20:37:13,945 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-15 20:37:13,945 [1    ] o.Configuration.LanguageManagementConfig - Converted IEManageSystem (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-15 20:37:13,945 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-15 20:37:14,810 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: IEManageSystem.EntityFrameworkCore.IEManageSystemDbContext, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:37:16,473 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2018-08-15 20:37:16,808 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-15 20:37:16,873 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-15 20:37:16,905 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+DEBUG 2018-08-15 20:37:16,943 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2018-08-15 20:37:17,152 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2018-08-15 20:37:17,208 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 9 classes define auto mapping attributes
+DEBUG 2018-08-15 20:37:17,208 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.CreateUserDto
+DEBUG 2018-08-15 20:37:17,211 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.UserDto
+DEBUG 2018-08-15 20:37:17,212 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2018-08-15 20:37:17,212 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.UserLoginInfoDto
+DEBUG 2018-08-15 20:37:17,212 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.CreateRoleDto
+DEBUG 2018-08-15 20:37:17,212 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.PermissionDto
+DEBUG 2018-08-15 20:37:17,212 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.RoleDto
+DEBUG 2018-08-15 20:37:17,212 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2018-08-15 20:37:17,212 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.TenantDto
+INFO  2018-08-15 20:37:44,220 [1    ] IdentityServer4.Startup                  - You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+INFO  2018-08-15 20:37:46,536 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-15 20:37:46,537 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 DEBUG http://localhost:21021/  0
+INFO  2018-08-15 20:37:46,708 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 175.7444ms 200 
+INFO  2018-08-15 20:37:47,231 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 702.5391ms 404 
+INFO  2018-08-15 20:37:47,769 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/favicon.ico  
+INFO  2018-08-15 20:37:47,770 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/  
+INFO  2018-08-15 20:37:47,786 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 21.4807ms 404 
+INFO  2018-08-15 20:37:47,795 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 35.1344ms 404 
+INFO  2018-08-15 20:38:01,771 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger  
+INFO  2018-08-15 20:38:01,778 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 6.741ms 301 
+INFO  2018-08-15 20:38:01,831 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/index.html  
+INFO  2018-08-15 20:38:01,858 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 27.2961ms 200 text/html
+INFO  2018-08-15 20:38:01,893 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-bundle.js  
+INFO  2018-08-15 20:38:01,898 [7    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui.css  
+INFO  2018-08-15 20:38:01,899 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.js  
+INFO  2018-08-15 20:38:01,901 [9    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/swagger-ui-standalone-preset.js  
+INFO  2018-08-15 20:38:01,902 [14   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/ui/abp.swagger.js  
+INFO  2018-08-15 20:38:02,110 [8    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+INFO  2018-08-15 20:38:02,125 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 239.727ms 200 text/css
+INFO  2018-08-15 20:38:02,197 [14   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger/ui/abp.swagger.js'. Physical path: 'D:\VSProject\IEManageSystem\src\IEManageSystem.Web.Host\wwwroot\swagger\ui\abp.swagger.js'
+INFO  2018-08-15 20:38:02,199 [9    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger/ui/abp.js'. Physical path: 'D:\VSProject\IEManageSystem\src\IEManageSystem.Web.Host\wwwroot\swagger\ui\abp.js'
+INFO  2018-08-15 20:38:02,200 [14   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 310.9765ms 200 application/javascript
+INFO  2018-08-15 20:38:02,202 [9    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 311.776ms 200 application/javascript
+INFO  2018-08-15 20:38:02,276 [9    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+INFO  2018-08-15 20:38:02,278 [9    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 388.8749ms 200 application/javascript
+INFO  2018-08-15 20:38:02,372 [15   ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+INFO  2018-08-15 20:38:02,373 [15   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 487.7681ms 200 application/javascript
+INFO  2018-08-15 20:38:04,369 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/v1/swagger.json  
+INFO  2018-08-15 20:38:04,829 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 464.4097ms 200 application/json;charset=utf-8
+INFO  2018-08-15 20:38:05,993 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 GET http://localhost:21021/swagger/favicon-16x16.png  
+INFO  2018-08-15 20:38:06,059 [8    ] NetCore.StaticFiles.StaticFileMiddleware - Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+INFO  2018-08-15 20:38:06,060 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 67.9552ms 200 image/png
+INFO  2018-08-15 20:38:34,807 [9    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:21021/api/Account/RegisterAsync application/json-patch+json 58
+INFO  2018-08-15 20:38:37,110 [9    ] ore.Mvc.Internal.ControllerActionInvoker - Route matched with {action = "RegisterAsync", controller = "Account"}. Executing action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host)
+INFO  2018-08-15 20:38:37,604 [9    ] ore.Mvc.Internal.ControllerActionInvoker - Executing action method IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) with arguments (IEManageSystem.Web.Host.Models.AccountModels.RegisterApiModel) - Validation state: Valid
+ERROR 2018-08-15 20:38:51,269 [8    ] Mvc.ExceptionHandling.AbpExceptionFilter - Can not register host users!
+System.InvalidOperationException: Can not register host users!
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.CheckForTenant() in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 79
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.RegisterAsync(String name, String surname, String emailAddress, String userName, String plainPassword, Boolean isEmailConfirmed) in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 42
+   at IEManageSystem.Authorization.Accounts.AccountAppService.Register(RegisterInput input) in D:\VSProject\IEManageSystem\src\IEManageSystem.Application\Authorization\Accounts\AccountAppService.cs:line 37
+   at IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync(RegisterApiModel model) in D:\VSProject\IEManageSystem\src\IEManageSystem.Web.Host\Controllers\AccountController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+INFO  2018-08-15 20:38:51,283 [8    ] ore.Mvc.Internal.ControllerActionInvoker - Executed action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) in 14167.7255ms
+ERROR 2018-08-15 20:38:51,352 [8    ] nostics.DeveloperExceptionPageMiddleware - An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Can not register host users!
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.CheckForTenant() in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 79
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.RegisterAsync(String name, String surname, String emailAddress, String userName, String plainPassword, Boolean isEmailConfirmed) in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 42
+   at IEManageSystem.Authorization.Accounts.AccountAppService.Register(RegisterInput input) in D:\VSProject\IEManageSystem\src\IEManageSystem.Application\Authorization\Accounts\AccountAppService.cs:line 37
+   at IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync(RegisterApiModel model) in D:\VSProject\IEManageSystem\src\IEManageSystem.Web.Host\Controllers\AccountController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ExceptionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at IdentityServer4.Hosting.IdentityServerMiddleware.Invoke(HttpContext context, IEndpointRouter router, IUserSession session, IEventService events) in C:\local\identity\server4\IdentityServer4\src\IdentityServer4\Hosting\IdentityServerMiddleware.cs:line 72
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at IdentityServer4.Hosting.BaseUrlMiddleware.Invoke(HttpContext context) in C:\local\identity\server4\IdentityServer4\src\IdentityServer4\Hosting\BaseUrlMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+INFO  2018-08-15 20:38:51,545 [8    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 16734.7132ms 500 text/html; charset=utf-8
+DEBUG 2018-08-15 20:53:38,377 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2018-08-15 20:53:38,612 [1    ] Abp.Modules.AbpModuleManager             - Found 14 ABP modules in total.
+DEBUG 2018-08-15 20:53:38,637 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.Web.Host.Startup.IEManageSystemWebHostModule, IEManageSystem.Web.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,641 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemApplicationModule, IEManageSystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,642 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.IEManageSystemCoreModule, IEManageSystem.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,642 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,642 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,642 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,643 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,648 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: IEManageSystem.EntityFrameworkCore.IEManageSystemEntityFrameworkModule, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,648 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,648 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,649 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,649 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,649 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,649 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=3.7.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:38,661 [1    ] Abp.Modules.AbpModuleManager             - 14 modules loaded.
+DEBUG 2018-08-15 20:53:38,786 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-15 20:53:38,786 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-15 20:53:38,786 [1    ] o.Configuration.LanguageManagementConfig - Converted IEManageSystem (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-15 20:53:38,786 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2018-08-15 20:53:40,236 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: IEManageSystem.EntityFrameworkCore.IEManageSystemDbContext, IEManageSystem.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2018-08-15 20:53:41,449 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2018-08-15 20:53:41,557 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2018-08-15 20:53:41,601 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2018-08-15 20:53:41,635 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: IEManageSystem
+DEBUG 2018-08-15 20:53:41,665 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2018-08-15 20:53:41,707 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2018-08-15 20:53:41,747 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 9 classes define auto mapping attributes
+DEBUG 2018-08-15 20:53:41,747 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.CreateUserDto
+DEBUG 2018-08-15 20:53:41,778 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Users.Dto.UserDto
+DEBUG 2018-08-15 20:53:41,778 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2018-08-15 20:53:41,778 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Sessions.Dto.UserLoginInfoDto
+DEBUG 2018-08-15 20:53:41,778 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.CreateRoleDto
+DEBUG 2018-08-15 20:53:41,778 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.PermissionDto
+DEBUG 2018-08-15 20:53:41,778 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.Roles.Dto.RoleDto
+DEBUG 2018-08-15 20:53:41,779 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.CreateTenantDto
+DEBUG 2018-08-15 20:53:41,779 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - IEManageSystem.MultiTenancy.Dto.TenantDto
+INFO  2018-08-15 20:53:47,585 [1    ] IdentityServer4.Startup                  - You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+INFO  2018-08-15 20:53:49,312 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:21021/api/Account/RegisterAsync application/json-patch+json 58
+INFO  2018-08-15 20:53:49,312 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request starting HTTP/1.1 POST http://localhost:21021/api/Account/RegisterAsync application/json-patch+json 58
+INFO  2018-08-15 20:53:50,571 [6    ] ore.Mvc.Internal.ControllerActionInvoker - Route matched with {action = "RegisterAsync", controller = "Account"}. Executing action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host)
+INFO  2018-08-15 20:53:50,571 [10   ] ore.Mvc.Internal.ControllerActionInvoker - Route matched with {action = "RegisterAsync", controller = "Account"}. Executing action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host)
+INFO  2018-08-15 20:53:51,041 [10   ] ore.Mvc.Internal.ControllerActionInvoker - Executing action method IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) with arguments (IEManageSystem.Web.Host.Models.AccountModels.RegisterApiModel) - Validation state: Valid
+INFO  2018-08-15 20:53:51,041 [6    ] ore.Mvc.Internal.ControllerActionInvoker - Executing action method IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) with arguments (IEManageSystem.Web.Host.Models.AccountModels.RegisterApiModel) - Validation state: Valid
+ERROR 2018-08-15 20:53:51,939 [10   ] Mvc.ExceptionHandling.AbpExceptionFilter - Can not register host users!
+System.InvalidOperationException: Can not register host users!
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.CheckForTenant() in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 79
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.RegisterAsync(String name, String surname, String emailAddress, String userName, String plainPassword, Boolean isEmailConfirmed) in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 42
+   at IEManageSystem.Authorization.Accounts.AccountAppService.Register(RegisterInput input) in D:\VSProject\IEManageSystem\src\IEManageSystem.Application\Authorization\Accounts\AccountAppService.cs:line 37
+   at IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync(RegisterApiModel model) in D:\VSProject\IEManageSystem\src\IEManageSystem.Web.Host\Controllers\AccountController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+ERROR 2018-08-15 20:53:51,939 [6    ] Mvc.ExceptionHandling.AbpExceptionFilter - Can not register host users!
+System.InvalidOperationException: Can not register host users!
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.CheckForTenant() in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 79
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.RegisterAsync(String name, String surname, String emailAddress, String userName, String plainPassword, Boolean isEmailConfirmed) in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 42
+   at IEManageSystem.Authorization.Accounts.AccountAppService.Register(RegisterInput input) in D:\VSProject\IEManageSystem\src\IEManageSystem.Application\Authorization\Accounts\AccountAppService.cs:line 37
+   at IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync(RegisterApiModel model) in D:\VSProject\IEManageSystem\src\IEManageSystem.Web.Host\Controllers\AccountController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+INFO  2018-08-15 20:53:51,949 [10   ] ore.Mvc.Internal.ControllerActionInvoker - Executed action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) in 1372.6835ms
+INFO  2018-08-15 20:53:51,949 [6    ] ore.Mvc.Internal.ControllerActionInvoker - Executed action IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync (IEManageSystem.Web.Host) in 1372.6829ms
+ERROR 2018-08-15 20:53:52,477 [10   ] nostics.DeveloperExceptionPageMiddleware - An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Can not register host users!
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.CheckForTenant() in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 79
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.RegisterAsync(String name, String surname, String emailAddress, String userName, String plainPassword, Boolean isEmailConfirmed) in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 42
+   at IEManageSystem.Authorization.Accounts.AccountAppService.Register(RegisterInput input) in D:\VSProject\IEManageSystem\src\IEManageSystem.Application\Authorization\Accounts\AccountAppService.cs:line 37
+   at IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync(RegisterApiModel model) in D:\VSProject\IEManageSystem\src\IEManageSystem.Web.Host\Controllers\AccountController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ExceptionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at IdentityServer4.Hosting.IdentityServerMiddleware.Invoke(HttpContext context, IEndpointRouter router, IUserSession session, IEventService events) in C:\local\identity\server4\IdentityServer4\src\IdentityServer4\Hosting\IdentityServerMiddleware.cs:line 72
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at IdentityServer4.Hosting.BaseUrlMiddleware.Invoke(HttpContext context) in C:\local\identity\server4\IdentityServer4\src\IdentityServer4\Hosting\BaseUrlMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ERROR 2018-08-15 20:53:52,477 [6    ] nostics.DeveloperExceptionPageMiddleware - An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Can not register host users!
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.CheckForTenant() in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 79
+   at IEManageSystem.Authorization.Users.UserRegistrationManager.RegisterAsync(String name, String surname, String emailAddress, String userName, String plainPassword, Boolean isEmailConfirmed) in D:\VSProject\IEManageSystem\src\IEManageSystem.Core\Authorization\Users\UserRegistrationManager.cs:line 42
+   at IEManageSystem.Authorization.Accounts.AccountAppService.Register(RegisterInput input) in D:\VSProject\IEManageSystem\src\IEManageSystem.Application\Authorization\Accounts\AccountAppService.cs:line 37
+   at IEManageSystem.Web.Host.Controllers.AccountController.RegisterAsync(RegisterApiModel model) in D:\VSProject\IEManageSystem\src\IEManageSystem.Web.Host\Controllers\AccountController.cs:line 31
+   at lambda_method(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextExceptionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ExceptionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at IdentityServer4.Hosting.IdentityServerMiddleware.Invoke(HttpContext context, IEndpointRouter router, IUserSession session, IEventService events) in C:\local\identity\server4\IdentityServer4\src\IdentityServer4\Hosting\IdentityServerMiddleware.cs:line 72
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at IdentityServer4.Hosting.BaseUrlMiddleware.Invoke(HttpContext context) in C:\local\identity\server4\IdentityServer4\src\IdentityServer4\Hosting\BaseUrlMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+INFO  2018-08-15 20:53:53,115 [10   ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 3806.07ms 500 text/html; charset=utf-8
+INFO  2018-08-15 20:53:53,115 [6    ] soft.AspNetCore.Hosting.Internal.WebHost - Request finished in 3806.0737ms 500 text/html; charset=utf-8

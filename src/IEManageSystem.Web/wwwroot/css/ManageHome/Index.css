@@ -1,0 +1,68 @@
+﻿.bodydiv_css {
+    padding-top: 50px;
+    margin: 0px;
+    width: 100%;
+}
+
+.navbar_css {
+    background: linear-gradient(to right, #00C5CD, #00EEEE);
+}
+    .navbar_css .navbar-collapse {
+        display: -webkit-flex;
+        display: flex;
+    }
+    .navbar_css .navbar-collapse span {
+        margin-left: auto;
+        margin-right:20px;
+    }
+    .navbar_css a {
+        color: #FFFFFF;
+    }
+    .navbar_css li {
+        border-radius:5px;
+        overflow:hidden;
+    }
+    .navbar_css li a:hover {
+        background-color: #00E5CD;
+    }
+
+.navbar_css_li_click {
+    background-color: #00E5CD;
+}
+
+.navbar_css li a:focus {
+    background-color: #00E5CD;
+}
+
+.leftmenu_css {
+    border-right: 1px solid #00688B;
+    box-shadow: 0px 0px 5px grey;
+    padding:0px;
+}
+
+    .leftmenu_css ul {
+        padding-top: 10px;
+    }
+
+.leftmenu_css_li {
+    background-color: #00BED1;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+.leftmenu_css ul li:hover {
+    background-color: #00E5CD;
+}
+
+.leftmenu_css_li_click {
+    background-color: #00E5CD;
+}
+
+#servicecontainer {
+    padding:20px;
+}
