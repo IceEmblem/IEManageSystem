@@ -15,3 +15,7 @@
 /src/IEManageSystem.Web/bin
 /src/IEManageSystem.Web/obj
 /src/UtilityAction/obj
+/src/IEManageSystem.Application/bin
+/src/IEManageSystem.Core/bin
+/src/IEManageSystem.EntityFrameworkCore/bin
+/src/UtilityAction/bin
