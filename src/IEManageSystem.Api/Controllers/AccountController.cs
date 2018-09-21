@@ -9,6 +9,7 @@ using Abp.Domain.Uow;
 using Abp.Runtime.Session;
 using IdentityModel.Client;
 using IdentityServer4.Events;
+using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IEManageSystem.Api.Help;
@@ -56,6 +57,11 @@ namespace IEManageSystem.Api.Controllers
             _AbpSession = abpSession;
         }
 
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<ApiResultDataModel<RegisterOutput>>> RegisterAsync([FromBody] RegisterApiModel model)
         {
@@ -84,6 +90,12 @@ namespace IEManageSystem.Api.Controllers
             return new ApiResultDataModel<RegisterOutput>(output);
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
         public async Task<ActionResult<ApiResultDataModel>> LoginAsync([FromBody] LoginApiModel model)
         {
             if (ValidateModel() == false)
@@ -163,6 +175,34 @@ namespace IEManageSystem.Api.Controllers
             return new ApiResultDataModel() { IsSuccess = false, Value = null };
         }
 
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="logoutId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Logout(string logoutId)
+        {
+            var context = await _Interaction.GetLogoutContextAsync(logoutId);
+
+            if (User?.Identity.IsAuthenticated == true)
+            {
+                // delete local authentication cookie
+                await HttpContext.SignOutAsync();
+
+                // raise the logout event
+                await _Events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
+            }
+
+            var logout = await _Interaction.GetLogoutContextAsync(logoutId);
+
+            return Redirect(logout?.PostLogoutRedirectUri);
+        }
+
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult GetVerificationCode()
         {
@@ -170,13 +210,6 @@ namespace IEManageSystem.Api.Controllers
             Response.Body.Dispose();
 
             return File(ms.ToArray(), @"image/png");
-        }
-
-        [HttpGet]
-        [Authorize]
-        public async Task<ActionResult<ApiResultDataModel>> TestAsync()
-        {
-            return new ApiResultDataModel(true, "验证成功");
         }
     }
 }

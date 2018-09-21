@@ -14,10 +14,10 @@ namespace IEManageSystem.Api.Help.IdentityServerHelp
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(){
-                    DisplayName = "当前用户标识",
+                    DisplayName = "用户标识",
                 }, //必须要添加，否则报无效的scope错误
                 new IdentityResources.Profile(){
-                    DisplayName = "基本信息（包括用户Id，用户账户，用户昵称）",
+                    DisplayName = "基本信息（包括用户Id，用户账号，用户昵称）",
                     UserClaims = new List<string>(){
                         "Id",
                         "UserName",

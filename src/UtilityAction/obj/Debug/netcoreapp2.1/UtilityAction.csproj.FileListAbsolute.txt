@@ -99,7 +99,6 @@ D:\VSProject\IEManageSystemZore\src\UtilityAction\obj\Debug\netcoreapp2.1\Utilit
 F:\projects\IEManageSystem\src\UtilityAction\bin\Debug\netcoreapp2.1\UtilityAction.deps.json
 F:\projects\IEManageSystem\src\UtilityAction\bin\Debug\netcoreapp2.1\UtilityAction.dll
 F:\projects\IEManageSystem\src\UtilityAction\bin\Debug\netcoreapp2.1\UtilityAction.pdb
-F:\projects\IEManageSystem\src\UtilityAction\obj\Debug\netcoreapp2.1\UtilityAction.csprojAssemblyReference.cache
 F:\projects\IEManageSystem\src\UtilityAction\obj\Debug\netcoreapp2.1\UtilityAction.csproj.CoreCompileInputs.cache
 F:\projects\IEManageSystem\src\UtilityAction\obj\Debug\netcoreapp2.1\UtilityAction.AssemblyInfoInputs.cache
 F:\projects\IEManageSystem\src\UtilityAction\obj\Debug\netcoreapp2.1\UtilityAction.AssemblyInfo.cs

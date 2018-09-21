@@ -3,3 +3,14 @@
 ################################################################################
 
 /.vs
+/src/Es6JsView/node_modules/.cache/uglifyjs-webpack-plugin
+/src/Es6JsView/node_modules
+/src/IEManageSystem.Api/bin
+/src/IEManageSystem.Api/obj
+/src/IEManageSystem.Api/bin
+/src/IEManageSystem.Api/bin
+/src/IEManageSystem.Application/obj
+/src/IEManageSystem.Core/obj
+/src/IEManageSystem.EntityFrameworkCore/obj
+/src/IEManageSystem.Web/bin
+/src/IEManageSystem.Web/obj

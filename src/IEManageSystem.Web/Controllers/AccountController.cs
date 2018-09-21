@@ -36,22 +36,9 @@ namespace IEManageSystem.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout(string logoutId)
         {
-            var context = await _interaction.GetLogoutContextAsync(logoutId);
+            string url = "/api" + HttpContext.Request.Path.Value + HttpContext.Request.QueryString.Value;
 
-            if (User?.Identity.IsAuthenticated == true)
-            {
-                // delete local authentication cookie
-                await HttpContext.SignOutAsync();
-
-                // raise the logout event
-                await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
-            }
-
-            var a = HttpContext.Request;
-
-            var logout = await _interaction.GetLogoutContextAsync(logoutId);
-
-            return Redirect(logout?.PostLogoutRedirectUri);
+            return Redirect(url);
         }
     }
 }

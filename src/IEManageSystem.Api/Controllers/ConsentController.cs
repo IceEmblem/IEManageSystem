@@ -152,6 +152,14 @@ namespace IEManageSystem.Api.Controllers
             return new ApiResultDataModel() { IsSuccess = true, RedirectHref = model.ReturnUrl };
         }
 
+        /// <summary>
+        /// 生成授权模型
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <param name="request"></param>
+        /// <param name="client"></param>
+        /// <param name="resources"></param>
+        /// <returns></returns>
         private ConsentModel CreateConsentModel(
             string returnUrl,
             AuthorizationRequest request,

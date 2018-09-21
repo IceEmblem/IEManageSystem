@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IEManageSystem.Web.Controllers.Consent
+namespace IEManageSystem.Web.Controllers
 {
     /// <summary>
     /// This controller processes the consent UI
