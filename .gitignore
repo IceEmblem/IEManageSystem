@@ -19,3 +19,4 @@
 /src/IEManageSystem.Core/bin
 /src/IEManageSystem.EntityFrameworkCore/bin
 /src/UtilityAction/bin
+/src/IEManageSystem.Web/App_Data/Logs/Logs.txt
