@@ -26,6 +26,42 @@ namespace IEManageSystem.Web.Startup
                         icon: "fa fa-info"
                         )
                 );
+
+            context.Manager.Menus.Add("ManageHomeMenu", 
+                new MenuDefinition(
+                    "ManageHome",
+                    L("ManageHome")
+                ).AddItem(
+                    new MenuItemDefinition(
+                        "UserManage",
+                        L("UserManage")
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            "NormalUser",
+                            L("NormalUser"),
+                            url:""
+                        )
+                    )
+                    .AddItem(
+                        new MenuItemDefinition(
+                            "AdminiUser",
+                            L("AdminiUser"),
+                            url: ""
+                        )
+                    )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        "AuthorizeManage",
+                        L("AuthorizeManage")
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            "ExternalAuthorize",
+                            L("ExternalAuthorize"),
+                            url: ""
+                        )
+                    )
+                )
+            );
         }
 
         private static ILocalizableString L(string name)

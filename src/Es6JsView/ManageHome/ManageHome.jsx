@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {setLeftMenuHeight,testServiceClickFun,logoutClickFun} from './UserHomeJq'
+import Nav from './Nav.jsx';
+import BodyDiv from './BodyDiv.jsx';
 
 
 class UserHome extends React.Component{

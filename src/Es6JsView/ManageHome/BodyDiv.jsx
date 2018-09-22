@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {setLeftMenuHeight,testServiceClickFun,logoutClickFun} from './UserHomeJq'
 
-class BodyDiv extends React.Component
+export default class BodyDiv extends React.Component
 {
 	setLeftMenuHeight(){
 	    var winheight = $(window).height() - 50 +"px";

@@ -158,10 +158,10 @@ namespace IEManageSystem.Api.Controllers
                     {
                         result.RedirectHref = model.ReturnUrl;
                     }
-                    else
-                    {
-                        result.RedirectHref = "/";
-                    }
+                    //else
+                    //{
+                    //    result.RedirectHref = "/";
+                    //}
 
                     return result;
 

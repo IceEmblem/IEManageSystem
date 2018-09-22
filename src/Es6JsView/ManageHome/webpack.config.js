@@ -6,7 +6,7 @@ module.exports = {
     devtool: 'source-map',
     mode:"development",
     entry: { 
-        adminiHome:__dirname + "/ManageHome/UserHome.jsx"
+        adminiHome:__dirname + "/ManageHome/ManageHome.jsx"
     },
     output: {
         //path: __dirname + "/public",
@@ -18,7 +18,7 @@ module.exports = {
         //这里开始写
         new HtmlWebpackPlugin({
             filename: __dirname + '/../IEManageSystem.Web/Views/ManageHome/Index.cshtml',
-            template: __dirname + '/ManageHome/UserHome.html', // html模板路径,模板路径是支持传参调用loader的,
+            template: __dirname + '/ManageHome/ManageHome.html', // html模板路径,模板路径是支持传参调用loader的,
             inject: 'body', //打包之后的js插入的位置，true/'head'/'body'/false,
             chunks: ['adminiHome']
         }),

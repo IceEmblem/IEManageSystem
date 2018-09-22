@@ -1,33 +1,35 @@
 var path = require("path");
-var pathMap = require('./Consent/pathmap.json');
+var pathMap = require('./ManageHome/pathmap.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var BomPlugin = require('webpack-utf8-bom');    //将文件转成utf-8 bom格式，解决中文乱码的问题
 module.exports = {
     devtool: 'source-map',
+    mode:"development",
     entry: { 
-        consent:__dirname + "/Consent/consent.jsx"
+        adminiHome:__dirname + "/ManageHome/ManageHome.jsx"
     },
     output: {
-        path: __dirname + "/../IEManageSystem.Web/wwwroot/js/Consent",
+        //path: __dirname + "/public",
+        path: __dirname +"/../IEManageSystem.Web/wwwroot/js/ManageHome",//打包后的文件存放的地方
         filename: "[name].bundle.js",
         chunkFilename: "[id].chunk.js"
     },
     plugins: [       //生成html
         //这里开始写
         new HtmlWebpackPlugin({
-            filename: __dirname + '/../IEManageSystem.Web/Views/Consent/Index.cshtml',
-            template: __dirname + '/Consent/index.html', // html模板路径,模板路径是支持传参调用loader的,
+            filename: __dirname + '/../IEManageSystem.Web/Views/ManageHome/Index.cshtml',
+            template: __dirname + '/ManageHome/ManageHome.html', // html模板路径,模板路径是支持传参调用loader的,
             inject: 'body', //打包之后的js插入的位置，true/'head'/'body'/false,
-            chunks: ['consent']
+            chunks: ['adminiHome']
         }),
         new BomPlugin(true, /\.(cshtml)$/),//解决cshtml中文乱码的问题
     ],
-    module: {  
+    module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /(\.jsx|\.js)$/,
                 use: {
-                    loader: 'babel-loader',
+                    loader: "babel-loader",
                     options: {
                         presets: ['es2015', 'react'],
                     }

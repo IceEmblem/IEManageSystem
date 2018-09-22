@@ -12,7 +12,8 @@ function GetUrlParam(name)
     if (r != null) return unescape(r[2]); return null;
 }
 
-export default class Content extends React.Component{
+export default class Content extends React.Component
+{
 	constructor(props){
 		super(props);
 		
@@ -37,66 +38,39 @@ export default class Content extends React.Component{
 			VaildCodeR:""
 		}
 	}
+
+	// 去登录
 	toLogin(){
 		this.setState({ LoginPanelState:LoginPanelState.Login });
 	}
+
+	// 去注册
 	toRegister(){
 		this.setState({ LoginPanelState:LoginPanelState.Register });
 	}
+	
+	// 登录回调
+	loginCall(data){
+		if(data.isSuccess==true)
+		{
+			if( data.redirectHref == null || data.redirectHref == "")
+			{
+				// 跳转管理中心
+				let manageHomeUrl = $("#manageHomeUrl").attr("value");
+				$(location).attr('href', manageHomeUrl);
+			}
+			else{
+				$(location).attr('href', data.redirectHref);
+			}
+		}
+		else{
+			$("div.error").eq(0).text(data.message);
+			setTimeout('$("div.error").eq(0).text("")',3000);
+		}
+	}
+
+	// 登录
 	login(){
-		// let form = new FormData();
-		// form.append("username", this.state.AccountIDL);
-		// form.append("password", this.state.PasswordL);
-		// form.append("VaildCode", this.state.VaildCodeL);
-		// form.append("grant_type", "password");
-		// form.append("client_id", "IEClient");
-		// form.append("client_secret", "secret");
-
-		// let settings = 
-		// {
-		//   	"async": true,
-		// 	"crossDomain": true,
-		// 	"url": "/connect/token",
-		// 	"method": "POST",
-		// 	"headers": {
-		// 		"Cache-Control": "no-cache",
-		// 		"Postman-Token": "f55b3ba4-781d-4b93-a1af-309a267cd8fb"
-		// 	},
-		// 	"processData": false,
-		// 	"contentType": false,
-		// 	"mimeType": "multipart/form-data",
-		// 	"data": form,
-		// 	"success":function(data){
-		// 		console.log(data);
-		// 		let response = JSON.parse(data);
-		// 		$.cookie("token",response.access_token);
-		// 		// 测试
-		// 		$.ajax({
-		// 		    headers: {
-		// 		        //Bearer是我的项目需要的,你可以按你的需求规范格式
-		// 		        'Authorization':'Bearer '+ $.cookie("token"),
-		// 		    },
-		// 		    type: 'GET',
-		// 		    dataType: "json",
-		// 		    url: "/api/Account/TestAsync",
-		// 		    error: function(testdata) {
-		// 		    	console.log(testdata);
-		// 		    },
-		// 		    success: function(testdata) {
-		// 		    	console.log(testdata);
-		// 		    }
-		// 		});
-		// 	},
-		// 	"error":function(data)
-		// 	{
-		// 		let responseText = data.responseText;
-		// 		let response = JSON.parse(responseText);
-		// 		$("div.error").eq(0).text(response.error_description);
-		// 		setTimeout('$("div.error").eq(0).text("")',3000);
-		// 	}
-		// }
-
-		// $.ajax(settings);
 		let returnUrl = GetUrlParam("returnUrl");
 
 		let postdata = {
@@ -113,22 +87,15 @@ export default class Content extends React.Component{
                 contentType: "application/json-patch+json",
                 dataType: "json",
                 data: JSON.stringify(postdata),
-                success: function(data) {
-					if(data.isSuccess==true){
-						console.log("登录成功");
-						$(location).attr('href', data.redirectHref);
-					}
-					else{
-						$("div.error").eq(0).text(data.message);
-						setTimeout('$("div.error").eq(0).text("")',3000);
-					}
-		    	},
+                success: this.loginCall,
 				error: function(data)
 				{
 					console.log(data.responseText);
 				}
             });
 	}
+
+	// 注册
 	register(){
 		let PasswordR = this.state.PasswordR;
 		let PasswordRC = this.state.PasswordRC;
@@ -166,6 +133,8 @@ export default class Content extends React.Component{
 				}
             });
 	}
+
+	// 验证图片
 	imgClick(){
 			let imgsrc = "/Api/Account/GetVerificationCode/?date=" + new Date();
 			this.setState({imgSrc:imgsrc});
