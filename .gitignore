@@ -20,3 +20,8 @@
 /src/IEManageSystem.EntityFrameworkCore/bin
 /src/UtilityAction/bin
 /src/IEManageSystem.Web/App_Data/Logs/Logs.txt
+src/Es6JsView/package-lock.json
+src/Es6JsView/package.json
+src/IEManageSystem.Web/wwwroot/js/Consent/consent.bundle.js
+src/IEManageSystem.Web/wwwroot/js/Consent/consent.bundle.js.map
+src/Es6JsView/package-lock.json
