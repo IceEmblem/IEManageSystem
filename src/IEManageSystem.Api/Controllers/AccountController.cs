@@ -103,8 +103,6 @@ namespace IEManageSystem.Api.Controllers
                 return new ApiResultDataModel(_ValidateModelErrors);
             }
 
-            var a = Request;
-
             string validateCode = _ValidateCodeHelper.GetValidateCode();
             if (!string.Equals(validateCode, model.VaildCode, StringComparison.OrdinalIgnoreCase))
             {

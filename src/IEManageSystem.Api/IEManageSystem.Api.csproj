@@ -10,9 +10,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Help\TokenHelp\**" />
+    <Compile Remove="wwwroot\**" />
     <Content Remove="Help\TokenHelp\**" />
+    <Content Remove="wwwroot\**" />
     <EmbeddedResource Remove="Help\TokenHelp\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
     <None Remove="Help\TokenHelp\**" />
+    <None Remove="wwwroot\**" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -21,9 +25,6 @@
     </None>
     <None Update="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
-    <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
@@ -66,6 +67,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Help\IdentityServerHelp\IdentityResources\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 </Project>

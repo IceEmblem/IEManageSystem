@@ -15,15 +15,8 @@ namespace IEManageSystem.Web.Controllers
 {
     public class AccountController : IEManageSystemControllerBase
     {
-        private readonly IIdentityServerInteractionService _interaction;
-        private readonly IEventService _events;
-
-        public AccountController(
-            IIdentityServerInteractionService interaction,
-            IEventService events)
+        public AccountController()
         {
-            _interaction = interaction;
-            _events = events;
         }
 
         public IActionResult Login()

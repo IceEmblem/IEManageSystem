@@ -13,6 +13,8 @@ namespace IEManageSystem.Web.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["ManageHomeMenu"] = "ManageHomeMenu";
+
             return View();
         }
     }

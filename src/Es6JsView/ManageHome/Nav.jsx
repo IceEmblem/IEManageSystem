@@ -3,33 +3,46 @@ import ReactDOM from 'react-dom';
 
 export default class Nav extends React.Component
 {
-	logoutClickFun(e){
-	 	var url = $(e.target).attr("data-url");
-	 	 $.get(url,function(data,status){
-		    if(data.IsSuccess==true){
-		    	window.location.href=data.RedirectHref;
-		    }
-		});
-	 }
+    // 组件更新时
     componentDidUpdate(){
         $(".navbar_css li").removeClass("navbar_css_li_click");
-        let name="li[name="+this.props.bodyShowState+"]";
+        let name="li[name="+this.props.selectMenuName+"]";
         $(name).addClass("navbar_css_li_click");
     }
+
+    // 组件挂载时
     componentDidMount (){
         $(".navbar_css li").removeClass("navbar_css_li_click");
-        let name="li[name="+this.props.bodyShowState+"]";
+        let name="li[name="+this.props.selectMenuName+"]";
         $(name).addClass("navbar_css_li_click");
     }
+
+    // 退出登录单击
     logoutClick(e){
-        this.logoutClickFun(e);
+        var url = $(e.target).attr("data-url");
+
+        $.get(url,function(data,status){
+            if(data.IsSuccess==true){
+                window.location.href=data.RedirectHref;
+            }
+        });
     }
+    
     render(){
-        let letServiceInfoListInfo = this.props.ServiceInfoListInfo;
+        let menus = this.props.menus;
         let serviceInfoList = new Array();
-        if(letServiceInfoListInfo != null){
-            for(let item in letServiceInfoListInfo){
-                let li = <li name={letServiceInfoListInfo[item].ServiceListID} onClick={this.props.serviceListInfoClick} className="nav-item" data-url={letServiceInfoListInfo[item].ServiceListUrl}><a className="nav-link" href="#">{letServiceInfoListInfo[item].ServiceListName}</a></li>;
+        if(menus != null){
+            for(let item in menus){
+                let li = 
+                    <li 
+                        name={menus[item].name} 
+                        onClick={this.props.selectMenuItemsClick} 
+                        className="nav-item"
+                    >
+                        <a className="nav-link" href="#">
+                            {menus[item].displayName}
+                        </a>
+                    </li>;
 
                 serviceInfoList.push(li);
             }

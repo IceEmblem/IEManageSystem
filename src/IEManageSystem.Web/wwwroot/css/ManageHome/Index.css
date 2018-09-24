@@ -1,4 +1,17 @@
-﻿.bodydiv_css {
+﻿html,body {
+            margin: 0;
+            width:100%;
+            height: 100%;
+
+            /*超出body范围部分隐藏*/
+            overflow: hidden;
+}
+
+.content{
+            height: 100%;
+}
+
+.bodydiv_css {
     padding-top: 50px;
     margin: 0px;
     width: 100%;

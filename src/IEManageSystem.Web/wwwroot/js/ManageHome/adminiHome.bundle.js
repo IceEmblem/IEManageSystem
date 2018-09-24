@@ -36,17 +36,32 @@
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
 /******/ 	};
 /******/
 /******/ 	// define __esModule on exports
 /******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
 /******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -113,45 +128,45 @@ var BodyDiv = function (_React$Component) {
     }
 
     _createClass(BodyDiv, [{
-        key: 'setLeftMenuHeight',
-        value: function setLeftMenuHeight() {
-            var winheight = $(window).height() - 50 + "px";
-            $(".leftmenu_css").css("height", winheight);
-        }
-    }, {
-        key: 'testServiceClickFun',
-        value: function testServiceClickFun(e) {
+        key: 'testServiceClick',
+
+        // setLeftMenuHeight(){
+        //     var winheight = $(window).height() - 50 +"px";
+        //     $(".leftmenu_css").css("height",winheight);
+        // }
+
+        //    // 组件更新时
+        //    componentDidUpdate(){
+        //        this.setLeftMenuHeight();
+        //    }
+
+        //    // 组件挂载时
+        //    componentDidMount (){
+        //        this.setLeftMenuHeight();
+        //    }
+
+        // 服务单击
+        value: function testServiceClick(e) {
             var url = $(e.target).attr("data-url");
             $.get(url, function (data, status) {
                 $("#servicecontainer").html(data);
             });
         }
     }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            this.setLeftMenuHeight();
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.setLeftMenuHeight();
-        }
-    }, {
-        key: 'testServiceClick',
-        value: function testServiceClick(e) {
-            this.testServiceClickFun(e);
-        }
-    }, {
         key: 'render',
         value: function render() {
-            var letServiceInfoList = this.props.ServiceInfoList;
+            var selectMenuItems = this.props.selectMenuItems;
             var lis = Array();
-            if (letServiceInfoList != null) {
-                for (var item in letServiceInfoList) {
+            if (selectMenuItems != null) {
+                for (var item in selectMenuItems) {
                     var li = _react2.default.createElement(
                         'li',
-                        { 'data-url': letServiceInfoList[item].ViewUrl, onClick: this.testServiceClick, className: 'leftmenu_css_li' },
-                        letServiceInfoList[item].ServiceName
+                        {
+                            'data-url': selectMenuItems[item].url,
+                            onClick: this.testServiceClick,
+                            className: 'leftmenu_css_li'
+                        },
+                        selectMenuItems[item].displayName
                     );
 
                     lis.push(li);
@@ -163,7 +178,7 @@ var BodyDiv = function (_React$Component) {
                 { className: 'container-fixed bodydiv_css' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'row' },
+                    { className: 'row h-100' },
                     _react2.default.createElement(
                         'div',
                         { className: 'col-md-2 leftmenu_css' },
@@ -230,79 +245,108 @@ var UserHome = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (UserHome.__proto__ || Object.getPrototypeOf(UserHome)).call(this, props));
 
-        _this.serviceListInfoClick = _this.serviceListInfoClick.bind(_this);
+        _this.selectMenuItemsClick = _this.selectMenuItemsClick.bind(_this);
 
-        _this.getServiceInfoListInfoBackcall = _this.getServiceInfoListInfoBackcall.bind(_this);
-        _this.serviceListInfoClickBackCall = _this.serviceListInfoClickBackCall.bind(_this);
+        _this.getNavigationForNameCall = _this.getNavigationForNameCall.bind(_this);
+
         _this.getUserNameBackCall = _this.getUserNameBackCall.bind(_this);
 
-        _this.state = { bodyShowState: null, ServiceInfoList: null, UserName: null, ServiceInfoListInfo: null };
+        _this.state = {
+            manageHomeMenu: null, // 管理中心菜单
+            selectMenuName: null, // 当前显示的服务列表的菜单名称
+            selectMenuItems: null, // 当前显示的服务列表
+            userName: null // 用户名称
+        };
 
-        _this.getServiceInfoListInfo();
-        //this.serviceListInfoClick();
+        _this.getNavigationForName();
+
         _this.getUserName();
         return _this;
     }
 
-    _createClass(UserHome, [{
-        key: 'getServiceInfoListInfoBackcall',
-        value: function getServiceInfoListInfoBackcall(data) {
-            if (data.IsSuccess == true) {
-                var name = void 0;
-                var url = void 0;
-                for (var item in data.Value) {
-                    name = data.Value[item].ServiceListID;
-                    url = data.Value[item].ServiceListUrl;
+    // 获取导航回调
 
+
+    _createClass(UserHome, [{
+        key: 'getNavigationForNameCall',
+        value: function getNavigationForNameCall(data) {
+            if (data.isSuccess == true) {
+                if (data.value.items.length > 0) {
+                    this.setState({
+                        manageHomeMenu: data.value,
+                        selectMenuName: data.value.items[0].name,
+                        selectMenuItems: data.value.items[0].items
+                    });
+                }
+            }
+        }
+
+        // 获取导航
+
+    }, {
+        key: 'getNavigationForName',
+        value: function getNavigationForName() {
+            var navName = $("#NavName").attr("value");
+            var url = "/api/Navigation/GetNavigationForName/?NavigationName=" + navName;
+            $.get(url, this.getNavigationForNameCall);
+        }
+
+        // 服务单击事件
+
+    }, {
+        key: 'selectMenuItemsClick',
+        value: function selectMenuItemsClick(e) {
+            var name = $(e.target).parent().attr("name");
+
+            var selectMenuItems = null;
+            for (var item in this.state.manageHomeMenu.items) {
+                if (this.state.manageHomeMenu.items[item].name == name) {
+                    selectMenuItems = this.state.manageHomeMenu.items[item].items;
                     break;
                 }
+            }
 
-                this.setState({ ServiceInfoListInfo: data.Value }, function () {
-                    this.setState({ bodyShowState: name });
-                });
-                $.get(url, this.serviceListInfoClickBackCall);
-            }
+            this.setState({
+                selectMenuName: name,
+                selectMenuItems: selectMenuItems
+            });
         }
-    }, {
-        key: 'getServiceInfoListInfo',
-        value: function getServiceInfoListInfo() {
-            $.get("/api/AdminiHome/GetServiceListInfoList", this.getServiceInfoListInfoBackcall);
-        }
-    }, {
-        key: 'serviceListInfoClickBackCall',
-        value: function serviceListInfoClickBackCall(data) {
-            if (data.IsSuccess == true) {
-                this.setState({ ServiceInfoList: data.Value });
-            }
-        }
-    }, {
-        key: 'serviceListInfoClick',
-        value: function serviceListInfoClick(e) {
-            var name = $(e.target).parent().attr("name");
-            this.setState({ bodyShowState: name });
-            var url = $(e.target).parent().attr("data-url");
-            $.get(url, this.serviceListInfoClickBackCall);
-        }
+
+        // 获取用户名称回调
+
     }, {
         key: 'getUserNameBackCall',
         value: function getUserNameBackCall(data) {
-            if (data.IsSuccess == true) {
-                this.setState({ UserName: data.Value });
+            if (data.isSuccess == true) {
+                this.setState({ userName: data.value.identityUser.name });
             }
         }
+
+        // 获取用户名称
+
     }, {
         key: 'getUserName',
         value: function getUserName() {
-            $.get("/api/AdminiHome/GetUserName", this.getUserNameBackCall);
+            $.get("/api/User/GetIdentity", this.getUserNameBackCall);
         }
     }, {
         key: 'render',
         value: function render() {
+            var menuList = null;
+            if (this.state.manageHomeMenu != null) {
+                menuList = this.state.manageHomeMenu.items;
+            }
+
             return _react2.default.createElement(
                 'div',
-                null,
-                _react2.default.createElement(_Nav2.default, { bodyShowState: this.state.bodyShowState, serviceListInfoClick: this.serviceListInfoClick, userName: this.state.UserName, ServiceInfoListInfo: this.state.ServiceInfoListInfo }),
-                _react2.default.createElement(_BodyDiv2.default, { ServiceInfoList: this.state.ServiceInfoList })
+                { className: 'd-flex h-100' },
+                _react2.default.createElement(_Nav2.default, {
+                    selectMenuName: this.state.selectMenuName,
+                    selectMenuItemsClick: this.selectMenuItemsClick,
+                    userName: this.state.userName,
+                    menus: menuList
+                }),
+                _react2.default.createElement(_BodyDiv2.default, { selectMenuItems: this.state.selectMenuItems })
             );
         }
     }]);
@@ -356,9 +400,32 @@ var Nav = function (_React$Component) {
     }
 
     _createClass(Nav, [{
-        key: 'logoutClickFun',
-        value: function logoutClickFun(e) {
+        key: 'componentDidUpdate',
+
+        // 组件更新时
+        value: function componentDidUpdate() {
+            $(".navbar_css li").removeClass("navbar_css_li_click");
+            var name = "li[name=" + this.props.selectMenuName + "]";
+            $(name).addClass("navbar_css_li_click");
+        }
+
+        // 组件挂载时
+
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            $(".navbar_css li").removeClass("navbar_css_li_click");
+            var name = "li[name=" + this.props.selectMenuName + "]";
+            $(name).addClass("navbar_css_li_click");
+        }
+
+        // 退出登录单击
+
+    }, {
+        key: 'logoutClick',
+        value: function logoutClick(e) {
             var url = $(e.target).attr("data-url");
+
             $.get(url, function (data, status) {
                 if (data.IsSuccess == true) {
                     window.location.href = data.RedirectHref;
@@ -366,38 +433,23 @@ var Nav = function (_React$Component) {
             });
         }
     }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            $(".navbar_css li").removeClass("navbar_css_li_click");
-            var name = "li[name=" + this.props.bodyShowState + "]";
-            $(name).addClass("navbar_css_li_click");
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            $(".navbar_css li").removeClass("navbar_css_li_click");
-            var name = "li[name=" + this.props.bodyShowState + "]";
-            $(name).addClass("navbar_css_li_click");
-        }
-    }, {
-        key: 'logoutClick',
-        value: function logoutClick(e) {
-            this.logoutClickFun(e);
-        }
-    }, {
         key: 'render',
         value: function render() {
-            var letServiceInfoListInfo = this.props.ServiceInfoListInfo;
+            var menus = this.props.menus;
             var serviceInfoList = new Array();
-            if (letServiceInfoListInfo != null) {
-                for (var item in letServiceInfoListInfo) {
+            if (menus != null) {
+                for (var item in menus) {
                     var li = _react2.default.createElement(
                         'li',
-                        { name: letServiceInfoListInfo[item].ServiceListID, onClick: this.props.serviceListInfoClick, className: 'nav-item', 'data-url': letServiceInfoListInfo[item].ServiceListUrl },
+                        {
+                            name: menus[item].name,
+                            onClick: this.props.selectMenuItemsClick,
+                            className: 'nav-item'
+                        },
                         _react2.default.createElement(
                             'a',
                             { className: 'nav-link', href: '#' },
-                            letServiceInfoListInfo[item].ServiceListName
+                            menus[item].displayName
                         )
                     );
 
