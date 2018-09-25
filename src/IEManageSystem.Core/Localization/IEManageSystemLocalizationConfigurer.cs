@@ -11,7 +11,8 @@ namespace IEManageSystem.Localization
     {
         public static void Configure(ILocalizationConfiguration localizationConfiguration)
         {
-            localizationConfiguration.Languages.Add(new LanguageInfo("en", "English", "famfamfam-flags england", isDefault: true));
+            localizationConfiguration.Languages.Add(new LanguageInfo("chs", "简体中文", isDefault: true));
+            localizationConfiguration.Languages.Add(new LanguageInfo("en", "English", "famfamfam-flags england"));
             localizationConfiguration.Languages.Add(new LanguageInfo("tr", "Türkçe", "famfamfam-flags tr"));
 
             localizationConfiguration.Sources.Add(
