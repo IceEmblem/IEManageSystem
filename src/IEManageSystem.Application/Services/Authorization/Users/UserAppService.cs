@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Abp.Auditing;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
-using IEManageSystem.Dtos.Authorization;
 using IEManageSystem.Entitys.Authorization;
+using IEManageSystem.Entitys.Authorization.LoginManagers;
+using IEManageSystem.Entitys.Authorization.Users;
 using IEManageSystem.Services.Authorization.Users.Dto;
 
 namespace IEManageSystem.Services.Authorization.Users

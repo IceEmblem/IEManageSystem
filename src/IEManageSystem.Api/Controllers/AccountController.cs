@@ -15,7 +15,7 @@ using IdentityServer4.Services;
 using IEManageSystem.Api.Help;
 using IEManageSystem.Api.Models;
 using IEManageSystem.Api.Models.AccountModels;
-using IEManageSystem.Dtos.Authorization;
+using IEManageSystem.Entitys.Authorization.LoginManagers;
 using IEManageSystem.Services.Authorization.Accounts;
 using IEManageSystem.Services.Authorization.Accounts.Dto;
 using Microsoft.AspNetCore.Authentication;
@@ -103,16 +103,18 @@ namespace IEManageSystem.Api.Controllers
                 return new ApiResultDataModel(_ValidateModelErrors);
             }
 
+            // 验证验证码
             string validateCode = _ValidateCodeHelper.GetValidateCode();
             if (!string.Equals(validateCode, model.VaildCode, StringComparison.OrdinalIgnoreCase))
             {
                 return new ApiResultDataModel() { IsSuccess = false, Message = "验证码错误" };
             }
 
-            LoginInput input = new LoginInput();
-            input.Username = model.AccountID;
-            input.Password = model.Password;
-            input.TenantId = _AbpSession.TenantId;
+            LoginInput input = new LoginInput() {
+                Username = model.AccountID,
+                Password = model.Password,
+                TenantId = _AbpSession.TenantId,
+            };
             var output = await _AccountAppService.Login(input);
 
             switch (output.AbpLoginResult.Result)
@@ -121,7 +123,7 @@ namespace IEManageSystem.Api.Controllers
 
                     var user = output.AbpLoginResult.User;
                     // 触发用户登录成功事件
-                    await _Events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.UserName, user.UserName));
+                    await _Events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.Name));
 
                     // 如果用户选择“记住我”，则仅在此设置明确的到期时间。
                     // 否则我们依赖于cookie中间件中配置的到期。
@@ -135,18 +137,16 @@ namespace IEManageSystem.Api.Controllers
                             ExpiresUtc = DateTimeOffset.UtcNow.Add(TimeSpan.FromDays(15))
                         };
                     };
-
                     var claims = new Claim[]
                         {
-                            new Claim("Id", user.Id.ToString()),
-                            new Claim("UserName", user.UserName),
-                            new Claim("EmailAddress", user.EmailAddress),
-                            new Claim("Name", user.Name),
-                            new Claim("Phone", user.Phone ?? ""),
+                            new Claim(ClaimHelper.Id, user.Id.ToString()),
+                            new Claim(ClaimHelper.UserName, user.UserName),
+                            new Claim(ClaimHelper.EmailAddress, user.EmailAddress),
+                            new Claim(ClaimHelper.Name, user.Name),
+                            new Claim(ClaimHelper.Phone, user.Phone ?? ""),
                         };
-
                     // 使用主题ID和用户名发出身份验证Cookie
-                    await HttpContext.SignInAsync(user.UserName, user.UserName, props, claims);
+                    await HttpContext.SignInAsync(user.Id.ToString(), user.Name, props, claims);
 
                     var result = new ApiResultDataModel() { IsSuccess = true, Value = null };
 
@@ -156,10 +156,6 @@ namespace IEManageSystem.Api.Controllers
                     {
                         result.RedirectHref = model.ReturnUrl;
                     }
-                    //else
-                    //{
-                    //    result.RedirectHref = "/";
-                    //}
 
                     return result;
 

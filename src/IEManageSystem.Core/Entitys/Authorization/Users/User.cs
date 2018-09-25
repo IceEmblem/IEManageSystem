@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace IEManageSystem.Entitys.Authorization
+namespace IEManageSystem.Entitys.Authorization.Users
 {
     [Table("User")]
     public class User:Entity

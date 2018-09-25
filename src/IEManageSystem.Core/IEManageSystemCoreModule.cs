@@ -12,14 +12,6 @@ namespace IEManageSystem
         {
             Configuration.Auditing.IsEnabledForAnonymousUsers = true;
 
-            //Configuration.EmbeddedResources.Sources.Add(
-            //    new EmbeddedResourceSet(
-            //        "/Localization/SourceFiles/",
-            //        Assembly.GetExecutingAssembly(),
-            //        "IEManageSystem.Localization.SourceFiles"
-            //    )
-            //);
-
             IEManageSystemLocalizationConfigurer.Configure(Configuration.Localization);
         }
 

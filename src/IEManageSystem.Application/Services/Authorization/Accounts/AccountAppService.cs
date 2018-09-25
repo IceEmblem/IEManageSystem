@@ -2,7 +2,8 @@ using System.Threading.Tasks;
 using Abp.Configuration;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
-using IEManageSystem.Dtos.Authorization;
+using IEManageSystem.Entitys.Authorization.LoginManagers;
+using IEManageSystem.Entitys.Authorization.Users.UserManager;
 using IEManageSystem.Services.Authorization.Accounts.Dto;
 
 namespace IEManageSystem.Services.Authorization.Accounts
@@ -11,20 +12,20 @@ namespace IEManageSystem.Services.Authorization.Accounts
     {
         private IAbpSession _AbpSession { get; set; }
 
-        private AccountDomainService _AccountDomainService { get; set; }
+        private LoginManager _LoginManager { get; set; }
 
-        private LoginDomainService _LoginDomainService { get; set; }
+        private UserManager _UserManager { get; set; }
 
         public AccountAppService(
             IAbpSession abpSession,
-            AccountDomainService accountDomainService,
-            LoginDomainService loginDomainService)
+            LoginManager loginManager,
+            UserManager userManager)
         {
             _AbpSession = abpSession;
 
-            _AccountDomainService = accountDomainService;
+            _LoginManager = loginManager;
 
-            _LoginDomainService = loginDomainService;
+            _UserManager = userManager;
         }
 
         /// <summary>
@@ -38,49 +39,27 @@ namespace IEManageSystem.Services.Authorization.Accounts
                 input.Name = input.UserName;
             }
 
-            if (_AccountDomainService.IsHaveUserName(input.UserName)) {
-                return new RegisterOutput() { ErrorMessage = "已存在用户名" + input.UserName };
-            }
-
-            _AccountDomainService.Register(input.UserName, input.Password, input.EmailAddress, input.Name, input.TenantId);
+            await _UserManager.RegisterAsync(input.UserName, input.Password, input.EmailAddress, input.Name, input.TenantId ?? 0);
 
             return new RegisterOutput();
         }
 
         /// <summary>
-        /// 登录验证
+        /// 登录
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task<LoginOutput> Login(LoginInput input)
         {
-            AbpLoginResult abpLoginResult = new AbpLoginResult();
+            AbpLoginResult abpLoginResult = await _LoginManager.LoginAsync(input.Username, input.Password, input.TenantId ?? 0);
 
-            // 验证用户名
-            if ( !_LoginDomainService.ValidateUsername(input.Username, input.TenantId) )
-            {
-                abpLoginResult.Result = AbpLoginResultType.InvalidUserNameOrEmailAddress;
+            if (abpLoginResult.Result == AbpLoginResultType.InvalidUserNameOrEmailAddress) {
                 return new LoginOutput() { ErrorMessage = "无效的用户名", AbpLoginResult = abpLoginResult };
             }
 
-            // 验证密码
-            var user = _LoginDomainService.ValidateUsernameAndPassword(input.Username, input.Password, input.TenantId);
-            if (user == null)
-            {
-                abpLoginResult.Result = AbpLoginResultType.InvalidPassword;
+            if (abpLoginResult.Result == AbpLoginResultType.InvalidPassword) {
                 return new LoginOutput() { ErrorMessage = "无效的密码", AbpLoginResult = abpLoginResult };
             }
-
-            // 验证成功
-            abpLoginResult.Result = AbpLoginResultType.Success;
-            abpLoginResult.User = new IdentityUser() {
-                Id = user.Id,
-                UserName = user.UserName,
-                EmailAddress = user.EmailAddress,
-                Name = user.Name,
-                Phone = user.Phone,
-                TenantId = user.TenantId
-            };
 
             return new LoginOutput() { AbpLoginResult = abpLoginResult };
         }

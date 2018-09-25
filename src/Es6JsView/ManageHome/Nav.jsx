@@ -50,17 +50,17 @@ export default class Nav extends React.Component
 
         return(
             <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top navbar_css">
-              <a className="navbar-brand" href="#">冰纹后台管理系统</a>
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul className="navbar-nav">
-                    {serviceInfoList}
-                </ul>
-                <span className="text-info float-right">你好，{this.props.userName}</span>
-                <input id="outLogin" data-url="/api/Account/Logout" onClick={this.logoutClick} type="button" value="退出登录" className="btn btn-info float-right" />
-              </div> 
+                <a className="navbar-brand" href="#">冰纹后台管理系统</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul className="navbar-nav">
+                        {serviceInfoList}
+                    </ul>
+                    <span className="text-info float-right">你好，{this.props.userName}</span>
+                    <input id="outLogin" data-url="/api/Account/Logout" onClick={this.logoutClick} type="button" value="退出登录" className="btn btn-info float-right" />
+                </div> 
             </nav>
         );
     }

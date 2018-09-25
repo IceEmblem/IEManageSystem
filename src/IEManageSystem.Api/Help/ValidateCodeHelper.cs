@@ -26,6 +26,10 @@ namespace IEManageSystem.Api.Help
             _HttpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        /// 生成一个验证码
+        /// </summary>
+        /// <returns></returns>
         public MemoryStream CreateValidateCode()
         {
             string code = "";
@@ -36,6 +40,10 @@ namespace IEManageSystem.Api.Help
             return ms;
         }
 
+        /// <summary>
+        /// 获取当前验证码
+        /// </summary>
+        /// <returns></returns>
         public string GetValidateCode()
         {
             return _HttpContext.Session.GetString(ValidateCodeSesssionName);

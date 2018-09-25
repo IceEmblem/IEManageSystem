@@ -2,7 +2,7 @@
 using Abp.Runtime.Session;
 using IdentityServer4.Models;
 using IdentityServer4.Validation;
-using IEManageSystem.Dtos.Authorization;
+using IEManageSystem.Entitys.Authorization.LoginManagers;
 using IEManageSystem.Services;
 using IEManageSystem.Services.Authorization.Accounts;
 using IEManageSystem.Services.Authorization.Accounts.Dto;

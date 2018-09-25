@@ -1,5 +1,6 @@
 ﻿using Abp.EntityFrameworkCore;
 using IEManageSystem.Entitys.Authorization;
+using IEManageSystem.Entitys.Authorization.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace IEManageSystem.EntityFrameworkCore

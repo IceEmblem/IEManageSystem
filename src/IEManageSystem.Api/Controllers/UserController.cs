@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IEManageSystem.Api.Models;
-using IEManageSystem.Dtos.Authorization;
+using IEManageSystem.Entitys.Authorization.LoginManagers;
 using IEManageSystem.Services.Authorization.Users;
 using IEManageSystem.Services.Authorization.Users.Dto;
 using Microsoft.AspNetCore.Http;

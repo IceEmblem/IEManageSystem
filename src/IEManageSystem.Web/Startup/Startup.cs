@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using IEManageSystem.Api.Help;
 using System.IdentityModel.Tokens.Jwt;
 using IEManageSystem.Api.Help.IdentityServerHelp;
+using IEManageSystem.Api.Middlewares;
 
 namespace IEManageSystem.Web.Startup
 {
@@ -42,22 +43,6 @@ namespace IEManageSystem.Web.Startup
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddProfileService<ProfileService>();
 
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultScheme = "Cookies";
-            //    options.DefaultChallengeScheme = "oidc";
-            //}).AddCookie("Cookies")
-            //    .AddOpenIdConnect("oidc", options =>
-            //    {
-            //        options.SignInScheme = "Cookies";
-
-            //        options.Authority = "http://localhost:21022/";
-            //        options.RequireHttpsMetadata = false;
-
-            //        options.ClientId = "IEApi";
-            //        options.SaveTokens = true;
-            //    });
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<ValidateCodeHelper>();
@@ -77,6 +62,7 @@ namespace IEManageSystem.Web.Startup
             app.UseAbp(); //Initializes ABP framework.
 
             app.UseDeveloperExceptionPage();
+
             app.UseDatabaseErrorPage();
 
             //if (env.IsDevelopment())
@@ -88,6 +74,8 @@ namespace IEManageSystem.Web.Startup
             //{
             //    app.UseExceptionHandler("/Error");
             //}
+
+            app.UseExceptionHandleEx();
 
             app.UseSession();
 

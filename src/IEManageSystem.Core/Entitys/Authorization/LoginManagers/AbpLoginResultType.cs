@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IEManageSystem.Dtos.Authorization
+namespace IEManageSystem.Entitys.Authorization.LoginManagers
 {
     public enum AbpLoginResultType
     {

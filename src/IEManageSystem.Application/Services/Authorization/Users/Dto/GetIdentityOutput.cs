@@ -1,5 +1,5 @@
 ﻿using IEManageSystem.Dtos;
-using IEManageSystem.Dtos.Authorization;
+using IEManageSystem.Entitys.Authorization.LoginManagers;
 using System;
 using System.Collections.Generic;
 using System.Text;
