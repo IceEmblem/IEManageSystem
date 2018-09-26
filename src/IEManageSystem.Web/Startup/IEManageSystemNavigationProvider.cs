@@ -33,6 +33,17 @@ namespace IEManageSystem.Web.Startup
                     L("ManageHome")
                 ).AddItem(
                     new MenuItemDefinition(
+                        "Personal",
+                        L("Personal")
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            "PersonalInfo",
+                            L("PersonalInfo"),
+                            url:""
+                        )    
+                    )
+                ).AddItem(
+                    new MenuItemDefinition(
                         "UserManage",
                         L("UserManage")
                     ).AddItem(

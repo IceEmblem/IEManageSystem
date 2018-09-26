@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Version>1.0.0.0</Version>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -10,9 +10,6 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <RootNamespace>IEManageSystem</RootNamespace>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Localization\SourceFiles\IEManageSystem-chs.json" />
-  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\SourceFiles\IEManageSystem-chs.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

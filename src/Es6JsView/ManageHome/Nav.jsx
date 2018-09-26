@@ -53,7 +53,14 @@ export default class Nav extends React.Component
 
         return(
             <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top navbar_css">
-                <a className="navbar-brand" href="#">冰纹后台管理系统</a>
+                <div className="float-left navbar_logo_css">
+                    <div className="logo">
+                        <div className="w-75">
+                            <img src="/images/logo.png" alt="" className="w-100" />
+                        </div>
+                    </div>
+                </div>
+                <a className="navbar-brand" href="#">冰纹管理系统</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span className="navbar-toggler-icon"></span>
                 </button>

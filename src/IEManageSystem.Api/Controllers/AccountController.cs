@@ -131,7 +131,7 @@ namespace IEManageSystem.Api.Controllers
             // 确保returnUrl仍然有效，如果是这样重定向回授权端点或本地页面，只有当你想支持其他本地页面时才需要进行IsLocalUrl检查，否则IsValidReturnUrl会更严格
             if (_Interaction.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
             {
-                new ApiResultDataModel()
+                return new ApiResultDataModel()
                 {
                     IsSuccess = true,
                     RedirectHref = model.ReturnUrl,

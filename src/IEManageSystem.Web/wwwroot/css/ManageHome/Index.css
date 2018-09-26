@@ -20,6 +20,9 @@
 .navbar_css {
     background: linear-gradient(to right, #00C5CD, #00EEEE);
 }
+.navbar_logo_css{
+    width: 50px;
+}
     .navbar_css .navbar-collapse {
         display: -webkit-flex;
         display: flex;

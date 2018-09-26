@@ -56,7 +56,13 @@ namespace IEManageSystem.Api.Help.IdentityServerHelp
                 new Client
                 {
                     ClientId = "IEClient",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    // AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
 
                     RedirectUris = { "http://localhost:5002/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
@@ -66,7 +72,10 @@ namespace IEManageSystem.Api.Help.IdentityServerHelp
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.Phone,
+                        "IEApi",
                     },
+
+                    AllowOfflineAccess = true,
                 }
             };
         }

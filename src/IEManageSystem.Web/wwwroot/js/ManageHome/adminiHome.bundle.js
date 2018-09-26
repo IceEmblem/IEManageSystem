@@ -446,9 +446,22 @@ var Nav = function (_React$Component) {
                 'nav',
                 { className: 'navbar navbar-expand-md bg-dark navbar-dark fixed-top navbar_css' },
                 _react2.default.createElement(
+                    'div',
+                    { className: 'float-left navbar_logo_css' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'logo' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'w-75' },
+                            _react2.default.createElement('img', { src: '/images/logo.png', alt: '', className: 'w-100' })
+                        )
+                    )
+                ),
+                _react2.default.createElement(
                     'a',
                     { className: 'navbar-brand', href: '#' },
-                    '\u51B0\u7EB9\u540E\u53F0\u7BA1\u7406\u7CFB\u7EDF'
+                    '\u51B0\u7EB9\u7BA1\u7406\u7CFB\u7EDF'
                 ),
                 _react2.default.createElement(
                     'button',
