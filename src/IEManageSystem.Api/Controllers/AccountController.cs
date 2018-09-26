@@ -13,6 +13,7 @@ using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IEManageSystem.Api.Help;
+using IEManageSystem.Api.Help.ClaimHelp;
 using IEManageSystem.Api.Models;
 using IEManageSystem.Api.Models.AccountModels;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
@@ -117,56 +118,52 @@ namespace IEManageSystem.Api.Controllers
             };
             var output = await _AccountAppService.Login(input);
 
-            switch (output.AbpLoginResult.Result)
-            {
-                case AbpLoginResultType.Success:
-
-                    var user = output.AbpLoginResult.User;
-                    // 触发用户登录成功事件
-                    await _Events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.Name));
-
-                    // 如果用户选择“记住我”，则仅在此设置明确的到期时间。
-                    // 否则我们依赖于cookie中间件中配置的到期。
-                    // AuthenticationProperties用于存储有关身份验证会话的状态值的字典。
-                    AuthenticationProperties props = null;
-                    if (model.RememberLogin)
-                    {
-                        props = new AuthenticationProperties
-                        {
-                            IsPersistent = true,
-                            ExpiresUtc = DateTimeOffset.UtcNow.Add(TimeSpan.FromDays(15))
-                        };
-                    };
-                    var claims = new Claim[]
-                        {
-                            new Claim(ClaimHelper.Id, user.Id.ToString()),
-                            new Claim(ClaimHelper.UserName, user.UserName),
-                            new Claim(ClaimHelper.EmailAddress, user.EmailAddress),
-                            new Claim(ClaimHelper.Name, user.Name),
-                            new Claim(ClaimHelper.Phone, user.Phone ?? ""),
-                        };
-                    // 使用主题ID和用户名发出身份验证Cookie
-                    await HttpContext.SignInAsync(user.Id.ToString(), user.Name, props, claims);
-
-                    var result = new ApiResultDataModel() { IsSuccess = true, Value = null };
-
-                    // result.RedirectHref = request.RedirectUri;
-                    // 确保returnUrl仍然有效，如果是这样重定向回授权端点或本地页面，只有当你想支持其他本地页面时才需要进行IsLocalUrl检查，否则IsValidReturnUrl会更严格
-                    if (_Interaction.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        result.RedirectHref = model.ReturnUrl;
-                    }
-
-                    return result;
-
-                case AbpLoginResultType.InvalidPassword:
-                    return new ApiResultDataModel() { IsSuccess = false, Message = "密码错误" };
-
-                case AbpLoginResultType.InvalidUserNameOrEmailAddress:
-                    return new ApiResultDataModel() { IsSuccess = false, Message = "用户名或密码错误" };
+            if (output.AbpLoginResult.Result == AbpLoginResultType.InvalidUserNameOrEmailAddress) {
+                return new ApiResultDataModel() { IsSuccess = false, Message = "用户名或密码错误" };
             }
 
-            return new ApiResultDataModel() { IsSuccess = false, Value = null };
+            if (output.AbpLoginResult.Result == AbpLoginResultType.InvalidPassword) {
+                return new ApiResultDataModel() { IsSuccess = false, Message = "密码错误" };
+            }
+
+            await SignInAsync(output.AbpLoginResult.User, model.RememberLogin);
+
+            // 确保returnUrl仍然有效，如果是这样重定向回授权端点或本地页面，只有当你想支持其他本地页面时才需要进行IsLocalUrl检查，否则IsValidReturnUrl会更严格
+            if (_Interaction.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
+            {
+                new ApiResultDataModel()
+                {
+                    IsSuccess = true,
+                    RedirectHref = model.ReturnUrl,
+                };
+            }
+
+            return new ApiResultDataModel() { IsSuccess = true };
+        }
+
+        /// <summary>
+        /// 执行站点登录
+        /// </summary>
+        /// <returns></returns>
+        private async Task SignInAsync(IdentityUser user, bool rememberLogin)
+        {
+            // 触发IdentityService用户登录成功事件
+            await _Events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.Name));
+
+            // 如果用户选择“记住我”，则仅在此设置明确的到期时间。
+            AuthenticationProperties props = null;
+            if (rememberLogin)
+            {
+                props = new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.Add(TimeSpan.FromDays(15))
+                };
+            };
+            var claims = new ClaimHelper().CreateClaimsForIdentityUser(user).ToArray();
+
+            // 发出身份验证Cookie
+            await HttpContext.SignInAsync(user.Id.ToString(), user.Name, props, claims);
         }
 
         /// <summary>
@@ -175,9 +172,9 @@ namespace IEManageSystem.Api.Controllers
         /// <param name="logoutId"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Logout(string logoutId)
+        public async Task<ActionResult<ApiResultDataModel>> Logout(string logoutId)
         {
-            var context = await _Interaction.GetLogoutContextAsync(logoutId);
+            var logout = await _Interaction.GetLogoutContextAsync(logoutId);
 
             if (User?.Identity.IsAuthenticated == true)
             {
@@ -188,7 +185,14 @@ namespace IEManageSystem.Api.Controllers
                 await _Events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
             }
 
-            var logout = await _Interaction.GetLogoutContextAsync(logoutId);
+            // logoutId 为空则为本站点退出登录
+            if (string.IsNullOrEmpty(logoutId) || string.IsNullOrEmpty(logout?.ClientId))
+            {
+                return new ApiResultDataModel() {
+                    IsSuccess = true,
+                    RedirectHref = HttpContext.Request.Headers["Referer"],
+                };
+            }
 
             return Redirect(logout?.PostLogoutRedirectUri);
         }

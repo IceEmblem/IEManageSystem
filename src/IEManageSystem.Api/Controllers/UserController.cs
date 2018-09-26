@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IEManageSystem.Api.Help.ClaimHelp;
 using IEManageSystem.Api.Models;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
 using IEManageSystem.Services.Authorization.Users;
@@ -35,14 +36,8 @@ namespace IEManageSystem.Api.Controllers
                 return new ApiResultDataModel<GetIdentityOutput>(_ValidateModelErrors);
             }
 
-            IdentityUser identityUser = new IdentityUser() {
-                Id = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value),
-                EmailAddress = User.Claims.FirstOrDefault(e => e.Type == "EmailAddress").Value,
-                Name = User.Claims.FirstOrDefault(e => e.Type == "Name").Value,
-                Phone = User.Claims.FirstOrDefault(e => e.Type == "Phone").Value,
-                UserName = User.Claims.FirstOrDefault(e => e.Type == "UserName").Value
-            };
-            
+            IdentityUser identityUser = new ClaimHelper().CreateIdentityUserForClaims(User.Claims.ToList());
+
 
             return new ApiResultDataModel<GetIdentityOutput>(new GetIdentityOutput() { IdentityUser = identityUser });
         }

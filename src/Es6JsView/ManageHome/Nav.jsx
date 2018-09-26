@@ -21,11 +21,14 @@ export default class Nav extends React.Component
     logoutClick(e){
         var url = $(e.target).attr("data-url");
 
-        $.get(url,function(data,status){
-            if(data.IsSuccess==true){
-                window.location.href=data.RedirectHref;
+        $.get(url,
+            function(data)
+            {
+                if(data.isSuccess==true){
+                    window.location.href=data.redirectHref;
+                }
             }
-        });
+        );
     }
     
     render(){
