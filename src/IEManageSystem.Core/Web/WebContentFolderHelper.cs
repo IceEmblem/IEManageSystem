@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace IEManageSystem.Api
+namespace IEManageSystem
 {
     /// <summary>
     /// This class is used to find root path of the web project in;

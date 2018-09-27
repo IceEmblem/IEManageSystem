@@ -1,21 +1,23 @@
 ﻿using IdentityServer4.EntityFramework.DbContexts;
+using IEManageSystem.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IEManageSystem.Web.Contexts
+namespace IEManageSystem.EntityFrameworkCore.IdentityServiceEF
 {
     public class IEConfigurationDbContextFactory : IDesignTimeDbContextFactory<IEConfigurationDbContext>
     {
-        const string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=IdentityServiceDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
         public IEConfigurationDbContext CreateDbContext(string[] args)
         {
+            var configuration = AppConfigurations.Get(WebContentDirectoryFinder.CalculateContentRootFolder());
+
             var builder = new DbContextOptionsBuilder<ConfigurationDbContext>();
-            builder.UseSqlServer(connectionString);
+            builder.UseSqlServer(configuration.GetConnectionString(IEManageSystemConsts.IdentityServerConnectionStringName));
 
             return new IEConfigurationDbContext(builder.Options, new IdentityServer4.EntityFramework.Options.ConfigurationStoreOptions());
         }

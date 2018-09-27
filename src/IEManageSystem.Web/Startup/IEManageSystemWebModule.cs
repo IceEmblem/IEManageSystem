@@ -5,6 +5,7 @@ using Abp.Reflection.Extensions;
 using IEManageSystem.Api.Startup;
 using IEManageSystem.Configuration;
 using IEManageSystem.EntityFrameworkCore;
+using IEManageSystem.EntityFrameworkCore.IEManageSystemEF;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 

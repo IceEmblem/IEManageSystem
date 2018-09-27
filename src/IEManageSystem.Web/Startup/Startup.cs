@@ -21,13 +21,13 @@ using System.Reflection;
 using IdentityServer4.EntityFramework.DbContexts;
 using System.Linq;
 using IdentityServer4.EntityFramework.Mappers;
+using IEManageSystem.EntityFrameworkCore.IEManageSystemEF;
+using IEManageSystem.EntityFrameworkCore.IdentityServiceEF;
 
 namespace IEManageSystem.Web.Startup
 {
     public class Startup
     {
-        const string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=IdentityServiceDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             //Configure DbContext
@@ -43,27 +43,11 @@ namespace IEManageSystem.Web.Startup
             services.AddSession();
 
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            // configure identity server with in-memory stores, keys, clients and scopes
+            // 配置IdentityService
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
-                // this adds the config data from DB (clients, resources)
-                .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(connectionString,
-                            sql => sql.MigrationsAssembly(migrationsAssembly));
-                })
-                // this adds the operational data from DB (codes, tokens, consents)
-                .AddOperationalStore(options =>
-                {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(connectionString,
-                            sql => sql.MigrationsAssembly(migrationsAssembly));
-
-                    // this enables automatic token cleanup. this is optional.
-                    options.EnableTokenCleanup = true;
-                    options.TokenCleanupInterval = 30;
-                })
+                .AddConfigurationStore()
+                .AddOperationalStore()
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddProfileService<ProfileService>();
 
@@ -85,7 +69,7 @@ namespace IEManageSystem.Web.Startup
         {
             app.UseAbp(); //Initializes ABP framework.
 
-            InitializeDatabase(app);
+            // InitializeDatabase(app);
 
             app.UseDeveloperExceptionPage();
 
@@ -126,41 +110,41 @@ namespace IEManageSystem.Web.Startup
             });
         }
 
-        private void InitializeDatabase(IApplicationBuilder app)
-        {
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+        //private void InitializeDatabase(IApplicationBuilder app)
+        //{
+        //    using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+        //    {
+        //        serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
 
-                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-                context.Database.Migrate();
-                if (!context.Clients.Any())
-                {
-                    foreach (var client in IdentityServerConfigure.GetClients())
-                    {
-                        context.Clients.Add(client.ToEntity());
-                    }
-                    context.SaveChanges();
-                }
+        //        var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+        //        context.Database.Migrate();
+        //        if (!context.Clients.Any())
+        //        {
+        //            foreach (var client in IdentityServerConfigure.GetClients())
+        //            {
+        //                context.Clients.Add(client.ToEntity());
+        //            }
+        //            context.SaveChanges();
+        //        }
 
-                if (!context.IdentityResources.Any())
-                {
-                    foreach (var resource in IdentityServerConfigure.GetIdentityResourceResources())
-                    {
-                        context.IdentityResources.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
-                }
+        //        if (!context.IdentityResources.Any())
+        //        {
+        //            foreach (var resource in IdentityServerConfigure.GetIdentityResourceResources())
+        //            {
+        //                context.IdentityResources.Add(resource.ToEntity());
+        //            }
+        //            context.SaveChanges();
+        //        }
 
-                if (!context.ApiResources.Any())
-                {
-                    foreach (var resource in IdentityServerConfigure.GetApiResources())
-                    {
-                        context.ApiResources.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
-                }
-            }
-        }
+        //        if (!context.ApiResources.Any())
+        //        {
+        //            foreach (var resource in IdentityServerConfigure.GetApiResources())
+        //            {
+        //                context.ApiResources.Add(resource.ToEntity());
+        //            }
+        //            context.SaveChanges();
+        //        }
+        //    }
+        //}
     }
 }

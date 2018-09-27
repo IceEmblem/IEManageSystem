@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IEManageSystem.Web.Contexts
+namespace IEManageSystem.EntityFrameworkCore.IdentityServiceEF
 {
     public class IEConfigurationDbContext : ConfigurationDbContext
     {

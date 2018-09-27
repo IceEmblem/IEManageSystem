@@ -2,7 +2,7 @@
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 
-namespace IEManageSystem.EntityFrameworkCore
+namespace IEManageSystem.EntityFrameworkCore.IEManageSystemEF
 {
     [DependsOn(
         typeof(IEManageSystemCoreModule), 

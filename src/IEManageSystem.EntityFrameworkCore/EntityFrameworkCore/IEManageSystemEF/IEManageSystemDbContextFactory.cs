@@ -1,10 +1,9 @@
 ﻿using IEManageSystem.Configuration;
-using IEManageSystem.Api;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace IEManageSystem.EntityFrameworkCore
+namespace IEManageSystem.EntityFrameworkCore.IEManageSystemEF
 {
     /* This class is needed to run EF Core PMC commands. Not used anywhere else */
     public class IEManageSystemDbContextFactory : IDesignTimeDbContextFactory<IEManageSystemDbContext>

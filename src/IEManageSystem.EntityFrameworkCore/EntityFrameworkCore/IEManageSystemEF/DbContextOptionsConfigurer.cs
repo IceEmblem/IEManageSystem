@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace IEManageSystem.EntityFrameworkCore
+namespace IEManageSystem.EntityFrameworkCore.IEManageSystemEF
 {
     public static class DbContextOptionsConfigurer
     {
