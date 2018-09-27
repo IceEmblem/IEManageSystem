@@ -16,11 +16,16 @@ using IEManageSystem.Api.Help;
 using System.IdentityModel.Tokens.Jwt;
 using IEManageSystem.Api.Help.IdentityServerHelp;
 using IEManageSystem.Api.Middlewares;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using IdentityServer4.EntityFramework.DbContexts;
 
 namespace IEManageSystem.Web.Startup
 {
     public class Startup
     {
+        const string connectionString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=IdentityServiceDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             //Configure DbContext
@@ -35,11 +40,28 @@ namespace IEManageSystem.Web.Startup
 
             services.AddSession();
 
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            // configure identity server with in-memory stores, keys, clients and scopes
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
-                .AddInMemoryIdentityResources(IdentityServerConfigure.GetIdentityResourceResources())
-                .AddInMemoryApiResources(IdentityServerConfigure.GetApiResources())
-                .AddInMemoryClients(IdentityServerConfigure.GetClients())
+                // this adds the config data from DB (clients, resources)
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                // this adds the operational data from DB (codes, tokens, consents)
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+
+                    // this enables automatic token cleanup. this is optional.
+                    options.EnableTokenCleanup = true;
+                    options.TokenCleanupInterval = 30;
+                })
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddProfileService<ProfileService>();
 
