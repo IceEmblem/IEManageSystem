@@ -19,9 +19,10 @@ export default class BodyDiv extends React.Component
  //    }
 
     // 服务单击
-    testServiceClick(e){
+    serviceClick(e){
         var url = $(e.target).attr("data-url");
-        $.get(url,function(data,status){
+        $.get(url,function(data)
+        {
             $("#servicecontainer").html(data);
         });
     }
@@ -34,7 +35,7 @@ export default class BodyDiv extends React.Component
                 let li = 
                     <li 
                         data-url={selectMenuItems[item].url} 
-                        onClick={this.testServiceClick} 
+                        onClick={this.serviceClick} 
                         className="leftmenu_css_li"
                     >
                             {selectMenuItems[item].displayName}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace IEManageSystem.Services.Authorization.Accounts.Dto
+namespace IEManageSystem.Services.Accounts.Dto
 {
     public class LoginInput
     {

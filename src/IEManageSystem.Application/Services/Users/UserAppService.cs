@@ -8,9 +8,9 @@ using Abp.Runtime.Session;
 using IEManageSystem.Entitys.Authorization;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
 using IEManageSystem.Entitys.Authorization.Users;
-using IEManageSystem.Services.Authorization.Users.Dto;
+using IEManageSystem.Services.Users.Dto;
 
-namespace IEManageSystem.Services.Authorization.Users
+namespace IEManageSystem.Services.Users
 {
     public class UserAppService : IUserAppService
     {

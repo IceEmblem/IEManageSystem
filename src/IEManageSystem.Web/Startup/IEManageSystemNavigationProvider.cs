@@ -66,6 +66,19 @@ namespace IEManageSystem.Web.Startup
                         L("AuthorizeManage")
                     ).AddItem(
                         new MenuItemDefinition(
+                            "IdentityResource",
+                            L("IdentityResource"),
+                            url: "/AuthorizeManage/IdentityResource"
+                        )
+                    ).AddItem(
+                        new MenuItemDefinition(
+                            "ApiResource",
+                            L("ApiResource"),
+                            url: ""
+                        )
+                    ).AddItem(
+                        
+                        new MenuItemDefinition(
                             "ExternalAuthorize",
                             L("ExternalAuthorize"),
                             url: ""

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using IEManageSystem.Api.Help.ClaimHelp;
 using IEManageSystem.Api.Models;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
-using IEManageSystem.Services.Authorization.Users;
-using IEManageSystem.Services.Authorization.Users.Dto;
+using IEManageSystem.Services.Users;
+using IEManageSystem.Services.Users.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

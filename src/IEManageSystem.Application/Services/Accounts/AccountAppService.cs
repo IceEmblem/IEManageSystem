@@ -4,9 +4,9 @@ using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
 using IEManageSystem.Entitys.Authorization.Users.UserManager;
-using IEManageSystem.Services.Authorization.Accounts.Dto;
+using IEManageSystem.Services.Accounts.Dto;
 
-namespace IEManageSystem.Services.Authorization.Accounts
+namespace IEManageSystem.Services.Accounts
 {
     public class AccountAppService : IEManageSystemAppServiceBase, IAccountAppService
     {

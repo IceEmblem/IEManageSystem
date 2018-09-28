@@ -1,6 +1,6 @@
 ﻿using IEManageSystem.Dtos;
 
-namespace IEManageSystem.Services.Authorization.Accounts.Dto
+namespace IEManageSystem.Services.Accounts.Dto
 {
     public class RegisterOutput: OutputDtoBase
     {

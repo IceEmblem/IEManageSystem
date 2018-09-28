@@ -113,7 +113,7 @@ var BodyDiv = function (_React$Component) {
     }
 
     _createClass(BodyDiv, [{
-        key: 'testServiceClick',
+        key: 'serviceClick',
 
         // setLeftMenuHeight(){
         //     var winheight = $(window).height() - 50 +"px";
@@ -131,9 +131,9 @@ var BodyDiv = function (_React$Component) {
         //    }
 
         // 服务单击
-        value: function testServiceClick(e) {
+        value: function serviceClick(e) {
             var url = $(e.target).attr("data-url");
-            $.get(url, function (data, status) {
+            $.get(url, function (data) {
                 $("#servicecontainer").html(data);
             });
         }
@@ -148,7 +148,7 @@ var BodyDiv = function (_React$Component) {
                         'li',
                         {
                             'data-url': selectMenuItems[item].url,
-                            onClick: this.testServiceClick,
+                            onClick: this.serviceClick,
                             className: 'leftmenu_css_li'
                         },
                         selectMenuItems[item].displayName

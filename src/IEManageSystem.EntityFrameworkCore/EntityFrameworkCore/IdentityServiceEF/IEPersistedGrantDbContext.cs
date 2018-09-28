@@ -1,4 +1,5 @@
-﻿using IdentityServer4.EntityFramework.DbContexts;
+﻿using Abp.Dependency;
+using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IEManageSystem.EntityFrameworkCore.IdentityServiceEF
 {
-    public class IEPersistedGrantDbContext : PersistedGrantDbContext
+    public class IEPersistedGrantDbContext : PersistedGrantDbContext, ITransientDependency
     {
         public IEPersistedGrantDbContext(DbContextOptions<PersistedGrantDbContext> options, OperationalStoreOptions storeOptions) : base(options, storeOptions)
         {

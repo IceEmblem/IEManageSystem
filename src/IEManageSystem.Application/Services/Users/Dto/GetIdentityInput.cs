@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IEManageSystem.Services.Authorization.Users.Dto
+namespace IEManageSystem.Services.Users.Dto
 {
     public class GetIdentityInput
     {

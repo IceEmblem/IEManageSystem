@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IEManageSystem.Services.Authorization.Accounts.Dto
+namespace IEManageSystem.Services.Accounts.Dto
 {
     public class LoginOutput:OutputDtoBase
     {

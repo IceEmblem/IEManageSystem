@@ -1,25 +1,27 @@
-﻿using IdentityServer4.EntityFramework.DbContexts;
+﻿using Abp.EntityFrameworkCore;
+using IdentityServer4.EntityFramework.DbContexts;
 using IEManageSystem.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace IEManageSystem.EntityFrameworkCore.IdentityServiceEF
 {
-    public class IEConfigurationDbContextFactory : IDesignTimeDbContextFactory<IEConfigurationDbContext>
+    public static class IdentityServiceDbContextExtensions
     {
-        public IEConfigurationDbContext CreateDbContext(string[] args)
+        public static IServiceCollection AddIdentityServiceDbContext(this IServiceCollection services)
         {
             var configuration = AppConfigurations.Get(WebContentDirectoryFinder.CalculateContentRootFolder());
 
             var builder = new DbContextOptionsBuilder<ConfigurationDbContext>();
             builder.UseSqlServer(configuration.GetConnectionString(IEManageSystemConsts.IdentityServerConnectionStringName));
 
-            return new IEConfigurationDbContext(builder.Options);
+            return services
+                       .AddSingleton<DbContextOptions<ConfigurationDbContext>>(builder.Options)
+                       .AddScoped<IDbContextProvider<IEConfigurationDbContext>, IEConfigurationDbContextProvider>();
         }
     }
 }

@@ -47,23 +47,23 @@ namespace IEManageSystem.Api.Middlewares
                 settings.Formatting = Formatting.Indented;
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(result, settings));
             }
-            catch (Exception ex)
-            {
-                RecordExceptionLog(ex);
+            //catch (Exception ex)
+            //{
+            //    RecordExceptionLog(ex);
 
-                ApiResultDataModel result = new ApiResultDataModel()
-                {
-                    IsSuccess = false,
-                    Message = "发生未知错误，请联系管理员",
-                };
-                context.Response.ContentType = "text/plain";
+            //    ApiResultDataModel result = new ApiResultDataModel()
+            //    {
+            //        IsSuccess = false,
+            //        Message = "发生未知错误，请联系管理员",
+            //    };
+            //    context.Response.ContentType = "text/plain";
 
-                //设置序列化时key为驼峰样式
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                settings.Formatting = Formatting.Indented;
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(result, settings));
-            }
+            //    //设置序列化时key为驼峰样式
+            //    JsonSerializerSettings settings = new JsonSerializerSettings();
+            //    settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //    settings.Formatting = Formatting.Indented;
+            //    await context.Response.WriteAsync(JsonConvert.SerializeObject(result, settings));
+            //}
         }
 
         /// <summary>

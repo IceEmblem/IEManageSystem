@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Abp.Auditing;
 using Abp.Extensions;
 
-namespace IEManageSystem.Services.Authorization.Accounts.Dto
+namespace IEManageSystem.Services.Accounts.Dto
 {
     public class RegisterInput : IValidatableObject
     {

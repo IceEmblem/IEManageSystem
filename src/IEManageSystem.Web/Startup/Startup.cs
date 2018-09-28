@@ -23,6 +23,7 @@ using System.Linq;
 using IdentityServer4.EntityFramework.Mappers;
 using IEManageSystem.EntityFrameworkCore.IEManageSystemEF;
 using IEManageSystem.EntityFrameworkCore.IdentityServiceEF;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace IEManageSystem.Web.Startup
 {
@@ -35,9 +36,14 @@ namespace IEManageSystem.Web.Startup
             {
                 DbContextOptionsConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
             });
+            services.AddIdentityServiceDbContext();
+
             services.AddMvc(options =>
             {
                 // options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            }).AddRazorOptions(opt =>
+            {
+                opt.ViewLocationFormats.Add("/Views/ManageHome/{1}/{0}" + RazorViewEngine.ViewExtension);
             });
 
             services.AddSession();

@@ -1,0 +1,41 @@
+﻿<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>站点身份资源</th>
+        <th>资源名</th>
+        <th>资源Claim</th>
+      </tr>
+    </thead>
+    <tbody id="datadiv" data-element="dataElement" data-iP="true" data-iL="true">
+      <tr>
+        <td data-element="dataElement" data-n="DisplayName">{{Value}}</td>
+        <td data-element="dataElement" data-n="Description">Doe</td>
+        <td data-element="dataElement" data-n="UserClaimsString">john@example.com</td>
+      </tr>
+    </tbody>
+</table>
+
+<script src="~/js/Other/selectSingleData.js"></script>
+<script>
+  function GetIdentityResourceCall(data){
+    if(data.isSuccess == true){
+      let identityResources = data.value.identityResources;
+
+      for(let item in identityResources){
+        let userClaimsString = "";
+
+        for(let childItem in item.userClaims){
+          userClaimsString = userClaimsString + childItem.type + " ";
+        }
+
+        item.UserClaimsString = userClaimsString;
+      }
+
+      var factoryId = BuildData(identityResources, $("#datadiv"));
+    }
+  }
+
+  $(function(){
+    $.get("/api/IdentityResourceManage/GetIdentityResource", GetIdentityResourceCall);
+  });
+</script>

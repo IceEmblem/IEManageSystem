@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Abp.Application.Services;
-using IEManageSystem.Services.Authorization.Accounts.Dto;
+using IEManageSystem.Services.Accounts.Dto;
 
-namespace IEManageSystem.Services.Authorization.Accounts
+namespace IEManageSystem.Services.Accounts
 {
     public interface IAccountAppService : IApplicationService
     {
