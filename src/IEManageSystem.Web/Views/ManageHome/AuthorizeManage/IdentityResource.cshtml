@@ -1,16 +1,21 @@
 ﻿<table class="table table-hover">
     <thead class="thead-dark">
       <tr>
-        <th>站点身份资源</th>
         <th>资源名</th>
+        <th>资源描述</th>
         <th>资源Claim</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody id="datadiv" data-element="dataElement" data-iP="true" data-iL="true">
       <tr>
-        <td data-element="dataElement" data-n="DisplayName">{{Value}}</td>
-        <td data-element="dataElement" data-n="Description">Doe</td>
-        <td data-element="dataElement" data-n="UserClaimsString">john@example.com</td>
+        <td data-element="dataElement" data-n="displayName">{{Value}}</td>
+        <td data-element="dataElement" data-n="description">{{Value}}</td>
+        <td data-element="dataElement" data-n="userClaimsString">{{Value}}</td>
+        <td>
+          <button type="button" class="btn btn-info">修改</button>
+          <button type="button" class="btn btn-danger">删除</button>
+        </td>
       </tr>
     </tbody>
 </table>
@@ -24,11 +29,11 @@
       for(let item in identityResources){
         let userClaimsString = "";
 
-        for(let childItem in item.userClaims){
-          userClaimsString = userClaimsString + childItem.type + " ";
+        for(let childItem in identityResources[item].userClaims){
+          userClaimsString = userClaimsString + "[" + identityResources[item].userClaims[childItem].type + "]" + " ";
         }
 
-        item.UserClaimsString = userClaimsString;
+        identityResources[item].userClaimsString = userClaimsString;
       }
 
       var factoryId = BuildData(identityResources, $("#datadiv"));
@@ -36,6 +41,7 @@
   }
 
   $(function(){
+    console.log(1);
     $.get("/api/IdentityResourceManage/GetIdentityResource", GetIdentityResourceCall);
   });
 </script>

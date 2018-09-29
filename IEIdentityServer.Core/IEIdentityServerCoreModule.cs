@@ -6,6 +6,7 @@ using System.Text;
 
 namespace IEIdentityServer.Core
 {
+    [DependsOn()]
     public class IEIdentityServerCoreModule : AbpModule
     {
         public override void PreInitialize()

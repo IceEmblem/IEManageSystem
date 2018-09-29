@@ -15,11 +15,15 @@
     <RootNamespace>IEManageSystem</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="EntityConfigurations\**" />
+    <EmbeddedResource Remove="EntityConfigurations\**" />
+    <None Remove="EntityConfigurations\**" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\IEManageSystem.Core\IEManageSystem.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Abp.EntityFrameworkCore" Version="3.7.2" />
-    <PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.5" />
@@ -29,8 +33,5 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EntityConfigurations\" />
   </ItemGroup>
 </Project>

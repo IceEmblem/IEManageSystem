@@ -2,28 +2,24 @@
 using Abp.AspNetCore;
 using Abp.Castle.Logging.Log4Net;
 using Abp.EntityFrameworkCore;
-using IEManageSystem.EntityFrameworkCore;
 using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using IEManageSystem.Api.Help;
-using System.IdentityModel.Tokens.Jwt;
 using IEManageSystem.Api.Help.IdentityServerHelp;
 using IEManageSystem.Api.Middlewares;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+using IEManageSystem.EntityFrameworkCore.IEManageSystemEF;
+using Microsoft.AspNetCore.Mvc.Razor;
+using IEIdentityServer.EFCore.EntityFrameworkCore.IdentityServiceEF;
 using IdentityServer4.EntityFramework.DbContexts;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using IdentityServer4.EntityFramework.Mappers;
-using IEManageSystem.EntityFrameworkCore.IEManageSystemEF;
-using IEManageSystem.EntityFrameworkCore.IdentityServiceEF;
-using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace IEManageSystem.Web.Startup
 {
@@ -36,7 +32,6 @@ namespace IEManageSystem.Web.Startup
             {
                 DbContextOptionsConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
             });
-            services.AddIdentityServiceDbContext();
 
             services.AddMvc(options =>
             {
@@ -44,16 +39,17 @@ namespace IEManageSystem.Web.Startup
             }).AddRazorOptions(opt =>
             {
                 opt.ViewLocationFormats.Add("/Views/ManageHome/{1}/{0}" + RazorViewEngine.ViewExtension);
-            });
+            }).AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling =
+                                           Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            }); ;
 
             services.AddSession();
 
-            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             // 配置IdentityService
-            services.AddIdentityServer()
-                .AddDeveloperSigningCredential()
-                .AddConfigurationStore()
-                .AddOperationalStore()
+            services
+                .AddConfigurationStore("Data Source=(localdb)\\ProjectsV13;Initial Catalog=IdentityServiceDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddProfileService<ProfileService>();
 

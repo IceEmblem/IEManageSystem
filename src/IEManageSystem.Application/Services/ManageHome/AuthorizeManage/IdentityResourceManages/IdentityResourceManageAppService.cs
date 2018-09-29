@@ -1,21 +1,21 @@
-﻿using IEManageSystem.CustomRepositoryI;
-using IEManageSystem.Dtos.IdentityService;
-using IEManageSystem.Entitys.IdentityService;
+﻿using IEManageSystem.Dtos.IdentityService;
 using IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceManages.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using IEIdentityServer.Core.RepositoriesI;
+using IdentityServer4.EntityFramework.Entities;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceManages
 {
     public class IdentityResourceManageAppService: IIdentityResourceManageAppService
     {
-        private IRepositoryIdentityConfig<IEIdentityResource> _IdentityResourceRepository { get; set; }
+        private IIEIdentityServerRepository<IdentityResource> _IdentityResourceRepository { get; set; }
 
         public IdentityResourceManageAppService(
-            IRepositoryIdentityConfig<IEIdentityResource> identityResourceRepository
+            IIEIdentityServerRepository<IdentityResource> identityResourceRepository
             )
         {
             _IdentityResourceRepository = identityResourceRepository;
@@ -23,15 +23,9 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceMan
 
         public async Task<GetIdentityResourceOutput> GetIdentityResource(GetIdentityResourceInput input)
         {
-            List<IEIdentityResource> identityResources = null;
-            try
-            {
-                identityResources = _IdentityResourceRepository.AsNoTracking(new System.Linq.Expressions.Expression<Func<IEIdentityResource, object>>[] { }).ToList();
-            }
-            catch (Exception ex) {
-                string a = ex.Message;
-            }
-            
+            List<IdentityResource> identityResources = identityResources = _IdentityResourceRepository.GetAllInclude(new System.Linq.Expressions.Expression<Func<IdentityResource, object>>[] {
+                    e=>e.UserClaims,
+                }).ToList();
 
             return new GetIdentityResourceOutput() { IdentityResources = AutoMapper.Mapper.Map<List<IdentityResourceDto>>(identityResources) };
         }

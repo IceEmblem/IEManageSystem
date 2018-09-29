@@ -8,11 +8,15 @@ using Abp.AspNetCore.Configuration;
 using IEManageSystem.EntityFrameworkCore;
 using Abp.AspNetCore;
 using IEManageSystem.Api.Configuration;
+using IEManageSystem.EntityFrameworkCore.IEManageSystemEF;
+using IEIdentityServer.EFCore;
 
 namespace IEManageSystem.Api.Startup
 {
     [DependsOn(
         typeof(IEManageSystemApplicationModule),
+        typeof(IEManageSystemEntityFrameworkCoreModule),
+        typeof(IEIdentityServerEFCoreModule),
         typeof(AbpAspNetCoreModule)
     )]
     public class IEManageSystemWebHostModule: AbpModule

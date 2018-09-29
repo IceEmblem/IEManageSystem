@@ -11,6 +11,7 @@
     <RootNamespace>IEManageSystem</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\IEIdentityServer.Core\IEIdentityServer.Core.csproj" />
     <ProjectReference Include="..\IEManageSystem.Core\IEManageSystem.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

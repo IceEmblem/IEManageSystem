@@ -1,6 +1,5 @@
 ﻿using IEManageSystem.Dtos;
 using IEManageSystem.Dtos.IdentityService;
-using IEManageSystem.Entitys.IdentityService;
 using System;
 using System.Collections.Generic;
 using System.Text;

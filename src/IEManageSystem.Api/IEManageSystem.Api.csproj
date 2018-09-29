@@ -61,6 +61,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\IEIdentityServer.EFCore\IEIdentityServer.EFCore.csproj" />
     <ProjectReference Include="..\IEManageSystem.Application\IEManageSystem.Application.csproj" />
     <ProjectReference Include="..\IEManageSystem.EntityFrameworkCore\IEManageSystem.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\UtilityAction\UtilityAction.csproj" />
