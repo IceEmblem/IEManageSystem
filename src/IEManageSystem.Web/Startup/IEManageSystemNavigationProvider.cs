@@ -77,7 +77,6 @@ namespace IEManageSystem.Web.Startup
                             url: ""
                         )
                     ).AddItem(
-                        
                         new MenuItemDefinition(
                             "ExternalAuthorize",
                             L("ExternalAuthorize"),

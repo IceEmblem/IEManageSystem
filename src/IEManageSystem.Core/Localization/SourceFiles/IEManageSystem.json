@@ -6,6 +6,15 @@
     "HomePage": "主页",
     "About": "关于我们",
     "Home_Description": "欢迎使用冰纹管理系统...",
-    "About_Description": "这是一个简单的abp项目"
+    "About_Description": "这是一个简单的abp项目",
+    "Personal": "个人中心",
+    "PersonalInfo": "个人信息",
+    "UserManage": "用户管理",
+    "NormalUser": "普通用户",
+    "AdminiUser": "管理员用户",
+    "AuthorizeManage": "认证管理",
+    "IdentityResource": "身份资源",
+    "ApiResource": "Api资源",
+    "ExternalAuthorize": "外部认证"
   }
 }
