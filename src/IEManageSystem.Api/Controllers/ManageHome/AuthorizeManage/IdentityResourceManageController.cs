@@ -27,8 +27,8 @@ namespace IEManageSystem.Api.Controllers.ManageHome.AuthorizeManage
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<ActionResult<ApiResultDataModel<GetIdentityResourceOutput>>> GetIdentityResource(GetIdentityResourceInput input)
+        [HttpPost]
+        public async Task<ActionResult<ApiResultDataModel<GetIdentityResourceOutput>>> GetIdentityResource([FromBody] GetIdentityResourceInput input)
         {
             if (ValidateModel() == false)
             {

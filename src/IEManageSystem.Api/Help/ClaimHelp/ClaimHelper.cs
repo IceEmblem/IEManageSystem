@@ -1,4 +1,5 @@
-﻿using IEManageSystem.Entitys.Authorization.LoginManagers;
+﻿using Abp.Dependency;
+using IEManageSystem.Entitys.Authorization.LoginManagers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,27 @@ namespace IEManageSystem.Api.Help.ClaimHelp
     /// <summary>
     /// 提供站点Claim
     /// </summary>
-    public class ClaimHelper
+    public class ClaimHelper: ITransientDependency
     {
         public ClaimHelper(
             )
         {
+        }
+
+        /// <summary>
+        /// 获取站点Claim类型列表
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetWebClaimTypes()
+        {
+            return new List<string>
+                    {
+                            ClaimBuilder.Id.ClaimName,
+                            ClaimBuilder.UserName.ClaimName,
+                            ClaimBuilder.EmailAddress.ClaimName,
+                            ClaimBuilder.Name.ClaimName,
+                            ClaimBuilder.Phone.ClaimName,
+                    };
         }
 
         /// <summary>

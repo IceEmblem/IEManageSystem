@@ -25,7 +25,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceMan
         {
             List<IdentityResource> identityResources = identityResources = _IdentityResourceRepository.GetAllInclude(new System.Linq.Expressions.Expression<Func<IdentityResource, object>>[] {
                     e=>e.UserClaims,
-                }).ToList();
+                }).OrderByDescending(e => e.Id).Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
 
             return new GetIdentityResourceOutput() { IdentityResources = AutoMapper.Mapper.Map<List<IdentityResourceDto>>(identityResources) };
         }
