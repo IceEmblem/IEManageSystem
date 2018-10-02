@@ -37,5 +37,34 @@ namespace IEManageSystem.Api.Controllers.ManageHome.AuthorizeManage
 
             return new ApiResultDataModel<GetIdentityResourceOutput>(await _IdentityResourceManageAppService.GetIdentityResource(input));
         }
+
+        /// <summary>
+        /// 添加身份资源
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ActionResult<ApiResultDataModel<AddIdentityResourceOutput>>> AddIdentityResource([FromBody] AddIdentityResourceInput input)
+        {
+            if (ValidateModel() == false)
+            {
+                return new ApiResultDataModel<AddIdentityResourceOutput>(_ValidateModelErrors);
+            }
+
+            return new ApiResultDataModel<AddIdentityResourceOutput>(await _IdentityResourceManageAppService.AddIdentityResource(input));
+        }
+
+        /// <summary>
+        /// 删除身份资源
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<ApiResultDataModel<DeleteIdentityResourceOutput>>> DeleteIdentityResource([FromBody] DeleteIdentityResourceInput input)
+        {
+            if (ValidateModel() == false)
+            {
+                return new ApiResultDataModel<DeleteIdentityResourceOutput>(_ValidateModelErrors);
+            }
+
+            return new ApiResultDataModel<DeleteIdentityResourceOutput>(await _IdentityResourceManageAppService.DeleteIdentityResource(input));
+        }
     }
 }

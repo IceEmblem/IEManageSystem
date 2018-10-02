@@ -61,5 +61,10 @@ namespace IEIdentityServer.EFCore.Repositories
         {
             _entities.Remove(entity);
         }
+
+        public void SaveChange()
+        {
+            _context.SaveChanges();
+        }
     }
 }

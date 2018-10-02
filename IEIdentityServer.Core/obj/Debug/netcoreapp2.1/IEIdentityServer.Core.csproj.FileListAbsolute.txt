@@ -6,3 +6,4 @@ D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIden
 D:\VSProject\IEManageSystem\IEIdentityServer.Core\bin\Debug\netcoreapp2.1\IEIdentityServer.Core.pdb
 D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.dll
 D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.pdb
+D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.csprojAssemblyReference.cache

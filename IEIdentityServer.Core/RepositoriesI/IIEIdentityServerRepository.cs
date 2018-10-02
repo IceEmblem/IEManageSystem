@@ -21,5 +21,7 @@ namespace IEIdentityServer.Core.RepositoriesI
         IEnumerable<TEntity> GetAll();
 
         IEnumerable<TEntity> GetAllInclude(Expression<Func<TEntity, object>>[] propertySelectors);
+
+        void SaveChange();
     }
 }

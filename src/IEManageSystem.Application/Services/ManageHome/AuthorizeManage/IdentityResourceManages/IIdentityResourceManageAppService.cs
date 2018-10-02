@@ -10,5 +10,9 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceMan
     public interface IIdentityResourceManageAppService:IApplicationService
     {
         Task<GetIdentityResourceOutput> GetIdentityResource(GetIdentityResourceInput input);
+
+        Task<AddIdentityResourceOutput> AddIdentityResource(AddIdentityResourceInput input);
+
+        Task<DeleteIdentityResourceOutput> DeleteIdentityResource(DeleteIdentityResourceInput input);
     }
 }
