@@ -3,7 +3,9 @@ using IdentityServer4.EntityFramework.Entities;
 using IEIdentityServer.Core.RepositoriesI;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
+using System.Linq;
 
 namespace IEIdentityServer.Core.Entitys.IdentityService.IdentityResources
 {
@@ -35,6 +37,34 @@ namespace IEIdentityServer.Core.Entitys.IdentityService.IdentityResources
             };
 
             _repository.Insert(identityResource);
+            _repository.SaveChange();
+        }
+
+        public void UpdateIdentityResource(
+            int id,
+            string name,
+            string dispalyName,
+            string description,
+            List<string> useClaims
+            )
+        {
+            Expression<Func<IdentityResource, object>>[] propertySelectors = new Expression<Func<IdentityResource, object>>[] {
+                e=>e.UserClaims,
+            };
+            var identityResource = _repository.GetAllInclude(propertySelectors).FirstOrDefault(e=>e.Id == id);
+            if (identityResource == null)
+            {
+                throw new Exception("未找到资源");
+            }
+
+            List<IdentityClaim> identityClaims = new List<IdentityClaim>();
+            useClaims.ForEach(e => identityClaims.Add(new IdentityClaim() { Type = e }));
+
+            identityResource.Name = name;
+            identityResource.DisplayName = dispalyName;
+            identityResource.Description = description;
+            identityResource.UserClaims = identityClaims;
+
             _repository.SaveChange();
         }
 

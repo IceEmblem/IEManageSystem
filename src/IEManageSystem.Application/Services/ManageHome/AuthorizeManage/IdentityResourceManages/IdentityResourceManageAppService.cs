@@ -66,5 +66,22 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceMan
 
             return new DeleteIdentityResourceOutput();
         }
+
+        /// <summary>
+        /// 更新身份资源
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<UpdateIdentityResourceOutput> UpdateIdentityResource(UpdateIdentityResourceInput input)
+        {
+            if (_IdentityResourceRepository.FirstOrDefault(input.Id) == null)
+            {
+                return new UpdateIdentityResourceOutput() { ErrorMessage = "未找到资源" };
+            }
+
+            _IdentityResourceManager.UpdateIdentityResource(input.Id, input.Name, input.DisplayName, input.Description, input.Claims);
+
+            return new UpdateIdentityResourceOutput();
+        }
     }
 }

@@ -23,7 +23,7 @@
           <td data-element="dataElement" data-n="description">{{Value}}</td>
           <td data-element="dataElement" data-n="userClaimsString">{{Value}}</td>
           <td>
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resourceData">修改</button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resourceData" onclick="updateHandle(this)">修改</button>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteData" onclick="deleteConfirm(this)">删除</button>
           </td>
         </tr>
@@ -37,7 +37,7 @@
       </ul>
     </div>
     <div class="">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resourceData">+添加数据</button>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resourceData" onclick="addHandle()">+添加数据</button>
     </div>
   </div>
 </div>
@@ -55,31 +55,39 @@
  
       <!-- 模态框主体 -->
       <div class="modal-body">
-        <form>
+        <form id="resourceDataForm" data-element="dataElement" data-iP="true">
+          <input id="resourceId" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="id" hidden="hidden">
           <div id="resourceDataError" class="text-danger error"></div>
           <div class="form-group">
             <label for="text">资源标识名</label>
-            <input id="resourceName" type="text" class="form-control">
+            <input id="resourceName" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="name">
           </div>
           <div class="form-group">
             <label for="text">资源名</label>
-            <input id="resourceDisplayName" type="text" class="form-control">
+            <input id="resourceDisplayName" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="displayName">
           </div>
           <div class="form-group">
             <label for="text">资源描述</label>
-            <input id="resourceDescription" type="text" class="form-control">
+            <input id="resourceDescription" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="description">
           </div>
           <div class="form-group">
             <label for="text">资源Claim</label>
           </div>
-          <div id="claimTypes" class="form-check">
+          <div id="claimTypes" class="form-check" data-element="dataElement" data-n="userClaims" data-iL="true">
+            <label class="form-check-label col-md-4 float-left">
+              <input class="form-check-input" type="checkbox" value="{{Value}}" data-element="dataElement" data-n="type" data-p-n="userClaims" >
+              <span data-element="dataElement" data-n="type" data-p-n="userClaims">
+                {{Value}}
+              </span>
+              </input>
+            </label>
           </div>
         </form>
       </div>
  
       <!-- 模态框底部 -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="addResourceData()">提交</button>
+        <button id="resourceDataSubmit" type="button" class="btn btn-primary" onclick="resourceDataSubmitHandle()">提交</button>
         <button id="resourceDataClose" type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
       </div>
  
@@ -118,7 +126,16 @@
 <script>
   var curPageIndex = 1;
   var pageSize = 10;
-  var factoryId = null;
+  var resourceDataListFactoryId = null;
+  var resourceDataFactoryId = null;
+  var claims = new Array();
+  var resourceDataList = null;
+  var nullResourceData = {
+    name:"",
+    displayName:"",
+    description:"",
+    userClaims:claims,
+  };
 
   // 获取资源回调
   function GetResourceCall(data){
@@ -135,7 +152,9 @@
         identityResources[item].userClaimsString = userClaimsString;
       }
 
-      ReloadData(identityResources, null, factoryId);
+      resourceDataList = identityResources;
+
+      ReloadData(identityResources, null, resourceDataListFactoryId);
 
       if(identityResources.length < pageSize){
         notNextHandle();
@@ -217,6 +236,7 @@
     }
 
     var data = {
+      Id: $("#resourceId").val(),
       Name: $("#resourceName").val(),
       DisplayName: $("#resourceDisplayName").val(),
       Description: $("#resourceDescription").val(),
@@ -224,6 +244,12 @@
     }
 
     return data;
+  }
+
+  // 生成资源数据HTML
+  function createResourceDataHtml(data)
+  {
+    ReloadData(data, null, resourceDataFactoryId);
   }
 
   // 添加资源数据回调
@@ -250,6 +276,11 @@
       dataType: 'json',
       success: addResourceDataCall,
     });
+  }
+
+  // 添加处理
+  function addHandle(){
+    createResourceDataHtml(nullResourceData);
   }
 
   // 删除身份资源回调
@@ -283,9 +314,75 @@
     });
   }
 
+  // 删除确认
   function deleteConfirm(curele){
     var id = $(curele).parents("tr").attr("data-resourceId");
     $("#deleteDataDelete").attr("data-resourceId", id);
+  }
+
+  // 更新资源数据回调
+  function updateResourceDataCall(data){
+    if(data.isSuccess == true){
+      $("#resourceDataClose").click();
+      GetResource();
+    }
+    else{
+      $("#resourceDataError").text(data.message);
+      setTimeout('$("#resourceDataError").html("")',3000);
+    }
+  }
+
+  // 更新资源数据
+  function updateResourceData(){
+    var postdata = createResourceData();
+
+    $.ajax({
+      url:"/api/IdentityResourceManage/UpdateIdentityResource",
+      type:"post",
+      contentType: "application/json",
+      data: JSON.stringify(postdata),
+      dataType: 'json',
+      success: updateResourceDataCall,
+    });
+  }
+
+  // 修改处理
+  function updateHandle(curele)
+  {
+    var id = $(curele).parents("tr").attr("data-resourceId");
+    var resourceData = null;
+    for(var item in resourceDataList){
+      if(resourceDataList[item].id == id){
+        resourceData = resourceDataList[item];
+      }
+    }
+
+    var newResourceData = jQuery.extend(true, {}, resourceData);
+    newResourceData.userClaims = claims;
+    createResourceDataHtml(newResourceData);
+    // newResourceData.userClaims = jQuery.extend(true, {}, claims);
+    // for(var item in newResourceData.userClaims)
+    // {
+    //   for(var childitem in resourceData.userClaims){
+    //     if(newResourceData.userClaims[item].type == resourceData.userClaims[childitem].type){
+    //       newResourceData.userClaims[item].isCheck = true;
+    //     }
+    //   }
+    // }
+
+    // createResourceDataHtml(newResourceData);
+  }
+
+  // 资源数据提交处理
+  function resourceDataSubmitHandle()
+  {
+    var postdata = createResourceData();
+    if(postdata.Id == ""){
+      addResourceData();
+    }
+    else{
+      updateResourceData();
+    }
   }
 
   // 初始化
@@ -294,19 +391,16 @@
     $.get("/api/ClaimManage/GetWebClaimTypes", function(data){
       if(data.isSuccess == true){
         for(var item in data.value){
-          var claimhtml = 
-            '<label class="form-check-label col-md-4 float-left">'+
-              '<input class="form-check-input" type="checkbox" value="'+data.value[item]+'">'+
-              data.value[item] +
-            '</label>';
-
-          $("#claimTypes").append(claimhtml);
+          claims.push({
+            type: data.value[item],
+          });
         }
       }
     });
+    resourceDataFactoryId = BuildData(null, $("#resourceDataForm"));
 
     GetResource();
-    factoryId = BuildData(null, $("#datadiv"));
+    resourceDataListFactoryId = BuildData(null, $("#datadiv"));
   }
 
   $(function(){

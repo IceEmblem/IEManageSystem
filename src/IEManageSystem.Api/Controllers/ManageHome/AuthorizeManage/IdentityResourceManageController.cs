@@ -66,5 +66,20 @@ namespace IEManageSystem.Api.Controllers.ManageHome.AuthorizeManage
 
             return new ApiResultDataModel<DeleteIdentityResourceOutput>(await _IdentityResourceManageAppService.DeleteIdentityResource(input));
         }
+
+        /// <summary>
+        /// 更新身份资源
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<ApiResultDataModel<UpdateIdentityResourceOutput>>> UpdateIdentityResource([FromBody] UpdateIdentityResourceInput input)
+        {
+            if (ValidateModel() == false)
+            {
+                return new ApiResultDataModel<UpdateIdentityResourceOutput>(_ValidateModelErrors);
+            }
+
+            return new ApiResultDataModel<UpdateIdentityResourceOutput>(await _IdentityResourceManageAppService.UpdateIdentityResource(input));
+        }
     }
 }

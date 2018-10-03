@@ -14,5 +14,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceMan
         Task<AddIdentityResourceOutput> AddIdentityResource(AddIdentityResourceInput input);
 
         Task<DeleteIdentityResourceOutput> DeleteIdentityResource(DeleteIdentityResourceInput input);
+
+        Task<UpdateIdentityResourceOutput> UpdateIdentityResource(UpdateIdentityResourceInput input);
     }
 }
