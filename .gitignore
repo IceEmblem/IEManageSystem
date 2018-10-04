@@ -22,3 +22,8 @@
 /src/IEManageSystem.Web/App_Data/Logs/Logs.txt
 src/Es6JsView/package-lock.json
 src/Es6JsView/package.json
+/IEIdentityServer.Core/bin
+/IEIdentityServer.Core/obj
+/IEIdentityServer.EFCore/bin
+/IEIdentityServer.EFCore/obj
+/IEIdentityServer.Core/obj
