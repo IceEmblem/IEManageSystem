@@ -1,9 +1,0 @@
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\bin\Debug\netcoreapp2.1\IEIdentityServer.Core.deps.json
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\bin\Debug\netcoreapp2.1\IEIdentityServer.Core.dll
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.csproj.CoreCompileInputs.cache
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.AssemblyInfoInputs.cache
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.AssemblyInfo.cs
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\bin\Debug\netcoreapp2.1\IEIdentityServer.Core.pdb
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.dll
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.pdb
-D:\VSProject\IEManageSystem\IEIdentityServer.Core\obj\Debug\netcoreapp2.1\IEIdentityServer.Core.csprojAssemblyReference.cache
