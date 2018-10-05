@@ -9,7 +9,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceMan
 {
     public interface IIdentityResourceManageAppService:IApplicationService
     {
-        Task<GetIdentityResourceOutput> GetIdentityResource(GetIdentityResourceInput input);
+        Task<GetIdentityResourceOutput> GetIdentityResources(GetIdentityResourceInput input);
 
         Task<AddIdentityResourceOutput> AddIdentityResource(AddIdentityResourceInput input);
 

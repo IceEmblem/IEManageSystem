@@ -32,9 +32,9 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceMan
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<GetIdentityResourceOutput> GetIdentityResource(GetIdentityResourceInput input)
+        public async Task<GetIdentityResourceOutput> GetIdentityResources(GetIdentityResourceInput input)
         {
-            List<IdentityResource> identityResources = identityResources = _IdentityResourceRepository.GetAllInclude(new System.Linq.Expressions.Expression<Func<IdentityResource, object>>[] {
+            List<IdentityResource> identityResources = _IdentityResourceRepository.GetAllInclude(new System.Linq.Expressions.Expression<Func<IdentityResource, object>>[] {
                     e=>e.UserClaims,
                 }).OrderByDescending(e => e.Id).Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
 

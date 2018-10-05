@@ -7,6 +7,7 @@
     padding-bottom: 10px;
   }
 </style>
+<!-- 数据列表 -->
 <div class="d-flex flex-column h-100">
   <table class="table table-hover resource">
       <thead class="thead-dark">
@@ -24,7 +25,7 @@
           <td data-element="dataElement" data-n="userClaimsString">{{Value}}</td>
           <td>
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resourceData" onclick="updateHandle(this)">修改</button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteData" onclick="deleteConfirm(this)">删除</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteData" onclick="deleteHandle(this)">删除</button>
           </td>
         </tr>
       </tbody>
@@ -124,18 +125,88 @@
 
 <script src="~/js/Other/selectSingleData.js"></script>
 <script>
+  // 当前页索引
   var curPageIndex = 1;
+  // 页大小
   var pageSize = 10;
+  // selectSingleData，resourceDataListFactoryId
   var resourceDataListFactoryId = null;
+  // selectSingleData，resourceDataFactoryId
   var resourceDataFactoryId = null;
+  // claims
   var claims = new Array();
+  // 资源数据列表
   var resourceDataList = null;
+  // 空的资源数据
   var nullResourceData = {
     name:"",
     displayName:"",
     description:"",
     userClaims:claims,
   };
+
+  // 没有下一页处理
+  function notNextHandle(){
+    $("#resourceNext").addClass("disabled");
+  }
+
+  // 有下一页处理
+  function haveNextHandle(){
+    $("#resourceNext").removeClass("disabled");
+  }
+
+  // 没有上一页处理
+  function notNPreHandle()
+  {
+    $("#resourcePre").addClass("disabled");
+  }
+
+  // 有上一页处理
+  function havePreHandle(){
+    $("#resourcePre").removeClass("disabled");
+  }
+
+  // 上一页
+  function preClick(){
+    curPageIndex = curPageIndex - 1;
+    GetResource();
+  }
+
+  // 下一页
+  function nextClick(){
+    curPageIndex = curPageIndex + 1;
+    GetResource();
+  }
+
+  // 生成资源数据 For Html
+  function createResourceData()
+  {
+    var claims = new Array();
+    var claimHtmls = $("#claimTypes").find("input");
+    for(var n = 0; n < claimHtmls.length; n++){
+      var claimHtml = claimHtmls.eq(n);
+      if(claimHtml.is(':checked'))
+      {
+        claims.push(claimHtml.val());
+      }
+    }
+
+    var data = {
+      Id: $("#resourceId").val(),
+      Name: $("#resourceName").val(),
+      DisplayName: $("#resourceDisplayName").val(),
+      Description: $("#resourceDescription").val(),
+      Claims: claims,
+    }
+
+    return data;
+  }
+
+  // 生成资源数据HTML For 数据
+  function createResourceDataHtml(data)
+  {
+    ReloadData(data, null, resourceDataFactoryId);
+  }
 
   // 获取资源回调
   function GetResourceCall(data){
@@ -180,76 +251,13 @@
       pageSize: pageSize,
     };
     $.ajax({
-      url:"/api/IdentityResourceManage/GetIdentityResource",
+      url:"/api/IdentityResourceManage/GetIdentityResources",
       type:"post",
       contentType: "application/json",
       data: JSON.stringify(postdata),
       dataType: 'json',
       success: GetResourceCall,
     });
-  }
-
-  // 没有下一页处理
-  function notNextHandle(){
-    $("#resourceNext").addClass("disabled");
-  }
-
-  // 有下一页处理
-  function haveNextHandle(){
-    $("#resourceNext").removeClass("disabled");
-  }
-
-  // 没有上一页处理
-  function notNPreHandle()
-  {
-    $("#resourcePre").addClass("disabled");
-  }
-
-  // 有上一页处理
-  function havePreHandle(){
-    $("#resourcePre").removeClass("disabled");
-  }
-
-  // 上一页
-  function preClick(){
-    curPageIndex = curPageIndex - 1;
-    GetResource();
-  }
-
-  // 下一页
-  function nextClick(){
-    curPageIndex = curPageIndex + 1;
-    GetResource();
-  }
-
-  // 生成资源数据
-  function createResourceData()
-  {
-    var claims = new Array();
-    var claimHtmls = $("#claimTypes").find("input");
-    for(var n = 0; n < claimHtmls.length; n++){
-      var claimHtml = claimHtmls.eq(n);
-      if(claimHtml.is(':checked'))
-      {
-        claims.push(claimHtml.val());
-      }
-    }
-
-    var data = {
-      Id: $("#resourceId").val(),
-      Name: $("#resourceName").val(),
-      DisplayName: $("#resourceDisplayName").val(),
-      Description: $("#resourceDescription").val(),
-      Claims: claims,
-    }
-
-    return data;
-  }
-
-  // 生成资源数据HTML
-  function createResourceDataHtml(data)
-  {
-    ReloadData(data, null, resourceDataFactoryId);
   }
 
   // 添加资源数据回调
@@ -278,7 +286,7 @@
     });
   }
 
-  // 添加处理
+  // 添加按钮处理
   function addHandle(){
     createResourceDataHtml(nullResourceData);
   }
@@ -314,8 +322,8 @@
     });
   }
 
-  // 删除确认
-  function deleteConfirm(curele){
+  // 删除按钮处理
+  function deleteHandle(curele){
     var id = $(curele).parents("tr").attr("data-resourceId");
     $("#deleteDataDelete").attr("data-resourceId", id);
   }
@@ -346,7 +354,7 @@
     });
   }
 
-  // 修改处理
+  // 更新（修改）按钮处理
   function updateHandle(curele)
   {
     var id = $(curele).parents("tr").attr("data-resourceId");
@@ -360,17 +368,6 @@
     var newResourceData = jQuery.extend(true, {}, resourceData);
     newResourceData.userClaims = claims;
     createResourceDataHtml(newResourceData);
-    // newResourceData.userClaims = jQuery.extend(true, {}, claims);
-    // for(var item in newResourceData.userClaims)
-    // {
-    //   for(var childitem in resourceData.userClaims){
-    //     if(newResourceData.userClaims[item].type == resourceData.userClaims[childitem].type){
-    //       newResourceData.userClaims[item].isCheck = true;
-    //     }
-    //   }
-    // }
-
-    // createResourceDataHtml(newResourceData);
   }
 
   // 资源数据提交处理
@@ -388,6 +385,7 @@
   // 初始化
   function init()
   {
+    // 获取Claim
     $.get("/api/ClaimManage/GetWebClaimTypes", function(data){
       if(data.isSuccess == true){
         for(var item in data.value){

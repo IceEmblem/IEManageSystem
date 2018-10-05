@@ -28,14 +28,14 @@ namespace IEManageSystem.Api.Controllers.ManageHome.AuthorizeManage
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ApiResultDataModel<GetIdentityResourceOutput>>> GetIdentityResource([FromBody] GetIdentityResourceInput input)
+        public async Task<ActionResult<ApiResultDataModel<GetIdentityResourceOutput>>> GetIdentityResources([FromBody] GetIdentityResourceInput input)
         {
             if (ValidateModel() == false)
             {
                 return new ApiResultDataModel<GetIdentityResourceOutput>(_ValidateModelErrors);
             }
 
-            return new ApiResultDataModel<GetIdentityResourceOutput>(await _IdentityResourceManageAppService.GetIdentityResource(input));
+            return new ApiResultDataModel<GetIdentityResourceOutput>(await _IdentityResourceManageAppService.GetIdentityResources(input));
         }
 
         /// <summary>
