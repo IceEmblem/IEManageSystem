@@ -12,5 +12,10 @@ namespace IEManageSystem.Web.Controllers.ManageHome
         {
             return PartialView();
         }
+
+        public ActionResult ApiResource()
+        {
+            return PartialView();
+        }
     }
 }

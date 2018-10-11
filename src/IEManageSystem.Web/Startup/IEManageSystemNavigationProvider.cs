@@ -74,7 +74,7 @@ namespace IEManageSystem.Web.Startup
                         new MenuItemDefinition(
                             "ApiResource",
                             L("ApiResource"),
-                            url: ""
+                            url: "/AuthorizeManage/ApiResource"
                         )
                     ).AddItem(
                         new MenuItemDefinition(

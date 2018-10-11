@@ -18,6 +18,7 @@ namespace IEIdentityServer.Core.Entitys.IdentityService.ApiResources
             )
         {
             _repository = repository;
+            // IdentityServer4.EntityFramework.Entities.Client
         }
 
         /// <summary>

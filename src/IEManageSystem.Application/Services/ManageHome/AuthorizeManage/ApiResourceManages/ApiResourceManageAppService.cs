@@ -3,6 +3,7 @@ using IEIdentityServer.Core.Entitys.IdentityService.ApiResources;
 using IEIdentityServer.Core.RepositoriesI;
 using IEManageSystem.Dtos.IdentityService;
 using IEManageSystem.Services.ManageHome.AuthorizeManage.ApiResourceManages.Dto;
+using IEManageSystem.Services.ManageHome.AuthorizeManage.IdentityResourceManages.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,33 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiResourceManages
             _apiResourceManager.AddResource(input.Name, input.DisplayName, input.Description, input.Claims);
 
             return new AddApiResourceOutput();
+        }
+
+        /// <summary>
+        /// 删除Api资源
+        /// </summary>
+        /// <returns></returns>
+        public async Task<DeleteApiResourceOutput> DeleteApiResource(DeleteApiResourceInput input)
+        {
+            ApiResource resource = _apiResourceRepository.FirstOrDefault(input.ApiResourceId);
+            if (resource == null) {
+                return new DeleteApiResourceOutput() { ErrorMessage = "找不到Api资源" };
+            }
+
+            _apiResourceManager.RemoveApiResource(input.ApiResourceId);
+            return new DeleteApiResourceOutput();
+        }
+
+        /// <summary>
+        /// 更新Api资源
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<UpdateApiResourceOutput> UpdateApiResource(UpdateApiResourceInput input)
+        {
+            _apiResourceManager.UpdateApiResource(input.Id, input.Name, input.DisplayName, input.Description, input.Claims);
+
+            return new UpdateApiResourceOutput();
         }
     }
 }
