@@ -1,0 +1,424 @@
+﻿<style type="text/css">
+  .resource{
+    margin-bottom: auto;
+  }
+
+  .error{
+    padding-bottom: 10px;
+  }
+</style>
+<!-- 数据列表 -->
+<div class="d-flex flex-column h-100">
+  <table class="table table-hover resource">
+      <thead class="thead-dark">
+        <tr>
+          <th>客户端Id</th>
+          <th>认证类型</th>
+          <th>登录重定向地址</th>
+          <th>退出登录重定向地址</th>
+          <th>允许离线共享</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="datadiv" data-element="dataElement" data-iP="true" data-iL="true">
+        <tr data-element="dataElement" data-n="clientId" data-resourceId="{{Value}}">
+          <td data-element="dataElement" data-n="clientId">{{Value}}</td>
+          <td data-element="dataElement" data-n="allowedGrantTypesString">{{Value}}</td>
+          <td data-element="dataElement" data-n="redirectUrisString">{{Value}}</td>
+          <td data-element="dataElement" data-n="postLogoutRedirectUrisString">{{Value}}</td>
+          <td data-element="dataElement" data-n="allowOfflineAccess">{{Value}}</td>
+          <td>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resourceData" onclick="updateHandle(this)">修改</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteData" onclick="deleteHandle(this)">删除</button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="w-100 d-flex justify-content-between">
+    <div>
+      <ul class="pagination">
+        <li id="resourcePre" class="page-item"><a class="page-link" href="#" onclick="preClick()">上一页</a></li>
+        <li id="resourceNext" class="page-item"><a class="page-link" href="#" onclick="nextClick()">下一页</a></li>
+      </ul>
+    </div>
+    <div class="">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resourceData" onclick="addHandle()">+添加数据</button>
+    </div>
+  </div>
+</div>
+
+<!-- 数据 -->
+<div class="modal fade" id="resourceData">
+  <div class="modal-dialog">
+    <div class="modal-content">
+ 
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">资源数据</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+ 
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        <form id="resourceDataForm" data-element="dataElement" data-iP="true">
+          <input id="resourceId" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="id" hidden="hidden">
+          <div id="resourceDataError" class="text-danger error"></div>
+          <div class="form-group">
+            <label for="text">资源标识名</label>
+            <input id="resourceName" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="name">
+          </div>
+          <div class="form-group">
+            <label for="text">资源名</label>
+            <input id="resourceDisplayName" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="displayName">
+          </div>
+          <div class="form-group">
+            <label for="text">资源描述</label>
+            <input id="resourceDescription" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="description">
+          </div>
+          <div class="form-group">
+            <label for="text">资源Claim</label>
+          </div>
+          <div id="claimTypes" class="form-check" data-element="dataElement" data-n="userClaims" data-iL="true">
+            <label class="form-check-label col-md-4 float-left">
+              <input class="form-check-input" type="checkbox" value="{{Value}}" data-element="dataElement" data-n="type" data-p-n="userClaims" >
+              <span data-element="dataElement" data-n="type" data-p-n="userClaims">
+                {{Value}}
+              </span>
+              </input>
+            </label>
+          </div>
+        </form>
+      </div>
+ 
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button id="resourceDataSubmit" type="button" class="btn btn-primary" onclick="resourceDataSubmitHandle()">提交</button>
+        <button id="resourceDataClose" type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+
+<!-- 删除确认框 -->
+<div class="modal fade" id="deleteData">
+  <div class="modal-dialog">
+    <div class="modal-content">
+ 
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">确认删除？</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+ 
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        <div id="deleteDataError" class="text-danger error"></div>
+        你正在删除xxxx
+      </div>
+ 
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button id="deleteDataDelete" data-resourceId="" type="button" class="btn btn-danger" onclick="deleteResourceData()">删除</button>
+        <button id="deleteDataClose" type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+
+<script src="~/js/Other/selectSingleData.js"></script>
+<script>
+  // 当前页索引
+  var curPageIndex = 1;
+  // 页大小
+  var pageSize = 10;
+  // selectSingleData，resourceDataListFactoryId
+  var resourceDataListFactoryId = null;
+  // selectSingleData，resourceDataFactoryId
+  var resourceDataFactoryId = null;
+  // claims
+  var claims = new Array();
+  // 资源数据列表
+  var resourceDataList = null;
+  // 空的资源数据
+  var nullResourceData = {
+    clientId:"",
+    allowedGrantTypes:"",
+    redirectUris:"",
+    postLogoutRedirectUris:"",
+    allowOfflineAccess:"",
+  };
+
+  // 没有下一页处理
+  function notNextHandle(){
+    $("#resourceNext").addClass("disabled");
+  }
+
+  // 有下一页处理
+  function haveNextHandle(){
+    $("#resourceNext").removeClass("disabled");
+  }
+
+  // 没有上一页处理
+  function notNPreHandle()
+  {
+    $("#resourcePre").addClass("disabled");
+  }
+
+  // 有上一页处理
+  function havePreHandle(){
+    $("#resourcePre").removeClass("disabled");
+  }
+
+  // 上一页
+  function preClick(){
+    curPageIndex = curPageIndex - 1;
+    GetResource();
+  }
+
+  // 下一页
+  function nextClick(){
+    curPageIndex = curPageIndex + 1;
+    GetResource();
+  }
+
+  // 生成资源数据 For Html
+  function createResourceData()
+  {
+    var claims = new Array();
+    var claimHtmls = $("#claimTypes").find("input");
+    for(var n = 0; n < claimHtmls.length; n++){
+      var claimHtml = claimHtmls.eq(n);
+      if(claimHtml.is(':checked'))
+      {
+        claims.push(claimHtml.val());
+      }
+    }
+
+    var data = {
+      Id: $("#resourceId").val(),
+      Name: $("#resourceName").val(),
+      DisplayName: $("#resourceDisplayName").val(),
+      Description: $("#resourceDescription").val(),
+      Claims: claims,
+    }
+
+    return data;
+  }
+
+  // 生成资源数据HTML For 数据
+  function createResourceDataHtml(data)
+  {
+    ReloadData(data, null, resourceDataFactoryId);
+  }
+
+  // 获取资源回调
+  function GetResourceCall(data){
+    if(data.isSuccess == true){
+      let resources = data.value.clients;
+
+      for(let item in resources){
+        let allowedGrantTypesString = "";
+        for(let childItem in resources[item].allowedGrantTypes){
+          allowedGrantTypesString = allowedGrantTypesString + "[" + resources[item].allowedGrantTypes[childItem].grantType + "]" + " ";
+        }
+        resources[item].allowedGrantTypesString = allowedGrantTypesString;
+
+        let redirectUrisString = "";
+        for(let childItem in resources[item].redirectUris){
+          redirectUrisString = redirectUrisString + "[" + resources[item].redirectUris[childItem].redirectUri + "]" + " ";
+        }
+        resources[item].redirectUrisString = redirectUrisString;
+
+        let postLogoutRedirectUrisString = "";
+        for(let childItem in resources[item].postLogoutRedirectUris){
+          postLogoutRedirectUrisString = postLogoutRedirectUrisString + "[" + resources[item].postLogoutRedirectUris[childItem].postLogoutRedirectUri + "]" + " ";
+        }
+        resources[item].postLogoutRedirectUrisString = postLogoutRedirectUrisString;
+      }
+
+      resourceDataList = resources;
+
+      ReloadData(resources, null, resourceDataListFactoryId);
+
+      if(resources.length < pageSize){
+        notNextHandle();
+      }
+      else{
+        haveNextHandle();
+      }
+
+      if(curPageIndex > 1){
+        havePreHandle();
+      }
+      else{
+        notNPreHandle();
+      }
+    }
+  }
+
+  // 获取资源
+  function GetResource()
+  {
+    var postdata = {
+      pageIndex: curPageIndex,
+      pageSize: pageSize,
+    };
+    $.ajax({
+      url:"/api/ClientManage/GetClients",
+      type:"post",
+      contentType: "application/json",
+      data: JSON.stringify(postdata),
+      dataType: 'json',
+      success: GetResourceCall,
+    });
+  }
+
+  // 添加资源数据回调
+  function addResourceDataCall(data){
+    if(data.isSuccess == true){
+      $("#resourceDataClose").click();
+      GetResource();
+    }
+    else{
+      $("#resourceDataError").text(data.message);
+      setTimeout('$("#resourceDataError").html("")',3000);
+    }
+  }
+
+  // 添加资源数据
+  function addResourceData(){
+    var postdata = createResourceData();
+
+    $.ajax({
+      url:"/api/IdentityResourceManage/AddIdentityResource",
+      type:"post",
+      contentType: "application/json",
+      data: JSON.stringify(postdata),
+      dataType: 'json',
+      success: addResourceDataCall,
+    });
+  }
+
+  // 添加按钮处理
+  function addHandle(){
+    createResourceDataHtml(nullResourceData);
+  }
+
+  // 删除身份资源回调
+  function deleteResourceDataCall(data){
+    if(data.isSuccess == true){
+      $("#deleteDataClose").click();
+      GetResource();
+    }
+    else{
+      $("#deleteDataError").text(data.message);
+      setTimeout('$("#deleteDataError").html("")',3000);
+    }
+  }
+
+  // 删除数据资源
+  function deleteResourceData()
+  {
+    var id = $("#deleteDataDelete").attr("data-resourceId");
+
+    var postdata = {
+      IdentityResourceId: id,
+    }
+
+    $.ajax({
+      url:"/api/IdentityResourceManage/DeleteIdentityResource",
+      type:"post",
+      contentType: "application/json",
+      data: JSON.stringify(postdata),
+      dataType: 'json',
+      success: deleteResourceDataCall,
+    });
+  }
+
+  // 删除按钮处理
+  function deleteHandle(curele){
+    var id = $(curele).parents("tr").attr("data-resourceId");
+    $("#deleteDataDelete").attr("data-resourceId", id);
+  }
+
+  // 更新资源数据回调
+  function updateResourceDataCall(data){
+    if(data.isSuccess == true){
+      $("#resourceDataClose").click();
+      GetResource();
+    }
+    else{
+      $("#resourceDataError").text(data.message);
+      setTimeout('$("#resourceDataError").html("")',3000);
+    }
+  }
+
+  // 更新资源数据
+  function updateResourceData(){
+    var postdata = createResourceData();
+
+    $.ajax({
+      url:"/api/IdentityResourceManage/UpdateIdentityResource",
+      type:"post",
+      contentType: "application/json",
+      data: JSON.stringify(postdata),
+      dataType: 'json',
+      success: updateResourceDataCall,
+    });
+  }
+
+  // 更新（修改）按钮处理
+  function updateHandle(curele)
+  {
+    var id = $(curele).parents("tr").attr("data-resourceId");
+    var resourceData = null;
+    for(var item in resourceDataList){
+      if(resourceDataList[item].id == id){
+        resourceData = resourceDataList[item];
+      }
+    }
+
+    var newResourceData = jQuery.extend(true, {}, resourceData);
+    newResourceData.userClaims = claims;
+    createResourceDataHtml(newResourceData);
+  }
+
+  // 资源数据提交处理
+  function resourceDataSubmitHandle()
+  {
+    var postdata = createResourceData();
+    if(postdata.Id == ""){
+      addResourceData();
+    }
+    else{
+      updateResourceData();
+    }
+  }
+
+  // 初始化
+  function init()
+  {
+    // 获取Claim
+    $.get("/api/ClaimManage/GetWebClaimTypes", function(data){
+      if(data.isSuccess == true){
+        for(var item in data.value){
+          claims.push({
+            type: data.value[item],
+          });
+        }
+      }
+    });
+    resourceDataFactoryId = BuildData(null, $("#resourceDataForm"));
+
+    GetResource();
+    resourceDataListFactoryId = BuildData(null, $("#datadiv"));
+  }
+
+  $(function(){
+    console.log(1);
+
+    init();
+  });
+</script>

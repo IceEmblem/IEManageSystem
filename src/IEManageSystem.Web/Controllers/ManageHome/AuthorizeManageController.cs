@@ -17,5 +17,10 @@ namespace IEManageSystem.Web.Controllers.ManageHome
         {
             return PartialView();
         }
+
+        public ActionResult Client()
+        {
+            return PartialView();
+        }
     }
 }

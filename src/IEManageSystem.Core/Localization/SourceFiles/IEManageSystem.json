@@ -15,6 +15,7 @@
     "AuthorizeManage": "认证管理",
     "IdentityResource": "身份资源",
     "ApiResource": "Api资源",
-    "ExternalAuthorize": "外部认证"
+    "ExternalAuthorize": "外部认证",
+    "Client": "客户端"
   }
 }
