@@ -34,6 +34,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
                 e=>e.AllowedGrantTypes,
                 e=>e.RedirectUris,
                 e=>e.PostLogoutRedirectUris,
+                e=>e.AllowedScopes,
             };
             var clients = _clientRepository.GetAllInclude(clientLoad).OrderByDescending(e => e.Id).Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
 
@@ -45,9 +46,9 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
             _clientManager.AddClient(
                 input.ClientId, 
                 input.AllowedGrantTypes, 
-                input.ClientSecrets, 
-                input.RedirectUris, 
-                input.PostLogoutRedirectUris, 
+                new List<string>() { input.ClientSecrets }, 
+                new List<string>() { input.RedirectUris }, 
+                new List<string>() { input.PostLogoutRedirectUris }, 
                 input.AllowedScopes, 
                 input.AllowOfflineAccess);
 

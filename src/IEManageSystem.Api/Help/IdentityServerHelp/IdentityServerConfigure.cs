@@ -58,7 +58,7 @@ namespace IEManageSystem.Api.Help.IdentityServerHelp
                     ClientId = "IEClient",
                     // AllowedGrantTypes = GrantTypes.Implicit,
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
-
+                    
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())

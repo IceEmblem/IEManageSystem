@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IEIdentityServer.Core.Entitys.IdentityService.Clients;
 using IEManageSystem.Api.Models;
 using IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages;
 using IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages.Dto;
@@ -15,11 +16,16 @@ namespace IEManageSystem.Api.Controllers.ManageHome.AuthorizeManage
     {
         private ClientManageAppService _clientManageAppService { get; set; }
 
+        private ClientGrantTypeManager _clientGrantTypeManager { get; set; }
+
         public ClientManageController(
-            ClientManageAppService clientManageAppService
+            ClientManageAppService clientManageAppService,
+            ClientGrantTypeManager clientGrantTypeManager
             )
         {
             _clientManageAppService = clientManageAppService;
+
+            _clientGrantTypeManager = clientGrantTypeManager;
         }
 
         [HttpPost]
@@ -64,6 +70,12 @@ namespace IEManageSystem.Api.Controllers.ManageHome.AuthorizeManage
             }
 
             return new ApiResultDataModel<UpdateClientOutput>(await _clientManageAppService.UpdateClient(input));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ApiResultDataModel>> GetGrantTypes()
+        {
+            return new ApiResultDataModel() { IsSuccess = true, Value = _clientGrantTypeManager.GetClientGrantTypes() };
         }
     }
 }

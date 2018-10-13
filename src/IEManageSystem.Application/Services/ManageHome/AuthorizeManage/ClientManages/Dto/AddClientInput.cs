@@ -14,22 +14,22 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages.Dto
         /// <summary>
         /// 
         /// </summary>
+        public string ClientSecrets;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string RedirectUris;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PostLogoutRedirectUris;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> AllowedGrantTypes;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<string> ClientSecrets;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<string> RedirectUris;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<string> PostLogoutRedirectUris;
 
         /// <summary>
         /// 

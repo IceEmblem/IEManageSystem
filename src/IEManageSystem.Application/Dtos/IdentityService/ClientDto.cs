@@ -11,6 +11,8 @@ namespace IEManageSystem.Dtos.IdentityService
     {
         public string ClientId { get; set; }
 
+        public List<ClientScopeDto> AllowedScopes { get; set; } 
+
         public List<ClientGrantTypeDto> AllowedGrantTypes { get; set; }
 
         // public List<ClientSecretDto> ClientSecrets { get; set; }
