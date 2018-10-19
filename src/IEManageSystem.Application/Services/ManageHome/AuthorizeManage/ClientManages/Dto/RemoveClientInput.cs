@@ -6,6 +6,6 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages.Dto
 {
     public class RemoveClientInput
     {
-        public string clientId { get; set; }
+        public int Id { get; set; }
     }
 }

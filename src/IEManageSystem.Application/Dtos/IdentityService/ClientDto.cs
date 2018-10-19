@@ -9,6 +9,8 @@ namespace IEManageSystem.Dtos.IdentityService
     [AutoMap(typeof(Client))]
     public class ClientDto
     {
+        public int Id { get; set; }
+
         public string ClientId { get; set; }
 
         public List<ClientScopeDto> AllowedScopes { get; set; } 

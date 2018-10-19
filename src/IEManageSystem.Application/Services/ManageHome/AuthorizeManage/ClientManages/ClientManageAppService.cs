@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using IEManageSystem.Dtos.IdentityService;
 using System.Linq.Expressions;
+using UtilityAction.Other;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
 {
@@ -43,6 +44,10 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
 
         public async Task<AddClientOutput> AddClient(AddClientInput input)
         {
+            if (!Regular.IsMatchUrl(input.RedirectUris) || !Regular.IsMatchUrl(input.PostLogoutRedirectUris)) {
+                return new AddClientOutput() { ErrorMessage = "请输入Url格式，例[http://abc.com/abc]" };
+            }
+
             _clientManager.AddClient(
                 input.ClientId, 
                 input.AllowedGrantTypes, 
@@ -57,7 +62,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
 
         public async Task<RemoveClientOutput> RemoveClient(RemoveClientInput input)
         {
-            _clientManager.RemoveClient(input.clientId);
+            _clientManager.RemoveClient(input.Id);
 
             return new RemoveClientOutput();
         }
@@ -65,13 +70,21 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
         public async Task<UpdateClientOutput> UpdateClient(UpdateClientInput input)
         {
             _clientManager.UpdateClient(
+                input.Id,
                 input.ClientId,
                 input.AllowedGrantTypes,
-                input.ClientSecrets,
-                input.RedirectUris,
-                input.PostLogoutRedirectUris,
+                new List<string>() { input.RedirectUris },
+                new List<string>() { input.PostLogoutRedirectUris },
                 input.AllowedScopes,
                 input.AllowOfflineAccess);
+
+            // 如果密匙不为空，则更新
+            if (!string.IsNullOrEmpty(input.ClientSecrets)) {
+                _clientManager.UpdateSecrets(
+                    input.Id,
+                    new List<string>() { input.ClientSecrets }
+                    );
+            }
 
             return new UpdateClientOutput();
         }

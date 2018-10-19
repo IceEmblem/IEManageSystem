@@ -34,8 +34,8 @@
         </tr>
       </thead>
       <tbody id="datadiv" data-element="dataElement" data-iP="true" data-iL="true">
-        <tr data-element="dataElement" data-n="clientId" data-resourceId="{{Value}}">
-          <td data-element="dataElement" data-n="clientId">{{Value}}</td>
+        <tr data-element="dataElement" data-n="id" data-resourceId="{{Value}}">
+          <td name="clientId" data-element="dataElement" data-n="clientId">{{Value}}</td>
           <td data-element="dataElement" data-n="allowedGrantTypesString">{{Value}}</td>
           <td data-element="dataElement" data-n="allowedScopesString">{{Value}}</td>
           <td data-element="dataElement" data-n="redirectUrisString">{{Value}}</td>
@@ -75,7 +75,7 @@
       <!-- 模态框主体 -->
       <div class="modal-body">
         <form id="resourceDataForm" data-element="dataElement" data-iP="true">
-          <input type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="clientId" hidden="hidden">
+          <input id="resourceId" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="id" hidden="hidden">
           <div id="resourceDataError" class="text-danger error"></div>
           <div class="form-group">
             <label for="text">客户端Id</label>
@@ -83,7 +83,7 @@
           </div>
 
           <div class="form-group">
-            <label for="text">密匙</label>
+            <label for="text">密匙（如果无需修改，则不要填写值）</label>
             <input id="clientSecrets" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="clientSecrets">
           </div>
           
@@ -175,7 +175,7 @@
       <!-- 模态框主体 -->
       <div class="modal-body">
         <div id="deleteDataError" class="text-danger error"></div>
-        你正在删除xxxx
+        你正在删除[<span id="deleteClientId"></span>]
       </div>
  
       <!-- 模态框底部 -->
@@ -273,6 +273,7 @@
     }
 
     var data = {
+      Id: $("#resourceId").val(),
       ClientId: $("#clientId").val(),
       ClientSecrets: $("#clientSecrets").val(),
       RedirectUris: $("#redirectUris").val(),
@@ -390,6 +391,7 @@
   function addHandle(){
     // 空的资源数据
     var nullResourceData = {
+      id:"",
       clientId:"",
       allowedGrantTypes: grantTypes,
       identityResourceScopes: identityResources,
@@ -419,11 +421,11 @@
     var id = $("#deleteDataDelete").attr("data-resourceId");
 
     var postdata = {
-      IdentityResourceId: id,
+      Id: id,
     }
 
     $.ajax({
-      url:"/api/IdentityResourceManage/DeleteIdentityResource",
+      url:"/api/ClientManage/RemoveClient",
       type:"post",
       contentType: "application/json",
       data: JSON.stringify(postdata),
@@ -435,6 +437,8 @@
   // 删除按钮处理
   function deleteHandle(curele){
     var id = $(curele).parents("tr").attr("data-resourceId");
+    var clientId = $(curele).parents("tr").find("[name=clientId]").text();
+    $("#deleteClientId").text(clientId);
     $("#deleteDataDelete").attr("data-resourceId", id);
   }
 
@@ -455,7 +459,7 @@
     var postdata = createResourceData();
 
     $.ajax({
-      url:"/api/IdentityResourceManage/UpdateIdentityResource",
+      url:"/api/ClientManage/UpdateClient",
       type:"post",
       contentType: "application/json",
       data: JSON.stringify(postdata),
@@ -476,7 +480,11 @@
     }
 
     var newResourceData = jQuery.extend(true, {}, resourceData);
-    newResourceData.userClaims = claims;
+    newResourceData.allowedGrantTypes = grantTypes;
+    newResourceData.identityResourceScopes = identityResources;
+    newResourceData.apiResourceScopes = apiResources;
+    newResourceData.redirectUris = resourceData.redirectUris[0].redirectUri;
+    newResourceData.postLogoutRedirectUris = resourceData.postLogoutRedirectUris[0].postLogoutRedirectUri
     createResourceDataHtml(newResourceData);
   }
 
@@ -484,12 +492,12 @@
   function resourceDataSubmitHandle()
   {
     var postdata = createResourceData();
-    //if(postdata.Id == ""){
+    if(postdata.Id == ""){
       addResourceData();
-    // }
-    // else{
-    //   updateResourceData();
-    // }
+    }
+    else{
+      updateResourceData();
+    }
   }
 
   // 初始化
