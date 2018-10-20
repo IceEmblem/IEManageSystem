@@ -69,6 +69,11 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
 
         public async Task<UpdateClientOutput> UpdateClient(UpdateClientInput input)
         {
+            if (!Regular.IsMatchUrl(input.RedirectUris) || !Regular.IsMatchUrl(input.PostLogoutRedirectUris))
+            {
+                return new UpdateClientOutput() { ErrorMessage = "请输入Url格式，例[http://abc.com/abc]" };
+            }
+
             _clientManager.UpdateClient(
                 input.Id,
                 input.ClientId,

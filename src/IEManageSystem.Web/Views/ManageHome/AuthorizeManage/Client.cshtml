@@ -18,6 +18,21 @@
   {
     margin-bottom: 0px;
   }
+
+  .input-text{
+    background-color: #17a2b8;
+    color: #ffffff;
+    padding: 3px 5px 3px 5px;
+    box-sizing: border-box;
+    border-right: 5px solid #ffffff;
+  }
+  .input-text span{
+  }
+
+  #resourceDataSubmit{
+    background-color: #00EEEE;
+    border-color: #00EEEE;
+  }
 </style>
 <!-- 数据列表 -->
 <div class="d-flex flex-column h-100">
@@ -63,11 +78,11 @@
 
 <!-- 数据 -->
 <div class="modal fade" id="resourceData">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
  
       <!-- 模态框头部 -->
-      <div class="modal-header">
+      <div class="modal-header bg-info text-white">
         <h4 class="modal-title">客户端数据</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
@@ -91,10 +106,10 @@
             <div class="form-group">
               <label for="text">认证类型</label>
             </div>
-            <div id="allowedGrantTypes" class="form-check overflowhidden" data-element="dataElement" data-n="allowedGrantTypes" data-iL="true">
-              <label class="form-check-label col-md-6 float-left">
-                <input class="form-check-input" type="checkbox" value="{{Value}}" data-element="dataElement" data-p-n="allowedGrantTypes" >
-                <span data-element="dataElement" data-p-n="allowedGrantTypes">
+            <div id="allowedGrantTypes" class="overflowhidden" data-element="dataElement" data-n="allowedGrantTypes" data-iL="true">
+              <label class="col-md-4 float-left input-text">
+                <input class="checkbox" type="checkbox" value="{{Value}}" data-element="dataElement" data-p-n="allowedGrantTypes" >
+                <span class="" data-element="dataElement" data-p-n="allowedGrantTypes">
                   {{Value}}
                 </span>
                 </input>
@@ -106,10 +121,10 @@
             <div class="form-group">
               <label for="text">身份资源域</label>
             </div>
-            <div id="identityResourceScopes" class="form-check overflowhidden" data-element="dataElement" data-n="identityResourceScopes" data-iL="true">
-              <label class="form-check-label col-md-6 float-left">
-                <input class="form-check-input" type="checkbox" value="{{Value}}" data-element="dataElement" data-p-n="identityResourceScopes" >
-                <span data-element="dataElement" data-p-n="identityResourceScopes">
+            <div id="identityResourceScopes" class="overflowhidden" data-element="dataElement" data-n="identityResourceScopes" data-iL="true">
+              <label class="col-md-4 float-left input-text">
+                <input class="checkbox" type="checkbox" value="{{Value}}" data-element="dataElement" data-p-n="identityResourceScopes" >
+                <span class="" data-element="dataElement" data-p-n="identityResourceScopes">
                   {{Value}}
                 </span>
                 </input>
@@ -121,10 +136,10 @@
             <div class="form-group">
               <label for="text">Api资源域</label>
             </div>
-            <div id="apiResourceScopes" class="form-check overflowhidden" data-element="dataElement" data-n="apiResourceScopes" data-iL="true">
-              <label class="form-check-label col-md-6 float-left">
-                <input class="form-check-input" type="checkbox" value="{{Value}}" data-element="dataElement" data-p-n="apiResourceScopes" >
-                <span data-element="dataElement" data-p-n="apiResourceScopes">
+            <div id="apiResourceScopes" class="overflowhidden" data-element="dataElement" data-n="apiResourceScopes" data-iL="true">
+              <label class="col-md-4 float-left input-text">
+                <input class="checkbox" type="checkbox" value="{{Value}}" data-element="dataElement" data-p-n="apiResourceScopes" >
+                <span class="" data-element="dataElement" data-p-n="apiResourceScopes">
                   {{Value}}
                 </span>
                 </input>
@@ -144,15 +159,24 @@
           <div class="form-group">
             <label for="text">允许离线共享</label>
             <div>
-              <label class="radio-inline"><input type="radio" name="allowOfflineAccess" value="true">是</label>&nbsp&nbsp&nbsp&nbsp&nbsp
-              <label class="radio-inline"><input type="radio" name="allowOfflineAccess" value="false">否</label>
+              <label class="radio-inline">
+                <input class="radio float-left" type="radio" name="allowOfflineAccess" value="true">
+                <span class="float-left">
+                  &nbsp是
+                </span>
+              </label>
+              &nbsp&nbsp&nbsp&nbsp&nbsp
+              <label class="radio-inline">
+                <input class="radio float-left" type="radio" name="allowOfflineAccess" value="false">
+                <span class="float-left">&nbsp否</span>
+              </label>
             </div>
           </div>
         </form>
       </div>
  
       <!-- 模态框底部 -->
-      <div class="modal-footer">
+      <div class="modal-footer bg-info">
         <button id="resourceDataSubmit" type="button" class="btn btn-primary" onclick="resourceDataSubmitHandle()">提交</button>
         <button id="resourceDataClose" type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
       </div>
