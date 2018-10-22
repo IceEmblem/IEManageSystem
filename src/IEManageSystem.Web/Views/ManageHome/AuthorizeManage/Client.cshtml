@@ -99,20 +99,18 @@
 
           <div class="form-group">
             <label for="text">密匙（如果无需修改，则不要填写值）</label>
-            <input id="clientSecrets" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="clientSecrets">
+            <input id="clientSecret" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="clientSecret">
           </div>
-          
           <div class="checkbox-list">
             <div class="form-group">
               <label for="text">认证类型</label>
             </div>
-            <div id="allowedGrantTypes" class="overflowhidden" data-element="dataElement" data-n="allowedGrantTypes" data-iL="true">
-              <label class="col-md-4 float-left input-text">
-                <input class="checkbox" type="checkbox" value="{{Value}}" data-element="dataElement" data-p-n="allowedGrantTypes" >
-                <span class="" data-element="dataElement" data-p-n="allowedGrantTypes">
-                  {{Value}}
+            <div class="overflowhidden" data-element="dataElement" data-n="allowedGrantType" data-iL="true">
+              <label class="radio-inline col-md-6">
+                <input class="radio float-left" type="radio" name="allowedGrantType" value="{{Value}}" data-element="dataElement" data-p-n="allowedGrantType">
+                <span class="float-left overflowhidden" data-element="dataElement" data-p-n="allowedGrantType">
+                  &nbsp{{Value}}
                 </span>
-                </input>
               </label>
             </div>
           </div>
@@ -150,11 +148,11 @@
 
           <div class="form-group">
             <label for="text">登录重定向地址</label>
-            <input id="redirectUris" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="redirectUris">
+            <input id="redirectUri" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="redirectUri">
           </div>
           <div class="form-group">
             <label for="text">登出重定向地址</label>
-            <input id="postLogoutRedirectUris" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="postLogoutRedirectUris">
+            <input id="postLogoutRedirectUri" type="text" class="form-control" value="{{Value}}" data-element="dataElement" data-n="postLogoutRedirectUri">
           </div>
           <div class="form-group">
             <label for="text">允许离线共享</label>
@@ -267,16 +265,6 @@
   // 生成资源数据 For Html
   function createResourceData()
   {
-    let allowedGrantTypes = new Array();
-    let grantTypeHtmls = $("#allowedGrantTypes").find("input");
-    for(var n = 0; n < grantTypeHtmls.length; n++){
-      var htmlinput = grantTypeHtmls.eq(n);
-      if(htmlinput.is(':checked'))
-      {
-        allowedGrantTypes.push(htmlinput.val());
-      }
-    }
-
     let allowedScopes = new Array();
     let identityResourceScopeHtmls = $("#identityResourceScopes").find("input");
     for(var n = 0; n < identityResourceScopeHtmls.length; n++){
@@ -299,10 +287,10 @@
     var data = {
       Id: $("#resourceId").val(),
       ClientId: $("#clientId").val(),
-      ClientSecrets: $("#clientSecrets").val(),
-      RedirectUris: $("#redirectUris").val(),
-      PostLogoutRedirectUris: $("#postLogoutRedirectUris").val(),
-      AllowedGrantTypes:allowedGrantTypes,
+      ClientSecret: $("#clientSecret").val(),
+      RedirectUri: $("#redirectUri").val(),
+      PostLogoutRedirectUri: $("#postLogoutRedirectUri").val(),
+      AllowedGrantType:$("input[name=allowedGrantType]:checked").val(),
       AllowedScopes:allowedScopes,
       AllowOfflineAccess: $("input[name=allowOfflineAccess]:checked").val(),
     }
@@ -417,11 +405,11 @@
     var nullResourceData = {
       id:"",
       clientId:"",
-      allowedGrantTypes: grantTypes,
+      allowedGrantType: grantTypes,
       identityResourceScopes: identityResources,
       apiResourceScopes: apiResources,
-      redirectUris:"",
-      postLogoutRedirectUris:"",
+      redirectUri:"",
+      postLogoutRedirectUri:"",
       allowOfflineAccess:"",
     };
     createResourceDataHtml(nullResourceData);
@@ -504,11 +492,11 @@
     }
 
     var newResourceData = jQuery.extend(true, {}, resourceData);
-    newResourceData.allowedGrantTypes = grantTypes;
+    newResourceData.allowedGrantType = grantTypes;
     newResourceData.identityResourceScopes = identityResources;
     newResourceData.apiResourceScopes = apiResources;
-    newResourceData.redirectUris = resourceData.redirectUris[0].redirectUri;
-    newResourceData.postLogoutRedirectUris = resourceData.postLogoutRedirectUris[0].postLogoutRedirectUri
+    newResourceData.redirectUri = resourceData.redirectUris[0].redirectUri;
+    newResourceData.postLogoutRedirectUri = resourceData.postLogoutRedirectUris[0].postLogoutRedirectUri
     createResourceDataHtml(newResourceData);
   }
 

@@ -75,6 +75,16 @@ namespace IEIdentityServer.Core.Entitys.IdentityService.IdentityResources
             {
                 throw new Exception("未找到资源");
             }
+
+            if (identityResource.Name == "openid") {
+                throw new Exception("无法删除openid资源，该资源为必须存在");
+            }
+
+            if (identityResource.Name == "profile")
+            {
+                throw new Exception("无法删除profile资源，该资源为必须存在");
+            }
+
             _repository.Remove(identityResource);
 
             _repository.SaveChange();

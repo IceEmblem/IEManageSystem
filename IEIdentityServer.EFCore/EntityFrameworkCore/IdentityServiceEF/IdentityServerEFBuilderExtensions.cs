@@ -17,9 +17,9 @@ namespace IEIdentityServer.EFCore.EntityFrameworkCore.IdentityServiceEF
     public static class IdentityServerEFBuilderExtensions
     {
         public static IIdentityServerBuilder AddConfigurationStore(
-            this IServiceCollection services, string connectionString)
+            this IServiceCollection services)
         {
-            IEIdentityServerConfigurations.IEIdentityServerConnectionString = connectionString;
+            string connectionString = IEIdentityServerConfigurations.GetIEIdentityServerConnectionString();
 
             return services.AddIdentityServer()
                 .AddDeveloperSigningCredential()

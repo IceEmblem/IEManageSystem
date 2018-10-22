@@ -15,7 +15,7 @@ namespace IEIdentityServer.EFCore.EntityFrameworkCore.IdentityServiceEF
         public IEConfigurationDbContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<ConfigurationDbContext>();
-            builder.UseSqlServer(IEIdentityServerConfigurations.IEIdentityServerConnectionString);
+            builder.UseSqlServer(IEIdentityServerConfigurations.GetIEIdentityServerConnectionString());
 
             return new IEConfigurationDbContext(builder.Options);
         }

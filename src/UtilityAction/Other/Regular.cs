@@ -17,5 +17,17 @@ namespace UtilityAction.Other
 
             return regex.IsMatch(matchstr);
         }
+
+        /// <summary>
+        /// 字母和数字
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsMatchLettersNumbers(string matchstr)
+        {
+            string Pattern = @"^[A-Za-z0-9]+$";
+            Regex regex = new Regex(Pattern);
+
+            return regex.IsMatch(matchstr);
+        }
     }
 }

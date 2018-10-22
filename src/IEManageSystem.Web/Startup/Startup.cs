@@ -49,7 +49,7 @@ namespace IEManageSystem.Web.Startup
 
             // 配置IdentityService
             services
-                .AddConfigurationStore("Data Source=(localdb)\\ProjectsV13;Initial Catalog=IdentityServiceDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+                .AddConfigurationStore()
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddProfileService<ProfileService>();
 
@@ -71,7 +71,7 @@ namespace IEManageSystem.Web.Startup
         {
             app.UseAbp(); //Initializes ABP framework.
 
-            // InitializeDatabase(app);
+            InitializeDatabase(app);
 
             app.UseDeveloperExceptionPage();
 
@@ -112,41 +112,42 @@ namespace IEManageSystem.Web.Startup
             });
         }
 
-        //private void InitializeDatabase(IApplicationBuilder app)
-        //{
-        //    using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-        //    {
-        //        serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
 
-        //        var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-        //        context.Database.Migrate();
-        //        if (!context.Clients.Any())
-        //        {
-        //            foreach (var client in IdentityServerConfigure.GetClients())
-        //            {
-        //                context.Clients.Add(client.ToEntity());
-        //            }
-        //            context.SaveChanges();
-        //        }
+                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                context.Database.Migrate();
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in IdentityServerConfigure.GetClients())
+                    {
+                        var entity = client.ToEntity();
+                        context.Clients.Add(entity);
+                    }
+                    context.SaveChanges();
+                }
 
-        //        if (!context.IdentityResources.Any())
-        //        {
-        //            foreach (var resource in IdentityServerConfigure.GetIdentityResourceResources())
-        //            {
-        //                context.IdentityResources.Add(resource.ToEntity());
-        //            }
-        //            context.SaveChanges();
-        //        }
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var resource in IdentityServerConfigure.GetIdentityResourceResources())
+                    {
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
 
-        //        if (!context.ApiResources.Any())
-        //        {
-        //            foreach (var resource in IdentityServerConfigure.GetApiResources())
-        //            {
-        //                context.ApiResources.Add(resource.ToEntity());
-        //            }
-        //            context.SaveChanges();
-        //        }
-        //    }
-        //}
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in IdentityServerConfigure.GetApiResources())
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+            }
+        }
     }
 }

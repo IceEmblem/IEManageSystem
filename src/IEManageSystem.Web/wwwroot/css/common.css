@@ -43,9 +43,9 @@
         -moz-transform: scale(0);
         transform: scale(0);
         /*增加一些动画*/
-        -webkit-transition : all ease-in-out 300ms;
-        -moz-transition : all ease-in-out 300ms;
-        transition : all ease-in-out 300ms;
+        -webkit-transition : all ease-in-out 100ms;
+        -moz-transition : all ease-in-out 100ms;
+        transition : all ease-in-out 100ms;
     }
 
     .radio:checked:after{
@@ -82,9 +82,9 @@
         text-align: center;
         line-height: 16px;
         /*增加动画*/
-        -webkit-transition: all ease-in-out 300ms;
-        -moz-transition: all ease-in-out 300ms;
-        transition: all ease-in-out 300ms;
+        -webkit-transition: all ease-in-out 200ms;
+        -moz-transition: all ease-in-out 200ms;
+        transition: all ease-in-out 200ms;
         /*利用border-radius和opacity达到填充的假象，首先隐藏此元素*/
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;

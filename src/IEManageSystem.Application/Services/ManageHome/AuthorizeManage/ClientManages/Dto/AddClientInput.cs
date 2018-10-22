@@ -10,47 +10,47 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages.Dto
         /// <summary>
         /// 
         /// </summary>
-        [MinLength(6)]
-        [MaxLength(50)]
         [Required]
-        public string ClientId;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [MinLength(6)]
-        [MaxLength(50)]
-        [Required]
-        public string ClientSecrets;
+        [StringLength(50, MinimumLength = 6)]
+        public string ClientId { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public string RedirectUris;
+        [StringLength(50, MinimumLength = 6)]
+        public string ClientSecret { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public string PostLogoutRedirectUris;
+        [Url]
+        public string RedirectUri { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public List<string> AllowedGrantTypes;
+        [Url]
+        public string PostLogoutRedirectUri { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public List<string> AllowedScopes;
+        public string AllowedGrantType { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public bool AllowOfflineAccess;
+        public List<string> AllowedScopes { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        public bool AllowOfflineAccess { get; set; }
     }
 }

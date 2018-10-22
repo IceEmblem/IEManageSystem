@@ -19,28 +19,27 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages.Dto
         /// <summary>
         /// 
         /// </summary>
-        [StringLength(50, MinimumLength = 6)]
-        public string ClientSecrets { get; set; }
+        public string ClientSecret { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
         [Url]
-        public string RedirectUris { get; set; }
+        public string RedirectUri { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
         [Url]
-        public string PostLogoutRedirectUris { get; set; }
+        public string PostLogoutRedirectUri { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public List<string> AllowedGrantTypes { get; set; }
+        public string AllowedGrantType { get; set; }
 
         /// <summary>
         /// 

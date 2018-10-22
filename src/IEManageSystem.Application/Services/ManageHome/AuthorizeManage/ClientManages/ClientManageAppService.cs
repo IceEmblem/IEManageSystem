@@ -44,16 +44,22 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
 
         public async Task<AddClientOutput> AddClient(AddClientInput input)
         {
-            if (!Regular.IsMatchUrl(input.RedirectUris) || !Regular.IsMatchUrl(input.PostLogoutRedirectUris)) {
-                return new AddClientOutput() { ErrorMessage = "请输入Url格式，例[http://abc.com/abc]" };
+            if (!Regular.IsMatchLettersNumbers(input.ClientId))
+            {
+                return new AddClientOutput() { ErrorMessage = "客户端Id只能输入数字和字母" };
+            }
+
+            if (!Regular.IsMatchLettersNumbers(input.ClientSecret))
+            {
+                return new AddClientOutput() { ErrorMessage = "密匙只能输入数字和字母" };
             }
 
             _clientManager.AddClient(
                 input.ClientId, 
-                input.AllowedGrantTypes, 
-                new List<string>() { input.ClientSecrets }, 
-                new List<string>() { input.RedirectUris }, 
-                new List<string>() { input.PostLogoutRedirectUris }, 
+                input.AllowedGrantType, 
+                new List<string>() { input.ClientSecret }, 
+                new List<string>() { input.RedirectUri }, 
+                new List<string>() { input.PostLogoutRedirectUri }, 
                 input.AllowedScopes, 
                 input.AllowOfflineAccess);
 
@@ -69,25 +75,33 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ClientManages
 
         public async Task<UpdateClientOutput> UpdateClient(UpdateClientInput input)
         {
-            if (!Regular.IsMatchUrl(input.RedirectUris) || !Regular.IsMatchUrl(input.PostLogoutRedirectUris))
+            if (!Regular.IsMatchLettersNumbers(input.ClientId))
             {
-                return new UpdateClientOutput() { ErrorMessage = "请输入Url格式，例[http://abc.com/abc]" };
+                return new UpdateClientOutput() { ErrorMessage = "客户端Id只能输入数字和字母" };
+            }
+
+            if (!string.IsNullOrEmpty(input.ClientSecret) && !Regular.IsMatchLettersNumbers(input.ClientSecret)) {
+                return new UpdateClientOutput() { ErrorMessage = "密匙只能输入数字和字母" };
+            }
+
+            if (!string.IsNullOrEmpty(input.ClientSecret) && (input.ClientSecret.Length < 6 || input.ClientSecret.Length > 50)) {
+                return new UpdateClientOutput() { ErrorMessage = "客户端密匙长度必须大于或等于6，小于或等于50" };
             }
 
             _clientManager.UpdateClient(
                 input.Id,
                 input.ClientId,
-                input.AllowedGrantTypes,
-                new List<string>() { input.RedirectUris },
-                new List<string>() { input.PostLogoutRedirectUris },
+                input.AllowedGrantType,
+                new List<string>() { input.RedirectUri },
+                new List<string>() { input.PostLogoutRedirectUri },
                 input.AllowedScopes,
                 input.AllowOfflineAccess);
 
             // 如果密匙不为空，则更新
-            if (!string.IsNullOrEmpty(input.ClientSecrets)) {
+            if (!string.IsNullOrEmpty(input.ClientSecret)) {
                 _clientManager.UpdateSecrets(
                     input.Id,
-                    new List<string>() { input.ClientSecrets }
+                    new List<string>() { input.ClientSecret }
                     );
             }
 
