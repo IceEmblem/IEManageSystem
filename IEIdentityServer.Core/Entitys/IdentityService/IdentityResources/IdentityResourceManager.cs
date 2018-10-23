@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using System.Linq;
+using IEIdentityServer.Core.Help.Exceptions;
 
 namespace IEIdentityServer.Core.Entitys.IdentityService.IdentityResources
 {
@@ -26,6 +27,11 @@ namespace IEIdentityServer.Core.Entitys.IdentityService.IdentityResources
             List<string> useClaims
             )
         {
+            if (_repository.FirstOrDefault(e => e.Name == name) != null)
+            {
+                throw new IEIdentityException("已存在相同名称的资源");
+            }
+
             List<IdentityClaim> identityClaims = new List<IdentityClaim>();
             useClaims.ForEach(e=> identityClaims.Add(new IdentityClaim() { Type = e }));
 
@@ -51,10 +57,25 @@ namespace IEIdentityServer.Core.Entitys.IdentityService.IdentityResources
             Expression<Func<IdentityResource, object>>[] propertySelectors = new Expression<Func<IdentityResource, object>>[] {
                 e=>e.UserClaims,
             };
-            var identityResource = _repository.GetAllInclude(propertySelectors).FirstOrDefault(e=>e.Id == id);
+            var identityResource = _repository.GetAllInclude(propertySelectors).FirstOrDefault(e => e.Id == id);
             if (identityResource == null)
             {
                 throw new Exception("未找到资源");
+            }
+
+            var compareResource = _repository.FirstOrDefault(e => e.Name == name);
+            if (compareResource != null && !identityResource.Equals(compareResource))
+            {
+                throw new IEIdentityException("已存在相同名称的资源");
+            }
+
+            if (identityResource.Name == "openid")
+            {
+                throw new IEIdentityException("不支持更新openid资源");
+            }
+
+            if (identityResource.Name == "profile" && name != "profile") {
+                throw new IEIdentityException("不支持对profile重新名称");
             }
 
             List<IdentityClaim> identityClaims = new List<IdentityClaim>();
@@ -77,12 +98,12 @@ namespace IEIdentityServer.Core.Entitys.IdentityService.IdentityResources
             }
 
             if (identityResource.Name == "openid") {
-                throw new Exception("无法删除openid资源，该资源为必须存在");
+                throw new IEIdentityException("无法删除openid资源，该资源为必须存在");
             }
 
             if (identityResource.Name == "profile")
             {
-                throw new Exception("无法删除profile资源，该资源为必须存在");
+                throw new IEIdentityException("无法删除profile资源，该资源为必须存在");
             }
 
             _repository.Remove(identityResource);

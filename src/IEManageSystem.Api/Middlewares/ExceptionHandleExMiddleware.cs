@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using IEIdentityServer.Core.Help.Exceptions;
 using IEManageSystem.Api.Models;
 using IEManageSystem.Help.Exceptions;
 using Microsoft.AspNetCore.Http;
@@ -32,20 +33,11 @@ namespace IEManageSystem.Api.Middlewares
             }
             catch (MessageException ex)
             {
-                RecordExceptionLog(ex);
-
-                ApiResultDataModel result = new ApiResultDataModel()
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-                context.Response.ContentType = "text/plain";
-
-                //设置序列化时key为驼峰样式
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                settings.Formatting = Formatting.Indented;
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(result, settings));
+                await HandleMessageException(ex, context);
+            }
+            catch (IEIdentityException ex)
+            {
+                await HandleMessageException(ex, context);
             }
             catch (Exception ex)
             {
@@ -64,6 +56,27 @@ namespace IEManageSystem.Api.Middlewares
                 settings.Formatting = Formatting.Indented;
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(result, settings));
             }
+        }
+
+        /// <summary>
+        /// 处理消息异常
+        /// </summary>
+        private async Task HandleMessageException(Exception ex, HttpContext context)
+        {
+            RecordExceptionLog(ex);
+
+            ApiResultDataModel result = new ApiResultDataModel()
+            {
+                IsSuccess = false,
+                Message = ex.Message,
+            };
+            context.Response.ContentType = "text/plain";
+
+            //设置序列化时key为驼峰样式
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            settings.Formatting = Formatting.Indented;
+            await context.Response.WriteAsync(JsonConvert.SerializeObject(result, settings));
         }
 
         /// <summary>

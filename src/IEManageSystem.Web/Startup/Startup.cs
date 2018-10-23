@@ -57,10 +57,8 @@ namespace IEManageSystem.Web.Startup
 
             services.AddScoped<ValidateCodeHelper>();
 
-            //Configure Abp and Dependency Injection
             return services.AddAbp<IEManageSystemWebModule>(options =>
             {
-                //Configure Log4Net logging
                 options.IocManager.IocContainer.AddFacility<LoggingFacility>(
                     f => f.UseAbpLog4Net().WithConfig("log4net.config")
                 );

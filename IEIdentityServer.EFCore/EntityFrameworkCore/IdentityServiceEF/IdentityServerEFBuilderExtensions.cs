@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using IEIdentityServer.Core.Configuration;
+using System.Collections.Generic;
 
 namespace IEIdentityServer.EFCore.EntityFrameworkCore.IdentityServiceEF
 {

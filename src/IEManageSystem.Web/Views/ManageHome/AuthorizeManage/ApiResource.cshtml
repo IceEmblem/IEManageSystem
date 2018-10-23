@@ -21,7 +21,7 @@
       </thead>
       <tbody id="datadiv" data-element="dataElement" data-iP="true" data-iL="true">
         <tr data-element="dataElement" data-n="id" data-resourceId="{{Value}}">
-          <td data-element="dataElement" data-n="name">{{Value}}</td>
+          <td name="name" data-element="dataElement" data-n="name">{{Value}}</td>
           <td data-element="dataElement" data-n="displayName">{{Value}}</td>
           <td data-element="dataElement" data-n="description">{{Value}}</td>
           <td data-element="dataElement" data-n="userClaimsString">{{Value}}</td>
@@ -112,7 +112,7 @@
       <!-- 模态框主体 -->
       <div class="modal-body">
         <div id="deleteDataError" class="text-danger error"></div>
-        你正在删除xxxx
+        你正在删除[<span id="deleteResourceId"></span>]
       </div>
  
       <!-- 模态框底部 -->
@@ -327,6 +327,8 @@
   // 删除按钮处理
   function deleteHandle(curele){
     var id = $(curele).parents("tr").attr("data-resourceId");
+    var name = $(curele).parents("tr").find("[name=name]").text();
+    $("#deleteResourceId").text(name);
     $("#deleteDataDelete").attr("data-resourceId", id);
   }
 

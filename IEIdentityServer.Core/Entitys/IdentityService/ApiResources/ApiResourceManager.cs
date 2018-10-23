@@ -1,5 +1,6 @@
 ﻿using Abp.Dependency;
 using IdentityServer4.EntityFramework.Entities;
+using IEIdentityServer.Core.Help.Exceptions;
 using IEIdentityServer.Core.RepositoriesI;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,11 @@ namespace IEIdentityServer.Core.Entitys.IdentityService.ApiResources
             List<string> useClaims
             )
         {
+            if (_repository.FirstOrDefault(e => e.Name == name) != null)
+            {
+                throw new IEIdentityException("已存在相同名称的资源");
+            }
+
             List<ApiResourceClaim> claims = new List<ApiResourceClaim>();
             useClaims.ForEach(e => claims.Add(new ApiResourceClaim() { Type = e }));
 
@@ -73,6 +79,12 @@ namespace IEIdentityServer.Core.Entitys.IdentityService.ApiResources
             if (resource == null)
             {
                 throw new Exception("未找到资源");
+            }
+
+            var compareResource = _repository.FirstOrDefault(e => e.Name == name);
+            if (compareResource != null && !resource.Equals(compareResource))
+            {
+                throw new IEIdentityException("已存在相同名称的资源");
             }
 
             List<ApiResourceClaim> claims = new List<ApiResourceClaim>();
