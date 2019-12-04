@@ -3,3 +3,24 @@
 ################################################################################
 
 /.vs
+/src/IEManageSystem.ApiAuthorization/bin
+/src/IEManageSystem.ApiAuthorization/obj
+/src/IEManageSystem.Application/bin
+/src/IEManageSystem.Application/obj
+/src/IEManageSystem.CMS/bin
+/src/IEManageSystem.CMS/obj
+/src/IEManageSystem.Core/bin
+/src/IEManageSystem.Core/obj
+/src/IEManageSystem.EntityFrameworkCore/bin
+/src/IEManageSystem.EntityFrameworkCore/obj
+/src/IEManageSystem.JwtAuthentication/bin
+/src/IEManageSystem.JwtAuthentication/obj
+/src/IEManageSystem.Web/bin
+/src/IEManageSystem.Web/obj
+/src/IEManageSystem.Web/ClientApp/node_modules
+/src/UtilityAction/bin
+/src/UtilityAction/obj
+/test/IEManageSystem.Tests/bin
+/test/IEManageSystem.Tests/obj
+/test/IEManageSystem.Web.Tests/bin
+/test/IEManageSystem.Web.Tests/obj

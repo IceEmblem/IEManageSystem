@@ -1,0 +1,31 @@
+.btn-bubble {
+    color: white;
+    background-color: #7e848d;
+    background-repeat: no-repeat;
+}
+.btn-bubble:hover,
+.btn-bubble:focus {
+    -webkit-animation: bubbles 1s forwards ease-out;
+    animation: bubbles 1s forwards ease-out;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 52% 125% / 1.2em 1.2em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 67% 133% / 0.66em 0.66em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 64% 93% / 1.17em 1.17em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 22% 88% / 1.04em 1.04em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 43% 95% / 0.87em 0.87em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 97% 116% / 0.62em 0.62em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 62% 97% / 0.64em 0.64em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 87% 135% / 0.68em 0.68em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) -4% 89% / 0.57em 0.57em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 89% 88% / 0.65em 0.65em, radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eeeeff 60%, #eeeeff 65%, rgba(0, 0, 0, 0) 70%) 6% 144% / 0.77em 0.77em;
+    color: white;
+    background-color: #7e848d;
+    background-repeat: no-repeat;
+}
+.btn-bubble-active{
+    color: white;
+    background-color: #5a6876;
+    background-repeat: no-repeat;
+}
+@-webkit-keyframes bubbles {
+    100% {
+        background-position: 45% -182%, 61% -215%, 62% -196%, 18% -318%, 51% -86%, 88% -292%, 66% -244%, 89% -313%, -9% 9%, 99% -107%, 16% -282%;
+        box-shadow: inset 0 -6.5em 0 #5a6876;
+    }
+}
+@keyframes bubbles {
+    100% {
+        background-position: 45% -182%, 61% -215%, 62% -196%, 18% -318%, 51% -86%, 88% -292%, 66% -244%, 89% -313%, -9% 9%, 99% -107%, 16% -282%;
+        box-shadow: inset 0 -6.5em 0 #5a6876;
+    }
+}

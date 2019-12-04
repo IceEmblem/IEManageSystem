@@ -1,0 +1,127 @@
+.picturemanage {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+}
+
+.picturemanage>div{
+    display: inline-block;
+}
+
+.picturemanage>div:first-child{
+    width: 80%;
+}
+
+.picturemanage>div:nth-child(2){
+    width: 20%;
+    padding: 0rem 0.5rem;
+}
+
+.picturemanage .photobox {
+    display: inline-flex;
+    justify-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    width: 15rem;
+    height: 15rem;
+    --photoboxOverlay: rgba(72, 27, 174, .7);
+    padding: 0rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.picturemanage .photobox__previewbox {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.picturemanage .photobox__preview {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.picturemanage .photobox__previewbox:before {
+    content: "";
+    background-color: var(--photoboxOverlay, rgba(0, 0, 0, .8));
+}
+
+/* type 1 */
+
+.picturemanage .photobox_type1 .photobox__previewbox:before {
+    width: 0;
+    height: 0;
+    padding: 25%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition: -webkit-transform calc(var(--photoboxAnimationDuration, .2s) / 2) ease calc(var(--photoboxAnimationDuration, .2s) / 2);
+    transition: -webkit-transform calc(var(--photoboxAnimationDuration, .2s) / 2) ease calc(var(--photoboxAnimationDuration, .2s) / 2);
+    transition: transform calc(var(--photoboxAnimationDuration, .2s) / 2) ease calc(var(--photoboxAnimationDuration, .2s) / 2);
+    transition: transform calc(var(--photoboxAnimationDuration, .2s) / 2) ease calc(var(--photoboxAnimationDuration, .2s) / 2), -webkit-transform calc(var(--photoboxAnimationDuration, .2s) / 2) ease calc(var(--photoboxAnimationDuration, .2s) / 2);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+.picturemanage .photobox_type1:hover .photobox__previewbox:before {
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    -webkit-transition-duration: var(--photoboxAnimationDuration, .2s);
+    transition-duration: var(--photoboxAnimationDuration, .2s);
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.picturemanage .photobox_type1 .photobox__label {
+    width: 50%;
+    -webkit-transform: translate(-200%, -50%);
+    transform: translate(-200%, -50%);
+    -webkit-transition: -webkit-transform var(--photoboxAnimationDuration, .2s) ease-out;
+    transition: -webkit-transform var(--photoboxAnimationDuration, .2s) ease-out;
+    transition: transform var(--photoboxAnimationDuration, .2s) ease-out;
+    transition: transform var(--photoboxAnimationDuration, .2s) ease-out, -webkit-transform var(--photoboxAnimationDuration, .2s) ease-out;
+    position: absolute;
+    top: 50%;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.picturemanage .photobox_type1:hover .photobox__label {
+    -webkit-transition-duration: var(--photoboxAnimationDuration, .2s);
+    transition-duration: var(--photoboxAnimationDuration, .2s);
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+.picturemanage-noactive{
+    transition: all 0.5s;
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+}
+
+.picturemanage-active{
+    background-color: #3b779030;
+    border-radius: 2rem;
+}
+
+.picturemanage-active > div{
+    transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+}
+
+.picturemanage .custom-file-label::after
+{
+    color: #fff;
+    content: "上传图片";
+    background-color: #28a745;
+}
+
+.picturemanage-bgcolor-fff0{
+    background-color: #fff0;
+}

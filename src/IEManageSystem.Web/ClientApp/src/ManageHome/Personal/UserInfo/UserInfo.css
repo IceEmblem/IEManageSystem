@@ -1,0 +1,67 @@
+.userinfo>div:nth-child(1){
+    box-shadow: 0px 0px 5px #e9ecef;
+}
+
+.userinfo > div:nth-child(2) {
+    box-shadow: 0px 0px 5px #e9ecef;
+    padding: 1rem;
+    border: 1px solid #dfdfdf;
+    border-radius: .5rem;
+}
+
+.userinfo > div:nth-child(3) {
+    box-shadow: 0px 0px 5px #e9ecef;
+    padding: 1rem;
+    border: 1px solid #dfdfdf;
+    border-radius: .5rem;
+    display: inline-block;
+}
+
+    .userinfo > div:nth-child(2) h5 {
+        background-color: #5a8e9a;
+        color: #fff;
+        padding: .5rem;
+    }
+
+    .userinfo-lable {
+        width: 15%;
+    }
+
+.userinfo-lable>span{
+    width: 100%;
+    text-align: right;
+    justify-content: center;
+}
+
+.inputfile-img{
+    position: absolute;
+}
+
+.inputfile-img button{
+    position: absolute;
+    padding: 10px;
+    width: 100px;
+    height: 45px;
+    background-color: #669898;
+}
+
+.inputfile-img input{
+    position: absolute;
+    padding: 10px;
+    width: 100px;
+    height: 45px;
+    z-index: 9999;
+    opacity: 0;
+}
+
+.userinfo-radio {
+    
+}
+
+    .userinfo-radio > label {
+        margin:0px;
+    }
+
+.userinfo-transparent{
+    background-color: #ffffff00;
+}

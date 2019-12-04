@@ -1,0 +1,21 @@
+{
+    "GetUserInfo":{
+        "user":{
+            "id":1,
+            "account":{
+                "userName": "SuperAdmin"
+            },
+            "emailAddress": "1373611035@qq.com",
+            "name": "打不死的",
+            "phone": "18850046915",
+            "personSignature": "作业写完了吗",
+            "headSculpture": null,
+            "realName": null,
+            "idNumber": null,
+            "address": null,
+            "sex": false,
+            "birthDate": "1994/11/07",
+            "tenantId": null
+        }
+    }
+}

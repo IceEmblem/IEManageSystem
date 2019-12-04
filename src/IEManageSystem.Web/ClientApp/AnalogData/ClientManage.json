@@ -1,0 +1,26 @@
+{
+    "GetClients": {
+        "clients": [{
+            "id": 1,
+            "clientId": "client1",
+            "clientName": "客户端1",
+            "allowedGrantType": "Code",
+            "allowedGrantTypes": [],
+            "allowedScopes": [],
+            "redirectUris": [],
+            "postLogoutRedirectUris": [],
+            "allowAccessTokensViaBrowser": true,
+            "accessTokenType": "",
+            "allowOfflineAccess": true,
+            "enabled": true
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetClientGrantTypeGroupNames": {
+        "clientGrantTypeGroupNames": [
+            "Code",
+            "CodeAndClientCredentials"
+        ]
+    }
+}

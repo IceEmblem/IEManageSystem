@@ -1,0 +1,42 @@
+{
+    "GetAdmins":{
+        "admins":[{
+            "id": 1,
+            "account": {
+                "userName": "admin"
+            },
+            "emailAddress": "137xxxxxxxx@qq.com",
+            "name": "打不死的",
+            "phone": "188xxxxxxxx",
+            "personSignature": "",
+            "headSculpture": null,
+            "realName": null,
+            "idNumber": null,
+            "address": null,
+            "sex": true,
+            "birthDate": "2010/11/07",
+            "tenantId": null
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetAdminRoles": {
+        "roles":[{
+            "id": 1,
+            "name": "admin",
+            "displayName": "DisplayName",
+            "describe": "Describe"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetPermissions": {
+        "permissions": [{
+            "id": 1,
+            "name": "Name",
+            "displayName": "DisplayName"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    }
+}

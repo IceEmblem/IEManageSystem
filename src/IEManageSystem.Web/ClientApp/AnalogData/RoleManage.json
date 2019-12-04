@@ -1,0 +1,21 @@
+{
+    "GetRoles":{
+        "roles":[{
+            "id": 1,
+            "name": "admin",
+            "displayName": "DisplayName",
+            "describe": "Describe"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetPermissions": {
+        "permissions": [{
+            "id": 1,
+            "name": "Name",
+            "displayName": "DisplayName"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    }
+}

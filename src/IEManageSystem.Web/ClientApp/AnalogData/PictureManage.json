@@ -1,0 +1,23 @@
+{
+    "GetFileAndDirs":{
+        "pictures": [{
+            "webPath": "/Post1",
+            "name": "Post1",
+            "isDir": true
+        },{
+            "webPath": "/Post2",
+            "name": "Post2",
+            "isDir": true
+        },
+        {
+            "webPath": "/js/images/a5e81f19cf2c587876fd1bb08ae0249f.png",
+            "name": "Post1",
+            "isDir": false
+        },
+        {
+            "webPath": "/js/images/a5e81f19cf2c587876fd1bb08ae0249f.png",
+            "name": "Post2",
+            "isDir": false
+        }]
+    }
+}

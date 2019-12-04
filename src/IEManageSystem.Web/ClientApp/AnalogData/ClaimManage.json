@@ -1,0 +1,5 @@
+{
+    "GetWebClaimTypes":{
+        "webClaimTypes":["Subject", "Audience"]
+    }
+}

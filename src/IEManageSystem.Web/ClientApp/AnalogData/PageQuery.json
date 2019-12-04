@@ -1,0 +1,86 @@
+{
+    "GetPageComponent": {
+        "pageComponents": [{
+                "name": "CitiesSlider",
+                "sign": "1",
+                "col": "12",
+                "height": "27rem",
+                "padding": "0rem",
+                "componentType": "ContentLeafComponent",
+                "pageComponentSettings": []
+            },
+            {
+                "name": "RichTextEditor",
+                "sign": "2",
+                "col": "12",
+                "height": "",
+                "padding": "0rem",
+                "componentType": "ContentLeafComponent",
+                "pageComponentSettings": []
+            },
+            {
+                "name": "Progress",
+                "sign": "3",
+                "col": "12",
+                "height": "",
+                "padding": "0rem",
+                "componentType": "ContentLeafComponent",
+                "pageComponentSettings": []
+            },
+            {
+                "name": "PostList",
+                "sign": "4",
+                "col": "12",
+                "height": "",
+                "padding": "0rem",
+                "componentType": "PageLeafComponent",
+                "pageComponentSettings": [],
+                "targetPageId": 1
+            }
+        ]
+    },
+    "GetPage": {
+        "page": {
+            "id":1 ,
+            "name": "Home",
+            "displayName": "首页",
+            "description": "这是一个首页",
+            "pageType": "StaticPage"
+        }
+    },
+    "GetPages": {
+        "pages": [{
+            "id":1 ,
+            "name": "Home",
+            "displayName": "首页",
+            "description": "这是一个首页",
+            "pageType": "StaticPage"
+        },
+        {
+            "id":2 ,
+            "name": "Post",
+            "displayName": "文章",
+            "description": "这是一个文章页",
+            "pageType": "ContentPage"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetPageDatas": {
+        "pageDatas": [{
+            "id": 1,
+            "name": "post",
+            "title": "文章1"
+        },
+        {
+            "id": 2,
+            "name": "post",
+            "title": "文章2"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetComponentDatas": {
+        "componentDatas": []
+    }
+}

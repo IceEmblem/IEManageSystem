@@ -1,0 +1,62 @@
+.cms-menu ul {
+    padding: 0;
+    margin: 0;
+}
+.cms-menu li {
+    list-style-type: none;
+}
+.cms-menu {
+    height: auto;
+    overflow: hidden;
+    border-radius: 4px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+}
+.cms-menu>div{
+    display: inline-block;
+    width: 15%;
+    float: left;
+    background: #2a394f;
+}
+.cms-menu label {
+    border-bottom: 1px solid #293649;
+    width: 100%;
+    color: #eff4fa;
+    -webkit-transition: text-indent .15s, height .3s;
+    transition: text-indent .15s, height .3s;
+    box-sizing: border-box;
+    display: block;
+    cursor: pointer;
+}
+.cms-menu label img {
+    margin-right: 10px;
+    position: relative;
+    top: 2px;
+    width: 16px;
+}
+
+.cms-menu-title{
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cms-menu-content {
+    display: block;
+    overflow: hidden;
+    left: 0;
+    width: 100%;
+}
+.cms-menu-content ul{
+    width: 100%;
+}
+.cms-menu-content li {
+    width: 100%;
+    background: #15a4fa;
+    padding: 15px 25px;
+    box-shadow: 0px 0px #126CA1 inset;
+    -webkit-transition: box-shadow .3s, text-indent .3s;
+    transition: box-shadow .3s, text-indent .3s;
+    position: relative;
+}

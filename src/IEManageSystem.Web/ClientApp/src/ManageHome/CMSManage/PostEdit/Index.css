@@ -1,0 +1,24 @@
+.page-container{
+    height: 100%;
+    overflow-x: hidden;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.page-container-body{
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding-top: 0.67rem;
+    /* border: 1px solid #cdcdcd; */
+    padding-left: 0.33rem;
+    padding-right: 0.33rem;
+    overflow-y: scroll;
+    margin-right: -18px;
+    overflow-x: hidden;
+}

@@ -1,0 +1,28 @@
+{
+    "GetMenus": {
+        "menus": [
+            {
+                "name": "home",
+                "displayName": "首页",
+                "icon": "oi-home",
+                "pageName": "Home",
+                "pageDataName": "Home",
+                "menus": []
+            },
+            {
+                "name": "post",
+                "displayName": "技术文档",
+                "menus": [
+                    {
+                        "name": "web",
+                        "displayName": "站点技术"
+                    },
+                    {
+                        "name": "dosktop",
+                        "displayName": "桌面应用"
+                    }
+                ]
+            }
+        ]
+    }
+}

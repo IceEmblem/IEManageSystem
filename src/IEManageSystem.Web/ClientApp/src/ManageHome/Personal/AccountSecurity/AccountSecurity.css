@@ -1,0 +1,38 @@
+﻿.account-security > div:nth-child(1) {
+    box-shadow: 0px 0px 5px #e9ecef;
+}
+
+.account-security > div:nth-child(2) {
+    box-shadow: 0px 0px 5px #e9ecef;
+    padding: 1rem;
+    border: 1px solid #dfdfdf;
+    border-radius: .5rem;
+}
+
+.account-security > div:nth-child(3) {
+    box-shadow: 0px 0px 5px #e9ecef;
+    padding: 1rem;
+    border: 1px solid #dfdfdf;
+    border-radius: .5rem;
+    display: inline-block;
+}
+
+.account-security > div:nth-child(2) h5 {
+    background-color: #5a8e9a;
+    color: #fff;
+    padding: .5rem;
+}
+
+.account-security-lable {
+    width: 15%;
+}
+
+    .account-security-lable > span {
+        width: 100%;
+        text-align: right;
+        justify-content: center;
+    }
+
+    .account-security-transparent{
+        background-color: #ffffff00;
+    }

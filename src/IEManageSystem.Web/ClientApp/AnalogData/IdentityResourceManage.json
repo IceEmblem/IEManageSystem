@@ -1,0 +1,17 @@
+{
+    "GetIdentityResources":{
+        "identityResources":[{
+            "id": 1,
+            "enabled": true,
+            "name": "IdentityName1",
+            "displayName": "DisplayName",
+            "description": "Description",
+            "required": true,
+            "userClaims": [
+                "Subject"
+            ]
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    }
+}

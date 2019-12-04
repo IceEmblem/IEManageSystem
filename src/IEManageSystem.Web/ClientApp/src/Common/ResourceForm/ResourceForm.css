@@ -1,0 +1,14 @@
+.data-form .modal-body>div{
+    margin-bottom: 10px;
+}
+
+.data-form ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+.data-form li{
+    list-style: none;
+    display: inline-block;
+    padding: 0rem 0.3rem 0rem 0.3rem;
+}

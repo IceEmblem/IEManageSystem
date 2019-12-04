@@ -1,0 +1,96 @@
+.ie-progress_inner {
+    overflow: hidden;
+    padding: 1rem 0rem;
+}
+
+.ie-progress_inner__step-before {
+    z-index: 9;
+    position: relative;
+}
+
+.ie-progress_inner__bar,
+.ie-progress_inner__bar--set {
+    height: .5rem;
+    background: -webkit-repeating-linear-gradient(45deg, #1ea4ec, #1ea4ec 4px, #1f8bc5 4px, #1f8bc5 10px);
+    background: repeating-linear-gradient(45deg, #1ea4ec, #1ea4ec 4px, #1f8bc5 4px, #1f8bc5 10px);
+    -webkit-transition: width 800ms cubic-bezier(0.915, 0.015, 0.3, 1.005);
+    transition: width 800ms cubic-bezier(0.915, 0.015, 0.3, 1.005);
+    border-radius: .5rem;
+    position: relative;
+}
+
+
+.ie-progress_inner__bar {
+    top: 1.9rem;
+    z-index: 2;
+}
+
+.ie-progress_inner__bar--set {
+    width: 80%;
+    background: #70afd0;
+    z-index: 1;
+    top: 1.4rem
+}
+
+.ie-progress_inner__step-before {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #70afd0;
+    background: white;
+    border: 3px solid #a6cde2;
+    border-radius: 100%;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    display: inline-block;
+}
+
+.ie-progress_inner__step {
+    font-size: 1.3rem;
+    padding: 0 1rem;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.ie-progress_inner__step label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background-color: #70afd04f;
+    color: #fff;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-radius: 10rem;
+}
+
+.ie-progress_inner__step:hover {
+    color: white;
+}
+
+.ie-progress_inner__step-before:hover {
+    color: white;
+    background: #1ea4ec;
+}
+
+.ie-progress-card {
+    background-color: #70afd080 !important;
+    border: 0rem;
+    color: #fff;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.ie-progress-card a {
+    color: #635656;
+}
+
+.ie-progress-card-show {
+    opacity: 1;
+}
+
+.Progress-editor {}
+
+.Progress-editor-bf {}

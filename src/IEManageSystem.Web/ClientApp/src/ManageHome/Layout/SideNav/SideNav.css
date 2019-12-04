@@ -1,0 +1,94 @@
+.leftmenu_css {
+    padding: 0rem;
+    height: 100%;
+    padding-top: 0.625rem;
+    background-color: #00214080;;
+    /*background-color: #0c6d77;*/
+}
+
+.leftmenu-avatar{
+    padding:0.625rem 0rem;
+}
+
+    .leftmenu-avatar img {
+        width:40%;
+        height:40%;
+    }
+
+    .leftmenu-avatar p {
+        color: #ffffff;
+        text-align: center;
+        font-size: 1rem;
+        margin: 0.625rem;
+    }
+
+.leftmenu-weather{
+    padding-bottom: 1rem;
+}
+
+.leftmenu-menu 
+{
+    overflow-x: hidden;
+    height: 1px;
+}
+
+    .leftmenu-menu > div 
+    {
+        height:100%;
+        overflow-y: scroll;
+        margin-right: -1.5rem;
+    }
+
+.leftmenu_css_li {
+    background-color: #3b7790;
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+.leftmenu_css_li a:hover {
+    /*background-color: #095c65;*/
+    border-left: 0.312rem solid #00C5AD;
+}
+
+    .leftmenu_css_li .leftmenu_css_li{
+        background-color: #275d71;
+    }
+
+    .leftmenu_css_li .leftmenu_css_li a{
+        padding-left: 1.56rem;
+    }
+
+    .leftmenu_css_li .leftmenu_css_li a:hover {
+        /*background-color: #095c65;*/
+        border-left: 0.312rem solid #00C5AD;
+    }
+
+    .leftmenu_css_li a{
+        display: block;
+        padding: 0.9rem 1rem;
+        border-left: 0.312rem solid #ffffff00;
+        display: flex;
+        align-items: center;
+    }
+
+    .leftmenu_css_li_active{
+        /*background-color: #095c65;*/
+        border-left: 0.312rem solid #00C5AD !important;
+        border-right: 0.312rem solid #00C5AD !important;
+    }
+
+.leftmenu-icon-hide{
+    color: #ffffff00;
+}
+
+.leftmenu-menutag {
+    background-color: #234a4e;
+    padding: .35rem .5rem;
+}
+
+    .leftmenu-menutag > div {
+        font-size:1.15rem;
+    }

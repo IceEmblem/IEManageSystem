@@ -1,0 +1,55 @@
+{
+    "GetApiScopes": {
+        "apiScopes": [{
+            "id": 1,
+            "name": "ApiScope1",
+            "displayName": "DisplayName"
+        }]
+    },
+    "GetManagePermissions": {
+        "permissions": [{
+            "id": 1,
+            "name": "Name",
+            "displayName": "DisplayName"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetQueryPermissions": {
+        "permissions": [{
+            "id": 1,
+            "name": "Name",
+            "displayName": "DisplayName"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetApiScopeUrls": {
+        "urls": [{
+            "url": "/api/manage/managescope",
+            "isQueryUrl": true
+        },
+        {
+            "url": "/api/manage/queryscope",
+            "isQueryUrl": false
+        }]
+    },
+    "GetManagePermissionsByName": {
+        "permissions": [{
+            "id": 1,
+            "name": "Name",
+            "displayName": "DisplayName"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetQueryPermissionsByName": {
+        "permissions": [{
+            "id": 1,
+            "name": "Name",
+            "displayName": "DisplayName"
+        }],
+        "resourceNum": 10,
+        "pageIndex": 1
+    }
+}

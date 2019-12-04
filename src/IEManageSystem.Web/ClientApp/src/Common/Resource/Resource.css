@@ -1,0 +1,55 @@
+.data-list h6 {
+    /* background: #f5f5f5; */
+    padding: 0.3rem 0.67rem;
+    margin-bottom: 0px;
+    color: #6c757d;
+    font-size: 1rem;
+    border-radius: 0.33rem 0.33rem 0rem 0rem;
+}
+
+.data-list h6 input {
+    font-size: 0.8rem;
+    width: 15rem !important;
+    background-color: #fff0;
+    border: 1px solid #6c757d;
+}
+
+.data-list table {
+    /* table-layout: fixed; */
+}
+
+.data-list thead {
+    background-color: #5d6b79;
+    color: #fff;
+}
+
+.data-list thead th {
+    border: 0px;
+}
+
+.data-list td {
+    border-color: #ffffff40;
+}
+
+.data-paging ul {
+    margin-bottom: 0px;
+}
+
+.data-paging li a {
+    background-color: #6c757d;
+    color: #fff;
+    border: 0rem;
+}
+
+.data-paging li a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.margin-buttom-0 {
+    margin-bottom: 0rem !important;
+}
+
+.margin-buttom-10 {
+    margin-bottom: 0.67rem !important;
+}
