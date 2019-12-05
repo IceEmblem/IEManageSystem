@@ -42,6 +42,7 @@ module.exports = {
     ],
     module: {  
         rules: [
+            { test: /\.ts[x]?$/, loader: "awesome-typescript-loader" },
             {
                 test: /\.(js|jsx)$/,
                 use: {
@@ -82,7 +83,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.js','.jsx',"*",".css"],
+        extensions: ['.js', ".ts", ".tsx", '.jsx', "*", ".css"],
         modules:[libPath, commonPath, ManageHomePath, nodeModPath],
         alias: pathMap
     }
