@@ -1,7 +1,13 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import {ieReduxFetch} from "Core/IEReduxFetch"
-import { BaseComponent } from '../BaseComponent'
+import { BaseComponent, BaseComponentProps } from '../BaseComponent'
+
+export class PageLeafComponentProps extends BaseComponentProps {
+    constructor(){
+        super();
+        this.targetPageId = "";
+    }
+}
 
 
 class BasePageLeafComponent extends BaseComponent 
@@ -89,7 +95,7 @@ class BasePageLeafComponent extends BaseComponent
 }
 
 BasePageLeafComponent.propTypes = {
-    targetPageId: PropTypes.strin
+    targetPageId: PropTypes.string
 }
 
 BasePageLeafComponent.defaultProps = {

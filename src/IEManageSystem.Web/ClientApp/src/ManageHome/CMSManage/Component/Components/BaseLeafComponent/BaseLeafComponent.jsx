@@ -1,21 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { BaseComponent, BaseComponentProps } from '../BaseComponent'
 
-import { BaseComponent } from '../BaseComponent'
-
-class BaseLeafComponent extends BaseComponent 
-{
-    constructor(props) {
-        super(props);
+export class BaseLeafComponentProps extends BaseComponentProps{
+    constructor(){
+        super();
+        this.componentData = {};
     }
 }
 
-BaseLeafComponent.propTypes = {
-    pageComponentSettings: PropTypes.array,
-    componentData: PropTypes.object
+export default class BaseLeafComponent extends BaseComponent
+{
 }
-
-BaseLeafComponent.defaultProps = {
-};
-
-export default BaseLeafComponent;

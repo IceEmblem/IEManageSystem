@@ -29,7 +29,7 @@ class ComponentTool extends React.Component
                 }
             }
         >
-            <item.componentObject.Preview />
+            {item.componentObject.Preview()}
         </ComponentFrame>
     </a>);
     }

@@ -3,15 +3,17 @@ import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSe
 import RichTextEditor from './RichTextEditor'
 import CustomizeField from './CustomizeField'
 
-const ComponentObject = {
-    ...BaseComponentObject,
-    ... {
-        Component: RichTextEditor,
-        Preview: (props) => (<p>富文本框</p>),
-        ComponentDataConfigs: {
+export default class ComponentObject extends BaseComponentObject {
+    constructor(){
+        super();
+        this.ComponentDataConfigs = {
             field1: CustomizeField
         }
     }
+    Component(props) {
+        return <RichTextEditor {...props} />
+    }
+    Preview() {
+        return <p>富文本框</p>;
+    }
 }
-
-export default ComponentObject

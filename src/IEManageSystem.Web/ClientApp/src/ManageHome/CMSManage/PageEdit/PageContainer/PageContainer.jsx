@@ -7,8 +7,8 @@ import CreatePageComponentService from 'CMSManage/Component/ParentComponent/Page
 import './PageContainer.css'
 
 import PageEditParentCompont from 'CMSManage/Component/ParentComponent/PageEditParentCompont'
-import { BaseContainerComponent } from 'CMSManage/Component/Components/BaseContainerComponent'
-import {BasePageLeafComponent} from 'CMSManage/Component/Components/BasePageLeafComponent'
+import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
+import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
 
 import { pageAddComponent, pageComponentUpdateFetch, pageComponentFetch } from 'CMSManage/IEReduxs/Actions'
 
@@ -69,11 +69,11 @@ class PageContainer extends React.Component {
         }
 
         let pageComponent;
-        if (this.props.selectedComponentDescribe.componentObject.Component.prototype instanceof BaseContainerComponent) 
+        if (this.props.selectedComponentDescribe.componentObject.prototype instanceof ContainerComponentObject) 
         {
             pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.props.selectedComponentDescribe.name)
         }
-        else if(this.props.selectedComponentDescribe.componentObject.Component.prototype instanceof BasePageLeafComponent)
+        else if(this.props.selectedComponentDescribe.componentObject.prototype instanceof PageLeafComponentObject)
         {
             pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.props.selectedComponentDescribe.name)
         }

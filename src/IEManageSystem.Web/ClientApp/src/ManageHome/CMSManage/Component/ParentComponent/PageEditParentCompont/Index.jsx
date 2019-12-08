@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import {BaseContainerComponent} from 'CMSManage/Component/Components/BaseContainerComponent'
-import {BasePageLeafComponent} from 'CMSManage/Component/Components/BasePageLeafComponent'
+import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
+import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
 import CreatePageComponentService from './CreatePageComponentService'
 
 import './Index.css'
@@ -36,12 +36,11 @@ class EditableParentCom extends BaseParentComponent {
                 pageComponent={item}
             >
             </EditableParentComContain>)
-        );;
+        );
 
-        return (
-            <componentDescribe.componentObject.Component
-                pageComponentSettings={this.getPageComponentSettings() || []}
-            >{childrens}</componentDescribe.componentObject.Component>)
+        return componentDescribe.componentObject.Component({
+            pageComponentSettings:this.getPageComponentSettings() || [],
+        }, childrens)
     }
 
     addChildComponent() {
@@ -55,11 +54,11 @@ class EditableParentCom extends BaseParentComponent {
         }
 
         let pageComponent;
-        if (this.props.selectedComponentDescribe.componentObject.Component.prototype instanceof BaseContainerComponent) 
+        if (this.props.selectedComponentDescribe.componentObject.prototype instanceof ContainerComponentObject) 
         {
             pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.props.selectedComponentDescribe.name)
         }
-        else if(this.props.selectedComponentDescribe.componentObject.Component.prototype instanceof BasePageLeafComponent)
+        else if(this.props.selectedComponentDescribe.componentObject.prototype instanceof PageLeafComponentObject)
         {
             pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.props.selectedComponentDescribe.name)
         }
@@ -81,10 +80,10 @@ class EditableParentCom extends BaseParentComponent {
 
         let baseSetting = BaseSetting;
         let isShowAddBtn = false;
-        if(componentDescribe.componentObject.Component.prototype instanceof BaseContainerComponent){
+        if(componentDescribe.componentObject.prototype instanceof ContainerComponentObject){
             isShowAddBtn = true;
         }
-        else if(componentDescribe.componentObject.Component.prototype instanceof BasePageLeafComponent){
+        else if(componentDescribe.componentObject.prototype instanceof PageLeafComponentObject){
             baseSetting = PageLeafBaseSetting;
         }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {LeafComponent} from '../BaseLeafComponent'
+import {BaseLeafComponent} from '../BaseLeafComponent'
 
 import './Progress.css'
 
@@ -31,7 +31,7 @@ const defaultData = [
         btnTitle: "第5步"
     }];
 
-class Progress extends LeafComponent {
+class Progress extends BaseLeafComponent {
     constructor(props) {
         super(props);
 

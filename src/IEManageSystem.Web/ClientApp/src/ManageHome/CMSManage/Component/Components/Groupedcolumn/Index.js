@@ -3,12 +3,23 @@ import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSe
 import Groupedcolumn from './Groupedcolumn'
 import CustomizeField from './CustomizeField'
 
-const ComponentObject = {
-    ...BaseComponentObject,
-    ... {
-        Component: Groupedcolumn,
-        Preview: (props) => (<p>柱状图</p>),
-        ComponentSettingConfigs: [
+const CustomizeComponentDataConCfigField = 
+    (name) => 
+    (props) => 
+    <CustomizeField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+
+export default class ComponentObject extends BaseComponentObject {
+    constructor(){
+        super();
+        this.ComponentDataConfigs = {
+            field1: CustomizeComponentDataConCfigField("数据1"),
+            field2: CustomizeComponentDataConCfigField("数据2"),
+            field3: CustomizeComponentDataConCfigField("数据3"),
+            field4: CustomizeComponentDataConCfigField("数据4"),
+            field5: CustomizeComponentDataConCfigField("数据5")
+        }
+
+        this.ComponentSettingConfigs = [
             new ComponentSettingConfig(
                 "otherSetting",
                 "柱状图配置",
@@ -31,15 +42,12 @@ const ComponentObject = {
                     </div>)
                 }
             )
-        ],
-        ComponentDataConfigs: {
-            field1: (props) => <CustomizeField text={"数据1"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />,
-            field2: (props) => <CustomizeField text={"数据2"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />,
-            field3: (props) => <CustomizeField text={"数据3"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />,
-            field4: (props) => <CustomizeField text={"数据4"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />,
-            field5: (props) => <CustomizeField text={"数据5"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />
-        }
+        ]
+    }
+    Component(props) {
+        return <Groupedcolumn {...props} />
+    }
+    Preview() {
+        return <p>柱状图</p>;
     }
 }
-
-export default ComponentObject

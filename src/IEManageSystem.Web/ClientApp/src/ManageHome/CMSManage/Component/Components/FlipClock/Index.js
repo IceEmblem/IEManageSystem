@@ -2,14 +2,15 @@ import React from 'react'
 import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
 import FlipClock from './FlipClock.jsx'
 
-const ComponentObject = {
-    ...BaseComponentObject,
-    ... {
-        Component: FlipClock,
-        Preview: (props) => (<p>翻页式时钟</p>),
-        ComponentSettingConfigs: BaseComponentObject.ComponentSettingConfigs,
-        ComponentDataConfigs: {}
+export default class ComponentObject extends BaseComponentObject {
+    constructor(){
+        super();
+        this.ComponentDataConfigs = {}
+    }
+    Component(props) {
+        return <FlipClock {...props} />
+    }
+    Preview() {
+        return <p>翻页式时钟</p>;
     }
 }
-
-export default ComponentObject

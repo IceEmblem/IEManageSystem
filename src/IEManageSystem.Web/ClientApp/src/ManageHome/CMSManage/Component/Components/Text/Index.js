@@ -1,16 +1,18 @@
 import React from 'react'
-import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
+import BaseComponentObject, { BaseField, ComponentDataConCfigField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
 import Text from './Text'
 
-const ComponentObject = {
-    ...BaseComponentObject,
-    ... {
-        Component: Text,
-        Preview: (props) => (<p>文本框</p>),
-        ComponentDataConfigs: {
-            field1: (props) => <BaseField text={"文本"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />
+export default class ComponentObject extends BaseComponentObject {
+    constructor(){
+        super();
+        this.ComponentDataConfigs = {
+            field1: ComponentDataConCfigField("文本")
         }
     }
+    Component(props) {
+        return <Text {...props} />
+    }
+    Preview() {
+        return <p>文本框</p>;
+    }
 }
-
-export default ComponentObject

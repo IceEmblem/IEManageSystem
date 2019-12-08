@@ -26,5 +26,6 @@ export default class BaseField extends React.Component {
 BaseField.propTypes = {
     text: PropTypes.string.isRequired,
     fieldValue: PropTypes.string,
+    // setFieldValue(value: string);
     setFieldValue: PropTypes.func.isRequired
 }

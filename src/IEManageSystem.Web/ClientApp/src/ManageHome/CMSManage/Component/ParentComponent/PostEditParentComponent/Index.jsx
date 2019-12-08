@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import {BaseContainerComponent} from 'CMSManage/Component/Components/BaseContainerComponent'
-import {BasePageLeafComponent} from 'CMSManage/Component/Components/BasePageLeafComponent'
+import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
+import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
 
 import './Index.css'
 import BaseParentComponent from '../BaseParentComponent.jsx'
@@ -41,12 +41,11 @@ class PostEditParentComponent extends BaseParentComponent {
         );
 
         // componentDescribe.componentObject.Component （指定的组件类类型）
-        return (
-            <componentDescribe.componentObject.Component
-                componentData={this.getComponentData()}
-                pageComponentSettings={this.getPageComponentSettings() || []}
-                targetPageId={pageComponent.targetPageId}
-            >{childrens}</componentDescribe.componentObject.Component>)
+        return componentDescribe.componentObject.Component({
+            componentData:this.getComponentData(),
+            pageComponentSettings:this.getPageComponentSettings() || [],
+            targetPageId:pageComponent.targetPageId
+        }, childrens)
     }
 
     getTools()
@@ -55,8 +54,8 @@ class PostEditParentComponent extends BaseParentComponent {
         let componentDescribe = new ComponentFactory().getComponentDescribeForName(pageComponent.name);
         
         // 容器组件和页叶子组件不提供组件数据
-        if(componentDescribe.componentObject.Component.prototype instanceof BaseContainerComponent ||
-            componentDescribe.componentObject.Component.prototype instanceof BasePageLeafComponent){
+        if(componentDescribe.componentObject.prototype instanceof ContainerComponentObject ||
+            componentDescribe.componentObject.prototype instanceof PageLeafComponentObject){
             return;
         }
 

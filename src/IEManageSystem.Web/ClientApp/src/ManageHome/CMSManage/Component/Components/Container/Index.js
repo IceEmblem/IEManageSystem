@@ -2,13 +2,11 @@ import React from 'react'
 import BaseComponentObject, { LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContainerComponent'
 import Container from './Container'
 
-const ComponentObject = {
-    ...BaseComponentObject,
-    ... {
-        Component: Container,
-        Preview: (props) => (<p>容器组件</p>),
-        ComponentSettingConfigs: BaseComponentObject.ComponentSettingConfigs
+export default class ComponentObject extends BaseComponentObject {
+    Component(props, childrens) {
+        return <Container {...props} >{childrens}</Container>
+    }
+    Preview() {
+        return <p>容器组件</p>;
     }
 }
-
-export default ComponentObject

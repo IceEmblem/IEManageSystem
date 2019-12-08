@@ -1,19 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { BaseComponent, BaseComponentProps } from '../BaseComponent'
 
-import { BaseComponent } from '../BaseComponent'
-
-class BaseContainerComponent extends BaseComponent{
-    constructor(props){
-        super(props);
-    }
+export default class BaseContainerComponent extends BaseComponent {
 }
-
-BaseContainerComponent.propTypes = {
-    pageComponentSettings: PropTypes.array
-}
-
-BaseContainerComponent.defaultProps = {
-};
-
-export default BaseContainerComponent;

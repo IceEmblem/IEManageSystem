@@ -28,12 +28,11 @@ class FrontParentCompont extends BaseParentComponent {
             </Contain>)
         );
 
-        return (
-            <componentDescribe.componentObject.Component
-                componentData={this.getComponentData()}
-                pageComponentSettings={this.getPageComponentSettings() || []}
-                targetPageId={pageComponent.targetPageId}
-            >{childrens}</componentDescribe.componentObject.Component>)
+        return componentDescribe.componentObject.Component({
+            componentData:this.getComponentData(),
+            pageComponentSettings:this.getPageComponentSettings() || [],
+            targetPageId:pageComponent.targetPageId
+        }, childrens)
     }
 }
 

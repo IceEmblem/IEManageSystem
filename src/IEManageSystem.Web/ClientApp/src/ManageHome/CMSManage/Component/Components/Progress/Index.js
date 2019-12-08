@@ -3,19 +3,26 @@ import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSe
 import Progress from './Progress'
 import CustomizeField from './CustomizeField'
 
-const ComponentObject = {
-    ...BaseComponentObject,
-    ... {
-        Component: Progress,
-        Preview: (props) => (<p>程序流程</p>),
-        ComponentDataConfigs: {
-            field1: (props) => <CustomizeField text={"第1步"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />,
-            field2: (props) => <CustomizeField text={"第2步"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />,
-            field3: (props) => <CustomizeField text={"第3步"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />,
-            field4: (props) => <CustomizeField text={"第4步"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />,
-            field5: (props) => <CustomizeField text={"第5步"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />
+const CustomizeComponentDataConCfigField = 
+    (name) => 
+    (props) => 
+    <CustomizeField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+
+export default class ComponentObject extends BaseComponentObject {
+    constructor(){
+        super();
+        this.ComponentDataConfigs = {
+            field1: CustomizeComponentDataConCfigField("步骤1"),
+            field2: CustomizeComponentDataConCfigField("步骤2"),
+            field3: CustomizeComponentDataConCfigField("步骤3"),
+            field4: CustomizeComponentDataConCfigField("步骤4"),
+            field5: CustomizeComponentDataConCfigField("步骤5")
         }
     }
+    Component(props) {
+        return <Progress {...props} />
+    }
+    Preview() {
+        return <p>程序流程</p>;
+    }
 }
-
-export default ComponentObject

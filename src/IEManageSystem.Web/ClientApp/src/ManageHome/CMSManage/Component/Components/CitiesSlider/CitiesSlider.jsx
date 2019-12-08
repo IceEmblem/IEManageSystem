@@ -1,5 +1,5 @@
 import React from 'react'
-import { BaseField, LeafComponent, BasePreview, ComponentSettingConfig, ComponentDataConfig } from '../BaseLeafComponent'
+import { BaseField, BaseLeafComponent, BasePreview, ComponentSettingConfig, ComponentDataConfig } from '../BaseLeafComponent'
 
 import './CitiesSlider.css'
 
@@ -9,7 +9,7 @@ import SliderDefault3 from './slider-default3.jpg'
 
 
 // 幻灯片
-class CitiesSlider extends LeafComponent {
+class CitiesSlider extends BaseLeafComponent {
     constructor(props) {
         super(props);
 

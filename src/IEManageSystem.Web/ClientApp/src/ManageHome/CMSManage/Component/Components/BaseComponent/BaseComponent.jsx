@@ -1,17 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-class BaseComponent extends React.Component {
-    constructor(props) {
-        super(props);
+export class BaseComponentProps{
+    constructor(){
+        this.pageComponentSettings = []
     }
 }
 
-BaseComponent.propTypes = {
-    pageComponentSettings: PropTypes.array
+export default class BaseComponent extends React.Component {
 }
-
-BaseComponent.defaultProps = {
-};
-
-export default BaseComponent;

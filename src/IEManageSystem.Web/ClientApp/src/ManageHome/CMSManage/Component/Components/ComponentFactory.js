@@ -37,20 +37,20 @@ export default class ComponentFactory {
 
         // ComponentDescribes 组件描述，描述组件的类型
         // componentObject 组件对象
-        ComponentDescribes.push({ componentObject: Container, name: "Container", componentType: componentType.container });
+        ComponentDescribes.push({ componentObject: new Container(), name: "Container", componentType: componentType.container });
 
-        ComponentDescribes.push({ componentObject: PostList, name: "PostList", componentType: componentType.page });
+        ComponentDescribes.push({ componentObject: new PostList(), name: "PostList", componentType: componentType.page });
 
-        ComponentDescribes.push({ componentObject: Text, name: "Text", componentType: componentType.text });
-        ComponentDescribes.push({ componentObject: RichTextEditor, name: "RichTextEditor", componentType: componentType.text });
+        ComponentDescribes.push({ componentObject: new Text(), name: "Text", componentType: componentType.text });
+        ComponentDescribes.push({ componentObject: new RichTextEditor(), name: "RichTextEditor", componentType: componentType.text });
 
-        ComponentDescribes.push({ componentObject: Groupedcolumn, name: "Groupedcolumn", componentType: componentType.graph });
-        ComponentDescribes.push({ componentObject: Donut, name: "Donut", componentType: componentType.graph });
-        ComponentDescribes.push({ componentObject: Clock, name: "Clock", componentType: componentType.graph });
+        ComponentDescribes.push({ componentObject: new Groupedcolumn(), name: "Groupedcolumn", componentType: componentType.graph });
+        ComponentDescribes.push({ componentObject: new Donut(), name: "Donut", componentType: componentType.graph });
+        ComponentDescribes.push({ componentObject: new Clock(), name: "Clock", componentType: componentType.graph });
 
-        ComponentDescribes.push({ componentObject: CitiesSlider, name: "CitiesSlider" });
-        ComponentDescribes.push({ componentObject: FlipClock, name: "FlipClock" });
-        ComponentDescribes.push({ componentObject: Progress, name: "Progress" });
+        ComponentDescribes.push({ componentObject: new CitiesSlider(), name: "CitiesSlider" });
+        ComponentDescribes.push({ componentObject: new FlipClock(), name: "FlipClock" });
+        ComponentDescribes.push({ componentObject: new Progress(), name: "Progress" });
     }
     
 
