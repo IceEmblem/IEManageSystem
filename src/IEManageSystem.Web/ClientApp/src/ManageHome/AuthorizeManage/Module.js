@@ -1,8 +1,7 @@
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'Core/Menu/MenuProvider'
-import { ApiScope } from "Core/ApiScopeAuthority/ApiScope.js";
-import { ApiScopeNodeType } from "Core/ApiScopeAuthority/ApiScopeNodeType.js";
+import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 import AuthorizeManage from "./AuthorizeManage.jsx";
 import 'Core/Module';
 
@@ -26,7 +25,7 @@ class Module extends BaseModule {
                                     url: "/ManageHome/AuthorizeManage/AdminManage",
                                     accessScope:
                                         [
-                                            { scopeName: ApiScope.AuthorizeManage.AdminManage, scopeNodeType: ApiScopeNodeType.manage },
+                                            AccessScope.AdminManage(ApiScopeNodeType.manage)
                                         ]
                                 },
                                 {
@@ -35,8 +34,8 @@ class Module extends BaseModule {
                                     url: "/ManageHome/AuthorizeManage/AdminRoleManage",
                                     accessScope:
                                         [
-                                            { scopeName: ApiScope.AuthorizeManage.AdminManage, scopeNodeType: ApiScopeNodeType.manage },
-                                            { scopeName: ApiScope.AuthorizeManage.RoleManage, scopeNodeType: ApiScopeNodeType.query },
+                                            AccessScope.AdminManage(ApiScopeNodeType.manage),
+                                            AccessScope.RoleManage(ApiScopeNodeType.query)
                                         ]
                                 },
                                 {
@@ -45,7 +44,7 @@ class Module extends BaseModule {
                                     url: "/ManageHome/AuthorizeManage/AdminPermissionManage",
                                     accessScope:
                                         [
-                                            { scopeName: ApiScope.AuthorizeManage.AdminManage, scopeNodeType: ApiScopeNodeType.query },
+                                            AccessScope.AdminManage(ApiScopeNodeType.query)
                                         ]
                                 }
                             ]
@@ -60,7 +59,7 @@ class Module extends BaseModule {
                                     url: "/ManageHome/AuthorizeManage/RoleManage",
                                     accessScope:
                                         [
-                                            { scopeName: ApiScope.AuthorizeManage.RoleManage, scopeNodeType: ApiScopeNodeType.manage },
+                                            AccessScope.RoleManage(ApiScopeNodeType.manage)
                                         ]
                                 },
                                 {
@@ -69,8 +68,8 @@ class Module extends BaseModule {
                                     url: "/ManageHome/AuthorizeManage/RolePermissionManage",
                                     accessScope:
                                         [
-                                            { scopeName: ApiScope.AuthorizeManage.RoleManage, scopeNodeType: ApiScopeNodeType.manage },
-                                            { scopeName: ApiScope.AuthorizeManage.PermissionManage, scopeNodeType: ApiScopeNodeType.query },
+                                            AccessScope.RoleManage(ApiScopeNodeType.manage),
+                                            AccessScope.PermissionManage(ApiScopeNodeType.query)
                                         ]
                                 }
                             ]
@@ -82,7 +81,7 @@ class Module extends BaseModule {
                             icon: "oi-cog",
                             accessScope:
                                 [
-                                    { scopeName: ApiScope.AuthorizeManage.PermissionManage, scopeNodeType: ApiScopeNodeType.manage },
+                                    AccessScope.PermissionManage(ApiScopeNodeType.manage)
                                 ]
                         },
                         {
@@ -96,8 +95,8 @@ class Module extends BaseModule {
                                     url: "/ManageHome/AuthorizeManage/ApiScopePermission",
                                     accessScope:
                                         [
-                                            { scopeName: ApiScope.AuthorizeManage.ApiScopeManage, scopeNodeType: ApiScopeNodeType.manage },
-                                            { scopeName: ApiScope.AuthorizeManage.PermissionManage, scopeNodeType: ApiScopeNodeType.query },
+                                            AccessScope.ApiScopeManage(ApiScopeNodeType.manage),
+                                            AccessScope.PermissionManage(ApiScopeNodeType.query)
                                         ]
                                 },
                                 {
@@ -107,7 +106,7 @@ class Module extends BaseModule {
                                     icon: "oi-menu",
                                     accessScope:
                                         [
-                                            { scopeName: ApiScope.AuthorizeManage.ApiScopeManage, scopeNodeType: ApiScopeNodeType.query },
+                                            AccessScope.ApiScopeManage(ApiScopeNodeType.query)
                                         ]
                                 }
                             ]

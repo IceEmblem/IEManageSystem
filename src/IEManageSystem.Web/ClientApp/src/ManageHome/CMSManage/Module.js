@@ -1,8 +1,7 @@
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'Core/Menu/MenuProvider'
-import { ApiScope } from "Core/ApiScopeAuthority/ApiScope.js";
-import { ApiScopeNodeType } from "Core/ApiScopeAuthority/ApiScopeNodeType.js";
+import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 
 import CMSManage from './CMSManage.jsx';
 import { reducer } from 'CMSManage/IEReduxs/Reducers'
@@ -26,7 +25,7 @@ class Module extends BaseModule {
                         url: "/ManageHome/CMSManage/Menu",
                         accessScope:
                             [
-                                { scopeName: ApiScope.CMSManage.Menu, scopeNodeType: ApiScopeNodeType.manage },
+                                AccessScope.Menu(ApiScopeNodeType.manage)
                             ]
                     },
                     {
@@ -37,7 +36,7 @@ class Module extends BaseModule {
                         url: "/ManageHome/CMSManage/PageManage",
                         accessScope:
                             [
-                                { scopeName: ApiScope.CMSManage.Page, scopeNodeType: ApiScopeNodeType.manage },
+                                AccessScope.Page(ApiScopeNodeType.manage)
                             ]
                     },
                     {

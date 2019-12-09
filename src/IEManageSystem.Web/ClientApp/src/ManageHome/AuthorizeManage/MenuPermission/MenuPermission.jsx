@@ -3,7 +3,6 @@ import Resource from 'Resource/Resource.jsx';
 import Tab from 'Tab/Tab.jsx';
 
 import "./MenuPermission.css";
-import { ApiScopeNodeType } from "Core/ApiScopeAuthority/ApiScopeNodeType.js";
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 import {connect} from 'react-redux'
 
@@ -42,7 +41,7 @@ class MenuPermission extends React.Component {
 
 		for (let item in this.selectMenu.accessScope) {
 			let url = "";
-			if (this.selectMenu.accessScope[item].scopeNodeType == ApiScopeNodeType.manage) {
+			if (this.selectMenu.accessScope[item].isManageScope()) {
 				url = "/api/ApiScopeManage/GetManagePermissionsByName"
 			}
 			else {
