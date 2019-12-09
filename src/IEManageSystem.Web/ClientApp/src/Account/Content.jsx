@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 import { clearError } from 'Core/IEReduxs/Actions'
+import IEToken from 'Core/IEToken'
 
 const LoginPanelState = {
 	Login: "l",
@@ -60,7 +61,7 @@ class Content extends React.Component {
 
 		ieReduxFetch("/api/Account/LoginAsync", postdata)
 			.then(result => {
-				IETool.setToken(result.access_token);
+				IEToken.setToken(result.access_token);
 
 				// 跳转管理中心
 				this.props.history.push("/ManageHome/Index");

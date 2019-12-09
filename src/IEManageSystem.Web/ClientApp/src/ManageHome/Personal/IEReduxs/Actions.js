@@ -5,10 +5,7 @@ export function getUserInfoFetch(postData) {
     return createIEThunkAction(
         "/api/User/GetUserInfo",
         postData,
-        value => ({
-            type: GetUserInfoReceive,
-            value
-        })
+        GetUserInfoReceive
     );
 }
 
@@ -17,10 +14,7 @@ export function setUserInfoFetch(postData) {
     return createIEThunkAction(
         "/api/User/SetUserInfo",
         postData,
-        value => ({
-            type: SetUserInfoReceive,
-            value
-        })
+        SetUserInfoReceive
     );
 }
 
@@ -29,10 +23,7 @@ export function setSafetyProblemFetch(postData) {
     return createIEThunkAction(
         "/api/User/SetSafetyProblem",
         postData,
-        value => ({
-            type: SetSafetyProblemReceive,
-            value
-        })
+        SetSafetyProblemReceive
     );
 }
 
@@ -41,9 +32,6 @@ export function setPassageFetch(postData) {
     return createIEThunkAction(
         "/api/User/SetPassage",
         postData,
-        value => ({
-            type: SetPassageReceive,
-            value
-        })
+        SetPassageReceive
     );
 }

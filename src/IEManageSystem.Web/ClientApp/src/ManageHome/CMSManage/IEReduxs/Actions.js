@@ -39,10 +39,7 @@ export function pagesFetch(pageIndex, pageSize, searchKey) {
   return createIEThunkAction(
     "/api/PageQuery/GetPages",
     postData,
-    data => ({
-      type: PagesReceive,
-      data
-    })
+    PagesReceive
   );
 }
 
@@ -56,10 +53,7 @@ export function pageComponentFetch(name){
   return createIEThunkAction(
     "/api/PageQuery/GetPageComponent",
     postData,
-    data => ({
-      type: PageComponentReceive,
-      data
-    })
+    PageComponentReceive
   );
 }
 
@@ -74,9 +68,7 @@ export function pageComponentUpdateFetch(name, components) {
   return createIEThunkAction(
     "/api/PageManage/UpdatePageComponent",
     postData,
-    data => ({
-      type: PageComponentUpdateReceive
-    })
+    PageComponentUpdateReceive
   );
 }
 
@@ -93,10 +85,7 @@ export function pageDatasFetch(pageIndex, pageSize, searchKey, pageName){
   return createIEThunkAction(
     "/api/PageQuery/GetPageDatas",
     postData,
-    data => ({
-      type: PageDatasReceive,
-      data
-    })
+    PageDatasReceive
   );
 }
 
@@ -111,10 +100,7 @@ export function componentDatasFetch(pageName, pageDataName){
   return createIEThunkAction(
     "/api/PageQuery/GetComponentDatas",
     postData,
-    data => ({
-      type: ComponentDatasReceive,
-      data
-    })
+    ComponentDatasReceive
   );
 }
 
@@ -131,10 +117,7 @@ export function componentDataUpdateFetch(pageName, pageDataName, componentDatas)
   return createIEThunkAction(
     "/api/PageManage/UpdateComponentData",
     postData,
-    data => ({
-      type: ComponentDataUpdateReceive,
-      data
-    })
+    ComponentDataUpdateReceive
   );
 }
 

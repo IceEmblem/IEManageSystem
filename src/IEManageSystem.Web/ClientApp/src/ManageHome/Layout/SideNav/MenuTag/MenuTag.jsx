@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import ListBtn from 'ListBtn';
 import "./MenuTag.css";
+import IETool from 'ToolLibrary/IETool'
 
 export default class MenuTag extends React.Component
 {
@@ -19,7 +20,7 @@ export default class MenuTag extends React.Component
         this.curMenu = null;
         this.menuItems = null;
 
-        let menuItemString = $.cookie('SideNav_MenuTag');
+        let menuItemString = IETool.getCookie('SideNav_MenuTag');
         if (menuItemString === null || menuItemString === undefined) {
             this.menuItems = [];
         }
@@ -86,9 +87,8 @@ export default class MenuTag extends React.Component
                         onClick={
                             () => {
                                 this.menuItems.splice(item, 1);
-                                $.cookie('SideNav_MenuTag', JSON.stringify(this.menuItems), { expires: 30 });
+                                IETool.setCookie('SideNav_MenuTag', JSON.stringify(this.menuItems), 30);
                                 this.setState({});
-
                             }
                         }
                     ></span>
@@ -151,7 +151,7 @@ export default class MenuTag extends React.Component
                                                     }
                                                 }
                                                 this.menuItems.push(this.curMenu);
-                                                $.cookie('SideNav_MenuTag', JSON.stringify(this.menuItems), { expires: 30 });
+                                                IETool.setCookie('SideNav_MenuTag', JSON.stringify(this.menuItems), 30);
                                                 this.setState({});
                                             }
                                         }

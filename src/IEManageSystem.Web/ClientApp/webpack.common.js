@@ -27,10 +27,8 @@ module.exports = {
             'window.$':'jquery',
             'window.jQuery':'jquery',
             Popper: 'popper',
-            Cookie: "cookie",
+            // Cookie: "cookie",
             IELib: "ielib",
-            IETool: 'ToolLibrary/IETool.js',
-            IEAjax: 'js/IEAjax.js'
         }),
         new HtmlWebpackPlugin({
             filename: __dirname + '/build/Index.html',

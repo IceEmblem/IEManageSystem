@@ -1,6 +1,7 @@
 import React from 'react'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 import ConfirmBox from 'ConfirmBox/ConfirmBox'
+import IETool from 'ToolLibrary/IETool'
 
 import Folder from './folder.png'
 

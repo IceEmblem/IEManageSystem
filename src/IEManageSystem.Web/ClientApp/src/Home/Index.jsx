@@ -6,8 +6,6 @@ import 'mousewheel';
 
 import 'commoncss';
 
-import 'cookie';
-
 import React from 'react';
 import { Switch, Route } from "react-router-dom";
 

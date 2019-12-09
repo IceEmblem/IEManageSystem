@@ -13,6 +13,7 @@ import LayoutRedux from 'Layout/IEReduxs/LayoutRedux'
 import { topLevelMenusSelect } from 'Layout/IEReduxs/Actions';
 import {ieReduxFetch} from 'Core/IEReduxFetch'
 import {getIEStore} from 'Core/IEStore'
+import IEToken from 'Core/IEToken'
 
 class Nav extends React.Component {
     // props.topLevelMenus
@@ -51,7 +52,7 @@ class Nav extends React.Component {
 
     // 退出登录单击
     logoutClick() {
-        IETool.clearToken();
+        IEToken.clearToken();
 
         this.props.history.push("/Account");
     }

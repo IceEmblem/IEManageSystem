@@ -13,9 +13,8 @@ import 'bootstrap';
 import 'bootstrapcss';
 import 'bootstrapcssicon';
 import 'commoncss';
-import 'cookie';
+// import 'cookie';
 import 'ielib';
-import 'ToolLibrary/IETool.js';
 import 'css/simple-btn.css'
 
 let moduleFactory = new ModuleFactory();

@@ -3,6 +3,7 @@ import './UserInfo.css';
 import imgAvatar from 'images/default_avatar.png';
 import {getUserInfoFetch, setUserInfoFetch} from '../IEReduxs/Actions'
 import IERedux from '../IEReduxs/PersonalRedux'
+import IETool from 'ToolLibrary/IETool'
 
 class UserInfo extends React.Component {
     constructor(props) {

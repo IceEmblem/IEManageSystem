@@ -9,7 +9,7 @@ function userInfoData(state = {
 {
     if(action.type == GetUserInfoReceive){
         return {
-            ...action.value,
+            ...action.data,
             ...{invalidate:false}
         }
     }
