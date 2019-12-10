@@ -4,7 +4,7 @@ import ErrorModal from 'ErrorModal/ErrorModal.jsx';
 
 import {clearError} from 'Core/IEReduxs/Actions'
 
-import { connect } from 'react-redux'
+import RootRedux from 'Core/IEReduxs/RootRedux'
 
 class Error extends React.Component {
     constructor(props) {
@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const ErrorContain = connect(
+const ErrorContain = RootRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps // 关于dispatch
 )(Error)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
+import RootRedux from 'Core/IEReduxs/RootRedux'
 import PropTypes from 'prop-types'
 
 import { ieReduxFetch } from 'Core/IEReduxFetch'
@@ -197,7 +197,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-const Contain = connect(
+const Contain = RootRedux.connect(
 	mapStateToProps, // 关于state
 	mapDispatchToProps // 关于dispatch
 )(withRouter(Content))

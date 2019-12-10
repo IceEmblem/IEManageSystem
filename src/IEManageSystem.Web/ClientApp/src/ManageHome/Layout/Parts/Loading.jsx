@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import LoadingModal from 'LoadingModal/LoadingModal.jsx';
 
-import { connect } from 'react-redux'
+import RootRedux from 'Core/IEReduxs/RootRedux'
 
 class Loading extends React.Component{
     constructor(props){
@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const LoadingContain = connect(
+const LoadingContain = RootRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps, // 关于dispatch
 )(Loading)

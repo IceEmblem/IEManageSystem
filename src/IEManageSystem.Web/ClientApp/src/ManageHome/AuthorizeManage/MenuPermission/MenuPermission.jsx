@@ -4,7 +4,7 @@ import Tab from 'Tab/Tab.jsx';
 
 import "./MenuPermission.css";
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import {connect} from 'react-redux'
+import RootRedux from 'Core/IEReduxs/RootRedux'
 
 class MenuPermission extends React.Component {
 	constructor(props) {
@@ -213,7 +213,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const Contain = connect(
+const Contain = RootRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps // 关于dispatch
 )(MenuPermission)
