@@ -1,46 +1,68 @@
 var moduleDatas = [];
+// 已排序的模块
+var sortedModuleDatas = [];
 
 export default class ModuleFactory
 {
-    register(module, name, dependModuleNames)
+    register(moduleType, dependModuleTypes)
     {
         moduleDatas.push({
-            name: name,
-            module: module,
-            dependModuleNames: dependModuleNames,
+            module: null,
+            moduleType: moduleType,
+            dependModuleTypes: dependModuleTypes,
             isPreInit: false,
             isInit: false,
             isPostInit: false
-        })
+        });
     }
 
     init(){
         for(let n = 0; n < moduleDatas.length; n++)
         {
-            this.preInitialize(moduleDatas[n]);
+            this.moduleSort(moduleDatas[n]);
         }
 
-        for(let n = 0; n < moduleDatas.length; n++)
+        for(let n = 0; n < sortedModuleDatas.length; n++)
         {
-            this.initialize(moduleDatas[n]);
+            this.preInitialize(sortedModuleDatas[n]);
         }
 
-        for(let n = 0; n < moduleDatas.length; n++)
+        for(let n = 0; n < sortedModuleDatas.length; n++)
         {
-            this.postInitialize(moduleDatas[n]);
+            this.initialize(sortedModuleDatas[n]);
         }
+
+        for(let n = 0; n < sortedModuleDatas.length; n++)
+        {
+            this.postInitialize(sortedModuleDatas[n]);
+        }
+    }
+
+    moduleSort(moduleData){
+        if(moduleData.dependModuleTypes)
+        {
+            for(let n = 0; n < moduleData.dependModuleTypes.length; n++){
+                let dependModuleData = moduleDatas.find(item=>item.moduleType == moduleData.dependModuleTypes[n]);
+                if(!dependModuleData){
+                    throw new Error(`模块${moduleData.moduleType}所依赖的模块未注册，请注册其依赖的模块`);
+                }
+
+                // dependModuleData 已在排序过的列表中，则表明已对 dependModuleData 以及 dependModuleData 的依赖进行过排序
+                if(sortedModuleDatas.findIndex(item => item == dependModuleData) >= 0){
+                    continue;
+                }
+
+                this.moduleSort(dependModuleData)
+            }
+        }
+
+        moduleData.module = new moduleData.moduleType();
+
+        sortedModuleDatas.push(moduleData);
     }
 
     preInitialize(moduleData)
     {
-        if(moduleData.dependModuleNames)
-        {
-            for(let n = 0; n < moduleData.dependModuleNames.length; n++){
-                let dependModuleData = moduleDatas.find(item=>item.name == moduleData.dependModuleNames[n]);
-                this.preInitialize(dependModuleData)
-            }
-        }
-
         if(moduleData.isPreInit){
             return;
         }
@@ -52,14 +74,6 @@ export default class ModuleFactory
 
     initialize(moduleData)
     {
-        if(moduleData.dependModuleNames)
-        {
-            for(let n = 0; n < moduleData.dependModuleNames.length; n++){
-                let dependModuleData = moduleDatas.find(item=>item.name == moduleData.dependModuleNames[n]);
-                this.initialize(dependModuleData)
-            }
-        }
-
         if(moduleData.isInit){
             return;
         }
@@ -71,14 +85,6 @@ export default class ModuleFactory
 
     postInitialize(moduleData)
     {
-        if(moduleData.dependModuleNames)
-        {
-            for(let n = 0; n < moduleData.dependModuleNames.length; n++){
-                let dependModuleData = moduleDatas.find(item=>item.name == moduleData.dependModuleNames[n]);
-                this.postInitialize(dependModuleData)
-            }
-        }
-
         if(moduleData.isPostInit){
             return;
         }

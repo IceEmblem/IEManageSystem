@@ -1,16 +1,16 @@
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 
-import 'Core/Module'
-import 'Personal/Module'
-import 'AuthorizeManage/Module'
-import 'CMSManage/Module'
+import CoreModule from 'Core/Module'
+import PersonalModule from 'Personal/Module'
+import AuthorizeManageModule from 'AuthorizeManage/Module'
+import CMSManageModule from 'CMSManage/Module'
 
 import { reducer } from 'Layout/IEReduxs/Reducers'
 import LayoutRedux from 'Layout/IEReduxs/LayoutRedux'
 import RootRedux from 'Core/IEReduxs/RootRedux'
 
-class Module extends BaseModule
+export default class Module extends BaseModule
 {
     initialize(){
         LayoutRedux.setReducer(reducer);
@@ -18,9 +18,9 @@ class Module extends BaseModule
     }
 }
 
-new ModuleFactory().register(new Module(), "LayoutModule", [
-    "AuthorizeManageModule",
-    "CMSManageModule",
-    "PersonalModule",
-    "CoreModule"
+new ModuleFactory().register(Module, [
+    AuthorizeManageModule,
+    CMSManageModule,
+    PersonalModule,
+    CoreModule
 ]);

@@ -1,14 +1,14 @@
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'Core/Menu/MenuProvider'
-import 'Core/Module'
+import CoreModel from 'Core/Module';
 import IERedux from './IEReduxs/PersonalRedux'
 import {reducer} from './IEReduxs/Reducers'
 import RootRedux from 'Core/IEReduxs/RootRedux'
 
 import Personal from './Personal.jsx';
 
-class Module extends BaseModule
+export default class Module extends BaseModule
 {
     initialize()
     {
@@ -42,6 +42,6 @@ class Module extends BaseModule
     }
 }
 
-new ModuleFactory().register(new Module(), "PersonalModule", [
-    "CoreModule"
+new ModuleFactory().register(Module, [
+    CoreModel
 ]);

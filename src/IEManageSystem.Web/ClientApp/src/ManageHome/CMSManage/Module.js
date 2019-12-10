@@ -7,9 +7,9 @@ import CMSManage from './CMSManage.jsx';
 import { reducer } from 'CMSManage/IEReduxs/Reducers'
 import IERedux from 'CMSManage/IEReduxs/CmsRedux'
 import RootRedux from 'Core/IEReduxs/RootRedux'
-import 'Core/Module'
+import CoreModel from 'Core/Module';
 
-class Module extends BaseModule {
+export default class Module extends BaseModule {
     initialize() {
         MenuProvider.registerMenu(
             {
@@ -59,6 +59,6 @@ class Module extends BaseModule {
     }
 }
 
-new ModuleFactory().register(new Module(), "CMSManageModule", [
-    "CoreModule"
+new ModuleFactory().register(Module, [
+    CoreModel
 ]);

@@ -3,9 +3,9 @@ import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'Core/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 import AuthorizeManage from "./AuthorizeManage.jsx";
-import 'Core/Module';
+import CoreModel from 'Core/Module';
 
-class Module extends BaseModule {
+export default class Module extends BaseModule {
     initialize() {
         MenuProvider.registerMenu(
             {
@@ -119,6 +119,6 @@ class Module extends BaseModule {
     }
 }
 
-new ModuleFactory().register(new Module(), "AuthorizeManageModule", [
-    "CoreModule"
+new ModuleFactory().register(Module, [
+    CoreModel
 ]);

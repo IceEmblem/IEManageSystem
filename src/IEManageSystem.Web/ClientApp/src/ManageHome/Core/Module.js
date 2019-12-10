@@ -7,7 +7,7 @@ import {createTopLevelMenusFetch} from 'Core/IEReduxs/Actions'
 import RootRedux from 'Core/IEReduxs/RootRedux'
 import {reducer} from 'Core/IEReduxs/Reducer'
 
-class Module extends BaseModule
+export default class Module extends BaseModule
 {
     initialize(){
         new MiddlewareFactory().register(fecth);
@@ -21,4 +21,4 @@ class Module extends BaseModule
     }
 }
 
-new ModuleFactory().register(new Module(), "CoreModule");
+new ModuleFactory().register(Module, null);
