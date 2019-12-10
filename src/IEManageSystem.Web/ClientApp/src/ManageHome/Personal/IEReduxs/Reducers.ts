@@ -5,7 +5,7 @@ import {
 
 function userInfoData(state = {
     invalidate: true
-}, action)
+}, action:any)
 {
     if(action.type == GetUserInfoReceive){
         return {
@@ -24,7 +24,7 @@ function userInfoData(state = {
     return state;
 }
 
-export function reducer(state = {}, action) {
+export function reducer(state:any = {}, action:any) {
     return {
         ...state,
         ...{

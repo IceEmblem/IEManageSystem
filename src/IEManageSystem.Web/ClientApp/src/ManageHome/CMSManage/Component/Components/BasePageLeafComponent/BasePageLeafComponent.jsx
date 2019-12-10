@@ -5,7 +5,7 @@ import { BaseComponent, BaseComponentProps } from '../BaseComponent'
 export class PageLeafComponentProps extends BaseComponentProps {
     constructor(){
         super();
-        this.targetPageId = "";
+        this.targetPageId = 0;
     }
 }
 
@@ -29,7 +29,7 @@ class BasePageLeafComponent extends BaseComponent
 
     getPageDateFetchs()
     {
-        if(!this.props.targetPageId){
+        if(this.props.targetPageId <= 0){
             return;
         }
 
@@ -95,7 +95,7 @@ class BasePageLeafComponent extends BaseComponent
 }
 
 BasePageLeafComponent.propTypes = {
-    targetPageId: PropTypes.string
+    targetPageId: PropTypes.number
 }
 
 BasePageLeafComponent.defaultProps = {

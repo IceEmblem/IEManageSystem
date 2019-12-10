@@ -1,6 +1,7 @@
 import { TopLevelMenusSelect, SideMenuSelect } from './Actions'
+import Menu from 'Core/Menu/Menu';
 
-function selectedTopMenu(state, action) 
+function selectedTopMenu(state:Menu | null, action:any) 
 {
     switch (action.type) 
     {
@@ -11,7 +12,7 @@ function selectedTopMenu(state, action)
     }
 }
 
-function selectedSideMenu(state = null, action){
+function selectedSideMenu(state:Menu | null = null, action:any){
     switch(action.type){
         case SideMenuSelect:
             return action.menu
@@ -20,7 +21,11 @@ function selectedSideMenu(state = null, action){
     }
 }
 
-export function reducer(state = {}, action)
+export function reducer(state = {
+    selectedTopMenu:null,
+    selectedSideMenu:null
+
+}, action:any)
 {
     return Object.assign({}, state, 
     {

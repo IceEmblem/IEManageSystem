@@ -17,5 +17,8 @@
             "birthDate": "1994/11/07",
             "tenantId": null
         }
+    },
+    "GetUserScopeAccessAuthorities":{
+        "userScopeAccessAuthoritys":[]
     }
 }

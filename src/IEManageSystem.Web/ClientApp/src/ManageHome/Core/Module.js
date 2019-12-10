@@ -2,7 +2,7 @@ import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MiddlewareFactory from 'Core/Middlewares/MiddlewareFactory'
 import {fecth} from 'Core/Middlewares/FecthMiddlewares'
-import {createIEStore} from 'Core/IEStore'
+import {createIEStore, getIEStore} from 'Core/IEStore'
 import {createTopLevelMenusFetch} from 'Core/IEReduxs/Actions'
 
 class Module extends BaseModule
@@ -13,7 +13,8 @@ class Module extends BaseModule
 
     postInitialize(){
         createIEStore();
-        createTopLevelMenusFetch();
+        let store = getIEStore();
+        store.dispatch(createTopLevelMenusFetch());
     }
 }
 

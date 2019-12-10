@@ -54,8 +54,8 @@ class PostEditParentComponent extends BaseParentComponent {
         let componentDescribe = new ComponentFactory().getComponentDescribeForName(pageComponent.name);
         
         // 容器组件和页叶子组件不提供组件数据
-        if(componentDescribe.componentObject.prototype instanceof ContainerComponentObject ||
-            componentDescribe.componentObject.prototype instanceof PageLeafComponentObject){
+        if(componentDescribe.componentObject instanceof ContainerComponentObject ||
+            componentDescribe.componentObject instanceof PageLeafComponentObject){
             return;
         }
 

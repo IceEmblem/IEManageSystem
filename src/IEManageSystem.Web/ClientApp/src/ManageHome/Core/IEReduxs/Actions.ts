@@ -1,6 +1,6 @@
 import IEToken from '../IEToken'
 
-interface FetchAction {
+export interface FetchAction {
   // 动作类型
   type: string,
   // 发送数据或接收的数据

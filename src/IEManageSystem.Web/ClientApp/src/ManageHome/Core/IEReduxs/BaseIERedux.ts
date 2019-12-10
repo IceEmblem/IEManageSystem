@@ -1,36 +1,33 @@
 import { connect } from 'react-redux'
 
-export default class BaseIERedux
+export default abstract class BaseIERedux
 {
+    reducer:(state:any, action:any)=>any;
+    ieRedux:Array<BaseIERedux>;
+
     constructor(){
         this.reducer = (state, action)=>{ return state }
         this.ieRedux = [];
     }
 
-    getStateType(){
-        return undefined;
-    }
+    abstract getStateType():string;
 
-
-    setReducer(reducer){
+    setReducer(reducer:(state:any, action:any)=>any){
         this.reducer = reducer;
     }
 
     connect(
-        mapStateToProps,
-        mapDispatchToProps,
-        mergeProps,
-        options)
+        mapStateToProps:any,
+        mapDispatchToProps:any,
+        mergeProps:any,
+        options:any)
     {
         let stateType = this.getStateType();
-        if(!stateType){
-            throw "未实现getStateType方法";
-        }
 
-        let ieMapStateToProps = (state, ownProps) => mapStateToProps(state[stateType], ownProps);
-        let ieMapDispatchToProps = (dispatch, ownProps) => 
+        let ieMapStateToProps = (state:any, ownProps:any) => mapStateToProps(state[stateType], ownProps);
+        let ieMapDispatchToProps = (dispatch:(action:any)=>any, ownProps:any) => 
         {
-            let iedispatch = (action)=>{
+            let iedispatch = (action:any)=>{
                 if (typeof action === "function") {		
                     return dispatch(action);
                 }
@@ -42,16 +39,13 @@ export default class BaseIERedux
         return connect(ieMapStateToProps, ieMapDispatchToProps, mergeProps, options)
     }
 
-    register(baseIERedux){
+    register(baseIERedux:BaseIERedux){
         this.ieRedux.push(baseIERedux);
     }
 
-    callReducer(state, action)
+    callReducer(state:any, action:any)
     {
         let stateType = this.getStateType();
-        if(!stateType){
-            throw "未实现getStateType方法";
-        }
 
         return {...state, ...{
             [stateType]: this.reducer(state[stateType], action)
@@ -61,11 +55,8 @@ export default class BaseIERedux
     getReducer()
     {
         let stateType = this.getStateType();
-        if(!stateType){
-            throw "未实现getStateType方法";
-        }
 
-        return (state = {}, action)=>
+        return (state:any = {}, action:any)=>
         {
             let newstate = {};
 

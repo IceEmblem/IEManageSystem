@@ -1,11 +1,12 @@
-import {CreateTopLevelMenusReceive} from './Actions'
+import {CreateTopLevelMenusReceive, FetchAction} from './Actions'
 import MenuProvider from 'Core/Menu/MenuProvider'
 import ApiScopeAuthorityManager from 'Core/ApiScopeAuthority/ApiScopeAuthorityManager'
+import Menu from 'Core/Menu/Menu';
 
-function topLevelMenus(state = new MenuProvider().getTopLevelMenus(), action)
+function topLevelMenus(state:Array<Menu> = new MenuProvider().getTopLevelMenus(null), action: FetchAction)
 {
     if(action.type == CreateTopLevelMenusReceive){
-        let apiScopeAuthorityManager = new ApiScopeAuthorityManager(action.value.userScopeAccessAuthoritys);
+        let apiScopeAuthorityManager = new ApiScopeAuthorityManager(action.data.userScopeAccessAuthoritys);
         let menuProvider = new MenuProvider();
         return menuProvider.getTopLevelMenus(apiScopeAuthorityManager);
     }
@@ -14,15 +15,16 @@ function topLevelMenus(state = new MenuProvider().getTopLevelMenus(), action)
 }
 
 export function reducer(
-    state = {
+    state:any = {
         fecth: {
             fecthSign: 0,
             isFecth: false,
             isSuccess: true,
             error: null,
             isAuthorize: true
-        }
-    }, action) 
+        },
+        topLevelMenus: undefined
+    }, action: any) 
 {
     return {
         ...state,

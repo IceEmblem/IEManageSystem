@@ -7,14 +7,14 @@ import "./account.css";
 export default class Account extends React.Component {
     render() {
         return (
-            <div class="Content">
-                <div class="space">
-                    <div class="stars">
-                        <div class="star"></div>
-                        <div class="star pink"></div>
-                        <div class="star blue"></div>
-                        <div class="star yellow"></div>
-                        <div class="star white"></div>
+            <div className="Content">
+                <div className="space">
+                    <div className="stars">
+                        <div className="star"></div>
+                        <div className="star pink"></div>
+                        <div className="star blue"></div>
+                        <div className="star yellow"></div>
+                        <div className="star white"></div>
                     </div>
                 </div>
                 <div className="row account">

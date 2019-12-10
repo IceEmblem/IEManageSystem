@@ -1,7 +1,7 @@
 import { createIEThunkAction } from 'Core/IEReduxs/Actions'
 
 export const GetUserInfoReceive = "GetUserInfoReceive"
-export function getUserInfoFetch(postData) {
+export function getUserInfoFetch(postData:any) {
     return createIEThunkAction(
         "/api/User/GetUserInfo",
         postData,
@@ -10,7 +10,7 @@ export function getUserInfoFetch(postData) {
 }
 
 export const SetUserInfoReceive = "SetUserInfoReceive";
-export function setUserInfoFetch(postData) {
+export function setUserInfoFetch(postData:any) {
     return createIEThunkAction(
         "/api/User/SetUserInfo",
         postData,
@@ -19,7 +19,7 @@ export function setUserInfoFetch(postData) {
 }
 
 export const SetSafetyProblemReceive = "SetSafetyProblemReceive";
-export function setSafetyProblemFetch(postData) {
+export function setSafetyProblemFetch(postData:any) {
     return createIEThunkAction(
         "/api/User/SetSafetyProblem",
         postData,
@@ -28,7 +28,7 @@ export function setSafetyProblemFetch(postData) {
 }
 
 export const SetPassageReceive = "SetPassageReceive";
-export function setPassageFetch(postData) {
+export function setPassageFetch(postData:any) {
     return createIEThunkAction(
         "/api/User/SetPassage",
         postData,

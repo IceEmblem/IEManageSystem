@@ -54,11 +54,11 @@ class EditableParentCom extends BaseParentComponent {
         }
 
         let pageComponent;
-        if (this.props.selectedComponentDescribe.componentObject.prototype instanceof ContainerComponentObject) 
+        if (this.props.selectedComponentDescribe.componentObject instanceof ContainerComponentObject) 
         {
             pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.props.selectedComponentDescribe.name)
         }
-        else if(this.props.selectedComponentDescribe.componentObject.prototype instanceof PageLeafComponentObject)
+        else if(this.props.selectedComponentDescribe.componentObject instanceof PageLeafComponentObject)
         {
             pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.props.selectedComponentDescribe.name)
         }
@@ -80,10 +80,10 @@ class EditableParentCom extends BaseParentComponent {
 
         let baseSetting = BaseSetting;
         let isShowAddBtn = false;
-        if(componentDescribe.componentObject.prototype instanceof ContainerComponentObject){
+        if(componentDescribe.componentObject instanceof ContainerComponentObject){
             isShowAddBtn = true;
         }
-        else if(componentDescribe.componentObject.prototype instanceof PageLeafComponentObject){
+        else if(componentDescribe.componentObject instanceof PageLeafComponentObject){
             baseSetting = PageLeafBaseSetting;
         }
 

@@ -2,7 +2,7 @@ import { createIEThunkAction } from 'Core/IEReduxs/Actions'
 
 // 页面添加组件
 export const PageAddComponent = 'PageAddComponent'
-export function pageAddComponent(pageComponent) {
+export function pageAddComponent(pageComponent:PageComponentModel) {
   return {
     type: PageAddComponent,
     pageComponent
@@ -11,7 +11,7 @@ export function pageAddComponent(pageComponent) {
 
 // 页面移除组件
 export const PageRemoveComponent = 'PageRemoveComponent'
-export function pageRemoveComponent(pageComponent) {
+export function pageRemoveComponent(pageComponent:PageComponentModel) {
   return {
     type: PageRemoveComponent,
     pageComponent
@@ -20,7 +20,7 @@ export function pageRemoveComponent(pageComponent) {
 
 // 页面编辑组件
 export const PageEditComponent = "PageEditComponent"
-export function pageEditComponent(pageComponent) {
+export function pageEditComponent(pageComponent:PageComponentModel) {
   return {
     type: PageEditComponent,
     pageComponent
@@ -29,7 +29,7 @@ export function pageEditComponent(pageComponent) {
 
 // 页面列表请求
 export const PagesReceive = "PagesReceive"
-export function pagesFetch(pageIndex, pageSize, searchKey) {
+export function pagesFetch(pageIndex:number, pageSize:number, searchKey:string) {
   let postData = {
     pageIndex: pageIndex,
     pageSize: pageSize,
@@ -45,7 +45,7 @@ export function pagesFetch(pageIndex, pageSize, searchKey) {
 
 // 页面组件请求
 export const PageComponentReceive = "PageComponentReceive"
-export function pageComponentFetch(name){
+export function pageComponentFetch(name:string){
   let postData = {
     name: name
   };
@@ -59,7 +59,7 @@ export function pageComponentFetch(name){
 
 // 页面组件更新
 export const PageComponentUpdateReceive = "PageComponentUpdateReceive"
-export function pageComponentUpdateFetch(name, components) {
+export function pageComponentUpdateFetch(name:string, components:PageComponentModel) {
   let postData = {
     name: name,
     pageComponents: components
@@ -74,7 +74,7 @@ export function pageComponentUpdateFetch(name, components) {
 
 // 文章列表请求
 export const PageDatasReceive = "PageDatasReceive"
-export function pageDatasFetch(pageIndex, pageSize, searchKey, pageName){
+export function pageDatasFetch(pageIndex:number, pageSize:number, searchKey:string, pageName:string){
   let postData = {
     pageIndex: pageIndex,
     pageSize: pageSize,
@@ -91,7 +91,7 @@ export function pageDatasFetch(pageIndex, pageSize, searchKey, pageName){
 
 // 文章数据请求
 export const ComponentDatasReceive = "ComponentDatasReceive"
-export function componentDatasFetch(pageName, pageDataName){
+export function componentDatasFetch(pageName:string, pageDataName:string){
   let postData = {
     pageName: pageName,
     pageDataName: pageDataName
@@ -106,7 +106,7 @@ export function componentDatasFetch(pageName, pageDataName){
 
 // 文章数据更新
 export const ComponentDataUpdateReceive = "ComponentDataUpdateReceive"
-export function componentDataUpdateFetch(pageName, pageDataName, componentDatas)
+export function componentDataUpdateFetch(pageName:string, pageDataName:string, componentDatas:PageComponentModel)
 {
   let postData = {
     pageName: pageName,
@@ -123,7 +123,7 @@ export function componentDataUpdateFetch(pageName, pageDataName, componentDatas)
 
 // 文章组件数据更新
 export const ComponentDataUpdate = "ComponentDataUpdate"
-export function componentDataUpdate(resource)
+export function componentDataUpdate(resource: ContentComponentDataModel)
 {
   return {
     type: ComponentDataUpdate,

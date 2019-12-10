@@ -11,7 +11,7 @@ export default class PostList extends BasePageLeafComponent {
 
     render() {
         let list = this.getPageDatasOrDemoDatas().map((item, index) => (
-            <li>
+            <li key={item.id}>
                 <span><span>{index + 1}</span></span>
                 <NavLink className="text-secondary" to={`/Page/${this.state.page.name}/${item.name}`}>{item.title}</NavLink>
             </li>

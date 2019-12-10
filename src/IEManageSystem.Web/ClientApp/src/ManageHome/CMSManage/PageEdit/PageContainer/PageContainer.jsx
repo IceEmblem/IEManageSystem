@@ -69,11 +69,11 @@ class PageContainer extends React.Component {
         }
 
         let pageComponent;
-        if (this.props.selectedComponentDescribe.componentObject.prototype instanceof ContainerComponentObject) 
+        if (this.props.selectedComponentDescribe.componentObject instanceof ContainerComponentObject) 
         {
             pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.props.selectedComponentDescribe.name)
         }
-        else if(this.props.selectedComponentDescribe.componentObject.prototype instanceof PageLeafComponentObject)
+        else if(this.props.selectedComponentDescribe.componentObject instanceof PageLeafComponentObject)
         {
             pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.props.selectedComponentDescribe.name)
         }

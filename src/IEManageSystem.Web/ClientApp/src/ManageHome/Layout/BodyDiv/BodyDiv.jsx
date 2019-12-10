@@ -20,7 +20,7 @@ export default class BodyDiv extends React.Component
                     <Route key={0} exact path="/ManageHome" component={Index} />
                     <Route key={1} exact path="/ManageHome/Index" component={Index} />
                     {new MenuProvider().getNavMenuComponents().map(
-                        (item, index) => <Route key={2+index} path={item.beseUrl} component={item.component} />)}
+                        (item, index) => <Route key={2+index} path={item.baseUrl} component={item.component} />)}
                 </Switch>
             </div>
         );

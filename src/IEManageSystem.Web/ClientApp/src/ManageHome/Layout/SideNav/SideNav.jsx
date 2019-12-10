@@ -145,7 +145,7 @@ class SideNav extends React.Component
 }
 
 SideNav.propTypes = {
-    selectTopMenu: PropsTypes.object.isRequired,
+    selectTopMenu: PropsTypes.object,
     selectedSideMenu: PropsTypes.object,
     sideMenuSelect: PropsTypes.func.isRequired
 }

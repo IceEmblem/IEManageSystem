@@ -138,7 +138,7 @@ class UserInfo extends React.Component {
                                         <div className="input-group-prepend userinfo-lable">
                                             <span className="input-group-text">账号</span>
                                         </div>
-                                        <input value={this.state.userName} name="userName" type="text" className="form-control" placeholder="AccountNo" readonly="readonly"
+                                        <input value={this.state.userName} name="userName" type="text" className="form-control" placeholder="AccountNo" readOnly="readonly"
                                             onChange={
                                                 (event) => {
                                                     this.setState({ userName: event.target.value });
@@ -150,7 +150,7 @@ class UserInfo extends React.Component {
                                         <div className="input-group-prepend userinfo-lable">
                                             <span className="input-group-text">昵称</span>
                                         </div>
-                                        <input value={this.state.name} name="name" type="text" className="form-control" placeholder="请输入昵称"
+                                        <input value={this.state.name || ""} name="name" type="text" className="form-control" placeholder="请输入昵称"
                                             readOnly={this.state.nameReadonly}
                                             onChange={
                                                 (event) => {
@@ -172,7 +172,7 @@ class UserInfo extends React.Component {
                                         <div className="input-group-prepend userinfo-lable">
                                             <span className="input-group-text">手机号</span>
                                         </div>
-                                        <input value={this.state.phone} name="phone" type="text" className="form-control" placeholder="请输入手机号"
+                                        <input value={this.state.phone || ""} name="phone" type="text" className="form-control" placeholder="请输入手机号"
                                             readOnly={this.state.phoneReadonly}
                                             onChange={
                                                 (event) => {
@@ -194,7 +194,7 @@ class UserInfo extends React.Component {
                                         <div className="input-group-prepend userinfo-lable">
                                             <span className="input-group-text">邮箱号</span>
                                         </div>
-                                        <input value={this.state.emailAddress} name="emailAddress" type="text" className="form-control" placeholder="请输入电子邮箱"
+                                        <input value={this.state.emailAddress || ""} name="emailAddress" type="text" className="form-control" placeholder="请输入电子邮箱"
                                             readOnly={this.state.emailAddressReadonly}
                                             onChange={
                                                 (event) => {
@@ -235,7 +235,7 @@ class UserInfo extends React.Component {
                                     <div className="input-group-prepend userinfo-lable">
                                         <span className="input-group-text">真实姓名</span>
                                     </div>
-                                    <input value={this.state.realName} name="phone" type="text" className="form-control" placeholder="请输入真实姓名"
+                                    <input value={this.state.realName || ""} name="phone" type="text" className="form-control" placeholder="请输入真实姓名"
                                         readOnly={this.state.realNameReadonly}
                                         onChange={
                                             (event) => {
@@ -257,7 +257,7 @@ class UserInfo extends React.Component {
                                     <div className="input-group-prepend userinfo-lable">
                                         <span className="input-group-text">身份证号</span>
                                     </div>
-                                    <input value={this.state.idNumber} name="phone" type="text" className="form-control" placeholder="请输入身份证号"
+                                    <input value={this.state.idNumber || ""} name="phone" type="text" className="form-control" placeholder="请输入身份证号"
                                         readOnly={this.state.idNumberReadonly}
                                         onChange={
                                             (event) => {
@@ -279,7 +279,7 @@ class UserInfo extends React.Component {
                                     <div className="input-group-prepend userinfo-lable">
                                         <span className="input-group-text">地址</span>
                                     </div>
-                                    <input value={this.state.address} name="phone" type="text" className="form-control" placeholder="请输入地址"
+                                    <input value={this.state.address || ""} name="phone" type="text" className="form-control" placeholder="请输入地址"
                                         readOnly={this.state.addressReadonly}
                                         onChange={
                                             (event) => {

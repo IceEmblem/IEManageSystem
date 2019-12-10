@@ -25,7 +25,7 @@ export default class MenuProvider {
     enableAuthorityFilter: boolean;
 
     constructor() {
-        this.enableAuthorityFilter = true;
+        this.enableAuthorityFilter = false;
     }
 
     // 生成菜单

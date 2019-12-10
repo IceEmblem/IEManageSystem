@@ -9,7 +9,7 @@ import {
     ComponentDataUpdateReceive,
     ComponentDataUpdate} from './Actions'
 
-function pageComponents(state = [], action){
+function pageComponents(state:Array<PageComponentModel> = [], action:any){
     switch(action.type){
         case PageAddComponent:
             return [...state, action.pageComponent]
@@ -32,11 +32,11 @@ function pageComponents(state = [], action){
 
 // 页面Reducer
 function page(state = {
-    pages:[],
+    pages:new Array<PageModel>(),
     resourceNum:0,
     pageIndex: 1,
     pagesDidInvalidate: true
-}, action)
+}, action:any)
 {
     switch(action.type){
         case PagesReceive:
@@ -52,11 +52,11 @@ function page(state = {
 }
 
 function pageData(state = {
-    pageDatas:[],
+    pageDatas:new Array<PageModel>(),
     resourceNum: 0,
     pageIndex: 1,
     pageDatasDidInvalidate: false
-}, action){
+}, action:any){
     switch(action.type)
     {
         case PageDatasReceive:
@@ -72,9 +72,9 @@ function pageData(state = {
 }
 
 function componentData(state = {
-    componentDatas:[],
+    componentDatas:new Array<ContentComponentDataModel>(),
     componentDatasDidInvalidate: false
-}, action){
+}, action:any){
     switch(action.type)
     {
         case ComponentDatasReceive:
@@ -103,8 +103,8 @@ function componentData(state = {
     }
 }
 
-export function reducer(state = {
-}, action)
+export function reducer(state:any = {
+}, action:any)
 {
     return Object.assign({}, state, 
     {
