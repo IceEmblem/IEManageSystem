@@ -27,8 +27,6 @@ class PageEditCompontContainer extends BaseComponentContainer {
     }
 
     createChildrenComponent() {
-
-        let componentDescribe = this.componentFactory.getComponentDescribeForName(this.props.pageComponent.name);
         let childrens = this.props.childPageComponents.map(item => (
             <Contain
                 selectedComponentDescribe={this.props.selectedComponentDescribe}
@@ -37,7 +35,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
             </Contain>)
         );
 
-        return componentDescribe.componentObject.Component({
+        return this.componentObject.Component({
             pageComponentSettings:this.getPageComponentSettings() || [],
         }, childrens)
     }
@@ -53,24 +51,22 @@ class PageEditCompontContainer extends BaseComponentContainer {
 
     getTools()
     {
-        let componentDescribe = this.componentFactory.getComponentDescribeForName(this.props.pageComponent.name);
-
         // PageLeafBaseSetting
         let tools = [];
 
         let baseSetting = BaseSetting;
         let isShowAddBtn = false;
-        if(componentDescribe.componentObject instanceof ContainerComponentObject){
+        if(this.componentObject instanceof ContainerComponentObject){
             isShowAddBtn = true;
         }
-        else if(componentDescribe.componentObject instanceof PageLeafComponentObject){
+        else if(this.componentObject instanceof PageLeafComponentObject){
             baseSetting = PageLeafBaseSetting;
         }
 
         tools.push(<EditFrame 
             baseSetting={baseSetting}
             pageComponent={this.props.pageComponent} 
-            pageComponentSettingConfigs={componentDescribe.componentObject.ComponentSettingConfigs}
+            pageComponentSettingConfigs={this.componentObject.ComponentSettingConfigs}
             editComponent={this.props.editComponent}
             show={this.state.openEdit}
             close={()=>{this.setState({openEdit: false})}}

@@ -17,8 +17,6 @@ class FrontCompontContainer extends BaseComponentContainer {
     {
         let pageComponent = this.props.pageComponent;
 
-        let componentDescribe = this.componentFactory.getComponentDescribeForName(pageComponent.name);
-
         let childrens = this.props.childPageComponents.map(item => (
             <Contain
                 pageComponent={item}
@@ -26,7 +24,7 @@ class FrontCompontContainer extends BaseComponentContainer {
             </Contain>)
         );
 
-        return componentDescribe.componentObject.Component({
+        return this.componentObject.Component({
             componentData:this.getComponentData(),
             pageComponentSettings:this.getPageComponentSettings() || [],
             targetPageId:pageComponent.targetPageId

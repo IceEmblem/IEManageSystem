@@ -29,7 +29,6 @@ class PostEditComponentContainer extends BaseComponentContainer {
     {
         let pageComponent = this.props.pageComponent;
 
-        let componentDescribe = this.componentFactory.getComponentDescribeForName(pageComponent.name);
         let childrens = this.props.childPageComponents.map(item => (
             <Contain
                 pageComponent={item}
@@ -38,8 +37,8 @@ class PostEditComponentContainer extends BaseComponentContainer {
             </Contain>)
         );
 
-        // componentDescribe.componentObject.Component （指定的组件类类型）
-        return componentDescribe.componentObject.Component({
+        // componentObject.Component （指定的组件类类型）
+        return this.componentObject.Component({
             componentData:this.getComponentData(),
             pageComponentSettings:this.getPageComponentSettings() || [],
             targetPageId:pageComponent.targetPageId
@@ -49,11 +48,10 @@ class PostEditComponentContainer extends BaseComponentContainer {
     getTools()
     {
         let pageComponent = this.props.pageComponent;
-        let componentDescribe = this.componentFactory.getComponentDescribeForName(pageComponent.name);
-        
+
         // 容器组件和页叶子组件不提供组件数据
-        if(componentDescribe.componentObject instanceof ContainerComponentObject ||
-            componentDescribe.componentObject instanceof PageLeafComponentObject){
+        if(this.componentObject instanceof ContainerComponentObject ||
+            this.componentObject instanceof PageLeafComponentObject){
             return;
         }
 
@@ -66,7 +64,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
                 submit={this.submit}
                 pageComponent={pageComponent}
                 componentData={this.getComponentData()}
-                config={componentDescribe.componentObject.ComponentDataConfigs}
+                config={this.componentObject.ComponentDataConfigs}
             ></EditFrame>);
         tools.push(
             <div className="parentcomponent-btns"

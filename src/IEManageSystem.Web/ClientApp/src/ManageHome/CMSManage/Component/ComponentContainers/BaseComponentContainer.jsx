@@ -9,7 +9,7 @@ class BaseComponentContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.componentFactory = new ComponentFactory();
+        this.componentObject = new ComponentFactory().getComponentDescribeForName(this.props.pageComponent.name).componentObject;
     }
 
     getStyle(){
