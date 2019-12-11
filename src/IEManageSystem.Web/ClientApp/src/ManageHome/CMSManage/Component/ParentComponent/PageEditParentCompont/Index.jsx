@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
 import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
-import CreatePageComponentService from './CreatePageComponentService'
+import CreateComponentService from './CreateComponentService'
 
 import './Index.css'
 
 import EditFrame from './EditFrame.jsx'
 
-import ComponentFactory from '../../Components/ComponentFactory'
 import { pageAddComponent, pageRemoveComponent, pageEditComponent } from 'CMSManage/IEReduxs/Actions'
 
 import BaseParentComponent from '../BaseParentComponent.jsx'
@@ -29,7 +28,7 @@ class EditableParentCom extends BaseParentComponent {
 
     createChildrenComponent() {
 
-        let componentDescribe = new ComponentFactory().getComponentDescribeForName(this.props.pageComponent.name);
+        let componentDescribe = this.componentFactory.getComponentDescribeForName(this.props.pageComponent.name);
         let childrens = this.props.childPageComponents.map(item => (
             <EditableParentComContain
                 selectedComponentDescribe={this.props.selectedComponentDescribe}
@@ -44,36 +43,17 @@ class EditableParentCom extends BaseParentComponent {
     }
 
     addChildComponent() {
-        var timetamp = Number(new Date());
-        while (true) {
-            if (!this.props.childPageComponents.some(item => item.sign === timetamp)) {
-                break;
-            }
-
-            timetamp = Number(new Date());
-        }
-
-        let pageComponent;
-        if (this.props.selectedComponentDescribe.componentObject instanceof ContainerComponentObject) 
-        {
-            pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.props.selectedComponentDescribe.name)
-        }
-        else if(this.props.selectedComponentDescribe.componentObject instanceof PageLeafComponentObject)
-        {
-            pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.props.selectedComponentDescribe.name)
-        }
-        else {
-            pageComponent = CreatePageComponentService.createContentLeafComponent(timetamp, this.props.selectedComponentDescribe.name)
-        }
-
-        pageComponent.parentSign = this.props.pageComponent.sign;
+        let pageComponent = CreateComponentService.createComponent(
+            this.props.childPageComponents, 
+            this.props.selectedComponentDescribe,
+            this.props.pageComponent.sign);
 
         this.props.addComponent(pageComponent);
     }
 
     getTools()
     {
-        let componentDescribe = new ComponentFactory().getComponentDescribeForName(this.props.pageComponent.name);
+        let componentDescribe = this.componentFactory.getComponentDescribeForName(this.props.pageComponent.name);
 
         // PageLeafBaseSetting
         let tools = [];

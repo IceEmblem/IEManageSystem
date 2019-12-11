@@ -7,8 +7,6 @@ import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeaf
 import './Index.css'
 import BaseParentComponent from '../BaseParentComponent.jsx'
 
-import ComponentFactory from '../../Components/ComponentFactory'
-
 import EditFrame from './EditFrame.jsx'
 
 class PostEditParentComponent extends BaseParentComponent {
@@ -31,7 +29,7 @@ class PostEditParentComponent extends BaseParentComponent {
     {
         let pageComponent = this.props.pageComponent;
 
-        let componentDescribe = new ComponentFactory().getComponentDescribeForName(pageComponent.name);
+        let componentDescribe = this.componentFactory.getComponentDescribeForName(pageComponent.name);
         let childrens = this.props.childPageComponents.map(item => (
             <Contain
                 pageComponent={item}
@@ -51,7 +49,7 @@ class PostEditParentComponent extends BaseParentComponent {
     getTools()
     {
         let pageComponent = this.props.pageComponent;
-        let componentDescribe = new ComponentFactory().getComponentDescribeForName(pageComponent.name);
+        let componentDescribe = this.componentFactory.getComponentDescribeForName(pageComponent.name);
         
         // 容器组件和页叶子组件不提供组件数据
         if(componentDescribe.componentObject instanceof ContainerComponentObject ||

@@ -4,8 +4,6 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
 import BaseParentComponent from '../BaseParentComponent.jsx'
 
-import ComponentFactory from '../../Components/ComponentFactory'
-
 class FrontParentCompont extends BaseParentComponent {
     constructor(props) {
         super(props);
@@ -19,7 +17,7 @@ class FrontParentCompont extends BaseParentComponent {
     {
         let pageComponent = this.props.pageComponent;
 
-        let componentDescribe = new ComponentFactory().getComponentDescribeForName(pageComponent.name);
+        let componentDescribe = this.componentFactory.getComponentDescribeForName(pageComponent.name);
 
         let childrens = this.props.childPageComponents.map(item => (
             <Contain

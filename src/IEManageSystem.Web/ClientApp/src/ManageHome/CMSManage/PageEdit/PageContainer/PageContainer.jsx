@@ -2,13 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import CreatePageComponentService from 'CMSManage/Component/ParentComponent/PageEditParentCompont/CreatePageComponentService'
+import CreateComponentService from 'CMSManage/Component/ParentComponent/PageEditParentCompont/CreateComponentService'
 
 import './PageContainer.css'
 
 import PageEditParentCompont from 'CMSManage/Component/ParentComponent/PageEditParentCompont'
-import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
-import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
 
 import { pageAddComponent, pageComponentUpdateFetch, pageComponentFetch } from 'CMSManage/IEReduxs/Actions'
 
@@ -55,31 +53,10 @@ class PageContainer extends React.Component {
     }
 
     addComponent(){
-        if (!this.props.selectedComponentDescribe.name) {
-            return;
-        }
-
-        var timetamp = Number(new Date());
-        while (true) {
-            if (!this.props.pageComponents.some(item => item.sign === timetamp)) {
-                break;
-            }
-
-            timetamp = Number(new Date());
-        }
-
-        let pageComponent;
-        if (this.props.selectedComponentDescribe.componentObject instanceof ContainerComponentObject) 
-        {
-            pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.props.selectedComponentDescribe.name)
-        }
-        else if(this.props.selectedComponentDescribe.componentObject instanceof PageLeafComponentObject)
-        {
-            pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.props.selectedComponentDescribe.name)
-        }
-        else {
-            pageComponent = CreatePageComponentService.createContentLeafComponent(timetamp, this.props.selectedComponentDescribe.name)
-        }
+        let pageComponent = CreateComponentService.createComponent(
+            this.props.pageComponents, 
+            this.props.selectedComponentDescribe,
+            null);
 
         this.props.addComponent(pageComponent);
     }

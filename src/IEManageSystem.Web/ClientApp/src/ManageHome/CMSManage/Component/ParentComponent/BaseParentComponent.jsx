@@ -1,11 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import ComponentFactory from '../Components/ComponentFactory'
+
 import './BaseParentComponent.css'
 
 class BaseParentComponent extends React.Component {
     constructor(props) {
         super(props);
+
+        this.componentFactory = new ComponentFactory();
     }
 
     getStyle(){
