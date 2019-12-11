@@ -6,7 +6,7 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import './Index.css'
 
 import { pageComponentFetch, componentDatasFetch, componentDataUpdateFetch, componentDataUpdate } from 'CMSManage/IEReduxs/Actions'
-import PostEditParentComponent from 'CMSManage/Component/ParentComponent/PostEditParentComponent'
+import PostEditComponentContainer from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer'
 
 class ComponentData extends React.Component {
     constructor(props) {
@@ -46,12 +46,12 @@ class ComponentData extends React.Component {
                 <div className="page-container-body">
                     {
                         this.props.pageComponents.filter(item => !item.parentSign).map(item =>
-                            <PostEditParentComponent
+                            <PostEditComponentContainer
                                 key={item.sign}
                                 pageComponent={item}
                                 componentDataUpdate={this.props.componentDataUpdate}
                             >
-                            </PostEditParentComponent>)
+                            </PostEditComponentContainer>)
                     }
                 </div>
             </div>

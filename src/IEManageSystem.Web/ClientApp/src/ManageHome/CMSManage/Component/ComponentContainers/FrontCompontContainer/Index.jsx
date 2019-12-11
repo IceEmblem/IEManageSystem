@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
-import BaseParentComponent from '../BaseParentComponent.jsx'
+import BaseComponentContainer from '../BaseComponentContainer.jsx'
 
-class FrontParentCompont extends BaseParentComponent {
+class FrontCompontContainer extends BaseComponentContainer {
     constructor(props) {
         super(props);
 
@@ -34,13 +34,13 @@ class FrontParentCompont extends BaseParentComponent {
     }
 }
 
-FrontParentCompont.propTypes = {
+FrontCompontContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
     childPageComponents: PropTypes.array.isRequired,
     componentDatas: PropTypes.array
 }
 
-FrontParentCompont.defaultProps = {
+FrontCompontContainer.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -61,6 +61,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const Contain = CmsRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps
-)(FrontParentCompont)
+)(FrontCompontContainer)
 
 export default Contain;

@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import CreateComponentService from 'CMSManage/Component/ParentComponent/PageEditParentCompont/CreateComponentService'
+import CreateComponentService from 'CMSManage/Component/ComponentContainers/PageEditCompontContainer/CreateComponentService'
 
 import './PageContainer.css'
 
-import PageEditParentCompont from 'CMSManage/Component/ParentComponent/PageEditParentCompont'
+import PageEditCompontContainer from 'CMSManage/Component/ComponentContainers/PageEditCompontContainer'
 
 import { pageAddComponent, pageComponentUpdateFetch, pageComponentFetch } from 'CMSManage/IEReduxs/Actions'
 
@@ -119,12 +119,12 @@ class PageContainer extends React.Component {
                 <div className="page-container-body">
                     {
                         this.props.pageComponents.filter(item => !item.parentSign).map(item =>
-                            <PageEditParentCompont
+                            <PageEditCompontContainer
                                 key={item.sign}
                                 pageComponent={item}
                                 selectedComponentDescribe={this.props.selectedComponentDescribe}
                             >
-                            </PageEditParentCompont>)
+                            </PageEditCompontContainer>)
                     }
                     <div className="col-md-12  padding-0">
                         <div className="col-md-2 padding-0 float-right">

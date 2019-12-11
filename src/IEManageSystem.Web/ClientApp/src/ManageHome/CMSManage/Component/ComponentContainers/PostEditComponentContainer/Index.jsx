@@ -5,11 +5,11 @@ import ContainerComponentObject from 'CMSManage/Component/Components/BaseContain
 import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
 
 import './Index.css'
-import BaseParentComponent from '../BaseParentComponent.jsx'
+import BaseComponentContainer from '../BaseComponentContainer'
 
-import EditFrame from './EditFrame.jsx'
+import EditFrame from './EditFrame'
 
-class PostEditParentComponent extends BaseParentComponent {
+class PostEditComponentContainer extends BaseComponentContainer {
     constructor(props) {
         super(props);
 
@@ -86,14 +86,14 @@ class PostEditParentComponent extends BaseParentComponent {
     }
 }
 
-PostEditParentComponent.propTypes = {
+PostEditComponentContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
     childPageComponents: PropTypes.array.isRequired,
     componentDataUpdate: PropTypes.func.isRequired,
     componentDatas: PropTypes.array
 }
 
-PostEditParentComponent.defaultProps = {
+PostEditComponentContainer.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -114,6 +114,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const Contain = CmsRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps
-)(PostEditParentComponent)
+)(PostEditComponentContainer)
 
 export default Contain;

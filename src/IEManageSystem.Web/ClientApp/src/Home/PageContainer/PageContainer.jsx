@@ -6,7 +6,7 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import './PageContainer.css'
 
 import { pageComponentFetch, componentDatasFetch } from 'CMSManage/IEReduxs/Actions'
-import FrontParentCompont from 'CMSManage/Component/ParentComponent/FrontParentCompont'
+import FrontCompontContainer from 'CMSManage/Component/ComponentContainers/FrontCompontContainer'
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -30,11 +30,11 @@ class PageContainer extends React.Component {
             <div className="front-page-container">
                 {
                     this.props.pageComponents.filter(item => !item.parentSign).map(item =>
-                        <FrontParentCompont
+                        <FrontCompontContainer
                             key={item.sign}
                             pageComponent={item}
                         >
-                        </FrontParentCompont>)
+                        </FrontCompontContainer>)
                 }
             </div>
         );

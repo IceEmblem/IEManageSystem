@@ -7,15 +7,15 @@ import CreateComponentService from './CreateComponentService'
 
 import './Index.css'
 
-import EditFrame from './EditFrame.jsx'
+import EditFrame from './EditFrame'
 
 import { pageAddComponent, pageRemoveComponent, pageEditComponent } from 'CMSManage/IEReduxs/Actions'
 
-import BaseParentComponent from '../BaseParentComponent.jsx'
+import BaseComponentContainer from '../BaseComponentContainer'
 import BaseSetting from './BaseSetting'
 import PageLeafBaseSetting from './PageLeafBaseSetting'
 
-class EditableParentCom extends BaseParentComponent {
+class PageEditCompontContainer extends BaseComponentContainer {
     constructor(props) {
         super(props);
 
@@ -30,11 +30,11 @@ class EditableParentCom extends BaseParentComponent {
 
         let componentDescribe = this.componentFactory.getComponentDescribeForName(this.props.pageComponent.name);
         let childrens = this.props.childPageComponents.map(item => (
-            <EditableParentComContain
+            <Contain
                 selectedComponentDescribe={this.props.selectedComponentDescribe}
                 pageComponent={item}
             >
-            </EditableParentComContain>)
+            </Contain>)
         );
 
         return componentDescribe.componentObject.Component({
@@ -107,7 +107,7 @@ class EditableParentCom extends BaseParentComponent {
     }
 }
 
-EditableParentCom.propTypes = {
+PageEditCompontContainer.propTypes = {
     selectedComponentDescribe: PropTypes.object.isRequired,
     pageComponent: PropTypes.object.isRequired,
     childPageComponents: PropTypes.array.isRequired,
@@ -116,7 +116,7 @@ EditableParentCom.propTypes = {
     editComponent: PropTypes.func.isRequired
 }
 
-EditableParentCom.defaultProps = {
+PageEditCompontContainer.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -142,9 +142,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const EditableParentComContain = CmsRedux.connect(
+const Contain = CmsRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps
-)(EditableParentCom)
+)(PageEditCompontContainer)
 
-export default EditableParentComContain;
+export default Contain;

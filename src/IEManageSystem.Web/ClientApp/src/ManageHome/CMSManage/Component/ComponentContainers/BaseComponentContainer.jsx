@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import ComponentFactory from '../Components/ComponentFactory'
 
-import './BaseParentComponent.css'
+import './BaseComponentContainer.css'
 
-class BaseParentComponent extends React.Component {
+class BaseComponentContainer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -73,11 +73,11 @@ class BaseParentComponent extends React.Component {
     }
 }
 
-BaseParentComponent.propTypes = {
+BaseComponentContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired
 }
 
-BaseParentComponent.defaultProps = {
+BaseComponentContainer.defaultProps = {
 };
 
-export default BaseParentComponent;
+export default BaseComponentContainer;
