@@ -1,8 +1,9 @@
 import React from 'react'
 import BaseComponentObject, { LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContainerComponent'
 import Container from './Container'
+import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
-export default class ComponentObject extends BaseComponentObject {
+class ComponentObject extends BaseComponentObject {
     Component(props, childrens) {
         return <Container {...props} >{childrens}</Container>
     }
@@ -10,3 +11,6 @@ export default class ComponentObject extends BaseComponentObject {
         return <p>容器组件</p>;
     }
 }
+
+let componentDescribe = new ComponentDescribe("Container", new ComponentObject(), componentType.container);
+export default componentDescribe;

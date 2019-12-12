@@ -1,8 +1,9 @@
 import React from 'react'
 import BaseComponentObject, { BaseField, ComponentDataConCfigField } from '../BaseLeafComponent'
 import CitiesSlider from './CitiesSlider.jsx'
+import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
-export default class ComponentObject extends BaseComponentObject {
+class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentDataConfigs = {
@@ -20,3 +21,6 @@ export default class ComponentObject extends BaseComponentObject {
         return <p>幻灯片</p>;
     }
 }
+
+let componentDescribe = new ComponentDescribe("CitiesSlider", new ComponentObject(), componentType.other);
+export default componentDescribe;

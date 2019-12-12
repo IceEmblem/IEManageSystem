@@ -2,13 +2,14 @@ import React from 'react'
 import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
 import Clock from './Clock.jsx'
 import CustomizeField from './CustomizeField'
+import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
 const CustomizeComponentDataConCfigField = 
     (name) => 
     (props) => 
     <CustomizeField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
 
-export default class ComponentObject extends BaseComponentObject {
+class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentDataConfigs = {
@@ -26,3 +27,6 @@ export default class ComponentObject extends BaseComponentObject {
         return <p>日常作息可视图</p>;
     }
 }
+
+let componentDescribe = new ComponentDescribe("Clock", new ComponentObject(), componentType.graph);
+export default componentDescribe;

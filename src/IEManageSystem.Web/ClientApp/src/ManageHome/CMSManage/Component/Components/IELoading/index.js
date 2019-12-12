@@ -1,8 +1,9 @@
 import React from 'react'
 import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
 import IELoading from './IELoading'
+import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
-export default class ComponentObject extends BaseComponentObject {
+class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentDataConfigs = {}
@@ -32,3 +33,6 @@ export default class ComponentObject extends BaseComponentObject {
         return <p>彩色Loading动画</p>;
     }
 }
+
+let componentDescribe = new ComponentDescribe("IELoading", new ComponentObject(), componentType.other);
+export default componentDescribe;

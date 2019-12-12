@@ -1,8 +1,9 @@
 import React from 'react'
 import BaseComponentObject, { BaseField, ComponentDataConCfigField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
 import Text from './Text'
+import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
-export default class ComponentObject extends BaseComponentObject {
+class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentDataConfigs = {
@@ -16,3 +17,6 @@ export default class ComponentObject extends BaseComponentObject {
         return <p>文本框</p>;
     }
 }
+
+let componentDescribe = new ComponentDescribe("Text", new ComponentObject(), componentType.text);
+export default componentDescribe;

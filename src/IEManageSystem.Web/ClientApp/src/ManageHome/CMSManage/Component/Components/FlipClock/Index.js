@@ -1,8 +1,9 @@
 import React from 'react'
 import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
 import FlipClock from './FlipClock.jsx'
+import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
-export default class ComponentObject extends BaseComponentObject {
+class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentDataConfigs = {}
@@ -14,3 +15,6 @@ export default class ComponentObject extends BaseComponentObject {
         return <p>翻页式时钟</p>;
     }
 }
+
+let componentDescribe = new ComponentDescribe("FlipClock", new ComponentObject(), componentType.other);
+export default componentDescribe;

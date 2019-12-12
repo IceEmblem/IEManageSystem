@@ -2,13 +2,14 @@ import React from 'react'
 import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
 import Progress from './Progress'
 import CustomizeField from './CustomizeField'
+import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
 const CustomizeComponentDataConCfigField = 
     (name) => 
     (props) => 
     <CustomizeField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
 
-export default class ComponentObject extends BaseComponentObject {
+class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentDataConfigs = {
@@ -26,3 +27,6 @@ export default class ComponentObject extends BaseComponentObject {
         return <p>程序流程</p>;
     }
 }
+
+let componentDescribe = new ComponentDescribe("Progress", new ComponentObject(), componentType.other);
+export default componentDescribe;

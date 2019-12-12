@@ -6,7 +6,7 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import './ComponentTool.css'
 
 import ComponentFrame from './ComponentFrame.jsx'
-import ComponentFactory, { componentType, componentTypes } from 'CMSManage/Component/Components/ComponentFactory'
+import ComponentFactory, { componentTypes } from 'CMSManage/Component/Components/ComponentFactory'
 
 class ComponentTool extends React.Component 
 {
@@ -53,22 +53,6 @@ class ComponentTool extends React.Component
                 </div>
             </li>);
         });
-        // 
-        let otherIndex = list.length;
-        list.push(
-            <li key={otherIndex} className="component-tool-item" id="other">
-                <a href="javascript:void(0)"
-                    onClick={()=>{this.setState({activeIndex: otherIndex})}}
-                >
-                    <span className={`oi oi-puzzle-piece`} title="icon name" aria-hidden="true"></span>
-                    <span className="ml-2">其他组件</span>
-                </a>
-                <div className={`subMenu ${this.state.activeIndex == otherIndex && "subMenu-active"}`}>
-                    {componentDescribes.map(item=> this.createComponent(item))}
-                </div>
-            </li>
-        );
-
 
         return (<div className="component-tool">
             <div>

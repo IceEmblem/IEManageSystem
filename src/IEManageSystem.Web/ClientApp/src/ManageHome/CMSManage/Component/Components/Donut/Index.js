@@ -2,13 +2,14 @@ import React from 'react'
 import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
 import Donut from './Donut.jsx'
 import CustomizeField from './CustomizeField'
+import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
 const CustomizeComponentDataConCfigField = 
     (name) => 
     (props) => 
     <CustomizeField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
 
-export default class ComponentObject extends BaseComponentObject {
+class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentDataConfigs = {
@@ -26,3 +27,6 @@ export default class ComponentObject extends BaseComponentObject {
         return <p>环图</p>;
     }
 }
+
+let componentDescribe = new ComponentDescribe("Donut", new ComponentObject(), componentType.graph);
+export default componentDescribe;
