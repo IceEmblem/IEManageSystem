@@ -43,9 +43,17 @@ class BaseComponentContainer extends React.Component {
         return className;
     }
 
-    createChildrenComponent() 
-    {
+    createChildComponent(){
         return undefined;
+    }
+
+    createComponent() 
+    {
+        return this.componentObject.Component({
+            componentData: this.props.contentComponentData,
+            pageComponentSettings:this.getPageComponentSettings() || [],
+            targetPageId: this.props.pageComponent.targetPageId
+        }, this.createChildComponent())
     }
 
     getTools(){
@@ -56,16 +64,12 @@ class BaseComponentContainer extends React.Component {
         return this.props.pageComponent.pageComponentSettings
     }
 
-    getComponentData(){
-        return this.props.componentDatas.find(e=>e.sign==this.props.pageComponent.sign)
-    }
-
     render() 
     {
         return (
             <div style={this.getStyle()} className={`parentcomponent ${this.getClassName()}`}>
                 <div className="w-100">
-                    {this.createChildrenComponent()}
+                    {this.createComponent()}
                 </div>
                 {this.getTools()}
             </div>
@@ -74,7 +78,8 @@ class BaseComponentContainer extends React.Component {
 }
 
 BaseComponentContainer.propTypes = {
-    pageComponent: PropTypes.object.isRequired
+    pageComponent: PropTypes.object.isRequired,
+    contentComponentData: PropTypes.object
 }
 
 BaseComponentContainer.defaultProps = {

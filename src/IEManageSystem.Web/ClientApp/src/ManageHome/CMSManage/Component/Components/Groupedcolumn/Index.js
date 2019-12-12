@@ -23,21 +23,19 @@ export default class ComponentObject extends BaseComponentObject {
             new ComponentSettingConfig(
                 "otherSetting",
                 "柱状图配置",
-                (props) => {
-                    // props.pageComponentSetting
-                    // props.setPageComponentSetting
+                (pageComponentSetting, setPageComponentSetting) => {
                     return (<div>
                         <BaseField
                             text="柱1名称"
-                            fieldValue={props.pageComponentSetting.field1}
+                            fieldValue={pageComponentSetting.field1}
                             setFieldValue={(value) => {
-                                props.setPageComponentSetting({ ...props.pageComponentSetting, ...{ field1: value } })
+                                setPageComponentSetting({ ...pageComponentSetting, ...{ field1: value } })
                             }} />
                         <BaseField
                             text="柱2名称"
-                            fieldValue={props.pageComponentSetting.field2}
+                            fieldValue={pageComponentSetting.field2}
                             setFieldValue={(value) => {
-                                props.setPageComponentSetting({ ...props.pageComponentSetting, ...{ field2: value } })
+                                setPageComponentSetting({ ...pageComponentSetting, ...{ field2: value } })
                             }} />
                     </div>)
                 }

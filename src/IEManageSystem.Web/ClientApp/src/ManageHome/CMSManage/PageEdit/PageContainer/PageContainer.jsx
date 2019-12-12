@@ -8,7 +8,7 @@ import './PageContainer.css'
 
 import PageEditCompontContainer from 'CMSManage/Component/ComponentContainers/PageEditCompontContainer'
 
-import { pageAddComponent, pageComponentUpdateFetch, pageComponentFetch } from 'CMSManage/IEReduxs/Actions'
+import { pageAddComponent, pageComponentUpdateFetch, pageFetch } from 'CMSManage/IEReduxs/Actions'
 
 import {ieReduxFetch} from 'Core/IEReduxFetch'
 
@@ -27,7 +27,7 @@ class PageContainer extends React.Component {
         this.submitPage = this.submitPage.bind(this);
         this.addComponent = this.addComponent.bind(this);
 
-        this.props.pageComponentFetch(props.pageName);
+        this.props.pageFetch(props.pageName);
     }
 
     getPage(name) {
@@ -48,13 +48,13 @@ class PageContainer extends React.Component {
     submitPage() {
         this.props.pageComponentUpdateFetch(
             this.props.pageName,
-            this.props.pageComponents
+            this.props.page.pageComponents
         );
     }
 
     addComponent(){
         let pageComponent = CreateComponentService.createComponent(
-            this.props.pageComponents, 
+            this.props.page.pageComponents, 
             this.props.selectedComponentDescribe,
             null);
 
@@ -118,7 +118,7 @@ class PageContainer extends React.Component {
                 </div>
                 <div className="page-container-body">
                     {
-                        this.props.pageComponents.filter(item => !item.parentSign).map(item =>
+                        this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                             <PageEditCompontContainer
                                 key={item.sign}
                                 pageComponent={item}
@@ -143,16 +143,16 @@ class PageContainer extends React.Component {
 
 PageContainer.propTypes = {
     selectedComponentDescribe: PropTypes.object,
-    pageComponents: PropTypes.array,
+    page: PropTypes.object,
     pageName: PropTypes.string.isRequired,
     addComponent: PropTypes.func.isRequired,
     pageComponentUpdateFetch: PropTypes.func.isRequired,
-    pageComponentFetch: PropTypes.func.isRequired
+    pageFetch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        pageComponents: state.pageComponents,
+        page: state.page,
         pageName: ownProps.pageName
     }
 }
@@ -165,8 +165,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         pageComponentUpdateFetch: (name, components) => {
             dispatch(pageComponentUpdateFetch(name, components));
         },
-        pageComponentFetch: (name) => {
-            dispatch(pageComponentFetch(name));
+        pageFetch: (name) => {
+            dispatch(pageFetch(name));
         }
     }
 }

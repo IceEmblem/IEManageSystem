@@ -5,15 +5,15 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
 import './PageContainer.css'
 
-import { pageComponentFetch, componentDatasFetch } from 'CMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
 import FrontCompontContainer from 'CMSManage/Component/ComponentContainers/FrontCompontContainer'
 
 class PageContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.props.pageComponentFetch(this.props.pageName);
-        this.props.componentDatasFetch(this.props.pageName, this.props.pageDataName);
+        this.props.pageFetch(this.props.pageName);
+        this.props.pageDataFetch(this.props.pageName, this.props.pageDataName);
     }
 
     componentWillUpdate(nextProps) {
@@ -21,15 +21,15 @@ class PageContainer extends React.Component {
             return;
         }
 
-        this.props.pageComponentFetch(nextProps.pageName);
-        this.props.componentDatasFetch(nextProps.pageName, nextProps.pageDataName);
+        this.props.pageFetch(nextProps.pageName);
+        this.props.pageDataFetch(nextProps.pageName, nextProps.pageDataName);
     }
 
     render() {
         return (
             <div className="front-page-container">
                 {
-                    this.props.pageComponents.filter(item => !item.parentSign).map(item =>
+                    this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                         <FrontCompontContainer
                             key={item.sign}
                             pageComponent={item}
@@ -42,12 +42,11 @@ class PageContainer extends React.Component {
 }
 
 PageContainer.propTypes = {
-    pageComponents: PropTypes.array,
-    componentDatasDidInvalidate: PropTypes.bool.isRequired,
+    page: PropTypes.object,
     pageName: PropTypes.string.isRequired,
     pageDataName: PropTypes.string,
-    pageComponentFetch: PropTypes.func.isRequired,
-    componentDatasFetch: PropTypes.func.isRequired
+    pageFetch: PropTypes.func.isRequired,
+    pageDataFetch: PropTypes.func.isRequired
 }
 
 PageContainer.defaultProps = {
@@ -56,8 +55,7 @@ PageContainer.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        pageComponents: state.pageComponents,
-        componentDatasDidInvalidate: state.componentData.componentDatasDidInvalidate,
+        page: state.page,
         pageName: ownProps.match.params.pageName,
         pageDataName: ownProps.match.params.pageDataName
     }
@@ -65,11 +63,11 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        pageComponentFetch: (name) => {
-            dispatch(pageComponentFetch(name));
+        pageFetch: (name) => {
+            dispatch(pageFetch(name));
         },
-        componentDatasFetch: (pageName, pageDataName) => {
-            dispatch(componentDatasFetch(pageName, pageDataName));
+        pageDataFetch: (pageName, pageDataName) => {
+            dispatch(pageDataFetch(pageName, pageDataName));
         }
     }
 }

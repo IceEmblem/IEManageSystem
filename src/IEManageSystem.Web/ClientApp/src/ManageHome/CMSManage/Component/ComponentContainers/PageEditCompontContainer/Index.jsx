@@ -26,18 +26,14 @@ class PageEditCompontContainer extends BaseComponentContainer {
         this.addChildComponent = this.addChildComponent.bind(this);
     }
 
-    createChildrenComponent() {
-        let childrens = this.props.childPageComponents.map(item => (
+    createChildComponent(){
+        return this.props.childPageComponents.map(item => (
             <Contain
                 selectedComponentDescribe={this.props.selectedComponentDescribe}
                 pageComponent={item}
             >
             </Contain>)
         );
-
-        return this.componentObject.Component({
-            pageComponentSettings:this.getPageComponentSettings() || [],
-        }, childrens)
     }
 
     addChildComponent() {
@@ -66,7 +62,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
         tools.push(<EditFrame 
             baseSetting={baseSetting}
             pageComponent={this.props.pageComponent} 
-            pageComponentSettingConfigs={this.componentObject.ComponentSettingConfigs}
+            componentSettingConfigs={this.componentObject.ComponentSettingConfigs}
             editComponent={this.props.editComponent}
             show={this.state.openEdit}
             close={()=>{this.setState({openEdit: false})}}
@@ -117,7 +113,7 @@ PageEditCompontContainer.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
-    let childPageComponents = state.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
+    let childPageComponents = state.page.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
 
     return {
         childPageComponents: childPageComponents

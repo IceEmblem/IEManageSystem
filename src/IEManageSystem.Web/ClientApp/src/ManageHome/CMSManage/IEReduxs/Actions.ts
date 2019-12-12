@@ -28,16 +28,16 @@ export function pageEditComponent(pageComponent:PageComponentModel) {
 }
 
 // 页面组件请求
-export const PageComponentReceive = "PageComponentReceive"
-export function pageComponentFetch(name:string){
+export const PageReceive = "PageReceive"
+export function pageFetch(name:string){
   let postData = {
     name: name
   };
 
   return createIEThunkAction(
-    "/api/PageQuery/GetPageComponent",
+    "/api/PageQuery/GetPage",
     postData,
-    PageComponentReceive
+    PageReceive
   );
 }
 
@@ -57,17 +57,17 @@ export function pageComponentUpdateFetch(name:string, components:PageComponentMo
 }
 
 // 文章数据请求
-export const ComponentDatasReceive = "ComponentDatasReceive"
-export function componentDatasFetch(pageName:string, pageDataName:string){
+export const PageDataReceive = "PageDataReceive"
+export function pageDataFetch(pageName:string, pageDataName:string){
   let postData = {
     pageName: pageName,
     pageDataName: pageDataName
   };
 
   return createIEThunkAction(
-    "/api/PageQuery/GetComponentDatas",
+    "/api/PageQuery/GetPageData",
     postData,
-    ComponentDatasReceive
+    PageDataReceive
   );
 }
 

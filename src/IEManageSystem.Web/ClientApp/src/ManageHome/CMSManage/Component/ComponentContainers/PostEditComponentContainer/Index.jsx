@@ -25,24 +25,14 @@ class PostEditComponentContainer extends BaseComponentContainer {
         this.setState({show: false});
     }
 
-    createChildrenComponent() 
-    {
-        let pageComponent = this.props.pageComponent;
-
-        let childrens = this.props.childPageComponents.map(item => (
+    createChildComponent(){
+        return this.props.childPageComponents.map(item => (
             <Contain
                 pageComponent={item}
                 componentDataUpdate={this.props.componentDataUpdate}
             >
             </Contain>)
         );
-
-        // componentObject.Component （指定的组件类类型）
-        return this.componentObject.Component({
-            componentData:this.getComponentData(),
-            pageComponentSettings:this.getPageComponentSettings() || [],
-            targetPageId:pageComponent.targetPageId
-        }, childrens)
     }
 
     getTools()
@@ -63,7 +53,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
                 close={()=>{this.setState({show: false})}}
                 submit={this.submit}
                 pageComponent={pageComponent}
-                componentData={this.getComponentData()}
+                componentData={this.props.contentComponentData}
                 config={this.componentObject.ComponentDataConfigs}
             ></EditFrame>);
         tools.push(
@@ -88,7 +78,7 @@ PostEditComponentContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
     childPageComponents: PropTypes.array.isRequired,
     componentDataUpdate: PropTypes.func.isRequired,
-    componentDatas: PropTypes.array
+    contentComponentData: PropTypes.object
 }
 
 PostEditComponentContainer.defaultProps = {
@@ -96,11 +86,12 @@ PostEditComponentContainer.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
-    let childPageComponents = state.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
+    let childPageComponents = state.page.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
+    let contentComponentData = state.pageData.contentComponentDatas.find(e=>e.sign == ownProps.pageComponent.sign)
 
     return {
         childPageComponents: childPageComponents,
-        componentDatas: state.componentData.componentDatas
+        contentComponentData: contentComponentData
     }
 }
 

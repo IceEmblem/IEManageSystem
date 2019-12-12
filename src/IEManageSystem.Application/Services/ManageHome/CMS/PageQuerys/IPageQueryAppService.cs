@@ -12,10 +12,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
 
         GetPageOutput GetPage(GetPageInput input);
 
-        GetPageComponentOutput GetPageComponent(GetPageComponentInput input);
-
         GetPageDatasOutput GetPageDatas(GetPageDatasInput input);
 
-        GetComponentDataOutput GetComponentDatas(GetComponentDataInput input);
+        GetPageDataOutput GetPageData(GetPageDataInput input);
     }
 }

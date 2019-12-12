@@ -1,64 +1,4 @@
 {
-    "GetPageComponent": {
-        "pageComponents": [
-            {
-                "name": "CitiesSlider",
-                "sign": "1",
-                "parentSign": null,
-                "margin": null,
-                "backgroundColor": null,
-                "className": null,
-                "targetPageId": null,
-                "col": "12",
-                "height": "27rem",
-                "padding": "0rem",
-                "componentType": "ContentLeafComponent",
-                "pageComponentSettings": []
-            },
-            {
-                "name": "RichTextEditor",
-                "sign": "2",
-                "parentSign": null,
-                "margin": null,
-                "backgroundColor": null,
-                "className": null,
-                "targetPageId": null,
-                "col": "12",
-                "height": "",
-                "padding": "0rem",
-                "componentType": "ContentLeafComponent",
-                "pageComponentSettings": []
-            },
-            {
-                "name": "Progress",
-                "sign": "3",
-                "parentSign": null,
-                "margin": null,
-                "backgroundColor": null,
-                "className": null,
-                "targetPageId": null,
-                "col": "12",
-                "height": "",
-                "padding": "0rem",
-                "componentType": "ContentLeafComponent",
-                "pageComponentSettings": []
-            },
-            {
-                "name": "PostList",
-                "sign": "4",
-                "parentSign": null,
-                "margin": null,
-                "backgroundColor": null,
-                "className": null,
-                "col": "12",
-                "height": "",
-                "padding": "0rem",
-                "componentType": "PageLeafComponent",
-                "pageComponentSettings": [],
-                "targetPageId": 1
-            }
-        ]
-    },
     "GetPage": {
         "page": {
             "id": 1,
@@ -169,8 +109,5 @@
             "title": "文章1",
             "contentComponentDatas": []
         }
-    },
-    "GetComponentDatas": {
-        "componentDatas": []
     }
 }

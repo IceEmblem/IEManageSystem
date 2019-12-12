@@ -5,21 +5,15 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
 import './Index.css'
 
-import { pageComponentFetch, componentDatasFetch, componentDataUpdateFetch, componentDataUpdate } from 'CMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch, componentDataUpdateFetch, componentDataUpdate } from 'CMSManage/IEReduxs/Actions'
 import PostEditComponentContainer from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer'
 
 class ComponentData extends React.Component {
     constructor(props) {
         super(props);
 
-        this.props.pageComponentFetch(this.props.pageName);
-        this.props.componentDatasFetch(this.props.pageName, this.props.pageDataName);
-    }
-
-    componentWillUpdate(nextProps) {
-        if (nextProps.componentDatasDidInvalidate) {
-            this.props.componentDatasFetch(this.props.pageName, this.props.pageDataName);
-        }
+        this.props.pageFetch(this.props.pageName);
+        this.props.pageDataFetch(this.props.pageName, this.props.pageDataName);
     }
 
     render() {
@@ -27,7 +21,7 @@ class ComponentData extends React.Component {
             <div className="page-container">
                 <div className="">
                     <button type="button" className="btn btn-warning mr-2"
-                        onClick={()=>this.props.componentDatasFetch(this.props.pageName, this.props.pageDataName)}
+                        onClick={()=>this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)}
                     >
                         取消修改
                         <span className="oi padding-left-10 oi-action-undo" title="icon name" aria-hidden="true"></span>
@@ -35,7 +29,7 @@ class ComponentData extends React.Component {
                     <button type="button" className="btn btn-info"
                         onClick={
                             ()=>{
-                                this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.componentDatas);
+                                this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.pageData.contentComponentDatas);
                             }
                         }
                     >
@@ -45,7 +39,7 @@ class ComponentData extends React.Component {
                 </div>
                 <div className="page-container-body">
                     {
-                        this.props.pageComponents.filter(item => !item.parentSign).map(item =>
+                        this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                             <PostEditComponentContainer
                                 key={item.sign}
                                 pageComponent={item}
@@ -60,22 +54,20 @@ class ComponentData extends React.Component {
 }
 
 ComponentData.propTypes = {
-    pageComponents: PropTypes.array,
-    componentDatas: PropTypes.array,
-    componentDatasDidInvalidate: PropTypes.bool.isRequired,
+    page: PropTypes.object,
+    pageData: PropTypes.object,
     pageName: PropTypes.string.isRequired,
     pageDataName: PropTypes.string,
-    pageComponentFetch: PropTypes.func.isRequired,
-    componentDatasFetch: PropTypes.func.isRequired,
+    pageFetch: PropTypes.func.isRequired,
+    pageDataFetch: PropTypes.func.isRequired,
     componentDataUpdateFetch: PropTypes.func.isRequired,
     componentDataUpdate: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        pageComponents: state.pageComponents,
-        componentDatas: state.componentData.componentDatas,
-        componentDatasDidInvalidate: state.componentData.componentDatasDidInvalidate,
+        page: state.page,
+        pageData: state.pageData,
         pageName: ownProps.match.params.pageName,
         pageDataName: ownProps.match.params.pageDataName
     }
@@ -83,11 +75,11 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        pageComponentFetch: (name) => {
-            dispatch(pageComponentFetch(name));
+        pageFetch: (name) => {
+            dispatch(pageFetch(name));
         },
-        componentDatasFetch: (pageName, pageDataName) => {
-            dispatch(componentDatasFetch(pageName, pageDataName));
+        pageDataFetch: (pageName, pageDataName) => {
+            dispatch(pageDataFetch(pageName, pageDataName));
         },
         componentDataUpdateFetch: (pageName, pageDataName, componentDatas) => {
             dispatch(componentDataUpdateFetch(pageName, pageDataName, componentDatas));

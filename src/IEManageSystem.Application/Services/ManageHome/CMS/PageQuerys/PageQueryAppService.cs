@@ -90,22 +90,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             return new GetPageOutput() { Page = CreatePageDtos(page) };
         }
 
-        /// <summary>
-        /// 待删除-----------------------------------------------
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public GetPageComponentOutput GetPageComponent(GetPageComponentInput input)
-        {
-            List<PageComponentDto> dtos = new List<PageComponentDto>();
-            foreach (var item in _pageManager.GetPageComponents(input.Name))
-            {
-                dtos.Add(CreatePageComponentDto(item));
-            }
-
-            return new GetPageComponentOutput() { PageComponents = dtos };
-        }
-
         private PageDto CreatePageDtos(PageBase page)
         {
             var pageDto = new PageDto();
@@ -224,21 +208,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             return new GetPageDataOutput()
             {
                 PageData = _objectMapper.Map<PageDataDto>(pageData)
-            };
-        }
-
-        /// <summary>
-        /// 待删除------------------------------
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public GetComponentDataOutput GetComponentDatas(GetComponentDataInput input)
-        {
-            var pageData = _pageDataManager.GetPageDataIncludeAllProperty(input.PageName, input.PageDataName);
-
-            return new GetComponentDataOutput()
-            {
-                ComponentDatas = _objectMapper.Map<List<ContentComponentDataDto>>(pageData.ContentComponentDatas)
             };
         }
     }

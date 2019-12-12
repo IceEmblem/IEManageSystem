@@ -8,6 +8,7 @@ import RichTextEditor from './RichTextEditor'
 import FlipClock from './FlipClock'
 import Progress from './Progress'
 import PostList from './PostList'
+import IELoading from './IELoading'
 
 let ComponentDescribes = null;
 
@@ -51,6 +52,7 @@ export default class ComponentFactory {
         ComponentDescribes.push({ componentObject: new CitiesSlider(), name: "CitiesSlider" });
         ComponentDescribes.push({ componentObject: new FlipClock(), name: "FlipClock" });
         ComponentDescribes.push({ componentObject: new Progress(), name: "Progress" });
+        ComponentDescribes.push({ componentObject: new IELoading(), name: "IELoading" });
     }
     
 
