@@ -1,4 +1,5 @@
 interface PageComponentModel{
+    id:number,
     name:string,
     sign:string,
     parentSign:string | null,

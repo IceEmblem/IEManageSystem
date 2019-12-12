@@ -21,5 +21,7 @@ namespace IEManageSystem.Dtos.CMS
         /// StaticPage || ContentPage
         /// </summary>
         public string PageType { get; set; }
+
+        public IEnumerable<PageComponentDto> PageComponents { get; set; }
     }
 }

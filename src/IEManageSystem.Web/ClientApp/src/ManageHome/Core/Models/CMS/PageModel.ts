@@ -4,4 +4,5 @@ interface PageModel{
     displayName:string,
     description:string,
     pageType:string,
+    pageComponents:Array<PageComponentModel>
 }

@@ -45,39 +45,18 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
 
             pages = pages.Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize);
 
+            List<PageDto> pageDtos = new List<PageDto>();
+
+            foreach (var page in pages) {
+                pageDtos.Add(CreatePageDtos(page));
+            }
+
             return new GetPagesOutput()
             {
                 ResourceNum = pageNum,
                 PageIndex = input.PageIndex,
-                Pages = CreatePageDtos(pages.ToList())
+                Pages = pageDtos,
             };
-        }
-
-        private List<PageDto> CreatePageDtos(List<PageBase> pageBases)
-        {
-            List<PageDto> pageDtos = new List<PageDto>();
-
-            foreach (var page in pageBases)
-            {
-                var pageDto = new PageDto();
-                pageDto.Id = page.Id;
-                pageDto.Name = page.Name;
-                pageDto.DisplayName = page.DisplayName;
-                pageDto.Description = page.Description;
-
-                if (page is StaticPage)
-                {
-                    pageDto.PageType = "StaticPage";
-                }
-                else if (page is ContentPage)
-                {
-                    pageDto.PageType = "ContentPage";
-                }
-
-                pageDtos.Add(pageDto);
-            }
-
-            return pageDtos;
         }
 
         private IEnumerable<PageBase> GetPagesForSearchKey(string searchKey)
@@ -90,14 +69,15 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
         public GetPageOutput GetPage(GetPageInput input)
         {
             PageBase page = null;
+            
             if (input.Id != null)
             {
-                page = _repository.FirstOrDefault(input.Id.Value);
+                page = _repository.ThenInclude(p => p.PageComponents, pageComponent => pageComponent.PageComponentSettings).FirstOrDefault(e => e.Id == input.Id.Value);
             }
 
             if (page == null && !string.IsNullOrWhiteSpace(input.Name))
             {
-                page = _repository.FirstOrDefault(item => item.Name == input.Name);
+                page = _repository.ThenInclude(p => p.PageComponents, pageComponent => pageComponent.PageComponentSettings).FirstOrDefault(item => item.Name == input.Name);
             }
 
             if (page == null)
@@ -105,9 +85,16 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
                 return new GetPageOutput() { Page = null };
             }
 
-            return new GetPageOutput() { Page = _objectMapper.Map<PageDto>(page) };
+
+
+            return new GetPageOutput() { Page = CreatePageDtos(page) };
         }
 
+        /// <summary>
+        /// 待删除-----------------------------------------------
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public GetPageComponentOutput GetPageComponent(GetPageComponentInput input)
         {
             List<PageComponentDto> dtos = new List<PageComponentDto>();
@@ -117,6 +104,38 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             }
 
             return new GetPageComponentOutput() { PageComponents = dtos };
+        }
+
+        private PageDto CreatePageDtos(PageBase page)
+        {
+            var pageDto = new PageDto();
+            pageDto.Id = page.Id;
+            pageDto.Name = page.Name;
+            pageDto.DisplayName = page.DisplayName;
+            pageDto.Description = page.Description;
+
+            if (page is StaticPage)
+            {
+                pageDto.PageType = "StaticPage";
+            }
+            else if (page is ContentPage)
+            {
+                pageDto.PageType = "ContentPage";
+            }
+
+            if (page.PageComponents == null) {
+                return pageDto;
+            }
+
+            List<PageComponentDto> pageComponents = new List<PageComponentDto>();
+            foreach (var pageComponent in page.PageComponents) 
+            {
+                pageComponents.Add(CreatePageComponentDto(pageComponent));
+            }
+
+            pageDto.PageComponents = pageComponents;
+
+            return pageDto;
         }
 
         private PageComponentDto CreatePageComponentDto(PageComponentBase page)
@@ -198,6 +217,21 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             };
         }
 
+        public GetPageDataOutput GetPageData(GetPageDataInput input) 
+        {
+            var pageData = _pageDataManager.GetPageDataIncludeAllProperty(input.PageName, input.PageDataName);
+
+            return new GetPageDataOutput()
+            {
+                PageData = _objectMapper.Map<PageDataDto>(pageData)
+            };
+        }
+
+        /// <summary>
+        /// 待删除------------------------------
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public GetComponentDataOutput GetComponentDatas(GetComponentDataInput input)
         {
             var pageData = _pageDataManager.GetPageDataIncludeAllProperty(input.PageName, input.PageDataName);
