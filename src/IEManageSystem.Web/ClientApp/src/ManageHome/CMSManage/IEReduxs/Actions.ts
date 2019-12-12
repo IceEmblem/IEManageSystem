@@ -27,22 +27,6 @@ export function pageEditComponent(pageComponent:PageComponentModel) {
   }
 }
 
-// 页面列表请求
-export const PagesReceive = "PagesReceive"
-export function pagesFetch(pageIndex:number, pageSize:number, searchKey:string) {
-  let postData = {
-    pageIndex: pageIndex,
-    pageSize: pageSize,
-    searchKey: searchKey
-  };
-
-  return createIEThunkAction(
-    "/api/PageQuery/GetPages",
-    postData,
-    PagesReceive
-  );
-}
-
 // 页面组件请求
 export const PageComponentReceive = "PageComponentReceive"
 export function pageComponentFetch(name:string){
@@ -69,23 +53,6 @@ export function pageComponentUpdateFetch(name:string, components:PageComponentMo
     "/api/PageManage/UpdatePageComponent",
     postData,
     PageComponentUpdateReceive
-  );
-}
-
-// 文章列表请求
-export const PageDatasReceive = "PageDatasReceive"
-export function pageDatasFetch(pageIndex:number, pageSize:number, searchKey:string, pageName:string){
-  let postData = {
-    pageIndex: pageIndex,
-    pageSize: pageSize,
-    searchKey: searchKey,
-    pageName: pageName
-  };
-
-  return createIEThunkAction(
-    "/api/PageQuery/GetPageDatas",
-    postData,
-    PageDatasReceive
   );
 }
 

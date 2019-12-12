@@ -2,6 +2,7 @@ class CreatePageComponentService{
     private createComponent(sign:string, name:string, componentType:string):PageComponentModel
     {
         let pageComponent:PageComponentModel = {
+            id: 0,
             sign: sign,
             name: name,
             parentSign: null,

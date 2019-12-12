@@ -1,27 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BaseSetting from './BaseSetting'
-import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import { pagesFetch } from 'CMSManage/IEReduxs/Actions'
+import {ieReduxFetch} from "Core/IEReduxFetch"
 
 class PageLeafBaseSetting extends BaseSetting {
     constructor(props) {
         super(props)
 
-        if (this.props.pagesDidInvalidate) {
-            this.props.pagesFetch();
+        this.state = {
+            pages:[]
         }
     }
 
+    componentDidMount(){
+        ieReduxFetch("/api/PageQuery/GetPages", {})
+        .then(value=>{
+            this.setState({pages:value.pages});
+        })
+    }
+
     customizeFields() {
-        let pageList = this.props.pages.map(item => <option value={item.id}>{item.displayName}</option>);
+        let pageList = this.state.pages.map(item => <option value={item.id}>{item.displayName}</option>);
 
         // 如果当前没有选择页面且有页面，则默认选择第一个页面
         if (!this.props.pageComponentSetting.targetPageId &&
-            this.props.pages.length > 0) {
+            this.state.pages.length > 0) {
             this.props.setPageComponentSetting({
                 ...this.props.pageComponentSetting,
-                ...{ targetPageId: this.props.pages[0].id }
+                ...{ targetPageId: this.state.pages[0].id }
             })
         }
 
@@ -50,29 +56,8 @@ class PageLeafBaseSetting extends BaseSetting {
 }
 
 PageLeafBaseSetting.propTypes = {
-    pages: PropTypes.array.isRequired,
-    pagesDidInvalidate: PropTypes.bool.isRequired,
-    pagesFetch: PropTypes.func.isRequired,
     pageComponentSetting: PropTypes.object.isRequired,
     setPageComponentSetting: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    return {
-        pages: state.page.pages,
-        pagesDidInvalidate: state.page.pagesDidInvalidate
-    }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        pagesFetch: (searchKey) => { dispatch(pagesFetch(1, 9999, searchKey)) }
-    }
-}
-
-const Contain = CmsRedux.connect(
-    mapStateToProps, // 关于state
-    mapDispatchToProps
-)(PageLeafBaseSetting)
-
-export default Contain
+export default PageLeafBaseSetting

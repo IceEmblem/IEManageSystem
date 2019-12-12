@@ -2,9 +2,7 @@ import {
     PageAddComponent, 
     PageRemoveComponent, 
     PageEditComponent,
-    PagesReceive,
     PageComponentReceive,
-    PageDatasReceive,
     ComponentDatasReceive,
     ComponentDataUpdateReceive,
     ComponentDataUpdate} from './Actions'
@@ -25,47 +23,6 @@ function pageComponents(state:Array<PageComponentModel> = [], action:any){
             return newState
         case PageComponentReceive:
             return action.data.pageComponents
-        default:
-            return state;
-    }
-}
-
-// 页面Reducer
-function page(state = {
-    pages:new Array<PageModel>(),
-    resourceNum:0,
-    pageIndex: 1,
-    pagesDidInvalidate: true
-}, action:any)
-{
-    switch(action.type){
-        case PagesReceive:
-            return {...state, ...{
-                pages:action.data.pages,
-                resourceNum: action.data.resourceNum,
-                pageIndex: action.data.pageIndex,
-                pagesDidInvalidate: false
-            }};
-        default:
-            return state;
-    }
-}
-
-function pageData(state = {
-    pageDatas:new Array<PageModel>(),
-    resourceNum: 0,
-    pageIndex: 1,
-    pageDatasDidInvalidate: false
-}, action:any){
-    switch(action.type)
-    {
-        case PageDatasReceive:
-            return {...state, ...{
-                pageDatas: action.data.pageDatas,
-                resourceNum: action.data.resourceNum,
-                pageIndex: action.data.pageIndex,
-                pageDatasDidInvalidate: false
-            }}
         default:
             return state;
     }
@@ -108,9 +65,7 @@ export function reducer(state:any = {
 {
     return Object.assign({}, state, 
     {
-        page:page(state.page, action),
         pageComponents: pageComponents(state.pageComponents, action),
-        pageData:pageData(state.pageData, action),
         componentData: componentData(state.componentData, action)
     })
 }
