@@ -7,7 +7,6 @@ var pathMap = require('./src/pathmap.json');
 var srcPath = path.resolve('./src');
 var libPath = path.resolve('./src/lib');
 var commonPath = path.resolve('./src/Common');
-var ManageHomePath = path.resolve('./src/ManageHome');
 var nodeModPath = path.resolve(__dirname, './node_modules');
 
 const webpack = require('webpack');
@@ -89,7 +88,7 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', ".ts", ".tsx", '.jsx', "*", ".css"],
-        modules:[srcPath, libPath, commonPath, ManageHomePath, nodeModPath],
+        modules:[srcPath, libPath, commonPath, nodeModPath],
         alias: pathMap
     }
 }

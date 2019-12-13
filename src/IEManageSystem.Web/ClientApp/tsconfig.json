@@ -8,7 +8,7 @@
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
     "baseUrl": "./",
     "paths": {
-      "*": ["src/*", "src/ManageHome/*", "src/lib/*", "src/Common/*"]
+      "*": ["src/*", "src/lib/*", "src/Common/*"]
     }
   }
 }

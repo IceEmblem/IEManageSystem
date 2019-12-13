@@ -10,7 +10,6 @@ module.exports = {
     // 源码搜索路径
     modulePaths:[
         "<rootDir>/src/",
-        "<rootDir>/src/ManageHome/",
         "<rootDir>/src/lib/",
         "<rootDir>/src/Common/"
     ]

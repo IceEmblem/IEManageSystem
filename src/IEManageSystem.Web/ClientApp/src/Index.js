@@ -29,9 +29,6 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 {PageProvider.pages.map(item => (<Route key={item.url} path={item.url} component={item.component} />))}
-                {/* <Route path="/ManageHome" component={ManageHome} />
-                <Route path="/Account" component={Account} />
-                <Route path="/" component={Home} /> */}
             </Switch>
         </BrowserRouter>
     </Provider>,

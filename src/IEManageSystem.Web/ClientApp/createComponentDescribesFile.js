@@ -2,7 +2,7 @@
 
 var fs = require("fs");
 
-const componentsDirPath = __dirname + '/src/ManageHome/CMSManage/Component/Components'
+const componentsDirPath = __dirname + '/src/CMSManage/Component/Components'
 
 var componentPaths = [];
 
@@ -23,7 +23,7 @@ files.forEach(function (file) {
     let stats =fs.statSync(componentPath);
 
     if (stats.isDirectory()) {
-        componentPaths.push(componentPath.replace(__dirname + "/src/ManageHome/", ""));
+        componentPaths.push(componentPath.replace(__dirname + "/src/", ""));
     }
 });
 
