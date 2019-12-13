@@ -9,12 +9,16 @@ import CMSManageModule from 'CMSManage/Module'
 import { reducer } from 'Layout/IEReduxs/Reducers'
 import LayoutRedux from 'Layout/IEReduxs/LayoutRedux'
 import RootRedux from 'Core/IEReduxs/RootRedux'
+import PageProvider from 'Core/Page/PageProvider'
+import Page from 'Core/Page/Page'
+import ManageHome from './ManageHome'
 
 export default class Module extends BaseModule
 {
     initialize(){
         LayoutRedux.setReducer(reducer);
         RootRedux.register(LayoutRedux);
+        PageProvider.register(new Page("ManageHome", "/ManageHome", ManageHome));
     }
 }
 

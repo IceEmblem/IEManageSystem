@@ -8,6 +8,9 @@ import { reducer } from 'CMSManage/IEReduxs/Reducers'
 import IERedux from 'CMSManage/IEReduxs/CmsRedux'
 import RootRedux from 'Core/IEReduxs/RootRedux'
 import CoreModel from 'Core/Module';
+import PageProvider from 'Core/Page/PageProvider'
+import Page from 'Core/Page/Page'
+import Home from './Home'
 
 export default class Module extends BaseModule {
     initialize() {
@@ -56,6 +59,7 @@ export default class Module extends BaseModule {
 
         IERedux.setReducer(reducer);
         RootRedux.register(IERedux);
+        PageProvider.register(new Page("Home", "/", Home));
     }
 }
 

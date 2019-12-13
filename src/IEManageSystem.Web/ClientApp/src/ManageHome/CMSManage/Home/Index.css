@@ -1,0 +1,36 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background-image: url("background.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.front-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.front-container>div {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    overflow-y: scroll;
+    margin-right: -18px;
+}
+
+.front-container>div>div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-shrink: 0;
+    margin-top: 3.5rem;
+    margin-bottom: 2rem;
+}

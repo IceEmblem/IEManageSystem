@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux'
 
-import ManageHome from './ManageHome/index'
-import Home from './Home/Index.jsx'
-import Account from './Account/account.jsx'
+// 导入入口模块
+import 'Account/Module'
+import 'Layout/Module'
+
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import {getIEStore} from 'Core/IEStore'
+import PageProvider from 'Core/Page/PageProvider'
 
 import 'bootstrap';
 import 'bootstrapcss';
 import 'bootstrapcssicon';
+import 'mousewheel';
 import 'commoncss';
-// import 'cookie';
 import 'ielib';
 import 'css/simple-btn.css'
 
@@ -26,9 +28,10 @@ ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <Switch>
-                <Route path="/ManageHome" component={ManageHome} />
+                {PageProvider.pages.map(item => (<Route key={item.url} path={item.url} component={item.component} />))}
+                {/* <Route path="/ManageHome" component={ManageHome} />
                 <Route path="/Account" component={Account} />
-                <Route path="/" component={Home} />
+                <Route path="/" component={Home} /> */}
             </Switch>
         </BrowserRouter>
     </Provider>,

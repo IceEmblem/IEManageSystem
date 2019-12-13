@@ -1,14 +1,3 @@
-import Container from './Container'
-import Text from './Text'
-import CitiesSlider from './CitiesSlider'
-import Groupedcolumn from './Groupedcolumn'
-import Donut from './Donut'
-import Clock from './Clock'
-import RichTextEditor from './RichTextEditor'
-import FlipClock from './FlipClock'
-import Progress from './Progress'
-import PostList from './PostList'
-import IELoading from './IELoading'
 import {componentType} from './ComponentDescribe'
 import ComponentDescribes from './ComponentDescribeList';
 
@@ -22,33 +11,7 @@ export const componentTypes = [
 
 export default class ComponentFactory {
     constructor() {
-        if (ComponentDescribes == null) {
-            this.createComponentDescribes();
-        }
     }
-
-    createComponentDescribes() {
-        ComponentDescribes = [];
-
-        // ComponentDescribes 组件描述，描述组件的类型
-        // componentObject 组件对象
-        ComponentDescribes.push(Container);
-
-        ComponentDescribes.push(PostList);
-
-        ComponentDescribes.push(Text);
-        ComponentDescribes.push(RichTextEditor);
-
-        ComponentDescribes.push(Groupedcolumn);
-        ComponentDescribes.push(Donut);
-        ComponentDescribes.push(Clock);
-
-        ComponentDescribes.push(CitiesSlider);
-        ComponentDescribes.push(FlipClock);
-        ComponentDescribes.push(Progress);
-        ComponentDescribes.push(IELoading);
-    }
-    
 
     getComponentDescribes() {
         return [...ComponentDescribes];

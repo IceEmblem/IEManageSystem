@@ -4,6 +4,7 @@ var path = require("path");
 var pathMap = require('./src/pathmap.json');
 
 // 路径
+var srcPath = path.resolve('./src');
 var libPath = path.resolve('./src/lib');
 var commonPath = path.resolve('./src/Common');
 var ManageHomePath = path.resolve('./src/ManageHome');
@@ -88,7 +89,7 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', ".ts", ".tsx", '.jsx', "*", ".css"],
-        modules:[libPath, commonPath, ManageHomePath, nodeModPath],
+        modules:[srcPath, libPath, commonPath, ManageHomePath, nodeModPath],
         alias: pathMap
     }
 }
