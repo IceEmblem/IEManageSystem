@@ -11,6 +11,8 @@ import CoreModel from 'Core/Module';
 import PageProvider from 'Core/Page/PageProvider'
 import Page from 'Core/Page/Page'
 import Home from './Home'
+import PageEdit from "./PageEdit"
+import PostEdit from './PostEdit'
 
 export default class Module extends BaseModule {
     initialize() {
@@ -60,6 +62,8 @@ export default class Module extends BaseModule {
         IERedux.setReducer(reducer);
         RootRedux.register(IERedux);
         PageProvider.register(new Page("Home", "/", Home));
+        PageProvider.register(new Page("PageEdit", "/ManageHome/CMSManage/PageEdit/:pageName", PageEdit));
+        PageProvider.register(new Page("PostEdit", "/ManageHome/CMSManage/PostEdit/:pageName/:pageDataName?", PostEdit));
     }
 }
 
