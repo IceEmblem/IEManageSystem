@@ -10,8 +10,7 @@ import Progress from './Progress'
 import PostList from './PostList'
 import IELoading from './IELoading'
 import {componentType} from './ComponentDescribe'
-
-let ComponentDescribes = null;
+import ComponentDescribes from './ComponentDescribeList';
 
 export const componentTypes = [
     { name: componentType.container, text: "容器组件", icon: "oi-box" },

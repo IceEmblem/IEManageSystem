@@ -1,3 +1,5 @@
+require("./createComponentDescribesFile");
+
 var path = require("path");
 var pathMap = require('./src/pathmap.json');
 

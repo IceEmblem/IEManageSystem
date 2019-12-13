@@ -7,7 +7,7 @@ const datas = require('require-all')({
     dirname: __dirname + '/AnalogData',
 })
 
-console.log(datas);
+// console.log(datas);
 
 module.exports = merge(common, {
     devtool: 'inline-source-map',
