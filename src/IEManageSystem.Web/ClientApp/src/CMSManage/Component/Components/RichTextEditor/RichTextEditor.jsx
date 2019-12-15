@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseLeafComponent} from '../BaseLeafComponent'
+import {BaseContentLeafComponent} from '../BaseContentLeafComponent'
 
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
@@ -8,7 +8,7 @@ import 'braft-editor/dist/index.css'
 
 import './RichTextEditor.css'
 
-class RichTextEditor extends BaseLeafComponent {
+class RichTextEditor extends BaseContentLeafComponent {
     constructor(props) {
         super(props);
     }

@@ -111,7 +111,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             }
             else
             {
-                pageComponent = new ContentLeafComponent(dto.Name);
+                pageComponent = new LeafComponent(dto.Name);
             }
 
             pageComponent.Sign = dto.Sign;

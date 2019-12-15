@@ -31,7 +31,7 @@ namespace IEManageSystem.Dtos.CMS
         public int? TargetPageId { get; set; }
 
         /// <summary>
-        /// CompositeComponent, ContentLeafComponent, PageLeafComponent
+        /// CompositeComponent, LeafComponent, PageLeafComponent
         /// </summary>
         public string ComponentType { get; set; }
 

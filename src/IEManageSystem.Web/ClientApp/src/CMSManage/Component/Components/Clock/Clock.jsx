@@ -17,10 +17,10 @@ import {
 } from "bizcharts";
 import DataSet from "@antv/data-set";
 
-import { BaseField, BaseLeafComponent, BasePreview, ComponentSettingConfig, ComponentDataConfig } from '../BaseLeafComponent'
+import { BaseField, BaseContentLeafComponent, BasePreview, ComponentSettingConfig, ComponentDataConfig } from '../BaseContentLeafComponent'
 
 // 日常作息可视图
-class Clock extends BaseLeafComponent {
+class Clock extends BaseContentLeafComponent {
     static preview() {
         return (<p>日常作息可视图</p>);
     }

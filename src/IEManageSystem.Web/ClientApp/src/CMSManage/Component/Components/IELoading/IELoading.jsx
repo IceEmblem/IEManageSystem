@@ -1,10 +1,10 @@
 // 源码来源 https://www.html5tricks.com/html5-canvas-color-loading.html
 import React from 'react'
-import { BaseLeafComponent } from '../BaseLeafComponent'
+import { BaseContentLeafComponent } from '../BaseContentLeafComponent'
 
 import "./IELoading.css"
 
-export default class IELoading extends BaseLeafComponent {
+export default class IELoading extends BaseContentLeafComponent {
     componentDidMount(){
         this.load();
     }

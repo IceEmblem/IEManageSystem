@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseLeafComponent} from '../BaseLeafComponent'
+import {BaseContentLeafComponent} from '../BaseContentLeafComponent'
 
-class Text extends BaseLeafComponent
+class Text extends BaseContentLeafComponent
 {
     getComponentData(){
         return this.props.componentData || {};

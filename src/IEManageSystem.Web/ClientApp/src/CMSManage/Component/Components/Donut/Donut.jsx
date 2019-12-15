@@ -17,10 +17,10 @@ import {
 } from "bizcharts";
 import DataSet from "@antv/data-set";
 
-import {BaseLeafComponent} from '../BaseLeafComponent'
+import {BaseContentLeafComponent} from '../BaseContentLeafComponent'
 
 // 环图
-class Donut extends BaseLeafComponent {
+class Donut extends BaseContentLeafComponent {
     render() {
         const { DataView } = DataSet;
         let data = [];

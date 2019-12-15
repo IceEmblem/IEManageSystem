@@ -164,7 +164,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             }
             else
             {
-                dto.ComponentType = "ContentLeafComponent";
+                dto.ComponentType = "LeafComponent";
             }
 
             return dto;

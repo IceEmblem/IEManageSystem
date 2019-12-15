@@ -8,6 +8,20 @@
             "pageType": "StaticPage",
             "pageComponents": [
                 {
+                    "name": "IEMenu",
+                    "sign": "0",
+                    "parentSign": null,
+                    "margin": null,
+                    "backgroundColor": null,
+                    "className": null,
+                    "targetPageId": null,
+                    "col": null,
+                    "height": null,
+                    "padding": null,
+                    "componentType": "LeafComponent",
+                    "pageComponentSettings": []
+                },
+                {
                     "name": "CitiesSlider",
                     "sign": "1",
                     "parentSign": null,
@@ -18,7 +32,7 @@
                     "col": "12",
                     "height": "27rem",
                     "padding": "0rem",
-                    "componentType": "ContentLeafComponent",
+                    "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 },
                 {
@@ -32,7 +46,7 @@
                     "col": "12",
                     "height": "",
                     "padding": "0rem",
-                    "componentType": "ContentLeafComponent",
+                    "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 },
                 {
@@ -46,7 +60,7 @@
                     "col": "12",
                     "height": "",
                     "padding": "0rem",
-                    "componentType": "ContentLeafComponent",
+                    "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 },
                 {

@@ -25,9 +25,9 @@ class CreatePageComponentService{
         return this.createComponent(sign, name, "CompositeComponent")
     }
 
-    createContentLeafComponent(sign:string, name:string)
+    createLeafComponent(sign:string, name:string)
     {
-        return this.createComponent(sign, name, "ContentLeafComponent")
+        return this.createComponent(sign, name, "LeafComponent")
     }
 
     createPageLeafComponent(sign:string, name:string)

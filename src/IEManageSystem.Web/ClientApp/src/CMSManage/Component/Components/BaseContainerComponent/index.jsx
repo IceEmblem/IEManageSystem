@@ -1,6 +1,5 @@
 import BaseContainerComponent from './BaseContainerComponent';
 import BaseComponentObject, { BasePreview, ComponentSettingConfig, BaseComponentProps} from '../BaseComponent';
-import { ReactNode } from 'react';
 
 export default class ContainerComponentObject extends BaseComponentObject {
     Component(props, childrens){

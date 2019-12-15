@@ -522,11 +522,11 @@ namespace IEManageSystem.Migrations
                     b.HasDiscriminator().HasValue("CompositeComponent");
                 });
 
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.ContentLeafComponent", b =>
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.LeafComponent", b =>
                 {
                     b.HasBaseType("IEManageSystem.CMS.DomainModel.Pages.PageComponentBase");
 
-                    b.HasDiscriminator().HasValue("ContentLeafComponent");
+                    b.HasDiscriminator().HasValue("LeafComponent");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageLeafComponent", b =>
@@ -542,11 +542,11 @@ namespace IEManageSystem.Migrations
 
             modelBuilder.Entity("IEManageSystem.ApiAuthorization.DomainModel.ApiScopes.ApiScope", b =>
                 {
-                    b.HasOne("IEManageSystem.ApiAuthorization.DomainModel.ApiScopes.AuthorizationNodes.ApiManageScope", "ApiManageScope")
+                    b.HasOne("IEManageSystem.ApiAuthorization.DomainModel.ApiScopes.AuthorizationNodes.ApiScopeNode", "ApiManageScope")
                         .WithMany()
                         .HasForeignKey("ApiManageScopeId");
 
-                    b.HasOne("IEManageSystem.ApiAuthorization.DomainModel.ApiScopes.AuthorizationNodes.ApiQueryScope", "ApiQueryScope")
+                    b.HasOne("IEManageSystem.ApiAuthorization.DomainModel.ApiScopes.AuthorizationNodes.ApiScopeNode", "ApiQueryScope")
                         .WithMany()
                         .HasForeignKey("ApiQueryScopeId");
                 });

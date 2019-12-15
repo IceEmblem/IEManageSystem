@@ -1,5 +1,5 @@
 import React from 'react'
-import BaseComponentObject, { BaseField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
+import BaseComponentObject, { BaseField, BaseContentLeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContentLeafComponent'
 import Groupedcolumn from './Groupedcolumn'
 import CustomizeField from './CustomizeField'
 import ComponentDescribe, {componentType} from '../ComponentDescribe'

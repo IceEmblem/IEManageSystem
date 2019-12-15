@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from "react-router-dom";
 
 import Nav from "./Nav/Nav.jsx";
-import Menu from './Menu/Menu.jsx'
 import PageContainer from './PageContainer/PageContainer.jsx'
 
 require('./Index.css');
@@ -41,7 +40,6 @@ export default class Home extends React.Component{
             <div className="front-container">
                 <div>
                     <div className="container-fluid">
-                        <Menu />
                         <Switch>
                             <Route exact path="/Page/:pageName?/:pageDataName?"
                                 render={(props)=><PageContainer {...props} />}

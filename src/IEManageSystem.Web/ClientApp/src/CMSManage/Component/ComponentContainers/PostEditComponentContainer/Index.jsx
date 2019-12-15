@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
-import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
+import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseContentLeafComponent'
 
 import './Index.css'
 import BaseComponentContainer from '../BaseComponentContainer'
@@ -39,9 +38,8 @@ class PostEditComponentContainer extends BaseComponentContainer {
     {
         let pageComponent = this.props.pageComponent;
 
-        // 容器组件和页叶子组件不提供组件数据
-        if(this.componentObject instanceof ContainerComponentObject ||
-            this.componentObject instanceof PageLeafComponentObject){
+        // 基本内容叶子组件才提供组件数据编辑
+        if(!this.componentObject instanceof BaseContentLeafComponent){
             return;
         }
 

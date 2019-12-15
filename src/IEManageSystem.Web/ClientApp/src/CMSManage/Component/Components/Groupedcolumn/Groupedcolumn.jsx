@@ -18,12 +18,12 @@ import {
 import DataSet from "@antv/data-set";
 
 
-import {BaseLeafComponent} from '../BaseLeafComponent'
+import {BaseContentLeafComponent} from '../BaseContentLeafComponent'
 
 const pageComponentSettingName = "otherSetting"
 
 // 柱状图
-class Groupedcolumn extends BaseLeafComponent {
+class Groupedcolumn extends BaseContentLeafComponent {
 
     render() {
         let pageComponentSetting = (this.props.pageComponentSettings || []).find(item=>item.name == pageComponentSettingName) || {}

@@ -23,7 +23,7 @@ class CreateComponentService{
             pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, componentDescribe.name)
         }
         else {
-            pageComponent = CreatePageComponentService.createContentLeafComponent(timetamp, componentDescribe.name)
+            pageComponent = CreatePageComponentService.createLeafComponent(timetamp, componentDescribe.name)
         }
 
         pageComponent.parentSign = parentSign;

@@ -36,7 +36,7 @@ namespace IEManageSystem.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new ContentPageConfigure());
             modelBuilder.ApplyConfiguration(new PageDataConfigure());
             modelBuilder.ApplyConfiguration(new CompositeComponentConfigure());
-            modelBuilder.ApplyConfiguration(new ContentLeafComponentConfigure());
+            modelBuilder.ApplyConfiguration(new LeafComponentConfigure());
             modelBuilder.ApplyConfiguration(new PageLeafComponentConfigure());
             modelBuilder.ApplyConfiguration(new LeafMenuConfigure());
             modelBuilder.ApplyConfiguration(new CompositeMenuConfigure());

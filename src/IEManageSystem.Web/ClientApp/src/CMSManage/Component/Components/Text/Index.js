@@ -1,5 +1,5 @@
 import React from 'react'
-import BaseComponentObject, { BaseField, ComponentDataConCfigField, LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent'
+import BaseComponentObject, { BaseField, ComponentDataConfigField, BaseContentLeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContentLeafComponent'
 import Text from './Text'
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
@@ -7,7 +7,7 @@ class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentDataConfigs = {
-            field1: ComponentDataConCfigField("文本")
+            field1: ComponentDataConfigField("文本")
         }
     }
     Component(props) {
