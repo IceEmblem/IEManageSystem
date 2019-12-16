@@ -18,8 +18,8 @@ class ComponentData extends React.Component {
 
     render() {
         return (
-            <div className="page-container">
-                <div className="">
+            <div className="postedit-page-container">
+                <div className="postedit-page-container-header">
                     <button type="button" className="btn btn-warning mr-2"
                         onClick={()=>this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)}
                     >
@@ -37,7 +37,7 @@ class ComponentData extends React.Component {
                         <span className="oi padding-left-10 oi-cloud-upload" title="icon name" aria-hidden="true"></span>
                     </button>
                 </div>
-                <div className="page-container-body">
+                <div className="postedit-page-container-body">
                     {
                         this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                             <PostEditComponentContainer

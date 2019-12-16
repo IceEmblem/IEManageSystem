@@ -15,6 +15,7 @@ files.forEach(function (file) {
         file == "BaseLeafComponent" ||
         file == "BaseMenuComponent" ||
         file == "BaseContentLeafComponent" ||
+        file == "BaseStaticComponent" ||
         file == "BasePageLeafComponent") 
     {
         return;

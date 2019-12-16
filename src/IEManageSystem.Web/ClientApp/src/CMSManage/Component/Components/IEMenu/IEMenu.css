@@ -1,4 +1,4 @@
-.front-menu {
+.ie-menu {
     height: auto;
     overflow: hidden;
     left: 0px;
@@ -10,7 +10,7 @@
     background: #2a394fc4;
     padding: 0rem 2rem;
 }
-.front-menu label {
+.ie-menu label {
     color: #eff4fa;
     -webkit-transition: text-indent .15s, height .3s;
     transition: text-indent .15s, height .3s;
@@ -21,12 +21,12 @@
     margin-bottom: 0px;
     background-color: #404b5a;
 }
-.front-menu label:hover {
+.ie-menu label:hover {
     background: #212e41;
     text-indent: 4px;
 }
 
-.front-menu label .front-menu-title-right {
+.ie-menu label .ie-menu-title-right {
     width: 5px;
     height: 5px;
     -webkit-transition: -webkit-transform 0.8s;
@@ -38,18 +38,18 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-.front-menu-title{
+.ie-menu-title{
     padding: 1rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.front-menu-content {
+.ie-menu-content {
     display: none;
     left: 0;
     width: 100%;
 }
-.front-menu-content ul{
+.ie-menu-content ul{
     width: 15%;
     padding: 0;
     margin: 0;
@@ -57,7 +57,7 @@
     z-index: 999;
     position: fixed;
 }
-.front-menu-content li {
+.ie-menu-content li {
     list-style-type: none;
     width: 100%;
     opacity: 0;
@@ -70,22 +70,22 @@
     transition: box-shadow .3s, text-indent .3s;
     position: relative;
 }
-.front-menu-content li:hover {
+.ie-menu-content li:hover {
     background: #0c93e4;
     box-shadow: 3px 0px #126CA1 inset;
     -webkit-transition: box-shadow .3s linear, text-indent .3s linear;
     transition: box-shadow .3s linear, text-indent .3s linear;
     text-indent: 31px;
 }
-.front-menu-content .clear {
+.ie-menu-content .clear {
     clear: both;
 }
 
-.front-menu label:hover .front-menu-content {
+.ie-menu label:hover .ie-menu-content {
     display: block;
 }
 
-.front-menu label:hover .front-menu-title-right {
+.ie-menu label:hover .ie-menu-title-right {
     -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -webkit-transform: rotate(135deg);
     -ms-transform: rotate(135deg);
@@ -94,7 +94,7 @@
     border-right: 2px solid #14a3f9;
 }
 
-.front-menu label:hover {
+.ie-menu label:hover {
     background: #212e41;
     text-indent: 4px;
     -webkit-transition-property: height;
@@ -104,28 +104,28 @@
     -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.front-menu label:hover li:nth-of-type(1) {
+.ie-menu label:hover li:nth-of-type(1) {
     -webkit-animation: in 0.15s 0.1s forwards;
     animation: in 0.15s 0.1s forwards;
     -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -moz-animation: in 0.15s 0.1s forwards;
     -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.front-menu label:hover li:nth-of-type(2) {
+.ie-menu label:hover li:nth-of-type(2) {
     -webkit-animation: in 0.15s 0.2s forwards;
     animation: in 0.15s 0.2s forwards;
     -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -moz-animation: in 0.15s 0.2s forwards;
     -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.front-menu label:hover li:nth-of-type(3) {
+.ie-menu label:hover li:nth-of-type(3) {
     -webkit-animation: in 0.15s 0.3s forwards;
     animation: in 0.15s 0.3s forwards;
     -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -moz-animation: in 0.15s 0.3s forwards;
     -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.front-menu label:hover li:nth-of-type(4) {
+.ie-menu label:hover li:nth-of-type(4) {
     -webkit-animation: in 0.15s 0.4s forwards;
     animation: in 0.15s 0.4s forwards;
     -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);

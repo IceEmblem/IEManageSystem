@@ -11,7 +11,7 @@ export default class IEMenu extends BaseMenuComponent{
 
         return (
             <label key={menuIndex}>
-                <div className="front-menu-title">
+                <div className="ie-menu-title">
                     <div>
                         <span className={ "oi padding-right-10 " + menu.icon } title="icon name" aria-hidden="true"></span>
                         <span>
@@ -19,10 +19,10 @@ export default class IEMenu extends BaseMenuComponent{
                         </span>
                     </div>
                     {
-                        childsMenus.length != 0 && <div className='front-menu-title-right'></div>
+                        childsMenus.length != 0 && <div className='ie-menu-title-right'></div>
                     }
                 </div>
-                <div className='front-menu-content'>
+                <div className='ie-menu-content'>
                     <ul>
                         {childsMenus.map((item, index) => (
                         <li key={index}>
@@ -35,7 +35,7 @@ export default class IEMenu extends BaseMenuComponent{
 
     render() {
         return (
-            <div className='front-menu'>
+            <div className='ie-menu'>
                 {this.state.menus.map((item, index) => this.createRootMenu(item, index))}
             </div>
         );

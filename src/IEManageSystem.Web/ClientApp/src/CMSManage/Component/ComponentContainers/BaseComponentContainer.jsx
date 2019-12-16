@@ -15,7 +15,7 @@ class BaseComponentContainer extends React.Component {
     getStyle(){
         let style =
             {
-                padding: "0.33rem"
+                padding: "0rem"
             }
 
         if (this.props.pageComponent.height) {

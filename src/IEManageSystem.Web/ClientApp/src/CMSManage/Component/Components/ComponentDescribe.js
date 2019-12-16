@@ -1,5 +1,6 @@
 export const componentType = {
     container: "container",
+    nav: "nav",
     menu: "menu",
     page: "page",
     text: "text",

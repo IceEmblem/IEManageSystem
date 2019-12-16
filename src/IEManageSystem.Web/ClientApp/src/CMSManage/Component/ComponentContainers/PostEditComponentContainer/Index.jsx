@@ -39,7 +39,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
         let pageComponent = this.props.pageComponent;
 
         // 基本内容叶子组件才提供组件数据编辑
-        if(!this.componentObject instanceof BaseContentLeafComponent){
+        if(!(this.componentObject instanceof BaseContentLeafComponent)){
             return;
         }
 

@@ -21,7 +21,7 @@ export default class PageEdit extends React.Component {
         return (<div className="pagecomponent">
             <Animate
                 start={() => ({
-                    toolcontainHeight: 30,
+                    toolcontainHeight: 35,
                     btnRadius: 0,
                     btnFontSize: 1,
                     width: 12,
@@ -29,7 +29,7 @@ export default class PageEdit extends React.Component {
                 })}
 
                 update={[{
-                    toolcontainHeight: [this.state.open ? 30 : 0],
+                    toolcontainHeight: [this.state.open ? 35 : 0],
                     btnRadius: [this.state.open ? 0 : 1],
                     btnFontSize: [this.state.open ? 1 : 0.3],
                     borderBottom: [this.state.open ? 0.5 : 0],

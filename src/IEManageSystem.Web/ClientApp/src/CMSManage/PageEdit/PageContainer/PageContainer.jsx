@@ -10,7 +10,7 @@ import PageEditCompontContainer from 'CMSManage/Component/ComponentContainers/Pa
 
 import { pageAddComponent, pageComponentUpdateFetch, pageFetch } from 'CMSManage/IEReduxs/Actions'
 
-import {ieReduxFetch} from 'Core/IEReduxFetch'
+import { ieReduxFetch } from 'Core/IEReduxFetch'
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -36,13 +36,13 @@ class PageContainer extends React.Component {
         };
 
         ieReduxFetch("/api/PageQuery/GetPage", postData)
-        .then(value=>{
-            this.setState({
-                name: value.page.name,
-                displayName: value.page.displayName,
-                description: value.page.description
-            })
-        });
+            .then(value => {
+                this.setState({
+                    name: value.page.name,
+                    displayName: value.page.displayName,
+                    description: value.page.description
+                })
+            });
     }
 
     submitPage() {
@@ -52,9 +52,9 @@ class PageContainer extends React.Component {
         );
     }
 
-    addComponent(){
+    addComponent() {
         let pageComponent = CreateComponentService.createComponent(
-            this.props.page.pageComponents, 
+            this.props.page.pageComponents,
             this.props.selectedComponentDescribe,
             null);
 
@@ -65,56 +65,58 @@ class PageContainer extends React.Component {
         return (
             <div className="page-container">
                 <div className="page-container-header">
-                    <div className="input-group shadow-sm">
-                        <input value={this.state.displayName} type="text" className="form-control bg-transparent" placeholder="" disabled />
-                        <div className="input-group-append">
-                            <span className="input-group-text text-white">显示名称</span>
+                    <div className="page-container-header-info">
+                        <div className="input-group shadow-sm">
+                            <input value={this.state.displayName} type="text" className="form-control bg-transparent" placeholder="" disabled />
+                            <div className="input-group-append">
+                                <span className="input-group-text text-white">显示名称</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className="input-group shadow-sm">
-                        <input value={this.state.name} type="text" className="form-control bg-transparent" placeholder="" disabled />
-                        <div className="input-group-append">
-                            <span className="input-group-text text-white">
-                                <span className="oi oi-key mr-2" title="icon name" aria-hidden="true"></span>
-                                名称
+                        <div className="input-group shadow-sm">
+                            <input value={this.state.name} type="text" className="form-control bg-transparent" placeholder="" disabled />
+                            <div className="input-group-append">
+                                <span className="input-group-text text-white">
+                                    <span className="oi oi-key mr-2" title="icon name" aria-hidden="true"></span>
+                                    名称
                             </span>
+                            </div>
                         </div>
-                    </div>
-                    <div className="input-group shadow-sm">
-                        <input value={this.state.description} type="text" className="form-control bg-transparent" placeholder="" disabled />
-                        <div className="input-group-append">
-                            <span className="input-group-text text-white">
-                                <span className="oi oi-info mr-2" title="icon name" aria-hidden="true"></span>
-                                描述
+                        <div className="input-group shadow-sm">
+                            <input value={this.state.description} type="text" className="form-control bg-transparent" placeholder="" disabled />
+                            <div className="input-group-append">
+                                <span className="input-group-text text-white">
+                                    <span className="oi oi-info mr-2" title="icon name" aria-hidden="true"></span>
+                                    描述
                             </span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <button className="btn btn-warning padding-left-10 padding-right-10 shadow-sm"
-                            onClick={
-                                () => {
-                                    let myEvent = new Event('resize');
-                                    window.dispatchEvent(myEvent);
+                        <div>
+                            <button className="btn btn-warning padding-left-10 padding-right-10 shadow-sm"
+                                onClick={
+                                    () => {
+                                        let myEvent = new Event('resize');
+                                        window.dispatchEvent(myEvent);
+                                    }
                                 }
-                            }
-                        >
-                            <span className="oi oi-loop-circular mr-1" title="icon name" aria-hidden="true"></span>
-                            重新渲染
+                            >
+                                <span className="oi oi-loop-circular mr-1" title="icon name" aria-hidden="true"></span>
+                                重新渲染
                         </button>
-                        <button className="btn btn-info padding-left-10 padding-right-10 shadow-sm"
-                            onClick={this.submitPage}
-                        >
-                            <span className="oi oi-cloud-upload mr-1" title="icon name" aria-hidden="true"></span>
-                            提交页面
+                            <button className="btn btn-info padding-left-10 padding-right-10 shadow-sm"
+                                onClick={this.submitPage}
+                            >
+                                <span className="oi oi-cloud-upload mr-1" title="icon name" aria-hidden="true"></span>
+                                提交页面
                         </button>
+                        </div>
                     </div>
-                </div>
-                <div className="page-container-header-hidebtn">
-                    <button className="btn btn-info"
-                        onClick={() => {
-                            $(".page-container-header").slideToggle(300);
-                        }}
-                    >==</button>
+                    <div className="page-container-header-hidebtn">
+                        <button className="btn btn-info"
+                            onClick={() => {
+                                $(".page-container-header-info").slideToggle(300);
+                            }}
+                        >==</button>
+                    </div>
                 </div>
                 <div className="page-container-body">
                     {

@@ -1,4 +1,4 @@
-.page-container{
+.postedit-page-container{
     height: 100%;
     overflow-x: hidden;
     padding: 0px;
@@ -8,7 +8,22 @@
     flex-grow: 1;
 }
 
-.page-container-body{
+.postedit-page-container-header{
+    position: fixed;
+    z-index: 9999;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0.7;
+}
+
+.postedit-page-container-header:hover{
+    opacity: 1;
+}
+
+.postedit-page-container-body{
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;

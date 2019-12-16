@@ -8,6 +8,20 @@
             "pageType": "StaticPage",
             "pageComponents": [
                 {
+                    "name": "IENav",
+                    "sign": "-2",
+                    "parentSign": null,
+                    "margin": null,
+                    "backgroundColor": null,
+                    "className": null,
+                    "targetPageId": null,
+                    "col": null,
+                    "height": null,
+                    "padding": null,
+                    "componentType": "LeafComponent",
+                    "pageComponentSettings": []
+                },
+                {
                     "name": "IEMenu",
                     "sign": "0",
                     "parentSign": null,
@@ -76,6 +90,20 @@
                     "componentType": "PageLeafComponent",
                     "pageComponentSettings": [],
                     "targetPageId": 1
+                },
+                {
+                    "name": "IEBottomNav",
+                    "sign": "5",
+                    "parentSign": null,
+                    "margin": null,
+                    "backgroundColor": null,
+                    "className": null,
+                    "targetPageId": null,
+                    "col": "12",
+                    "height": null,
+                    "padding": "0rem",
+                    "componentType": "LeafComponent",
+                    "pageComponentSettings": []
                 }
             ]
         }
