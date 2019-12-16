@@ -20,7 +20,7 @@ class PageLeafBaseSetting extends BaseSetting {
     }
 
     customizeFields() {
-        let pageList = this.state.pages.map(item => <option value={item.id}>{item.displayName}</option>);
+        let pageList = this.state.pages.map(item => <option key={item.id} value={item.id}>{item.displayName}</option>);
 
         // 如果当前没有选择页面且有页面，则默认选择第一个页面
         if (!this.props.pageComponentSetting.targetPageId &&
@@ -33,7 +33,7 @@ class PageLeafBaseSetting extends BaseSetting {
 
         return (
             <div className="col-md-6 float-left">
-                <label for="sel1">指定页面:</label>
+                <label htmlFor="sel1">指定页面:</label>
                 <div className="input-group mb-3">
                     <select className="form-control"
                         onChange={(event) => {

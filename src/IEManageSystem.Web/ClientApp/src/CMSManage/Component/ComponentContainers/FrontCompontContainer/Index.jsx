@@ -12,6 +12,7 @@ class FrontCompontContainer extends BaseComponentContainer {
     createChildComponent(){
         return this.props.childPageComponents.map(item => (
             <Contain
+                key={item.sign}
                 pageComponent={item}
             >
             </Contain>)

@@ -41,7 +41,7 @@ class ComponentTool extends React.Component
             let childComponents = childComponentDescribes.map(item => this.createComponent(item))
             componentDescribes = componentDescribes.filter(e => e.componentType != componentType.name)
 
-            return (<li key={index} className="component-tool-item" id={componentType.name}>
+            return (<li key={index} className="pageedit-component-tool-item" id={componentType.name}>
                 <a href="javascript:void(0)"
                     onClick={()=>{this.setState({activeIndex: index})}}
                 >
@@ -54,9 +54,9 @@ class ComponentTool extends React.Component
             </li>);
         });
 
-        return (<div className="component-tool">
+        return (<div className="pageedit-component-tool">
             <div>
-                <ul className="component-tool-list">
+                <ul className="pageedit-component-tool-list">
                     {list}
                 </ul>
             </div>

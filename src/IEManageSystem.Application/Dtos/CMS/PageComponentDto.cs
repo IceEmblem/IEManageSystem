@@ -16,6 +16,8 @@ namespace IEManageSystem.Dtos.CMS
 
         public string ParentSign { get; set; }
 
+        public int SortIndex { get; set; }
+
         public string Col { get; set; }
 
         public string Height { get; set; }

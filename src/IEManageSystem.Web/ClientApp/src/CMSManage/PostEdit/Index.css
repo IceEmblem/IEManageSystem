@@ -10,12 +10,9 @@
 
 .postedit-page-container-header{
     position: fixed;
+    display: inline-block;
     z-index: 9999;
-    position: fixed;
-    z-index: 9999;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+    bottom: 20vh;
     opacity: 0.7;
 }
 
@@ -29,10 +26,6 @@
     flex-shrink: 1;
     flex-wrap: wrap;
     align-content: flex-start;
-    padding-top: 0.67rem;
-    /* border: 1px solid #cdcdcd; */
-    padding-left: 0.33rem;
-    padding-right: 0.33rem;
     overflow-y: scroll;
     margin-right: -18px;
     overflow-x: hidden;

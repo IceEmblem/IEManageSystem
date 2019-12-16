@@ -63,17 +63,17 @@ class PageContainer extends React.Component {
 
     render() {
         return (
-            <div className="page-container">
-                <div className="page-container-header">
-                    <div className="page-container-header-info">
+            <div className="pageedit-page-container">
+                <div className="pageedit-page-container-header">
+                    <div className="pageedit-page-container-header-info">
                         <div className="input-group shadow-sm">
-                            <input value={this.state.displayName} type="text" className="form-control bg-transparent" placeholder="" disabled />
+                            <input value={this.state.displayName} type="text" className="form-control" placeholder="" disabled />
                             <div className="input-group-append">
                                 <span className="input-group-text text-white">显示名称</span>
                             </div>
                         </div>
                         <div className="input-group shadow-sm">
-                            <input value={this.state.name} type="text" className="form-control bg-transparent" placeholder="" disabled />
+                            <input value={this.state.name} type="text" className="form-control" placeholder="" disabled />
                             <div className="input-group-append">
                                 <span className="input-group-text text-white">
                                     <span className="oi oi-key mr-2" title="icon name" aria-hidden="true"></span>
@@ -82,7 +82,7 @@ class PageContainer extends React.Component {
                             </div>
                         </div>
                         <div className="input-group shadow-sm">
-                            <input value={this.state.description} type="text" className="form-control bg-transparent" placeholder="" disabled />
+                            <input value={this.state.description} type="text" className="form-control" placeholder="" disabled />
                             <div className="input-group-append">
                                 <span className="input-group-text text-white">
                                     <span className="oi oi-info mr-2" title="icon name" aria-hidden="true"></span>
@@ -101,24 +101,26 @@ class PageContainer extends React.Component {
                             >
                                 <span className="oi oi-loop-circular mr-1" title="icon name" aria-hidden="true"></span>
                                 重新渲染
-                        </button>
+                            </button>
                             <button className="btn btn-info padding-left-10 padding-right-10 shadow-sm"
                                 onClick={this.submitPage}
                             >
                                 <span className="oi oi-cloud-upload mr-1" title="icon name" aria-hidden="true"></span>
                                 提交页面
-                        </button>
+                            </button>
                         </div>
                     </div>
-                    <div className="page-container-header-hidebtn">
+                    <div className="pageedit-page-container-header-hidebtn">
                         <button className="btn btn-info"
                             onClick={() => {
-                                $(".page-container-header-info").slideToggle(300);
+                                $(".pageedit-page-container-header-info").slideToggle(300);
                             }}
-                        >==</button>
+                        >
+                            <span className="oi oi-collapse-down"></span>
+                        </button>
                     </div>
                 </div>
-                <div className="page-container-body">
+                <div className="pageedit-page-container-body">
                     {
                         this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                             <PageEditCompontContainer
@@ -128,15 +130,12 @@ class PageContainer extends React.Component {
                             >
                             </PageEditCompontContainer>)
                     }
-                    <div className="col-md-12  padding-0">
-                        <div className="col-md-2 padding-0 float-right">
-                            <a className="add-component-btn" href="javascript:void(0)"
-                                onClick={this.addComponent}
-                            >
-                                <span className="oi oi-plus" title="icon name" aria-hidden="true"></span>
-                            </a>
-                        </div>
-                    </div>
+                </div>
+                <div className="col-md-12  padding-0 pageedit-page-container-addcomponent">
+                    <button className="btn pageedit-page-container-addcomponent-btn" onClick={this.addComponent}
+                    >
+                        <span className="oi oi-plus" title="添加组件" aria-hidden="true"></span>
+                    </button>
                 </div>
             </div>
         );

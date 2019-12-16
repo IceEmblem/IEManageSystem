@@ -27,6 +27,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
     createChildComponent(){
         return this.props.childPageComponents.map(item => (
             <Contain
+                key={item.sign}
                 pageComponent={item}
                 componentDataUpdate={this.props.componentDataUpdate}
             >

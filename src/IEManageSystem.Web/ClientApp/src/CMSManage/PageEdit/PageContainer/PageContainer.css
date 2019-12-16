@@ -1,4 +1,4 @@
-.page-container {
+.pageedit-page-container {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
@@ -9,7 +9,7 @@
     flex-grow: 1;
 }
 
-.page-container-header{
+.pageedit-page-container-header{
     display: flex;
     position: fixed;
     width: 100%;
@@ -17,7 +17,7 @@
     flex-direction: column;
 }
 
-.page-container-header-info {
+.pageedit-page-container-header-info {
     display: flex;
     justify-content: space-between;
     flex-grow: 0;
@@ -25,27 +25,32 @@
     padding: 0.33rem 0.67rem;
 }
 
-.page-container-header-info>.input-group {
+.pageedit-page-container-header-info>.input-group {
     width: 25%;
 }
 
-.page-container-header-info>.input-group .input-group-text {
+.pageedit-page-container-header-info>.input-group .input-group-text {
     background-color: #5a8e9a;
 }
 
-.page-container-header-info>.input-group input,
-.page-container-header-info>.input-group span {
+.pageedit-page-container-header-info>.input-group input{
+    color: #fff;
+    background-color: #77777782;
+}
+
+.pageedit-page-container-header-info>.input-group input,
+.pageedit-page-container-header-info>.input-group span {
     border: 0rem;
 }
 
-.page-container-header-hidebtn {
+.pageedit-page-container-header-hidebtn {
     height: 0px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
 }
 
-.page-container-header-hidebtn>button {
+.pageedit-page-container-header-hidebtn>button {
     width: 10rem;
     transform: perspective(100px) rotateX(-45deg);
     -webkit-transform: perspective(100px) rotateX(-45deg);
@@ -55,7 +60,7 @@
     flex-shrink: 0;
 }
 
-.page-container-body {
+.pageedit-page-container-body {
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;
@@ -66,30 +71,34 @@
     overflow-x: hidden;
 }
 
-.add-component {
-    display: flex;
-    height: 9rem;
-    box-shadow: 0px 0px 5px gray;
-    border-radius: 5px;
-    margin: 0rem 0.67rem 0rem 0.67rem;
+.pageedit-page-container-addcomponent {
+    position: fixed;
+    right: 3vw;
+    bottom: 15vh;
+    height: 4rem;
+    width: 4rem;
 }
 
-.add-component-btn {
+.pageedit-page-container-addcomponent-btn {
     display: flex;
-    height: 9rem;
-    /* box-shadow: 0px 0px 5px gray; */
-    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    cursor:pointer;
+    box-shadow: 0px 0px 5px gray;
+    border-radius: 2rem;
     color: #84b0b5;
     transition: 0.5s;
     -webkit-transition: 0.5s;
+    opacity: 0.6;
 }
 
-.add-component-btn:hover {
+.pageedit-page-container-addcomponent-btn:hover {
     color: #fff;
     background-color: #84b0b5;
+    opacity: 1;
 }
 
-.add-component-btn>span {
+.pageedit-page-container-addcomponent-btn>span {
     margin: auto;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }

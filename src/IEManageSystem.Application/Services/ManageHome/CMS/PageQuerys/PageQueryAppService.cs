@@ -129,6 +129,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             dto.Name = page.Name;
             dto.Sign = page.Sign;
             dto.ParentSign = page.ParentSign;
+            dto.SortIndex = page.SortIndex;
             dto.Col = page.Col;
             dto.Height = page.Height;
             dto.Padding = page.Padding;

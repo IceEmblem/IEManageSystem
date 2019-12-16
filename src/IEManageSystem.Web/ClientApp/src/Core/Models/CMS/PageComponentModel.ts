@@ -3,6 +3,7 @@ interface PageComponentModel{
     name:string,
     sign:string,
     parentSign:string | null,
+    sortIndex: number,
     col:string | null,
     height:string | null,
     padding:string | null,

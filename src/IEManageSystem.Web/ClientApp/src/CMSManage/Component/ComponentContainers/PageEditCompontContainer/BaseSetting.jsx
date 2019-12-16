@@ -123,6 +123,29 @@ class BaseSetting extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="col-md-6 float-left">
+                    <label>请输入排序索引(必须是数字)：</label>
+                    <div className="input-group mb-3">
+                        <input value={this.props.pageComponentSetting.sortIndex || ""} type="text" className="form-control" placeholder="排序索引"
+                            onChange={
+                                (event) => {
+                                    let index = parseInt(event.target.value);
+                                    if(isNaN(index)){
+                                        return;
+                                    }
+
+                                    this.props.setPageComponentSetting({
+                                        ...this.props.pageComponentSetting,
+                                        ...{ sortIndex: index }
+                                    })
+                                }
+                            }
+                        />
+                        <div className="input-group-append">
+                            <span className="input-group-text">排序索引</span>
+                        </div>
+                    </div>
+                </div>
                 {this.customizeFields()}
             </div>
         );

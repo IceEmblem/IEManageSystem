@@ -18,6 +18,7 @@
 /src/IEManageSystem.Web/bin
 /src/IEManageSystem.Web/obj
 /src/IEManageSystem.Web/ClientApp/node_modules
+/src/IEManageSystem.Web/ClientApp/obj
 /src/UtilityAction/bin
 /src/UtilityAction/obj
 /test/IEManageSystem.Tests/bin

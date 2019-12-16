@@ -29,6 +29,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
     createChildComponent(){
         return this.props.childPageComponents.map(item => (
             <Contain
+                key={item.sign}
                 selectedComponentDescribe={this.props.selectedComponentDescribe}
                 pageComponent={item}
             >
@@ -60,6 +61,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
         }
 
         tools.push(<EditFrame 
+            key={"EditFrame"}
             baseSetting={baseSetting}
             pageComponent={this.props.pageComponent} 
             componentSettingConfigs={this.componentObject.ComponentSettingConfigs}
@@ -68,7 +70,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
             close={()=>{this.setState({openEdit: false})}}
         ></EditFrame>);
         tools.push(
-            <div className="editableparentcom-btns">
+            <div key={"EditFrameBtn"} className="editableparentcom-btns">
                     <button type="button" className="btn btn-danger btn-sm"
                         onClick={
                             () => { this.props.removeComponent(this.props.pageComponent) }

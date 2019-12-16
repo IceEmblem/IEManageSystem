@@ -234,6 +234,8 @@ namespace IEManageSystem.Migrations
 
                     b.Property<string>("Sign");
 
+                    b.Property<int>("SortIndex");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CmsComponentId");

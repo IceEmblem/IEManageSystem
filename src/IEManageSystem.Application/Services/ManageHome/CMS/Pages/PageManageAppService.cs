@@ -116,6 +116,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
             pageComponent.Sign = dto.Sign;
             pageComponent.ParentSign = dto.ParentSign;
+            pageComponent.SortIndex = dto.SortIndex;
             pageComponent.Col = dto.Col;
             pageComponent.Height = dto.Height;
             pageComponent.Padding = dto.Padding;
