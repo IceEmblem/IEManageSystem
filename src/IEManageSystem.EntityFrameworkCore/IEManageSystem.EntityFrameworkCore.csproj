@@ -21,6 +21,14 @@
     <Compile Remove="Migrations\20181015085310_Upgraded_To_ABP_v3_9_0.Designer.cs" />
     <Compile Remove="Migrations\20190719145525_Upgraded_To_Abp_4_8_0.cs" />
     <Compile Remove="Migrations\20190719145525_Upgraded_To_Abp_4_8_0.Designer.cs" />
+    <Compile Remove="Migrations\20191106102411_Init.cs" />
+    <Compile Remove="Migrations\20191106102411_Init.Designer.cs" />
+    <Compile Remove="Migrations\20191214045316_Rename_LeafComponent.cs" />
+    <Compile Remove="Migrations\20191214045316_Rename_LeafComponent.Designer.cs" />
+    <Compile Remove="Migrations\20191216111834_Add_PageComponentBase_SortIndex.cs" />
+    <Compile Remove="Migrations\20191216111834_Add_PageComponentBase_SortIndex.Designer.cs" />
+    <Compile Remove="Migrations\20191217022034_Add_ValueObject_PageComponentBaseSetting.cs" />
+    <Compile Remove="Migrations\20191217022034_Add_ValueObject_PageComponentBaseSetting.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IEManageSystem.ApiAuthorization\IEManageSystem.ApiAuthorization.csproj" />

@@ -16,19 +16,7 @@ namespace IEManageSystem.Dtos.CMS
 
         public string ParentSign { get; set; }
 
-        public int SortIndex { get; set; }
-
-        public string Col { get; set; }
-
-        public string Height { get; set; }
-
-        public string Padding { get; set; }
-
-        public string Margin { get; set; }
-
-        public string BackgroundColor { get; set; }
-
-        public string ClassName { get; set; }
+        public PageComponentBaseSettingDto PageComponentBaseSetting { get; set; }
 
         public int? TargetPageId { get; set; }
 

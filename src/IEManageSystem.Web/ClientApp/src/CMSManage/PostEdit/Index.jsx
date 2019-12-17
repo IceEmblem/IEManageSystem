@@ -5,7 +5,7 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
 import './Index.css'
 
-import { pageFetch, pageDataFetch, componentDataUpdateFetch, componentDataUpdate } from 'CMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch, componentDataUpdateFetch } from 'CMSManage/IEReduxs/Actions'
 import PostEditComponentContainer from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer'
 
 class ComponentData extends React.Component {
@@ -43,7 +43,6 @@ class ComponentData extends React.Component {
                             <PostEditComponentContainer
                                 key={item.sign}
                                 pageComponent={item}
-                                componentDataUpdate={this.props.componentDataUpdate}
                             >
                             </PostEditComponentContainer>)
                     }
@@ -61,7 +60,6 @@ ComponentData.propTypes = {
     pageFetch: PropTypes.func.isRequired,
     pageDataFetch: PropTypes.func.isRequired,
     componentDataUpdateFetch: PropTypes.func.isRequired,
-    componentDataUpdate: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -83,9 +81,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         componentDataUpdateFetch: (pageName, pageDataName, componentDatas) => {
             dispatch(componentDataUpdateFetch(pageName, pageDataName, componentDatas));
-        },
-        componentDataUpdate: (resource) => {
-            dispatch(componentDataUpdate(resource));
         }
     }
 }

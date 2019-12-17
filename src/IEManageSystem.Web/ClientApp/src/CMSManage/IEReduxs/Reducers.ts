@@ -22,7 +22,7 @@ function page(
     if (action.type == PageAddComponent) {
         let maxSortIndex = 0;
         if(state.pageComponents.length > 0){
-            maxSortIndex = state.pageComponents[state.pageComponents.length - 1].sortIndex;
+            maxSortIndex = state.pageComponents[state.pageComponents.length - 1].pageComponentBaseSetting.sortIndex;
         }
         action.pageComponent.sortIndex = maxSortIndex + 1;
         state.pageComponents.push(action.pageComponent);
@@ -66,7 +66,7 @@ function pageComponentSort(arr: Array<PageComponentModel>) {
     for (var i = 1; i < len; i++) {
         preIndex = i - 1;
         current = arr[i];
-        while(preIndex >= 0 && arr[preIndex].sortIndex > current.sortIndex) {
+        while(preIndex >= 0 && arr[preIndex].pageComponentBaseSetting.sortIndex > current.pageComponentBaseSetting.sortIndex) {
             arr[preIndex+1] = arr[preIndex];
             preIndex--;
         }

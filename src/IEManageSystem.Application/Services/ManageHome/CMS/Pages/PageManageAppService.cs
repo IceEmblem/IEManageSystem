@@ -116,13 +116,15 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
             pageComponent.Sign = dto.Sign;
             pageComponent.ParentSign = dto.ParentSign;
-            pageComponent.SortIndex = dto.SortIndex;
-            pageComponent.Col = dto.Col;
-            pageComponent.Height = dto.Height;
-            pageComponent.Padding = dto.Padding;
-            pageComponent.Margin = dto.Margin;
-            pageComponent.BackgroundColor = dto.BackgroundColor;
-            pageComponent.ClassName = dto.ClassName;
+            pageComponent.PageComponentBaseSetting = new PageComponentBaseSetting(
+                dto.PageComponentBaseSetting.SortIndex,
+                dto.PageComponentBaseSetting.Col,
+                dto.PageComponentBaseSetting.Height,
+                dto.PageComponentBaseSetting.Padding,
+                dto.PageComponentBaseSetting.Margin,
+                dto.PageComponentBaseSetting.BackgroundColor,
+                dto.PageComponentBaseSetting.ClassName
+                );
 
             var pageComponentSettings = new List<PageComponentSetting>();
             foreach (var item in dto.PageComponentSettings ?? new List<PageComponentSettingDto>()) {

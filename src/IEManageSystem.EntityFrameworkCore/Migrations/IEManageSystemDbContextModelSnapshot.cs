@@ -209,32 +209,18 @@ namespace IEManageSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BackgroundColor");
-
-                    b.Property<string>("ClassName");
-
                     b.Property<int?>("CmsComponentId");
-
-                    b.Property<string>("Col");
 
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
-                    b.Property<string>("Height");
-
-                    b.Property<string>("Margin");
-
                     b.Property<string>("Name");
-
-                    b.Property<string>("Padding");
 
                     b.Property<int>("PageId");
 
                     b.Property<string>("ParentSign");
 
                     b.Property<string>("Sign");
-
-                    b.Property<int>("SortIndex");
 
                     b.HasKey("Id");
 
@@ -602,6 +588,36 @@ namespace IEManageSystem.Migrations
                         .WithMany("PageComponents")
                         .HasForeignKey("PageId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.OwnsOne("IEManageSystem.CMS.DomainModel.Pages.PageComponentBaseSetting", "PageComponentBaseSetting", b1 =>
+                        {
+                            b1.Property<int>("PageComponentBaseId")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("BackgroundColor");
+
+                            b1.Property<string>("ClassName");
+
+                            b1.Property<string>("Col");
+
+                            b1.Property<string>("Height");
+
+                            b1.Property<string>("Margin");
+
+                            b1.Property<string>("Padding");
+
+                            b1.Property<int>("SortIndex");
+
+                            b1.HasKey("PageComponentBaseId");
+
+                            b1.ToTable("PageComponentBase");
+
+                            b1.HasOne("IEManageSystem.CMS.DomainModel.Pages.PageComponentBase")
+                                .WithOne("PageComponentBaseSetting")
+                                .HasForeignKey("IEManageSystem.CMS.DomainModel.Pages.PageComponentBaseSetting", "PageComponentBaseId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageComponentSetting", b =>

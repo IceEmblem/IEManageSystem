@@ -61,9 +61,19 @@ class EditFrame extends React.Component {
         let ContentComponent
         if (this.state.selectIndex == 0) {
             ContentComponent = <this.props.baseSetting
-                pageComponentSetting={this.state.pageComponent}
+                pageComponentSetting={this.state.pageComponent.pageComponentBaseSetting}
                 setPageComponentSetting={(d) => {
-                    this.setState({pageComponent: d})
+                    this.state.pageComponent.pageComponentBaseSetting = d;
+                    this.setState({});
+                }}
+                targetPageId={this.state.pageComponent.targetPageId}
+                setTargetPageId={(value) => {
+                    let targetPageId = parseInt(value);
+                    if(isNaN(targetPageId)){
+                        return;
+                    }
+                    this.state.pageComponent.targetPageId = targetPageId;
+                    this.setState({});
                 }}
             />
         }

@@ -37,12 +37,9 @@ class PageLeafBaseSetting extends BaseSetting {
                 <div className="input-group mb-3">
                     <select className="form-control"
                         onChange={(event) => {
-                            this.props.setPageComponentSetting({
-                                ...this.props.pageComponentSetting,
-                                ...{ targetPageId: event.currentTarget.value }
-                            })
+                            this.props.setTargetPageId(event.currentTarget.value)
                         }}
-                        value={this.props.pageComponentSetting.targetPageId}
+                        value={this.props.targetPageId}
                     >
                         {pageList}
                     </select>
@@ -57,7 +54,9 @@ class PageLeafBaseSetting extends BaseSetting {
 
 PageLeafBaseSetting.propTypes = {
     pageComponentSetting: PropTypes.object.isRequired,
-    setPageComponentSetting: PropTypes.func.isRequired
+    setPageComponentSetting: PropTypes.func.isRequired,
+    targetPageId: PropTypes.number,
+    setTargetPageId: PropTypes.func.isRequired
 };
 
 export default PageLeafBaseSetting

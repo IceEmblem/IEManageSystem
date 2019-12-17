@@ -129,13 +129,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             dto.Name = page.Name;
             dto.Sign = page.Sign;
             dto.ParentSign = page.ParentSign;
-            dto.SortIndex = page.SortIndex;
-            dto.Col = page.Col;
-            dto.Height = page.Height;
-            dto.Padding = page.Padding;
-            dto.Margin = page.Margin;
-            dto.BackgroundColor = page.BackgroundColor;
-            dto.ClassName = page.ClassName;
+            dto.PageComponentBaseSetting = _objectMapper.Map<PageComponentBaseSettingDto>(page.PageComponentBaseSetting);
             dto.PageComponentSettings = new List<PageComponentSettingDto>();
 
             foreach (var item in page.PageComponentSettings) {

@@ -11,14 +11,16 @@
                     "name": "IENav",
                     "sign": "-2",
                     "parentSign": null,
-                    "sortIndex": 1,
-                    "margin": null,
-                    "backgroundColor": null,
-                    "className": null,
+                    "pageComponentBaseSetting": {
+                        "sortIndex": 1,
+                        "margin": null,
+                        "backgroundColor": null,
+                        "className": null,
+                        "col": null,
+                        "height": null,
+                        "padding": null
+                    },
                     "targetPageId": null,
-                    "col": null,
-                    "height": null,
-                    "padding": null,
                     "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 },
@@ -26,14 +28,16 @@
                     "name": "IEMenu",
                     "sign": "0",
                     "parentSign": null,
-                    "sortIndex": 2,
-                    "margin": null,
-                    "backgroundColor": null,
-                    "className": null,
+                    "pageComponentBaseSetting": {
+                        "sortIndex": 2,
+                        "margin": null,
+                        "backgroundColor": null,
+                        "className": null,
+                        "col": null,
+                        "height": null,
+                        "padding": null
+                    },
                     "targetPageId": null,
-                    "col": null,
-                    "height": null,
-                    "padding": null,
                     "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 },
@@ -41,14 +45,16 @@
                     "name": "CitiesSlider",
                     "sign": "1",
                     "parentSign": null,
-                    "sortIndex": 3,
-                    "margin": null,
-                    "backgroundColor": null,
-                    "className": null,
+                    "pageComponentBaseSetting":{
+                        "sortIndex": 3,
+                        "margin": null,
+                        "backgroundColor": null,
+                        "className": null,
+                        "col": "12",
+                        "height": "27rem",
+                        "padding": "0rem"
+                    },
                     "targetPageId": null,
-                    "col": "12",
-                    "height": "27rem",
-                    "padding": "0rem",
                     "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 },
@@ -56,14 +62,16 @@
                     "name": "RichTextEditor",
                     "sign": "2",
                     "parentSign": null,
-                    "sortIndex": 4,
-                    "margin": null,
-                    "backgroundColor": null,
-                    "className": null,
+                    "pageComponentBaseSetting":{
+                        "sortIndex": 4,
+                        "margin": null,
+                        "backgroundColor": null,
+                        "className": null,
+                        "col": "12",
+                        "height": "",
+                        "padding": "0rem"
+                    },
                     "targetPageId": null,
-                    "col": "12",
-                    "height": "",
-                    "padding": "0rem",
                     "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 },
@@ -71,14 +79,16 @@
                     "name": "Progress",
                     "sign": "3",
                     "parentSign": null,
-                    "sortIndex": 5,
-                    "margin": null,
-                    "backgroundColor": null,
-                    "className": null,
+                    "pageComponentBaseSetting":{
+                        "sortIndex": 5,
+                        "margin": null,
+                        "backgroundColor": null,
+                        "className": null,
+                        "col": "12",
+                        "height": "",
+                        "padding": "0rem"
+                    },
                     "targetPageId": null,
-                    "col": "12",
-                    "height": "",
-                    "padding": "0rem",
                     "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 },
@@ -86,13 +96,15 @@
                     "name": "PostList",
                     "sign": "4",
                     "parentSign": null,
-                    "sortIndex": 6,
-                    "margin": null,
-                    "backgroundColor": null,
-                    "className": null,
-                    "col": "12",
-                    "height": "",
-                    "padding": "0rem",
+                    "pageComponentBaseSetting":{
+                        "sortIndex": 6,
+                        "margin": null,
+                        "backgroundColor": null,
+                        "className": null,
+                        "col": "12",
+                        "height": "",
+                        "padding": "0rem"
+                    },
                     "componentType": "PageLeafComponent",
                     "pageComponentSettings": [],
                     "targetPageId": 1
@@ -101,14 +113,16 @@
                     "name": "IEBottomNav",
                     "sign": "5",
                     "parentSign": null,
-                    "sortIndex": 7,
-                    "margin": null,
-                    "backgroundColor": null,
-                    "className": null,
+                    "pageComponentBaseSetting":{
+                        "sortIndex": 7,
+                        "margin": null,
+                        "backgroundColor": null,
+                        "className": null,
+                        "col": "12",
+                        "height": null,
+                        "padding": "0rem"
+                    },
                     "targetPageId": null,
-                    "col": "12",
-                    "height": null,
-                    "padding": "0rem",
                     "componentType": "LeafComponent",
                     "pageComponentSettings": []
                 }
@@ -151,8 +165,8 @@
         "resourceNum": 10,
         "pageIndex": 1
     },
-    "GetPageData":{
-        "pageData":{
+    "GetPageData": {
+        "pageData": {
             "id": 1,
             "name": "post",
             "title": "文章1",

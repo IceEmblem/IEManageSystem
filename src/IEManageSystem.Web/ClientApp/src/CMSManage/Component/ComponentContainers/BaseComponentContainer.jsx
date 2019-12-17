@@ -18,27 +18,27 @@ class BaseComponentContainer extends React.Component {
                 padding: "0rem"
             }
 
-        if (this.props.pageComponent.height) {
-            style.height = this.props.pageComponent.height;
+        if (this.props.pageComponent.pageComponentBaseSetting.height) {
+            style.height = this.props.pageComponent.pageComponentBaseSetting.height;
         }
 
-        if (this.props.pageComponent.padding) {
-            style.padding = this.props.pageComponent.padding;
+        if (this.props.pageComponent.pageComponentBaseSetting.padding) {
+            style.padding = this.props.pageComponent.pageComponentBaseSetting.padding;
         }
 
-        if(this.props.pageComponent.margin){
-            style.margin = this.props.pageComponent.margin;
+        if(this.props.pageComponent.pageComponentBaseSetting.margin){
+            style.margin = this.props.pageComponent.pageComponentBaseSetting.margin;
         }
 
-        if(this.props.pageComponent.backgroundColor){
-            style.backgroundColor = this.props.pageComponent.backgroundColor;
+        if(this.props.pageComponent.pageComponentBaseSetting.backgroundColor){
+            style.backgroundColor = this.props.pageComponent.pageComponentBaseSetting.backgroundColor;
         }
 
         return style;
     }
 
     getClassName(){
-        let className = `col-md-${this.props.pageComponent.col || 12} ${this.props.pageComponent.className || ""}`;
+        let className = `col-md-${this.props.pageComponent.pageComponentBaseSetting.col || 12} ${this.props.pageComponent.pageComponentBaseSetting.className || ""}`;
 
         return className;
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseContentLeafComponent'
+import { componentDataUpdate } from 'CMSManage/IEReduxs/Actions'
 
 import './Index.css'
 import BaseComponentContainer from '../BaseComponentContainer'
@@ -29,7 +30,6 @@ class PostEditComponentContainer extends BaseComponentContainer {
             <Contain
                 key={item.sign}
                 pageComponent={item}
-                componentDataUpdate={this.props.componentDataUpdate}
             >
             </Contain>)
         );
@@ -96,6 +96,9 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        componentDataUpdate: (resource) => {
+            dispatch(componentDataUpdate(resource));
+        }
     }
 }
 
