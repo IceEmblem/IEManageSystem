@@ -1,5 +1,6 @@
 export const componentType = {
     container: "container",
+    background: "background",
     nav: "nav",
     menu: "menu",
     page: "page",

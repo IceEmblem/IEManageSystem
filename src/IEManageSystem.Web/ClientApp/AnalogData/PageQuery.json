@@ -8,6 +8,23 @@
             "pageType": "StaticPage",
             "pageComponents": [
                 {
+                    "name": "IEBackground",
+                    "sign": "-3",
+                    "parentSign": null,
+                    "pageComponentBaseSetting": {
+                        "sortIndex": 1,
+                        "margin": null,
+                        "backgroundColor": null,
+                        "className": null,
+                        "col": null,
+                        "height": null,
+                        "padding": null
+                    },
+                    "targetPageId": null,
+                    "componentType": "LeafComponent",
+                    "pageComponentSettings": []
+                },
+                {
                     "name": "IENav",
                     "sign": "-2",
                     "parentSign": null,

@@ -6,6 +6,7 @@ import Container from "CMSManage/Component/Components/Container";
 import Donut from "CMSManage/Component/Components/Donut";
 import FlipClock from "CMSManage/Component/Components/FlipClock";
 import Groupedcolumn from "CMSManage/Component/Components/Groupedcolumn";
+import IEBackground from "CMSManage/Component/Components/IEBackground";
 import IEBottomNav from "CMSManage/Component/Components/IEBottomNav";
 import IELoading from "CMSManage/Component/Components/IELoading";
 import IEMenu from "CMSManage/Component/Components/IEMenu";
@@ -15,5 +16,5 @@ import Progress from "CMSManage/Component/Components/Progress";
 import RichTextEditor from "CMSManage/Component/Components/RichTextEditor";
 import Text from "CMSManage/Component/Components/Text";
 
-const componentDescribes = [CitiesSlider,Clock,Container,Donut,FlipClock,Groupedcolumn,IEBottomNav,IELoading,IEMenu,IENav,PostList,Progress,RichTextEditor,Text,];
+const componentDescribes = [CitiesSlider,Clock,Container,Donut,FlipClock,Groupedcolumn,IEBackground,IEBottomNav,IELoading,IEMenu,IENav,PostList,Progress,RichTextEditor,Text,];
 export default componentDescribes;

@@ -3,7 +3,8 @@ import ComponentDescribes from './ComponentDescribeList';
 
 export const componentTypes = [
     { name: componentType.container, text: "容器组件", icon: "oi-box" },
-    { name: componentType.nav, text: "导航栏组件", icon: "oi-home" },
+    { name: componentType.background, text: "背景组件", icon: "oi-image" },
+    { name: componentType.nav, text: "导航组件", icon: "oi-home" },
     { name: componentType.menu, text: "菜单组件", icon: "oi-list" },
     { name: componentType.page, text: "页面组件", icon: "oi-file" },
     { name: componentType.text, text: "文本组件", icon: "oi-text" },

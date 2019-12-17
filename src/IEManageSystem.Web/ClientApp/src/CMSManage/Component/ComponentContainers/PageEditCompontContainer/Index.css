@@ -34,6 +34,7 @@
 
 .editableparentcom-btns {
     width: 0px;
+    height: 0.3rem;
     position: relative;
     display: flex;
     align-items: start;

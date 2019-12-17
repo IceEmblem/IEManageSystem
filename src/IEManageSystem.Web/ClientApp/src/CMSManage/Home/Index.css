@@ -4,13 +4,6 @@ body {
     height: 100%;
 }
 
-body {
-    background-image: url("background.png");
-    background-size: auto 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
 .front-container {
     display: flex;
     height: 100%;
