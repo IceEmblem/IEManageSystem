@@ -3,18 +3,3 @@ body {
     margin: 0;
     height: 100%;
 }
-
-.front-container {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    overflow-x: hidden;
-}
-
-.front-container>div {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    overflow-y: scroll;
-    margin-right: -18px;
-}

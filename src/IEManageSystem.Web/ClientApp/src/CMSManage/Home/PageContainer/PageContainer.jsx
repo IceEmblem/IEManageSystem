@@ -27,7 +27,7 @@ class PageContainer extends React.Component {
 
     render() {
         return (
-            <div className="front-page-container row">
+            <div className="front-page-container">
                 {
                     this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                         <FrontCompontContainer

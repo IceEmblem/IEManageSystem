@@ -31,19 +31,15 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div className="front-container">
-                <div>
-                    <div className="container-fluid">
-                        <Switch>
-                            <Route exact path="/Page/:pageName?/:pageDataName?"
-                                render={(props) => <PageContainer {...props} />}
-                            />
-                            <Route exact path="/"
-                                render={(props) => <PageContainer {...props} />}
-                            />
-                        </Switch>
-                    </div>
-                </div>
+            <div className="front-container hide-scroll">
+                <Switch>
+                    <Route exact path="/Page/:pageName?/:pageDataName?"
+                        render={(props) => <PageContainer {...props} />}
+                    />
+                    <Route exact path="/"
+                        render={(props) => <PageContainer {...props} />}
+                    />
+                </Switch>
             </div>
         );
     }

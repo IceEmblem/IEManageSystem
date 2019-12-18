@@ -19,14 +19,3 @@
 .postedit-page-container-header:hover{
     opacity: 1;
 }
-
-.postedit-page-container-body{
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    overflow-y: scroll;
-    margin-right: -18px;
-    overflow-x: hidden;
-}

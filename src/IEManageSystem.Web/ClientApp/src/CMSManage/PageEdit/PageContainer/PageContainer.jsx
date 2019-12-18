@@ -120,16 +120,18 @@ class PageContainer extends React.Component {
                         </button>
                     </div>
                 </div>
-                <div className="pageedit-page-container-body">
-                    {
-                        this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
-                            <PageEditCompontContainer
-                                key={item.sign}
-                                pageComponent={item}
-                                selectedComponentDescribe={this.props.selectedComponentDescribe}
-                            >
-                            </PageEditCompontContainer>)
-                    }
+                <div className="hide-scroll">
+                    <div className="front-page-container">
+                        {
+                            this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
+                                <PageEditCompontContainer
+                                    key={item.sign}
+                                    pageComponent={item}
+                                    selectedComponentDescribe={this.props.selectedComponentDescribe}
+                                >
+                                </PageEditCompontContainer>)
+                        }
+                    </div>
                 </div>
                 <div className="col-md-12  padding-0 pageedit-page-container-addcomponent">
                     <button className="btn pageedit-page-container-addcomponent-btn" onClick={this.addComponent}

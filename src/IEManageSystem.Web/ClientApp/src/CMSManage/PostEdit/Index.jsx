@@ -21,14 +21,14 @@ class ComponentData extends React.Component {
             <div className="postedit-page-container">
                 <div className="postedit-page-container-header">
                     <button type="button" className="btn btn-warning mr-2"
-                        onClick={()=>this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)}
+                        onClick={() => this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)}
                     >
                         取消修改
                         <span className="oi padding-left-10 oi-action-undo" title="icon name" aria-hidden="true"></span>
                     </button>
                     <button type="button" className="btn btn-info"
                         onClick={
-                            ()=>{
+                            () => {
                                 this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.pageData.contentComponentDatas);
                             }
                         }
@@ -37,15 +37,17 @@ class ComponentData extends React.Component {
                         <span className="oi padding-left-10 oi-cloud-upload" title="icon name" aria-hidden="true"></span>
                     </button>
                 </div>
-                <div className="postedit-page-container-body">
-                    {
-                        this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
-                            <PostEditComponentContainer
-                                key={item.sign}
-                                pageComponent={item}
-                            >
-                            </PostEditComponentContainer>)
-                    }
+                <div className="hide-scroll">
+                    <div className="front-page-container">
+                        {
+                            this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
+                                <PostEditComponentContainer
+                                    key={item.sign}
+                                    pageComponent={item}
+                                >
+                                </PostEditComponentContainer>)
+                        }
+                    </div>
                 </div>
             </div>
         );
