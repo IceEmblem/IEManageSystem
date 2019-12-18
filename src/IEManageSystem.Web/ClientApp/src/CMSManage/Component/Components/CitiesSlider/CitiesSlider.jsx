@@ -1,5 +1,5 @@
 import React from 'react'
-import { BaseField, BaseContentLeafComponent, BasePreview, ComponentSettingConfig, ComponentDataConfig } from '../BaseContentLeafComponent'
+import { BaseField, BaseStaticComponent, BasePreview, ComponentSettingConfig, ComponentDataConfig } from '../BaseStaticComponent'
 
 import './CitiesSlider.css'
 
@@ -9,16 +9,56 @@ import SliderDefault3 from './slider-default3.jpg'
 
 
 // 幻灯片
-class CitiesSlider extends BaseContentLeafComponent {
+class CitiesSlider extends BaseStaticComponent {
     constructor(props) {
         super(props);
 
+        this.sliders = [];
+
+        // 将图片分为4个部分
         this.IMAGE_PARTS = 4;
 
         this.changeTO = null;
         this.AUTOCHANGE_TIME = 4000;
 
-        this.state = { activeSlide: -1, prevSlide: -1, sliderReady: false };
+        this.state = { activeSlide: 0, prevSlide: -1 };
+    }
+    
+    componentWillMount() {
+        this.updateSliders(this.props);
+    }
+
+    // 父组件发生render的时候子组件就会调用
+    componentWillReceiveProps(nextProps){
+        this.updateSliders(nextProps);
+    }
+
+    updateSliders(props){
+        let sliders = [];
+        let pageComponentSetting = props.pageComponentSettings.find(item=>item.name == "pic");
+        if(!pageComponentSetting){
+            this.sliders = defaultSlides;
+            return;
+        }
+
+        if(pageComponentSetting.field1){
+            sliders.push(JSON.parse(pageComponentSetting.field1));
+        }
+
+        if(pageComponentSetting.field2){
+            sliders.push(JSON.parse(pageComponentSetting.field2));
+        }
+
+        if(pageComponentSetting.field3){
+            sliders.push(JSON.parse(pageComponentSetting.field3));
+        }
+
+        if(sliders.length == 0){
+            this.sliders = defaultSlides;
+            return;
+        }
+
+        this.sliders = sliders;
     }
 
     componentWillUnmount() {
@@ -26,22 +66,13 @@ class CitiesSlider extends BaseContentLeafComponent {
     }
 
     componentDidMount() {
-        this.runAutochangeTO();
-        setTimeout(() => {
-            this.setState({ activeSlide: 0, sliderReady: true });
-        }, 0);
-    }
-
-    runAutochangeTO() {
-        this.changeTO = setTimeout(() => {
+        this.changeTO = window.setInterval(()=>{
             this.changeSlides(1);
-            this.runAutochangeTO();
         }, this.AUTOCHANGE_TIME);
     }
 
     changeSlides(change) {
-        window.clearTimeout(this.changeTO);
-        const { length } = this.props.slides;
+        const { length } = this.sliders;
         const prevSlide = this.state.activeSlide;
         let activeSlide = prevSlide + change;
         if (activeSlide < 0) activeSlide = length - 1;
@@ -50,27 +81,27 @@ class CitiesSlider extends BaseContentLeafComponent {
     }
 
     render() {
-        const { activeSlide, prevSlide, sliderReady } = this.state;
+        const { activeSlide, prevSlide } = this.state;
         return (
-            <div className={"slider" + (sliderReady && " s--ready")}>
+            <div className={"slider s--ready"}>
                 {/* <p className="slider__top-heading">Travelers</p> */}
                 <div className="slider__slides">
-                    {this.props.slides.map((slide, index) => (
+                    {this.sliders.map((slide, index) => (
                         <div
                             className={'slider__slide' + (activeSlide === index ? ' s--active' : (prevSlide === index ? ' s--prev' : ""))}
-                            key={slide.city}
+                            key={slide.title}
                         >
                             <div className="slider__slide-content">
-                                <h3 className="slider__slide-subheading">{slide.country || slide.city}</h3>
+                                <h3 className="slider__slide-subheading">{slide.content || slide.title}</h3>
                                 <h2 className="slider__slide-heading">
-                                    {slide.city.split('').map((l, charIndex) => <span key={charIndex}>{l}</span>)}
+                                    {slide.title.split('').map((l, charIndex) => <span key={charIndex}>{l}</span>)}
                                 </h2>
                                 <p className="slider__slide-readmore">read more</p>
                             </div>
                             <div className="slider__slide-parts">
                                 {[...Array(this.IMAGE_PARTS).fill()].map((x, i) => (
                                     <div className="slider__slide-part" key={i}>
-                                        <div className="slider__slide-part-inner" style={{ backgroundImage: `url(${slide.img})` }} />
+                                        <div className="slider__slide-part-inner" style={{ backgroundImage: `url(${slide.imgSrc})` }} />
                                     </div>
                                 ))}
                             </div>
@@ -84,25 +115,24 @@ class CitiesSlider extends BaseContentLeafComponent {
     }
 }
 
-const slides = [
+const defaultSlides = [
     {
-        city: 'Paris',
-        country: 'France',
-        img: SliderDefault1,
+        title: 'Paris',
+        content: 'France',
+        imgSrc: SliderDefault1,
     },
     {
-        city: 'Singapore',
-        img: SliderDefault2,
+        title: 'Singapore',
+        imgSrc: SliderDefault2,
     },
     {
-        city: 'Prague',
-        country: 'Czech Republic',
-        img: SliderDefault3,
+        title: 'Prague',
+        content: 'Czech Republic',
+        imgSrc: SliderDefault3,
     }
 ];
 
 CitiesSlider.defaultProps = {
-    slides: slides
 }
 
 export default CitiesSlider;

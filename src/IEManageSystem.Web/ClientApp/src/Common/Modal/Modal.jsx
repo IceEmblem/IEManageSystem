@@ -2,6 +2,8 @@ import React from 'react';
 import { Animate } from 'react-move'
 import { easeExpOut } from 'd3-ease'
 
+import './index.css';
+
 // props.show bool
 export default class Modal extends React.Component {
   constructor(props) {
@@ -24,7 +26,7 @@ export default class Modal extends React.Component {
           const { x } = state;
 
           return (
-            <div className="modal fade show" style={{opacity: `${x}`, display:x!=0?"block":"none", overflow:"scroll", marginRight:"-1.5rem"}}>
+            <div className="iemodel" style={{opacity: `${x}`, display:x!=0?"block":"none", overflow:"scroll", marginRight:"-1.5rem"}}>
               {this.props.children}
             </div>
           )
