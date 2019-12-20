@@ -1,12 +1,11 @@
 import React from 'react'
-import BaseComponentObject, { BaseField, BaseContentLeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContentLeafComponent'
+import BaseComponentObject from '../BaseStaticComponent'
 import FlipClock from './FlipClock.jsx'
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
 class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
-        this.ComponentDataConfigs = {}
     }
     Component(props) {
         return <FlipClock {...props} />

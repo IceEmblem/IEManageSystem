@@ -1,4 +1,4 @@
-import { BaseComponent, BaseComponentProps } from '../BaseLeafComponent'
+import { BaseComponent, BaseComponentProps } from '../BaseComponent'
 import {ieReduxFetch} from 'Core/IEReduxFetch'
 
 export class BaseMenuComponentProps extends BaseComponentProps {

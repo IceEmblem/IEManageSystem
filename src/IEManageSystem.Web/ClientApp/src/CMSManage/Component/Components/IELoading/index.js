@@ -1,28 +1,27 @@
 import React from 'react'
-import BaseComponentObject, { BaseField, BaseContentLeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContentLeafComponent'
+import BaseComponentObject from '../BaseStaticComponent';
+import { BaseField, DefaultSettingConfig, ComponentSettingConfig } from '../BaseComponent';
 import IELoading from './IELoading'
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
+
+const field1 = (props)=>(<BaseField text={"宽（px）"} {...props} />);
+const field2 = (props)=>(<BaseField text={"高（px）"} {...props} />);
 
 class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
-        this.ComponentDataConfigs = {}
         this.ComponentSettingConfigs = [
-            new ComponentSettingConfig("SizeSetting", "大小设置", (pageComponentSetting, setPageComponentSetting) => {
-                return (<div>
-                    <BaseField
-                        text="宽（px）"
-                        fieldValue={pageComponentSetting.field1}
-                        setFieldValue={(value) => {
-                            setPageComponentSetting({ ...pageComponentSetting, ...{ field1: value } })
-                        }} />
-                    <BaseField
-                        text="高（px）"
-                        fieldValue={pageComponentSetting.field2}
-                        setFieldValue={(value) => {
-                            setPageComponentSetting({ ...pageComponentSetting, ...{ field2: value } })
-                        }} />
-                </div>)}
+            new ComponentSettingConfig(
+                "SizeSetting",
+                "大小设置",
+                (pageComponentSetting, setPageComponentSetting) => {
+                    return <DefaultSettingConfig
+                        data={pageComponentSetting}
+                        setData={setPageComponentSetting}
+                        field1={field1}
+                        field2={field2}
+                    />;
+                }
             )
         ]
     }

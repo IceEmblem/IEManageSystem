@@ -1,4 +1,4 @@
-import BaseComponentObject, {BaseField, BaseComponent, BaseComponentProps, BasePreview, ComponentSettingConfig } from '../BaseComponent';
+import BaseComponentObject from '../BaseComponent';
 
 export default class LeafComponentObject extends BaseComponentObject {
     Component(props){
@@ -7,5 +7,3 @@ export default class LeafComponentObject extends BaseComponentObject {
         throw new Error("Component function undefined");
     }
 }
-
-export {BaseField, BaseComponent, BaseComponentProps, BasePreview, ComponentSettingConfig }

@@ -1,6 +1,6 @@
 import React from 'react';
 import IENav from './IENav'
-import BaseComponentObject, {BaseField, BaseStaticComponent, BaseStaticComponentProps, BasePreview, ComponentSettingConfig } from '../BaseStaticComponent';
+import BaseComponentObject from '../BaseStaticComponent';
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
 class ComponentObject extends BaseComponentObject{

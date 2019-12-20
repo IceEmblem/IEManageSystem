@@ -1,7 +1,14 @@
 import BasePageLeafComponent, { PageLeafComponentProps } from './BasePageLeafComponent'
-import BaseComponentObject, {BaseField, BasePreview, ComponentSettingConfig } from '../BaseComponent';
+import BaseComponentObject from '../BaseComponent';
+import PageLeafSettingConfig from './PageLeafSettingConfig';
 
 export default class PageLeafComponentObject extends BaseComponentObject {
+    constructor(){
+        super();
+
+        this.PageLeafSettingConfig = PageLeafSettingConfig;
+    }
+
     Component(props){
         props instanceof PageLeafComponentProps;
 
@@ -9,4 +16,4 @@ export default class PageLeafComponentObject extends BaseComponentObject {
     }
 }
 
-export { BaseField, BasePageLeafComponent, BasePreview, ComponentSettingConfig, PageLeafComponentProps }
+export { BasePageLeafComponent, PageLeafComponentProps }

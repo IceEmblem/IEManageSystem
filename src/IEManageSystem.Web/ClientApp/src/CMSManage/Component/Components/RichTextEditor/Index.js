@@ -1,5 +1,5 @@
 import React from 'react'
-import BaseComponentObject, { BaseField, BaseContentLeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContentLeafComponent'
+import BaseComponentObject, { ComponentDataConfig } from '../BaseContentLeafComponent'
 import RichTextEditor from './RichTextEditor'
 import CustomizeField from './CustomizeField'
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
@@ -7,9 +7,10 @@ import ComponentDescribe, {componentType} from '../ComponentDescribe'
 class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
-        this.ComponentDataConfigs = {
-            field1: CustomizeField
-        }
+        this.ComponentDataConfig = (props) => (
+            <ComponentDataConfig {...props}
+                field1={CustomizeField}
+            />);
     }
     Component(props) {
         return <RichTextEditor {...props} />

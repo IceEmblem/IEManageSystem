@@ -1,6 +1,6 @@
 import React from 'react'
 import PostList from './PostList'
-import BaseComponentObject, {BaseField, BasePreview, ComponentSettingConfig} from '../BasePageLeafComponent';
+import BaseComponentObject from '../BasePageLeafComponent';
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
 class ComponentObject extends BaseComponentObject {

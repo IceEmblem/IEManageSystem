@@ -1,4 +1,4 @@
-import BaseComponentObject, {BaseField, BaseComponent, BaseComponentProps, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent';
+import BaseComponentObject from '../BaseLeafComponent';
 import BaseStaticComponent, {BaseStaticComponentProps} from './BaseStaticComponent'
 
 export default class StaticComponentObject extends BaseComponentObject {
@@ -9,4 +9,4 @@ export default class StaticComponentObject extends BaseComponentObject {
     }
 } 
 
-export {BaseField, BaseStaticComponent, BaseStaticComponentProps, BasePreview, ComponentSettingConfig }
+export {BaseStaticComponent, BaseStaticComponentProps}

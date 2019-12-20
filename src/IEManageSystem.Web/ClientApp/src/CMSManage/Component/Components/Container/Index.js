@@ -1,5 +1,5 @@
 import React from 'react'
-import BaseComponentObject, { LeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContainerComponent'
+import BaseComponentObject from '../BaseContainerComponent'
 import Container from './Container'
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
 

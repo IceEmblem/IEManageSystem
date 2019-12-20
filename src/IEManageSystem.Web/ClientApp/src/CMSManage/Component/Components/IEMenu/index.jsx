@@ -1,5 +1,5 @@
 import React from 'react'
-import BaseComponentObject, {BaseField, BaseMenuComponent, BaseMenuComponentProps, BasePreview, ComponentSettingConfig } from '../BaseMenuComponent'
+import BaseComponentObject from '../BaseMenuComponent'
 import IEMenu from './IEMenu'
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
 

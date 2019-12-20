@@ -1,5 +1,5 @@
 import React from 'react'
-import {BaseContentLeafComponent} from '../BaseContentLeafComponent'
+import {BaseStaticComponent} from '../BaseStaticComponent'
 
 import './FlipClock.css'
 
@@ -77,7 +77,7 @@ class FlipUnitContainer extends React.Component {
 	}
 }
 
-class FlipClock extends BaseContentLeafComponent 
+class FlipClock extends BaseStaticComponent 
 {
 	constructor(props) {
 		super(props);

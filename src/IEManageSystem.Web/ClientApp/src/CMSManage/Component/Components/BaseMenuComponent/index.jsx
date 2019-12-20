@@ -1,4 +1,4 @@
-import BaseComponentObject, {BaseField, BaseComponent, BaseComponentProps, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent';
+import BaseComponentObject from '../BaseLeafComponent';
 import BaseMenuComponent, { BaseMenuComponentProps } from './BaseMenuComponent'
 
 export default class MenuComponentObject extends BaseComponentObject {
@@ -9,4 +9,4 @@ export default class MenuComponentObject extends BaseComponentObject {
     }
 } 
 
-export {BaseField, BaseMenuComponent, BaseMenuComponentProps, BasePreview, ComponentSettingConfig }
+export {BaseMenuComponent, BaseMenuComponentProps }

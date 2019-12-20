@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseComponentObject, {BaseField, BaseStaticComponent, BaseStaticComponentProps, BasePreview, ComponentSettingConfig } from '../BaseStaticComponent';
+import BaseComponentObject from '../BaseStaticComponent';
 import IEBackground from './IEBackground';
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
 

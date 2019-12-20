@@ -1,29 +1,37 @@
 import BaseContentLeafComponent, { BaseContentLeafComponentProps } from './BaseContentLeafComponent'
-import BaseComponentObject, {BaseField, BaseComponent, BaseComponentProps, BasePreview, ComponentSettingConfig } from '../BaseLeafComponent';
+import BaseComponentObject from '../BaseLeafComponent';
 import React from 'react';
+import ComponentDataConfig from './ComponentDataConfig';
 
-const ComponentDataConfigField = 
-    (name) => 
-    (props) => 
-    <BaseField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+// const ComponentDataConfigField =
+//     (name) =>
+//         (props) =>
+//             <BaseField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+
+const field1 = (props) => <BaseField text={"字段1"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field2 = (props) => <BaseField text={"字段2"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field3 = (props) => <BaseField text={"字段3"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field4 = (props) => <BaseField text={"字段4"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field5 = (props) => <BaseField text={"字段5"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
 
 export default class ContentLeafComponentObject extends BaseComponentObject {
-    constructor(){
+    constructor() {
         super();
 
-        this.ComponentDataConfigs = {
-            field1: ComponentDataConfigField("字段1"),
-            field2: ComponentDataConfigField("字段2"),
-            field3: ComponentDataConfigField("字段3"),
-            field4: ComponentDataConfigField("字段4"),
-            field5: ComponentDataConfigField("字段5")
-        }
+        this.ComponentDataConfig = (props) => (
+            <ComponentDataConfig {...props}
+                field1={field1}
+                field2={field2}
+                field3={field3}
+                field4={field4}
+                field5={field5}
+            />);
     }
-    Component(props){
+    Component(props) {
         props instanceof BaseContentLeafComponentProps;
 
         throw new Error("Component function undefined");
     }
 }
 
-export { BaseField, BaseContentLeafComponent, BaseContentLeafComponentProps, BasePreview, ComponentSettingConfig, ComponentDataConfigField }
+export { BaseContentLeafComponent, BaseContentLeafComponentProps, ComponentDataConfig }

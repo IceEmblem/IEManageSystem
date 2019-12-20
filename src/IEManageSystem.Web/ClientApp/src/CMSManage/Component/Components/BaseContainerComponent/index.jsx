@@ -10,4 +10,4 @@ export default class ContainerComponentObject extends BaseComponentObject {
     }
 } 
 
-export {BaseContainerComponent, BasePreview, ComponentSettingConfig, BaseComponentProps}
+export {BaseContainerComponent}

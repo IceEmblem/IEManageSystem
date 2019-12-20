@@ -1,17 +1,9 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import {BaseCustomizeField} from '../BaseComponent'
 
-class CustomizeField extends React.Component {
+class CustomizeField extends BaseCustomizeField {
     constructor(props) {
         super(props)
-    }
-
-    getFieldValue(){
-        return this.props.fieldValue ? JSON.parse(this.props.fieldValue) : {};
-    }
-
-    setFieldValue(fieldValue) {
-        this.props.setFieldValue(JSON.stringify(fieldValue));
     }
 
     render() {
@@ -20,46 +12,48 @@ class CustomizeField extends React.Component {
         //     value1: "",
         //     value2: ""
         // };
-        let fieldValue = this.getFieldValue();
 
         return (
             <div>
                 <label>{this.props.text}</label>
                 <div>
                     <div className="input-group mb-3 col-md-4 float-left">
-                        <input value={fieldValue.type} type="text" className="form-control" placeholder={`请输入类型`}
+                        <input value={this.fieldValue.type} type="text" className="form-control" placeholder={`请输入类型`}
                             onChange={
                                 (event) => {
-                                    fieldValue.type = event.target.value;
-                                    this.setFieldValue(fieldValue);
+                                    this.fieldValue.type = event.target.value;
+                                    this.setState({});
                                 }
                             }
+                            onBlur={()=>{this.setFieldValue()}}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text">类型</span>
                         </div>
                     </div>
                     <div className="input-group mb-3 col-md-4 float-left">
-                        <input value={fieldValue.value1} type="text" className="form-control" placeholder={`请输入值`}
+                        <input value={this.fieldValue.value1} type="text" className="form-control" placeholder={`请输入值`}
                             onChange={
                                 (event) => {
-                                    fieldValue.value1 = event.target.value;
-                                    this.setFieldValue(fieldValue);
+                                    this.fieldValue.value1 = event.target.value;
+                                    this.setState({});
                                 }
                             }
+                            onBlur={()=>{this.setFieldValue()}}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text">柱1</span>
                         </div>
                     </div>
                     <div className="input-group mb-3 col-md-4 float-left">
-                        <input value={fieldValue.value2} type="text" className="form-control" placeholder={`请输入值`}
+                        <input value={this.fieldValue.value2} type="text" className="form-control" placeholder={`请输入值`}
                             onChange={
                                 (event) => {
-                                    fieldValue.value2 = event.target.value;
-                                    this.setFieldValue(fieldValue);
+                                    this.fieldValue.value2 = event.target.value;
+                                    this.setState({});
                                 }
                             }
+                            onBlur={()=>{this.setFieldValue()}}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text">柱2</span>
@@ -69,12 +63,6 @@ class CustomizeField extends React.Component {
             </div>
         );
     }
-}
-
-CustomizeField.propTypes = {
-    text: PropTypes.string.isRequired,
-    fieldValue: PropTypes.string,
-    setFieldValue: PropTypes.func.isRequired
 }
 
 export default CustomizeField

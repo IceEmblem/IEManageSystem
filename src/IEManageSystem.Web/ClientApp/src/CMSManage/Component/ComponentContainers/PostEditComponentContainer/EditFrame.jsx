@@ -76,36 +76,10 @@ class EditFrame extends React.Component {
                                 selectIndex={this.selectIndex}
                                 selectOnclick={() => { }}
                             >
-                                {
-                                    this.props.config.field1 &&
-                                    <this.props.config.field1
-                                        fieldValue={this.state.field1}
-                                        setFieldValue={(fieldValue) => { this.setState({ field1: fieldValue }) }}
-                                    />}
-                                {
-                                    this.props.config.field2 &&
-                                    <this.props.config.field2
-                                        fieldValue={this.state.field2}
-                                        setFieldValue={(fieldValue) => { this.setState({ field2: fieldValue }) }}
-                                    />}
-                                {
-                                    this.props.config.field3 &&
-                                    <this.props.config.field3
-                                        fieldValue={this.state.field3}
-                                        setFieldValue={(fieldValue) => { this.setState({ field3: fieldValue }) }}
-                                    />}
-                                {
-                                    this.props.config.field4 &&
-                                    <this.props.config.field4
-                                        fieldValue={this.state.field4}
-                                        setFieldValue={(fieldValue) => { this.setState({ field4: fieldValue }) }}
-                                    />}
-                                {
-                                    this.props.config.field5 &&
-                                    <this.props.config.field5
-                                        fieldValue={this.state.field5}
-                                        setFieldValue={(fieldValue) => { this.setState({ field5: fieldValue }) }}
-                                    />}
+                                <this.props.componentDataConfig 
+                                    data={this.state}
+                                    setData={(value)=>this.setState(value)}
+                                />
                             </Tab>
                         </div>
 
@@ -127,7 +101,7 @@ EditFrame.propTypes = {
     submit: PropTypes.func.isRequired,
     pageComponent: PropTypes.object.isRequired,
     componentData: PropTypes.object,
-    config: PropTypes.object.isRequired
+    componentDataConfig: PropTypes.object.isRequired
 }
 
 export default EditFrame

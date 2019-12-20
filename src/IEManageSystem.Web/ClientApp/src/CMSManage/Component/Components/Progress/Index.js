@@ -1,24 +1,26 @@
 import React from 'react'
-import BaseComponentObject, { BaseField, BaseContentLeafComponent, BasePreview, ComponentSettingConfig } from '../BaseContentLeafComponent'
+import BaseComponentObject, { ComponentDataConfig } from '../BaseContentLeafComponent'
 import Progress from './Progress'
 import CustomizeField from './CustomizeField'
 import ComponentDescribe, {componentType} from '../ComponentDescribe'
 
-const CustomizeComponentDataConCfigField = 
-    (name) => 
-    (props) => 
-    <CustomizeField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field1 = (props) => <CustomizeField text={"步骤1"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field2 = (props) => <CustomizeField text={"步骤2"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field3 = (props) => <CustomizeField text={"步骤3"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field4 = (props) => <CustomizeField text={"步骤4"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+const field5 = (props) => <CustomizeField text={"步骤5"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
 
 class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
-        this.ComponentDataConfigs = {
-            field1: CustomizeComponentDataConCfigField("步骤1"),
-            field2: CustomizeComponentDataConCfigField("步骤2"),
-            field3: CustomizeComponentDataConCfigField("步骤3"),
-            field4: CustomizeComponentDataConCfigField("步骤4"),
-            field5: CustomizeComponentDataConCfigField("步骤5")
-        }
+        this.ComponentDataConfig = (props) => (
+            <ComponentDataConfig {...props}
+                field1={field1}
+                field2={field2}
+                field3={field3}
+                field4={field4}
+                field5={field5}
+            />);
     }
     Component(props) {
         return <Progress {...props} />

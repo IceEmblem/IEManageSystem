@@ -53,7 +53,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
                 submit={this.submit}
                 pageComponent={pageComponent}
                 componentData={this.props.contentComponentData}
-                config={this.componentObject.ComponentDataConfigs}
+                componentDataConfig={this.componentObject.ComponentDataConfig}
             ></EditFrame>);
         tools.push(
             <div className="parentcomponent-btns"

@@ -11,29 +11,36 @@ class EditFrame extends React.Component {
     constructor(props) {
         super(props);
 
-        // 选项卡配置
-        this.tabs = [{ index: 0, text: "基本设置" }];
-        // 选项卡名称字段的名字
-        this.nameField = "text";
-
         this.state = {
             // 当前选择的选项卡的索引
-            selectIndex: 0,
+            selectTab: null,
             pageComponent: { ...{}, ...this.props.pageComponent }
         }
 
-        if(!this.state.pageComponent.pageComponentSettings){
+        if (!this.state.pageComponent.pageComponentSettings) {
             this.state.pageComponent.pageComponentSettings = []
         }
 
+        // 选项卡名称字段的名字
+        this.nameField = "text";
+
+        let index = 0;
+        // 选项卡配置
+        this.tabs = [{ index: index, text: "基本设置", name: "ieBaiscSetting" }];
+        index++;
+
+        // 如果有页叶子有配置
+        if (this.props.pageLeafSettingConfig) {
+            this.tabs.push({ index: index, text: "页面配置", name: "iePageLeafSetting" });
+            index++;
+        }
+
         // 根据组件的配置，配置选项卡
-        let index = 1
         this.props.componentSettingConfigs.forEach(element => {
             // 添加 选项卡 选项
             this.tabs.push({ index: index, text: element.displayName, name: element.name })
-            // 添加组件设置
-            if(this.state.pageComponent.pageComponentSettings.find(item=>item.name == element.name) == null)
-            {
+            // 根据 组件设置配置 添加 组件设置数据 到 组件数据 中
+            if (this.state.pageComponent.pageComponentSettings.find(item => item.name == element.name) == null) {
                 this.state.pageComponent.pageComponentSettings.push({
                     name: element.name,
                     displayName: element.displayName
@@ -42,14 +49,13 @@ class EditFrame extends React.Component {
             index++;
         });
 
-
         this.cancel = this.cancel.bind(this);
         this.submit = this.submit.bind(this);
     }
 
-    cancel(){
+    cancel() {
         this.props.close();
-        this.setState({pageComponent: { ...this.props.pageComponent }});
+        this.setState({ pageComponent: { ...this.props.pageComponent } });
     }
 
     submit() {
@@ -59,34 +65,40 @@ class EditFrame extends React.Component {
 
     render() {
         let ContentComponent
-        if (this.state.selectIndex == 0) {
-            ContentComponent = <this.props.baseSetting
-                pageComponentSetting={this.state.pageComponent.pageComponentBaseSetting}
-                setPageComponentSetting={(d) => {
+        // 选择了基本配置
+        if (this.state.selectTab == null || this.state.selectTab.name == "ieBaiscSetting") {
+            ContentComponent = <this.props.basicSettingConfig
+                data={this.state.pageComponent.pageComponentBaseSetting}
+                setData={(d) => {
                     this.state.pageComponent.pageComponentBaseSetting = d;
                     this.setState({});
                 }}
-                targetPageId={this.state.pageComponent.targetPageId}
-                setTargetPageId={(value) => {
+            />
+        }
+        // 选择了页叶子配置
+        else if (this.state.selectTab.name == "iePageLeafSetting") {
+            ContentComponent = <this.props.pageLeafSettingConfig
+                data={this.state.pageComponent.targetPageId}
+                setData={(value) => {
                     let targetPageId = parseInt(value);
-                    if(isNaN(targetPageId)){
+                    if (isNaN(targetPageId)) {
                         return;
                     }
                     this.state.pageComponent.targetPageId = targetPageId;
                     this.setState({});
                 }}
-            />
+            />;
         }
-        else{
+        else {
             // 组件设置配置
-            let componentSettingConfig = this.props.componentSettingConfigs[this.state.selectIndex - 1];
+            let componentSettingConfig = this.props.componentSettingConfigs.find(item => item.name == this.state.selectTab.name);
             // 组件设置数据
-            let pageComponentSetting = this.state.pageComponent.pageComponentSettings.find(item=>item.name == componentSettingConfig.name) || {}
+            let pageComponentSetting = this.state.pageComponent.pageComponentSettings.find(item => item.name == componentSettingConfig.name) || {}
             // 组件设置配置使用的组件
             ContentComponent = componentSettingConfig.settingComponentBuilder(
                 pageComponentSetting,
                 (d) => {
-                    let data = this.state.pageComponent.pageComponentSettings.find(item=>item.name == componentSettingConfig.name) || {}
+                    let data = this.state.pageComponent.pageComponentSettings.find(item => item.name == componentSettingConfig.name) || {}
                     data.field1 = d.field1
                     data.field2 = d.field2
                     data.field3 = d.field3
@@ -111,9 +123,9 @@ class EditFrame extends React.Component {
                             <Tab
                                 tabs={this.tabs}
                                 nameField={this.nameField}
-                                selectIndex={this.state.selectIndex}
+                                selectIndex={this.state.selectTab == null ? 0 : this.state.selectTab.index}
                                 selectOnclick={(data) => {
-                                    this.setState({ selectIndex: data.index })
+                                    this.setState({ selectTab: data })
                                 }}
                             >
                                 {ContentComponent}
@@ -133,7 +145,8 @@ class EditFrame extends React.Component {
 }
 
 EditFrame.propTypes = {
-    baseSetting: PropTypes.func.isRequired,     // 基本配置（React组件）
+    basicSettingConfig: PropTypes.func.isRequired,     // 基本配置（React组件）
+    pageLeafSettingConfig: PropTypes.func.isRequired,     // 页叶子配置（React组件）
     pageComponent: PropTypes.object.isRequired,
     componentSettingConfigs: PropTypes.array.isRequired,
     editComponent: PropTypes.func.isRequired,

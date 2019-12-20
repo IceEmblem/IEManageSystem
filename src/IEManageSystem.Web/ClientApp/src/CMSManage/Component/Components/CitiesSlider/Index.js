@@ -1,9 +1,14 @@
-import React from 'react'
-import BaseComponentObject, { BaseField, ComponentSettingConfig } from '../BaseStaticComponent'
+import React from 'react';
+import BaseComponentObject from '../BaseStaticComponent';
+import { ComponentSettingConfig, DefaultSettingConfig } from '../BaseComponent';
 import CitiesSlider from './CitiesSlider.jsx';
 import ComponentDescribe, { componentType } from '../ComponentDescribe';
 
 import CustomizeField from './CustomizeField';
+
+const field1 = (props)=>(<CustomizeField text={"幻灯片1"} {...props} />);
+const field2 = (props)=>(<CustomizeField text={"幻灯片2"} {...props} />);
+const field3 = (props)=>(<CustomizeField text={"幻灯片3"} {...props} />);
 
 class ComponentObject extends BaseComponentObject {
     constructor() {
@@ -11,20 +16,13 @@ class ComponentObject extends BaseComponentObject {
 
         this.ComponentSettingConfigs = [new ComponentSettingConfig("pic", "幻灯片设置",
             (pageComponentSetting, setPageComponentSetting) => {
-                return (<div>
-                    <CustomizeField
-                        text={"幻灯片1"}
-                        fieldValue={pageComponentSetting.field1}
-                        setFieldValue={(value) => { setPageComponentSetting({ ...pageComponentSetting, ...{ field1: value } }) }} />
-                    <CustomizeField
-                        text={"幻灯片2"}
-                        fieldValue={pageComponentSetting.field2}
-                        setFieldValue={(value) => { setPageComponentSetting({ ...pageComponentSetting, ...{ field2: value } }) }} />
-                    <CustomizeField
-                        text={"幻灯片3"}
-                        fieldValue={pageComponentSetting.field3}
-                        setFieldValue={(value) => { setPageComponentSetting({ ...pageComponentSetting, ...{ field3: value } }) }} />
-                </div>);
+                return (<DefaultSettingConfig 
+                    data={pageComponentSetting}
+                    setData={setPageComponentSetting}
+                    field1={field1}
+                    field2={field2}
+                    field3={field3}
+                />);
             }
         )];
     }
