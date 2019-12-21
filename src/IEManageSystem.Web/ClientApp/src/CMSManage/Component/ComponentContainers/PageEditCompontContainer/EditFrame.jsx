@@ -17,28 +17,34 @@ class EditFrame extends React.Component {
             pageComponent: { ...{}, ...this.props.pageComponent }
         }
 
-        if (!this.state.pageComponent.pageComponentSettings) {
-            this.state.pageComponent.pageComponentSettings = []
-        }
-
         // 选项卡名称字段的名字
         this.nameField = "text";
+        // 生成选项卡
+        this.tabs = this.createTabs();
+        
+        this.fillPageComponentSettings(this.state.pageComponent.pageComponentSettings);
+        
+        this.cancel = this.cancel.bind(this);
+        this.submit = this.submit.bind(this);
+    }
 
+    // 生成选项卡列表
+    createTabs(){
         let index = 0;
         // 选项卡配置
-        this.tabs = [{ index: index, text: "基本设置", name: "ieBaiscSetting" }];
+        let tabs = [{ index: index, text: "基本设置", name: "ieBaiscSetting" }];
         index++;
 
         // 如果有页叶子有配置
         if (this.props.pageLeafSettingConfig) {
-            this.tabs.push({ index: index, text: "页面配置", name: "iePageLeafSetting" });
+            tabs.push({ index: index, text: "页面配置", name: "iePageLeafSetting" });
             index++;
         }
 
         // 根据组件的配置，配置选项卡
         this.props.componentSettingConfigs.forEach(element => {
             // 添加 选项卡 选项
-            this.tabs.push({ index: index, text: element.displayName, name: element.name })
+            tabs.push({ index: index, text: element.displayName, name: element.name })
             // 根据 组件设置配置 添加 组件设置数据 到 组件数据 中
             if (this.state.pageComponent.pageComponentSettings.find(item => item.name == element.name) == null) {
                 this.state.pageComponent.pageComponentSettings.push({
@@ -49,8 +55,20 @@ class EditFrame extends React.Component {
             index++;
         });
 
-        this.cancel = this.cancel.bind(this);
-        this.submit = this.submit.bind(this);
+        return tabs;
+    }
+
+    // 根据 组件设置配置 添加 组件设置数据 到 组件数据 中
+    fillPageComponentSettings(pageComponentSettings){
+        this.props.componentSettingConfigs.forEach(element => {
+            // 根据 组件设置配置 添加 组件设置数据 到 组件数据 中
+            if (pageComponentSettings.find(item => item.name == element.name) == null) {
+                pageComponentSettings.push({
+                    name: element.name,
+                    displayName: element.displayName
+                });
+            }
+        });
     }
 
     cancel() {
@@ -63,8 +81,9 @@ class EditFrame extends React.Component {
         this.props.editComponent(this.state.pageComponent);
     }
 
-    render() {
-        let ContentComponent
+    // 获取当前要显示的内容
+    getContentComponent(){
+        let ContentComponent;
         // 选择了基本配置
         if (this.state.selectTab == null || this.state.selectTab.name == "ieBaiscSetting") {
             ContentComponent = <this.props.basicSettingConfig
@@ -108,6 +127,10 @@ class EditFrame extends React.Component {
                 });
         }
 
+        return ContentComponent;
+    }
+
+    render() {
         return (
             <Modal
                 show={this.props.show}
@@ -128,7 +151,7 @@ class EditFrame extends React.Component {
                                     this.setState({ selectTab: data })
                                 }}
                             >
-                                {ContentComponent}
+                                {this.getContentComponent()}
                             </Tab>
                         </div>
 
