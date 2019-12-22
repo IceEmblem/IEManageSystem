@@ -25,7 +25,7 @@
     // 图片转base64编码
     // file: event.target.files[0];
     // setBase64StringFun: fun(base64)
-    static imageToBase64String(file:any, setBase64StringFun:(base64:string)=>void) {
+    static imageToBase64String(file: any, setBase64StringFun: (base64: string) => void) {
         //判断是否是图片类型
         if (!/image\/\w+/.test(file.type)) {
             alert("只能选择图片");
@@ -33,9 +33,24 @@
         }
 
         var reader = new FileReader();
-        reader.onload = function (e:any) {
+        reader.onload = function (e: any) {
             setBase64StringFun(e.target.result);
         }.bind(this);
         reader.readAsDataURL(file);
+    }
+
+    // 深拷贝函数
+    static deepCopy(obj: any) {
+        let result:any = Array.isArray(obj) ? [] : {};
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (typeof obj[key] === 'object' && obj[key] !== null) {
+                    result[key] = this.deepCopy(obj[key]);   //递归复制
+                } else {
+                    result[key] = obj[key];
+                }
+            }
+        }
+        return result;
     }
 }

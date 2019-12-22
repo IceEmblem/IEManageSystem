@@ -7,10 +7,16 @@ module.exports = {
     },
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+    // 与测试无关的资源文件过滤掉
+    moduleNameMapper: {  
+        // ResourceFilter是自定义的文件，什么都没写
+        '\\.(css|less|gif|jpg|jpeg|png)$': '<rootDir>/test/ResourceFilter.js',
+    },
     // 源码搜索路径
-    modulePaths:[
+    modulePaths: [
         "<rootDir>/src/",
         "<rootDir>/src/lib/",
-        "<rootDir>/src/Common/"
+        "<rootDir>/src/Common/",
+        "<rootDir>/test/"
     ]
 }

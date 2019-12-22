@@ -15,24 +15,19 @@ class EditFrame extends React.Component {
         this.nameField = "text";
         this.selectIndex = 0;
 
-        let componentData = this.props.componentData;
-        if (componentData == null || componentData == undefined) {
-            componentData = {}
-        }
-
-        this.state = {
-            field1: componentData.field1,
-            field2: componentData.field2,
-            field3: componentData.field3,
-            field4: componentData.field4,
-            field5: componentData.field5,
-        };
+        this.state = {};
+        this.init(this.props);
 
         this.submit = this.submit.bind(this);
+        this.cancel = this.cancel.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        let componentData = nextProps.componentData;
+        this.init(nextProps);
+    }
+
+    init(props){
+        let componentData = props.componentData;
         if (componentData == null || !componentData) {
             componentData = {}
         }
@@ -55,6 +50,11 @@ class EditFrame extends React.Component {
             field4: this.state.field4,
             field5: this.state.field5,
         });
+    }
+    
+    cancel(){
+        this.init(this.props);
+        this.props.close();
     }
 
     render() {
@@ -85,7 +85,7 @@ class EditFrame extends React.Component {
 
                         <div className="modal-footer">
                             <button type="button" className="btn btn-info" onClick={this.submit}>提交</button>
-                            <button type="button" className="btn btn-secondary" onClick={this.props.close}>关闭</button>
+                            <button type="button" className="btn btn-secondary" onClick={this.cancel}>关闭</button>
                         </div>
 
                     </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'Modal/Modal.jsx'
 
+import IETool from 'ToolLibrary/IETool';
 import Tab from 'Tab/Tab.jsx'
 
 
@@ -14,22 +15,22 @@ class EditFrame extends React.Component {
         this.state = {
             // 当前选择的选项卡的索引
             selectTab: null,
-            pageComponent: { ...{}, ...this.props.pageComponent }
+            pageComponent: IETool.deepCopy(this.props.pageComponent)
         }
 
         // 选项卡名称字段的名字
         this.nameField = "text";
         // 生成选项卡
         this.tabs = this.createTabs();
-        
+
         this.fillPageComponentSettings(this.state.pageComponent.pageComponentSettings);
-        
+
         this.cancel = this.cancel.bind(this);
         this.submit = this.submit.bind(this);
     }
 
     // 生成选项卡列表
-    createTabs(){
+    createTabs() {
         let index = 0;
         // 选项卡配置
         let tabs = [{ index: index, text: "基本设置", name: "ieBaiscSetting" }];
@@ -59,7 +60,7 @@ class EditFrame extends React.Component {
     }
 
     // 根据 组件设置配置 添加 组件设置数据 到 组件数据 中
-    fillPageComponentSettings(pageComponentSettings){
+    fillPageComponentSettings(pageComponentSettings) {
         this.props.componentSettingConfigs.forEach(element => {
             // 根据 组件设置配置 添加 组件设置数据 到 组件数据 中
             if (pageComponentSettings.find(item => item.name == element.name) == null) {
@@ -73,7 +74,8 @@ class EditFrame extends React.Component {
 
     cancel() {
         this.props.close();
-        this.setState({ pageComponent: { ...this.props.pageComponent } });
+        this.setState({ pageComponent: IETool.deepCopy(this.props.pageComponent) });
+        this.fillPageComponentSettings(this.state.pageComponent.pageComponentSettings);
     }
 
     submit() {
@@ -82,7 +84,7 @@ class EditFrame extends React.Component {
     }
 
     // 获取当前要显示的内容
-    getContentComponent(){
+    getContentComponent() {
         let ContentComponent;
         // 选择了基本配置
         if (this.state.selectTab == null || this.state.selectTab.name == "ieBaiscSetting") {

@@ -46,6 +46,8 @@
     "awesome-typescript-loader": "^5.2.1",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.5",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "jest": "^24.9.0",
     "redux-devtools": "^3.5.0",
     "require-all": "^3.0.0",
