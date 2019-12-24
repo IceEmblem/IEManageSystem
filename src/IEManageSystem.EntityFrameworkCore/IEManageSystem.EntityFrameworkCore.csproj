@@ -33,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IEManageSystem.ApiAuthorization\IEManageSystem.ApiAuthorization.csproj" />
     <ProjectReference Include="..\IEManageSystem.CMS\IEManageSystem.CMS.csproj" />
+    <ProjectReference Include="..\IEManageSystem.Common\IEManageSystem.Common.csproj" />
     <ProjectReference Include="..\IEManageSystem.Core\IEManageSystem.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
