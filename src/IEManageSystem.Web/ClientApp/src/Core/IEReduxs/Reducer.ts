@@ -1,4 +1,4 @@
-import {CreateTopLevelMenusReceive, FetchAction} from './Actions'
+import {CreateTopLevelMenusReceive, FetchAction, GetSiteSettingsReceive} from './Actions'
 import MenuProvider from 'Core/Menu/MenuProvider'
 import ApiScopeAuthorityManager from 'Core/ApiScopeAuthority/ApiScopeAuthorityManager'
 import Menu from 'Core/Menu/Menu';
@@ -14,6 +14,14 @@ function topLevelMenus(state:Array<Menu> = new MenuProvider().getTopLevelMenus(n
     return state;
 }
 
+function siteSettings(state:Array<SiteSettingModel> = [], action: FetchAction){
+    if(action.type == GetSiteSettingsReceive){
+        return action.data.siteSettings;
+    }
+
+    return state;
+}
+
 export function reducer(
     state:any = {
         fecth: {
@@ -23,14 +31,18 @@ export function reducer(
             error: null,
             isAuthorize: true
         },
-        topLevelMenus: undefined
+        // 后台菜单
+        topLevelMenus: undefined,
+        // 站点设置
+        siteSettings: undefined
     }, action: any) 
 {
     return {
         ...state,
         ...{
             fecth: state.fecth,
-            topLevelMenus: topLevelMenus(state.topLevelMenus, action)
+            topLevelMenus: topLevelMenus(state.topLevelMenus, action),
+            siteSettings: siteSettings(state.siteSettings, action)
         }
     }
 }

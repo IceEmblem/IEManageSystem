@@ -5,6 +5,7 @@ import CoreModule from 'Core/Module'
 import PersonalModule from 'Personal/Module'
 import AuthorizeManageModule from 'AuthorizeManage/Module'
 import CMSManageModule from 'CMSManage/Module'
+import SettingModule from 'Setting/Module'
 
 import { reducer } from 'Layout/IEReduxs/Reducers'
 import LayoutRedux from 'Layout/IEReduxs/LayoutRedux'
@@ -26,5 +27,6 @@ new ModuleFactory().register(Module, [
     AuthorizeManageModule,
     CMSManageModule,
     PersonalModule,
+    SettingModule,
     CoreModule
 ]);

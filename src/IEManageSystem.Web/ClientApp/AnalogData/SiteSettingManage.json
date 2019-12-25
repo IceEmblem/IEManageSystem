@@ -1,0 +1,11 @@
+{
+    "GetSiteSettings": {
+        "siteSettings": [{
+            "id": 1,
+            "key": "SiteName",
+            "value": "IceEmblem",
+            "displayName": "站点名称",
+            "group": "BaseSiteSetting"
+        }]
+    }
+}

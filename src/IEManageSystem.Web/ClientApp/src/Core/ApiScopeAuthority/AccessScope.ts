@@ -75,4 +75,8 @@ export default class AccessScope {
     static Page(apiScopeNodeType: ApiScopeNodeType){
         return new AccessScope("CMSManage.Page", apiScopeNodeType);
     }
+
+    static SiteSetting(apiScopeNodeType: ApiScopeNodeType){
+        return new AccessScope("Common.SiteSetting", apiScopeNodeType);
+    }
 }

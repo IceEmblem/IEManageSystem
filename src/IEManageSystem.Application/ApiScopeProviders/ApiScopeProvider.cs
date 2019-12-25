@@ -30,6 +30,9 @@ namespace IEManageSystem.ApiScopeProviders
         public const string Page = "CMSManage.Page";
         public const string Picture = "CMSManage.Picture";
 
+        // common域
+        public const string SiteSetting = "Common.SiteSetting";
+
 
         public List<ApiScopeGroupDescribe> ApiScopeGroupDescribes { get; set; } = new List<ApiScopeGroupDescribe>();
 
@@ -107,6 +110,17 @@ namespace IEManageSystem.ApiScopeProviders
                     new ApiScopeDescribe(){
                         Name = Picture,
                         DisplayName = "图片管理"
+                    }
+                }
+            });
+
+            ApiScopeGroupDescribes.Add(new ApiScopeGroupDescribe() 
+            { 
+                Name = "Common",
+                ApiScopeDescribes = new List<ApiScopeDescribe>() {
+                    new ApiScopeDescribe(){
+                        Name = SiteSetting,
+                        DisplayName = "站点设置"
                     }
                 }
             });

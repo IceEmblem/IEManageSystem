@@ -5,12 +5,15 @@ using System.Text;
 using Abp.Domain.Repositories;
 using Abp.ObjectMapping;
 using Abp.UI;
+using IEManageSystem.ApiScopeProviders;
+using IEManageSystem.Attributes;
 using IEManageSystem.Common.DomainModel;
 using IEManageSystem.Dtos.Common;
 using IEManageSystem.Services.ManageHome.Setting.SiteSettings.Dto;
 
 namespace IEManageSystem.Services.ManageHome.Setting.SiteSettings
 {
+    [ApiAuthorization(ApiScopeProvider.SiteSetting)]
     public class SiteSettingManageAppService : IEManageSystemAppServiceBase, ISiteSettingManageAppService
     {
         private IRepository<SiteSetting> _repository { get; set; }
@@ -25,6 +28,7 @@ namespace IEManageSystem.Services.ManageHome.Setting.SiteSettings
             _objectMapper = objectMapper;
         }
 
+        [ApiAuthorizationQuery]
         public GetSiteSettingsOutput GetSiteSettings(GetSiteSettingsInput input)
         {
             var siteSettings = _repository.GetAll();
@@ -56,13 +60,13 @@ namespace IEManageSystem.Services.ManageHome.Setting.SiteSettings
                     {
                         Key = dto.Key,
                         Value = dto.Value,
-                        DisplayeName = dto.DisplayeName,
+                        DisplayName = dto.DisplayeName,
                         Group = dto.Group
                     });
                 }
                 else 
                 {
-                    siteSetting.DisplayeName = dto.DisplayeName;
+                    siteSetting.DisplayName = dto.DisplayeName;
                     siteSetting.Value = dto.Value;
                 }
             }

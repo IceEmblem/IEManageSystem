@@ -15,6 +15,10 @@
     text-decoration: none;
 }
 
+.ie-tab .nav-tabs .nav-item{
+    margin-bottom: 0px !important;
+}
+
 .ie-tab .nav-tabs .active {
     background-color: #5d6b79;
     color: #fff;

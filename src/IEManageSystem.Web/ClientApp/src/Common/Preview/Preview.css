@@ -59,3 +59,8 @@
     background: #989a9a;
     color: #ffffff;
 }
+
+.preview-selected{
+    background: #989a9a !important;
+    color: #ffffff;
+}

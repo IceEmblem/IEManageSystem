@@ -116,9 +116,9 @@ class UserInfo extends React.Component {
         return (
             <div className="hide-scroll">
                 <div>
-                    <div className="userinfo mb-3">
+                    <div className="userinfo">
                         <div className="d-flex w-100">
-                            <div className="card border-right-0 w-25">
+                            <div className="card border-0 userinfo-introduce w-25">
                                 <div className="w-100">
                                     <div className="inputfile-img">
                                         <button className="btn text-white">修改头像</button>
@@ -132,11 +132,11 @@ class UserInfo extends React.Component {
                                     <p className="card-text">{this.state.personSignature}</p>
                                 </div>
                             </div>
-                            <div className="card text-white flex-grow-1 userinfo-transparent">
+                            <div className="card border-0 text-white flex-grow-1 userinfo-transparent">
                                 <div className="card-body">
                                     <div className="input-group mb-3 w-75 float-left">
                                         <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text">账号</span>
+                                            <span className="input-group-text bg-info text-white border-0">账号</span>
                                         </div>
                                         <input value={this.state.userName} name="userName" type="text" className="form-control" placeholder="AccountNo" readOnly="readonly"
                                             onChange={
@@ -148,7 +148,7 @@ class UserInfo extends React.Component {
                                     </div>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text">昵称</span>
+                                            <span className="input-group-text bg-info text-white border-0">昵称</span>
                                         </div>
                                         <input value={this.state.name || ""} name="name" type="text" className="form-control" placeholder="请输入昵称"
                                             readOnly={this.state.nameReadonly}
@@ -170,7 +170,7 @@ class UserInfo extends React.Component {
                                     </div>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text">手机号</span>
+                                            <span className="input-group-text bg-info text-white border-0">手机号</span>
                                         </div>
                                         <input value={this.state.phone || ""} name="phone" type="text" className="form-control" placeholder="请输入手机号"
                                             readOnly={this.state.phoneReadonly}
@@ -192,7 +192,7 @@ class UserInfo extends React.Component {
                                     </div>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text">邮箱号</span>
+                                            <span className="input-group-text bg-info text-white border-0">邮箱号</span>
                                         </div>
                                         <input value={this.state.emailAddress || ""} name="emailAddress" type="text" className="form-control" placeholder="请输入电子邮箱"
                                             readOnly={this.state.emailAddressReadonly}
@@ -214,7 +214,7 @@ class UserInfo extends React.Component {
                                     </div>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text">个性签名</span>
+                                            <span className="input-group-text bg-info text-white border-0">个性签名</span>
                                         </div>
                                         <textarea className="form-control" rows="4" id="comment" placeholder="请输入个性签名"
                                             value={this.state.personSignature}
@@ -233,7 +233,7 @@ class UserInfo extends React.Component {
                             <div className="col-md-9">
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text">真实姓名</span>
+                                        <span className="input-group-text bg-info text-white border-0">真实姓名</span>
                                     </div>
                                     <input value={this.state.realName || ""} name="phone" type="text" className="form-control" placeholder="请输入真实姓名"
                                         readOnly={this.state.realNameReadonly}
@@ -255,7 +255,7 @@ class UserInfo extends React.Component {
                                 </div>
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text">身份证号</span>
+                                        <span className="input-group-text bg-info text-white border-0">身份证号</span>
                                     </div>
                                     <input value={this.state.idNumber || ""} name="phone" type="text" className="form-control" placeholder="请输入身份证号"
                                         readOnly={this.state.idNumberReadonly}
@@ -277,7 +277,7 @@ class UserInfo extends React.Component {
                                 </div>
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text">地址</span>
+                                        <span className="input-group-text bg-info text-white border-0">地址</span>
                                     </div>
                                     <input value={this.state.address || ""} name="phone" type="text" className="form-control" placeholder="请输入地址"
                                         readOnly={this.state.addressReadonly}
@@ -299,7 +299,7 @@ class UserInfo extends React.Component {
                                 </div>
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text">性别</span>
+                                        <span className="input-group-text bg-info text-white border-0">性别</span>
                                     </div>
                                     <div className="d-flex flex-grow-1 align-items-center">
                                         <span className="ml-3 userinfo-radio">
@@ -312,7 +312,7 @@ class UserInfo extends React.Component {
                                 </div>
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text">出生日期</span>
+                                        <span className="input-group-text bg-info text-white border-0">出生日期</span>
                                     </div>
                                     <input value={this.state.birthDate} name="phone" type="date" className="form-control" placeholder="请输入出生年月日"
                                         readOnly={this.state.birthDateReadonly}

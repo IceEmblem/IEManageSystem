@@ -99,7 +99,7 @@ class AccountSecurity extends React.Component {
                 <div>
                     <div className="account-security mb-3">
                         <div className="d-flex w-100">
-                            <div className="card border-right-0 w-25">
+                            <div className="card account-security-introduce border-0 w-25">
                                 <div className="w-100">
                                     <img id="userInfoHeadSculpture" className="card-img-top w-100"
                                         src={userInfoHeadSculpture} alt="Card image" />
@@ -109,11 +109,11 @@ class AccountSecurity extends React.Component {
                                     <p className="card-text">{this.state.personSignature}</p>
                                 </div>
                             </div>
-                            <div className="card text-white flex-grow-1 account-security-transparent">
+                            <div className="card text-white flex-grow-1 border-0 account-security-transparent">
                                 <div className="card-body">
                                     <div className="input-group mb-3 w-75 float-left">
                                         <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text">账号</span>
+                                            <span className="input-group-text bg-info text-white border-0">账号</span>
                                         </div>
                                         <input value={this.state.userName} name="userName" type="text" className="form-control" placeholder="AccountNo" readonly="readonly"
                                             onChange={
@@ -128,13 +128,13 @@ class AccountSecurity extends React.Component {
                                     </div>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text">昵称</span>
+                                            <span className="input-group-text bg-info text-white border-0">昵称</span>
                                         </div>
                                         <input value={this.state.name} name="name" type="text" className="form-control" placeholder="请输入昵称" readOnly="true" />
                                     </div>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text">手机号</span>
+                                            <span className="input-group-text bg-info text-white border-0">手机号</span>
                                         </div>
                                         <input value={this.state.phone} name="phone" type="text" className="form-control" placeholder="请输入手机号"
                                             readOnly="true"
@@ -142,7 +142,7 @@ class AccountSecurity extends React.Component {
                                     </div>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text">邮箱号</span>
+                                            <span className="input-group-text bg-info text-white border-0">邮箱号</span>
                                         </div>
                                         <input value={this.state.emailAddress} name="emailAddress" type="text" className="form-control" placeholder="请输入电子邮箱"
                                             readOnly="true"
@@ -150,7 +150,7 @@ class AccountSecurity extends React.Component {
                                     </div>
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text">个性签名</span>
+                                            <span className="input-group-text bg-info text-white border-0">个性签名</span>
                                         </div>
                                         <textarea className="form-control" rows="4" id="comment" placeholder="请输入个性签名"
                                             value={this.state.personSignature}
@@ -165,7 +165,7 @@ class AccountSecurity extends React.Component {
                             <div className="col-md-9">
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend account-security-lable">
-                                        <span className="input-group-text">安全问题</span>
+                                        <span className="input-group-text bg-info text-white border-0">安全问题</span>
                                     </div>
                                     <input value={this.state.problem} name="phone" type="text" className="form-control" placeholder="请输入安全问题"
                                         readOnly={this.state.problemReadonly}
@@ -187,7 +187,7 @@ class AccountSecurity extends React.Component {
                                 </div>
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend account-security-lable">
-                                        <span className="input-group-text">答案</span>
+                                        <span className="input-group-text bg-info text-white border-0">答案</span>
                                     </div>
                                     <input value={this.state.answer} name="phone" type="text" className="form-control" placeholder="请输入答案"
                                         readOnly={this.state.answerReadonly}

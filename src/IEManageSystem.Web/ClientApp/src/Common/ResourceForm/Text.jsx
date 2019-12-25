@@ -15,7 +15,7 @@ export default class Text extends React.Component
         return (
             <div className={"input-group mb-3"}>
                 <div className="input-group-prepend w-20">
-                    <span className="input-group-text w-100 justify-content-end border-right-0">{this.props.title}</span>
+                    <span className="input-group-text w-100 justify-content-end border-right-0 bg-muted">{this.props.title}</span>
                 </div>
                 <input type="text" className="form-control"
                     placeholder={"请输入" + this.props.title}

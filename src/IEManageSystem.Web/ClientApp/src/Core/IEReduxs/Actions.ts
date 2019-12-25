@@ -131,3 +131,11 @@ export function createTopLevelMenusFetch(){
     {},
     CreateTopLevelMenusReceive);
 }
+
+export const GetSiteSettingsReceive = "GetSiteSettingsReceive";
+export function getSiteSettingsFetch(){
+  return createIEThunkAction(
+    "/api/SiteSettingManage/GetSiteSettings",
+    {},
+    GetSiteSettingsReceive);
+}
