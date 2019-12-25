@@ -8,8 +8,6 @@ namespace IEManageSystem.Services.ManageHome.Setting.SiteSettings
 {
     public interface ISiteSettingManageAppService : IApplicationService
     {
-        GetSiteSettingsOutput GetSiteSettings(GetSiteSettingsInput input);
-
         SetSiteSettingsOutput SetSiteSettings(SetSiteSettingsInput input);
 
         DeleteSiteSettingsOutput DeleteSiteSettings(DeleteSiteSettingsInput input);

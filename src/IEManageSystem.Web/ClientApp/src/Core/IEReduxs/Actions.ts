@@ -135,7 +135,7 @@ export function createTopLevelMenusFetch(){
 export const GetSiteSettingsReceive = "GetSiteSettingsReceive";
 export function getSiteSettingsFetch(){
   return createIEThunkAction(
-    "/api/SiteSettingManage/GetSiteSettings",
+    "/api/SiteSettingQuery/GetSiteSettings",
     {},
     GetSiteSettingsReceive);
 }

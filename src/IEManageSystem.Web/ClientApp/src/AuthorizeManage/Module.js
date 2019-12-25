@@ -93,6 +93,7 @@ export default class Module extends BaseModule {
                                     id: "ApiScopePermission",
                                     text: "功能域权限管理",
                                     url: "/ManageHome/AuthorizeManage/ApiScopePermission",
+                                    icon: "oi-cog",
                                     accessScope:
                                         [
                                             AccessScope.ApiScopeManage(ApiScopeNodeType.manage),

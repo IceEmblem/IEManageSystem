@@ -28,14 +28,6 @@ namespace IEManageSystem.Services.ManageHome.Setting.SiteSettings
             _objectMapper = objectMapper;
         }
 
-        [ApiAuthorizationQuery]
-        public GetSiteSettingsOutput GetSiteSettings(GetSiteSettingsInput input)
-        {
-            var siteSettings = _repository.GetAll();
-
-            return new GetSiteSettingsOutput() { SiteSettings = _objectMapper.Map<List<SiteSettingDto>>(siteSettings) };
-        }
-
         public SetSiteSettingsOutput SetSiteSettings(SetSiteSettingsInput input)
         {
             var groups = input.SiteSettings.GroupBy(e => new { e.Group, e.Key });
@@ -60,13 +52,13 @@ namespace IEManageSystem.Services.ManageHome.Setting.SiteSettings
                     {
                         Key = dto.Key,
                         Value = dto.Value,
-                        DisplayName = dto.DisplayeName,
+                        DisplayName = dto.DisplayName,
                         Group = dto.Group
                     });
                 }
                 else 
                 {
-                    siteSetting.DisplayName = dto.DisplayeName;
+                    siteSetting.DisplayName = dto.DisplayName;
                     siteSetting.Value = dto.Value;
                 }
             }

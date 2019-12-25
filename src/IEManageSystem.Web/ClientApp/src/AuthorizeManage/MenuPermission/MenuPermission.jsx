@@ -6,6 +6,8 @@ import "./MenuPermission.css";
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 import RootRedux from 'Core/IEReduxs/RootRedux'
 
+import IESideNav from 'IESideNav';
+
 class MenuPermission extends React.Component {
 	constructor(props) {
 		super(props);
@@ -70,71 +72,6 @@ class MenuPermission extends React.Component {
 		});
 	}
 
-	_createMenusIteration(menu) {
-		let lis = Array();
-
-		let menuItems = menu.menuItems;
-		for (let item in menuItems) {
-			let icon = <span className={
-				"oi padding-right-10 " +
-				(menuItems[item].icon == undefined ? "oi-tags leftmenu-icon-hide" : menuItems[item].icon)
-			} title="icon name" aria-hidden="true">
-			</span>
-			let text = <span>{" " + menuItems[item].text}</span>;
-
-			let navLink = null;
-			let childMenus = null;
-			if (menuItems[item].menuItems != undefined && menuItems[item].menuItems.length > 0) {
-				navLink =
-					<a href="javascript:void(0)" className="text-white" onClick={
-						event => {
-							// 隐藏所有子菜单
-							let lis = $(event.target).parents("ul").eq(0).children("li");
-							lis.children("div").hide(500);
-							lis.children("a").find("span.oi-chevron-right").removeClass("rotate90");
-
-							let div = $(event.target).parents("li").eq(0).children("div");
-							if (div.css("display") == "none") {
-								div.show(500);
-								$(event.target).find("span.oi-chevron-right").addClass("rotate90");
-							}
-							else {
-								div.hide(500);
-								$(event.target).find("span.oi-chevron-right").removeClass("rotate90");
-							}
-						}
-					}>
-						{icon}
-						{text}
-						<span className="oi oi-chevron-right ml-auto" title="icon name" aria-hidden="true"></span>
-					</a>;
-
-				childMenus = this._createMenusIteration(menuItems[item]);
-			}
-			else {
-				navLink =
-					<a href="javascript:void(0)" className="text-white" onClick={() => this._menuOnClick(menuItems[item])}>
-						{icon}
-						{text}
-					</a>;
-			}
-
-			let li =
-				<li key={item} className="leftmenu_css_li">
-					{navLink}
-					<div className="w-100 hide">
-						{childMenus}
-					</div>
-				</li>;
-
-			lis.push(li);
-		}
-
-		return <ul className="list-group">
-			{lis}
-		</ul>;
-	}
-
 	_menuOnClick(selectMenu) {
 		this.selectMenu = selectMenu;
 
@@ -152,8 +89,6 @@ class MenuPermission extends React.Component {
 	}
 
 	render() {
-		let ul = this._createMenusIteration({ menuItems: this.props.topLevelMenus });
-
 		let resources = [];
 		for (let item in this.selectMenuPermissions) {
 			let scopeName = this.selectMenuPermissions[item].scopeName;
@@ -186,7 +121,10 @@ class MenuPermission extends React.Component {
 		return (
 			<div className="w-100 h-100 menupermission">
 				<div className="menupermission-left">
-					{ul}
+					<IESideNav 
+						mainMenu={{ menuItems: this.props.topLevelMenus }}
+						sideMenuSelect={this._menuOnClick}
+					/>
 				</div>
 				<div className="menupermission-right">
 					<Tab tabs={[{ value: "value", text: "菜单需求功能域" }]}

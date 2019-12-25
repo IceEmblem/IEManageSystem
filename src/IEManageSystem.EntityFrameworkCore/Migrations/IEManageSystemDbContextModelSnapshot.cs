@@ -262,6 +262,25 @@ namespace IEManageSystem.Migrations
                     b.ToTable("PageComponentSetting");
                 });
 
+            modelBuilder.Entity("IEManageSystem.Common.DomainModel.SiteSetting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("Group");
+
+                    b.Property<string>("Key");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SiteSettings");
+                });
+
             modelBuilder.Entity("IEManageSystem.Entitys.Authorization.Permissions.Permission", b =>
                 {
                     b.Property<int>("Id")

@@ -13,7 +13,7 @@ export default class Module extends BaseModule
         MenuProvider.registerMenu(
             {
                 id: "Setting",
-                text: "设置",
+                text: "环境设置",
                 icon: "oi-wrench",
                 url: "/ManageHome/Setting",
                 menuItems: [

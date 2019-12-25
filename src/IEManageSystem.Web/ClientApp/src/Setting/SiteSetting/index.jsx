@@ -8,7 +8,31 @@ import {ieReduxFetch} from 'Core/IEReduxFetch';
 import './index.css'
 
 class SiteSetting extends React.Component {
-    createSetting(siteSetting) {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            siteSettings: this.createSetting(props)
+        };
+    }
+    componentWillReceiveProps(props){
+        this.setState({siteSettings:this.createSetting(props)});
+    }
+    createSetting(props){
+        let arr = [];
+        props.siteSettingGroupConfigs.map(siteSettingGroupConfig => {
+            let settings = siteSettingGroupConfig.siteSettingConfigs.map(item => {
+                let siteSetting = props.siteSettingManager.getSetting(siteSettingGroupConfig.name, item.key);
+    
+                return siteSetting || { key: item.key, value: "", displayName: item.displayName, group: siteSettingGroupConfig.name};
+            });
+
+            arr = [...arr, ...settings];
+        });
+
+        return arr;
+    }
+    createSettingView(siteSetting) {
         return (
             <div key={siteSetting.key} className="input-group mb-3">
                 <input type="text" className="form-control" placeholder={siteSetting.key} 
@@ -24,18 +48,14 @@ class SiteSetting extends React.Component {
                 </div>
             </div>);
     }
-    createGroupSetting(siteSettingGroupConfig) {
-        let settings = siteSettingGroupConfig.siteSettingConfigs.map(item => {
-            let siteSetting = this.props.siteSettingManager.getSetting(siteSettingGroupConfig.name, item.key);
-
-            return siteSetting || { key: item.key, value: "", displayName: item.displayName, group: siteSettingGroupConfig.name};
-        });
+    createGroupSettingView(siteSettingGroupConfig) {
+        let settings = this.state.siteSettings.filter(item => item.group == siteSettingGroupConfig.name);
 
         return (
             <div key={siteSettingGroupConfig.name} className="card-body">
                 <h5 className="card-title">{siteSettingGroupConfig.displayName}</h5>
                 <div className="card-text">
-                    {settings.map(item => this.createSetting(item))}
+                    {settings.map(item => this.createSettingView(item))}
                 </div>
                 <button className="btn btn-info"
                     onClick={()=>{
@@ -54,7 +74,7 @@ class SiteSetting extends React.Component {
         return (
             <div className="sitesetting">
                 <div className="card">
-                    {this.props.siteSettingGroupConfigs.map(item => this.createGroupSetting(item))}
+                    {this.props.siteSettingGroupConfigs.map(item => this.createGroupSettingView(item))}
                 </div>
             </div>);
     }
