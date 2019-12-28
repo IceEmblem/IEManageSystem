@@ -117,7 +117,7 @@ export default class BasicSettingConfig extends BaseConfig{
                 <div className="col-md-6 float-left">
                     <label>请输入排序索引(必须是数字)：</label>
                     <div className="input-group mb-3">
-                        <input value={this.props.data.sortIndex || ""} type="text" className="form-control" placeholder="排序索引"
+                        <input value={this.props.data.sortIndex || ""} type="number" className="form-control" placeholder="排序索引"
                             onChange={
                                 (event) => {
                                     let index = parseInt(event.target.value);

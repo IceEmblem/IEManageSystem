@@ -76,6 +76,7 @@
     height: 100%;
     overflow-y: scroll;
     margin-right: -1.5rem;
+    overflow-x: hidden;
 }
 
 @keyframes rotate90

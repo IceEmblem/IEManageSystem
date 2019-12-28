@@ -91,7 +91,7 @@ export default class Module extends BaseModule {
                             menuItems: [
                                 {
                                     id: "ApiScopePermission",
-                                    text: "功能域权限管理",
+                                    text: "功能域权限",
                                     url: "/ManageHome/AuthorizeManage/ApiScopePermission",
                                     icon: "oi-cog",
                                     accessScope:

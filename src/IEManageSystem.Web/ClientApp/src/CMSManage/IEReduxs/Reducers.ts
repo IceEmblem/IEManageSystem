@@ -24,7 +24,7 @@ function page(
         if(state.pageComponents.length > 0){
             maxSortIndex = state.pageComponents[state.pageComponents.length - 1].pageComponentBaseSetting.sortIndex;
         }
-        action.pageComponent.sortIndex = maxSortIndex + 1;
+        action.pageComponent.pageComponentBaseSetting.sortIndex = maxSortIndex + 1;
         state.pageComponents.push(action.pageComponent);
         return {...state};
     }
