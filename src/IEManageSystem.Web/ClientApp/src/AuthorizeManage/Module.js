@@ -115,7 +115,8 @@ export default class Module extends BaseModule {
                     ]
             },
             "/ManageHome/AuthorizeManage",
-            AuthorizeManage
+            AuthorizeManage,
+            2
         );
     }
 }

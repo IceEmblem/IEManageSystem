@@ -30,7 +30,8 @@ export default class Module extends BaseModule
                 ]
             },
             "/ManageHome/Setting",
-            Setting
+            Setting,
+            4
         );
     }
 }

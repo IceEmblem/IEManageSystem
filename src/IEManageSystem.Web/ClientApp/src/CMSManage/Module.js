@@ -56,7 +56,8 @@ export default class Module extends BaseModule {
                 ]
             },
             "/ManageHome/CMSManage",
-            CMSManage
+            CMSManage,
+            3
         );
 
         IERedux.setReducer(reducer);

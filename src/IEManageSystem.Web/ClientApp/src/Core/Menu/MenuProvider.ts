@@ -6,19 +6,23 @@ interface NavMenuComponent{
     menu:Menu,
     baseUrl:string,
     // 组件类型，该菜单对应的组件
-    component:any
+    component:any,
+    sortIndex: number
 }
 
 var navMenuComponents:Array<NavMenuComponent> = [];
 
 export default class MenuProvider {
     // 注册导航栏菜单
-    static registerMenu(menu:Menu, baseUrl:string, component:any) {
+    static registerMenu(menu:Menu, baseUrl:string, component:any, sortIndex: number = 0) {
         navMenuComponents.push({
             menu,
             baseUrl,
-            component
+            component,
+            sortIndex
         });
+        
+        navMenuComponents.sort((a, b) => a.sortIndex - b.sortIndex);
     }
 
     // 是否使用授权来过滤菜单

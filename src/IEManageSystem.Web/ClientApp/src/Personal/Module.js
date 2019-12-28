@@ -34,7 +34,8 @@ export default class Module extends BaseModule
                 ]
             },
             "/ManageHome/Personal",
-            Personal
+            Personal,
+            1
         );
 
         IERedux.setReducer(reducer);
