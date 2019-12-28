@@ -1,7 +1,8 @@
 require("./createComponentDescribesFile");
+require("./createModuleListFile");
 
 var path = require("path");
-var pathMap = require('./src/pathmap.json');
+var pathMap = require('./src/lib/pathmap.json');
 
 // 路径
 var srcPath = path.resolve('./src');
@@ -14,7 +15,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BomPlugin = require('webpack-utf8-bom');    //将文件转成utf-8 bom格式，解决中文乱码的问题
 module.exports = {
     entry: { 
-        index:__dirname + "/src/index.js",
+        index:__dirname + "/src/Start/index.js",
     },
     output: {
         path: __dirname + "/build/js",
@@ -33,8 +34,8 @@ module.exports = {
             IELib: "ielib",
         }),
         new HtmlWebpackPlugin({
-            filename: __dirname + '/build/Index.html',
-            template: __dirname + '/src/Index.html', // html模板路径,模板路径是支持传参调用loader的,
+            filename: __dirname + '/build/index.html',
+            template: __dirname + '/src/Start/index.html', // html模板路径,模板路径是支持传参调用loader的,
             inject: 'body', //打包之后的js插入的位置，true/'head'/'body'/false,
             chunks: ['index', "weatherExport"]
         }),
