@@ -56,5 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\Picture\image\" />
+    <Folder Include="ClientApp\bulid\" />
   </ItemGroup>
 </Project>
