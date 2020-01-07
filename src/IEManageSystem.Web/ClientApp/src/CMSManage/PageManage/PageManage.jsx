@@ -90,6 +90,10 @@ class PageManage extends React.Component {
 	// Resource组件添加资源通知
 	addResource(resource) {
 		let url;
+		if(!resource.pageType){
+			return;
+		}
+
 		if (resource.pageType == pageType.ContentPage) {
 			url = "/api/PageManage/AddContentPage";
 		}

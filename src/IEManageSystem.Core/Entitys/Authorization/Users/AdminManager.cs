@@ -50,6 +50,7 @@ namespace IEManageSystem.Entitys.Authorization.Users
             var user = await  _userManager.CreateUser(userName, password, name, tenantId);
 
             user.AddRole(_roleManager.Admin);
+            user.AddRole(_roleManager.User);
 
             return user;
         }

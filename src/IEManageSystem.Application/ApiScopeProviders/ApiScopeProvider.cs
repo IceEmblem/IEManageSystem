@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Abp.Dependency;
+using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
+using IEManageSystem.Entitys.Authorization.Permissions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +10,7 @@ namespace IEManageSystem.ApiScopeProviders
     /// <summary>
     /// Api域提供器，提供站点Api域的名称
     /// </summary>
-    public class ApiScopeProvider
+    public class ApiScopeProvider: ITransientDependency
     {
         // personal
         public const string User = "Personal.User";
@@ -33,112 +36,35 @@ namespace IEManageSystem.ApiScopeProviders
         // common域
         public const string SiteSetting = "Common.SiteSetting";
 
+        private ApiScopeManager _apiScopeManager { get; set; }
 
-        public List<ApiScopeGroupDescribe> ApiScopeGroupDescribes { get; set; } = new List<ApiScopeGroupDescribe>();
+        private PermissionManager _permissionManager { get; set; }
 
-        public ApiScopeProvider()
+        public ApiScopeProvider(ApiScopeManager apiScopeManager, PermissionManager permissionManager)
         {
-            ApiScopeProvide();
-        }
+            _apiScopeManager = apiScopeManager;
 
-        protected void ApiScopeProvide()
-        {
-            ApiScopeGroupDescribes.Add(new ApiScopeGroupDescribe() {
-                Name = "Personal",
-                ApiScopeDescribes = new List<ApiScopeDescribe>() {
-                    new ApiScopeDescribe(){
-                        Name = User,
-                        DisplayName = "用户信息"
-                    }
-                }
-            });
-
-            ApiScopeGroupDescribes.Add(new ApiScopeGroupDescribe()
-            {
-                Name = "AuthorizeManage",
-                ApiScopeDescribes = new List<ApiScopeDescribe>() {
-                    new ApiScopeDescribe(){
-                        Name = AdminManage,
-                        DisplayName = "管理员管理"
-                    },
-                    new ApiScopeDescribe(){
-                        Name = RoleManage,
-                        DisplayName = "角色管理"
-                    },
-                    new ApiScopeDescribe(){
-                        Name = PermissionManage,
-                        DisplayName = "权限管理"
-                    },
-                    new ApiScopeDescribe(){
-                        Name = ApiScopeManage,
-                        DisplayName = "Api域管理"
-                    },
-                }
-            });
-
-            ApiScopeGroupDescribes.Add(new ApiScopeGroupDescribe()
-            {
-                Name = "OAuthManage",
-                ApiScopeDescribes = new List<ApiScopeDescribe>() {
-                    new ApiScopeDescribe(){
-                        Name = IdentityResource,
-                        DisplayName = "身份资源"
-                    },
-                    new ApiScopeDescribe(){
-                        Name = ApiResource,
-                        DisplayName = "Api资源管理"
-                    },
-                    new ApiScopeDescribe(){
-                        Name = Client,
-                        DisplayName = "客户端"
-                    },
-                }
-            });
-
-            ApiScopeGroupDescribes.Add(new ApiScopeGroupDescribe()
-            {
-                Name = "CMSManage",
-                ApiScopeDescribes = new List<ApiScopeDescribe>() {
-                    new ApiScopeDescribe(){
-                        Name = Menu,
-                        DisplayName = "菜单管理"
-                    },
-                    new ApiScopeDescribe(){
-                        Name = Page,
-                        DisplayName = "页面管理"
-                    },
-                    new ApiScopeDescribe(){
-                        Name = Picture,
-                        DisplayName = "图片管理"
-                    }
-                }
-            });
-
-            ApiScopeGroupDescribes.Add(new ApiScopeGroupDescribe() 
-            { 
-                Name = "Common",
-                ApiScopeDescribes = new List<ApiScopeDescribe>() {
-                    new ApiScopeDescribe(){
-                        Name = SiteSetting,
-                        DisplayName = "站点设置"
-                    }
-                }
-            });
+            _permissionManager = permissionManager;
         }
 
         /// <summary>
-        /// 注册Api域，将Api域描述注册为Api域，参数action为注册函数
+        /// 注册Api域，将Api域描述注册为Api域
         /// </summary>
-        /// <param name="action"></param>
-        public void Register(Action<string, string> action)
+        public void Register()
         {
-            foreach (var apiScopeGroupDescribe in ApiScopeGroupDescribes)
-            {
-                foreach (var apiScopeDescribe in apiScopeGroupDescribe.ApiScopeDescribes)
-                {
-                    action(apiScopeDescribe.Name, apiScopeDescribe.DisplayName);
-                }
-            }
+            var userPermission = _permissionManager.UserPermission;
+            _apiScopeManager.Register(User, "用户信息", new List<Permission>() { userPermission }, new List<Permission>() { userPermission });
+
+            _apiScopeManager.Register(AdminManage, "管理员管理");
+            _apiScopeManager.Register(RoleManage, "角色管理");
+            _apiScopeManager.Register(PermissionManage, "权限管理");
+            _apiScopeManager.Register(ApiScopeManage, "Api域管理");
+
+            _apiScopeManager.Register(Menu, "菜单管理");
+            _apiScopeManager.Register(Page, "页面管理");
+            _apiScopeManager.Register(Picture, "图片管理");
+
+            _apiScopeManager.Register(SiteSetting, "站点设置");
         }
     }
 }

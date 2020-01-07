@@ -28,12 +28,7 @@ namespace IEManageSystem
             using (var unitOfWork = unitOfWorkManager.Begin())
             {
                 // 动态添加Api域
-                ApiScopeManager apiScopeManager = IocManager.Resolve<ApiScopeManager>();
-
-                new ApiScopeProvider().Register((name, displayName) =>
-                {
-                    apiScopeManager.Register(name, displayName);
-                });
+                IocManager.Resolve<ApiScopeProvider>().Register();
 
                 unitOfWorkManager.Current.SaveChanges();
 

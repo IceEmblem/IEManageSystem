@@ -69,7 +69,7 @@ namespace IEManageSystem.ApiAuthorization.DomainModel.ApiScopes
             return userScopeAccessAuthoritys;
         }
 
-        public void Register(string name, string displayName = null)
+        public void Register(string name, string displayName)
         {
             if (!ApiScopeRepository.GetAll().Any(e => e.Name == name))
             {
@@ -89,6 +89,21 @@ namespace IEManageSystem.ApiAuthorization.DomainModel.ApiScopes
                 apiScope.ApiManageScope.AddPermission(scopeManagePermission);
                 apiScope.ApiQueryScope.AddPermission(scopeManagePermission);
                 apiScope.ApiQueryScope.AddPermission(queryManagePermission);
+
+                ApiScopeRepository.Insert(apiScope);
+            }
+        }
+
+        public void Register(string name, string displayName, List<Permission> managePermissions, List<Permission> queryPermissions)
+        {
+            if (!ApiScopeRepository.GetAll().Any(e => e.Name == name))
+            {
+                ApiScope apiScope = new ApiScope(name);
+
+                apiScope.SetDisplayName(displayName ?? name);
+
+                managePermissions.ForEach(item => apiScope.ApiManageScope.AddPermission(item));
+                queryPermissions.ForEach(item => apiScope.ApiQueryScope.AddPermission(item));
 
                 ApiScopeRepository.Insert(apiScope);
             }

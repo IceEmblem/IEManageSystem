@@ -29,7 +29,12 @@ export default class MenuProvider {
     enableAuthorityFilter: boolean;
 
     constructor() {
-        this.enableAuthorityFilter = false;
+        if(process.env.NODE_ENV != "production"){
+            this.enableAuthorityFilter = false;
+        }
+        else{
+            this.enableAuthorityFilter = true;
+        }
     }
 
     // 生成菜单

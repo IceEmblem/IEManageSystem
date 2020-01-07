@@ -105,7 +105,7 @@ export default class IESideNav extends React.Component {
 
 IESideNav.propTypes = {
     // 菜单
-    mainMenu: PropTypes.object.isRequired,
+    mainMenu: PropTypes.object,
     // 选择菜单操作
     sideMenuSelect: PropTypes.func.isRequired
 }

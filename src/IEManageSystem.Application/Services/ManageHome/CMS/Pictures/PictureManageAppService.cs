@@ -11,7 +11,7 @@ using IEManageSystem.Services.ManageHome.CMS.Pictures.Dto;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Pictures
 {
-    [ApiAuthorization(ApiScopeProvider.Page)]
+    [ApiAuthorization(ApiScopeProvider.Picture)]
     public class PictureManageAppService : IEManageSystemAppServiceBase, IPictureManageAppService
     {
         private readonly IObjectMapper _objectMapper;

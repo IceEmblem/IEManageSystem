@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IEManageSystem.Migrations
 {
     [DbContext(typeof(IEManageSystemDbContext))]
-    [Migration("20191225095034_Add_SiteSetting")]
-    partial class Add_SiteSetting
+    [Migration("20200107031618_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

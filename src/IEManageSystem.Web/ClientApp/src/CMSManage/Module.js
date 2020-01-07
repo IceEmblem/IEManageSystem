@@ -51,7 +51,9 @@ export default class Module extends BaseModule {
                         icon: "oi-image",
                         url: "/ManageHome/CMSManage/PictureManage",
                         accessScope:
-                            []
+                            [
+                                AccessScope.Picture(ApiScopeNodeType.manage)
+                            ]
                     }
                 ]
             },
