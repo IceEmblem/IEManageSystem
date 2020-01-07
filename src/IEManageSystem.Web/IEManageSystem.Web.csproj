@@ -20,6 +20,9 @@
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
+    <None Update="ClientApp\build\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IEManageSystem.Application\IEManageSystem.Application.csproj" />
@@ -56,6 +59,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\Picture\image\" />
-    <Folder Include="ClientApp\bulid\" />
   </ItemGroup>
 </Project>
