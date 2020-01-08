@@ -12,7 +12,7 @@ export default class PageLeafSettingConfig extends BaseConfig{
     }
 
     componentDidMount(){
-        ieReduxFetch("/api/PageQuery/GetPages", {})
+        ieReduxFetch("/api/PageQuery/GetPages", {pageIndex: 1, pageSize: 9999})
         .then(value=>{
             this.setState({pages:value.pages});
         })
