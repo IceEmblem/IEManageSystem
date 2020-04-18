@@ -13,7 +13,7 @@ export default class PageEdit extends React.Component {
 
         this.state = {
             open: true,
-            selectedComponentDescribe: {}
+            selectedComponentDescribe: undefined
         }
     }
 

@@ -33,6 +33,23 @@ class CitiesSlider extends BaseStaticComponent {
         this.updateSliders(nextProps);
     }
 
+    // 补全数据
+    completionData(data){
+        if(!data.title){
+            data.title = "请输入标题";
+        }
+
+        if(data.content){
+            data.content = "请输入文本内容";
+        }
+
+        if(data.imgSrc){
+            data.imgSrc = SliderDefault1;
+        }
+
+        return data;
+    }
+
     updateSliders(props){
         let sliders = [];
         let pageComponentSetting = props.pageComponentSettings.find(item=>item.name == "pic");
@@ -42,15 +59,15 @@ class CitiesSlider extends BaseStaticComponent {
         }
 
         if(pageComponentSetting.field1){
-            sliders.push(JSON.parse(pageComponentSetting.field1));
+            sliders.push(this.completionData(JSON.parse(pageComponentSetting.field1)));
         }
 
         if(pageComponentSetting.field2){
-            sliders.push(JSON.parse(pageComponentSetting.field2));
+            sliders.push(this.completionData(JSON.parse(pageComponentSetting.field2)));
         }
 
         if(pageComponentSetting.field3){
-            sliders.push(JSON.parse(pageComponentSetting.field3));
+            sliders.push(this.completionData(JSON.parse(pageComponentSetting.field3)));
         }
 
         if(sliders.length == 0){
@@ -83,33 +100,33 @@ class CitiesSlider extends BaseStaticComponent {
     render() {
         const { activeSlide, prevSlide } = this.state;
         return (
-            <div className={"slider s--ready"}>
+            <div className={"slider slider-ready"}>
                 {/* <p className="slider__top-heading">Travelers</p> */}
-                <div className="slider__slides">
+                <div className="slider-slides">
                     {this.sliders.map((slide, index) => (
                         <div
-                            className={'slider__slide' + (activeSlide === index ? ' s--active' : (prevSlide === index ? ' s--prev' : ""))}
+                            className={'slider-slide' + (activeSlide === index ? ' slider-active' : (prevSlide === index ? ' s--prev' : ""))}
                             key={slide.title}
                         >
-                            <div className="slider__slide-content">
-                                <h3 className="slider__slide-subheading">{slide.content || slide.title}</h3>
-                                <h2 className="slider__slide-heading">
+                            <div className="slider-slide-content">
+                                <h3 className="slider-slide-subheading">{slide.content || slide.title}</h3>
+                                <h2 className="slider-slide-heading">
                                     {slide.title.split('').map((l, charIndex) => <span key={charIndex}>{l}</span>)}
                                 </h2>
-                                <p className="slider__slide-readmore">read more</p>
+                                <p className="slider-slide-readmore">阅读文章</p>
                             </div>
-                            <div className="slider__slide-parts">
+                            <div className="slider-slide-parts">
                                 {[...Array(this.IMAGE_PARTS).fill()].map((x, i) => (
-                                    <div className="slider__slide-part" key={i}>
-                                        <div className="slider__slide-part-inner" style={{ backgroundImage: `url(${slide.imgSrc})` }} />
+                                    <div className="slider-slide-part" key={i}>
+                                        <div className="slider-slide-part-inner" style={{ backgroundImage: `url(${slide.imgSrc})` }} />
                                     </div>
                                 ))}
                             </div>
                         </div>
                     ))}
                 </div>
-                <div className="slider__control" onClick={() => this.changeSlides(-1)} />
-                <div className="slider__control slider__control--right" onClick={() => this.changeSlides(1)} />
+                <div className="slider-control" onClick={() => this.changeSlides(-1)} />
+                <div className="slider-control slider-control-right" onClick={() => this.changeSlides(1)} />
             </div>
         );
     }

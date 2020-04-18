@@ -8,3 +8,10 @@
 .richtexteditor-editor-bf{
     max-height: 35rem;
 }
+
+.default-text{
+    color: #343a40;
+    background-color: #343a40;
+    border-radius: 0.5rem;
+    /* opacity: 0.7; */
+}

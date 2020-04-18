@@ -19,6 +19,7 @@
 
 .pageedit-page-container-header-info {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     flex-grow: 0;
     flex-shrink: 0;
@@ -26,7 +27,7 @@
 }
 
 .pageedit-page-container-header-info>.input-group {
-    width: 25%;
+    margin: .5rem 0rem;
 }
 
 .pageedit-page-container-header-info>.input-group .input-group-text {
@@ -43,51 +44,18 @@
     border: 0rem;
 }
 
-.pageedit-page-container-header-hidebtn {
-    height: 0px;
+.pageedit-page-container-btns {
+    position: absolute;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    right: 18rem;
+    bottom: 4rem;
+    width: 0rem;
+    opacity: 0.8;
+    z-index: 9999;
 }
 
-.pageedit-page-container-header-hidebtn>button {
-    width: 10rem;
-    transform: perspective(100px) rotateX(-45deg);
-    -webkit-transform: perspective(100px) rotateX(-45deg);
-    /* Safari 与 Chrome */
-    z-index: 900;
-    padding: 0px;
-    flex-shrink: 0;
-}
-
-.pageedit-page-container-addcomponent {
-    position: fixed;
-    right: 3vw;
-    bottom: 15vh;
-    height: 4rem;
-    width: 4rem;
-}
-
-.pageedit-page-container-addcomponent-btn {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    cursor:pointer;
-    box-shadow: 0px 0px 5px gray;
-    border-radius: 2rem;
-    color: #84b0b5;
+.pageedit-page-container-btns:hover{
     transition: 0.5s;
-    -webkit-transition: 0.5s;
-    opacity: 0.6;
-}
-
-.pageedit-page-container-addcomponent-btn:hover {
-    color: #fff;
-    background-color: #84b0b5;
     opacity: 1;
-}
-
-.pageedit-page-container-addcomponent-btn>span {
-    margin: auto;
-    font-size: 2.5rem;
 }

@@ -1,0 +1,13 @@
+/* 三角，头向下 */
+.triangle-bottom{
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #dfdfdf;
+    border-color: #fff0 #dfdfdf #dfdfdf #fff0;
+    background-color: #fff;
+    position: relative;
+    top: -1rem;
+    transform: rotate(45deg); 
+    -ms-transform: rotate(45deg); /* IE 9 */ 
+    -webkit-transform: rotate(45deg); /* Safari and Chrome */
+}

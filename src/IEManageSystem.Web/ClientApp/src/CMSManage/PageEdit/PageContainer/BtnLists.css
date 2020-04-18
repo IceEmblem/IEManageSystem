@@ -1,0 +1,22 @@
+.PageContainer-btnlists{
+}
+
+.PageContainer-btnlists-pageInfoComponent{
+    left: -4rem;
+    position: relative;
+}
+
+.PageContainer-btnlists-bnts>*{
+    padding: .5rem 0rem;
+    background-color: teal;
+}
+
+.PageContainer-btnlists .PageContainer-btnlists-block1{
+    width: 2rem;
+    border-radius: 0rem 2rem 2rem 0rem;
+}
+
+.PageContainer-btnlists .PageContainer-btnlists-block2{
+    width: 2rem;
+    border-radius: 2rem 0rem 0rem 2rem;
+}

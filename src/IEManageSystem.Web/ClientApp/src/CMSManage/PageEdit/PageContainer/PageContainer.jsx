@@ -12,6 +12,9 @@ import { pageAddComponent, pageComponentUpdateFetch, pageFetch } from 'CMSManage
 
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 
+import BtnLists from './BtnLists'
+import PromptBox from 'PromptBox'
+
 class PageContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -53,6 +56,10 @@ class PageContainer extends React.Component {
     }
 
     addComponent() {
+        if (!this.props.selectedComponentDescribe) {
+            return;
+        }
+
         let pageComponent = CreateComponentService.createComponent(
             this.props.page.pageComponents,
             this.props.selectedComponentDescribe,
@@ -62,64 +69,37 @@ class PageContainer extends React.Component {
     }
 
     render() {
-        return (
-            <div className="pageedit-page-container">
-                <div className="pageedit-page-container-header">
-                    <div className="pageedit-page-container-header-info">
-                        <div className="input-group shadow-sm">
-                            <input value={this.state.displayName} type="text" className="form-control" placeholder="" disabled />
-                            <div className="input-group-append">
-                                <span className="input-group-text text-white">显示名称</span>
-                            </div>
-                        </div>
-                        <div className="input-group shadow-sm">
-                            <input value={this.state.name} type="text" className="form-control" placeholder="" disabled />
-                            <div className="input-group-append">
-                                <span className="input-group-text text-white">
-                                    <span className="oi oi-key mr-2" title="icon name" aria-hidden="true"></span>
-                                    名称
-                            </span>
-                            </div>
-                        </div>
-                        <div className="input-group shadow-sm">
-                            <input value={this.state.description} type="text" className="form-control" placeholder="" disabled />
-                            <div className="input-group-append">
-                                <span className="input-group-text text-white">
-                                    <span className="oi oi-info mr-2" title="icon name" aria-hidden="true"></span>
-                                    描述
-                            </span>
-                            </div>
-                        </div>
-                        <div>
-                            <button className="btn btn-warning padding-left-10 padding-right-10 shadow-sm"
-                                onClick={
-                                    () => {
-                                        let myEvent = new Event('resize');
-                                        window.dispatchEvent(myEvent);
-                                    }
-                                }
-                            >
-                                <span className="oi oi-loop-circular mr-1" title="icon name" aria-hidden="true"></span>
-                                重新渲染
-                            </button>
-                            <button className="btn btn-info padding-left-10 padding-right-10 shadow-sm"
-                                onClick={this.submitPage}
-                            >
-                                <span className="oi oi-cloud-upload mr-1" title="icon name" aria-hidden="true"></span>
-                                提交页面
-                            </button>
-                        </div>
-                    </div>
-                    <div className="pageedit-page-container-header-hidebtn">
-                        <button className="btn btn-info"
-                            onClick={() => {
-                                $(".pageedit-page-container-header-info").slideToggle(300);
-                            }}
-                        >
-                            <span className="oi oi-collapse-down"></span>
-                        </button>
+        let promptBox = (<PromptBox>
+            <div className="pageedit-page-container-header-info">
+                <div className="input-group shadow-sm">
+                    <input value={this.state.displayName} type="text" className="form-control" placeholder="" disabled />
+                    <div className="input-group-append">
+                        <span className="input-group-text text-white">显示名称</span>
                     </div>
                 </div>
+                <div className="input-group shadow-sm">
+                    <input value={this.state.name} type="text" className="form-control" placeholder="" disabled />
+                    <div className="input-group-append">
+                        <span className="input-group-text text-white">
+                            <span className="oi oi-key" title="icon name" aria-hidden="true"></span>
+                                &#12288;名称
+                            </span>
+                    </div>
+                </div>
+                <div className="input-group shadow-sm">
+                    <input value={this.state.description} type="text" className="form-control" placeholder="" disabled />
+                    <div className="input-group-append">
+                        <span className="input-group-text text-white">
+                            <span className="oi oi-info mr-2" title="icon name" aria-hidden="true"></span>
+                                &#12288;描述
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </PromptBox>);
+
+        return (
+            <div className="pageedit-page-container">
                 <div className="hide-scroll">
                     <div className="front-page-container">
                         {
@@ -133,11 +113,18 @@ class PageContainer extends React.Component {
                         }
                     </div>
                 </div>
-                <div className="col-md-12  padding-0 pageedit-page-container-addcomponent">
-                    <button className="btn pageedit-page-container-addcomponent-btn" onClick={this.addComponent}
-                    >
-                        <span className="oi oi-plus" title="添加组件" aria-hidden="true"></span>
-                    </button>
+                <div className="col-md-12 padding-0 pageedit-page-container-btns">
+                    <BtnLists
+                        addComponent={this.addComponent}
+                        submitPage={this.submitPage}
+                        pageInfoComponent={promptBox}
+                        pageUpdate={
+                            () => {
+                                let myEvent = new Event('resize');
+                                window.dispatchEvent(myEvent);
+                            }
+                        }
+                    />
                 </div>
             </div>
         );
