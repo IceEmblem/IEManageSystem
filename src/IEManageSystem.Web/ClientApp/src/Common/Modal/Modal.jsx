@@ -4,6 +4,7 @@ import { easeExpOut } from 'd3-ease'
 
 import './index.css';
 
+// 模态框
 // props.show bool
 export default class Modal extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class Modal extends React.Component {
     return (
       <Animate
         start={() => ({
-          x: 0,
+          x: [this.props.show ? 1 : 0],
         })}
 
         update={() => ({

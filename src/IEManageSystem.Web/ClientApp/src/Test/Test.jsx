@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PromptBox from 'PromptBox';
+import Modal from 'Modal/Modal';
 
 import "./Test.css";
 
@@ -15,7 +15,25 @@ export default class Test extends React.Component {
     render() {
         return (
             <div className="w-100 h-100 d-flex justify-content-center align-items-center">
-                <PromptBox>简单的卡片</PromptBox>
+                <Modal show={true}>
+                    <div className="d-flex justify-content-center  align-items-center w-100 h-100">
+                        <div className="card w-75">
+                            <div className="card-body">
+                                <div>
+                                    <div className="components-title">
+                                        容器组件
+                                    </div>
+                                    <div className="card">
+                                        <div className="card-body">
+                                            列表
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </Modal>
             </div>
         );
     }

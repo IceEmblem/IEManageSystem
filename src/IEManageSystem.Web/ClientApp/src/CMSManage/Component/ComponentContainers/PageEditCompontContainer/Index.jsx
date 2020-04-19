@@ -19,28 +19,16 @@ class PageEditCompontContainer extends BaseComponentContainer {
         this.state = {
             openEdit: false
         }
-
-        this.addChildComponent = this.addChildComponent.bind(this);
     }
 
     createChildComponent(){
         return this.props.childPageComponents.map(item => (
             <Contain
                 key={item.sign}
-                selectedComponentDescribe={this.props.selectedComponentDescribe}
                 pageComponent={item}
             >
             </Contain>)
         );
-    }
-
-    addChildComponent() {
-        let pageComponent = CreateComponentService.createComponent(
-            this.props.childPageComponents, 
-            this.props.selectedComponentDescribe,
-            this.props.pageComponent.sign);
-
-        this.props.addComponent(pageComponent);
     }
 
     getTools()
@@ -83,7 +71,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
                         isShowAddBtn &&
                         <button type="button" className="btn btn-success btn-sm"
                             onClick={
-                                () => { this.addChildComponent() }
+                                () => { this.props.addChildComponent(this.props.pageComponent) }
                             }
                         >
                             <span className="oi oi-plus" title="icon name" aria-hidden="true"></span>
@@ -96,10 +84,9 @@ class PageEditCompontContainer extends BaseComponentContainer {
 }
 
 PageEditCompontContainer.propTypes = {
-    selectedComponentDescribe: PropTypes.object.isRequired,
+    addChildComponent: PropTypes.func.isRequired,
     pageComponent: PropTypes.object.isRequired,
     childPageComponents: PropTypes.array.isRequired,
-    addComponent: PropTypes.func.isRequired,
     removeComponent: PropTypes.func.isRequired,
     editComponent: PropTypes.func.isRequired
 }
@@ -119,9 +106,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        addComponent: (pageComponent) => {
-            dispatch(pageAddComponent(pageComponent));
-        },
         removeComponent: (pageComponent) => {
             dispatch(pageRemoveComponent(pageComponent));
         },

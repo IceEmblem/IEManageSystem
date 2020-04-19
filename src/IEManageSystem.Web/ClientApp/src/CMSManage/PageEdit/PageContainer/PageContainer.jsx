@@ -14,12 +14,16 @@ import { ieReduxFetch } from 'Core/IEReduxFetch'
 
 import BtnLists from './BtnLists'
 import PromptBox from 'PromptBox'
+import ComponentListBox from "./ComponentListBox"
 
 class PageContainer extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            // 要将组件添加到那个父组件下，undefined 表示没有父组件
+            curParentComponent: undefined,
+            showComponentListBox: false,
             name: "",
             displayName: "",
             description: ""
@@ -55,15 +59,15 @@ class PageContainer extends React.Component {
         );
     }
 
-    addComponent() {
-        if (!this.props.selectedComponentDescribe) {
+    addComponent(selectedComponentDescribe) {
+        if (!selectedComponentDescribe) {
             return;
         }
 
         let pageComponent = CreateComponentService.createComponent(
             this.props.page.pageComponents,
-            this.props.selectedComponentDescribe,
-            null);
+            selectedComponentDescribe,
+            this.state.curParentComponent ? this.state.curParentComponent.sign : null);
 
         this.props.addComponent(pageComponent);
     }
@@ -107,7 +111,9 @@ class PageContainer extends React.Component {
                                 <PageEditCompontContainer
                                     key={item.sign}
                                     pageComponent={item}
-                                    selectedComponentDescribe={this.props.selectedComponentDescribe}
+                                    addChildComponent={(curParentPageComponent)=>{
+                                        this.setState({curParentComponent: curParentPageComponent, showComponentListBox: true});
+                                    }}
                                 >
                                 </PageEditCompontContainer>)
                         }
@@ -115,7 +121,7 @@ class PageContainer extends React.Component {
                 </div>
                 <div className="col-md-12 padding-0 pageedit-page-container-btns">
                     <BtnLists
-                        addComponent={this.addComponent}
+                        addComponent={()=>{this.setState({curParentComponent: undefined, showComponentListBox: true})}}
                         submitPage={this.submitPage}
                         pageInfoComponent={promptBox}
                         pageUpdate={
@@ -126,13 +132,17 @@ class PageContainer extends React.Component {
                         }
                     />
                 </div>
+                <ComponentListBox
+                    show={this.state.showComponentListBox}
+                    close={() => { this.setState({ showComponentListBox: false }) }}
+                    addComponent={this.addComponent}
+                />
             </div>
         );
     }
 }
 
 PageContainer.propTypes = {
-    selectedComponentDescribe: PropTypes.object,
     page: PropTypes.object,
     pageName: PropTypes.string.isRequired,
     addComponent: PropTypes.func.isRequired,

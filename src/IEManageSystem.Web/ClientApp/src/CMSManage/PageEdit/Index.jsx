@@ -13,13 +13,12 @@ export default class PageEdit extends React.Component {
 
         this.state = {
             open: true,
-            selectedComponentDescribe: undefined
         }
     }
 
     render() {
         return (<div className="pagecomponent">
-            <Animate
+            {/* <Animate
                 start={() => ({
                     toolcontainHeight: 35,
                     btnRadius: 0,
@@ -33,11 +32,11 @@ export default class PageEdit extends React.Component {
                     btnRadius: [this.state.open ? 0 : 1],
                     btnFontSize: [this.state.open ? 1 : 0.3],
                     borderBottom: [this.state.open ? 0.5 : 0],
-                    timing: { delay: this.state.open ? 500: 0, duration: 500, ease: easeExpOut },
+                    timing: { delay: this.state.open ? 500 : 0, duration: 500, ease: easeExpOut },
                 },
                 {
                     width: [this.state.open ? 12 : 3],
-                    timing: { delay: this.state.open ? 0: 500, duration: 500, ease: easeExpOut },
+                    timing: { delay: this.state.open ? 0 : 500, duration: 500, ease: easeExpOut },
                 }]}
             >
                 {(state) => {
@@ -46,7 +45,7 @@ export default class PageEdit extends React.Component {
                     return (
                         <div className="pagecomponent-left shadow"
                             style={{
-                                width:`${width}%`,
+                                width: `${width}%`,
                                 borderRadius: `${btnRadius}rem`,
                                 borderBottomWidth: `${borderBottom}rem`
                             }}
@@ -67,19 +66,18 @@ export default class PageEdit extends React.Component {
                                     height: `${toolcontainHeight}rem`
                                 }}
                             >
-                                <ComponentTool 
+                                <ComponentTool
                                     selectedComponentDescribe={this.state.selectedComponentDescribe}
-                                    selectComponentDescribe={(selectedComponentDescribe)=>{this.setState({selectedComponentDescribe: selectedComponentDescribe})}}
+                                    selectComponentDescribe={(selectedComponentDescribe) => { this.setState({ selectedComponentDescribe: selectedComponentDescribe }) }}
                                 />
                             </div>
                         </div>
                     )
                 }}
-            </Animate>
+            </Animate> */}
             <div className="pagecomponent-right">
                 <PageContainer
-                    selectedComponentDescribe={this.state.selectedComponentDescribe}
-                    pageName={this.props.match.params.pageName} 
+                    pageName={this.props.match.params.pageName}
                 />
             </div>
         </div>);

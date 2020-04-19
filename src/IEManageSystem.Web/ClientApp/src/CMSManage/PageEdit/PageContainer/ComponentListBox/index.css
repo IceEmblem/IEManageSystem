@@ -1,0 +1,45 @@
+.pageedit-componentlistbox{
+    z-index: 9999;
+}
+
+.pageedit-componentlistbox-frame {
+    width: 15%;
+    margin: .5rem 1rem;
+    height: 6rem;
+    background-color: #fff0;
+}
+
+.pageedit-componentlistbox-header{
+    background-color: #586675;
+}
+
+.pageedit-componentlistbox-body{
+}
+
+.pageedit-componentlistbox-close{
+    border-radius: 50%;
+}
+
+.pageedit-componentlistbox-close>span:hover{
+    color: gray;
+}
+
+.pageedit-componentlistbox-body>div{
+    margin-bottom: 1rem;
+}
+
+.pageedit-componentlistbox-frame-active{
+    border-color: #2393a7;
+}
+
+.pageedit-componentlistbox-components-title{
+    display: inline-block;
+    padding: .5rem 1rem;
+    font-size: 1.3rem;
+    border: 1px solid;
+    border-color: #dfdfdf #dfdfdf #fff0 #dfdfdf;
+    background-color: #fff;
+    position: relative;
+    bottom: -1px;
+    z-index: 1;
+}
