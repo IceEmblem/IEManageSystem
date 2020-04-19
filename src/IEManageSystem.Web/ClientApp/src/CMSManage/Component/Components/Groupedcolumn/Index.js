@@ -27,7 +27,7 @@ class ComponentObject extends BaseComponentObject {
             />);
 
         this.ComponentSettingConfigs = [
-            new ComponentSettingConfig(
+            ComponentSettingConfig.BuildPageComponentSettingConfig(
                 "otherSetting",
                 "柱状图配置",
                 (pageComponentSetting, setPageComponentSetting) => {

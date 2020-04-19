@@ -14,7 +14,7 @@ class ComponentObject extends BaseComponentObject {
     constructor() {
         super();
 
-        this.ComponentSettingConfigs = [new ComponentSettingConfig("pic", "幻灯片设置",
+        this.ComponentSettingConfigs = [ComponentSettingConfig.BuildPageComponentSettingConfig("pic", "幻灯片设置",
             (pageComponentSetting, setPageComponentSetting) => {
                 return (<DefaultSettingConfig 
                     data={pageComponentSetting}

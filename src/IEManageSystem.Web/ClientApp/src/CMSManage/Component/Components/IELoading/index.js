@@ -11,7 +11,7 @@ class ComponentObject extends BaseComponentObject {
     constructor(){
         super();
         this.ComponentSettingConfigs = [
-            new ComponentSettingConfig(
+            ComponentSettingConfig.BuildPageComponentSettingConfig(
                 "SizeSetting",
                 "大小设置",
                 (pageComponentSetting, setPageComponentSetting) => {

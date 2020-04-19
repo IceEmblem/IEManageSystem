@@ -76,7 +76,7 @@ class EditFrame extends React.Component {
                                 selectIndex={this.selectIndex}
                                 selectOnclick={() => { }}
                             >
-                                <this.props.componentDataConfig 
+                                <this.props.componentObject.ComponentDataConfig 
                                     data={this.state}
                                     setData={(value)=>this.setState(value)}
                                 />
@@ -101,7 +101,7 @@ EditFrame.propTypes = {
     submit: PropTypes.func.isRequired,
     pageComponent: PropTypes.object.isRequired,
     componentData: PropTypes.object,
-    componentDataConfig: PropTypes.object.isRequired
+    componentObject: PropTypes.object.isRequired
 }
 
 export default EditFrame

@@ -25,12 +25,12 @@ const pageComponent = {
     "targetPageId": 1
 };
 const componentSettingConfigs = [
-    new ComponentSettingConfig("setting1", "设置1",
+    ComponentSettingConfig.BuildPageComponentSettingConfig("setting1", "设置1",
         (pageComponentSetting, setPageComponentSetting) => {
             return (<p>组件设置配置1</p>);
         }
     ),
-    new ComponentSettingConfig("setting2", "设置2",
+    ComponentSettingConfig.BuildPageComponentSettingConfig("setting2", "设置2",
         (pageComponentSetting, setPageComponentSetting) => {
             return (<p>组件设置配置2</p>);
         }

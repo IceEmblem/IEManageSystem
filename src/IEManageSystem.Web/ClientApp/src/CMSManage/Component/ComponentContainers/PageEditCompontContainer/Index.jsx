@@ -43,10 +43,8 @@ class PageEditCompontContainer extends BaseComponentContainer {
 
         tools.push(<EditFrame 
             key={"EditFrame"}
-            basicSettingConfig={this.componentObject.BasicSettingConfig}
-            pageLeafSettingConfig={this.componentObject.PageLeafSettingConfig}
+            componentObject={this.componentObject}
             pageComponent={this.props.pageComponent} 
-            componentSettingConfigs={this.componentObject.ComponentSettingConfigs}
             editComponent={this.props.editComponent}
             show={this.state.openEdit}
             close={()=>{this.setState({openEdit: false})}}

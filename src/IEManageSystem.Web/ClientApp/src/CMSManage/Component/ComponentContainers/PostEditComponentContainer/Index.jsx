@@ -53,6 +53,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
                 submit={this.submit}
                 pageComponent={pageComponent}
                 componentData={this.props.contentComponentData}
+                componentObject={this.componentObject}
                 componentDataConfig={this.componentObject.ComponentDataConfig}
             ></EditFrame>);
         tools.push(

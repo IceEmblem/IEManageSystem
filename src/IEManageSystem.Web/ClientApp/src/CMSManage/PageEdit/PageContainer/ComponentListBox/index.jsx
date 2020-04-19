@@ -22,6 +22,7 @@ class ComponentListBox extends React.Component
     {
         return (
         <ComponentFrame
+            key={item.name}
             active={this.state.selectedComponentDescribe && this.state.selectedComponentDescribe.name == item.name}
             componentOnClick={
                 () => {
@@ -65,12 +66,12 @@ class ComponentListBox extends React.Component
         <Modal show={this.props.show}>
             <div className="d-flex justify-content-center pageedit-componentlistbox align-items-center w-100">
                 <div className="card w-75">
-                    <div class="pageedit-componentlistbox-header card-header d-flex justify-content-between align-items-center">
+                    <div className="pageedit-componentlistbox-header card-header d-flex justify-content-between align-items-center">
                         <h5 className="mb-0 text-white">请选择组件</h5>
                         <a href="javascript:void(0)" className="pageedit-componentlistbox-close text-white"
                             onClick={()=>{this.props.close()}}
                         >
-                            <span class="oi oi-x" title="icon name" aria-hidden="true"></span>
+                            <span className="oi oi-x" title="icon name" aria-hidden="true"></span>
                         </a>
                     </div>
                     <div className="card-body pageedit-componentlistbox-body">

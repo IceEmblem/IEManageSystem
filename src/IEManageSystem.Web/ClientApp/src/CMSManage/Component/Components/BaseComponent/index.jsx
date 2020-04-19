@@ -12,11 +12,21 @@ import BasePreview from './BasePreview';
 export default class BaseComponentObject {
     constructor() {
         this.ComponentSettingConfigs = [];
-        this.BasicSettingConfig = BasicSettingConfig;
+        this.BasicSettingConfig = ComponentSettingConfig.BuildBasicComponentSettingConfig("ieBaiscSetting", "基本设置",
+            (pageComponentSetting, setPageComponentSetting) => {
+                return <BasicSettingConfig 
+                    data={pageComponentSetting}
+                    setData={setPageComponentSetting}
+                />;
+            }
+        );
     }
     Preview() {
         return <BasePreview />
     };
+    getComponentSettingConfigs(){
+        return [this.BasicSettingConfig, ...this.ComponentSettingConfigs]
+    }
 }
 
 export { 

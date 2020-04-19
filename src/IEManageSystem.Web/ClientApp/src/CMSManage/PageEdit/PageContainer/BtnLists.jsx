@@ -54,7 +54,7 @@ export default class BtnLists extends React.Component {
                                             this.props.addComponent();
                                         }}
                                     >
-                                        <span class="oi oi-plus" title="添加组件" aria-hidden="true"></span>
+                                        <span className="oi oi-plus" title="添加组件" aria-hidden="true"></span>
                                         {" 添加组件"}
                                     </button>
                                     <div style={{ width: `${y}rem` }}></div>
@@ -63,7 +63,7 @@ export default class BtnLists extends React.Component {
                                             this.setState({showPageInfoComponent: !this.state.showPageInfoComponent});
                                         }}
                                     >
-                                        <span class="oi oi-info" title="页面信息" aria-hidden="true"></span>
+                                        <span className="oi oi-info" title="页面信息" aria-hidden="true"></span>
                                         {" 页面信息"}
                                     </button>
                                     <div style={{ width: `${y}rem` }}></div>
