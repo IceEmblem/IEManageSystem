@@ -1,8 +1,12 @@
 export default class ComponentSettingConfig {
     static BuildBasicComponentSettingConfig(name, displayName, settingComponentBuilder){
         return new ComponentSettingConfig(name, displayName, settingComponentBuilder, 
-            (pageComponent, name)=>{ return pageComponent.pageComponentBaseSetting },
-            (pageComponent, name, setting)=>{ pageComponent.pageComponentBaseSetting = setting });
+            (pageComponent, name)=>{ 
+                return pageComponent.pageComponentBaseSetting 
+            },
+            (pageComponent, name, setting)=>{ 
+                pageComponent.pageComponentBaseSetting = setting 
+            });
     }
 
     static BuildPageLeafComponentSettingConfig(name, displayName, settingComponentBuilder){

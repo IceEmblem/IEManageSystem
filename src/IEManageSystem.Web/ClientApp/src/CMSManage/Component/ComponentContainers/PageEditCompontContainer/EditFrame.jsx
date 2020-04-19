@@ -37,13 +37,6 @@ class EditFrame extends React.Component {
         this.props.componentObject.getComponentSettingConfigs().forEach(element => {
             // 添加 选项卡 选项
             tabs.push({ index: index, text: element.displayName, name: element.name })
-            // 根据 组件设置配置 添加 组件设置数据 到 组件数据 中
-            if (this.props.pageComponent.pageComponentSettings.find(item => item.name == element.name) == null) {
-                this.props.pageComponent.pageComponentSettings.push({
-                    name: element.name,
-                    displayName: element.displayName
-                });
-            }
             index++;
         });
 
@@ -52,8 +45,10 @@ class EditFrame extends React.Component {
 
     cancel() {
         this.props.close();
-        this.setState({ pageComponent: IETool.deepCopy(this.props.pageComponent) });
-        this.fillPageComponentSettings(this.state.pageComponent.pageComponentSettings);
+        this.setState({
+            selectTab: this.tabs.length > 0 ? this.tabs[0] : null, 
+            pageComponent: IETool.deepCopy(this.props.pageComponent) 
+        });
     }
 
     submit() {

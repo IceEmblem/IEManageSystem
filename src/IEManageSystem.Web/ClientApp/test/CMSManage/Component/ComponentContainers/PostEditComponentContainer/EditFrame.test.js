@@ -1,14 +1,14 @@
 import React from 'react';
 import Enzyme from 'IEEnzyme';
 import EditFrame from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer/EditFrame';
-import {ComponentDataConfig} from 'CMSManage/Component/Components/BaseContentLeafComponent';
+import TestComponent from '../TestComponent';
 
 const { shallow } = Enzyme;
 
 const close = ()=>{};
 const submit = (data)=>{};
 const pageComponent = {
-    "name": "Text",
+    "name": "Test",
     "sign": "2",
     "parentSign": null,
     "pageComponentBaseSetting":{
@@ -25,7 +25,6 @@ const pageComponent = {
     "pageComponentSettings": []
 };
 const componentData = undefined;
-const componentDataConfig = ComponentDataConfig;
 
 // 提交测试
 test("submit_test", ()=>{
@@ -36,7 +35,7 @@ test("submit_test", ()=>{
         submit={(data)=>{submitData = data}}
         pageComponent={pageComponent}
         componentData={componentData}
-        componentDataConfig={componentDataConfig}
+        componentObject={TestComponent.componentObject}
     />);
 
     editFrame.setState({field1: "field1Data"});
@@ -60,7 +59,7 @@ test("cancel_test",()=>{
         submit={(data)=>{submitData = data}}
         pageComponent={pageComponent}
         componentData={componentData}
-        componentDataConfig={componentDataConfig}
+        componentObject={TestComponent.componentObject}
     />);
 
     // 更改组件数据
