@@ -16,7 +16,6 @@ export default class BasicSettingConfig extends BaseConfig{
                                         ...this.props.data,
                                         ...{ col: event.target.value }
                                     })
-                                    this.setState({});
                                 }
                             }
                         />
@@ -35,7 +34,6 @@ export default class BasicSettingConfig extends BaseConfig{
                                         ...this.props.data,
                                         ...{ height: event.target.value }
                                     });
-                                    this.setState({});
                                 }
                             }
                         />
@@ -54,7 +52,6 @@ export default class BasicSettingConfig extends BaseConfig{
                                         ...this.props.data,
                                         ...{ padding: event.target.value }
                                     });
-                                    this.setState({});
                                 }
                             }
                         />
@@ -73,7 +70,6 @@ export default class BasicSettingConfig extends BaseConfig{
                                         ...this.props.data,
                                         ...{ margin: event.target.value }
                                     });
-                                    this.setState({});
                                 }
                             }
                         />
@@ -92,7 +88,6 @@ export default class BasicSettingConfig extends BaseConfig{
                                         ...this.props.data,
                                         ...{ backgroundColor: event.target.value }
                                     });
-                                    this.setState({});
                                 }
                             }
                         />
@@ -111,7 +106,6 @@ export default class BasicSettingConfig extends BaseConfig{
                                         ...this.props.data,
                                         ...{ className: event.target.value }
                                     });
-                                    this.setState({});
                                 }
                             }
                         />
@@ -135,7 +129,6 @@ export default class BasicSettingConfig extends BaseConfig{
                                         ...this.props.data,
                                         ...{ sortIndex: index }
                                     });
-                                    this.setState({});
                                 }
                             }
                         />

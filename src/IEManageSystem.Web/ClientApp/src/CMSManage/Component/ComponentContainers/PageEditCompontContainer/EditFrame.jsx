@@ -74,7 +74,10 @@ class EditFrame extends React.Component {
         //     });
 
         // 组件设置配置使用的组件
-        return componentSettingConfig.bulidConfigComponent(this.state.pageComponent);
+        return componentSettingConfig.bulidConfigComponent(this.state.pageComponent, 
+            (pageComponent) => {
+                this.setState({pageComponent:pageComponent});
+            });
     }
 
     render() {

@@ -33,7 +33,8 @@ export default class PageLeafSettingConfig extends BaseConfig{
                 <div className="input-group mb-3">
                     <select className="form-control"
                         onChange={(event) => {
-                            this.props.setData(event.currentTarget.value)
+                            this.props.setData(event.currentTarget.value);
+                            this.setState({});
                         }}
                         value={this.props.data}
                     >

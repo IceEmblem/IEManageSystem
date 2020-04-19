@@ -1,3 +1,4 @@
+import React from 'react'
 import BasePageLeafComponent, { PageLeafComponentProps } from './BasePageLeafComponent'
 import BaseComponentObject, {ComponentSettingConfig} from '../BaseComponent';
 import PageLeafSettingConfig from './PageLeafSettingConfig';

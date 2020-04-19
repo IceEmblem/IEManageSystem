@@ -55,11 +55,13 @@ export default class ComponentSettingConfig {
         this.setComponentSettingOfPageComponent = setComponentSettingOfPageComponent;
     }
 
-    bulidConfigComponent(pageComponent){
+    // 在 setting 更新时，会调用 pageComponentUpdate，提醒调用方
+    bulidConfigComponent(pageComponent, pageComponentUpdate){
         return this.settingComponentBuilder(
             this.getSettingForPageComponent(pageComponent), 
             (setting)=>{
                 this.setSettingOfPageComponent(pageComponent, setting);
+                pageComponentUpdate(pageComponent);
             });
     }
 
