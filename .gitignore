@@ -28,3 +28,7 @@
 /test/IEManageSystem.Web.Tests/bin
 /test/IEManageSystem.Web.Tests/obj
 *.ldb
+/src/IEManageSystem.CommonInfrastructure/bin/Debug/netcoreapp2.1
+/src/IEManageSystem.CommonInfrastructure/obj
+/test/IEManageSystem.CommonInfrastructure.Tests/bin/Debug/netcoreapp3.0
+/test/IEManageSystem.CommonInfrastructure.Tests/obj

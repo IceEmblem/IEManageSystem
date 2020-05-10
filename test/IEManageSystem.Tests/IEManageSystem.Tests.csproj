@@ -14,6 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\IEManageSystem.Application\IEManageSystem.Application.csproj" />
+    <ProjectReference Include="..\..\src\IEManageSystem.CommonInfrastructure\IEManageSystem.CommonInfrastructure.csproj" />
     <ProjectReference Include="..\..\src\IEManageSystem.EntityFrameworkCore\IEManageSystem.EntityFrameworkCore.csproj" />
   </ItemGroup>
   <ItemGroup>

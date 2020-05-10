@@ -7,6 +7,7 @@ using IEManageSystem.Api.Help;
 using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.Attributes;
+using IEManageSystem.CommonInfrastructure;
 using IEManageSystem.Configuration;
 using IEManageSystem.EntityFrameworkCore;
 using IEManageSystem.JwtAuthentication;
@@ -22,6 +23,7 @@ namespace IEManageSystem.Web.Startup
         typeof(IEJwtAuthenticationModule),
         typeof(IEManageSystemApplicationModule), 
         typeof(IEManageSystemEntityFrameworkCoreModule), 
+        typeof(IEManageSystemCommonInfrastructureModule),
         typeof(AbpAspNetCoreModule))]
     public class IEManageSystemWebModule : AbpModule
     {

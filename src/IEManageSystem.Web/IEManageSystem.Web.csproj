@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IEManageSystem.Application\IEManageSystem.Application.csproj" />
+    <ProjectReference Include="..\IEManageSystem.CommonInfrastructure\IEManageSystem.CommonInfrastructure.csproj" />
     <ProjectReference Include="..\IEManageSystem.EntityFrameworkCore\IEManageSystem.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\IEManageSystem.JwtAuthentication\IEManageSystem.JwtAuthentication.csproj" />
   </ItemGroup>

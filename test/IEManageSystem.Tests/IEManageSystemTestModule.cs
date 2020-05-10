@@ -7,12 +7,14 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor.MsDependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using IEManageSystem.CommonInfrastructure;
 
 namespace IEManageSystem.Tests
 {
     [DependsOn(
         typeof(IEManageSystemApplicationModule),
         typeof(IEManageSystemEntityFrameworkCoreModule),
+        typeof(IEManageSystemCommonInfrastructureModule),
         typeof(AbpTestBaseModule)
         )]
     public class IEManageSystemTestModule : AbpModule
