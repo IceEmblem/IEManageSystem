@@ -8,7 +8,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
     /// <summary>
     /// 页面组件基本设置
     /// </summary>
-    public class PageComponentBaseSetting:ValueObject<PageComponentBaseSetting>
+    public class PageComponentBaseSetting:ValueObject
     {
         protected PageComponentBaseSetting() { }
 
@@ -36,5 +36,17 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         public string BackgroundColor { get; protected set; }
 
         public string ClassName { get; protected set; }
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+
+            yield return SortIndex;
+            yield return Col;
+            yield return Height;
+            yield return Padding;
+            yield return Margin;
+            yield return BackgroundColor;
+            yield return ClassName;
+        }
     }
 }

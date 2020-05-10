@@ -29,7 +29,7 @@ namespace IEManageSystem.Web.Startup
     {
         private readonly IConfigurationRoot _appConfiguration;
 
-        public IEManageSystemWebModule(IHostingEnvironment env)
+        public IEManageSystemWebModule(IWebHostEnvironment env)
         {
             _appConfiguration = AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName);
         }

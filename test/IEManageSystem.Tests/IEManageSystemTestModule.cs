@@ -41,7 +41,7 @@ namespace IEManageSystem.Tests
             );
 
             var builder = new DbContextOptionsBuilder<IEManageSystemDbContext>();
-            builder.UseInMemoryDatabase().UseInternalServiceProvider(serviceProvider);
+            builder.UseInMemoryDatabase("TestDB").UseInternalServiceProvider(serviceProvider);
 
             IocManager.IocContainer.Register(
                 Component

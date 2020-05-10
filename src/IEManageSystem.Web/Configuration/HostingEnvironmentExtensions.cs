@@ -6,7 +6,7 @@ namespace IEManageSystem.Api.Configuration
 {
     public static class HostingEnvironmentExtensions
     {
-        public static IConfigurationRoot GetAppConfiguration(this IHostingEnvironment env)
+        public static IConfigurationRoot GetAppConfiguration(this IWebHostEnvironment env)
         {
             return AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName);
         }

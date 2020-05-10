@@ -28,7 +28,7 @@ namespace IEManageSystem.Web.Tests
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             UseInMemoryDb(app.ApplicationServices);
 

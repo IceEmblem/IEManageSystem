@@ -22,7 +22,7 @@ namespace IEManageSystem.Web.Startup
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             WebConfiguration.Init(AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName));
         }
@@ -35,14 +35,12 @@ namespace IEManageSystem.Web.Startup
                 DbContextOptionsConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
             });
 
-            services.AddMvc(options =>
+            services.AddControllersWithViews(options =>
             {
-                // 防止 XSRF/CSRF（跨站请求伪造） 攻击，我们使用 JWT 进行身份验证，不存在 XSRF/CSRF
-                // options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            })
-            .AddJsonOptions(options =>
-            {
-                // 解决循环引用时的序列化
+                // .net core 自动将移除 Async 后缀，如方法 LoginAsync 的路由为 /Controller/Login
+                // 设为发 false 则不会移除
+                options.SuppressAsyncSuffixInActionNames = false;
+            }).AddNewtonsoftJson(options => { 
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
@@ -82,7 +80,12 @@ namespace IEManageSystem.Web.Startup
 
             app.UseSpaStaticFiles();
 
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.UseSpa(spa =>
             {
