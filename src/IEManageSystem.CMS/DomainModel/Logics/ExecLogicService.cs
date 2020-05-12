@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Abp.Domain.Repositories;
+using Abp.UI;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 
@@ -10,19 +13,50 @@ namespace IEManageSystem.CMS.DomainModel.Logics
     {
         private IActuatorFactory _actuatorFactory { get; set; }
 
-        public ExecLogicService(IActuatorFactory actuatorFactory) {
+        private IRepository<PageBase> _pageRepository { get; set; }
+
+        private IRepository<PageData> _pageDataRepository { get; set; }
+
+        public ExecLogicService(
+            IActuatorFactory actuatorFactory,
+            IRepository<PageBase> pageRepository,
+            IRepository<PageData> pageDataRepository) {
             _actuatorFactory = actuatorFactory;
+
+            _pageRepository = pageRepository;
+
+            _pageDataRepository = pageDataRepository;
         }
 
-        public void Exec(Logic logic, ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData)
+        public void Exec(
+            Logic logic,
+            PageBase pageBase,
+            string pageComponentBaseSign,
+            PageData pageData,
+            string contentComponentDataSign,
+            string request)
         {
             var actuator = _actuatorFactory.GetActuator(logic.Name);
+
             if (actuator == null) {
-                _actuatorFactory.Register(logic.Name, logic.Code);
+                try
+                {
+                    _actuatorFactory.Register(logic.Name, logic.Code);
+                }
+                catch (Exception e) 
+                {
+                    throw new UserFriendlyException(e.Message);
+                }
+
                 actuator = _actuatorFactory.GetActuator(logic.Name);
             }
 
-            actuator.Exec(componentData, pageComponent, pageData);
+            Task.WaitAll(
+                _pageRepository.EnsureCollectionLoadedAsync(pageBase, e => e.PageComponents),
+                _pageDataRepository.EnsureCollectionLoadedAsync(pageData, e => e.ContentComponentDatas)
+            );
+
+            actuator.Exec(pageData.GetComponentDataForSign(pageComponentBaseSign), pageBase.GetPageComponentForSign(contentComponentDataSign), pageData, request);
         }
     }
 }

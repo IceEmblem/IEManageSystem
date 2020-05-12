@@ -8,6 +8,6 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 {
     public interface IActuator
     {
-        void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData);
+        void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, string request);
     }
 }

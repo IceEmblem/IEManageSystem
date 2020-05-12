@@ -9,6 +9,12 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 {
     public interface IExecLogicService : IDomainService
     {
-        void Exec(Logic logic, ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData);
+        void Exec(
+            Logic logic, 
+            PageBase pageBase, 
+            string pageComponentBaseSign, 
+            PageData pageData, 
+            string contentComponentDataSign,
+            string request);
     }
 }

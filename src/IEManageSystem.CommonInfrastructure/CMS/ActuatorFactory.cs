@@ -1,37 +1,65 @@
-﻿using IEManageSystem.CMS.DomainModel.Logics;
+﻿using Abp.Domain.Entities;
+using IEManageSystem.CMS;
+using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
 using Microsoft.Extensions.DependencyModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 
 namespace IEManageSystem.CommonInfrastructure.CMS
 {
     public class ActuatorFactory : IActuatorFactory
     {
-        private AppDomain _actuatorsDomain { get; set; }
+        private ReaderWriterLockSlim _rwlock { get; } = new ReaderWriterLockSlim();
 
-        private CSharpCompilation _cSharpCompilation { get; }
+        private MemoryStream _assemblyMemoryStream;
+
+        private ActuatorAssemblyLoadContext _assemblyLoadContext { get; set; }
 
         private Assembly _actuatorsAssembly { get; set; }
 
-        private static string _actuatorsAssemblyName { get; } = Directory.GetCurrentDirectory() + "\\Actuators.dll";
+        private Dictionary<string, Actuator> _actuators { get; set; } = new Dictionary<string, Actuator>();
 
-        private Dictionary<string, Actuator> _actuators { get; } = new Dictionary<string, Actuator>();
+        private Dictionary<string, string> _actuatorCodes { get; set; } = new Dictionary<string, string>();
 
         public ActuatorFactory() 
         {
-            _actuatorsDomain = AppDomain.CreateDomain("ActuatorsDomain");
+            if (!CreateAssemblyMemoryStream().Success)
+            {
+                throw new Exception("执行器程序集创建失败");
+            }
 
-            IEnumerable<MetadataReference> refs = AppDomain.CurrentDomain.GetAssemblies().Where(e=> !e.IsDynamic ).Select(x => MetadataReference.CreateFromFile(x.Location));
+            CreateActuatorsAssembly();
+        }
 
-            _cSharpCompilation = CSharpCompilation
+        private EmitResult CreateAssemblyMemoryStream() 
+        {
+            if (_assemblyMemoryStream != null) {
+                _assemblyMemoryStream.Close();
+            }
+
+            _assemblyMemoryStream = new MemoryStream();
+
+            List<MetadataReference> refs = new List<MetadataReference>() {
+                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(List<int>).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(ASCIIEncoding).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(JsonConvert).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(IEManageSystemCMSModule).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Entity).Assembly.Location),
+            };
+
+            var cSharpCompilation = CSharpCompilation
                 .Create(Guid.NewGuid().ToString() + ".dll")
                 .WithOptions(new CSharpCompilationOptions(
                     Microsoft.CodeAnalysis.OutputKind.DynamicallyLinkedLibrary,
@@ -46,78 +74,118 @@ namespace IEManageSystem.CommonInfrastructure.CMS
                 )
                 .AddReferences(refs);
 
-            if (File.Exists(_actuatorsAssemblyName)) {
-                // _actuatorsAssembly = Assembly.LoadFile(_actuatorsAssemblyName);
-                _actuatorsAssembly = _actuatorsDomain.Load(_actuatorsAssemblyName);
-
-                return;
+            foreach (var code in _actuatorCodes) {
+                cSharpCompilation = cSharpCompilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText(CreateActuatorCode(code.Key, code.Value)));
             }
 
-            var eResult = _cSharpCompilation.Emit(_actuatorsAssemblyName);
+            var result = cSharpCompilation.Emit(_assemblyMemoryStream);
 
-            if (!eResult.Success) {
-                throw new Exception("执行器程序集创建失败");
-            }
+            _assemblyMemoryStream.Seek(0, SeekOrigin.Begin);
 
-            _actuatorsAssembly = _actuatorsDomain.Load(_actuatorsAssemblyName);
+            return result;
+        }
 
-            // _actuatorsAssembly = Assembly.LoadFile(_actuatorsAssemblyName);
+        private void CreateActuatorsAssembly() 
+        {
+            _assemblyLoadContext?.Unload();
+
+            _assemblyLoadContext = new ActuatorAssemblyLoadContext();
+            _actuatorsAssembly = _assemblyLoadContext.LoadFromStream(_assemblyMemoryStream);
         }
 
         private string CreateActuatorClassName(string name) => $"{name}__Actuator__"; 
 
         private string CreateActuatorCode(string name, string funCode) {
             return $@"
+using IEManageSystem.CMS.DomainModel.Logics;
+using IEManageSystem.CMS.DomainModel.PageDatas;
+using IEManageSystem.CMS.DomainModel.Pages;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json;
+
 public class {CreateActuatorClassName(name)} {{
-    ${funCode}
+    {funCode}
 }}
 ";
         }
 
         public IActuator GetActuator(string name)
         {
-            if (_actuators.ContainsKey(name)) {
-                return _actuators[name];
+            _rwlock.EnterReadLock();
+
+            try {
+                if (_actuators.ContainsKey(name))
+                {
+                    return _actuators[name];
+                }
+
+                Type type = _actuatorsAssembly.GetType(CreateActuatorClassName(name));
+
+                if (type == null)
+                {
+                    return null;
+                }
+
+                object obj = Activator.CreateInstance(type);
+
+                MethodInfo mInfo = type.GetMethod("Exec");
+
+                Action<ContentComponentData, PageComponentBase, PageData, string> action = (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, string request) => {
+                    mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, request });
+                };
+
+                var actuator = new Actuator(action);
+
+                _actuators[name] = actuator;
+
+                return actuator;
             }
-
-            Type type = _actuatorsAssembly.GetType(CreateActuatorClassName(name));
-
-            if (type == null) {
-                return null;
+            finally
+            {
+                _rwlock.ExitReadLock();
             }
-
-            object obj = Activator.CreateInstance(type);
-
-            MethodInfo mInfo = type.GetMethod("Exec");
-
-            Action<ContentComponentData, PageComponentBase, PageData> action = (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData) => {
-                mInfo.Invoke(obj, new object[]{ componentData, pageComponent, pageData });
-            };
-
-            _actuators[name] = new Actuator(action);
-
-            return _actuators[name];
         }
 
         public void Register(string name, string code)
         {
-            AppDomain.Unload(_actuatorsDomain);
+            _rwlock.EnterWriteLock();
 
-            string actuatorCode = CreateActuatorCode(name, code);
+            try
+            {
+                string oldCode;
+                bool isExistOldCode = _actuatorCodes.TryGetValue(name, out oldCode); ;
 
-            _cSharpCompilation.AddSyntaxTrees(CSharpSyntaxTree.ParseText(actuatorCode));
+                _actuatorCodes[name] = code;
 
-            var eResult = _cSharpCompilation.Emit(_actuatorsAssemblyName);
+                // 生成新的程序集流
+                var eResult = CreateAssemblyMemoryStream();
 
-            if (!eResult.Success) {
-                throw new Exception($"执行器{name}注册失败");
+                if (!eResult.Success)
+                {
+                    if (isExistOldCode)
+                    {
+                        _actuatorCodes[name] = oldCode;
+                    }
+                    else
+                    {
+                        _actuatorCodes.Remove(name);
+                    }
+
+                    throw new Exception($"执行器{name}注册失败，错误信息：{eResult.Diagnostics.First().ToString()}");
+                }
+
+                // 使用新的程序集
+                CreateActuatorsAssembly();
+
+                // _actuators 的成员是由上一个程序集生成的，所以释放掉
+                _actuators = new Dictionary<string, Actuator>();
             }
-
-            _actuatorsDomain = AppDomain.CreateDomain("ActuatorsDomain");
-
-            _actuatorsAssembly = _actuatorsDomain.Load(_actuatorsAssemblyName);
-
-            // _actuatorsAssembly = Assembly.LoadFile(_actuatorsAssemblyName);
+            finally 
+            {
+                _rwlock.ExitWriteLock();
+            }
         }
     }
 }

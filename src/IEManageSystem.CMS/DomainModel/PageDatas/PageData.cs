@@ -3,6 +3,7 @@ using IEManageSystem.CMS.DomainModel.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.PageDatas
@@ -19,5 +20,10 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
 
         [ForeignKey("Page")]
         public int PageId { get; set; }
+
+        public ContentComponentData GetComponentDataForSign(string sign)
+        {
+            return ContentComponentDatas.FirstOrDefault(e => e.Sign == sign);
+        }
     }
 }

@@ -3,6 +3,7 @@ using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
 using IEManageSystem.CMS.DomainModel;
 using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.Menus;
+using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Common.DomainModel;
 using IEManageSystem.Configures.ApiAuthorization;
@@ -60,6 +61,8 @@ namespace IEManageSystem.EntityFrameworkCore
         public DbSet<PageBase> Pages { get; set; }
 
         public DbSet<MenuBase> Menus { get; set; }
+
+        public DbSet<PageData> PageDatas { get; set; }
 
         public DbSet<SiteSetting> SiteSettings { get; set; }
 

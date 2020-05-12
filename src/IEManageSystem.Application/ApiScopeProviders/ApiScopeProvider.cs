@@ -32,6 +32,8 @@ namespace IEManageSystem.ApiScopeProviders
         public const string Menu = "CMSManage.Menu";
         public const string Page = "CMSManage.Page";
         public const string Picture = "CMSManage.Picture";
+        public const string Logic = "CMSManage.Logic";
+        public const string LogicExec = "CMSManage.LogicExec";
 
         // common域
         public const string SiteSetting = "Common.SiteSetting";
@@ -63,6 +65,8 @@ namespace IEManageSystem.ApiScopeProviders
             _apiScopeManager.Register(Menu, "菜单管理");
             _apiScopeManager.Register(Page, "页面管理");
             _apiScopeManager.Register(Picture, "图片管理");
+            _apiScopeManager.Register(Logic, "逻辑管理");
+            _apiScopeManager.Register(LogicExec, "执行逻辑", new List<Permission>() { userPermission }, new List<Permission>() { userPermission });
 
             _apiScopeManager.Register(SiteSetting, "站点设置");
         }
