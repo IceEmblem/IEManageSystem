@@ -1,0 +1,8 @@
+{
+    "GetLogics" : {
+        "logics" : [{
+            "name" : "logic1",
+            "code" : "public void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, string request){}"
+        }]
+    }
+}

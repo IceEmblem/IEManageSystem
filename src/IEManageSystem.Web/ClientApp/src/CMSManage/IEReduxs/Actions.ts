@@ -71,7 +71,7 @@ export function pageDataFetch(pageName:string, pageDataName:string){
   );
 }
 
-// 文章数据更新
+// 文章数据更新请求
 export const ComponentDataUpdateReceive = "ComponentDataUpdateReceive"
 export function componentDataUpdateFetch(pageName:string, pageDataName:string, componentDatas:PageComponentModel)
 {

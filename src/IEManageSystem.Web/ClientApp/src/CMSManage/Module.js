@@ -54,6 +54,17 @@ export default class Module extends BaseModule {
                             [
                                 AccessScope.Picture(ApiScopeNodeType.manage)
                             ]
+                    },
+                    {
+
+                        id: "LogicManage",
+                        text: "组件逻辑管理",
+                        icon: "oi-image",
+                        url: "/ManageHome/CMSManage/LogicManage",
+                        accessScope:
+                            [
+                                AccessScope.Logic(ApiScopeNodeType.manage)
+                            ]
                     }
                 ]
             },

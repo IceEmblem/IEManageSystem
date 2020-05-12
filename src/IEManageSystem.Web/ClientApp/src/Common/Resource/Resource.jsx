@@ -23,13 +23,13 @@ export default class Resource extends React.Component {
 	// props.title  标题
 	// props.describes  资源描述
 	// props.resources  资源
-	// ++++props.pageIndex	页索引
-	// ++++props.resourceNum	资源数量
+	// props.pageIndex	页索引
+	// props.pageSize	每一页资源数量
+	// props.resourceNum	总资源数量
 	// props.freshenResources()  刷新数据接口
 	// props.addResource()  添加数据接口
 	// props.updateResource()  更新数据接口
 	// props.deleteResource()  删除数据接口
-	// -----props.setResourceRef()  设置当前组件的引用
 	// props.customizeOperateBtns	自定义操作按钮组件
 	// props.customizeBottomOperateBtns	自定义底部操作按钮组件
 	// props.hideAdd = false
@@ -39,11 +39,7 @@ export default class Resource extends React.Component {
 	constructor(props) {
 		super(props);
 
-		if (this.props.hidePadding == true) {
-			this.pageSize = 999999;
-		}
-
-		this.pageSize = 10;
+		this.pageSize = this.props.pageSize || 10;
 		this.searchKey = "";
 
 		this.state =

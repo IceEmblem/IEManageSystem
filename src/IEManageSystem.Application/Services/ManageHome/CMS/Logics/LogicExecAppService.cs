@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Logics
 {
-    [ApiAuthorization(ApiScopeProvider.LogicExec)]
+    // [ApiAuthorization(ApiScopeProvider.LogicExec)]
     public class LogicExecAppService : IEManageSystemAppServiceBase, ILogicExecAppService
     {
         private IExecLogicService _execLogicService { get; }
@@ -47,7 +47,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Logics
 
             if (logicTask.Result == null)
             {
-                throw new UserFriendlyException($"可执行逻辑{input.LogicName}不存在");
+                throw new UserFriendlyException($"可执行逻辑{input.LogicName}未注册，请先进行注册");
             }
 
             if (pageTask.Result == null)

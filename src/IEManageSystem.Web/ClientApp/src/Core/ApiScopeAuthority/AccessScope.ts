@@ -80,6 +80,10 @@ export default class AccessScope {
         return new AccessScope("CMSManage.Picture", apiScopeNodeType);
     }
 
+    static Logic(apiScopeNodeType: ApiScopeNodeType){
+        return new AccessScope("CMSManage.Logic", apiScopeNodeType);
+    }
+
     static SiteSetting(apiScopeNodeType: ApiScopeNodeType){
         return new AccessScope("Common.SiteSetting", apiScopeNodeType);
     }
