@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace IEManageSystem.Services.ManageHome.CMS.Logics
 {
     [ApiAuthorization(ApiScopeProvider.LogicExec)]
-    public class LogicExecAppService : IEManageSystemAppServiceBase, IApplicationService
+    public class LogicExecAppService : IEManageSystemAppServiceBase, ILogicExecAppService
     {
         private IExecLogicService _execLogicService { get; }
 
@@ -41,7 +41,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Logics
         {
             Task<Logic> logicTask = _logicRepository.FirstOrDefaultAsync(e => e.Name == input.LogicName);
             Task<PageBase> pageTask = _pageRepository.FirstOrDefaultAsync(e => e.Name == input.PageName);
-            Task<PageData> pageDataTask = _pageDataRepository.FirstOrDefaultAsync(e => e.Name == input.PageName);
+            Task<PageData> pageDataTask = _pageDataRepository.FirstOrDefaultAsync(e => e.Name == input.PageDataName);
 
             Task.WaitAll(logicTask, pageTask, pageDataTask);
 
@@ -57,10 +57,10 @@ namespace IEManageSystem.Services.ManageHome.CMS.Logics
 
             if (pageDataTask.Result == null)
             {
-                throw new UserFriendlyException($"指定的文章{input.PageName}不存在");
+                throw new UserFriendlyException($"指定的文章{input.PageDataName}不存在");
             }
 
-            _execLogicService.Exec(logicTask.Result, pageTask.Result, input.PageComponentBaseSign, pageDataTask.Result, input.ContentComponentDataSign, input.Request);
+            _execLogicService.Exec(logicTask.Result, pageTask.Result, input.PageComponentSign, pageDataTask.Result, input.ContentComponentDataSign, input.Request);
 
             return new ExecLogicOutput();
         }
