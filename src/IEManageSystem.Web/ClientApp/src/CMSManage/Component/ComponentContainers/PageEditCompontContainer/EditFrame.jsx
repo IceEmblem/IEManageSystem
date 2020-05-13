@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'Modal/Modal.jsx'
+import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
 
 import IETool from 'ToolLibrary/IETool';
 import Tab from 'Tab/Tab.jsx'
@@ -20,7 +21,8 @@ class EditFrame extends React.Component {
         this.state = {
             // 当前选择的选项卡的索引
             selectTab: this.tabs.length > 0 ? this.tabs[0] : null,
-            pageComponent: IETool.deepCopy(this.props.pageComponent)
+            // 拷贝一份，用于取消操作
+            pageComponent: new PageComponentModel(this.props.pageComponent)
         }
 
         this.cancel = this.cancel.bind(this);
@@ -47,7 +49,7 @@ class EditFrame extends React.Component {
         this.props.close();
         this.setState({
             selectTab: this.tabs.length > 0 ? this.tabs[0] : null, 
-            pageComponent: IETool.deepCopy(this.props.pageComponent) 
+            pageComponent: new PageComponentModel(this.props.pageComponent)
         });
     }
 
@@ -64,14 +66,6 @@ class EditFrame extends React.Component {
 
         // 组件设置配置
         let componentSettingConfig = this.props.componentObject.getComponentSettingConfigs().find(item => item.name == this.state.selectTab.name);
-        
-        // // 组件设置配置使用的组件
-        // return componentSettingConfig.bulidConfigComponent(
-        //     componentSettingConfig.getSettingForPageComponent(this.state.pageComponent),
-        //     (d) => {
-        //         componentSettingConfig.setSettingOfPageComponent(this.state.pageComponent, d);
-        //         this.setState({});
-        //     });
 
         // 组件设置配置使用的组件
         return componentSettingConfig.bulidConfigComponent(this.state.pageComponent, 

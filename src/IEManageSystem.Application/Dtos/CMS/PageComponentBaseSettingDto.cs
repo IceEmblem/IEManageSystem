@@ -9,6 +9,8 @@ namespace IEManageSystem.Dtos.CMS
     [AutoMap(typeof(PageComponentBaseSetting))]
     public class PageComponentBaseSettingDto
     {
+        public int Id { get; set; }
+
         public int SortIndex { get; set; }
 
         public string Col { get; set; }

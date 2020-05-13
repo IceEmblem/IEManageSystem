@@ -9,6 +9,8 @@ namespace IEManageSystem.Dtos.CMS
     [AutoMap(typeof(SingleData))]
     public class SingleDataDto
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public int SortIndex { get; set; }

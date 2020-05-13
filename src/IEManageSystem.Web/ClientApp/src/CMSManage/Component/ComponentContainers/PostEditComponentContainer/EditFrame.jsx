@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ContentComponentDataModel from 'CMSManage/Models/PageDatas/ContentComponentDataModel'
 
 import Modal from 'Modal/Modal.jsx'
 
@@ -15,45 +16,23 @@ class EditFrame extends React.Component {
         this.nameField = "text";
         this.selectIndex = 0;
 
-        this.state = {};
-        this.init(this.props);
+        // 新建一个副本，供取消时使用
+        this.state = {
+            contentComponentDataModel: new ContentComponentDataModel(this.props.componentData)
+        };
 
         this.submit = this.submit.bind(this);
         this.cancel = this.cancel.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.init(nextProps);
-    }
-
-    init(props){
-        let componentData = props.componentData;
-        if (componentData == null || !componentData) {
-            componentData = {}
-        }
-
-        this.setState({
-            field1: componentData.field1,
-            field2: componentData.field2,
-            field3: componentData.field3,
-            field4: componentData.field4,
-            field5: componentData.field5,
-        });
-    }
-
     submit() {
-        this.props.submit({
-            sign: this.props.pageComponent.sign,
-            field1: this.state.field1,
-            field2: this.state.field2,
-            field3: this.state.field3,
-            field4: this.state.field4,
-            field5: this.state.field5,
-        });
+        this.props.submit(this.state.contentComponentDataModel);
     }
     
     cancel(){
-        this.init(this.props);
+        this.setState({
+            ContentComponentDataModel: new ContentComponentDataModel(this.props.componentData)
+        });
         this.props.close();
     }
 
@@ -77,8 +56,8 @@ class EditFrame extends React.Component {
                                 selectOnclick={() => { }}
                             >
                                 <this.props.componentObject.ComponentDataConfig 
-                                    data={this.state}
-                                    setData={(value)=>this.setState(value)}
+                                    data={this.state.contentComponentDataModel}
+                                    setData={(value)=>this.setState({contentComponentDataModel: value})}
                                 />
                             </Tab>
                         </div>
@@ -99,7 +78,6 @@ EditFrame.propTypes = {
     show: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
-    pageComponent: PropTypes.object.isRequired,
     componentData: PropTypes.object,
     componentObject: PropTypes.object.isRequired
 }

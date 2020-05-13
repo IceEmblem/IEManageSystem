@@ -1,6 +1,8 @@
 import React from 'react';
 import BaseConfig from './BaseConfig';
 
+// props.data 类型为 PageComponentBaseSettingModel
+// props.setData 类型为 (PageComponentBaseSettingModel) => void
 // 基本设置 配置
 export default class BasicSettingConfig extends BaseConfig{
     render() {

@@ -1,4 +1,6 @@
 import { createIEThunkAction } from 'Core/IEReduxs/Actions'
+import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
+import ContentComponentDataModel from 'CMSManage/Models/PageDatas/ContentComponentDataModel'
 
 // 页面添加组件
 export const PageAddComponent = 'PageAddComponent'

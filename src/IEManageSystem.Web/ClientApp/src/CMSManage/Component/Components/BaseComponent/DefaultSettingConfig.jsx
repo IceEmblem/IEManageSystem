@@ -20,7 +20,9 @@ export default class DefaultSettingConfig extends BaseConfig {
 }
 
 DefaultSettingConfig.propTypes = {
+    // 类型为 PageComponentSettingModel
     data: PropTypes.object,
+    // 类型为 (PageComponentSettingModel) => void;
     setData: PropTypes.func.isRequired,
     // 组件 props={fieldValue, setFieldValue}
     field1: PropTypes.func,

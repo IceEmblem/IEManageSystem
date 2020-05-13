@@ -131,6 +131,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
         {
             PageComponentDto dto = new PageComponentDto();
 
+            dto.Id = page.Id;
             dto.Name = page.Name;
             dto.Sign = page.Sign;
             dto.ParentSign = page.ParentSign;
@@ -139,6 +140,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
 
             foreach (var item in page.PageComponentSettings) {
                 PageComponentSettingDto pageComponentSetting = new PageComponentSettingDto() {
+                    Id = item.Id,
                     Name = item.Name,
                     DisplayName = item.DisplayName,
                     Field1 = item.Field1,

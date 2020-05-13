@@ -1,6 +1,6 @@
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
 import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
-import CreatePageComponentService from 'Core/Models/CMS/CreatePageComponentService'
+import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
 
 class CreateComponentService{
     createComponent(pageComponents, componentDescribe, parentSign){

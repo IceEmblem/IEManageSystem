@@ -115,15 +115,6 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
   }
 }
 
-// 用户信息响应
-export const UserInfoReceive = "UserInfoReceive"
-export function userInfoFetch() {
-  return createIEThunkAction(
-    "/api/PageManage/AddContentPage",
-    {},
-    UserInfoReceive);
-}
-
 export const CreateTopLevelMenusReceive = "CreateTopLevelMenusReceive"
 export function createTopLevelMenusFetch(){
   return createIEThunkAction(

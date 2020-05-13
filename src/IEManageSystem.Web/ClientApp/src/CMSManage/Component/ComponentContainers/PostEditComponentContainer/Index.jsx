@@ -17,12 +17,14 @@ class PostEditComponentContainer extends BaseComponentContainer {
             show: false
         }
 
-        // 基本内容叶子组件才提供组件数据编辑
+        // 如果内容组件没有数据对象，则申请一个数据对象
         if ((this.componentObject instanceof BaseContentLeafComponent) &&
-            !this.props.pageData.contentComponentDatas.some(e=>e.sign == this.props.pageComponent.sign)) 
+            !this.props.contentComponentData) 
         {
             this.props.componentDataUpdate({
-                sign: this.props.pageComponent.sign
+                id: 0,
+                sign: this.props.pageComponent.sign,
+                singleDatas: []
             });
         }
 
@@ -48,7 +50,12 @@ class PostEditComponentContainer extends BaseComponentContainer {
         let pageComponent = this.props.pageComponent;
 
         // 基本内容叶子组件才提供组件数据编辑
-        if (!(this.componentObject instanceof BaseContentLeafComponent)) {
+        // 需要有组件数据对象才提供数据编辑
+        if (
+            !(this.componentObject instanceof BaseContentLeafComponent) ||
+            !this.props.contentComponentData
+        ) 
+        {
             return;
         }
 
@@ -59,7 +66,6 @@ class PostEditComponentContainer extends BaseComponentContainer {
                 show={this.state.show}
                 close={() => { this.setState({ show: false }) }}
                 submit={this.submit}
-                pageComponent={pageComponent}
                 componentData={this.props.contentComponentData}
                 componentObject={this.componentObject}
             ></EditFrame>);

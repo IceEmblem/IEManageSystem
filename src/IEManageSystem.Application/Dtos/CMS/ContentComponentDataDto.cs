@@ -10,6 +10,8 @@ namespace IEManageSystem.Dtos.CMS
     [AutoMap(typeof(ContentComponentData))]
     public class ContentComponentDataDto
     {
+        public int Id { get; set; }
+
         public string Sign { get; set; }
 
         public List<SingleDataDto> SingleDatas { get; set; }

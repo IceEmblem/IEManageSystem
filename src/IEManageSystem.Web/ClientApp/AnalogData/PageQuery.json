@@ -93,23 +93,6 @@
                     "pageComponentSettings": []
                 },
                 {
-                    "name": "IEThumbUp",
-                    "sign": "3",
-                    "parentSign": null,
-                    "pageComponentBaseSetting":{
-                        "sortIndex": 5,
-                        "margin": null,
-                        "backgroundColor": null,
-                        "className": null,
-                        "col": "12",
-                        "height": "",
-                        "padding": "0rem"
-                    },
-                    "targetPageId": null,
-                    "componentType": "LeafComponent",
-                    "pageComponentSettings": []
-                },
-                {
                     "name": "PostList",
                     "sign": "4",
                     "parentSign": null,
@@ -127,7 +110,7 @@
                     "targetPageId": 1
                 },
                 {
-                    "name": "IEBottomNav",
+                    "name": "Text",
                     "sign": "5",
                     "parentSign": null,
                     "pageComponentBaseSetting":{

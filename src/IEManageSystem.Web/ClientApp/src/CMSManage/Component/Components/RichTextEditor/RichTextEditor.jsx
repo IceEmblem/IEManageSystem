@@ -63,7 +63,14 @@ class RichTextEditor extends BaseContentLeafComponent {
     }
 
     render() {
-        let text = this.getComponentData().field1 || this.getDefaultText();
+        let text;
+
+        if(this.props.componentData && this.props.componentData.getDefauleData().field1){
+            text = this.props.componentData.getDefauleData().field1;
+        }
+        else{
+            text = this.getDefaultText();
+        }
         
         return (<div dangerouslySetInnerHTML={{ __html: text }}></div>);
     }
