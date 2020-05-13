@@ -12,11 +12,23 @@ class ComponentData extends React.Component {
     constructor(props) {
         super(props);
 
-        this.props.pageFetch(this.props.pageName);
-        this.props.pageDataFetch(this.props.pageName, this.props.pageDataName);
+        this.state = {
+            isLoad: false
+        };
+
+        Promise.all([
+            this.props.pageFetch(this.props.pageName), 
+            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
+        ]).then(()=>{
+            this.setState({isLoad : true});
+        });
     }
 
     render() {
+        if(this.state.isLoad == false){
+            return (<div className="postedit-page-container"></div>);
+        }
+
         return (
             <div className="postedit-page-container">
                 <div className="postedit-page-container-header">
@@ -76,13 +88,13 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         pageFetch: (name) => {
-            dispatch(pageFetch(name));
+            return dispatch(pageFetch(name));
         },
         pageDataFetch: (pageName, pageDataName) => {
-            dispatch(pageDataFetch(pageName, pageDataName));
+            return dispatch(pageDataFetch(pageName, pageDataName));
         },
         componentDataUpdateFetch: (pageName, pageDataName, componentDatas) => {
-            dispatch(componentDataUpdateFetch(pageName, pageDataName, componentDatas));
+            return dispatch(componentDataUpdateFetch(pageName, pageDataName, componentDatas));
         }
     }
 }

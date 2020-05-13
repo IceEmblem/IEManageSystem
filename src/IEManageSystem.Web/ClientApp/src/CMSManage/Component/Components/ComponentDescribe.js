@@ -23,5 +23,6 @@ export default class ComponentDescribe {
         this.name = name;
         this.componentObject = componentObject;
         this.componentType = type;
+        this.logicCode = undefined;
     }
 }

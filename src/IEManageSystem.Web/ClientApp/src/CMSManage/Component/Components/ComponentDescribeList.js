@@ -11,10 +11,11 @@ import IEBottomNav from "CMSManage/Component/Components/IEBottomNav";
 import IELoading from "CMSManage/Component/Components/IELoading";
 import IEMenu from "CMSManage/Component/Components/IEMenu";
 import IENav from "CMSManage/Component/Components/IENav";
+import IEThumbUp from "CMSManage/Component/Components/IEThumbUp";
 import PostList from "CMSManage/Component/Components/PostList";
 import Progress from "CMSManage/Component/Components/Progress";
 import RichTextEditor from "CMSManage/Component/Components/RichTextEditor";
 import Text from "CMSManage/Component/Components/Text";
 
-const componentDescribes = [CitiesSlider,Clock,Container,Donut,FlipClock,Groupedcolumn,IEBackground,IEBottomNav,IELoading,IEMenu,IENav,PostList,Progress,RichTextEditor,Text,];
+const componentDescribes = [CitiesSlider,Clock,Container,Donut,FlipClock,Groupedcolumn,IEBackground,IEBottomNav,IELoading,IEMenu,IENav,IEThumbUp,PostList,Progress,RichTextEditor,Text,];
 export default componentDescribes;

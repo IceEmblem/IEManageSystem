@@ -39,28 +39,26 @@ namespace IEManageSystem.Services.ManageHome.CMS.Logics
 
         public ExecLogicOutput ExecLogic(ExecLogicInput input)
         {
-            Task<Logic> logicTask = _logicRepository.FirstOrDefaultAsync(e => e.Name == input.LogicName);
-            Task<PageBase> pageTask = _pageRepository.FirstOrDefaultAsync(e => e.Name == input.PageName);
-            Task<PageData> pageDataTask = _pageDataRepository.FirstOrDefaultAsync(e => e.Name == input.PageDataName);
+            Logic logic = _logicRepository.FirstOrDefault(e => e.Name == input.LogicName);
+            PageBase page = _pageRepository.FirstOrDefault(e => e.Name == input.PageName);
+            PageData pageData = _pageDataRepository.FirstOrDefault(e => e.Name == input.PageDataName);
 
-            Task.WaitAll(logicTask, pageTask, pageDataTask);
-
-            if (logicTask.Result == null)
+            if (logic == null)
             {
                 throw new UserFriendlyException($"可执行逻辑{input.LogicName}未注册，请先进行注册");
             }
 
-            if (pageTask.Result == null)
+            if (page == null)
             {
                 throw new UserFriendlyException($"指定的页面{input.PageName}不存在");
             }
 
-            if (pageDataTask.Result == null)
+            if (pageData == null)
             {
                 throw new UserFriendlyException($"指定的文章{input.PageDataName}不存在");
             }
 
-            _execLogicService.Exec(logicTask.Result, pageTask.Result, input.PageComponentSign, pageDataTask.Result, input.ContentComponentDataSign, input.Request);
+            _execLogicService.Exec(logic, page, input.PageComponentSign, pageData, input.ContentComponentDataSign, input.Request);
 
             return new ExecLogicOutput();
         }

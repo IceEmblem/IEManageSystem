@@ -16,14 +16,14 @@ export default class LogicManage extends React.Component {
         this.freshenResources = this.freshenResources.bind(this);
 
         // 存在逻辑代码的组件
-        this.existLogicCodeComponentDescribes = ((Array)(new ComponentFactory().getComponentDescribes()))
+        this.existLogicCodeComponentDescribes = new ComponentFactory().getComponentDescribes()
             .filter(e =>
                 e.logicCode &&
                 e.logicCode.trim() != "");
 
         // 注册按钮组件
         this.registerBtn = (props) => (
-            <button className="btn btn-outline-secondary"
+            <button className="btn btn-secondary"
                 onClick={() => {
                     let postData = {
                         name: props.resource.name,
@@ -36,7 +36,8 @@ export default class LogicManage extends React.Component {
                         });
                 }}
             >
-                <span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>{" 注册逻辑代码"}
+                <span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>
+                {props.resource.isRegister ? " 重新注册" : " 注册逻辑"}
             </button>);
     }
 
@@ -64,7 +65,7 @@ export default class LogicManage extends React.Component {
                     logics.push({
                         name: this.existLogicCodeComponentDescribes[item].name,
                         code: this.existLogicCodeComponentDescribes[item].logicCode,
-                        isRegister: ((Array)(value.logics)).some(e => e.name == this.existLogicCodeComponentDescribes[item].name)
+                        isRegister: value.logics.some(e => e.name == this.existLogicCodeComponentDescribes[item].name)
                     });
                 }
 

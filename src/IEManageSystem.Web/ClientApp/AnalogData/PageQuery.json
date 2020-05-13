@@ -93,7 +93,7 @@
                     "pageComponentSettings": []
                 },
                 {
-                    "name": "Progress",
+                    "name": "IEThumbUp",
                     "sign": "3",
                     "parentSign": null,
                     "pageComponentBaseSetting":{

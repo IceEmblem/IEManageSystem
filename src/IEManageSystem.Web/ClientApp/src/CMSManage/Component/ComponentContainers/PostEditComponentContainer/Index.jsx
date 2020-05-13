@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseContentLeafComponent'
-import { componentDataUpdate } from 'CMSManage/IEReduxs/Actions'
+import { componentDataUpdate, pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
 
 import './Index.css'
 import BaseComponentContainer from '../BaseComponentContainer'
@@ -17,15 +17,24 @@ class PostEditComponentContainer extends BaseComponentContainer {
             show: false
         }
 
+        // 基本内容叶子组件才提供组件数据编辑
+        if ((this.componentObject instanceof BaseContentLeafComponent) &&
+            !this.props.pageData.contentComponentDatas.some(e=>e.sign == this.props.pageComponent.sign)) 
+        {
+            this.props.componentDataUpdate({
+                sign: this.props.pageComponent.sign
+            });
+        }
+
         this.submit = this.submit.bind(this);
     }
 
-    submit(resource){
+    submit(resource) {
         this.props.componentDataUpdate(resource);
-        this.setState({show: false});
+        this.setState({ show: false });
     }
 
-    createChildComponent(){
+    createChildComponent() {
         return this.props.childPageComponents.map(item => (
             <Contain
                 key={item.sign}
@@ -35,12 +44,11 @@ class PostEditComponentContainer extends BaseComponentContainer {
         );
     }
 
-    getTools()
-    {
+    getTools() {
         let pageComponent = this.props.pageComponent;
 
         // 基本内容叶子组件才提供组件数据编辑
-        if(!(this.componentObject instanceof BaseContentLeafComponent)){
+        if (!(this.componentObject instanceof BaseContentLeafComponent)) {
             return;
         }
 
@@ -49,7 +57,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
             <EditFrame
                 key={"editFrame"}
                 show={this.state.show}
-                close={()=>{this.setState({show: false})}}
+                close={() => { this.setState({ show: false }) }}
                 submit={this.submit}
                 pageComponent={pageComponent}
                 componentData={this.props.contentComponentData}
@@ -59,17 +67,21 @@ class PostEditComponentContainer extends BaseComponentContainer {
             <div className="parentcomponent-btns"
                 key={"editFrameBtn"}
             >
-                    <button type="button" className="btn btn-info btn-sm"
-                        onClick={
-                            () => { this.setState({ show: true }) }
-                        }
-                    >
-                        <span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>
-                    </button>
-                </div>
+                <button type="button" className="btn btn-info btn-sm"
+                    onClick={
+                        () => { this.setState({ show: true }) }
+                    }
+                >
+                    <span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>
+                </button>
+            </div>
         );
 
         return tools;
+    }
+
+    execLogic(requestData){
+        throw new Error("不能在编辑文章时执行逻辑");
     }
 }
 
@@ -77,7 +89,10 @@ PostEditComponentContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
     childPageComponents: PropTypes.array.isRequired,
     componentDataUpdate: PropTypes.func.isRequired,
-    contentComponentData: PropTypes.object
+    contentComponentData: PropTypes.object,
+    page: PropTypes.object.isRequired,
+    pageData: PropTypes.object.isRequired,
+    pageFreshen: PropTypes.func.isRequired
 }
 
 PostEditComponentContainer.defaultProps = {
@@ -86,11 +101,13 @@ PostEditComponentContainer.defaultProps = {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
     let childPageComponents = state.page.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
-    let contentComponentData = state.pageData.contentComponentDatas.find(e=>e.sign == ownProps.pageComponent.sign)
+    let contentComponentData = state.pageData.contentComponentDatas.find(e => e.sign == ownProps.pageComponent.sign)
 
     return {
         childPageComponents: childPageComponents,
-        contentComponentData: contentComponentData
+        contentComponentData: contentComponentData,
+        page: state.page,
+        pageData: state.pageData
     }
 }
 
@@ -98,6 +115,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         componentDataUpdate: (resource) => {
             dispatch(componentDataUpdate(resource));
+        },
+        pageFreshen: (pageName, pageDataName) => {
+            return Promise.all([dispatch(pageFetch(pageName)), dispatch(pageDataFetch(pageName, pageDataName))]);
         }
     }
 }

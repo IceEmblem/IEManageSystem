@@ -51,10 +51,8 @@ namespace IEManageSystem.CMS.DomainModel.Logics
                 actuator = _actuatorFactory.GetActuator(logic.Name);
             }
 
-            Task.WaitAll(
-                _pageRepository.EnsureCollectionLoadedAsync(pageBase, e => e.PageComponents),
-                _pageDataRepository.EnsureCollectionLoadedAsync(pageData, e => e.ContentComponentDatas)
-            );
+            _pageRepository.EnsureCollectionLoaded(pageBase, e => e.PageComponents);
+            _pageDataRepository.EnsureCollectionLoaded(pageData, e => e.ContentComponentDatas);
 
             actuator.Exec(pageData.GetComponentDataForSign(pageComponentBaseSign), pageBase.GetPageComponentForSign(contentComponentDataSign), pageData, request);
         }

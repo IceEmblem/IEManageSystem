@@ -66,6 +66,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             );
         }
 
+        /// <summary>
+        /// 获取页面
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>如果不存在页面，需返回 null</returns>
         public GetPageOutput GetPage(GetPageInput input)
         {
             PageBase page = null;
@@ -196,6 +201,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             };
         }
 
+        /// <summary>
+        /// 获取文章
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>如果不存在文章，需返回 null</returns>
         public GetPageDataOutput GetPageData(GetPageDataInput input) 
         {
             var pageData = _pageDataManager.GetPageDataIncludeAllProperty(input.PageName, input.PageDataName);

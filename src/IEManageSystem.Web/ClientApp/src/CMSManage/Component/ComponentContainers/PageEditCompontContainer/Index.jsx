@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
-import CreateComponentService from './CreateComponentService'
+import {pageFetch, pageDataFetch} from 'CMSManage/IEReduxs/Actions'
 
 import './Index.css'
 
@@ -79,6 +79,10 @@ class PageEditCompontContainer extends BaseComponentContainer {
 
         return tools;
     }
+
+    execLogic(requestData){
+        throw new Error("不能在编辑页面时执行逻辑");
+    }
 }
 
 PageEditCompontContainer.propTypes = {
@@ -86,7 +90,10 @@ PageEditCompontContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
     childPageComponents: PropTypes.array.isRequired,
     removeComponent: PropTypes.func.isRequired,
-    editComponent: PropTypes.func.isRequired
+    editComponent: PropTypes.func.isRequired,
+    page: PropTypes.object.isRequired,
+    pageData: PropTypes.object.isRequired,
+    pageFreshen: PropTypes.func.isRequired
 }
 
 PageEditCompontContainer.defaultProps = {
@@ -97,8 +104,9 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     let childPageComponents = state.page.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
 
     return {
-        oldPage: state.page,
-        childPageComponents: childPageComponents
+        childPageComponents: childPageComponents,
+        page: state.page,
+        pageData: state.pageData
     }
 }
 
@@ -109,6 +117,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         editComponent: (pageComponent) => {
             dispatch(pageEditComponent(pageComponent));
+        },
+        pageFreshen: (pageName, pageDataName) => {
+            return Promise.all([dispatch(pageFetch(pageName)), dispatch(pageDataFetch(pageName, pageDataName))]);
         }
     }
 }

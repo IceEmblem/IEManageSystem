@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ComponentFactory from '../Components/ComponentFactory'
+import {ieReduxFetch} from 'Core/IEReduxFetch'
 
 import './BaseComponentContainer.css'
 
@@ -9,6 +10,8 @@ class BaseComponentContainer extends React.Component {
     constructor(props) {
         super(props);
 
+        this.execLogic = this.execLogic.bind(this);
+        this.pageFreshen = this.pageFreshen.bind(this);
         this.componentObject = new ComponentFactory().getComponentDescribeForName(this.props.pageComponent.name).componentObject;
     }
 
@@ -52,7 +55,9 @@ class BaseComponentContainer extends React.Component {
         return this.componentObject.Component({
             componentData: this.props.contentComponentData,
             pageComponentSettings:this.getPageComponentSettings() || [],
-            targetPageId: this.props.pageComponent.targetPageId
+            targetPageId: this.props.pageComponent.targetPageId,
+            execLogic: this.execLogic,
+            pageFreshen: this.pageFreshen
         }, this.createChildComponent())
     }
 
@@ -62,6 +67,15 @@ class BaseComponentContainer extends React.Component {
 
     getPageComponentSettings(){
         return this.props.pageComponent.pageComponentSettings
+    }
+
+    pageFreshen(){
+        return this.props.pageFreshen(this.props.page.name, this.props.pageData.name);
+    }
+
+    // 各自容器需要实现自己的执行逻辑
+    execLogic(requestData){
+        return undefined;
     }
 
     render() 
@@ -79,7 +93,10 @@ class BaseComponentContainer extends React.Component {
 
 BaseComponentContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
-    contentComponentData: PropTypes.object
+    contentComponentData: PropTypes.object,
+    page: PropTypes.object.isRequired,
+    pageData: PropTypes.object.isRequired,
+    pageFreshen: PropTypes.func.isRequired
 }
 
 BaseComponentContainer.defaultProps = {

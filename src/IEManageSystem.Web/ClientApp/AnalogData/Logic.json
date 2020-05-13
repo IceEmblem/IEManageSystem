@@ -1,7 +1,7 @@
 {
     "GetLogics" : {
         "logics" : [{
-            "name" : "logic1",
+            "name" : "IEThumbUp",
             "code" : "public void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, string request){}"
         }]
     }

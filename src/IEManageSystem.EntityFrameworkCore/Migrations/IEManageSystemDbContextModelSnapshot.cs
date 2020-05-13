@@ -218,7 +218,7 @@ namespace IEManageSystem.Migrations
 
                     b.HasIndex("PageId");
 
-                    b.ToTable("PageData");
+                    b.ToTable("PageDatas");
 
                     b.HasData(
                         new
