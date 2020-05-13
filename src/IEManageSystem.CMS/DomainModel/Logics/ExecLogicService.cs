@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.UI;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
+using IEManageSystem.CMS.Repositorys;
 
 namespace IEManageSystem.CMS.DomainModel.Logics
 {
@@ -15,12 +17,12 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 
         private IRepository<PageBase> _pageRepository { get; set; }
 
-        private IRepository<PageData> _pageDataRepository { get; set; }
+        private IPageDataRepository _pageDataRepository { get; set; }
 
         public ExecLogicService(
             IActuatorFactory actuatorFactory,
             IRepository<PageBase> pageRepository,
-            IRepository<PageData> pageDataRepository) {
+            IPageDataRepository pageDataRepository) {
             _actuatorFactory = actuatorFactory;
 
             _pageRepository = pageRepository;
@@ -52,7 +54,7 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             }
 
             _pageRepository.EnsureCollectionLoaded(pageBase, e => e.PageComponents);
-            _pageDataRepository.EnsureCollectionLoaded(pageData, e => e.ContentComponentDatas);
+            _pageDataRepository.ThenInclude(e => e.ContentComponentDatas, e => e.SingleDatas).First(e=>e.Id == pageData.Id);
 
             actuator.Exec(pageData.GetComponentDataForSign(pageComponentBaseSign), pageBase.GetPageComponentForSign(contentComponentDataSign), pageData, request);
         }

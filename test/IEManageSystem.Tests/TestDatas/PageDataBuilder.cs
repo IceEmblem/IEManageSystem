@@ -28,7 +28,13 @@ namespace IEManageSystem.Tests.TestDatas
                 Name = "PageData",
                 Title = "文章测试标题",
                 ContentComponentDatas = new List<ContentComponentData>() {
-                    new ContentComponentData(){ Sign = "ContentPageName1_ComponentSign1" },
+                    new ContentComponentData(){ 
+                        Sign = "ContentPageName1_ComponentSign1",
+                        SingleDatas = new List<SingleData>(){ 
+                            new SingleData(){ Name = "default" },
+                            new SingleData(){ Name = "ContentPageName1_Component1_SingleData2" }
+                        }
+                    },
                     new ContentComponentData(){ Sign = "ContentPageName1_ComponentSign2" }
                 },
                 Page = page

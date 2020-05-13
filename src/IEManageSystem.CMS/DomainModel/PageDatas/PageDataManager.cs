@@ -61,19 +61,15 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
 
         public PageData GetPageDataIncludeAllProperty(string pageName, string pageDataName)
         {
-            var page = PageRepository.ThenInclude(e => e.PageDatas, e => e.ContentComponentDatas).FirstOrDefault(e => e.Name == pageName);
-
-            PageData pageData = null;
-            if (page is StaticPage)
+            if (string.IsNullOrWhiteSpace(pageDataName))
             {
-                pageData = page.PageDatas.FirstOrDefault();
+                var page = PageRepository.GetPageIncludePageDataAllProperty(pageName);
+                return page.PageDatas.FirstOrDefault();
             }
-            else
+            else 
             {
-                pageData = page.PageDatas.FirstOrDefault(e => e.Name == pageDataName);
+                return Repository.ThenInclude(e => e.ContentComponentDatas, e => e.SingleDatas).FirstOrDefault(e=>e.Page.Name == pageName && e.Name == pageDataName);
             }
-
-            return pageData;
         }
     }
 }

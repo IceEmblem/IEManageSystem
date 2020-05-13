@@ -37,9 +37,9 @@ namespace IEManageSystem.Application.Tests.Services.Logics
                 Request = ""
             });
 
-            var pageData = dbContext.PageDatas.Include(e=>e.ContentComponentDatas).FirstOrDefault(e=>e.Name == "PageData");
+            var pageData = dbContext.PageDatas.Include(e=>e.ContentComponentDatas).ThenInclude(e => e.SingleDatas).FirstOrDefault(e=>e.Name == "PageData");
             var componentData = pageData.GetComponentDataForSign("ContentPageName1_ComponentSign1");
-            Assert.True(componentData.Field1 == "1");
+            Assert.True(componentData.SingleDatas.ElementAt(0).Field1 == "1");
         }
 
         [Fact]

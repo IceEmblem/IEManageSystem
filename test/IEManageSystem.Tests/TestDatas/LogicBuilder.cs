@@ -22,7 +22,7 @@ namespace IEManageSystem.Tests.TestDatas
                 Code = @"
         public void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, string request)
         {
-            componentData.Field1 = ""1"";
+            componentData.SingleDatas.ElementAt(0).Field1 = ""1"";
         }
 "
             };

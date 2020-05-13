@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Text;
 using System.Threading;
 
@@ -50,14 +51,25 @@ namespace IEManageSystem.CommonInfrastructure.CMS
 
             _assemblyMemoryStream = new MemoryStream();
 
-            List<MetadataReference> refs = new List<MetadataReference>() {
-                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(List<int>).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(ASCIIEncoding).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(JsonConvert).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(IEManageSystemCMSModule).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(Entity).Assembly.Location),
-            };
+            // var assemblyNames = typeof(ActuatorFactory).Assembly.GetReferencedAssemblies().Select(e=>e.Name).ToList();
+
+            var refs = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(e => !e.IsDynamic && !string.IsNullOrWhiteSpace(e.Location))
+                .Select(e=> MetadataReference.CreateFromFile(e.Location))
+                .ToList();
+
+            refs.Add(MetadataReference.CreateFromFile(typeof(object).Assembly.Location));
+
+            //List<MetadataReference> refs = new List<MetadataReference>() {
+            //    MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+            //    MetadataReference.CreateFromFile(typeof(List<int>).Assembly.Location),
+            //    MetadataReference.CreateFromFile(typeof(IQueryable).Assembly.Location),
+            //    MetadataReference.CreateFromFile(typeof(ASCIIEncoding).Assembly.Location),
+            //    MetadataReference.CreateFromFile(typeof(JsonConvert).Assembly.Location),
+            //    MetadataReference.CreateFromFile(typeof(IEManageSystemCMSModule).Assembly.Location),
+            //    MetadataReference.CreateFromFile(typeof(Entity).Assembly.Location),
+            //    MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
+            //};
 
             var cSharpCompilation = CSharpCompilation
                 .Create(Guid.NewGuid().ToString() + ".dll")
@@ -104,6 +116,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using System.Linq;
 
 public class {CreateActuatorClassName(name)} {{
     {funCode}

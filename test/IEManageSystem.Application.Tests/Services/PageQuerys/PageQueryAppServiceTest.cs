@@ -65,6 +65,7 @@ namespace IEManageSystem.Application.Tests.Services.PageQuerys
 
             Assert.True(output.PageData != null);
             Assert.True(output.PageData.ContentComponentDatas != null);
+            Assert.True(output.PageData.ContentComponentDatas.FirstOrDefault(e=>e.Sign == "ContentPageName1_ComponentSign1").SingleDatas.Count > 0);
         }
     }
 }

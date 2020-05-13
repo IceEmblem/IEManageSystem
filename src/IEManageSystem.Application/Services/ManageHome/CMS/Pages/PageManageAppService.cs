@@ -185,14 +185,26 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             List<ContentComponentData> contentComponentDatas = new List<ContentComponentData>();
             foreach (var item in input.ComponentDatas)
             {
-                contentComponentDatas.Add(new ContentComponentData() {
+                var componentData = new ContentComponentData()
+                {
                     Sign = item.Sign,
-                    Field1 = item.Field1,
-                    Field2 = item.Field2,
-                    Field3 = item.Field3,
-                    Field4 = item.Field4,
-                    Field5 = item.Field5,
-                });
+
+                };
+                componentData.SingleDatas = new List<SingleData>();
+
+                foreach (var singleData in item.SingleDatas) {
+                    componentData.SingleDatas.Add(new SingleData() {
+                        Name = singleData.Name,
+                        SortIndex = singleData.SortIndex,
+                        Field1 = singleData.Field1,
+                        Field2 = singleData.Field2,
+                        Field3 = singleData.Field3,
+                        Field4 = singleData.Field4,
+                        Field5 = singleData.Field5,
+                    });
+                }
+
+                contentComponentDatas.Add(componentData);
             }
 
             _pageDataManager.SetContentComponentDatas(input.PageName, input.PageDataName, contentComponentDatas);
