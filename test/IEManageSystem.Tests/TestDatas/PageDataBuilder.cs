@@ -8,7 +8,7 @@ using System.Linq;
 namespace IEManageSystem.Tests.TestDatas
 {
     /// <summary>
-    /// 允许 PageDataBuilder 前，先允许 PageBuilder
+    /// 使用 PageDataBuilder 前，先使用 PageBuilder
     /// </summary>
     public class PageDataBuilder
     {

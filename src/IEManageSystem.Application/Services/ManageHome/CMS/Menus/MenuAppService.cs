@@ -48,7 +48,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
                 e=>e.PageData.Page,
             };
             var rootMenu = _menuRepository.GetAllIncluding(propertySelectors).FirstOrDefault(e => e.Name == input.MenuName);
-            _menuRepository.GetAllIncluding(propertySelectors).Where(e => e.RootMenuId == rootMenu.RootMenuId);
+            _menuRepository.GetAllIncluding(propertySelectors).Where(e => e.RootMenuId == rootMenu.Id).ToList();
 
             return new GetMenuOutput() { Menu = CreateMenuDto(rootMenu) };
         }
