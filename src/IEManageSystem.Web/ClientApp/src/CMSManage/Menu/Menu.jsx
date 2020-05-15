@@ -28,13 +28,16 @@ export default class Menu extends React.Component {
             { name: "icon", text: "图标", isId: false, isName: false, isEditCanEdit: false, valueType: ResourceDescribeValueType.text, col: 12 },
             { name: "pageName", text: "页面名称", isId: false, isName: false, isEditCanEdit: false, valueType: ResourceDescribeValueType.text, col: 12 },
             { name: "pageDataName", text: "文章名称", isId: false, isName: false, isEditCanEdit: false, valueType: ResourceDescribeValueType.text, col: 12 },
+            { name: "menuType", text: "菜单类型", isId: false, isName: false, isEditCanEdit: false, valueType: ResourceDescribeValueType.radio, col: 12,
+                valueTexts: [{value:"CompositeMenu", text:"组合菜单"}, {value:"LeafMenu", text:"叶子菜单"}]
+            },
         ].forEach(element => {
             this.describes.push(new Describe(element));
         });
 
         this.state = {
+            rootMenu: null,
             menus: [],
-            parentMenuId: null,
             operateState: operateState.none,
             currentMenu: null,
             fromModalShow: false,
@@ -53,11 +56,12 @@ export default class Menu extends React.Component {
 
     getMenus() {
         let postData = {
+            menuName: this.props.menuName
         };
 
-        ieReduxFetch("/api/Menu/GetMenus", postData)
+        ieReduxFetch("/api/Menu/GetMenu", postData)
 		.then(value => {
-            this.setState({ menus: value.menus });
+            this.setState({ rootMenu: value.menu, menus: value.menu.menus });
 		});
     }
 
@@ -65,10 +69,10 @@ export default class Menu extends React.Component {
         this.setState({ fromModalShow: false });
 
         let postData = resource;
-        postData.parentMenuId = this.state.parentMenuId;
+        postData.parentMenuId = this.state.currentMenu.id;
 
         let url = null;
-        if (this.state.parentMenuId == null) {
+        if (resource.menuType == "CompositeMenu") {
             url = "/api/MenuManage/AddCompositeMenu";
         }
         else {
@@ -139,15 +143,18 @@ export default class Menu extends React.Component {
                                     <span>{item.displayName}</span>
                                 </li>))
                             }
-                            <li className="bg-success">
-                                <a className="text-white w-100" href="javescript:void(0);"
-                                    onClick={
-                                        () => {
-                                            this.setState({ operateState: operateState.add, parentMenuId: menu.id, fromModalShow: true });
+                            {
+                                menu.menuType == "CompositeMenu" &&
+                                (<li className="bg-success">
+                                    <a className="text-white w-100" href="javescript:void(0);"
+                                        onClick={
+                                            () => {
+                                                this.setState({ operateState: operateState.add, currentMenu: menu, fromModalShow: true });
+                                            }
                                         }
-                                    }
-                                ><span className="oi oi-plus padding-right-10" title="icon name" aria-hidden="true"></span>添加</a>
-                            </li>
+                                    ><span className="oi oi-plus padding-right-10" title="icon name" aria-hidden="true"></span>添加</a>
+                                </li>)
+                            }
                         </ul>
                     </div>
                 </label>
@@ -156,17 +163,6 @@ export default class Menu extends React.Component {
     }
 
     render() {
-        let resourceUpdate
-        let resource
-        if(this.state.operateState == operateState.add){
-            resourceUpdate = resource => this.addMenu(resource);
-            resource = {};
-        }
-        else if(this.state.operateState == operateState.update){
-            resourceUpdate = resource => this.updateMenu(resource);
-            resource = this.state.currentMenu;
-        }
-
         return (
             <div className="col-md-12">
                 <div className='cms-menu'>
@@ -177,7 +173,10 @@ export default class Menu extends React.Component {
                                 <a className="text-white w-100" href="javescript:void(0);"
                                     onClick={
                                         () => {
-                                            this.setState({ operateState: operateState.add, parentMenuId: null, fromModalShow: true });
+                                            this.setState({ 
+                                                operateState: operateState.add, 
+                                                currentMenu: this.state.rootMenu, 
+                                                fromModalShow: true });
                                         }
                                     }
                                 ><span className="oi oi-plus padding-right-10" title="icon name" aria-hidden="true"></span>添加</a>
@@ -188,8 +187,14 @@ export default class Menu extends React.Component {
                 <ResourceForm
                         title="编辑菜单"
                         describes={this.describes}
-                        resource={resource}
-                        resourceUpdate={resourceUpdate}
+                        resource={
+                            this.state.operateState == operateState.add ? {} : this.state.currentMenu
+                        }
+                        resourceUpdate={
+                            this.state.operateState == operateState.add ? 
+                                resource => this.addMenu(resource) :
+                                resource => this.updateMenu(resource)
+                        }
                         show={this.state.fromModalShow}
                         close={()=>{this.setState({fromModalShow: false})}}
                     />

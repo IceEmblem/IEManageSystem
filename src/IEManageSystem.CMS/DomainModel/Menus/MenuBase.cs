@@ -3,6 +3,7 @@ using IEManageSystem.CMS.DomainModel.PageDatas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.Menus
@@ -25,6 +26,11 @@ namespace IEManageSystem.CMS.DomainModel.Menus
         public string Icon { get; set; }
 
         public int? CompositeMenuId { get; set; }
+
+        public int? RootMenuId { get; set; }
+
+        [ForeignKey("RootMenuId")]
+        public MenuBase RootMenu { get; set; }
 
         public PageData PageData { get; set; }
     }

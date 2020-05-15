@@ -24,10 +24,10 @@ export default class Module extends BaseModule {
                 url: "/ManageHome/CMSManage",
                 menuItems: [
                     {
-                        id: "Menu",
-                        text: "菜单管理",
+                        id: "MenuListManage",
+                        text: "菜单列表",
                         icon: "oi-menu",
-                        url: "/ManageHome/CMSManage/Menu",
+                        url: "/ManageHome/CMSManage/MenuListManage",
                         accessScope:
                             [
                                 AccessScope.Menu(ApiScopeNodeType.manage)

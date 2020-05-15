@@ -20,10 +20,24 @@ namespace IEManageSystem.CMS.DomainModel.Menus
 
         public void AddLeafMenu(LeafMenu menu)
         {
-            if (menu.CompositeMenuId.HasValue && GetCompositeMenu(menu.CompositeMenuId.Value) == null)
+            // 叶子菜单必须有父菜单
+            if (!menu.CompositeMenuId.HasValue)
+            {
+                throw new UserFriendlyException("叶子菜单无法成为根菜单");
+            }
+
+            var parentMenu = GetCompositeMenu(menu.CompositeMenuId.Value);
+            if (parentMenu == null)
             {
                 throw new UserFriendlyException("无效的父菜单");
             }
+
+            if (!(parentMenu is CompositeMenu)) 
+            {
+                throw new UserFriendlyException("父菜单必须为组合菜单");
+            }
+
+            menu.RootMenuId = parentMenu.RootMenuId ?? parentMenu.Id;
 
             if (IsExistMenuName(menu.Name))
             {
@@ -35,9 +49,21 @@ namespace IEManageSystem.CMS.DomainModel.Menus
 
         public void AddCompositeMenu(CompositeMenu menu)
         {
-            if (menu.CompositeMenuId.HasValue && GetCompositeMenu(menu.CompositeMenuId.Value) == null)
+            // 如果有父菜单
+            if (menu.CompositeMenuId.HasValue) 
             {
-                throw new UserFriendlyException("无效的父菜单");
+                var parentMenu = GetCompositeMenu(menu.CompositeMenuId.Value);
+                if (parentMenu == null)
+                {
+                    throw new UserFriendlyException("无效的父菜单");
+                }
+
+                if (!(parentMenu is CompositeMenu))
+                {
+                    throw new UserFriendlyException("父菜单必须为组合菜单");
+                }
+
+                menu.RootMenuId = parentMenu.RootMenuId ?? parentMenu.Id;
             }
 
             if (IsExistMenuName(menu.Name))

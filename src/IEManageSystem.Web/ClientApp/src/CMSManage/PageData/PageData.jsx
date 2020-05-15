@@ -140,7 +140,7 @@ class PageData extends React.Component {
 }
 
 PageData.propsTypes = {
-	pageName: PropTypes.number.isRequired,
+	pageName: PropTypes.string.isRequired,
 }
 
 export default PageData;

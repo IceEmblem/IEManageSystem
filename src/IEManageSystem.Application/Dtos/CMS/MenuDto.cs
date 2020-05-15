@@ -18,6 +18,19 @@ namespace IEManageSystem.Dtos.CMS
 
         public string PageDataName { get; set; }
 
+        /// <summary>
+        /// CompositeMenu为“CompositeMenu”，LeafMenu为“LeafMenu”
+        /// </summary>
+        public string MenuType { get; set; }
+
         public List<MenuDto> Menus { get; set; }
+
+        public void SetCompositeMenuType() {
+            MenuType = "CompositeMenu";
+        }
+
+        public void SetLeafMenuType() {
+            MenuType = "LeafMenu";
+        }
     }
 }

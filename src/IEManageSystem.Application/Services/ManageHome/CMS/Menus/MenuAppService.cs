@@ -8,9 +8,9 @@ using Abp.UI;
 using IEManageSystem.CMS.DomainModel.Menus;
 using IEManageSystem.Dtos.CMS;
 using IEManageSystem.Repositorys;
-using IEManageSystem.Services.Home.Menus.Dto;
+using IEManageSystem.Services.ManageHome.CMS.Menus.Dto;
 
-namespace IEManageSystem.Services.Home.Menus
+namespace IEManageSystem.Services.ManageHome.CMS.Menus
 {
     public class MenuAppService : IEManageSystemAppServiceBase, IMenuAppService
     {
@@ -22,15 +22,14 @@ namespace IEManageSystem.Services.Home.Menus
             _menuRepository = menuRepository;
         }
 
+        // 获取根菜单列表
         public GetMenusOutput GetMenus(GetMenusInput input)
         {
             Expression<Func<MenuBase, object>>[] propertySelectors = new Expression<Func<MenuBase, object>>[] {
                 e=>e.PageData,
                 e=>e.PageData.Page,
             };
-            List<MenuBase> menus = _menuRepository.GetAllIncluding(propertySelectors).ToList();
-
-            List<MenuBase> rootMenus = menus.Where(e => e.CompositeMenuId == null).ToList();
+            List<MenuBase> rootMenus = _menuRepository.GetAllIncluding(propertySelectors).Where(e => e.CompositeMenuId == null).ToList();
 
             List<MenuDto> results = new List<MenuDto>();
 
@@ -40,6 +39,18 @@ namespace IEManageSystem.Services.Home.Menus
             }
 
             return new GetMenusOutput() { Menus = results };
+        }
+
+        // 获取单个菜单，包括其子菜单
+        public GetMenuOutput GetMenu(GetMenuInput input) {
+            Expression<Func<MenuBase, object>>[] propertySelectors = new Expression<Func<MenuBase, object>>[] {
+                e=>e.PageData,
+                e=>e.PageData.Page,
+            };
+            var rootMenu = _menuRepository.GetAllIncluding(propertySelectors).FirstOrDefault(e => e.Name == input.MenuName);
+            _menuRepository.GetAllIncluding(propertySelectors).Where(e => e.RootMenuId == rootMenu.RootMenuId);
+
+            return new GetMenuOutput() { Menu = CreateMenuDto(rootMenu) };
         }
 
         private MenuDto CreateMenuDto(MenuBase menu)
@@ -55,6 +66,7 @@ namespace IEManageSystem.Services.Home.Menus
 
             if (menu is LeafMenu)
             {
+                returnMenu.SetLeafMenuType();
                 return returnMenu;
             }
 
@@ -62,6 +74,8 @@ namespace IEManageSystem.Services.Home.Menus
             {
                 throw new UserFriendlyException("菜单转换异常");
             }
+
+            returnMenu.SetCompositeMenuType();
 
             returnMenu.Menus = new List<MenuDto>();
             CompositeMenu compositeMenu = (CompositeMenu)menu;
