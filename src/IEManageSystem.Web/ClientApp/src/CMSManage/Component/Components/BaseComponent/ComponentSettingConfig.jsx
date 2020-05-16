@@ -40,6 +40,12 @@ export default class ComponentSettingConfig {
             });
     }
 
+    static BuildMenuComponentSettingConfig(name, displayName, settingComponentBuilder){
+        return new ComponentSettingConfig(name, displayName, settingComponentBuilder, 
+            (pageComponent, name)=>{ return pageComponent.menuName },
+            (pageComponent, name, setting)=>{ pageComponent.menuName = setting });
+    }
+
     constructor(
         name, 
         displayName, 

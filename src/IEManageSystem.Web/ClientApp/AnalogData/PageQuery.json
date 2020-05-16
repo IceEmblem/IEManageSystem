@@ -55,7 +55,8 @@
                         "padding": null
                     },
                     "targetPageId": null,
-                    "componentType": "LeafComponent",
+                    "menuName": "main",
+                    "componentType": "MenuComponent",
                     "pageComponentSettings": []
                 },
                 {

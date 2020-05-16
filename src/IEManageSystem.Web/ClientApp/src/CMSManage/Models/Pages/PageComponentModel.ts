@@ -7,6 +7,7 @@ export default class PageComponentModel{
     public sign:string;
     public parentSign:string | null;
     public targetPageId:number | null;
+    public menuName:string | null;
     public componentType:string;
     public pageComponentBaseSetting:PageComponentBaseSettingModel;
     public pageComponentSettings:Array<PageComponentSettingModel>;
@@ -18,6 +19,7 @@ export default class PageComponentModel{
         this.sign = data.sign;
         this.parentSign = data.parentSign;
         this.targetPageId = data.targetPageId;
+        this.menuName = data.menuName;
         this.componentType = data.componentType;
 
         this.pageComponentBaseSetting = new PageComponentBaseSettingModel(data.pageComponentBaseSetting);

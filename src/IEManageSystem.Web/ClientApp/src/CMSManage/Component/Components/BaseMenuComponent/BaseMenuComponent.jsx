@@ -2,6 +2,10 @@ import { BaseComponent, BaseComponentProps } from '../BaseComponent'
 import {ieReduxFetch} from 'Core/IEReduxFetch'
 
 export class BaseMenuComponentProps extends BaseComponentProps {
+    constructor(){
+        super();
+        this.menuName = null;
+    }
 }
 
 export default class BaseMenuComponent extends BaseComponent {
@@ -18,12 +22,21 @@ export default class BaseMenuComponent extends BaseComponent {
     }
 
     getMenus() {
+        if(!this.props.menuName){
+            return;
+        }
+
         let postData = {
+            menuName: this.props.menuName
         };
 
-        ieReduxFetch("/api/Menu/GetMenus", postData)
+        ieReduxFetch("/api/Menu/GetMenu", postData)
         .then(value=>{
-            this.setState({ menus: value.menus });
+            if(value.menu == null){
+                return;
+            }
+            
+            this.setState({ menus: value.menu.menus });
         });
     }
 

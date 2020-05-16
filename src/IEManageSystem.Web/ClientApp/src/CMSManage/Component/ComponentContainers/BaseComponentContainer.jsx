@@ -56,6 +56,7 @@ class BaseComponentContainer extends React.Component {
             componentData: this.props.contentComponentData,
             pageComponentSettings:this.getPageComponentSettings() || [],
             targetPageId: this.props.pageComponent.targetPageId,
+            menuName: this.props.pageComponent.menuName,
             execLogic: this.execLogic,
             pageFreshen: this.pageFreshen
         }, this.createChildComponent())

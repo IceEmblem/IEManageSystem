@@ -1,6 +1,7 @@
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
 import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
 import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseLeafComponent'
+import BaseMenuComponentObject from 'CMSManage/Component/Components/BaseMenuComponent'
 import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
 
 class CreateComponentService{
@@ -26,6 +27,10 @@ class CreateComponentService{
         else if((componentDescribe.componentObject instanceof BaseLeafComponentObject))
         {
             pageComponent = CreatePageComponentService.createLeafComponent(timetamp, componentDescribe.name)
+        }
+        else if((componentDescribe.componentObject instanceof BaseMenuComponentObject))
+        {
+            pageComponent = CreatePageComponentService.createMenuComponent(timetamp, componentDescribe.name)
         }
         else
         {

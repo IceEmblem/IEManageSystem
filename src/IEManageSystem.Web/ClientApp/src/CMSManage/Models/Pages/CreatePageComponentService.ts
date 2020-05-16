@@ -19,6 +19,7 @@ class CreatePageComponentService{
                 className: null,
             },
             targetPageId: null,
+            menuName: null,
             componentType: componentType,
             pageComponentSettings: []
         };
@@ -39,6 +40,11 @@ class CreatePageComponentService{
     createPageLeafComponent(sign:string, name:string)
     {
         return this.createComponent(sign, name, "PageLeafComponent")
+    }
+
+    createMenuComponent(sign:string, name:string)
+    {
+        return this.createComponent(sign, name, "MenuComponent")
     }
 }
 
