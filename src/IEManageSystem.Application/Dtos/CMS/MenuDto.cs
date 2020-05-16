@@ -29,8 +29,12 @@ namespace IEManageSystem.Dtos.CMS
             MenuType = "CompositeMenu";
         }
 
+        public bool IsCompositeMenu() => MenuType == "CompositeMenu";
+
         public void SetLeafMenuType() {
             MenuType = "LeafMenu";
         }
+
+        public bool IsLeafMenu() => MenuType == "LeafMenu";
     }
 }

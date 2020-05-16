@@ -30,8 +30,22 @@ namespace IEManageSystem.CMS.DomainModel.Menus
         public int? RootMenuId { get; set; }
 
         [ForeignKey("RootMenuId")]
-        public MenuBase RootMenu { get; set; }
+        public CompositeMenu RootMenu { get; set; }
 
         public PageData PageData { get; set; }
+
+        public void SetRootMenu(CompositeMenu rootMenu) 
+        {
+            RootMenu = rootMenu;
+
+            if (!(this is CompositeMenu)) {
+                return;
+            }
+
+            foreach (var childMenu in ((CompositeMenu)this).Menus) 
+            {
+                childMenu.SetRootMenu(rootMenu);
+            }
+        }
     }
 }

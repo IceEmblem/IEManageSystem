@@ -14,7 +14,7 @@ export default class ErrorModal extends React.Component {
 
   render() {
     if (this.props.show == true) {
-      setTimeout(() => this.props.close(), 3000)
+      setTimeout(() => this.props.close(), 5000)
     }
 
     return (<Modal

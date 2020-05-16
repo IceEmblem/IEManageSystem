@@ -8,9 +8,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
 {
     public interface IMenuManageAppService: IApplicationService
     {
-        AddLeafMenuOutput AddLeafMenu(AddLeafMenuInput input);
+        AddMenuOutput AddMenu(AddMenuInput input);
 
-        AddCompositeMenuOutput AddCompositeMenu(AddCompositeMenuInput input);
+        //AddLeafMenuOutput AddLeafMenu(AddLeafMenuInput input);
+
+        //AddCompositeMenuOutput AddCompositeMenu(AddCompositeMenuInput input);
 
         RemoveMenuOutput RemoveMenu(RemoveMenuInput input);
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Abp.Domain.Repositories;
+using Abp.UI;
 using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.Attributes;
@@ -52,57 +53,102 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
             return pageData;
         }
 
-        public AddLeafMenuOutput AddLeafMenu(AddLeafMenuInput input)
+        private MenuBase CreateRootMenuForDto(MenuDto menuDto) 
         {
-            LeafMenu leafMenu = new LeafMenu(input.Name)
+            MenuBase menu;
+
+            if (menuDto.IsCompositeMenu()) {
+                CompositeMenu compositeMenu;
+                menu = compositeMenu = new CompositeMenu(menuDto.Name);
+                compositeMenu.Menus = new List<MenuBase>();
+                if (menuDto.Menus != null) {
+                    foreach (var childMenuDto in menuDto.Menus) 
+                    {
+                        var childMenu = CreateRootMenuForDto(childMenuDto);
+                        childMenu.SetRootMenu(compositeMenu);
+                        compositeMenu.Menus.Add(childMenu);
+                    }
+                }
+            }
+            else if(menuDto.IsLeafMenu()) {
+                menu = new LeafMenu(menuDto.Name);
+            }
+            else
             {
-                CompositeMenuId = input.ParentMenuId,
-                DisplayName = input.DisplayName,
-                Icon = input.Icon
-            };
+                throw new UserFriendlyException($"创建菜单失败，菜单{menuDto.Name}未指定类型");
+            }
 
-            var pageData = GetPageData(input.PageName, input.PageDataName);
-            leafMenu.PageData = pageData;
+            menu.DisplayName = menuDto.DisplayName;
+            menu.Icon = menuDto.Icon;
+            menu.PageData = GetPageData(menuDto.PageName, menuDto.PageDataName);
 
-            _menuManager.AddLeafMenu(leafMenu);
+            return menu;
 
-            return new AddLeafMenuOutput();
         }
 
-        public AddCompositeMenuOutput AddCompositeMenu(AddCompositeMenuInput input)
-        {
-            CompositeMenu compositeMenu = new CompositeMenu(input.Name)
-            {
-                CompositeMenuId = input.ParentMenuId,
-                DisplayName = input.DisplayName,
-                Icon = input.Icon
-            };
+        public AddMenuOutput AddMenu(AddMenuInput input) {
+            var menu = CreateRootMenuForDto(input.Menu);
 
-            var pageData = GetPageData(input.PageName, input.PageDataName);
-            compositeMenu.PageData = pageData;
+            if (!(menu is CompositeMenu)) {
+                throw new UserFriendlyException($"菜单添加失败，菜单{menu.Name}必须是组合菜单");
+            }
 
-            _menuManager.AddCompositeMenu(compositeMenu);
+            _menuManager.AddRootMenu((CompositeMenu)menu);
 
-            return new AddCompositeMenuOutput();
+            return new AddMenuOutput();
         }
+
+        //public AddLeafMenuOutput AddLeafMenu(AddLeafMenuInput input)
+        //{
+        //    LeafMenu leafMenu = new LeafMenu(input.Name)
+        //    {
+        //        CompositeMenuId = input.ParentMenuId,
+        //        DisplayName = input.DisplayName,
+        //        Icon = input.Icon
+        //    };
+
+        //    var pageData = GetPageData(input.PageName, input.PageDataName);
+        //    leafMenu.PageData = pageData;
+
+        //    _menuManager.AddLeafMenu(leafMenu);
+
+        //    return new AddLeafMenuOutput();
+        //}
+
+        //public AddCompositeMenuOutput AddCompositeMenu(AddCompositeMenuInput input)
+        //{
+        //    CompositeMenu compositeMenu = new CompositeMenu(input.Name)
+        //    {
+        //        CompositeMenuId = input.ParentMenuId,
+        //        DisplayName = input.DisplayName,
+        //        Icon = input.Icon
+        //    };
+
+        //    var pageData = GetPageData(input.PageName, input.PageDataName);
+        //    compositeMenu.PageData = pageData;
+
+        //    _menuManager.AddCompositeMenu(compositeMenu);
+
+        //    return new AddCompositeMenuOutput();
+        //}
 
         public RemoveMenuOutput RemoveMenu(RemoveMenuInput input)
         {
-            _menuManager.RemoveMenu(input.Id);
+            _menuManager.RemoveRootMenu(input.Id);
 
             return new RemoveMenuOutput();
         }
 
         public UpdateMenuOutput UpdateMenu(UpdateMenuInput input)
         {
-            var menu = _menuRepository.FirstOrDefault(input.Id);
+            var menu = CreateRootMenuForDto(input.Menu);
 
-            _menuManager.UpdateName(menu, input.Name);
-            menu.DisplayName = input.DisplayName;
-            menu.Icon = input.Icon;
+            if (!(menu is CompositeMenu))
+            {
+                throw new UserFriendlyException($"菜单更新失败，菜单{menu.Name}必须是组合菜单");
+            }
 
-            var pageData = GetPageData(input.PageName, input.PageDataName);
-            menu.PageData = pageData;
+            _menuManager.UpdateRootMenu(input.Menu.Id, (CompositeMenu)menu);
 
             return new UpdateMenuOutput();
         }

@@ -569,25 +569,39 @@ namespace IEManageSystem.Migrations
                         {
                             Id = 1,
                             Discriminator = "CompositeMenu",
-                            DisplayName = "首页",
-                            Icon = "oi-home",
-                            Name = "Home"
+                            DisplayName = "主菜单",
+                            Icon = "",
+                            Name = "Main"
                         },
                         new
                         {
                             Id = 2,
+                            CompositeMenuId = 1,
                             Discriminator = "CompositeMenu",
-                            DisplayName = "游戏",
-                            Icon = "oi-dial",
-                            Name = "Game"
+                            DisplayName = "首页",
+                            Icon = "oi-home",
+                            Name = "Home",
+                            RootMenuId = 1
                         },
                         new
                         {
                             Id = 3,
+                            CompositeMenuId = 1,
+                            Discriminator = "CompositeMenu",
+                            DisplayName = "游戏",
+                            Icon = "oi-dial",
+                            Name = "Game",
+                            RootMenuId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CompositeMenuId = 1,
                             Discriminator = "CompositeMenu",
                             DisplayName = "技术文档",
                             Icon = "oi-document",
-                            Name = "Document"
+                            Name = "Document",
+                            RootMenuId = 1
                         });
                 });
 
@@ -601,34 +615,38 @@ namespace IEManageSystem.Migrations
                         new
                         {
                             Id = 101,
-                            CompositeMenuId = 2,
+                            CompositeMenuId = 3,
                             Discriminator = "LeafMenu",
                             DisplayName = "主机游戏",
-                            Name = "PCGame"
+                            Name = "PCGame",
+                            RootMenuId = 1
                         },
                         new
                         {
                             Id = 102,
-                            CompositeMenuId = 2,
+                            CompositeMenuId = 3,
                             Discriminator = "LeafMenu",
                             DisplayName = "手机游戏",
-                            Name = "PhoneGame"
+                            Name = "PhoneGame",
+                            RootMenuId = 1
                         },
                         new
                         {
                             Id = 103,
-                            CompositeMenuId = 3,
+                            CompositeMenuId = 4,
                             Discriminator = "LeafMenu",
                             DisplayName = "站点技术",
-                            Name = "Web"
+                            Name = "Web",
+                            RootMenuId = 1
                         },
                         new
                         {
                             Id = 104,
-                            CompositeMenuId = 3,
+                            CompositeMenuId = 4,
                             Discriminator = "LeafMenu",
                             DisplayName = "桌面开发",
-                            Name = "Desktop"
+                            Name = "Desktop",
+                            RootMenuId = 1
                         });
                 });
 
@@ -716,7 +734,7 @@ namespace IEManageSystem.Migrations
                         .WithMany()
                         .HasForeignKey("PageDataId");
 
-                    b.HasOne("IEManageSystem.CMS.DomainModel.Menus.MenuBase", "RootMenu")
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Menus.CompositeMenu", "RootMenu")
                         .WithMany()
                         .HasForeignKey("RootMenuId");
                 });

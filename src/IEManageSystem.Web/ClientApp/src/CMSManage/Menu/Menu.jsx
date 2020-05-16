@@ -2,6 +2,8 @@ import React from "react";
 import ResourceForm from 'ResourceForm/ResourceForm.jsx';
 import Describe from 'ResourceForm/Describe.js';
 import { ResourceDescribeValueType } from 'ResourceForm/ResourceDescribeValueType.js';
+import MenuModel from 'CMSManage/Models/MenuModel'
+import ErrorModal from 'ErrorModal/ErrorModal'
 
 import ConfirmBox from 'ConfirmBox/ConfirmBox.jsx';
 
@@ -39,9 +41,12 @@ export default class Menu extends React.Component {
             rootMenu: null,
             menus: [],
             operateState: operateState.none,
-            currentMenu: null,
+            currentOperateParentMenu: null,
+            currentOperateMenu: null,
             fromModalShow: false,
-            confirmBoxShow: false
+            confirmBoxShow: false,
+            errorModalShow: false,
+            errorModalMessage: ""
         };
 
         this.getMenus = this.getMenus.bind(this);
@@ -56,53 +61,54 @@ export default class Menu extends React.Component {
 
     getMenus() {
         let postData = {
-            menuName: this.props.menuName
+            menuName: this.props.match.params.menuName
         };
 
         ieReduxFetch("/api/Menu/GetMenu", postData)
 		.then(value => {
-            this.setState({ rootMenu: value.menu, menus: value.menu.menus });
+            let menu = new MenuModel(value.menu);
+            this.setState({ rootMenu: menu, menus: menu.menus });
 		});
     }
 
     addMenu(resource) {
-        this.setState({ fromModalShow: false });
-
-        let postData = resource;
-        postData.parentMenuId = this.state.currentMenu.id;
-
-        let url = null;
-        if (resource.menuType == "CompositeMenu") {
-            url = "/api/MenuManage/AddCompositeMenu";
+        try{
+            this.state.currentOperateParentMenu.addChildMenu(resource);
+            this.setState({ fromModalShow: false });
         }
-        else {
-            url = "/api/MenuManage/AddLeafMenu";
+        catch(e){
+            this.setState({fromModalShow: false, errorModalShow:true, errorModalMessage: e.message});
         }
-
-        ieReduxFetch(url, postData)
-		.then(value => {
-            this.getMenus();
-		});
     }
 
     deleteMenu(resource) {
-        let postData = resource;
-
-        ieReduxFetch("/api/MenuManage/RemoveMenu", postData)
-		.then(value => {
-            this.getMenus();
-		});
+        try{
+            this.state.currentOperateParentMenu.deleteChildMenu(resource);
+        }
+        catch(e){
+            this.setState({errorModalShow:true, errorModalMessage: e.message});
+        }
     }
 
     updateMenu(resource) {
-        this.setState({ fromModalShow: false });
+        try{
+            this.state.currentOperateParentMenu.replaceChildMenu(resource);
+            this.setState({ fromModalShow: false });
+        }
+        catch(e){
+            this.setState({fromModalShow: false, errorModalShow:true, errorModalMessage: e.message});
+        }
+    }
 
-        let postData = resource;
+    submit(){
+        let postData = {
+            menu: this.state.rootMenu
+        }
 
         ieReduxFetch("/api/MenuManage/UpdateMenu", postData)
-		.then(value => {
+        .then(()=>{
             this.getMenus();
-		});
+        })
     }
 
     createRootMenu(menu) {
@@ -115,12 +121,20 @@ export default class Menu extends React.Component {
                         <div>
                             <a href="javescript:void(0);"
                                 onClick={
-                                    () => { this.setState({ operateState: operateState.update, currentMenu: menu, fromModalShow: true }) }
+                                    () => { this.setState({ 
+                                        operateState: operateState.update, 
+                                        currentOperateMenu: menu, 
+                                        currentOperateParentMenu: this.state.rootMenu,
+                                        fromModalShow: true }) }
                                 }
                             ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span></a>
                             <a href="javescript:void(0);"
                                 onClick={
-                                    () => { this.setState({ operateState: operateState.delete, currentMenu: menu, confirmBoxShow: true }) }
+                                    () => { this.setState({ 
+                                        operateState: operateState.delete, 
+                                        currentOperateMenu: menu, 
+                                        currentOperateParentMenu: this.state.rootMenu,
+                                        confirmBoxShow: true }) }
                                 }
                             ><span className="oi oi-trash padding-right-10" title="icon name" aria-hidden="true"></span></a>
                             <span>{menu.displayName}</span>
@@ -132,24 +146,36 @@ export default class Menu extends React.Component {
                                 <li>
                                     <a href="javescript:void(0);"
                                         onClick={
-                                            () => { this.setState({ operateState: operateState.update, currentMenu: item, fromModalShow: true }) }
+                                            () => { this.setState({ 
+                                                operateState: operateState.update, 
+                                                currentOperateMenu: item, 
+                                                currentOperateParentMenu: menu,
+                                                fromModalShow: true }) }
                                         }
                                     ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span></a>
                                     <a href="javescript:void(0);"
                                         onClick={
-                                            () => { this.setState({ operateState: operateState.delete, currentMenu: item, confirmBoxShow: true }) }
+                                            () => { this.setState({ 
+                                                operateState: operateState.delete, 
+                                                currentOperateMenu: item, 
+                                                currentOperateParentMenu: menu,
+                                                confirmBoxShow: true }) }
                                         }
                                     ><span className="oi oi-trash padding-right-10" title="icon name" aria-hidden="true"></span></a>
                                     <span>{item.displayName}</span>
                                 </li>))
                             }
                             {
-                                menu.menuType == "CompositeMenu" &&
+                                menu.isCompositeMenuType() &&
                                 (<li className="bg-success">
                                     <a className="text-white w-100" href="javescript:void(0);"
                                         onClick={
                                             () => {
-                                                this.setState({ operateState: operateState.add, currentMenu: menu, fromModalShow: true });
+                                                this.setState({ 
+                                                    operateState: operateState.add, 
+                                                    currentOperateMenu: {}, 
+                                                    currentOperateParentMenu: menu,
+                                                    fromModalShow: true });
                                             }
                                         }
                                     ><span className="oi oi-plus padding-right-10" title="icon name" aria-hidden="true"></span>添加</a>
@@ -164,8 +190,8 @@ export default class Menu extends React.Component {
 
     render() {
         return (
-            <div className="col-md-12">
-                <div className='cms-menu'>
+            <div className="col-md-12 d-flex flex-column h-100">
+                <div className='cms-menu flex-grow-1 flex-shrink-1'>
                     {this.state.menus.map(item => this.createRootMenu(item))}
                     <div>
                         <label className="bg-success">
@@ -175,7 +201,8 @@ export default class Menu extends React.Component {
                                         () => {
                                             this.setState({ 
                                                 operateState: operateState.add, 
-                                                currentMenu: this.state.rootMenu, 
+                                                currentOperateMenu: {}, 
+                                                currentOperateParentMenu: this.state.rootMenu,
                                                 fromModalShow: true });
                                         }
                                     }
@@ -184,11 +211,29 @@ export default class Menu extends React.Component {
                         </label>
                     </div>
                 </div>
+                <div className="d-flex justify-content-end">
+                    <button className="btn btn-secondary btn"
+                        onClick={()=>{
+                            this.getMenus();
+                        }}
+                    >
+                        <span class="oi oi-reload padding-right-10" title="icon name" aria-hidden="true"></span>
+                        重新加载
+                    </button>
+                    <button className="btn btn-success btn"
+                        onClick={()=>{
+                            this.submit();
+                        }}
+                    >
+                        <span class="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>
+                        提交保存
+                    </button>
+                </div>
                 <ResourceForm
                         title="编辑菜单"
                         describes={this.describes}
                         resource={
-                            this.state.operateState == operateState.add ? {} : this.state.currentMenu
+                            this.state.currentOperateMenu
                         }
                         resourceUpdate={
                             this.state.operateState == operateState.add ? 
@@ -201,10 +246,16 @@ export default class Menu extends React.Component {
                 <ConfirmBox
                         title="删除菜单"
                         text="确定删除菜单吗？"
-                        backcall={() => { this.deleteMenu(this.state.currentMenu) }}
+                        backcall={() => { this.deleteMenu(this.state.currentOperateMenu) }}
                         show={this.state.confirmBoxShow}
                         close={()=>{this.setState({confirmBoxShow: false})}}
                     />
+                <ErrorModal
+                    show={this.state.errorModalShow}
+                    title={"发生错误了"}
+                    message={this.state.errorModalMessage}
+                    close={()=>{this.setState({errorModalShow: false})}}
+                />
             </div>
         );
     }
