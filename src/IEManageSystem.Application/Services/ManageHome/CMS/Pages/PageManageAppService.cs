@@ -97,17 +97,24 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         {
             PageComponentBase pageComponent = null;
 
-            if (dto.ComponentType == "CompositeComponent")
+            if (dto.IsCompositeComponentType())
             {
                 pageComponent = new CompositeComponent(dto.Name);
             }
-            else if (dto.ComponentType == "PageLeafComponent")
+            else if (dto.IsPageLeafComponentType())
             {
                 pageComponent = new PageLeafComponent(dto.Name);
-                if (dto.TargetPageId.HasValue) {
+                if (dto.TargetPageId.HasValue)
+                {
                     var page = _repository.FirstOrDefault(dto.TargetPageId.Value);
                     ((PageLeafComponent)pageComponent).TargetPage = page;
                 }
+            }
+            else if (dto.IsMenuComponentType()) 
+            {
+                pageComponent = new MenuComponent(dto.Name) { 
+                    MenuName = dto.MenuName
+                };
             }
             else
             {

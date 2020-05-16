@@ -1,5 +1,6 @@
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
 import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
+import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseLeafComponent'
 import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
 
 class CreateComponentService{
@@ -22,8 +23,13 @@ class CreateComponentService{
         {
             pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, componentDescribe.name)
         }
-        else {
+        else if((componentDescribe.componentObject instanceof BaseLeafComponentObject))
+        {
             pageComponent = CreatePageComponentService.createLeafComponent(timetamp, componentDescribe.name)
+        }
+        else
+        {
+            throw new Error("无法识别的组件类型");
         }
 
         pageComponent.parentSign = parentSign;
