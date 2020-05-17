@@ -12,7 +12,13 @@ class BaseComponentContainer extends React.Component {
 
         this.execLogic = this.execLogic.bind(this);
         this.pageFreshen = this.pageFreshen.bind(this);
-        this.componentObject = new ComponentFactory().getComponentDescribeForName(this.props.pageComponent.name).componentObject;
+        let componentDescribe = new ComponentFactory().getComponentDescribeForName(this.props.pageComponent.name);
+        if(componentDescribe){
+            this.componentObject = componentDescribe.componentObject;
+        }
+        else{
+            this.componentObject = new ComponentFactory().getComponentDescribeForName("NotFind").componentObject;
+        }
     }
 
     getStyle(){

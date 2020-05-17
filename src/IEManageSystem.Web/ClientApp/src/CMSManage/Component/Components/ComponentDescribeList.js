@@ -8,9 +8,10 @@ import IEBottomNav from "CMSManage/Component/Components/IEBottomNav";
 import IELoading from "CMSManage/Component/Components/IELoading";
 import IEMenu from "CMSManage/Component/Components/IEMenu";
 import IENav from "CMSManage/Component/Components/IENav";
+import NotFind from "CMSManage/Component/Components/NotFind";
 import PostList from "CMSManage/Component/Components/PostList";
 import RichTextEditor from "CMSManage/Component/Components/RichTextEditor";
 import Text from "CMSManage/Component/Components/Text";
 
-const componentDescribes = [CitiesSlider,Container,FlipClock,IEBackground,IEBottomNav,IELoading,IEMenu,IENav,PostList,RichTextEditor,Text,];
+const componentDescribes = [CitiesSlider,Container,FlipClock,IEBackground,IEBottomNav,IELoading,IEMenu,IENav,NotFind,PostList,RichTextEditor,Text,];
 export default componentDescribes;

@@ -24,32 +24,16 @@ class PageContainer extends React.Component {
             // 要将组件添加到那个父组件下，undefined 表示没有父组件
             curParentComponent: undefined,
             showComponentListBox: false,
-            name: "",
-            displayName: "",
-            description: ""
+            isload: false
         }
-
-        this.getPage(props.pageName);
 
         this.submitPage = this.submitPage.bind(this);
         this.addComponent = this.addComponent.bind(this);
 
-        this.props.pageFetch(props.pageName);
-    }
-
-    getPage(name) {
-        let postData = {
-            name: name
-        };
-
-        ieReduxFetch("/api/PageQuery/GetPage", postData)
-            .then(value => {
-                this.setState({
-                    name: value.page.name,
-                    displayName: value.page.displayName,
-                    description: value.page.description
-                })
-            });
+        this.props.pageFetch(props.pageName)
+        .then(value=>{
+            this.setState({isload: true});
+        });
     }
 
     submitPage() {
@@ -73,16 +57,20 @@ class PageContainer extends React.Component {
     }
 
     render() {
+        if(!this.state.isload){
+            return <div className="pageedit-page-container"></div>
+        }
+
         let promptBox = (<PromptBox>
             <div className="pageedit-page-container-header-info">
                 <div className="input-group shadow-sm">
-                    <input value={this.state.displayName} type="text" className="form-control" placeholder="" disabled />
+                    <input value={this.props.page.displayName} type="text" className="form-control" placeholder="" disabled />
                     <div className="input-group-append">
                         <span className="input-group-text text-white">显示名称</span>
                     </div>
                 </div>
                 <div className="input-group shadow-sm">
-                    <input value={this.state.name} type="text" className="form-control" placeholder="" disabled />
+                    <input value={this.props.page.name} type="text" className="form-control" placeholder="" disabled />
                     <div className="input-group-append">
                         <span className="input-group-text text-white">
                             <span className="oi oi-key" title="icon name" aria-hidden="true"></span>
@@ -91,7 +79,7 @@ class PageContainer extends React.Component {
                     </div>
                 </div>
                 <div className="input-group shadow-sm">
-                    <input value={this.state.description} type="text" className="form-control" placeholder="" disabled />
+                    <input value={this.props.page.description} type="text" className="form-control" placeholder="" disabled />
                     <div className="input-group-append">
                         <span className="input-group-text text-white">
                             <span className="oi oi-info mr-2" title="icon name" aria-hidden="true"></span>
@@ -107,7 +95,7 @@ class PageContainer extends React.Component {
                 <div className="hide-scroll">
                     <div className="front-page-container">
                         {
-                            this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
+                            this.props.childPageComponents.map(item =>
                                 <PageEditCompontContainer
                                     key={item.sign}
                                     pageComponent={item}
@@ -145,15 +133,20 @@ class PageContainer extends React.Component {
 PageContainer.propTypes = {
     page: PropTypes.object,
     pageName: PropTypes.string.isRequired,
+    childPageComponents: PropTypes.array.isRequired,
     addComponent: PropTypes.func.isRequired,
     pageComponentUpdateFetch: PropTypes.func.isRequired,
     pageFetch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    
+    let childPageComponents = state.page.pageComponents.filter(item => !item.parentSign);
+
     return {
         page: state.page,
-        pageName: ownProps.pageName
+        pageName: ownProps.pageName,
+        childPageComponents: childPageComponents
     }
 }
 
@@ -166,7 +159,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(pageComponentUpdateFetch(name, components));
         },
         pageFetch: (name) => {
-            dispatch(pageFetch(name));
+            return dispatch(pageFetch(name));
         }
     }
 }
