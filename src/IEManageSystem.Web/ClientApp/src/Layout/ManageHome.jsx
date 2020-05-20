@@ -1,90 +1,81 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 
-import Nav from './Nav/Nav.jsx';
-import SideNav from "./SideNav/SideNav.jsx";
-import BodyDiv from './BodyDiv/BodyDiv.jsx';
-import NavTag from './NavTag/NavTag.jsx';
+import { Layout, Menu } from 'antd';
+import {
+    MenuUnfoldOutlined,
+    MenuFoldOutlined,
+    UserOutlined,
+    VideoCameraOutlined,
+    UploadOutlined,
+} from '@ant-design/icons';
 
-import 'Layout/Module'
+import Logo from 'Logo/Logo.jsx';
+import SideNav from './SideNav/SideNav.jsx'
+import Nav from './Nav/Nav'
+import BodyDiv from './BodyDiv/BodyDiv'
 
-require('./ManageHome.css');
+import Error from './Parts/Error';
+import Loading from './Parts/Loading'
 
-import { Animate } from 'react-move'
-import { easeExpOut } from 'd3-ease'
+import './ManageHome.css'
 
-import Loading from './Parts/Loading.jsx'
-import Error from './Parts/Error.jsx'
+const { Header, Sider, Content } = Layout;
 
 export default class ManageHome extends React.Component {
-    constructor(props) {
-        super(props);
+    state = {
+        collapsed: false,
+    };
 
-        this.state = {
-            open: true,
-        }
-    }
+    toggle = () => {
+        this.setState({
+            collapsed: !this.state.collapsed,
+        });
+    };
 
     render() {
         return (
-            <div className="container-fluid h-100">
-                <div className="manage-home d-flex flex-column h-100">
-                    <Nav 
-                        sideNavState={this.state.open}
-                        setSideNavState={(open)=>{
-                            this.setState({
-                                open: open
-                            })
-                        }}
-                    />
-                    <div className="d-flex flex-grow-1 overflow-hidden-y w-100">
-                        <div className="d-flex w-100">
-                            <Animate
-                                start={() => ({
-                                    x: 16,
-                                })}
-
-                                update={() => ({
-                                    x: [this.state.open ? 16 : 0],
-                                    timing: { duration: 750, ease: easeExpOut },
-                                })}
-                            >
-                                {(state) => {
-                                    const { x } = state
-
-                                    return (
-                                        <div className="h-100 padding-0 d-flex sidenavdiv flex-shrink-0" style={{
-                                            width: `${x}%`
-                                        }}>
-                                            <SideNav />
-                                        </div>
-                                    )
-                                }}
-                            </Animate>
-                            <div className="h-100 padding-0 right-content">
-                                <div className="flex-shrink-0">
-                                    <NavTag />
-                                </div>
-                                <div className="bodydiv-parent d-flex flex-grow-1 w-100">
-                                    <Route path="/ManageHome/:menuId?/:menuItemId?" component={BodyDiv} />
-                                </div>
-                                <div className="flex-shrink-0 nav-bottom">
-                                    <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-                                        <small className="text-white">
-                                            Copyright © 2019 by IceEmblem. All rights reserved.
-                                        </small>
-                                        <span className="text-white ml-auto">
-                                            由冰纹工作室开发开发
-                                        </span>
-                                    </nav>
-                                </div>
-                            </div>
+            <Layout className="antlayout h-100">
+                <Sider
+                    className="hide-scroll"
+                    trigger={null}
+                    collapsible
+                    collapsed={this.state.collapsed}
+                    style={{
+                        height: '100vh',
+                        left: 0,
+                    }}
+                >
+                    <div className="antlogo" >
+                        <div className="d-flex justify-content-center align-content-center align-items-center">
+                            <Logo className="h-100 flex-shrink-0 flex-grow-0 logowith" />
+                            {!this.state.collapsed &&
+                                <div className="text-white ml-1 font-italic flex-shrink-1 flex-grow-1 text-nowrap">冰纹 IceEmblem</div>
+                            }
                         </div>
                     </div>
-                    <Loading />
-                    <Error />
-                </div>
-            </div>
+                    <SideNav className="" />
+                </Sider>
+                <Layout className="site-layout">
+                    <Header className="site-layout-background d-flex align-items-center" style={{ padding: 0 }}>
+                        {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                            className: 'trigger',
+                            onClick: this.toggle,
+                        })}
+                        <Nav className="flex-grow-1 align-items-center" />
+                    </Header>
+                    <Content
+                        className=""
+                        style={{
+                            padding: 24,
+                            minHeight: 280,
+                        }}
+                    >
+                        <BodyDiv />
+                        <Error />
+                        <Loading />
+                    </Content>
+                </Layout>
+            </Layout>
         );
     }
 }

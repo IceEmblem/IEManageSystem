@@ -126,10 +126,10 @@ class MenuPermission extends React.Component {
 						sideMenuSelect={this._menuOnClick}
 					/>
 				</div>
-				<div className="menupermission-right">
+				<div className="menupermission-right bg-white">
 					<Tab tabs={[{ value: "value", text: "菜单需求功能域" }]}
 						nameField="text"
-						selectIndex={1}
+						selectIndex={0}
 						selectOnclick={(tab, index) => {
 						}}
 					>

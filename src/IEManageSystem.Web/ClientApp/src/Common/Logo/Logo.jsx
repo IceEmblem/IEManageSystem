@@ -1,10 +1,6 @@
-import 'bootstrap';
-import 'bootstrapcss';
-
 import './logo.css';
 import Logopng from "./logo.png";
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default class Logo extends React.Component
 {

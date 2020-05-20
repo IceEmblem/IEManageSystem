@@ -45,13 +45,13 @@
 }
 
 .pageedit-page-container-btns {
-    position: absolute;
+    position: absolute !important;
     display: flex;
     justify-content: center;
-    right: 18rem;
+    right: 20rem;
     bottom: 4rem;
-    width: 0rem;
-    opacity: 0.8;
+    width: 0rem !important;
+    opacity: 0.9;
     z-index: 9999;
 }
 

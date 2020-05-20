@@ -4,7 +4,7 @@ export class BaseComponentProps{
     constructor(){
         this.pageComponentSettings = []
         // 执行逻辑 (requestData) => Promise;
-        this.execLogic;
+        this.execLogic = (requestData)=>{};
     }
 }
 

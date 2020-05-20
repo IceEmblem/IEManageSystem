@@ -18,7 +18,7 @@ export default class PageLeafComponentObject extends BaseComponentObject {
     }
 
     Component(props){
-        props instanceof PageLeafComponentProps;
+        let isInherit = props instanceof PageLeafComponentProps;
 
         throw new Error("Component function undefined");
     }

@@ -2,15 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
-import {pageFetch, pageDataFetch} from 'CMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
 
-import './Index.css'
+import './index.css'
 
 import EditFrame from './EditFrame'
 
 import { pageAddComponent, pageRemoveComponent, pageEditComponent } from 'CMSManage/IEReduxs/Actions'
 
 import BaseComponentContainer from '../BaseComponentContainer'
+
+import { Button, Tooltip } from 'antd';
+import { DeleteOutlined, EditOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 
 class PageEditCompontContainer extends BaseComponentContainer {
     constructor(props) {
@@ -21,7 +24,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
         }
     }
 
-    createChildComponent(){
+    createChildComponent() {
         return this.props.childPageComponents.map(item => (
             <Contain
                 key={item.sign}
@@ -31,56 +34,57 @@ class PageEditCompontContainer extends BaseComponentContainer {
         );
     }
 
-    getTools()
-    {
+    getTools() {
         // PageLeafBaseSetting
         let tools = [];
 
         let isShowAddBtn = false;
-        if(this.componentObject instanceof ContainerComponentObject){
+        if (this.componentObject instanceof ContainerComponentObject) {
             isShowAddBtn = true;
         }
 
-        tools.push(<EditFrame 
+        tools.push(<EditFrame
             key={"EditFrame"}
+            title={this.componentDescribe.name}
             componentObject={this.componentObject}
-            pageComponent={this.props.pageComponent} 
+            pageComponent={this.props.pageComponent}
             editComponent={this.props.editComponent}
             show={this.state.openEdit}
-            close={()=>{this.setState({openEdit: false})}}
+            close={() => { this.setState({ openEdit: false }) }}
         ></EditFrame>);
         tools.push(
             <div key={"EditFrameBtn"} className="editableparentcom-btns">
-                    <button type="button" className="btn btn-danger btn-sm"
+                <Tooltip title="删除">
+                    <Button type="primary" shape="circle" danger icon={<DeleteOutlined />}
                         onClick={
                             () => { this.props.removeComponent(this.props.pageComponent) }
                         }
-                    >
-                        <span className="oi oi-trash" title="icon name" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" className="btn btn-info btn-sm"
+                    />
+                </Tooltip>
+                <Tooltip title="编辑">
+                    <Button type="primary" shape="circle" icon={<EditOutlined />}
                         onClick={
                             () => { this.setState({ openEdit: true }) }
                         }
-                    >
-                        <span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>
-                    </button>
-                    {
-                        isShowAddBtn &&
-                        <button type="button" className="btn btn-success btn-sm"
+                    />
+                </Tooltip>
+                {
+                    isShowAddBtn &&
+                    <Tooltip title="添加">
+                        <Button type="default" shape="circle" icon={<AppstoreAddOutlined />}
                             onClick={
                                 () => { this.props.addChildComponent(this.props.pageComponent) }
                             }
-                        >
-                            <span className="oi oi-plus" title="icon name" aria-hidden="true"></span>
-                        </button>}
-                </div>
+                        />
+                    </Tooltip>
+                }
+            </div>
         );
 
         return tools;
     }
 
-    execLogic(requestData){
+    execLogic(requestData) {
         throw new Error("不能在编辑页面时执行逻辑");
     }
 }

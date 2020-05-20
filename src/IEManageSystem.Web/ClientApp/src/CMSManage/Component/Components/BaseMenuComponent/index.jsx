@@ -17,7 +17,7 @@ export default class MenuComponentObject extends BaseComponentObject {
         );
     }
     Component(props){
-        props instanceof BaseMenuComponentProps;
+        let isInherit = props instanceof BaseMenuComponentProps;
 
         throw new Error("Component function undefined");
     }

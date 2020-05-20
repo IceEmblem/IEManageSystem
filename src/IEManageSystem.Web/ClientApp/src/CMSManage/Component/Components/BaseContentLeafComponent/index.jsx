@@ -1,5 +1,6 @@
 import BaseContentLeafComponent, { BaseContentLeafComponentProps } from './BaseContentLeafComponent'
 import BaseComponentObject from '../BaseLeafComponent';
+import {BaseField} from '../BaseComponent'
 import React from 'react';
 import ComponentDataConfig from './ComponentDataConfig';
 
@@ -28,7 +29,7 @@ export default class ContentLeafComponentObject extends BaseComponentObject {
             />);
     }
     Component(props) {
-        props instanceof BaseContentLeafComponentProps;
+        let isInherit = props instanceof BaseContentLeafComponentProps;
 
         throw new Error("Component function undefined");
     }

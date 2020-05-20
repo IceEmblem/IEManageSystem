@@ -44,7 +44,7 @@ export default class RolePermissionManage extends React.Component {
         return [
             { name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: false },
             { name: "name", text: "权限名称", isAddShow: false, isEditShow: false, isName: true, isShowOnList: true, isEditCanEdit: false },
-            { name: "displayName", text: "权限显示名称", isAddShow: false, isEditShow: false, isShowOnList: true },
+            { name: "displayName", text: "显示名称", isAddShow: false, isEditShow: false, isShowOnList: true },
             {
                 name: "selectId", text: "请选择权限", valueType: "radio",
                 valueTexts: this.state.permissions.map(item => ({

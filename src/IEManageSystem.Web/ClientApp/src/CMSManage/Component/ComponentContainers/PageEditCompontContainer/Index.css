@@ -44,10 +44,11 @@
 }
 
 .editableparentcom-btns>button {
-    opacity: 0.2;
+    opacity: 0.5;
     transition: 0.5s;
     -webkit-transition: 0.5s;
     transform-origin:50% 50%;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
+    margin: 0px 3px;
 }

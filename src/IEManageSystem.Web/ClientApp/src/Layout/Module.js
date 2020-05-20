@@ -19,7 +19,7 @@ export default class Module extends BaseModule
     initialize(){
         LayoutRedux.setReducer(reducer);
         RootRedux.register(LayoutRedux);
-        PageProvider.register(new Page("ManageHome", "/ManageHome", ManageHome));
+        PageProvider.register(new Page("AntManageHome", "/ManageHome", ManageHome));
     }
 }
 

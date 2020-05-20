@@ -1,53 +1,41 @@
-html,body {
-    margin: 0;
-    width:100%;
-    height: 100%;
-
-    /*超出body范围部分隐藏*/
-    overflow: hidden;
-    font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+.antlayout{
 }
 
-a{
-    text-decoration:none;
-}
-
-a:hover{
-    text-decoration:none;
-}
-
-.manage-home {
-    margin-right: -15px;
-    margin-left: -15px;
-    background-image: url(./backimg1.JPEG);
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-}
-
-.right-content{
+/* .antlayout .ant-layout-sider-children{
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+}
+
+.antlayout .ant-layout-sider-children>*:first-child{
+    flex-shrink: 0;
+}
+
+.antlayout .ant-layout-sider-children>*:nth-child(2){
     flex-shrink: 1;
-    overflow-x: hidden;
-}
+    flex-grow: 1;
+} */
 
-.bodydiv-parent{
-    overflow-y:auto;
-}
+.antlayout .trigger {
+    font-size: 18px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .antlayout .trigger:hover {
+    color: #1890ff;
+  }
+  
+  .antlayout .antlogo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
 
-.padding-0{
-    padding: 0px !important;
-}
-
-.padding-top-10{
-    padding-top: 0.625rem !important;
-}
-
-.nav-bottom {
-    font-size:0.9rem;
-}
-
-.sidenavdiv{
-    overflow: hidden;
-}
+  .antlayout .antlogo .logowith{
+    width: 40px;
+  }
+  
+  .antlayout .site-layout .site-layout-background {
+    background: #fff;
+  }

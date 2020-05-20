@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ContentComponentDataModel from 'CMSManage/Models/PageDatas/ContentComponentDataModel'
 
-import Modal from 'Modal/Modal.jsx'
-
 import Tab from 'Tab/Tab.jsx'
+
+import { Modal, Button } from 'antd';
 
 // props.submit
 // props.close    fun
@@ -28,10 +28,10 @@ class EditFrame extends React.Component {
     submit() {
         this.props.submit(this.state.contentComponentDataModel);
     }
-    
-    cancel(){
+
+    cancel() {
         this.setState({
-            ContentComponentDataModel: new ContentComponentDataModel(this.props.componentData)
+            contentComponentDataModel: new ContentComponentDataModel(this.props.componentData)
         });
         this.props.close();
     }
@@ -39,35 +39,28 @@ class EditFrame extends React.Component {
     render() {
         return (
             <Modal
-                show={this.props.show}
+                title={`${this.props.title} 组件数据编辑`}
+                visible={this.props.show}
+                onOk={this.submit}
+                onCancel={this.cancel}
+                width={1000}
+                bodyStyle={{ backgroundColor: "#f8f9fa" }}
+                zIndex={9999}
+                okText="提交"
+                cancelText="取消"
             >
-                <div className="modal-dialog" style={{maxWidth: "80rem"}}>
-                    <div className="modal-content">
-                        <div className="modal-header bg-info text-white">
-                            <h4 className="modal-title">编辑数据</h4>
-                            <button type="button" className="close" data-dismiss="modal" onClick={this.props.close}>&times;</button>
-                        </div>
-
-                        <div className="modal-body">
-                            <Tab
-                                tabs={this.tabs}
-                                nameField={this.nameField}
-                                selectIndex={this.selectIndex}
-                                selectOnclick={() => { }}
-                            >
-                                <this.props.componentObject.ComponentDataConfig 
-                                    data={this.state.contentComponentDataModel}
-                                    setData={(value)=>this.setState({contentComponentDataModel: value})}
-                                />
-                            </Tab>
-                        </div>
-
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-info" onClick={this.submit}>提交</button>
-                            <button type="button" className="btn btn-secondary" onClick={this.cancel}>关闭</button>
-                        </div>
-
-                    </div>
+                <div className="bg-white p-2">
+                    <Tab
+                        tabs={this.tabs}
+                        nameField={this.nameField}
+                        selectIndex={this.selectIndex}
+                        selectOnclick={() => { }}
+                    >
+                        <this.props.componentObject.ComponentDataConfig
+                            data={this.state.contentComponentDataModel}
+                            setData={(value) => this.setState({ contentComponentDataModel: value })}
+                        />
+                    </Tab>
                 </div>
             </Modal>
         );

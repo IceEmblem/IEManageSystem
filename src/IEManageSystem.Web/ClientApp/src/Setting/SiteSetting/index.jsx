@@ -3,28 +3,31 @@ import PropTypes from 'prop-types';
 import RootRedux from 'Core/IEReduxs/RootRedux';
 import { getSiteSettingsFetch } from 'Core/IEReduxs/Actions';
 import SiteSettingManager from 'Core/SiteSettings/SiteSettingManager';
-import {ieReduxFetch} from 'Core/IEReduxFetch';
+import { ieReduxFetch } from 'Core/IEReduxFetch';
+
+import { Card, Button, Input, Tag } from 'antd';
+import { SaveOutlined } from '@ant-design/icons'
 
 import './index.css'
 
 class SiteSetting extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
             siteSettings: this.createSetting(props)
         };
     }
-    componentWillReceiveProps(props){
-        this.setState({siteSettings:this.createSetting(props)});
+    componentWillReceiveProps(props) {
+        this.setState({ siteSettings: this.createSetting(props) });
     }
-    createSetting(props){
+    createSetting(props) {
         let arr = [];
         props.siteSettingGroupConfigs.map(siteSettingGroupConfig => {
             let settings = siteSettingGroupConfig.siteSettingConfigs.map(item => {
                 let siteSetting = props.siteSettingManager.getSetting(siteSettingGroupConfig.name, item.key);
-    
-                return siteSetting || { key: item.key, value: "", displayName: item.displayName, group: siteSettingGroupConfig.name};
+
+                return siteSetting || { key: item.key, value: "", displayName: item.displayName, group: siteSettingGroupConfig.name };
             });
 
             arr = [...arr, ...settings];
@@ -35,54 +38,52 @@ class SiteSetting extends React.Component {
     createSettingView(siteSetting) {
         return (
             <div key={siteSetting.key} className="input-group mb-3">
-                <input type="text" className="form-control" placeholder={siteSetting.key} 
+                <Input
+                    suffix={<Tag color="#55acee">{siteSetting.displayName}</Tag>}
+                    placeholder={siteSetting.key}
                     value={siteSetting.value}
                     onChange={
-                        event => { 
+                        event => {
                             siteSetting.value = event.currentTarget.value;
                             this.setState({});
                         }}
                 />
-                <div className="input-group-append">
-                    <span className="input-group-text bg-info text-white border-0">{siteSetting.displayName}</span>
-                </div>
             </div>);
     }
     createGroupSettingView(siteSettingGroupConfig) {
         let settings = this.state.siteSettings.filter(item => item.group == siteSettingGroupConfig.name);
 
         return (
-            <div key={siteSettingGroupConfig.name} className="card-body">
-                <h5 className="card-title">{siteSettingGroupConfig.displayName}</h5>
-                <div className="card-text">
+            <Card key={siteSettingGroupConfig.name} title={siteSettingGroupConfig.displayName}>
+                <div className="">
                     {settings.map(item => this.createSettingView(item))}
                 </div>
-                <button className="btn btn-info"
-                    onClick={()=>{
+                <Button
+                    icon={<SaveOutlined />}
+                    type="primary"
+                    onClick={() => {
                         ieReduxFetch("/api/SiteSettingManage/SetSiteSettings", {
                             siteSettings: settings
                         })
-                        .then((value) => {
-                            this.props.getSiteSettingsFetch();
-                        });
+                            .then((value) => {
+                                this.props.getSiteSettingsFetch();
+                            });
                     }}
-                >提交改变</button>
-            </div>);
+                >提交改变</Button>
+            </Card>);
     }
 
     render() {
         return (
             <div className="sitesetting">
-                <div className="card">
-                    {this.props.siteSettingGroupConfigs.map(item => this.createGroupSettingView(item))}
-                </div>
+                {this.props.siteSettingGroupConfigs.map(item => this.createGroupSettingView(item))}
             </div>);
     }
 }
 
 SiteSetting.propTypes = {
     siteSettings: PropTypes.array.isRequired,
-    siteSettingGroupConfigs: PropTypes.array.isRequire,
+    siteSettingGroupConfigs: PropTypes.array,
     siteSettingManager: PropTypes.object.isRequired,
     getSiteSettingsFetch: PropTypes.func.isRequired
 }
@@ -90,7 +91,7 @@ SiteSetting.propTypes = {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
         siteSettings: state.siteSettings,
-        siteSettingGroupConfigs: SiteSettingManager.siteSettingGroupConfigs,
+        siteSettingGroupConfigs: SiteSettingManager.siteSettingGroupConfigs || [],
         siteSettingManager: new SiteSettingManager(state.siteSettings)
     }
 }

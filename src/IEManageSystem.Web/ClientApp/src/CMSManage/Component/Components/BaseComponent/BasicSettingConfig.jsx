@@ -1,17 +1,21 @@
 import React from 'react';
 import BaseConfig from './BaseConfig';
 
+import { Input, Tag, InputNumber } from 'antd';
+
 // props.data 类型为 PageComponentBaseSettingModel
 // props.setData 类型为 (PageComponentBaseSettingModel) => void
 // 基本设置 配置
-export default class BasicSettingConfig extends BaseConfig{
+export default class BasicSettingConfig extends BaseConfig {
     render() {
         return (
             <div className="d-flex flex-md-wrap">
                 <div className="col-md-6 float-left">
                     <label>请输入1~12网格宽度：</label>
                     <div className="input-group mb-3">
-                        <input value={this.props.data.col || ""} type="text" className="form-control" placeholder="网格宽度"
+                        <Input
+                            placeholder="网格宽度"
+                            value={this.props.data.col}
                             onChange={
                                 (event) => {
                                     this.props.setData({
@@ -20,16 +24,16 @@ export default class BasicSettingConfig extends BaseConfig{
                                     })
                                 }
                             }
+                            suffix={<Tag color="#55acee">网格宽度</Tag>}
                         />
-                        <div className="input-group-append">
-                            <span className="input-group-text">网格宽度</span>
-                        </div>
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
                     <label>请输入组件高度（例：9rem）：</label>
                     <div className="input-group mb-3">
-                        <input value={this.props.data.height || ""} type="text" className="form-control" placeholder="组件高度"
+                        <Input
+                            placeholder="组件高度"
+                            value={this.props.data.height}
                             onChange={
                                 (event) => {
                                     this.props.setData({
@@ -38,16 +42,16 @@ export default class BasicSettingConfig extends BaseConfig{
                                     });
                                 }
                             }
+                            suffix={<Tag color="#55acee">组件高度</Tag>}
                         />
-                        <div className="input-group-append">
-                            <span className="input-group-text">组件高度</span>
-                        </div>
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
                     <label>请输入内边距（例：0.3rem 或 0rem 0.3rem）：</label>
                     <div className="input-group mb-3">
-                        <input value={this.props.data.padding || ""} type="text" className="form-control" placeholder="内边距"
+                        <Input
+                            placeholder="内边距"
+                            value={this.props.data.padding}
                             onChange={
                                 (event) => {
                                     this.props.setData({
@@ -56,16 +60,16 @@ export default class BasicSettingConfig extends BaseConfig{
                                     });
                                 }
                             }
+                            suffix={<Tag color="#55acee">内边距</Tag>}
                         />
-                        <div className="input-group-append">
-                            <span className="input-group-text">内边距</span>
-                        </div>
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
                     <label>请输入外边距（例：0.3rem 或 0rem 0.3rem）：</label>
                     <div className="input-group mb-3">
-                        <input value={this.props.data.margin || ""} type="text" className="form-control" placeholder="外边距"
+                        <Input
+                            placeholder="外边距"
+                            value={this.props.data.margin}
                             onChange={
                                 (event) => {
                                     this.props.setData({
@@ -74,16 +78,16 @@ export default class BasicSettingConfig extends BaseConfig{
                                     });
                                 }
                             }
+                            suffix={<Tag color="#55acee">外边距</Tag>}
                         />
-                        <div className="input-group-append">
-                            <span className="input-group-text">外边距</span>
-                        </div>
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
                     <label>请输入背景颜色（例：#ffffff）：</label>
                     <div className="input-group mb-3">
-                        <input value={this.props.data.backgroundColor || ""} type="text" className="form-control" placeholder="背景颜色"
+                        <Input
+                            placeholder="背景颜色"
+                            value={this.props.data.backgroundColor}
                             onChange={
                                 (event) => {
                                     this.props.setData({
@@ -92,16 +96,16 @@ export default class BasicSettingConfig extends BaseConfig{
                                     });
                                 }
                             }
+                            suffix={<Tag color="#55acee">背景颜色</Tag>}
                         />
-                        <div className="input-group-append">
-                            <span className="input-group-text">背景颜色</span>
-                        </div>
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
                     <label>请输入class：</label>
                     <div className="input-group mb-3">
-                        <input value={this.props.data.className || ""} type="text" className="form-control" placeholder="样式类"
+                        <Input
+                            placeholder="样式类"
+                            value={this.props.data.className}
                             onChange={
                                 (event) => {
                                     this.props.setData({
@@ -110,33 +114,26 @@ export default class BasicSettingConfig extends BaseConfig{
                                     });
                                 }
                             }
+                            suffix={<Tag color="#55acee">样式类</Tag>}
                         />
-                        <div className="input-group-append">
-                            <span className="input-group-text">样式类</span>
-                        </div>
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
                     <label>请输入排序索引(必须是数字)：</label>
                     <div className="input-group mb-3">
-                        <input value={this.props.data.sortIndex || ""} type="number" className="form-control" placeholder="排序索引"
+                        <InputNumber
+                            placeholder="排序索引"
+                            value={this.props.data.sortIndex}
                             onChange={
-                                (event) => {
-                                    let index = parseInt(event.target.value);
-                                    if(isNaN(index)){
-                                        return;
-                                    }
-
+                                (value) => {
                                     this.props.setData({
                                         ...this.props.data,
-                                        ...{ sortIndex: index }
+                                        ...{ sortIndex: value || 0 }
                                     });
                                 }
                             }
+                            suffix={<Tag color="#55acee">排序索引</Tag>}
                         />
-                        <div className="input-group-append">
-                            <span className="input-group-text">排序索引</span>
-                        </div>
                     </div>
                 </div>
             </div>

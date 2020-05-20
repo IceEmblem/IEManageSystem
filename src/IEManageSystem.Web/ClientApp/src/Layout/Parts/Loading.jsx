@@ -1,16 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import LoadingModal from 'LoadingModal/LoadingModal.jsx';
+
+import { Spin, Button } from 'antd';
 
 import RootRedux from 'Core/IEReduxs/RootRedux'
 
-class Loading extends React.Component{
-    constructor(props){
+class Loading extends React.Component {
+    constructor(props) {
         super(props)
     }
 
-    render(){
-        return (<LoadingModal show={this.props.show} />)
+    render() {
+        return <div
+            className="flex-column justify-content-center align-items-center"
+            style={{ display: this.props.show ? "flex" : "none", position: "fixed", width: "100%", height: "100%", left: "0px", top: "0px" }}
+        >
+            <Spin
+                tip="load..."
+                size="large"
+                spinning={this.props.show}
+            />
+        </div>
     }
 }
 

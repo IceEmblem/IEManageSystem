@@ -3,9 +3,9 @@
 }
 
 .pageedit-componentlistbox-frame {
-    width: 15%;
-    margin: .5rem 1rem;
-    height: 6rem;
+    width: 170px;
+    margin: 5px 5px;
+    height: 110px;
     background-color: #fff0;
 }
 
@@ -29,17 +29,5 @@
 }
 
 .pageedit-componentlistbox-frame-active{
-    border-color: #2393a7;
-}
-
-.pageedit-componentlistbox-components-title{
-    display: inline-block;
-    padding: .5rem 1rem;
-    font-size: 1.3rem;
-    border: 1px solid;
-    border-color: #dfdfdf #dfdfdf #fff0 #dfdfdf;
-    background-color: #fff;
-    position: relative;
-    bottom: -1px;
-    z-index: 1;
+    border-color: #2393a7 !important;
 }

@@ -5,6 +5,9 @@ import PropTypes from 'prop-types'
 import { Animate } from 'react-move'
 import { easeExpOut, easeQuadInOut, easeCubic, easeCubicInOut } from 'd3-ease'
 
+import { Button } from 'antd';
+import { PlusCircleOutlined, InfoCircleOutlined, SyncOutlined, SaveOutlined } from "@ant-design/icons"
+
 import "./BtnLists.css";
 
 export default class BtnLists extends React.Component {
@@ -23,8 +26,8 @@ export default class BtnLists extends React.Component {
                 <div className="PageContainer-btnlists-pageInfoComponent">
                     {this.state.showPageInfoComponent && this.props.pageInfoComponent}
                 </div>
-                <div className="PageContainer-btnlists-bnts d-flex justify-content-center">
-                    <div className="PageContainer-btnlists-block2"></div>
+                <div className="PageContainer-btnlists-bnts d-flex">
+                    <div className="PageContainer-btnlists-block2 pl-2 rounded-left"></div>
                     <Animate
                         start={() => ({
                             x: this.state.open ? 100 : 0,
@@ -48,24 +51,22 @@ export default class BtnLists extends React.Component {
                             return (
                                 <div className="d-flex justify-content-end overflow-hidden-x" style={{ width: `${x}%` }}>
                                     <div style={{ width: `${y}rem` }}></div>
-                                    <button className="btn btn-success padding-left-10 padding-right-10 shadow-sm"
-                                        onClick={()=>{
+                                    <Button
+                                        icon={<PlusCircleOutlined />}
+                                        className="bg-success border-success text-white"
+                                        onClick={() => {
                                             this.setState({});
                                             this.props.addComponent();
                                         }}
-                                    >
-                                        <span className="oi oi-plus" title="添加组件" aria-hidden="true"></span>
-                                        {" 添加组件"}
-                                    </button>
+                                    >添加组件</Button>
                                     <div style={{ width: `${y}rem` }}></div>
-                                    <button className="btn btn-primary padding-left-10 padding-right-10 shadow-sm"
-                                        onClick={()=>{
-                                            this.setState({showPageInfoComponent: !this.state.showPageInfoComponent});
+                                    <Button
+                                        icon={<InfoCircleOutlined />}
+                                        className="bg-info border-info text-white"
+                                        onClick={() => {
+                                            this.setState({ showPageInfoComponent: !this.state.showPageInfoComponent });
                                         }}
-                                    >
-                                        <span className="oi oi-info" title="页面信息" aria-hidden="true"></span>
-                                        {" 页面信息"}
-                                    </button>
+                                    >页面信息</Button>
                                     <div style={{ width: `${y}rem` }}></div>
                                 </div>
                             )
@@ -101,31 +102,29 @@ export default class BtnLists extends React.Component {
                             return (
                                 <div className="d-flex overflow-hidden-x" style={{ width: `${x}%` }}>
                                     <div style={{ width: `${y}rem` }}></div>
-                                    <button className="btn btn-warning padding-left-10 padding-right-10 shadow-sm"
-                                        onClick={()=>{
+                                    <Button
+                                        icon={<SyncOutlined />}
+                                        className="bg-warning border-warning text-white"
+                                        onClick={() => {
                                             this.setState({});
                                             this.props.pageUpdate();
                                         }}
-                                    >
-                                        <span className="oi oi-loop-circular mr-1" title="icon name" aria-hidden="true"></span>
-                                重新渲染
-                                </button>
+                                    >重新渲染</Button>
                                     <div style={{ width: `${y}rem` }}></div>
-                                    <button className="btn btn-info padding-left-10 padding-right-10 shadow-sm"
-                                        onClick={()=>{
+                                    <Button
+                                        type="primary"
+                                        icon={<SaveOutlined />}
+                                        onClick={() => {
                                             this.setState({});
                                             this.props.submitPage();
                                         }}
-                                    >
-                                        <span className="oi oi-cloud-upload mr-1" title="icon name" aria-hidden="true"></span>
-                                提交页面
-                                </button>
+                                    >提交页面</Button>
                                     <div style={{ width: `${y}rem` }}></div>
                                 </div>
                             )
                         }}
                     </Animate>
-                    <div className="PageContainer-btnlists-block1"></div>
+                    <div className="PageContainer-btnlists-block1 pr-2 rounded-right"></div>
                 </div>
             </div>
         );

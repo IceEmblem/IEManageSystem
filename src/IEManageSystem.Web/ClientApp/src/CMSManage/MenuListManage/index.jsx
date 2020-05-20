@@ -3,13 +3,16 @@ import { NavLink } from 'react-router-dom';
 import Resource from 'Resource/Resource.jsx';
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 
+import { EditOutlined } from '@ant-design/icons'
+
 // props.resource
 function EditMenu(props) {
 	return (
-		<NavLink className="btn btn-outline-secondary"
+		<NavLink className="ant-btn ant-btn-sm"
 			to={`/ManageHome/CMSManage/Menu/${props.resource.name}`}
 		>
-			<span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>{" 编辑菜单"}
+			<EditOutlined />
+			<span>{" 编辑菜单"}</span>
 		</NavLink>);
 }
 
@@ -96,7 +99,7 @@ class MenuListManage extends React.Component {
 		customizeOperateBtns.push(EditMenu);
 
 		return (
-			<div className="col-md-12">
+			<div className="col-md-12 bg-white pt-3 pb-3">
 				<Resource
 					title="页面管理"
 					describes={this.getDescribes()}

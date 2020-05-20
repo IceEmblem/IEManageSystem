@@ -1,6 +1,3 @@
-import 'labelauty';
-import 'labelautycss';
-
 import React from 'react';
 import ResourceDescribe from './ResourceDescribe.js';
 import ResourceList from './ResourceList.jsx';
@@ -58,15 +55,6 @@ export default class Resource extends React.Component {
 
 	componentDidMount(){
 		this.props.freshenResources(1, this.pageSize, this.searchKey);
-	}
-
-	getResourceNum(){
-		let pageNum = parseInt(this.props.resourceNum / this.pageSize);
-		if ((this.props.resourceNum % this.pageSize) > 0) {
-			pageNum++;
-		}
-
-		return pageNum;
 	}
 
 	// 搜索单击
@@ -133,7 +121,8 @@ export default class Resource extends React.Component {
 			resourceAddClick={() => this._resourceOperationClick(operationState.add)}
 			hideAdd={this.props.hideAdd}
 			hidePadding={this.props.hidePadding}
-			pageNum={this.getResourceNum()}
+			total={this.props.resourceNum}
+			pageSize={this.pageSize}
 			pageIndex={this.props.pageIndex}
 			pageIndexChange={this._pageIndexChange}
 			customizeBottomOperateBtns={this.props.customizeBottomOperateBtns} />;
@@ -152,7 +141,7 @@ export default class Resource extends React.Component {
 		}
 
 		return (
-			<div className="w-100 h-100 d-flex flex-column pb-3">
+			<div className="w-100 h-100 d-flex flex-column">
 				{resourceList}
 				{paging}
 				<ResourceForm
@@ -164,7 +153,7 @@ export default class Resource extends React.Component {
 						isHideSubmit={isHideSubmit}
 						close={()=>{this.setState({fromModalShow:false})}} />
 				<ResourceDelete
-						title={this.props.title}
+						title={`删除 ${this.props.title}`}
 						nameDescribe={resourceDescribe.nameDescribes}
 						resource={this.state.curResource}
 						resourceUpdate={resource => this._resourceUpdate(operationState.delete, resource)}

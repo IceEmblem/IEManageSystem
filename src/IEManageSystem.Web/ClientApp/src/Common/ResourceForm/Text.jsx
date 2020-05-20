@@ -1,8 +1,7 @@
 ﻿import React from 'react';
-import ReactDOM from 'react-dom';
+import { Input, Tag } from 'antd';
 
-export default class Text extends React.Component
-{
+export default class Text extends React.Component {
     // props.title
     // props.value
     // props.isEdit
@@ -14,14 +13,11 @@ export default class Text extends React.Component
     render() {
         return (
             <div className={"input-group mb-3"}>
-                <div className="input-group-prepend w-20">
-                    <span className="input-group-text w-100 justify-content-end border-right-0 bg-muted">{this.props.title}</span>
-                </div>
-                <input type="text" className="form-control"
-                    placeholder={"请输入" + this.props.title}
-                    readonly={this.props.isEdit ? null : "readonly"}
+                <Input placeholder={`输入${this.props.title}`} prefix={<Tag style={{width:"80px"}} className="text-right" color="#55acee">{this.props.title}</Tag>} 
+                    disabled={!this.props.isEdit}
                     value={this.props.value == null ? "" : this.props.value}
-                    onChange={event => { this.props.onChange(event.target.value) }} />
+                    onChange={event => { this.props.onChange(event.target.value) }}
+                />
             </div>);
     }
 }

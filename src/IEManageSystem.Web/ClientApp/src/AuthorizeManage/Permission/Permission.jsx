@@ -27,7 +27,7 @@ class Permission extends React.Component {
 		return [
 			{ name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: false },
 			{ name: "name", text: "权限名称", isName: true, isShowOnList: true, isEditCanEdit: false },
-			{ name: "displayName", text: "权限显示名称", isShowOnList: true },
+			{ name: "displayName", text: "显示名称", isShowOnList: true },
 		];
 	}
 
@@ -90,7 +90,7 @@ class Permission extends React.Component {
 
 	render() {
 		return (
-			<div className="col-md-12">
+			<div className="col-md-12 bg-white pt-3 pb-3">
 				<Resource
 					title="站点权限"
 					describes={this.getDescribes()}

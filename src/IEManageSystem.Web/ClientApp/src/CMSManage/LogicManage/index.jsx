@@ -74,7 +74,7 @@ export default class LogicManage extends React.Component {
     }
 
     render() {
-        return (<div className="col-md-12">
+        return (<div className="col-md-12 bg-white pt-3 pb-3">
             <Resource
                 title="逻辑代码管理"
                 describes={this.getDescribes()}

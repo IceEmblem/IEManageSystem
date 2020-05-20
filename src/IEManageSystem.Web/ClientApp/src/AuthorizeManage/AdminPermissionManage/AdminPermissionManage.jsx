@@ -39,7 +39,7 @@ export default class AdminPermissionManage extends React.Component
 		return [
             { name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: false },
             { name: "name", text: "权限名称", isName: true, isShowOnList: true, isEditCanEdit: false },
-            { name: "displayName", text: "权限显示名称", isShowOnList: true },
+            { name: "displayName", text: "显示名称", isShowOnList: true },
         ];
 	}
 

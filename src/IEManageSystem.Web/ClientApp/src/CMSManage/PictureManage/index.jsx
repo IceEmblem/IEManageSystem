@@ -1,9 +1,11 @@
 import React from 'react'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
-import ConfirmBox from 'ConfirmBox/ConfirmBox'
 import IETool from 'ToolLibrary/IETool'
 
 import PictureBox from './PictureBox';
+
+import { Upload, message, Button, Input, Modal } from 'antd';
+import { UploadOutlined, PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import './index.css'
 
@@ -36,10 +38,10 @@ export default class PictureManage extends React.Component {
     }
 
     // 上传图片点击事件
-    uploadImage(event) {
-        let fileName = event.target.files[0].name;
+    uploadImage(file) {
+        let fileName = file.name;
 
-        IETool.imageToBase64String(event.target.files[0], (base64) => {
+        IETool.imageToBase64String(file, (base64) => {
 
             // setTimeout(this.uploadImageFetch(`${this.state.curPath}${fileName}`, base64), 1);
 
@@ -50,7 +52,7 @@ export default class PictureManage extends React.Component {
 
             ieReduxFetch("/api/PictureManage/SavePicture", postData)
                 .then(value => {
-                    this.setState({isReload: true});
+                    this.setState({ isReload: true });
                 });
         });
     }
@@ -63,17 +65,17 @@ export default class PictureManage extends React.Component {
 
         ieReduxFetch("/api/PictureManage/CreateDir", postData)
             .then(value => {
-                this.setState({isReload: true});
+                this.setState({ isReload: true });
             });
     }
 
     // 删除图片
     deleteImage() {
-        if(!this.state.curSeletePic){
+        if (!this.state.curSeletePic) {
             return;
         }
 
-        if(this.state.curSeletePic.isDir){
+        if (this.state.curSeletePic.isDir) {
             return;
         }
 
@@ -82,14 +84,14 @@ export default class PictureManage extends React.Component {
                 title: "确认删除图片？",
                 text: `你正要删除 ${this.state.curSeletePic.name} 图片，是否删除？`,
                 show: true,
-                backcall: () => { 
+                backcall: () => {
                     let postData = {
                         picWebPath: `${this.state.curPath}/${this.state.curSeletePic.name}`
                     }
-            
+
                     ieReduxFetch("/api/PictureManage/DeletePicture", postData)
                         .then(value => {
-                            this.setState({isReload: true});
+                            this.setState({ isReload: true });
                         });
                 }
             }
@@ -98,11 +100,11 @@ export default class PictureManage extends React.Component {
 
     // 删除目录
     deleteDir() {
-        if(!this.state.curSeletePic) {
+        if (!this.state.curSeletePic) {
             return;
         }
 
-        if(!this.state.curSeletePic.isDir){
+        if (!this.state.curSeletePic.isDir) {
             return;
         }
 
@@ -111,14 +113,14 @@ export default class PictureManage extends React.Component {
                 title: "确认删除目录？",
                 text: `你正要删除 ${this.state.curSeletePic.name} 目录，删除该目录子文件也会一并删除，是否删除？`,
                 show: true,
-                backcall: () => { 
+                backcall: () => {
                     let postData = {
                         picWebPath: `${this.state.curPath}/${this.state.curSeletePic.name}`
                     }
-            
+
                     ieReduxFetch("/api/PictureManage/DeleteDir", postData)
                         .then(value => {
-                            this.setState({isReload: true});
+                            this.setState({ isReload: true });
                         });
                 }
             }
@@ -128,42 +130,49 @@ export default class PictureManage extends React.Component {
     render() {
         return (
             <div className="picturemanage">
-                <PictureBox 
-                    selectPath={(curPath, curSeletePic)=>{this.setState({curPath:curPath, curSeletePic: curSeletePic})}}
+                <PictureBox
+                    selectPath={(curPath, curSeletePic) => { this.setState({ curPath: curPath, curSeletePic: curSeletePic }) }}
                     isReload={this.state.isReload}
-                    reloadDid={()=>{this.setState({isReload:false})}}
+                    reloadDid={() => { this.setState({ isReload: false }) }}
                 />
-                <div className="">
-                    <div className="input-group shadow mb-2">
-                        <div className="custom-file">
-                            <input type="file" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"
-                                onChange={this.uploadImage}
-                            />
-                            <label className="custom-file-label picturemanage-bgcolor-fff0" htmlFor="inputGroupFile01">
-                                添加图片
-                            </label>
-                        </div>
+                <div className="bg-white">
+                    <div className="mb-3 d-flex">
+                        <Upload
+                            className="w-100"
+                            name='file'
+                            showUploadList={false}
+                            beforeUpload={(file) => {
+                                this.uploadImage(file);
+                                return false;
+                            }}
+                        >
+                            <Button block>
+                                <PlusCircleOutlined /> 添加图片
+                            </Button>
+                        </Upload>
+                        <Button onClick={this.deleteImage} danger>
+                            <DeleteOutlined /> 图片
+                        </Button>
                     </div>
-                    <button type="button" className="btn btn-warning btn-block shadow mb-3" onClick={this.deleteImage}>删除图片</button>
-                    <div className="input-group shadow mb-2">
-                        <input type="text" className="form-control picturemanage-bgcolor-fff0" placeholder="目录名称"
+                    <div className="input-group mb-3">
+                        <Input placeholder="输入目录名称"
                             value={this.state.addDirName}
                             onChange={
                                 (event) => { this.setState({ addDirName: event.currentTarget.value }) }
                             }
+                            style={{ padding: "0px 0px 0px 10px" }}
+                            suffix={<Button icon={<PlusCircleOutlined />} type="primary" onClick={this.createDir}></Button>}
                         />
-                        <div className="input-group-append">
-                            <button className="btn btn-primary" type="submit" onClick={this.createDir}>添加目录</button>
-                        </div>
                     </div>
-                    <button type="button" className="btn btn-danger btn-block shadow" onClick={this.deleteDir}>删除目录</button>
+                    <div>
+                        <Button block icon={<DeleteOutlined />} type="primary" danger onClick={this.deleteDir}>删除目录</Button>
+                    </div>
                 </div>
-                <ConfirmBox
+                <Modal
                     title={this.state.confirmBox.title}
-                    text={this.state.confirmBox.text}
-                    show={this.state.confirmBox.show}
-                    backcall={this.state.confirmBox.backcall}
-                    close={() => {
+                    visible={this.state.confirmBox.show}
+                    onOk={()=>{
+                        this.state.confirmBox.backcall();
                         this.setState({
                             confirmBox: {
                                 title: "",
@@ -173,7 +182,21 @@ export default class PictureManage extends React.Component {
                             }
                         });
                     }}
-                />
+                    onCancel={() => {
+                        this.setState({
+                            confirmBox: {
+                                title: "",
+                                text: "",
+                                show: false,
+                                backcall: () => { }
+                            }
+                        });
+                    }}
+                    okText="确认"
+                    cancelText="取消"
+                >
+                    <p>{this.state.confirmBox.text}</p>
+                </Modal>
             </div>
         )
     }

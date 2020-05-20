@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
-import './Index.css'
+import './index.css'
 
 import { pageFetch, pageDataFetch, componentDataUpdateFetch } from 'CMSManage/IEReduxs/Actions'
 import PostEditComponentContainer from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer'
+
+import { Button } from 'antd';
+import {CloudUploadOutlined, UndoOutlined } from '@ant-design/icons'
 
 class ComponentData extends React.Component {
     constructor(props) {
@@ -32,22 +35,20 @@ class ComponentData extends React.Component {
         return (
             <div className="postedit-page-container">
                 <div className="postedit-page-container-header">
-                    <button type="button" className="btn btn-warning mr-2"
+                    <Button 
+                        className="mr-2"
+                        icon={<UndoOutlined />}
                         onClick={() => this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)}
                     >
                         取消修改
-                        <span className="oi padding-left-10 oi-action-undo" title="icon name" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" className="btn btn-info"
-                        onClick={
-                            () => {
-                                this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.pageData.contentComponentDatas);
-                            }
-                        }
+                    </Button>
+                    <Button 
+                        type="primary"
+                        icon={<CloudUploadOutlined />}
+                        onClick={() => this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.pageData.contentComponentDatas)}
                     >
                         提交文章
-                        <span className="oi padding-left-10 oi-cloud-upload" title="icon name" aria-hidden="true"></span>
-                    </button>
+                    </Button>
                 </div>
                 <div className="hide-scroll">
                     <div className="front-page-container">

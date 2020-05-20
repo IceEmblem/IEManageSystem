@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import Resource from 'Resource/Resource.jsx';
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 
+import { EditOutlined } from '@ant-design/icons'
+
 class PageData extends React.Component {
 	constructor(props) {
 		super(props);
@@ -102,25 +104,27 @@ class PageData extends React.Component {
 		let customizeOperateBtns = [];
 		customizeOperateBtns.push((props) => {
 			return (
-				<NavLink className="btn btn-outline-secondary"
+				<NavLink className="ant-btn ant-btn-sm mr-1"
 					to={`/ManageHome/CMSManage/PostEdit/${this.props.pageName}/${props.resource.name}`}
 				>
-					<span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>{" 编辑文章"}
+					<EditOutlined />
+					<span>{" 编辑文章"}</span>
 				</NavLink>);
 		});
 		customizeOperateBtns.push((props) => {
 			return (
-				<NavLink className="btn btn-outline-secondary"
+				<NavLink className="ant-btn ant-btn-sm"
 					to={`/ManageHome/CMSManage/PostEdit/${this.props.pageName}/${props.resource.name}`}
 				>
-					<span className="oi oi-zoom-in" title="icon name" aria-hidden="true"></span>{" 浏览"}
+					<EditOutlined />
+					<span>{" 浏览"}</span>
 				</NavLink>);
 		});
 
 		let customizeBottomOperateBtns = [];
 
 		return (
-			<div className="col-md-12">
+			<div className="col-md-12 bg-white pt-3 pb-3">
 				<Resource
 					title="文章管理"
 					describes={this.getDescribes()}

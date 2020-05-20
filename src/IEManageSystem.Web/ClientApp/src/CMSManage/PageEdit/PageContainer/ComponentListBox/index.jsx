@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 
 import './index.css'
 
-import Modal from 'Modal/Modal';
 import ComponentFrame from './ComponentFrame.jsx'
 import ComponentFactory, { componentTypes } from 'CMSManage/Component/Components/ComponentFactory'
 
-class ComponentListBox extends React.Component 
-{
-    constructor(props){
+import { Modal, Card } from 'antd';
+
+class ComponentListBox extends React.Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -18,27 +18,26 @@ class ComponentListBox extends React.Component
         }
     }
 
-    createComponent(item)
-    {
+    createComponent(item) {
         return (
-        <ComponentFrame
-            key={item.name}
-            active={this.state.selectedComponentDescribe && this.state.selectedComponentDescribe.name == item.name}
-            componentOnClick={
-                () => {
-                    // 如果点中的不是之前选择的项目
-                    if(this.state.selectedComponentDescribe != item){
-                        this.setState({selectedComponentDescribe: item});
-                        return;
+            <ComponentFrame
+                key={item.name}
+                active={this.state.selectedComponentDescribe && this.state.selectedComponentDescribe.name == item.name}
+                componentOnClick={
+                    () => {
+                        // 如果点中的不是之前选择的项目
+                        if (this.state.selectedComponentDescribe != item) {
+                            this.setState({ selectedComponentDescribe: item });
+                            return;
+                        }
+
+                        this.props.close();
+                        this.props.addComponent(item);
                     }
-                    
-                    this.props.close();
-                    this.props.addComponent(item);
                 }
-            }
-        >
-            {item.componentObject.Preview()}
-        </ComponentFrame>);
+            >
+                {item.componentObject.Preview()}
+            </ComponentFrame>);
     }
 
     render() {
@@ -49,37 +48,23 @@ class ComponentListBox extends React.Component
             componentDescribes = componentDescribes.filter(e => e.componentType != componentType.name)
 
             return (
-            <div key={index}>
-                <div className="pageedit-componentlistbox-components-title">
-                    <span className={`oi ${componentType.icon}`} title="icon name" aria-hidden="true"></span>
-                    <span className="ml-2">{componentType.text}</span>
-                </div>
-                <div className="card">
-                    <div className="card-body">
-                        {childComponents}
-                    </div>
-                </div>
-            </div>);
+                <Card key={index} title={componentType.text} size="small">
+                    {childComponents}
+                </Card>);
         });
 
         return (
-        <Modal show={this.props.show}>
-            <div className="d-flex justify-content-center pageedit-componentlistbox align-items-center w-100">
-                <div className="card w-75">
-                    <div className="pageedit-componentlistbox-header card-header d-flex justify-content-between align-items-center">
-                        <h5 className="mb-0 text-white">请选择组件</h5>
-                        <a href="javascript:void(0)" className="pageedit-componentlistbox-close text-white"
-                            onClick={()=>{this.props.close()}}
-                        >
-                            <span className="oi oi-x" title="icon name" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div className="card-body pageedit-componentlistbox-body">
-                        {list}
-                    </div>
+            <Modal
+                title="请选择组件"
+                visible={this.props.show}
+                footer={null}
+                width={1000}
+                onCancel={() => this.props.close()}
+            >
+                <div className="pageedit-componentlistbox-body">
+                    {list}
                 </div>
-            </div>
-        </Modal>);
+            </Modal>);
     }
 }
 

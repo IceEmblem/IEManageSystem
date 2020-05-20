@@ -45,7 +45,7 @@ export default class ApiScopePermission extends React.Component {
 		return [
 			{ name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: true },
 			{ name: "name", text: "权限名称", isName: true, isShowOnList: true, isEditShow: false, isAddShow: false },
-			{ name: "displayName", text: "权限显示名称", isShowOnList: true, isEditShow: false, isAddShow: false },
+			{ name: "displayName", text: "显示名称", isShowOnList: true, isEditShow: false, isAddShow: false },
 			{
 				name: "permissionId", text: "请选择权限", valueType: "radio",
 				valueTexts: this.state.permissions.map(item => ({

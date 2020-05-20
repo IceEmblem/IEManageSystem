@@ -24,7 +24,7 @@ export default class Tab extends React.Component
             </li>);
 
         return (
-            <div className="ie-tab shadow h-100">
+            <div className="ie-tab h-100">
                 <div>
                     <ul className="nav nav-tabs">
                         {lis}

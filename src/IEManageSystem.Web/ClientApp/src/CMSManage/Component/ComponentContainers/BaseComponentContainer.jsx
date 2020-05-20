@@ -12,12 +12,13 @@ class BaseComponentContainer extends React.Component {
 
         this.execLogic = this.execLogic.bind(this);
         this.pageFreshen = this.pageFreshen.bind(this);
-        let componentDescribe = new ComponentFactory().getComponentDescribeForName(this.props.pageComponent.name);
-        if(componentDescribe){
-            this.componentObject = componentDescribe.componentObject;
+        this.componentDescribe = new ComponentFactory().getComponentDescribeForName(this.props.pageComponent.name);
+        if(this.componentDescribe){
+            this.componentObject = this.componentDescribe.componentObject;
         }
         else{
-            this.componentObject = new ComponentFactory().getComponentDescribeForName("NotFind").componentObject;
+            this.componentDescribe = new ComponentFactory().getComponentDescribeForName("NotFind");
+            this.componentObject = this.componentDescribe.componentObject;
         }
     }
 

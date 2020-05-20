@@ -1,7 +1,5 @@
 .content-container{
-	padding: 0.67rem 0.67rem 1rem 0.67rem;
-	overflow-y: auto;
-	flex-basis: 100%;
+
 }
 
 .content-container > div > *{

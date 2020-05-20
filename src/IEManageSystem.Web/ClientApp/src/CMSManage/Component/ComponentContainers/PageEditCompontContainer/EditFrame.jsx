@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from 'Modal/Modal.jsx'
 import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
 
-import IETool from 'ToolLibrary/IETool';
 import Tab from 'Tab/Tab.jsx'
 
+import { Modal, Button } from 'antd';
 
 class EditFrame extends React.Component {
     // props.close()
@@ -48,7 +47,7 @@ class EditFrame extends React.Component {
     cancel() {
         this.props.close();
         this.setState({
-            selectTab: this.tabs.length > 0 ? this.tabs[0] : null, 
+            selectTab: this.tabs.length > 0 ? this.tabs[0] : null,
             pageComponent: new PageComponentModel(this.props.pageComponent)
         });
     }
@@ -60,7 +59,7 @@ class EditFrame extends React.Component {
 
     // 获取当前要显示的内容
     getContentComponent() {
-        if(!this.state.selectTab){
+        if (!this.state.selectTab) {
             return undefined;
         }
 
@@ -68,43 +67,36 @@ class EditFrame extends React.Component {
         let componentSettingConfig = this.props.componentObject.getComponentSettingConfigs().find(item => item.name == this.state.selectTab.name);
 
         // 组件设置配置使用的组件
-        return componentSettingConfig.bulidConfigComponent(this.state.pageComponent, 
+        return componentSettingConfig.bulidConfigComponent(this.state.pageComponent,
             (pageComponent) => {
-                this.setState({pageComponent:pageComponent});
+                this.setState({ pageComponent: pageComponent });
             });
     }
 
     render() {
         return (
             <Modal
-                show={this.props.show}
+                title={`${this.props.title} 组件编辑`}
+                visible={this.props.show}
+                onOk={this.submit}
+                onCancel={this.cancel}
+                width={1000}
+                bodyStyle={{backgroundColor:"#f8f9fa"}}
+                zIndex={9999}
+                okText="提交"
+                cancelText="取消"
             >
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
-                        <div className="modal-header bg-info text-white">
-                            <h4 className="modal-title">{this.props.title}编辑组件</h4>
-                            <button type="button" className="close" data-dismiss="modal" onClick={this.cancel}>&times;</button>
-                        </div>
-
-                        <div className="modal-body jumbotron">
-                            <Tab
-                                tabs={this.tabs}
-                                nameField={this.nameField}
-                                selectIndex={this.state.selectTab == null ? 0 : this.state.selectTab.index}
-                                selectOnclick={(data) => {
-                                    this.setState({ selectTab: data })
-                                }}
-                            >
-                                {this.getContentComponent()}
-                            </Tab>
-                        </div>
-
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-info" onClick={this.submit}>提交</button>
-                            <button type="button" className="btn btn-secondary" onClick={this.cancel}>关闭</button>
-                        </div>
-
-                    </div>
+                <div className="bg-white p-2">
+                    <Tab
+                        tabs={this.tabs}
+                        nameField={this.nameField}
+                        selectIndex={this.state.selectTab == null ? 0 : this.state.selectTab.index}
+                        selectOnclick={(data) => {
+                            this.setState({ selectTab: data })
+                        }}
+                    >
+                        {this.getContentComponent()}
+                    </Tab>
                 </div>
             </Modal>
         );

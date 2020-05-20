@@ -4,8 +4,10 @@ import FormRadio from './FormRadio.jsx';
 import FormCheck from './FormCheck.jsx';
 import TextGroup from './TextGroup.jsx';
 import Text from './Text.jsx';
-import Modal from 'Modal/Modal.jsx'
 import './ResourceForm.css'
+
+import { Modal, Button, Card } from 'antd';
+import { SaveOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 export default class ResourceForm extends React.Component {
     // props.title
@@ -81,23 +83,20 @@ export default class ResourceForm extends React.Component {
                     title={describe.text}
                     values={this.resource[describe.name]}
                     isEdit={describe.isEdit}
-                    onChange={(name, values) => { this.resource[describe.name] = values }} />
+                    onChange={(name, values) => { this.resource[describe.name] = values; this.setState({}) }} />
             </div>);
         }
 
         if (describe.valueType === ResourceDescribeValueType.radio) {
             return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
-                <div className="card">
-                    <div className="card-header bg-secondary text-white">{describe.text}</div>
-                    <div className="card-body">
-                        <FormRadio
-                            name={describe.name}
-                            values={describe.valueTexts}
-                            isEdit={describe.isEdit}
-                            selectValue={this.resource[describe.name]}
-                            onChange={(name, selectValue) => { this.resource[describe.name] = selectValue }} />
-                    </div>
-                </div>
+                <Card size="small" title={describe.text}>
+                    <FormRadio
+                        name={describe.name}
+                        values={describe.valueTexts}
+                        isEdit={describe.isEdit}
+                        selectValue={this.resource[describe.name]}
+                        onChange={(name, selectValue) => { this.resource[describe.name] = selectValue; this.setState({}) }} />
+                </Card>
             </div>);
         }
 
@@ -111,7 +110,7 @@ export default class ResourceForm extends React.Component {
                             values={describe.valueTexts}
                             isEdit={describe.isEdit}
                             selectValues={this.resource[describe.name]}
-                            onChange={(name, selectValues) => { this.resource[describe.name] = selectValues }} />
+                            onChange={(name, selectValues) => { this.resource[describe.name] = selectValues; this.setState({}) }} />
                     </div>
                 </div>
             </div>);
@@ -126,33 +125,23 @@ export default class ResourceForm extends React.Component {
             elements.push(this.createElement(this.props.describes[item]));
         }
 
-        return (
-            <Modal
-                show={this.props.show}
-            >
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content data-form">
-                        <div className="modal-header bg-info text-white">
-                            <h4 className="modal-title">{this.props.title}信息</h4>
-                            <button type="button" className="close" onClick={this.props.close}>&times;</button>
-                        </div>
-
-                        <div className="modal-body jumbotron">
-                            {elements}
-                        </div>
-
-                        <div className="modal-footer">
-                            <span id="dataFormError" className="text-danger"></span>
-                            {
-                                !this.props.isHideSubmit &&
-                                <button type="button" className="btn btn-info" onClick={this.submit}>提交</button>
-                            }
-                            <button type="button" className="btn btn-secondary" onClick={this.props.close}>关闭</button>
-                        </div>
-
-                    </div>
-                </div>
-            </Modal>
-        );
+        return (<Modal
+            title={`${this.props.title}信息`}
+            visible={this.props.show}
+            footer={false}
+            onCancel={this.props.close}
+        >
+            <div className="w-100" style={{display:"inline-block"}}>
+                {elements}
+            </div>
+            <div className="modal-footer mt-3">
+                <span id="dataFormError" className="text-danger"></span>
+                <Button icon={<CloseCircleOutlined />} onClick={this.props.close}>关闭</Button>
+                {
+                    !this.props.isHideSubmit &&
+                    <Button icon={<SaveOutlined />} type="primary" onClick={this.submit}>提交</Button>
+                }
+            </div>
+        </Modal>)
     }
 }

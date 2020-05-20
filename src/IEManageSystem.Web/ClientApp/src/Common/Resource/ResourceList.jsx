@@ -1,7 +1,17 @@
 import React from 'react';
 import { ResourceDescribeValueType } from '../ResourceForm/ResourceDescribeValueType.js';
+import { Input, Button } from 'antd';
+import {
+    UnorderedListOutlined,
+    ZoomInOutlined,
+    EditOutlined,
+    DeleteOutlined
+} from '@ant-design/icons';
+
+const { Search } = Input;
 
 export default class ResourceList extends React.Component {
+    // props.className
     // props.title
     // props.resources
     // props.describes
@@ -13,8 +23,6 @@ export default class ResourceList extends React.Component {
     // props.customizeOperateBtns	自定义操作按钮组件
     constructor(props) {
         super(props);
-
-        this.searchKey = "";
     }
 
     getShowTexts(resource, describe) {
@@ -94,17 +102,13 @@ export default class ResourceList extends React.Component {
             {resourceBodyTds}
             <td>
                 <div className="btn-group btn-group-sm">
-                    <button type="button" className="btn btn-info"
-                        onClick={() => this.props.resourceLookupClick(resource)}>
-                        <span className="oi oi-zoom-in mr-1" title="icon name" aria-hidden="true"></span>查看</button>
-                    {this.props.hideEdit != true && <button type="button" className="btn btn-primary"
-                        onClick={() => this.props.resourceEditClick(resource)}>
-                        <span className="oi oi-pencil mr-1" title="icon name" aria-hidden="true"></span>编辑</button>}
-                    {this.props.hideDelete != true && <button type="button" className="btn btn-danger"
-                        onClick={() => this.props.resourceDeleteClick(resource)}>
-                        <span className="oi oi-trash mr-1" title="icon name" aria-hidden="true"></span>删除</button>}
+                    <Button className="mr-1" size="small" icon={<ZoomInOutlined />} type="primary" ghost onClick={() => this.props.resourceLookupClick(resource)}>查看</Button>
+                    {this.props.hideEdit != true &&
+                        <Button className="mr-1" size="small" icon={<EditOutlined />} type="primary" onClick={() => this.props.resourceEditClick(resource)}>编辑</Button>}
+                    {this.props.hideDelete != true && 
+                        <Button className="mr-1" size="small" icon={<DeleteOutlined />} type="primary" danger onClick={() => this.props.resourceDeleteClick(resource)}> 删除 </Button>}
                     {this.props.customizeOperateBtns && this.props.customizeOperateBtns.map(
-                        Item => <Item resource={resource}></Item>
+                        (Item, index) => <Item key={index} resource={resource}></Item>
                     )}
                 </div>
             </td>
@@ -129,23 +133,18 @@ export default class ResourceList extends React.Component {
         }
 
         return (
-            <div className="data-list w-100">
-                <h6 className="d-flex justify-content-between shadow">
+            <div className={`data-list w-100 ${this.props.className}`}>
+                <h6 className="d-flex justify-content-between">
                     <span className="mt-auto mb-auto">
-                        <span className="oi oi-list" title="icon name" aria-hidden="true"></span> {" " + this.props.title} 列表
+                        <UnorderedListOutlined /> {" " + this.props.title} 列表
                     </span>
                     <span>
-                        <div className="input-group mb-3 margin-buttom-0">
-                            <input name="searchKey" type="text" className="form-control" placeholder="Search" onChange={event => this.searchKey = event.target.value} />
-                            <div className="input-group-append">
-                                <button className="btn btn-outline-secondary btn-sm" type="submit" onClick={() => this.props.searchClick(this.searchKey)}>
-                                    <span className="oi oi-magnifying-glass" title="icon name" aria-hidden="true"></span>搜索一下
-                              </button>
-                            </div>
+                        <div className="input-group">
+                            <Search placeholder="input search text" onSearch={(value) => this.props.searchClick(value)} enterButton />
                         </div>
                     </span>
                 </h6>
-                <table className="table table-hover table-striped shadow">
+                <table className="table table-hover">
                     <thead>
                         {resourceHeadTr}
                     </thead>

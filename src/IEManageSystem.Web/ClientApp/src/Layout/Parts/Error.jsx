@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import ErrorModal from 'ErrorModal/ErrorModal.jsx';
+
+import { Button, notification, Space } from 'antd';
 
 import {clearError} from 'Core/IEReduxs/Actions'
 
@@ -28,21 +29,14 @@ class Error extends React.Component {
 
     render() 
     {
-        // if(this.state.show == true){
-        //     setTimeout(
-        //         ()=>this.setState({
-        //             show: false
-        //         }), 2000
-        //     )
-        // }
+        if(this.state.show){
+            notification.error({
+                message: "请求错误", 
+                description: this.state.message,
+                onClose: this.props.close});
+        }
             
-        return (
-            <ErrorModal
-                show={this.state.show}
-                title="发生了一个错误"
-                message={this.state.message}
-                close={this.props.close}
-            />)
+        return <div></div>
     }
 }
 

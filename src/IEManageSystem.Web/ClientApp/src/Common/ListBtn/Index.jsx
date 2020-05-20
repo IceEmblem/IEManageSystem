@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'Prop-Types'
-import './Index.css'
+import PropTypes from "prop-types"
+import './index.css'
 
 class ListBtn extends React.Component
 {

@@ -2,7 +2,7 @@ import React from 'react'
 import { BasePageLeafComponent } from '../BasePageLeafComponent'
 import { NavLink } from 'react-router-dom'
 
-import './Index.css';
+import './index.css';
 
 export default class PostList extends BasePageLeafComponent {
     constructor(props) {

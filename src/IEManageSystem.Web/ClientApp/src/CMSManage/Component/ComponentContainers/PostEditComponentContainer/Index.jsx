@@ -4,10 +4,13 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseContentLeafComponent'
 import { componentDataUpdate, pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
 
-import './Index.css'
+import './index.css'
 import BaseComponentContainer from '../BaseComponentContainer'
 
 import EditFrame from './EditFrame'
+
+import { Button, Tooltip } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
 
 class PostEditComponentContainer extends BaseComponentContainer {
     constructor(props) {
@@ -15,17 +18,6 @@ class PostEditComponentContainer extends BaseComponentContainer {
 
         this.state = {
             show: false
-        }
-
-        // 如果内容组件没有数据对象，则申请一个数据对象
-        if ((this.componentObject instanceof BaseContentLeafComponent) &&
-            !this.props.contentComponentData) 
-        {
-            this.props.componentDataUpdate({
-                id: 0,
-                sign: this.props.pageComponent.sign,
-                singleDatas: []
-            });
         }
 
         this.submit = this.submit.bind(this);
@@ -47,15 +39,17 @@ class PostEditComponentContainer extends BaseComponentContainer {
     }
 
     getTools() {
-        let pageComponent = this.props.pageComponent;
+        if (!(this.componentObject instanceof BaseContentLeafComponent)) {
+            return;
+        }
 
-        // 基本内容叶子组件才提供组件数据编辑
-        // 需要有组件数据对象才提供数据编辑
-        if (
-            !(this.componentObject instanceof BaseContentLeafComponent) ||
-            !this.props.contentComponentData
-        ) 
-        {
+        // 如果内容组件没有数据对象，则申请一个数据对象
+        if (!this.props.contentComponentData) {
+            this.props.componentDataUpdate({
+                id: 0,
+                sign: this.props.pageComponent.sign,
+                singleDatas: []
+            });
             return;
         }
 
@@ -63,6 +57,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
         tools.push(
             <EditFrame
                 key={"editFrame"}
+                title={this.componentDescribe.name}
                 show={this.state.show}
                 close={() => { this.setState({ show: false }) }}
                 submit={this.submit}
@@ -73,20 +68,20 @@ class PostEditComponentContainer extends BaseComponentContainer {
             <div className="parentcomponent-btns"
                 key={"editFrameBtn"}
             >
-                <button type="button" className="btn btn-info btn-sm"
-                    onClick={
-                        () => { this.setState({ show: true }) }
-                    }
-                >
-                    <span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>
-                </button>
+                <Tooltip title="编辑数据">
+                    <Button type="primary" shape="circle" icon={<EditOutlined />}
+                        onClick={
+                            () => { this.setState({ show: true }) }
+                        }
+                    />
+                </Tooltip>
             </div>
         );
 
         return tools;
     }
 
-    execLogic(requestData){
+    execLogic(requestData) {
         throw new Error("不能在编辑文章时执行逻辑");
     }
 }

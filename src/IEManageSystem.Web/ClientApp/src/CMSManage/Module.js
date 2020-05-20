@@ -14,19 +14,27 @@ import Home from './Home'
 import PageEdit from "./PageEdit"
 import PostEdit from './PostEdit'
 
+import {
+    SnippetsOutlined,
+    OrderedListOutlined,
+    FileOutlined,
+    FileImageOutlined,
+    ForkOutlined
+} from '@ant-design/icons';
+
 export default class Module extends BaseModule {
     initialize() {
         MenuProvider.registerMenu(
             {
                 id: "CMSManage",
                 text: "CMS管理",
-                icon: "oi-document",
+                icon: SnippetsOutlined,
                 url: "/ManageHome/CMSManage",
                 menuItems: [
                     {
                         id: "MenuListManage",
                         text: "菜单列表",
-                        icon: "oi-menu",
+                        icon: OrderedListOutlined,
                         url: "/ManageHome/CMSManage/MenuListManage",
                         accessScope:
                             [
@@ -37,7 +45,7 @@ export default class Module extends BaseModule {
 
                         id: "PageManage",
                         text: "页面管理",
-                        icon: "oi-file",
+                        icon: FileOutlined,
                         url: "/ManageHome/CMSManage/PageManage",
                         accessScope:
                             [
@@ -48,7 +56,7 @@ export default class Module extends BaseModule {
 
                         id: "PictureManage",
                         text: "图片管理",
-                        icon: "oi-image",
+                        icon: FileImageOutlined,
                         url: "/ManageHome/CMSManage/PictureManage",
                         accessScope:
                             [
@@ -59,7 +67,7 @@ export default class Module extends BaseModule {
 
                         id: "LogicManage",
                         text: "组件逻辑管理",
-                        icon: "oi-image",
+                        icon: ForkOutlined,
                         url: "/ManageHome/CMSManage/LogicManage",
                         accessScope:
                             [

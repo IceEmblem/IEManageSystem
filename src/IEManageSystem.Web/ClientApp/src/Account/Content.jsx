@@ -79,8 +79,8 @@ class Content extends React.Component {
 		}
 
 		let postdata = {
-			Password: $("#PasswordR").val(),
-			AccountID: $("#AccountIDR").val(),
+			Password: this.state.PasswordR,
+			AccountID: this.state.AccountIDR,
 		};
 
 		ieReduxFetch("/api/Account/RegisterAsync", postdata)

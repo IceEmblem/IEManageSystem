@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class BaseField extends React.Component {
-    constructor(props){
-        super(props);
+import { Input, Tag } from 'antd';
 
-        this.state = {
-            fieldValue: this.props.fieldValue
-        }
+export default class BaseField extends React.Component {
+    constructor(props) {
+        super(props);
     }
 
     render() {
@@ -15,17 +13,16 @@ export default class BaseField extends React.Component {
             <div>
                 <label>{this.props.text}</label>
                 <div className="input-group mb-3">
-                    <input value={this.state.fieldValue} type="text" className="form-control" placeholder={`请输入${this.props.text}`}
+                    <Input
+                        value={this.props.fieldValue}
+                        placeholder={`请输入${this.props.text}`}
                         onChange={
                             (event) => {
-                                this.setState({fieldValue: event.target.value});
+                                this.props.setFieldValue(event.target.value);
                             }
                         }
-                        onBlur={()=>{this.props.setFieldValue(this.state.fieldValue);}}
+                        suffix={<Tag color="#55acee">{this.props.text}</Tag>}
                     />
-                    <div className="input-group-append">
-                        <span className="input-group-text">{this.props.text}</span>
-                    </div>
                 </div>
             </div>
         )

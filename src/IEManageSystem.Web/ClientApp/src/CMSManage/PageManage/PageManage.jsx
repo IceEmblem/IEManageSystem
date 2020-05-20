@@ -4,6 +4,8 @@ import Resource from 'Resource/Resource.jsx';
 import { ResourceDescribeValueType } from 'ResourceForm/ResourceDescribeValueType'
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 
+import { EditOutlined } from '@ant-design/icons'
+
 const pageType = {
 	StaticPage: "StaticPage",
 	ContentPage: "ContentPage"
@@ -12,10 +14,11 @@ const pageType = {
 // props.resource
 function EditComponent(props) {
 	return (
-		<NavLink className="btn btn-outline-secondary"
+		<NavLink className="ant-btn ant-btn-sm mr-1"
 			to={`/ManageHome/CMSManage/PageEdit/${props.resource.name}`}
 		>
-			<span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>{" 编辑页面"}
+			<EditOutlined />
+			<span>{" 编辑页面"}</span>
 		</NavLink>);
 }
 
@@ -31,10 +34,11 @@ function EditPageData(props) {
 		}
 
 	return (
-		<NavLink className="btn btn-outline-secondary"
+		<NavLink className="ant-btn ant-btn-sm"
 			to={`${data.url}`}
 		>
-			<span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>{` ${data.text}`}
+			<EditOutlined />
+			<span>{` ${data.text}`}</span>
 		</NavLink>);
 }
 
@@ -147,7 +151,7 @@ class PageManage extends React.Component {
 		customizeOperateBtns.push(EditPageData);
 
 		return (
-			<div className="col-md-12">
+			<div className="col-md-12 bg-white pt-3 pb-3">
 				<Resource
 					title="页面管理"
 					describes={this.getDescribes()}

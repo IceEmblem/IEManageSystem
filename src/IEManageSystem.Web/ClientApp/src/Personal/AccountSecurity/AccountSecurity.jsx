@@ -3,7 +3,12 @@ import UserInfoCss from './AccountSecurity.css';
 import imgAvatar from 'images/default_avatar.png';
 import { getUserInfoFetch, setUserInfoFetch, setSafetyProblemFetch, setPassageFetch } from '../IEReduxs/Actions'
 
+import { Radio, Card, Upload, Input, Tooltip, Button, Tag, Modal } from 'antd';
+import { UploadOutlined, UserOutlined, InfoCircleOutlined, EditOutlined, ReloadOutlined, SmileOutlined } from '@ant-design/icons';
+
 import IERedux from '../IEReduxs/PersonalRedux'
+
+const { Meta } = Card;
 
 class AccountSecurity extends React.Component {
     constructor(props) {
@@ -23,7 +28,8 @@ class AccountSecurity extends React.Component {
             answer: "",
             answerReadonly: true,
             oldPassword: "",
-            newPassword: ""
+            newPassword: "",
+            isShowModal: false
         };
         this.setNextStateForProps(this.props);
 
@@ -33,24 +39,24 @@ class AccountSecurity extends React.Component {
     }
 
     componentDidMount() {
-        if(!this.props.userInfoData.invalidate){
+        if (!this.props.userInfoData.invalidate) {
             return;
         }
 
         this._getUserInfo();
     }
 
-    componentWillUpdate(props){
+    componentWillUpdate(props) {
         this.setNextStateForProps(props);
     }
 
-    setNextStateForProps(props){
-        if(!props.userInfoData.user){
+    setNextStateForProps(props) {
+        if (!props.userInfoData.user) {
             return;
         }
 
         let birthDate = props.userInfoData.user.birthDate != null ?
-            (new Date(props.userInfoData.user.birthDate)).Format("yyyy-MM-dd"):
+            (new Date(props.userInfoData.user.birthDate)).Format("yyyy-MM-dd") :
             "";
 
         Object.assign(this.state, {
@@ -90,6 +96,7 @@ class AccountSecurity extends React.Component {
         };
 
         this.props.setPassageFetch(postData);
+        this.setState({ isShowModal: false });
     }
 
     render() {
@@ -98,159 +105,155 @@ class AccountSecurity extends React.Component {
             <div className="hide-scroll">
                 <div>
                     <div className="account-security mb-3">
-                        <div className="d-flex w-100">
-                            <div className="card account-security-introduce border-0 w-25">
-                                <div className="w-100">
-                                    <img id="userInfoHeadSculpture" className="card-img-top w-100"
-                                        src={userInfoHeadSculpture} alt="Card image" />
-                                </div>
-                                <div className="card-body">
-                                    <h6 className="card-title">{this.state.name}</h6>
-                                    <p className="card-text">{this.state.personSignature}</p>
-                                </div>
+                        <div className="d-flex w-100 bg-white">
+                            <div className="card border-0 userinfo-introduce w-25">
+                                <Card
+                                    hoverable
+                                    cover={
+                                        <img className="w-100" alt={this.state.name} src={userInfoHeadSculpture} />
+                                    }
+                                >
+                                    <Meta description={this.state.personSignature} />
+                                </Card>
                             </div>
-                            <div className="card text-white flex-grow-1 border-0 account-security-transparent">
+                            <div className="card border-0 text-white flex-grow-1 userinfo-transparent">
                                 <div className="card-body">
                                     <div className="input-group mb-3 w-75 float-left">
-                                        <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text bg-info text-white border-0">账号</span>
-                                        </div>
-                                        <input value={this.state.userName} name="userName" type="text" className="form-control" placeholder="AccountNo" readonly="readonly"
-                                            onChange={
-                                                (event) => {
-                                                    this.setState({ userName: event.target.value });
-                                                }
+                                        <Input
+                                            value={this.state.userName}
+                                            prefix={<Tag icon={<UserOutlined />} color="#55acee">账号</Tag>}
+                                            suffix={
+                                                <Button type="primary" icon={<EditOutlined />}
+                                                    onClick={() => { this.setState({ isShowModal: true }) }}
+                                                >
+                                                    Search
+                                                </Button>
                                             }
                                         />
-                                        <div className="input-group-append">
-                                            <button className="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#changePassword">修改登录密码</button>
-                                        </div>
                                     </div>
                                     <div className="input-group mb-3">
-                                        <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text bg-info text-white border-0">昵称</span>
-                                        </div>
-                                        <input value={this.state.name} name="name" type="text" className="form-control" placeholder="请输入昵称" readOnly="true" />
-                                    </div>
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text bg-info text-white border-0">手机号</span>
-                                        </div>
-                                        <input value={this.state.phone} name="phone" type="text" className="form-control" placeholder="请输入手机号"
-                                            readOnly="true"
+                                        <Input
+                                            value={this.state.name}
+                                            prefix={<Tag icon={<SmileOutlined />} color="#55acee">昵称</Tag>}
+                                            suffix={
+                                                <Tooltip title="昵称">
+                                                    <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                </Tooltip>
+                                            }
                                         />
                                     </div>
                                     <div className="input-group mb-3">
-                                        <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text bg-info text-white border-0">邮箱号</span>
-                                        </div>
-                                        <input value={this.state.emailAddress} name="emailAddress" type="text" className="form-control" placeholder="请输入电子邮箱"
-                                            readOnly="true"
+                                        <Input
+                                            value={this.state.phone}
+                                            prefix={<Tag color="#55acee">手机号&#8194;</Tag>}
+                                            suffix={
+                                                <Tooltip title="手机号">
+                                                    <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                </Tooltip>
+                                            }
                                         />
                                     </div>
                                     <div className="input-group mb-3">
-                                        <div className="input-group-prepend account-security-lable">
-                                            <span className="input-group-text bg-info text-white border-0">个性签名</span>
-                                        </div>
-                                        <textarea className="form-control" rows="4" id="comment" placeholder="请输入个性签名"
+                                        <Input
+                                            value={this.state.emailAddress}
+                                            prefix={<Tag color="#55acee">邮箱号&#8194;</Tag>}
+                                            suffix={
+                                                <Tooltip title="邮箱号">
+                                                    <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                </Tooltip>
+                                            }
+                                        />
+                                    </div>
+                                    <div className="input-group mb-3">
+                                        <Input.TextArea placeholder="输入你的个性签名" allowClear
+                                            autoSize={{ minRows: 4, maxRows: 6 }}
                                             value={this.state.personSignature}
-                                            readOnly="true"
-                                        ></textarea>
+                                        />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="w-100 mt-3">
-                            <h5 className="mb-3">完善账号信息</h5>
+                        <Card className="w-100 mt-3" title="完善账号信息" bordered={false}>
                             <div className="col-md-9">
                                 <div className="input-group mb-3">
-                                    <div className="input-group-prepend account-security-lable">
-                                        <span className="input-group-text bg-info text-white border-0">安全问题</span>
-                                    </div>
-                                    <input value={this.state.problem} name="phone" type="text" className="form-control" placeholder="请输入安全问题"
-                                        readOnly={this.state.problemReadonly}
+                                    <Input
+                                        value={this.state.problem}
+                                        prefix={<Tag color="#55acee">安全问题</Tag>}
+                                        disabled={this.state.problemReadonly}
+                                        suffix={
+                                            <Button type="primary" icon={<EditOutlined />}
+                                                onClick={
+                                                    () => {
+                                                        this.setState((preState) => ({ problemReadonly: !preState.problemReadonly }));
+                                                    }
+                                                }
+                                            >
+                                                {this.state.problemReadonly ? "编辑" : "保存"}
+                                            </Button>
+                                        }
                                         onChange={
                                             (event) => {
                                                 this.setState({ problem: event.target.value });
                                             }
                                         }
                                     />
-                                    <div className="input-group-append">
-                                        <button className="btn btn-info" type="button"
-                                            onClick={
-                                                () => {
-                                                    this.setState((preState) => ({ problemReadonly: !preState.problemReadonly }));
-                                                }
-                                            }
-                                        ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.problemReadonly ? "编辑" : "保存"}</button>
-                                    </div>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <div className="input-group-prepend account-security-lable">
-                                        <span className="input-group-text bg-info text-white border-0">答案</span>
-                                    </div>
-                                    <input value={this.state.answer} name="phone" type="text" className="form-control" placeholder="请输入答案"
-                                        readOnly={this.state.answerReadonly}
+                                    <Input
+                                        value={this.state.answer}
+                                        prefix={<Tag color="#55acee">答&#12288;&#12288;案</Tag>}
+                                        disabled={this.state.answerReadonly}
+                                        suffix={
+                                            <Button type="primary" icon={<EditOutlined />}
+                                                onClick={
+                                                    () => {
+                                                        this.setState((preState) => ({ answerReadonly: !preState.answerReadonly }));
+                                                    }
+                                                }
+                                            >
+                                                {this.state.answerReadonly ? "编辑" : "保存"}
+                                            </Button>
+                                        }
                                         onChange={
                                             (event) => {
                                                 this.setState({ answer: event.target.value });
                                             }
                                         }
                                     />
-                                    <div className="input-group-append">
-                                        <button className="btn btn-info" type="button"
-                                            onClick={
-                                                () => {
-                                                    this.setState((preState) => ({ answerReadonly: !preState.answerReadonly }));
-                                                }
-                                            }
-                                        ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.answerReadonly ? "编辑" : "保存"}</button>
-                                    </div>
                                 </div>
                             </div>
+                        </Card>
+                        <div className="w-100 mt-3 d-flex justify-content-end">
+                            <Button onClick={this._getUserInfo} icon={<ReloadOutlined />} >取消修改</Button>
+                            <Button className="mr-2 ml-2" onClick={this._setSafetyProblem} type="primary" icon={<UploadOutlined />} >提交修改</Button>
                         </div>
-                        <div className="w-100 mt-3">
-                            <button className="btn btn-info float-right" type="button" onClick={this._setSafetyProblem}>提交修改</button>
-                            <button className="btn btn-secondary float-right mr-3" type="button" onClick={this._getUserInfo}>取消修改</button>
-                        </div>
-                        <div className="modal fade" id="changePassword">
-                            <div className="modal-dialog">
-                                <div className="modal-content">
-                                    <div className="modal-header bg-info text-white">
-                                        <h5 className="modal-title">修改用户密码</h5>
-                                        <button type="button" className="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <div className="modal-body">
-                                        <div className="input-group mb-3">
-                                            <div className="input-group-prepend">
-                                                <span className="input-group-text">输入原密码</span>
-                                            </div>
-                                            <input type="text" className="form-control" placeholder="请输入原密码" name="oldPassword"
-                                                value={this.state.oldPassword}
-                                                onChange={(event) => {
-                                                    this.setState({ oldPassword: event.target.value });
-                                                }}
-                                            />
-                                        </div>
-                                        <div className="input-group mb-3">
-                                            <div className="input-group-prepend">
-                                                <span className="input-group-text">输入新密码</span>
-                                            </div>
-                                            <input type="text" className="form-control" placeholder="请输入新密码" name="newPassword"
-                                                value={this.state.newPassword}
-                                                onChange={(event) => {
-                                                    this.setState({ newPassword: event.target.value });
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">关闭</button>
-                                        <button type="button" className="btn btn-info" data-dismiss="modal" onClick={this._setPassage}>提交</button>
-                                    </div>
-                                </div>
+                        <Modal
+                            title={"修改密码"}
+                            visible={this.state.isShowModal}
+                            onOk={this._setPassage}
+                            onCancel={() => { this.setState({ isShowModal: false }) }}
+                            okText="提交"
+                            cancelText="取消"
+                        >
+                            <div className="input-group mb-3">
+                                <Input.Password
+                                    prefix={<Tag color="#55acee">输入原密码</Tag>}
+                                    value={this.state.oldPassword}
+                                    onChange={(event) => {
+                                        this.setState({ oldPassword: event.target.value });
+                                    }}
+                                />
                             </div>
-                        </div>
+                            <div className="input-group mb-3">
+                                <Input.Password
+                                    prefix={<Tag color="#55acee">输入新密码</Tag>}
+                                    value={this.state.newPassword}
+                                    onChange={(event) => {
+                                        this.setState({ newPassword: event.target.value });
+                                    }}
+                                />
+                            </div>
+                        </Modal>
                     </div>
                 </div>
             </div>

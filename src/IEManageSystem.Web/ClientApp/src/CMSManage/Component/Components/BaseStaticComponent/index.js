@@ -3,7 +3,7 @@ import BaseStaticComponent, {BaseStaticComponentProps} from './BaseStaticCompone
 
 export default class StaticComponentObject extends BaseComponentObject {
     Component(props){
-        props instanceof BaseMenuComponentProps;
+        let isInherit = props instanceof BaseStaticComponentProps;
 
         throw new Error("Component function undefined");
     }
