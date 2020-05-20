@@ -19,12 +19,6 @@ module.exports = {
             ...config.plugins,
             new webpack.ProvidePlugin({
                 IELib: "ielib",
-            }),
-            new HtmlWebpackPlugin({
-                filename: __dirname + '/build/index.html',
-                template: __dirname + '/src/Start/index.html', // html模板路径,模板路径是支持传参调用loader的,
-                inject: 'body', //打包之后的js插入的位置，true/'head'/'body'/false,
-                chunks: ['index', "weatherExport"]
             })
         ];
 
