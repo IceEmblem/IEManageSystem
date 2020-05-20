@@ -36,3 +36,4 @@
 /src/IEManageSystem.Web/App_Data/Logs
 /test/IEManageSystem.Application.Tests/bin/Debug/netcoreapp3.0
 /test/IEManageSystem.Application.Tests/obj
+/src/IEManageSystem.Web/ClientApp/build
