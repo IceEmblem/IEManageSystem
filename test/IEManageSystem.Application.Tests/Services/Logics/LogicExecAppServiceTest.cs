@@ -30,15 +30,15 @@ namespace IEManageSystem.Application.Tests.Services.Logics
 
             _logicExecAppService.ExecLogic(new IEManageSystem.Services.ManageHome.CMS.Logics.Dto.ExecLogicInput() { 
                 LogicName = "ComponentName1",
-                PageName = "ContentPageName1",
-                PageComponentSign = "ContentPageName1_ComponentSign1",
-                PageDataName = "PageData",
-                ContentComponentDataSign = "ContentPageName1_ComponentSign1",
+                PageName = "ContentPage1Name",
+                PageComponentSign = "ContentPage1_Component1Sign",
+                PageDataName = "PageData1Name",
+                ContentComponentDataSign = "ContentPage1_Component1Sign",
                 Request = ""
             });
 
-            var pageData = dbContext.PageDatas.Include(e=>e.ContentComponentDatas).ThenInclude(e => e.SingleDatas).FirstOrDefault(e=>e.Name == "PageData");
-            var componentData = pageData.GetComponentDataForSign("ContentPageName1_ComponentSign1");
+            var pageData = dbContext.PageDatas.Include(e=>e.ContentComponentDatas).ThenInclude(e => e.SingleDatas).FirstOrDefault(e=>e.Name == "PageData1Name");
+            var componentData = pageData.GetComponentDataForSign("ContentPage1_Component1Sign");
             Assert.True(componentData.SingleDatas.ElementAt(0).Field1 == "1");
         }
 
@@ -56,10 +56,10 @@ namespace IEManageSystem.Application.Tests.Services.Logics
                 _logicExecAppService.ExecLogic(new IEManageSystem.Services.ManageHome.CMS.Logics.Dto.ExecLogicInput()
                 {
                     LogicName = "AAAAAAAAAAAAAAA",
-                    PageName = "ContentPageName1",
-                    PageComponentSign = "ContentPageName1_ComponentSign1",
+                    PageName = "ContentPage1Name",
+                    PageComponentSign = "ContentPage1_Component1Sign",
                     PageDataName = "PageData",
-                    ContentComponentDataSign = "ContentPageName1_ComponentSign1",
+                    ContentComponentDataSign = "ContentPage1_Component1Sign",
                     Request = ""
                 });
             }

@@ -35,6 +35,15 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             ((ContentPage)page).AddPageData(pageData);
         }
 
+        public void UpdatePageData(PageData pageData) {
+            var posts = Repository.GetAllList(e=>e.Name == pageData.Name);
+            if (posts.Count > 1 || (posts.Count == 1 && posts[0].Id != pageData.Id)) {
+                throw new UserFriendlyException("文章名称已重复");
+            }
+
+            Repository.Update(pageData);
+        }
+
         public void DeletePageData(string name, string pageDataName)
         {
             var page = PageRepository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Name == name);
@@ -48,6 +57,8 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             {
                 throw new UserFriendlyException("找不到要删除的文章");
             }
+
+            Repository.ThenInclude(e => e.ContentComponentDatas, e => e.SingleDatas).FirstOrDefault(e=>e.Id == pageData.Id);
 
             page.PageDatas.Remove(pageData);
         }

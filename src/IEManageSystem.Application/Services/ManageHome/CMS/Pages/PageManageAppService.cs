@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Abp.Domain.Repositories;
+using Abp.ObjectMapping;
 using Abp.UI;
 using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiScopeProviders;
@@ -20,6 +21,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
     [ApiAuthorization(ApiScopeProvider.Page)]
     public class PageManageAppService : IEManageSystemAppServiceBase, IPageManageAppService
     {
+        private readonly IObjectMapper _objectMapper;
+
         private PageManager _pageManager { get; set; }
 
         private IPageRepository _repository => _pageManager.PageRepository;
@@ -28,12 +31,15 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public PageManageAppService(
             PageManager pageManager,
-            PageDataManager pageDataManager
+            PageDataManager pageDataManager,
+            IObjectMapper objectMapper
             )
         {
             _pageManager = pageManager;
 
             _pageDataManager = pageDataManager;
+
+            _objectMapper = objectMapper;
         }
 
         public AddContentPageOutput AddContentPage(AddContentPageInput input)
@@ -139,11 +145,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 {
                     Name = item.Name,
                     DisplayName = item.DisplayName,
-                    Field1 = item.Field1,
-                    Field2 = item.Field2,
-                    Field3 = item.Field3,
-                    Field4 = item.Field4,
-                    Field5 = item.Field5
+                    SingleDatas = _objectMapper.Map<List<SingleSettingData>>(item.SingleDatas)
                 };
                 pageComponentSettings.Add(pageComponentSetting);
             }
@@ -173,9 +175,10 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 throw new UserFriendlyException("无法更改单页文章");
             }
 
-            var contentPage = (ContentPage) page;
-            contentPage.SetPageDataName(input.Id, input.Name);
-            contentPage.SetPageDataTitle(input.Id, input.Title);
+            var post = page.PageDatas.First(e=>e.Id == input.Id);
+            post.Name = input.Name;
+            post.Title = input.Title;
+            _pageDataManager.UpdatePageData(post);
 
             return new UpdatePageDataOutput();
         }
@@ -197,10 +200,10 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                     Sign = item.Sign,
 
                 };
-                componentData.SingleDatas = new List<SingleData>();
+                componentData.SingleDatas = new List<SingleComponentData>();
 
                 foreach (var singleData in item.SingleDatas) {
-                    componentData.SingleDatas.Add(new SingleData() {
+                    componentData.SingleDatas.Add(new SingleComponentData() {
                         Name = singleData.Name,
                         SortIndex = singleData.SortIndex,
                         Field1 = singleData.Field1,

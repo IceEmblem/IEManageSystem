@@ -77,12 +77,20 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             
             if (input.Id != null)
             {
-                page = _repository.ThenInclude(p => p.PageComponents, pageComponent => pageComponent.PageComponentSettings).FirstOrDefault(e => e.Id == input.Id.Value);
+                page = _repository
+                    .ThenInclude(p => p.PageComponents,
+                        pageComponent => pageComponent.PageComponentSettings,
+                        pageComponentSetting => pageComponentSetting.SingleDatas)
+                    .FirstOrDefault(e => e.Id == input.Id.Value);
             }
 
             if (page == null && !string.IsNullOrWhiteSpace(input.Name))
             {
-                page = _repository.ThenInclude(p => p.PageComponents, pageComponent => pageComponent.PageComponentSettings).FirstOrDefault(item => item.Name == input.Name);
+                page = _repository
+                        .ThenInclude(p => p.PageComponents,
+                            pageComponent => pageComponent.PageComponentSettings,
+                            pageComponentSetting => pageComponentSetting.SingleDatas)
+                        .FirstOrDefault(item => item.Name == input.Name);
             }
 
             if (page == null)
@@ -143,11 +151,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
                     Id = item.Id,
                     Name = item.Name,
                     DisplayName = item.DisplayName,
-                    Field1 = item.Field1,
-                    Field2 = item.Field2,
-                    Field3  = item.Field3,
-                    Field4 = item.Field4,
-                    Field5 = item.Field5
+                    SingleDatas = _objectMapper.Map<List<SingleSettingDataDto>>(item.SingleDatas)
                 };
 
                 dto.PageComponentSettings.Add(pageComponentSetting);

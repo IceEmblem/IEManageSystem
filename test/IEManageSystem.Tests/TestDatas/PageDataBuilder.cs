@@ -21,21 +21,21 @@ namespace IEManageSystem.Tests.TestDatas
 
         public void Build()
         {
-            var page = _context.Pages.First(e=>e.Name == "ContentPageName1");
+            var page = _context.Pages.First(e=>e.Name == "ContentPage1Name");
 
             var pageData = new CMS.DomainModel.PageDatas.PageData()
             {
-                Name = "PageData",
+                Name = "PageData1Name",
                 Title = "文章测试标题",
                 ContentComponentDatas = new List<ContentComponentData>() {
                     new ContentComponentData(){ 
-                        Sign = "ContentPageName1_ComponentSign1",
-                        SingleDatas = new List<SingleData>(){ 
-                            new SingleData(){ Name = "default" },
-                            new SingleData(){ Name = "ContentPageName1_Component1_SingleData2" }
+                        Sign = "ContentPage1_Component1Sign",
+                        SingleDatas = new List<SingleComponentData>(){ 
+                            new SingleComponentData(){ Name = "PageData1_ContentComponentData1_SingleComponentData1Name" },
+                            new SingleComponentData(){ Name = "PageData1_ContentComponentData1_SingleComponentData2Name" }
                         }
                     },
-                    new ContentComponentData(){ Sign = "ContentPageName1_ComponentSign2" }
+                    new ContentComponentData(){ Sign = "ContentPage1_Component2Sign" }
                 },
                 Page = page
             };

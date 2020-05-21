@@ -18,23 +18,29 @@ namespace IEManageSystem.Tests.TestDatas
 
         public void Build()
         {
-            var contentPage = new ContentPage("ContentPageName1")
+            var contentPage = new ContentPage("ContentPage1Name")
             {
                 DisplayName = "测试内容页",
                 Description = "用于测试的数据",
                 PageComponents = new List<PageComponentBase>() {
                     new LeafComponent("ComponentName1"){
-                        Sign = "ContentPageName1_ComponentSign1",
+                        Sign = "ContentPage1_Component1Sign",
                         PageComponentBaseSetting = new PageComponentBaseSetting(1, "12", "27rem", null, null, null, null),
                         PageComponentSettings = new List<PageComponentSetting>(){
-                            new PageComponentSetting(){ Name = "PicSetting" }
+                            new PageComponentSetting(){
+                                Name = "ContentPage1_Component1_PageComponentSetting1Name",
+                                SingleDatas = new List<SingleSettingData>(){
+                                    new SingleSettingData(){ Name = "ContentPage1_Component1_PageComponentSetting1_SingleSettingData1Name" },
+                                    new SingleSettingData(){ Name = "ContentPage1_Component1_PageComponentSetting1_SingleSettingData2Name" }
+                                }
+                            }
                         }
                     },
                     new CompositeComponent("ComponentName2"){ 
-                        Sign = "ContentPageName1_ComponentSign2"
+                        Sign = "ContentPage1_Component2Sign"
                     },
                     new PageLeafComponent("ComponentName3"){ 
-                        Sign = "ContentPageName1_ComponentSign3"
+                        Sign = "ContentPage1_Component3Sign"
                     }
                 }
             };
@@ -43,11 +49,11 @@ namespace IEManageSystem.Tests.TestDatas
 
             var pageData = new CMS.DomainModel.PageDatas.PageData()
             {
-                Name = "StaticPage_PageData",
+                Name = "StaticPage1_PageData1Name",
                 Title = "文章测试标题",
                 ContentComponentDatas = new List<ContentComponentData>() {
-                    new ContentComponentData(){ Sign = "StaticPage_ComponentSign1" },
-                    new ContentComponentData(){ Sign = "StaticPage_ComponentSign2" }
+                    new ContentComponentData(){ Sign = "StaticPage1_PageComponentBase1Sign" },
+                    new ContentComponentData(){ Sign = "StaticPage1_PageComponentBase2Sign" }
                 }
             };
 
@@ -57,10 +63,10 @@ namespace IEManageSystem.Tests.TestDatas
                 Description = "用于测试的数据",
                 PageComponents = new List<PageComponentBase>() {
                     new LeafComponent("ComponentName1"){
-                        Sign = "StaticPage_ComponentSign1",
+                        Sign = "StaticPage1_PageComponentBase1Sign",
                     },
                     new LeafComponent("ComponentName1"){
-                        Sign = "StaticPage_ComponentSign2",
+                        Sign = "StaticPage1_PageComponentBase2Sign",
                     }
                 }
             };

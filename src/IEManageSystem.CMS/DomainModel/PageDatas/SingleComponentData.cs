@@ -1,11 +1,12 @@
 ﻿using Abp.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.PageDatas
 {
-    public class SingleData : Entity
+    public class SingleComponentData : Entity, ISingleData
     {
         public string Name { get; set; }
 
@@ -20,5 +21,10 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         public string Field4 { get; set; }
 
         public string Field5 { get; set; }
+
+        [ForeignKey("ContentComponentData")]
+        public int ContentComponentDataId { get; set; }
+
+        public ContentComponentData ContentComponentData { get; set; }
     }
 }

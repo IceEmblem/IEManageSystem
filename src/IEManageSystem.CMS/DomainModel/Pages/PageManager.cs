@@ -54,7 +54,9 @@ namespace IEManageSystem.CMS.DomainModel.Pages
                 throw new UserFriendlyException("不能删除主页");
             }
 
-            PageRepository.Delete(item => item.Name == name);
+            var page = PageRepository.ThenInclude(e => e.PageComponents, e => e.PageComponentSettings, e => e.SingleDatas).FirstOrDefault(e=>e.Name == name);
+
+            PageRepository.Delete(page);
         }
 
         public List<PageComponentBase> GetPageComponents(string name)
@@ -76,7 +78,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public void UpdatePageComponents(string name, List<PageComponentBase> pageComponents)
         {
-            var page = PageRepository.ThenInclude(e => e.PageComponents, e=>e.PageComponentSettings).FirstOrDefault(e => e.Name == name);
+            var page = PageRepository.ThenInclude(e => e.PageComponents, e=>e.PageComponentSettings, e=>e.SingleDatas).FirstOrDefault(e => e.Name == name);
             page.PageComponents = new List<PageComponentBase>();
 
             foreach (var item in pageComponents) {

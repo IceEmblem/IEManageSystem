@@ -18,6 +18,6 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         [ForeignKey("PageData")]
         public int PageDataId { get; set; }
 
-        public ICollection<SingleData> SingleDatas { get; set; }
+        public ICollection<SingleComponentData> SingleDatas { get; set; }
     }
 }

@@ -14,5 +14,11 @@ namespace IEManageSystem.Repositorys
         IQueryable<TEntity> ThenInclude<ThenType>(
             Expression<Func<TEntity, IEnumerable<ThenType>>> includePath,
             Expression<Func<ThenType, object>> thenIncludePath);
+
+        IQueryable<TEntity> ThenInclude<ThenType, ThenThenType>(
+            Expression<Func<TEntity, IEnumerable<ThenType>>> includePath,
+            Expression<Func<ThenType, IEnumerable<ThenThenType>>> thenIncludePath,
+            Expression<Func<ThenThenType, object>> thenThenIncludePath
+            );
     }
 }

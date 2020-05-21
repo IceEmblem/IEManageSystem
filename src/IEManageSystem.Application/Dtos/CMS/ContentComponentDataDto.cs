@@ -14,6 +14,6 @@ namespace IEManageSystem.Dtos.CMS
 
         public string Sign { get; set; }
 
-        public List<SingleDataDto> SingleDatas { get; set; }
+        public List<SingleComponentDataDto> SingleDatas { get; set; }
     }
 }
