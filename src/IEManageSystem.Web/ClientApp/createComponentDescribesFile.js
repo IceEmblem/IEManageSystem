@@ -6,37 +6,32 @@ const componentsDirPath = __dirname + '/src/CMSManage/Component/Components'
 
 var componentPaths = [];
 
-let files = fs.readdirSync(componentsDirPath);
-
-files.forEach(function (file) {
-    // 过滤了基本组件
-    if (file == "BaseComponent" ||
-        file == "BaseContainerComponent" ||
-        file == "BaseLeafComponent" ||
-        file == "BaseMenuComponent" ||
-        file == "BaseContentLeafComponent" ||
-        file == "BaseStaticComponent" ||
-        file == "BasePageLeafComponent") 
-    {
+fs.readdirSync(componentsDirPath).forEach(function (templateDir) {
+    // 过滤掉其他非组件文件夹
+    if (!templateDir.endsWith("TemplateComponents")) {
         return;
     }
 
-    let componentPath = componentsDirPath + "/" + file;
+    let templatePath = componentsDirPath + "/" + templateDir;
 
-    let stats =fs.statSync(componentPath);
+    fs.readdirSync(templatePath).forEach(function (componentDir) {
+        let componentPath = templatePath + "/" + componentDir;
 
-    if (stats.isDirectory()) {
-        componentPaths.push(componentPath.replace(__dirname + "/src/", ""));
-    }
+        let stats = fs.statSync(componentPath);
+
+        if (stats.isDirectory()) {
+            componentPaths.push(componentPath.replace(__dirname + "/src/", ""));
+        }
+    });
 });
 
 let importListStr = "// -----该文件由 Webpack 编译时动态生成，请勿直接更改-----\n\n";
 let componentListStr = "";
 
 const componentNameRegex = /[^/]+$/;
-componentPaths.forEach(function(componentPath){
+componentPaths.forEach(function (componentPath) {
     let matchs = componentNameRegex.exec(componentPath);
-    if(matchs.length != 1){
+    if (matchs.length != 1) {
         throw new Error("编译时获取组件名称失败");
     }
 

@@ -1,7 +1,7 @@
-import ContainerComponentObject from 'CMSManage/Component/Components/BaseContainerComponent'
-import PageLeafComponentObject from 'CMSManage/Component/Components/BasePageLeafComponent'
-import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseLeafComponent'
-import BaseMenuComponentObject from 'CMSManage/Component/Components/BaseMenuComponent'
+import ContainerComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContainerComponent'
+import PageLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BasePageLeafComponent'
+import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseLeafComponent'
+import BaseMenuComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseMenuComponent'
 import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
 
 class CreateComponentService{

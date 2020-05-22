@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseContentLeafComponent'
+import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
 import { componentDataUpdate, pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
 
 import './index.css'
