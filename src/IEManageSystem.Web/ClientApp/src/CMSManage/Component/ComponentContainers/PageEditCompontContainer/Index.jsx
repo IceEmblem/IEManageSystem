@@ -54,14 +54,14 @@ class PageEditCompontContainer extends BaseComponentContainer {
         ></EditFrame>);
         tools.push(
             <div key={"EditFrameBtn"} className="editableparentcom-btns">
-                <Tooltip title="删除">
+                <Tooltip title={`删除 ${this.componentDescribe.displayName}`} overlayStyle={{zIndex:10000}}>
                     <Button type="primary" shape="circle" danger icon={<DeleteOutlined />}
                         onClick={
                             () => { this.props.removeComponent(this.props.pageComponent) }
                         }
                     />
                 </Tooltip>
-                <Tooltip title="编辑">
+                <Tooltip title={`编辑 ${this.componentDescribe.displayName}`} overlayStyle={{zIndex:10000}}>
                     <Button type="primary" shape="circle" icon={<EditOutlined />}
                         onClick={
                             () => { this.setState({ openEdit: true }) }
@@ -70,7 +70,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
                 </Tooltip>
                 {
                     isShowAddBtn &&
-                    <Tooltip title="添加">
+                    <Tooltip title="添加" overlayStyle={{zIndex:10000}}>
                         <Button type="default" shape="circle" icon={<AppstoreAddOutlined />}
                             onClick={
                                 () => { this.props.addChildComponent(this.props.pageComponent) }
