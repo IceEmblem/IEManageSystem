@@ -20,7 +20,6 @@ export default class PicturePopupBox extends React.Component {
     }
 
     render() {
-        debugger
         return (
             <Modal
                 title="图片选择"

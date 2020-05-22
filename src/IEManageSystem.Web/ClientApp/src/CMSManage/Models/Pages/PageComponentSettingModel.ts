@@ -1,22 +1,23 @@
-export default class PageComponentSettingModel {
+import SingleDataModel from "../SingleDataModel";
+import DataCollectionBase from "../DataCollectionBase";
+
+export default class PageComponentSettingModel extends DataCollectionBase 
+{
     public id: number;
     public name:string;
     public displayName:string;
-    public field1:string;
-    public field2:string;
-    public field3:string;
-    public field4:string;
-    public field5:string;
+
+    static createDefaultSettingData(name:string, displayName:string):PageComponentSettingModel
+    {
+        return new PageComponentSettingModel({id: 0, name: name, displayName:displayName, singleDatas: []});
+    }
 
     constructor(data:any)
     {
+        super(data.singleDatas);
+        
         this.id = data.id;
         this.name = data.name;
         this.displayName = data.displayName;
-        this.field1 = data.field1;
-        this.field2 = data.field2;
-        this.field3 = data.field3;
-        this.field4 = data.field4;
-        this.field5 = data.field5;
     }
 }

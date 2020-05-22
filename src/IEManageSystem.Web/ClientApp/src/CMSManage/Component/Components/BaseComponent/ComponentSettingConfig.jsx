@@ -1,3 +1,5 @@
+import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
+
 export default class ComponentSettingConfig {
     static BuildBasicComponentSettingConfig(name, displayName, settingComponentBuilder){
         return new ComponentSettingConfig(name, displayName, settingComponentBuilder, 
@@ -20,10 +22,7 @@ export default class ComponentSettingConfig {
             (pageComponent, name)=>{ 
                 let pageComponentSetting = pageComponent.pageComponentSettings.find(item => item.name == name);
                 if(!pageComponentSetting){
-                    pageComponentSetting = {
-                        name: name,
-                        displayName: displayName
-                    };
+                    pageComponentSetting = PageComponentSettingModel.createDefaultSettingData(name, displayName);
                     pageComponent.pageComponentSettings.push(pageComponentSetting);
                 }
 
@@ -32,11 +31,7 @@ export default class ComponentSettingConfig {
             },
             (pageComponent, name, setting)=>{ 
                 let pageComponentSetting = pageComponent.pageComponentSettings.find(item => item.name == name);
-                pageComponentSetting.field1 = setting.field1
-                pageComponentSetting.field2 = setting.field2
-                pageComponentSetting.field3 = setting.field3
-                pageComponentSetting.field4 = setting.field4
-                pageComponentSetting.field5 = setting.field5
+                pageComponentSetting.singleDatas = setting.singleDatas;
             });
     }
 
