@@ -27,6 +27,8 @@ class BaseComponentContainer extends React.Component {
             padding: "0rem"
         }
 
+        style.width = "100%";
+
         if (this.props.pageComponent.pageComponentBaseSetting.width) {
             style.width = this.props.pageComponent.pageComponentBaseSetting.width;
         }

@@ -29,6 +29,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
             <Contain
                 key={item.sign}
                 pageComponent={item}
+                addChildComponent={this.props.addChildComponent}
             >
             </Contain>)
         );

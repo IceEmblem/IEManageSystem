@@ -2,7 +2,7 @@ require("./createComponentDescribesFile");
 require("./createModuleListFile");
 
 var path = require("path");
-var pathMap = require('./src/lib/pathmap.json');
+var pathMap = require('./pathmap.json');
 
 // 路径
 var srcPath = path.resolve('./src');

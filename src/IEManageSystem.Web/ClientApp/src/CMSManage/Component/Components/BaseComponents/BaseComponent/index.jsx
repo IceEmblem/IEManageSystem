@@ -5,7 +5,6 @@ import BasicSettingConfig from './BasicSettingConfig';
 import DefaultSettingConfig from './DefaultSettingConfig';
 import ComponentSettingConfig from './ComponentSettingConfig';
 import BaseField from './BaseField';
-import BaseCustomizeField from './BaseCustomizeField';
 import BasePreview from './BasePreview';
 
 // 组件对象
@@ -35,7 +34,6 @@ export {
     DefaultSettingConfig, 
     ComponentSettingConfig,
     BaseField, 
-    BaseCustomizeField, 
     BaseComponent, 
     BaseComponentProps, 
 }

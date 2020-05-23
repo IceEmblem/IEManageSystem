@@ -110,16 +110,16 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="背景图片"
-                            value={this.props.data.backgroundColor}
+                            value={this.props.data.backgroundImage}
                             onChange={
                                 (event) => {
                                     this.props.setData({
                                         ...this.props.data,
-                                        ...{ backgroundColor: event.target.value }
+                                        ...{ backgroundImage: event.target.value }
                                     });
                                 }
                             }
-                            suffix={<Button type="primary" onClick={()=>{this.setState({isShowPicturePopupBox: true})}} >选择图片</Button>}
+                            suffix={<Button size="small" type="primary" onClick={()=>{this.setState({isShowPicturePopupBox: true})}} >选择图片</Button>}
                         />
                     </div>
                     <PicturePopupBox 
@@ -128,7 +128,7 @@ export default class BasicSettingConfig extends BaseConfig {
                         selectPictruePath={(path)=>{
                             this.props.setData({
                                 ...this.props.data,
-                                ...{ backgroundColor: path }
+                                ...{ backgroundImage: path }
                             });
                         }}
                     />

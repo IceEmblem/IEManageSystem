@@ -1,43 +1,50 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import {BaseMenuComponent} from '../../BaseComponents/BaseMenuComponent'
 
-import './IEMenu.css'
+import { Menu } from 'antd';
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+const { SubMenu } = Menu;
 
-export default class IEMenu extends BaseMenuComponent{
-    createRootMenu(menu, menuIndex) 
-    {
-        let childsMenus = menu.menus || [];
-
-        return (
-            <label key={menuIndex}>
-                <div className="ie-menu-title">
-                    <div>
-                        <span className={ "oi padding-right-10 " + menu.icon } title="icon name" aria-hidden="true"></span>
-                        <span>
-                            <NavLink className="text-white w-100" to={this.createUrl(menu)}>{menu.displayName}</NavLink>
-                        </span>
-                    </div>
-                    {
-                        childsMenus.length != 0 && <div className='ie-menu-title-right'></div>
-                    }
-                </div>
-                <div className='ie-menu-content'>
-                    <ul>
-                        {childsMenus.map((item, index) => (
-                        <li key={index}>
-                            <NavLink className="text-white w-100" to={this.createUrl(item)}>{item.displayName}</NavLink>
-                        </li>))}
-                    </ul>
-                </div>
-            </label>);
+export default class IEMenu extends React.Component {
+    constructor(props) {
+        super(props);
     }
+
+    state = {
+        current: 'mail',
+    };
+
+    handleClick = e => {
+        console.log('click ', e);
+        this.setState({
+            current: e.key,
+        });
+    };
 
     render() {
         return (
-            <div className='ie-menu'>
-                {this.state.menus.map((item, index) => this.createRootMenu(item, index))}
-            </div>
+            <Menu className="m-0 border-0" onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
+                <Menu.Item key="mail" icon={<MailOutlined />}>
+                    设计
+            </Menu.Item>
+                <Menu.Item key="app" disabled icon={<AppstoreOutlined />}>
+                    文档
+            </Menu.Item>
+                <SubMenu icon={<SettingOutlined />} title="组件">
+                    <Menu.ItemGroup title="Item 1">
+                        <Menu.Item key="setting:1">Option 1</Menu.Item>
+                        <Menu.Item key="setting:2">Option 2</Menu.Item>
+                    </Menu.ItemGroup>
+                    <Menu.ItemGroup title="Item 2">
+                        <Menu.Item key="setting:3">Option 3</Menu.Item>
+                        <Menu.Item key="setting:4">Option 4</Menu.Item>
+                    </Menu.ItemGroup>
+                </SubMenu>
+                <Menu.Item key="alipay">
+                    <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+                        资源
+                </a>
+                </Menu.Item>
+            </Menu>
         );
     }
 }
