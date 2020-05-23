@@ -25,7 +25,7 @@ namespace IEManageSystem.Tests.TestDatas
                 PageComponents = new List<PageComponentBase>() {
                     new LeafComponent("ComponentName1"){
                         Sign = "ContentPage1_Component1Sign",
-                        PageComponentBaseSetting = new PageComponentBaseSetting(1, "12", "27rem", null, null, null, null),
+                        PageComponentBaseSetting = new PageComponentBaseSetting(1, "12", "27rem", null, null, null, null, null),
                         PageComponentSettings = new List<PageComponentSetting>(){
                             new PageComponentSetting(){
                                 Name = "ContentPage1_Component1_PageComponentSetting1Name",

@@ -131,11 +131,12 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             pageComponent.ParentSign = dto.ParentSign;
             pageComponent.PageComponentBaseSetting = new PageComponentBaseSetting(
                 dto.PageComponentBaseSetting.SortIndex,
-                dto.PageComponentBaseSetting.Col,
+                dto.PageComponentBaseSetting.Width,
                 dto.PageComponentBaseSetting.Height,
                 dto.PageComponentBaseSetting.Padding,
                 dto.PageComponentBaseSetting.Margin,
                 dto.PageComponentBaseSetting.BackgroundColor,
+                dto.PageComponentBaseSetting.BackgroundImage,
                 dto.PageComponentBaseSetting.ClassName
                 );
 

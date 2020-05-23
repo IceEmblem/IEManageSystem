@@ -50,7 +50,7 @@ class ComponentData extends React.Component {
                         提交文章
                     </Button>
                 </div>
-                <div className="hide-scroll">
+                <div className="">
                     <div className="front-page-container">
                         {
                             this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>

@@ -92,7 +92,7 @@ class PageContainer extends React.Component {
 
         return (
             <div className="pageedit-page-container">
-                <div className="hide-scroll">
+                <div className="">
                     <div className="front-page-container">
                         {
                             this.props.childPageComponents.map(item =>

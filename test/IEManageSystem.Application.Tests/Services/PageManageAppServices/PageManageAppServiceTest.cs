@@ -106,7 +106,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
                         Name = "UpdatePageComponent_BaseTest_ComponentName",
                         Sign = "UpdatePageComponent_BaseTest_PageComponentSign",
                         PageComponentBaseSetting = new PageComponentBaseSettingDto(){ 
-                            Col = "12",
+                            Width = "12",
                         },
                         PageComponentSettings = new List<PageComponentSettingDto>(){
                             new PageComponentSettingDto(){

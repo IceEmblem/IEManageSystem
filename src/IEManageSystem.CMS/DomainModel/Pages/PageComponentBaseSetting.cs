@@ -12,20 +12,21 @@ namespace IEManageSystem.CMS.DomainModel.Pages
     {
         protected PageComponentBaseSetting() { }
 
-        public PageComponentBaseSetting(int sortIndex, string col, string height, string padding, string margin, string backgroundColor, string className)
+        public PageComponentBaseSetting(int sortIndex, string width, string height, string padding, string margin, string backgroundImage,string backgroundColor, string className)
         {
             SortIndex = sortIndex;
-            Col = col;
+            Width = width;
             Height = height;
             Padding = padding;
             Margin = margin;
             BackgroundColor = backgroundColor;
+            BackgroundImage = backgroundImage;
             ClassName = className;
         }
 
         public int SortIndex { get; protected set; }
 
-        public string Col { get; protected set; }
+        public string Width { get; protected set; }
 
         public string Height { get; protected set; }
 
@@ -35,17 +36,20 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public string BackgroundColor { get; protected set; }
 
+        public string BackgroundImage { get; protected set; }
+
         public string ClassName { get; protected set; }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
 
             yield return SortIndex;
-            yield return Col;
+            yield return Width;
             yield return Height;
             yield return Padding;
             yield return Margin;
             yield return BackgroundColor;
+            yield return BackgroundImage;
             yield return ClassName;
         }
     }

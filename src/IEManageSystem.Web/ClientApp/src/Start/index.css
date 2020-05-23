@@ -5,11 +5,6 @@ html {
     line-height: 22px;
 }
 
-/* #root{
-    display: flex;
-    justify-content: center;
+#root{
+    overflow-y: auto;
 }
-
-#root>*{
-    max-width: 1440px;
-} */

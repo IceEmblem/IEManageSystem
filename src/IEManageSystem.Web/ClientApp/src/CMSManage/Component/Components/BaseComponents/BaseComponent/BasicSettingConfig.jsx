@@ -1,20 +1,25 @@
 import React from 'react';
 import BaseConfig from './BaseConfig';
+import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 
-import { Input, Tag, InputNumber } from 'antd';
+import { Input, Tag, InputNumber, Button } from 'antd';
 
 // props.data 类型为 PageComponentBaseSettingModel
 // props.setData 类型为 (PageComponentBaseSettingModel) => void
 // 基本设置 配置
 export default class BasicSettingConfig extends BaseConfig {
+    state={
+        isShowPicturePopupBox: false
+    }
+
     render() {
         return (
             <div className="d-flex flex-md-wrap">
                 <div className="col-md-6 float-left">
-                    <label>请输入1~12网格宽度：</label>
+                    <label>请输入宽度（例如：50%）：</label>
                     <div className="input-group mb-3">
                         <Input
-                            placeholder="网格宽度"
+                            placeholder="宽度"
                             value={this.props.data.col}
                             onChange={
                                 (event) => {
@@ -24,7 +29,7 @@ export default class BasicSettingConfig extends BaseConfig {
                                     })
                                 }
                             }
-                            suffix={<Tag color="#55acee">网格宽度</Tag>}
+                            suffix={<Tag color="#55acee">宽度</Tag>}
                         />
                     </div>
                 </div>
@@ -99,6 +104,34 @@ export default class BasicSettingConfig extends BaseConfig {
                             suffix={<Tag color="#55acee">背景颜色</Tag>}
                         />
                     </div>
+                </div>
+                <div className="col-md-6 float-left">
+                    <label>请输入选择背景图片：</label>
+                    <div className="input-group mb-3">
+                        <Input
+                            placeholder="背景图片"
+                            value={this.props.data.backgroundColor}
+                            onChange={
+                                (event) => {
+                                    this.props.setData({
+                                        ...this.props.data,
+                                        ...{ backgroundColor: event.target.value }
+                                    });
+                                }
+                            }
+                            suffix={<Button type="primary" onClick={()=>{this.setState({isShowPicturePopupBox: true})}} >选择图片</Button>}
+                        />
+                    </div>
+                    <PicturePopupBox 
+                        isShow={this.state.isShowPicturePopupBox}
+                        closePopupBox={()=>{this.setState({isShowPicturePopupBox: false})}}
+                        selectPictruePath={(path)=>{
+                            this.props.setData({
+                                ...this.props.data,
+                                ...{ backgroundColor: path }
+                            });
+                        }}
+                    />
                 </div>
                 <div className="col-md-6 float-left">
                     <label>请输入class：</label>
