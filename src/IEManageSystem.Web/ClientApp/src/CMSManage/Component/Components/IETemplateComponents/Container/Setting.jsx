@@ -1,8 +1,8 @@
-import PageComponentSettingModel from "@/CMSManage/Models/Pages/PageComponentSettingModel"
+import PageComponentSettingModel from "CMSManage/Models/Pages/PageComponentSettingModel"
 
-export default class IEButtonSetting {
+export default class Setting {
     setting: PageComponentSettingModel;
-
+    
     constructor(pageComponentSetting:PageComponentSettingModel){
         this.setting = pageComponentSetting;
     }
@@ -11,44 +11,43 @@ export default class IEButtonSetting {
         this.setting = pageComponentSetting;
     }
 
-    get text() {
-        return this.setting.getDefauleData().field1 || "IE-按钮";
+    get direction(){
+        return this.setting.getDefauleData().field1;
     }
 
-    set text(val) {
+    set direction(val){
         this.setting.getDefauleData().field1 = val;
     }
 
-    get url(){
-        return this.setting.getDefauleData().field2 || "javescript:void(0)";
+    get justifyContent(){
+        return this.setting.getDefauleData().field2;
     }
 
-    set url(val){
+    set justifyContent(val){
         this.setting.getDefauleData().field2 = val;
     }
 
-    get btnType(){
+    get alignItems(){
         return this.setting.getDefauleData().field3;
     }
 
-    set btnType(val){
+    set alignItems(val){
         this.setting.getDefauleData().field3 = val;
     }
-
-    get size(){
-        return this.setting.getDefauleData().field4 || "false";
+    
+    get wrap(){
+        return this.setting.getDefauleData().field4;
     }
 
-    set size(val){
+    set wrap(val){
         this.setting.getDefauleData().field4 = val;
     }
 
-    get shape(){
+    get alignContent(){
         return this.setting.getDefauleData().field5;
     }
-    
-    set shape(val){
+
+    set alignContent(val){
         this.setting.getDefauleData().field5 = val;
     }
 }
-

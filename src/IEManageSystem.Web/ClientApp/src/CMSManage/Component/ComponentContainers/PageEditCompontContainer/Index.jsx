@@ -8,7 +8,7 @@ import './index.css'
 
 import EditFrame from './EditFrame'
 
-import { pageAddComponent, pageRemoveComponent, pageEditComponent } from 'CMSManage/IEReduxs/Actions'
+import { pageRemoveComponent, pageEditComponent } from 'CMSManage/IEReduxs/Actions'
 
 import BaseComponentContainer from '../BaseComponentContainer'
 
@@ -46,7 +46,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
 
         tools.push(<EditFrame
             key={"EditFrame"}
-            title={this.componentDescribe.name}
+            title={this.componentDescribe.displayName}
             componentObject={this.componentObject}
             pageComponent={this.props.pageComponent}
             editComponent={this.props.editComponent}
@@ -120,8 +120,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         removeComponent: (pageComponent) => {
             dispatch(pageRemoveComponent(pageComponent));
         },
-        editComponent: (pageComponent) => {
-            dispatch(pageEditComponent(pageComponent));
+        editComponent: (sign, pageComponent) => {
+            dispatch(pageEditComponent(sign, pageComponent));
         },
         pageFreshen: (pageName, pageDataName) => {
             return Promise.all([dispatch(pageFetch(pageName)), dispatch(pageDataFetch(pageName, pageDataName))]);

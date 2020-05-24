@@ -3,6 +3,7 @@ import PageLeafComponentObject from 'CMSManage/Component/Components/BaseComponen
 import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseLeafComponent'
 import BaseMenuComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseMenuComponent'
 import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
+import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
 
 class CreateComponentService{
     createComponent(pageComponents, componentDescribe, parentSign){
@@ -38,6 +39,12 @@ class CreateComponentService{
         }
 
         pageComponent.parentSign = parentSign;
+
+        componentDescribe.componentObject.ComponentSettingConfigs.forEach(element => {
+            pageComponent.pageComponentSettings.push(
+                PageComponentSettingModel.createDefaultSettingData(element.name, element.displayName)
+            );
+        });
 
         return pageComponent;
     }

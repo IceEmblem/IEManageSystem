@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
-import './PageContainer.css'
-
 import { pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
 import FrontCompontContainer from 'CMSManage/Component/ComponentContainers/FrontCompontContainer'
+import Page from './Page'
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -27,7 +26,7 @@ class PageContainer extends React.Component {
 
     render() {
         return (
-            <div className="front-page-container">
+            <Page>
                 {
                     this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                         <FrontCompontContainer
@@ -36,7 +35,7 @@ class PageContainer extends React.Component {
                         >
                         </FrontCompontContainer>)
                 }
-            </div>
+            </Page>
         );
     }
 }

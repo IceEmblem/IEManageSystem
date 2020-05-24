@@ -1,49 +1,59 @@
 import React from 'react';
+import { BaseMenuComponent } from '../../BaseComponents/BaseMenuComponent';
+
+import { Link } from 'react-router-dom'
 
 import { Menu } from 'antd';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import {  } from '@ant-design/icons';
 const { SubMenu } = Menu;
 
-export default class IEMenu extends React.Component {
+export default class IEMenu extends BaseMenuComponent {
     constructor(props) {
         super(props);
     }
 
-    state = {
-        current: 'mail',
-    };
+    createMenus() {
+        let mainMenu = this.state.menu;
+        if (!mainMenu) {
+            return null;
+        }
 
-    handleClick = e => {
-        console.log('click ', e);
-        this.setState({
-            current: e.key,
-        });
-    };
+        return this.createMenusIteration(mainMenu);
+    }
+
+    createMenusIteration(menu) {
+        let lis = Array();
+
+        let menuItems = menu.menus;
+        for (let item in menuItems) {
+            let Icon = menuItems[item].icon;
+
+            if (menuItems[item].isCompositeMenuType()) {
+                let childMenus = this.createMenusIteration(menuItems[item]);
+
+                let menu =
+                    <SubMenu key={menuItems[item].name} title={menuItems[item].displayName}>
+                        {childMenus}
+                    </SubMenu>
+
+                lis.push(menu);
+            }
+            else {
+                let menu =
+                    <Menu.Item key={menuItems[item].name}>
+                        <Link to={menuItems[item].createUrl()} >{menuItems[item].displayName}</Link>
+                    </Menu.Item>;
+                lis.push(menu);
+            }
+        }
+
+        return lis;
+    }
 
     render() {
         return (
-            <Menu className="m-0 border-0" onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-                <Menu.Item key="mail" icon={<MailOutlined />}>
-                    设计
-            </Menu.Item>
-                <Menu.Item key="app" disabled icon={<AppstoreOutlined />}>
-                    文档
-            </Menu.Item>
-                <SubMenu icon={<SettingOutlined />} title="组件">
-                    <Menu.ItemGroup title="Item 1">
-                        <Menu.Item key="setting:1">Option 1</Menu.Item>
-                        <Menu.Item key="setting:2">Option 2</Menu.Item>
-                    </Menu.ItemGroup>
-                    <Menu.ItemGroup title="Item 2">
-                        <Menu.Item key="setting:3">Option 3</Menu.Item>
-                        <Menu.Item key="setting:4">Option 4</Menu.Item>
-                    </Menu.ItemGroup>
-                </SubMenu>
-                <Menu.Item key="alipay">
-                    <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-                        资源
-                </a>
-                </Menu.Item>
+            <Menu className="m-0 border-0" style={{backgroundColor:"#fff0"}} mode="horizontal">
+                {this.createMenus()}
             </Menu>
         );
     }

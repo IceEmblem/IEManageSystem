@@ -14,7 +14,7 @@ export default class PageModel{
         this.name = data.name;
         this.displayName = data.displayName;
         this.description = data.description;
-        this.pageType = data.pageComponents;
+        this.pageType = data.pageType;
 
         this.pageComponents = [];
         data.pageComponents.forEach((element:any) => {
@@ -26,6 +26,10 @@ export default class PageModel{
     addPageComponent(pageComponentData:any):void
     {
         let newPageComponent = new PageComponentModel(pageComponentData);
+
+        if(this.pageComponents.some(e=>e.sign == pageComponentData.sign)){
+            throw new Error(`标识已重复，Sign：${pageComponentData.sign}`);
+        }
 
         let maxSortIndex = 0;
         if(this.pageComponents.length > 0){
@@ -40,10 +44,13 @@ export default class PageModel{
         this.pageComponents = this.pageComponents.filter(item => item.sign != pageComponentData.sign);
     }
 
-    editPageComponent(pageComponentData:any):void{
-        let needEditIndex = this.pageComponents.findIndex(e=>e.sign == pageComponentData.sign);
+    editPageComponent(sign:string, pageComponentData:any):void{
+        let needEditIndex = this.pageComponents.findIndex(e=>e.sign == sign);
         if(needEditIndex < 0){
-            throw new Error(`未找到要编辑的组件，Sign：${pageComponentData.sign}`);
+            throw new Error(`未找到要编辑的组件，Sign：${sign}`);
+        }
+        if(sign != pageComponentData.sign && this.pageComponents.some(e=>e.sign == pageComponentData.sign)){
+            throw new Error(`标识已重复，Sign：${pageComponentData.sign}`);
         }
         this.pageComponents[needEditIndex] = new PageComponentModel(pageComponentData);
         this.pageComponentSort();

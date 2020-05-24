@@ -11,6 +11,8 @@ export default abstract class DataCollectionBase {
         data.forEach((element:any) => {
             this.singleDatas.push(new SingleDataModel(element));
         });
+
+        this.singleDatas.sort(e=>e.sortIndex);
     }
 
     // 获取默认数据，不存在则创建
@@ -21,15 +23,33 @@ export default abstract class DataCollectionBase {
 
         let defaultData = this.singleDatas.find(e => e.name == DataCollectionBase.defaultDataName);
         if (!defaultData) {
+            let sortIndex = this.singleDatas.length == 0 ? 0 : (this.singleDatas[this.singleDatas.length-1].sortIndex + 1);
             defaultData = new SingleDataModel({
                 id: 0,
                 name: DataCollectionBase.defaultDataName,
-                sortIndex: 0
+                sortIndex: sortIndex
             });
             this.singleDatas.push(defaultData);
         }
         this._defaultData = defaultData;
 
         return this._defaultData;
+    }
+
+    createSingleData(name:string){
+        let sortIndex = this.singleDatas.length == 0 ? 0 : (this.singleDatas[this.singleDatas.length-1].sortIndex + 1);
+
+        let data = new SingleDataModel({
+            id: 0,
+            name: name,
+            sortIndex: sortIndex
+        });
+        this.singleDatas.push(data);
+
+        return data;
+    }
+
+    getSingleDatas(name:string){
+        return this.singleDatas.filter(e=>e.name == name);
     }
 }

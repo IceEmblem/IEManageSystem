@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ComponentFactory from '../Components/ComponentFactory'
+import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
 
 import './BaseComponentContainer.css'
 
@@ -28,6 +29,8 @@ class BaseComponentContainer extends React.Component {
         }
 
         style.width = "100%";
+
+        style = {...style, ...this.componentDescribe.defauleStyle}
 
         if (this.props.pageComponent.pageComponentBaseSetting.width) {
             style.width = this.props.pageComponent.pageComponentBaseSetting.width;
@@ -82,6 +85,16 @@ class BaseComponentContainer extends React.Component {
     }
 
     getPageComponentSettings() {
+        // 检查 this.props.pageComponent.pageComponentSettings 是否有对应的配置
+        // 没有则实例一个
+        this.componentObject.ComponentSettingConfigs.forEach(element => {
+            if(!this.props.pageComponent.pageComponentSettings.some(e=>e.name == element.name)){
+                this.props.pageComponent.pageComponentSettings.push(
+                    PageComponentSettingModel.createDefaultSettingData(element.name, element.displayName)
+                );
+            }
+        });
+
         return this.props.pageComponent.pageComponentSettings
     }
 

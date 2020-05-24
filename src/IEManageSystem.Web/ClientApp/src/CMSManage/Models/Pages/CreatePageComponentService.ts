@@ -11,11 +11,12 @@ class CreatePageComponentService{
             pageComponentBaseSetting: {
                 id: 0,
                 sortIndex: 0,
-                col: null,
+                width: null,
                 height: null,
                 padding: null,
                 margin: null,
                 backgroundColor: null,
+                backgroundImage: null,
                 className: null,
             },
             targetPageId: null,

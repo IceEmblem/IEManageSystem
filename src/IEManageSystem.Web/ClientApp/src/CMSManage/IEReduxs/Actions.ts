@@ -22,9 +22,10 @@ export function pageRemoveComponent(pageComponent:PageComponentModel) {
 
 // 页面编辑组件
 export const PageEditComponent = "PageEditComponent"
-export function pageEditComponent(pageComponent:PageComponentModel) {
+export function pageEditComponent(sign:string, pageComponent:PageComponentModel) {
   return {
     type: PageEditComponent,
+    sign,
     pageComponent
   }
 }

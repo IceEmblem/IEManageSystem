@@ -34,7 +34,7 @@ function page(
 
     // 编辑组件
     if (action.type == PageEditComponent) {
-        state.editPageComponent(action.pageComponent);
+        state.editPageComponent(action.sign, action.pageComponent);
 
         return state;
     }

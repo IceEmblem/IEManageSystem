@@ -25,5 +25,6 @@ export default class ComponentDescribe {
         this.componentType = type;
         this.displayName = displayName || name;
         this.logicCode = undefined;
+        this.defauleStyle = {};
     }
 }

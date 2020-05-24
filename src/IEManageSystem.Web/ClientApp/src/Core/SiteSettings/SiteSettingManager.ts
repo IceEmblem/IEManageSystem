@@ -35,7 +35,7 @@ export default class SiteSettingManager {
             && item.key == SiteSettingManager.siteNameSettingKey);
 
         if (!setting) {
-            return "";
+            return "IceEmblem";
         }
 
         return setting.value;

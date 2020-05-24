@@ -53,16 +53,17 @@ export default class IEButtonSettingConfig extends BaseConfig {
                 </Radio.Group>
             </div>
             <div className="mb-3">
-                <Tag color="#55acee">危险样式</Tag>
+                <Tag color="#55acee">按钮大小</Tag>
                 <Radio.Group
-                    value={this.buttonSetting.isDanger}
+                    value={this.buttonSetting.size}
                     onChange={(e) => {
-                        this.buttonSetting.isDanger = e.target.value;
+                        this.buttonSetting.size = e.target.value;
                         this.props.setData(this.buttonSetting.setting);
                     }}
                 >
-                    <Radio value="true">使用危险样式</Radio>
-                    <Radio value="false">不使用危险样式</Radio>
+                    <Radio value="large">大</Radio>
+                    <Radio value="middle">中</Radio>
+                    <Radio value="small">小</Radio>
                 </Radio.Group>
             </div>
             <div className="mb-3">
@@ -75,7 +76,8 @@ export default class IEButtonSettingConfig extends BaseConfig {
                     }}
                 >
                     <Radio value="circle">圆角型</Radio>
-                    <Radio value="round">正方型</Radio>
+                    <Radio value="round">有点方</Radio>
+                    <Radio value="">正方</Radio>
                 </Radio.Group>
             </div>
         </div>)

@@ -107,9 +107,9 @@ export default class BtnLists extends React.Component {
                                         className="bg-warning border-warning text-white"
                                         onClick={() => {
                                             this.setState({});
-                                            this.props.pageUpdate();
+                                            this.props.exportPage();
                                         }}
-                                    >重新渲染</Button>
+                                    >导出页面</Button>
                                     <div style={{ width: `${y}rem` }}></div>
                                     <Button
                                         type="primary"
@@ -135,5 +135,5 @@ BtnLists.propTypes = {
     addComponent: PropTypes.func.isRequired,
     submitPage: PropTypes.func.isRequired,
     pageInfoComponent: PropTypes.object.isRequired,
-    pageUpdate: PropTypes.func.isRequired
+    exportPage: PropTypes.func.isRequired
 }

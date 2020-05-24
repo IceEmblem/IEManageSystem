@@ -1,26 +1,29 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
+import Setting from './Setting'
 
 import { Select } from 'antd';
 const { Option } = Select;
 
+
 export default class IESelect extends React.Component {
     constructor(props) {
         super(props);
+
+        this.setting = new Setting(this.getPageComponentSetting());
+    }
+    
+    getPageComponentSetting(){
+        return this.props.pageComponentSettings.find(e=>e.name == "Select");
     }
 
-    state = {
-        current: 'mail',
-    };
-
     render() {
+        this.setting.setSetting(this.getPageComponentSetting());
+
         return (
-            <Select defaultValue="lucy" style={{ width: 120 }}>
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="disabled" disabled>
-                    Disabled
-                </Option>
-                <Option value="Yiminghe">yiminghe</Option>
+            <Select defaultValue="" >
+                {this.setting.getSeleteDatas().map((item,index)=>(
+                <Option key={index} value={item.url}><a href={item.url}>{item.text}</a></Option>))}
             </Select>
         );
     }

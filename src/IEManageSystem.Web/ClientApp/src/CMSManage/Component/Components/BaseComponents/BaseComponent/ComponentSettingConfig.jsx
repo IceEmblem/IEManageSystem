@@ -4,10 +4,11 @@ export default class ComponentSettingConfig {
     static BuildBasicComponentSettingConfig(name, displayName, settingComponentBuilder){
         return new ComponentSettingConfig(name, displayName, settingComponentBuilder, 
             (pageComponent, name)=>{ 
-                return pageComponent.pageComponentBaseSetting 
+                return pageComponent 
             },
             (pageComponent, name, setting)=>{ 
-                pageComponent.pageComponentBaseSetting = setting 
+                pageComponent.sign = setting.sign;
+                pageComponent.pageComponentBaseSetting = setting.pageComponentBaseSetting;
             });
     }
 
@@ -21,10 +22,6 @@ export default class ComponentSettingConfig {
         return new ComponentSettingConfig(name, displayName, settingComponentBuilder, 
             (pageComponent, name)=>{ 
                 let pageComponentSetting = pageComponent.pageComponentSettings.find(item => item.name == name);
-                if(!pageComponentSetting){
-                    pageComponentSetting = PageComponentSettingModel.createDefaultSettingData(name, displayName);
-                    pageComponent.pageComponentSettings.push(pageComponentSetting);
-                }
 
                 // 组件设置数据
                 return pageComponentSetting;

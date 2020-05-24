@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from "react-router-dom";
 
-import PageContainer from './PageContainer/PageContainer.jsx'
+import PageContainer from './PageContainer.jsx'
 
 require('./index.css');
 

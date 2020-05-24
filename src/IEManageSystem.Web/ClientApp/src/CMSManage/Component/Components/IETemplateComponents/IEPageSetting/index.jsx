@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseComponentObject from '../../BaseComponents/BaseStaticComponent';
-import IESelect from './IESelect';
+import IEPageSetting from './IEPageSetting';
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
 import ComponentSettingConfig from '../../BaseComponents/BaseComponent/ComponentSettingConfig';
@@ -8,7 +8,7 @@ import SettingConfig from './SettingConfig'
 
 class ComponentObject extends BaseComponentObject{
     ComponentSettingConfigs = [
-        ComponentSettingConfig.BuildPageComponentSettingConfig("Select", "数据配置",
+        ComponentSettingConfig.BuildPageComponentSettingConfig("PageSetting", "页面设置",
             (pageComponentSetting, setPageComponentSetting) => {
                 return <SettingConfig
                     data={pageComponentSetting}
@@ -18,12 +18,12 @@ class ComponentObject extends BaseComponentObject{
         )
     ];
     Component(props){
-        return <IESelect {...props} />
+        return <IEPageSetting {...props} />
     }
     Preview() {
-        return <p>IE-选择框</p>
+        return <p>IE-页面设置</p>
     };
 }
 
-let componentDescribe = new ComponentDescribe("IESelect", new ComponentObject(), componentType.other);
+let componentDescribe = new ComponentDescribe("IEPageSetting", new ComponentObject(), componentType.other, "页面设置");
 export default componentDescribe;

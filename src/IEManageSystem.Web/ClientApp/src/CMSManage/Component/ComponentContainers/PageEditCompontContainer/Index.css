@@ -28,6 +28,18 @@
     top: .8rem;
 }
 
+.parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
+    z-index: 9995;
+    right: 1rem;
+    top: 1rem;
+}
+
+.parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
+    z-index: 9996;
+    right: 1.2rem;
+    top: 1.2rem;
+}
+
 .parentcomponent:hover>.editableparentcom-btns>button {
     opacity: 1;
 }

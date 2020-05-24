@@ -8,23 +8,326 @@
             "pageType": "StaticPage",
             "pageComponents": [
                 {
-                    "name": "IEButton",
-                    "sign": "1",
+                    "id": 0,
+                    "name": "Container",
+                    "sign": "Header",
                     "parentSign": null,
+                    "targetPageId": null,
+                    "menuName": null,
+                    "componentType": "CompositeComponent",
                     "pageComponentBaseSetting": {
+                        "id": 0,
                         "sortIndex": 1,
+                        "width": null,
+                        "height": "448px",
+                        "padding": null,
                         "margin": null,
-                        "backgroundColor": null,
-                        "className": null,
-                        "col": null,
+                        "backgroundColor": "#0001",
+                        "backgroundImage": null,
+                        "className": null
+                    },
+                    "pageComponentSettings": [
+                        {
+                            "singleDatas": [
+                                {
+                                    "id": 0,
+                                    "name": "__default__",
+                                    "sortIndex": 0,
+                                    "field1": "flex-column"
+                                }
+                            ],
+                            "_defaultData": {
+                                "id": 0,
+                                "name": "__default__",
+                                "sortIndex": 0,
+                                "field1": "flex-column"
+                            },
+                            "id": 0,
+                            "name": "FlexSetting",
+                            "displayName": "内容对齐设置"
+                        }
+                    ]
+                },
+                {
+                    "id": 0,
+                    "name": "Container",
+                    "sign": "Header_Nav",
+                    "parentSign": "Header",
+                    "targetPageId": null,
+                    "menuName": null,
+                    "componentType": "CompositeComponent",
+                    "pageComponentBaseSetting": {
+                        "id": 0,
+                        "sortIndex": 2,
+                        "width": null,
+                        "height": "64px",
+                        "padding": null,
+                        "margin": null,
+                        "backgroundColor": "#0001",
+                        "backgroundImage": null,
+                        "className": null
+                    },
+                    "pageComponentSettings": [
+                        {
+                            "singleDatas": [
+                                {
+                                    "id": 0,
+                                    "name": "__default__",
+                                    "sortIndex": 0,
+                                    "field1": "flex-row",
+                                    "field2": "justify-content-center"
+                                }
+                            ],
+                            "_defaultData": {
+                                "id": 0,
+                                "name": "__default__",
+                                "sortIndex": 0,
+                                "field1": "flex-row",
+                                "field2": "justify-content-center"
+                            },
+                            "id": 0,
+                            "name": "FlexSetting",
+                            "displayName": "内容对齐设置"
+                        }
+                    ]
+                },
+                {
+                    "id": 0,
+                    "name": "Container",
+                    "sign": "Header_Nav_Mid",
+                    "parentSign": "Header_Nav",
+                    "targetPageId": null,
+                    "menuName": null,
+                    "componentType": "CompositeComponent",
+                    "pageComponentBaseSetting": {
+                        "id": 0,
+                        "sortIndex": 3,
+                        "width": "1280px",
+                        "height": "100%",
+                        "padding": null,
+                        "margin": null,
+                        "backgroundColor": "#0001",
+                        "backgroundImage": null,
+                        "className": null
+                    },
+                    "pageComponentSettings": [
+                        {
+                            "singleDatas": [
+                                {
+                                    "id": 0,
+                                    "name": "__default__",
+                                    "sortIndex": 0
+                                }
+                            ],
+                            "_defaultData": {
+                                "id": 0,
+                                "name": "__default__",
+                                "sortIndex": 0
+                            },
+                            "id": 0,
+                            "name": "FlexSetting",
+                            "displayName": "内容对齐设置"
+                        }
+                    ]
+                },
+                {
+                    "id": 0,
+                    "name": "Container",
+                    "sign": "IE_Icon",
+                    "parentSign": "Header_Nav_Mid",
+                    "targetPageId": null,
+                    "menuName": null,
+                    "componentType": "CompositeComponent",
+                    "pageComponentBaseSetting": {
+                        "id": 0,
+                        "sortIndex": 4,
+                        "width": "15%",
+                        "height": "100%",
+                        "padding": null,
+                        "margin": null,
+                        "backgroundColor": "#0001",
+                        "backgroundImage": null,
+                        "className": null
+                    },
+                    "pageComponentSettings": [
+                        {
+                            "singleDatas": [
+                                {
+                                    "id": 0,
+                                    "name": "__default__",
+                                    "sortIndex": 0
+                                }
+                            ],
+                            "_defaultData": {
+                                "id": 0,
+                                "name": "__default__",
+                                "sortIndex": 0
+                            },
+                            "id": 0,
+                            "name": "FlexSetting",
+                            "displayName": "内容对齐设置"
+                        }
+                    ]
+                },
+                {
+                    "id": 0,
+                    "name": "Container",
+                    "sign": "IE_Nav_Right",
+                    "parentSign": "Header_Nav_Mid",
+                    "targetPageId": null,
+                    "menuName": null,
+                    "componentType": "CompositeComponent",
+                    "pageComponentBaseSetting": {
+                        "id": 0,
+                        "sortIndex": 5,
+                        "width": "85%",
+                        "height": "100%",
+                        "padding": null,
+                        "margin": null,
+                        "backgroundColor": "#0001",
+                        "backgroundImage": null,
+                        "className": null
+                    },
+                    "pageComponentSettings": [
+                        {
+                            "singleDatas": [
+                                {
+                                    "id": 0,
+                                    "name": "__default__",
+                                    "sortIndex": 0
+                                }
+                            ],
+                            "_defaultData": {
+                                "id": 0,
+                                "name": "__default__",
+                                "sortIndex": 0
+                            },
+                            "id": 0,
+                            "name": "FlexSetting",
+                            "displayName": "内容对齐设置"
+                        }
+                    ]
+                },
+                {
+                    "id": 0,
+                    "name": "Container",
+                    "sign": "Header_Main",
+                    "parentSign": "Header",
+                    "targetPageId": null,
+                    "menuName": null,
+                    "componentType": "CompositeComponent",
+                    "pageComponentBaseSetting": {
+                        "id": 0,
+                        "sortIndex": 6,
+                        "width": null,
                         "height": null,
                         "padding": null,
-                        "width": null,
-                        "backgroundImage": null
+                        "margin": null,
+                        "backgroundColor": "#0001",
+                        "backgroundImage": null,
+                        "className": "flex-grow-1"
                     },
+                    "pageComponentSettings": [
+                        {
+                            "singleDatas": [
+                                {
+                                    "id": 0,
+                                    "name": "__default__",
+                                    "sortIndex": 0,
+                                    "field1": "flex-column",
+                                    "field2": "justify-content-center"
+                                }
+                            ],
+                            "_defaultData": {
+                                "id": 0,
+                                "name": "__default__",
+                                "sortIndex": 0,
+                                "field1": "flex-column",
+                                "field2": "justify-content-center"
+                            },
+                            "id": 0,
+                            "name": "FlexSetting",
+                            "displayName": "内容对齐设置"
+                        }
+                    ]
+                },
+                {
+                    "id": 0,
+                    "name": "Container",
+                    "sign": "Header_Main_Text",
+                    "parentSign": "Header_Main",
                     "targetPageId": null,
-                    "componentType": "LeafComponent",
-                    "pageComponentSettings": []
+                    "menuName": null,
+                    "componentType": "CompositeComponent",
+                    "pageComponentBaseSetting": {
+                        "id": 0,
+                        "sortIndex": 7,
+                        "width": null,
+                        "height": "200px",
+                        "padding": null,
+                        "margin": null,
+                        "backgroundColor": "#0001",
+                        "backgroundImage": null,
+                        "className": "mb-3"
+                    },
+                    "pageComponentSettings": [
+                        {
+                            "singleDatas": [
+                                {
+                                    "id": 0,
+                                    "name": "__default__",
+                                    "sortIndex": 0
+                                }
+                            ],
+                            "_defaultData": {
+                                "id": 0,
+                                "name": "__default__",
+                                "sortIndex": 0
+                            },
+                            "id": 0,
+                            "name": "FlexSetting",
+                            "displayName": "内容对齐设置"
+                        }
+                    ]
+                },
+                {
+                    "id": 0,
+                    "name": "Container",
+                    "sign": "Header_Main_Btn",
+                    "parentSign": "Header_Main",
+                    "targetPageId": null,
+                    "menuName": null,
+                    "componentType": "CompositeComponent",
+                    "pageComponentBaseSetting": {
+                        "id": 0,
+                        "sortIndex": 8,
+                        "width": null,
+                        "height": "50px",
+                        "padding": null,
+                        "margin": null,
+                        "backgroundColor": "#0001",
+                        "backgroundImage": null,
+                        "className": null
+                    },
+                    "pageComponentSettings": [
+                        {
+                            "singleDatas": [
+                                {
+                                    "id": 0,
+                                    "name": "__default__",
+                                    "sortIndex": 0
+                                }
+                            ],
+                            "_defaultData": {
+                                "id": 0,
+                                "name": "__default__",
+                                "sortIndex": 0
+                            },
+                            "id": 0,
+                            "name": "FlexSetting",
+                            "displayName": "内容对齐设置"
+                        }
+                    ]
                 }
             ]
         }

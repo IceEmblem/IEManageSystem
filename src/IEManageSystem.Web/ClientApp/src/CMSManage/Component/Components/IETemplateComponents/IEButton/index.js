@@ -25,5 +25,5 @@ class ComponentObject extends BaseComponentObject {
     };
 }
 
-let componentDescribe = new ComponentDescribe("IEButton", new ComponentObject(), componentType.other);
+let componentDescribe = new ComponentDescribe("IEButton", new ComponentObject(), componentType.other, "按钮");
 export default componentDescribe;

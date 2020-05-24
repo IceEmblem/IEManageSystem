@@ -22,12 +22,12 @@ export default class MenuSettingConfig extends BaseConfig {
     }
 
     render() {
-        let menuList = this.state.menus.map(item => <Option key={item.id} value={item.id}>{item.displayName}</Option>);
+        let menuList = this.state.menus.map(item => <Option key={item.id} value={item.name}>{item.displayName}</Option>);
 
         // 如果当前没有选择页面且有页面，则默认选择第一个页面
         if (!this.props.data &&
             this.state.menus.length > 0) {
-            this.props.setData(this.state.menus[0].id);
+            this.props.setData(this.state.menus[0].name);
 
             return <div></div>;
         }

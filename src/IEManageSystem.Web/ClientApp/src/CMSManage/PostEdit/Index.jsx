@@ -9,7 +9,9 @@ import { pageFetch, pageDataFetch, componentDataUpdateFetch } from 'CMSManage/IE
 import PostEditComponentContainer from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer'
 
 import { Button } from 'antd';
-import {CloudUploadOutlined, UndoOutlined } from '@ant-design/icons'
+import { CloudUploadOutlined, UndoOutlined } from '@ant-design/icons'
+
+import Page from 'CMSManage/Home/Page'
 
 class ComponentData extends React.Component {
     constructor(props) {
@@ -20,29 +22,29 @@ class ComponentData extends React.Component {
         };
 
         Promise.all([
-            this.props.pageFetch(this.props.pageName), 
+            this.props.pageFetch(this.props.pageName),
             this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
-        ]).then(()=>{
-            this.setState({isLoad : true});
+        ]).then(() => {
+            this.setState({ isLoad: true });
         });
     }
 
     render() {
-        if(this.state.isLoad == false){
+        if (this.state.isLoad == false) {
             return (<div className="postedit-page-container"></div>);
         }
 
         return (
             <div className="postedit-page-container">
                 <div className="postedit-page-container-header">
-                    <Button 
+                    <Button
                         className="mr-2"
                         icon={<UndoOutlined />}
                         onClick={() => this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)}
                     >
                         取消修改
                     </Button>
-                    <Button 
+                    <Button
                         type="primary"
                         icon={<CloudUploadOutlined />}
                         onClick={() => this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.pageData.contentComponentDatas)}
@@ -50,8 +52,8 @@ class ComponentData extends React.Component {
                         提交文章
                     </Button>
                 </div>
-                <div className="">
-                    <div className="front-page-container">
+                <div>
+                    <Page>
                         {
                             this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                                 <PostEditComponentContainer
@@ -60,7 +62,7 @@ class ComponentData extends React.Component {
                                 >
                                 </PostEditComponentContainer>)
                         }
-                    </div>
+                    </Page>
                 </div>
             </div>
         );

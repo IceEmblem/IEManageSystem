@@ -4,8 +4,8 @@ import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 
 import { Input, Tag, InputNumber, Button } from 'antd';
 
-// props.data 类型为 PageComponentBaseSettingModel
-// props.setData 类型为 (PageComponentBaseSettingModel) => void
+// props.data 类型为 PageComponentModel
+// props.setData 类型为 (PageComponentModel) => void
 // 基本设置 配置
 export default class BasicSettingConfig extends BaseConfig {
     state={
@@ -20,13 +20,11 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="宽度"
-                            value={this.props.data.col}
+                            value={this.props.data.pageComponentBaseSetting.width}
                             onChange={
                                 (event) => {
-                                    this.props.setData({
-                                        ...this.props.data,
-                                        ...{ col: event.target.value }
-                                    })
+                                    this.props.data.pageComponentBaseSetting.width = event.target.value;
+                                    this.props.setData(this.props.data)
                                 }
                             }
                             suffix={<Tag color="#55acee">宽度</Tag>}
@@ -38,13 +36,11 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="组件高度"
-                            value={this.props.data.height}
+                            value={this.props.data.pageComponentBaseSetting.height}
                             onChange={
                                 (event) => {
-                                    this.props.setData({
-                                        ...this.props.data,
-                                        ...{ height: event.target.value }
-                                    });
+                                    this.props.data.pageComponentBaseSetting.height = event.target.value;
+                                    this.props.setData(this.props.data)
                                 }
                             }
                             suffix={<Tag color="#55acee">组件高度</Tag>}
@@ -56,13 +52,11 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="内边距"
-                            value={this.props.data.padding}
+                            value={this.props.data.pageComponentBaseSetting.padding}
                             onChange={
                                 (event) => {
-                                    this.props.setData({
-                                        ...this.props.data,
-                                        ...{ padding: event.target.value }
-                                    });
+                                    this.props.data.pageComponentBaseSetting.padding = event.target.value;
+                                    this.props.setData(this.props.data)
                                 }
                             }
                             suffix={<Tag color="#55acee">内边距</Tag>}
@@ -74,13 +68,11 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="外边距"
-                            value={this.props.data.margin}
+                            value={this.props.data.pageComponentBaseSetting.margin}
                             onChange={
                                 (event) => {
-                                    this.props.setData({
-                                        ...this.props.data,
-                                        ...{ margin: event.target.value }
-                                    });
+                                    this.props.data.pageComponentBaseSetting.margin = event.target.value;
+                                    this.props.setData(this.props.data)
                                 }
                             }
                             suffix={<Tag color="#55acee">外边距</Tag>}
@@ -92,13 +84,11 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="背景颜色"
-                            value={this.props.data.backgroundColor}
+                            value={this.props.data.pageComponentBaseSetting.backgroundColor}
                             onChange={
                                 (event) => {
-                                    this.props.setData({
-                                        ...this.props.data,
-                                        ...{ backgroundColor: event.target.value }
-                                    });
+                                    this.props.data.pageComponentBaseSetting.backgroundColor = event.target.value;
+                                    this.props.setData(this.props.data)
                                 }
                             }
                             suffix={<Tag color="#55acee">背景颜色</Tag>}
@@ -110,13 +100,11 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="背景图片"
-                            value={this.props.data.backgroundImage}
+                            value={this.props.data.pageComponentBaseSetting.backgroundImage}
                             onChange={
                                 (event) => {
-                                    this.props.setData({
-                                        ...this.props.data,
-                                        ...{ backgroundImage: event.target.value }
-                                    });
+                                    this.props.data.pageComponentBaseSetting.backgroundImage = event.target.value;
+                                    this.props.setData(this.props.data)
                                 }
                             }
                             suffix={<Button size="small" type="primary" onClick={()=>{this.setState({isShowPicturePopupBox: true})}} >选择图片</Button>}
@@ -126,10 +114,8 @@ export default class BasicSettingConfig extends BaseConfig {
                         isShow={this.state.isShowPicturePopupBox}
                         closePopupBox={()=>{this.setState({isShowPicturePopupBox: false})}}
                         selectPictruePath={(path)=>{
-                            this.props.setData({
-                                ...this.props.data,
-                                ...{ backgroundImage: path }
-                            });
+                            this.props.data.pageComponentBaseSetting.backgroundImage = path;
+                            this.props.setData(this.props.data)
                         }}
                     />
                 </div>
@@ -138,13 +124,11 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="样式类"
-                            value={this.props.data.className}
+                            value={this.props.data.pageComponentBaseSetting.className}
                             onChange={
                                 (event) => {
-                                    this.props.setData({
-                                        ...this.props.data,
-                                        ...{ className: event.target.value }
-                                    });
+                                    this.props.data.pageComponentBaseSetting.className = event.target.value;
+                                    this.props.setData(this.props.data)
                                 }
                             }
                             suffix={<Tag color="#55acee">样式类</Tag>}
@@ -156,16 +140,30 @@ export default class BasicSettingConfig extends BaseConfig {
                     <div className="input-group mb-3">
                         <InputNumber
                             placeholder="排序索引"
-                            value={this.props.data.sortIndex}
+                            value={this.props.data.pageComponentBaseSetting.sortIndex}
                             onChange={
                                 (value) => {
-                                    this.props.setData({
-                                        ...this.props.data,
-                                        ...{ sortIndex: value || 0 }
-                                    });
+                                    this.props.data.pageComponentBaseSetting.sortIndex = value || 0;
+                                    this.props.setData(this.props.data)
                                 }
                             }
                             suffix={<Tag color="#55acee">排序索引</Tag>}
+                        />
+                    </div>
+                </div>
+                <div className="col-md-12 float-left">
+                    <label>组件标识 <small style={{color:"#0005"}}>不要随意改动组件标识，否则无法展示组件数据</small> ：</label>
+                    <div className="input-group mb-3">
+                        <Input
+                            placeholder="组件标识"
+                            value={this.props.data.sign}
+                            onChange={
+                                (event) => {
+                                    this.props.data.sign = event.target.value;
+                                    this.props.setData(this.props.data)
+                                }
+                            }
+                            suffix={<Tag color="#55acee">"唯一" 组件标识</Tag>}
                         />
                     </div>
                 </div>

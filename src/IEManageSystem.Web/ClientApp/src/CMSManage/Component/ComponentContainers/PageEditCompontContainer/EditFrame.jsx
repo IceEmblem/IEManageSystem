@@ -4,7 +4,7 @@ import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
 
 import Tab from 'Tab/Tab.jsx'
 
-import { Modal, Button } from 'antd';
+import { Modal, notification } from 'antd';
 
 class EditFrame extends React.Component {
     // props.close()
@@ -53,8 +53,17 @@ class EditFrame extends React.Component {
     }
 
     submit() {
+        try{
+            this.props.editComponent(this.props.pageComponent.sign, this.state.pageComponent);
+        }
+        catch(e){
+            notification.error({
+                message: '提交失败',
+                description: e.message,
+              })
+        }
+
         this.props.close();
-        this.props.editComponent(this.state.pageComponent);
     }
 
     // 获取当前要显示的内容

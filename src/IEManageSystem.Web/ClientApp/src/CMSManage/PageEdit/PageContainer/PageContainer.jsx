@@ -15,6 +15,7 @@ import { ieReduxFetch } from 'Core/IEReduxFetch'
 import BtnLists from './BtnLists'
 import PromptBox from 'PromptBox'
 import ComponentListBox from "./ComponentListBox"
+import Page from 'CMSManage/Home/Page'
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -27,13 +28,40 @@ class PageContainer extends React.Component {
             isload: false
         }
 
+        this.exportPage = this.exportPage.bind(this);
         this.submitPage = this.submitPage.bind(this);
         this.addComponent = this.addComponent.bind(this);
 
         this.props.pageFetch(props.pageName)
-        .then(value=>{
-            this.setState({isload: true});
-        });
+            .then(value => {
+                this.setState({ isload: true });
+            });
+    }
+
+    exportPage() {
+        if (!this.props.page) {
+            return;
+        }
+        var content = JSON.stringify(this.props.page);
+        var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+        window.saveAs(blob, "page.json");
+    }
+
+    exportPage() {
+        if (!this.props.page) {
+            return;
+        }
+
+        let data = JSON.stringify(this.props.page)
+
+        var blob = new Blob([data], { type: 'text/json' }),
+            e = document.createEvent('MouseEvents'),
+            a = document.createElement('a')
+        a.download = 'page.json'
+        a.href = window.URL.createObjectURL(blob)
+        a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
+        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+        a.dispatchEvent(e)
     }
 
     submitPage() {
@@ -57,7 +85,7 @@ class PageContainer extends React.Component {
     }
 
     render() {
-        if(!this.state.isload){
+        if (!this.state.isload) {
             return <div className="pageedit-page-container"></div>
         }
 
@@ -92,32 +120,27 @@ class PageContainer extends React.Component {
 
         return (
             <div className="pageedit-page-container">
-                <div className="">
-                    <div className="front-page-container">
+                <div>
+                    <Page>
                         {
                             this.props.childPageComponents.map(item =>
                                 <PageEditCompontContainer
                                     key={item.sign}
                                     pageComponent={item}
-                                    addChildComponent={(curParentPageComponent)=>{
-                                        this.setState({curParentComponent: curParentPageComponent, showComponentListBox: true});
+                                    addChildComponent={(curParentPageComponent) => {
+                                        this.setState({ curParentComponent: curParentPageComponent, showComponentListBox: true });
                                     }}
                                 >
                                 </PageEditCompontContainer>)
                         }
-                    </div>
+                    </Page>
                 </div>
                 <div className="col-md-12 padding-0 pageedit-page-container-btns">
                     <BtnLists
-                        addComponent={()=>{this.setState({curParentComponent: undefined, showComponentListBox: true})}}
+                        addComponent={() => { this.setState({ curParentComponent: undefined, showComponentListBox: true }) }}
                         submitPage={this.submitPage}
                         pageInfoComponent={promptBox}
-                        pageUpdate={
-                            () => {
-                                let myEvent = new Event('resize');
-                                window.dispatchEvent(myEvent);
-                            }
-                        }
+                        exportPage={this.exportPage}
                     />
                 </div>
                 <ComponentListBox
@@ -140,7 +163,7 @@ PageContainer.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    
+
     let childPageComponents = state.page.pageComponents.filter(item => !item.parentSign);
 
     return {
