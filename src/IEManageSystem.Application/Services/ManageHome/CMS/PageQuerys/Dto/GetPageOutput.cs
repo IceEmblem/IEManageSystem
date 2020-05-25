@@ -8,5 +8,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys.Dto
     public class GetPageOutput
     {
         public PageDto Page { get; set; }
+
+        public List<ComponentDataDto> DefaultComponentDatas { get; set; }
     }
 }

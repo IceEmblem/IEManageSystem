@@ -67,7 +67,8 @@ class PageContainer extends React.Component {
     submitPage() {
         this.props.pageComponentUpdateFetch(
             this.props.pageName,
-            this.props.page.pageComponents
+            this.props.page.pageComponents,
+            this.props.defaultComponentDatas
         );
     }
 
@@ -157,6 +158,7 @@ PageContainer.propTypes = {
     page: PropTypes.object,
     pageName: PropTypes.string.isRequired,
     childPageComponents: PropTypes.array.isRequired,
+    defaultComponentDatas: PropTypes.array.isRequired,
     addComponent: PropTypes.func.isRequired,
     pageComponentUpdateFetch: PropTypes.func.isRequired,
     pageFetch: PropTypes.func.isRequired
@@ -165,11 +167,13 @@ PageContainer.propTypes = {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
 
     let childPageComponents = state.page.pageComponents.filter(item => !item.parentSign);
+    let defaultComponentDatas = state.defaultComponentDatas;
 
     return {
         page: state.page,
         pageName: ownProps.pageName,
-        childPageComponents: childPageComponents
+        childPageComponents: childPageComponents,
+        defaultComponentDatas: defaultComponentDatas
     }
 }
 
@@ -178,8 +182,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         addComponent: (pageComponent) => {
             dispatch(pageAddComponent(pageComponent));
         },
-        pageComponentUpdateFetch: (name, components) => {
-            dispatch(pageComponentUpdateFetch(name, components));
+        pageComponentUpdateFetch: (name, components, defaultComponentDatas) => {
+            dispatch(pageComponentUpdateFetch(name, components, defaultComponentDatas));
         },
         pageFetch: (name) => {
             return dispatch(pageFetch(name));

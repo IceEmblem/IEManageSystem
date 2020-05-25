@@ -11,6 +11,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
 
         public string PageDataName { get; set; }
 
-        public List<ContentComponentDataDto> ComponentDatas { get; set; }
+        public List<ComponentDataDto> ComponentDatas { get; set; }
     }
 }

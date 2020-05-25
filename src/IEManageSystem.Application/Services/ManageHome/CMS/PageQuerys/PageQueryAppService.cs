@@ -25,13 +25,16 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
 
         private IEfRepository<ContentComponentData, int> _componentDataRepository { get; set; }
 
+        private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; set; }
+
         private IPageRepository _repository => _pageManager.PageRepository;
 
         public PageQueryAppService(
             IObjectMapper objectMapper,
             PageManager pageManager,
             PageDataManager pageDataManager,
-            IEfRepository<ContentComponentData, int> componentDataRepository
+            IEfRepository<ContentComponentData, int> componentDataRepository,
+            IEfRepository<DefaultComponentData, int> defaultDataRepository
             )
         {
             _objectMapper = objectMapper;
@@ -41,6 +44,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             _pageDataManager = pageDataManager;
 
             _componentDataRepository = componentDataRepository;
+
+            _defaultDataRepository = defaultDataRepository;
         }
 
         public GetPagesOutput GetPages(GetPagesInput input)
@@ -103,12 +108,16 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
 
             if (page == null)
             {
-                return new GetPageOutput() { Page = null };
+                return new GetPageOutput() { Page = null, DefaultComponentDatas = new List<ComponentDataDto>() };
             }
 
+            Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
+                e=>e.SingleDatas
+            };
+            var defaultComponentDatas = _defaultDataRepository.GetAllIncluding(propertySelectors).Where(e=>e.PageId == page.Id).ToList();
 
-
-            return new GetPageOutput() { Page = CreatePageDtos(page) };
+            return new GetPageOutput() { Page = CreatePageDtos(page), 
+                DefaultComponentDatas = _objectMapper.Map<List<ComponentDataDto>>(defaultComponentDatas) };
         }
 
         private PageDto CreatePageDtos(PageBase page)
@@ -238,7 +247,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             return new GetPageDataOutput()
             {
                 PageData = _objectMapper.Map<PageDataDto>(pageData),
-                ContentComponentDatas = _objectMapper.Map<List<ContentComponentDataDto>>(componentDatas)
+                ContentComponentDatas = _objectMapper.Map<List<ComponentDataDto>>(componentDatas)
             };
         }
     }

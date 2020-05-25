@@ -95,7 +95,16 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 pageComponents.Add(CreatePageComponent(item));
             }
 
-            _pageManager.UpdatePageComponents(input.Name, pageComponents);
+            List<DefaultComponentData> defaultComponentDatas = new List<DefaultComponentData>();
+            input.DefaultComponentDatas.ForEach(item =>
+            {
+                defaultComponentDatas.Add(new DefaultComponentData() { 
+                    Sign = item.Sign,
+                    SingleDatas = _objectMapper.Map<List<SingleComponentData>>(item.SingleDatas)
+                });
+            });
+
+            _pageManager.UpdatePageComponentsAndDefaultComponentData(input.Name, pageComponents, defaultComponentDatas);
 
             return new UpdatePageComponentOutput();
         }

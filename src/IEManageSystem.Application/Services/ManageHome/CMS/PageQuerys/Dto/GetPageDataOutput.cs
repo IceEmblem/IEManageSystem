@@ -10,6 +10,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys.Dto
     {
         public PageDataDto PageData { get; set; }
 
-        public List<ContentComponentDataDto> ContentComponentDatas { get; set; }
+        public List<ComponentDataDto> ContentComponentDatas { get; set; }
     }
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import Enzyme from 'IEEnzyme';
 import EditFrame from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer/EditFrame';
 import TestComponent from '../TestComponent';
-import ContentComponentDataModel from 'CMSManage/Models/PageDatas/ContentComponentDataModel'
 
 const { shallow } = Enzyme;
 

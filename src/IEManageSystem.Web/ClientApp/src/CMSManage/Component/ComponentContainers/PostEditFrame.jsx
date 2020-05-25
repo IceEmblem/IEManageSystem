@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ContentComponentDataModel from 'CMSManage/Models/PageDatas/ContentComponentDataModel'
+import ContentComponentDataModel from 'CMSManage/Models/ComponentDataModel'
 
 import Tab from 'Tab/Tab.jsx'
 
@@ -27,6 +27,7 @@ class EditFrame extends React.Component {
 
     submit() {
         this.props.submit(this.state.contentComponentDataModel);
+        this.props.close();
     }
 
     cancel() {

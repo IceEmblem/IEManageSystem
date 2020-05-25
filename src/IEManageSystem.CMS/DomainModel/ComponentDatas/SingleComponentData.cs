@@ -22,9 +22,9 @@ namespace IEManageSystem.CMS.DomainModel.ComponentDatas
 
         public string Field5 { get; set; }
 
-        [ForeignKey("ContentComponentData")]
-        public int ContentComponentDataId { get; set; }
+        [ForeignKey("ComponentData")]
+        public int ComponentDataId { get; set; }
 
-        public ContentComponentData ContentComponentData { get; set; }
+        public ComponentData ComponentData { get; set; }
     }
 }

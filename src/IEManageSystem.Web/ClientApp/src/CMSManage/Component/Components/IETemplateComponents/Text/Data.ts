@@ -1,4 +1,4 @@
-import ContentComponentDataModel from "CMSManage/Models/PageDatas/ContentComponentDataModel"
+import ContentComponentDataModel from "CMSManage/Models/ComponentDataModel"
 
 export default class Data {
     data: ContentComponentDataModel;
@@ -20,7 +20,7 @@ export default class Data {
     }
 
     get smallText(){
-        return this.data.getDefauleData().field2 || "一个未知的副标题";
+        return this.data.getDefauleData().field2;
     }
 
     set smallText(val){

@@ -44,6 +44,9 @@ namespace IEManageSystem.Application.Tests.Services.PageQuerys
             Assert.True(output.Page.PageComponents.FirstOrDefault(e=>e.Name == "ComponentName1").PageComponentBaseSetting != null);
             Assert.True(output.Page.PageComponents.FirstOrDefault(e => e.Name == "ComponentName1").PageComponentSettings != null);
             Assert.True(output.Page.PageComponents.FirstOrDefault(e => e.Name == "ComponentName1").PageComponentSettings[0].SingleDatas.Count > 0);
+
+            Assert.True(output.DefaultComponentDatas.Count > 0);
+            Assert.True(output.DefaultComponentDatas[0].SingleDatas.Count > 0);
         }
 
         [Fact]

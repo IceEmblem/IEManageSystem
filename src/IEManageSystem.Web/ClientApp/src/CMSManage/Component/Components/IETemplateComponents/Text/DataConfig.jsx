@@ -15,7 +15,7 @@ export default class DataConfig extends BaseConfig {
     }
 
     render() {
-        this.data.setSetting(this.props.data);
+        this.data.setData(this.props.data);
 
         return (<div>
             <Input
@@ -24,7 +24,7 @@ export default class DataConfig extends BaseConfig {
                 value={this.data.text}
                 onChange={(e) => {
                     this.data.text = e.currentTarget.value;
-                    this.props.setData(this.data.setting);
+                    this.props.setData(this.data.data);
                 }}
                 suffix={<Tag color="#55acee">文本</Tag>}
             />
@@ -34,7 +34,7 @@ export default class DataConfig extends BaseConfig {
                 value={this.data.smallText}
                 onChange={(e) => {
                     this.data.smallText = e.currentTarget.value;
-                    this.props.setData(this.data.setting);
+                    this.props.setData(this.data.data);
                 }}
                 suffix={<Tag color="#55acee">副文本</Tag>}
             />

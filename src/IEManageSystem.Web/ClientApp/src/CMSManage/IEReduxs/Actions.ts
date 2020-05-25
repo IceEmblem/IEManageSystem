@@ -1,6 +1,6 @@
 import { createIEThunkAction } from 'Core/IEReduxs/Actions'
 import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
-import ContentComponentDataModel from 'CMSManage/Models/PageDatas/ContentComponentDataModel'
+import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
 
 // 页面添加组件
 export const PageAddComponent = 'PageAddComponent'
@@ -46,10 +46,11 @@ export function pageFetch(name:string){
 
 // 页面组件更新
 export const PageComponentUpdateReceive = "PageComponentUpdateReceive"
-export function pageComponentUpdateFetch(name:string, components:PageComponentModel) {
+export function pageComponentUpdateFetch(name:string, components:Array<PageComponentModel>, defaultComponentDatas:Array<ComponentDataModel>) {
   let postData = {
     name: name,
-    pageComponents: components
+    pageComponents: components,
+    defaultComponentDatas: defaultComponentDatas
   };
 
   return createIEThunkAction(
@@ -93,10 +94,20 @@ export function componentDataUpdateFetch(pageName:string, pageDataName:string, c
 
 // 文章组件数据更新
 export const ComponentDataUpdate = "ComponentDataUpdate"
-export function componentDataUpdate(resource: ContentComponentDataModel)
+export function componentDataUpdate(resource: ComponentDataModel)
 {
   return {
     type: ComponentDataUpdate,
+    resource
+  }
+}
+
+// 默认组件数据更新
+export const DefaultComponentDataUpdate = "DefaultComponentDataUpdate"
+export function defaultComponentDataUpdate(resource: ComponentDataModel)
+{
+  return {
+    type: DefaultComponentDataUpdate,
     resource
   }
 }

@@ -8,8 +8,8 @@ using System.Text;
 
 namespace IEManageSystem.Dtos.CMS
 {
-    [AutoMap(typeof(ContentComponentData))]
-    public class ContentComponentDataDto
+    [AutoMap(typeof(ComponentData))]
+    public class ComponentDataDto
     {
         public int Id { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using IEManageSystem.CMS.DomainModel.PageDatas;
+﻿using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.EntityFrameworkCore;
 using System;
@@ -46,6 +47,18 @@ namespace IEManageSystem.Tests.TestDatas
             };
 
             _context.Pages.Add(contentPage);
+
+            _context.DefaultComponentDatas.AddRange(new List<DefaultComponentData>() {
+                new DefaultComponentData(){
+                    Sign = "ContentPage1_Component1Sign",
+                    SingleDatas = new List<SingleComponentData>(){
+                        new SingleComponentData(){ Name = "PageData1_DefaultComponentData1_SingleComponentData1Name" },
+                        new SingleComponentData(){ Name = "PageData1_DefaultComponentData1_SingleComponentData2Name" }
+                    },
+                    Page = contentPage
+                },
+                new DefaultComponentData(){ Sign = "ContentPage1_Component2Sign", Page = contentPage }
+            }) ;
 
             var pageData = new CMS.DomainModel.PageDatas.PageData()
             {

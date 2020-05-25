@@ -1,4 +1,4 @@
-import ContentComponentDataModel from "./ContentComponentDataModel";
+import ContentComponentDataModel from "../ComponentDataModel";
 
 export default class PageDataModel{
     public id: number;

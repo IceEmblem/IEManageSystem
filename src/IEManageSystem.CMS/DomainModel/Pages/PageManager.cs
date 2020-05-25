@@ -1,10 +1,13 @@
 ﻿using Abp.Dependency;
 using Abp.UI;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.Repositorys;
+using IEManageSystem.Repositorys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.Pages
@@ -15,9 +18,14 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public const string StaticPagePageDataName = "Index";
 
-        public PageManager(IPageRepository pageRepository)
+        private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; set; }
+
+        public PageManager(IPageRepository pageRepository,
+            IEfRepository<DefaultComponentData, int> defaultDataRepository
+            )
         {
             PageRepository = pageRepository;
+            _defaultDataRepository = defaultDataRepository;
         }
 
         public IPageRepository PageRepository { get; }
@@ -57,6 +65,14 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             var page = PageRepository.ThenInclude(e => e.PageComponents, e => e.PageComponentSettings, e => e.SingleDatas).FirstOrDefault(e=>e.Name == name);
 
             PageRepository.Delete(page);
+
+            Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
+                e=>e.SingleDatas
+            };
+            var oldDatas = _defaultDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageId == page.Id).ToList();
+            oldDatas.ForEach(item => {
+                _defaultDataRepository.Delete(item);
+            });
         }
 
         public List<PageComponentBase> GetPageComponents(string name)
@@ -76,7 +92,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             return page.PageComponents.ToList();
         }
 
-        public void UpdatePageComponents(string name, List<PageComponentBase> pageComponents)
+        public void UpdatePageComponentsAndDefaultComponentData(string name, List<PageComponentBase> pageComponents, List<DefaultComponentData> defaultComponentDatas)
         {
             var page = PageRepository.ThenInclude(e => e.PageComponents, e=>e.PageComponentSettings, e=>e.SingleDatas).FirstOrDefault(e => e.Name == name);
             page.PageComponents = new List<PageComponentBase>();
@@ -84,6 +100,20 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             foreach (var item in pageComponents) {
                 page.PageComponents.Add(item);
             }
+
+            Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
+                e=>e.SingleDatas
+            };
+            var oldDatas = _defaultDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageId == page.Id).ToList();
+            oldDatas.ForEach(item=> {
+                _defaultDataRepository.Delete(item);
+            });
+
+            defaultComponentDatas.ForEach(item =>
+            {
+                item.Page = page;
+                _defaultDataRepository.Insert(item);
+            });
         }
     }
 }

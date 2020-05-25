@@ -91,6 +91,10 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
             Assert.True(!dbContext.Set<PageComponentBase>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
             Assert.True(!dbContext.Set<PageComponentSetting>().Any(e => e.Name == "ContentPage1_Component1_PageComponentSetting1Name"));
             Assert.True(!dbContext.Set<SingleSettingData>().Any(e => e.Name == "ContentPage1_Component1_PageComponentSetting1_SingleSettingData1Name"));
+
+            // 删除的默认数据
+            Assert.True(!dbContext.Set<DefaultComponentData>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
+            Assert.True(!dbContext.Set<SingleComponentData>().Any(e => e.Name == "PageData1_DefaultComponentData1_SingleComponentData1Name"));
         }
 
         [Fact]
@@ -118,6 +122,16 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
                             }
                         }
                     }
+                },
+                DefaultComponentDatas = new List<ComponentDataDto>() {
+                    new ComponentDataDto(){
+                    Sign = "UpdatePageComponent_BaseTest_DefaultComponentDatas1",
+                        SingleDatas = new List<SingleComponentDataDto>(){
+                            new SingleComponentDataDto(){ Name = "UpdatePageComponent_BaseTest_SingleComponentData1" },
+                            new SingleComponentDataDto(){ Name = "UpdatePageComponent_BaseTest_SingleComponentData2" }
+                        }
+                    },
+                    new ComponentDataDto(){ Sign = "UpdatePageComponent_BaseTest_DefaultComponentDatas2" }
                 }
             });
 
@@ -133,6 +147,14 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
             Assert.True(dbContext.Set<PageComponentBase>().Any(e => e.Sign == "UpdatePageComponent_BaseTest_PageComponentSign"));
             Assert.True(dbContext.Set<PageComponentSetting>().Any(e => e.Name == "UpdatePageComponent_BaseTest_PageComponentSettingName"));
             Assert.True(dbContext.Set<SingleSettingData>().Any(e => e.Name == "UpdatePageComponent_BaseTest_PageComponentSetting_SingleSettingDataName"));
+
+            // 删除原先的默认数据
+            Assert.True(!dbContext.Set<DefaultComponentData>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
+            Assert.True(!dbContext.Set<SingleComponentData>().Any(e => e.Name == "PageData1_DefaultComponentData1_SingleComponentData1Name"));
+
+            // 使用新的默认数据
+            Assert.True(dbContext.Set<DefaultComponentData>().Any(e => e.Sign == "UpdatePageComponent_BaseTest_DefaultComponentDatas1"));
+            Assert.True(dbContext.Set<SingleComponentData>().Any(e => e.Name == "UpdatePageComponent_BaseTest_SingleComponentData1"));
         }
 
         /// <summary>
@@ -229,8 +251,8 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
             _pageManageAppService.UpdateComponentData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdateComponentDataInput() {
                 PageName = "ContentPage1Name",
                 PageDataName = "PageData1Name",
-                ComponentDatas = new List<ContentComponentDataDto>() {
-                    new ContentComponentDataDto(){
+                ComponentDatas = new List<ComponentDataDto>() {
+                    new ComponentDataDto(){
                         Sign = "UpdateComponentData_BaseTest_ContentComponentDataSign",
                         SingleDatas = new List<SingleComponentDataDto>(){
                             new SingleComponentDataDto(){ Name = "UpdateComponentData_BaseTest_SingleComponentDataName" }

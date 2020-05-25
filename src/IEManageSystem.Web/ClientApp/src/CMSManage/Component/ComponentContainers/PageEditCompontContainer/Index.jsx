@@ -2,25 +2,26 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContainerComponent'
-import { pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
+import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
+import { pageFetch, pageDataFetch, pageRemoveComponent, pageEditComponent, defaultComponentDataUpdate } from 'CMSManage/IEReduxs/Actions'
 
 import './index.css'
 
-import EditFrame from './EditFrame'
-
-import { pageRemoveComponent, pageEditComponent } from 'CMSManage/IEReduxs/Actions'
+import PageEditFrame from '../PageEditFrame'
+import PostEditFrame from '../PostEditFrame'
 
 import BaseComponentContainer from '../BaseComponentContainer'
 
 import { Button, Tooltip } from 'antd';
-import { DeleteOutlined, EditOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, AppstoreAddOutlined, FormOutlined } from '@ant-design/icons';
 
 class PageEditCompontContainer extends BaseComponentContainer {
     constructor(props) {
         super(props);
 
         this.state = {
-            openEdit: false
+            openEdit: false,
+            showPostEdit: false
         }
     }
 
@@ -39,30 +40,27 @@ class PageEditCompontContainer extends BaseComponentContainer {
         // PageLeafBaseSetting
         let tools = [];
 
-        let isShowAddBtn = false;
-        if (this.componentObject instanceof ContainerComponentObject) {
-            isShowAddBtn = true;
-        }
-
-        tools.push(<EditFrame
+        tools.push(<PageEditFrame
             key={"EditFrame"}
             title={this.componentDescribe.displayName}
             componentObject={this.componentObject}
             pageComponent={this.props.pageComponent}
             editComponent={this.props.editComponent}
+            defaultComponentData={this.props.defaultComponentData}
             show={this.state.openEdit}
             close={() => { this.setState({ openEdit: false }) }}
-        ></EditFrame>);
+        ></PageEditFrame>);
+
         tools.push(
             <div key={"EditFrameBtn"} className="editableparentcom-btns">
-                <Tooltip title={`删除 ${this.componentDescribe.displayName}`} overlayStyle={{zIndex:10000}}>
+                <Tooltip title={`删除 ${this.componentDescribe.displayName}`} overlayStyle={{ zIndex: 10000 }}>
                     <Button type="primary" shape="circle" danger icon={<DeleteOutlined />}
                         onClick={
                             () => { this.props.removeComponent(this.props.pageComponent) }
                         }
                     />
                 </Tooltip>
-                <Tooltip title={`编辑 ${this.componentDescribe.displayName}`} overlayStyle={{zIndex:10000}}>
+                <Tooltip title={`编辑 ${this.componentDescribe.displayName}`} overlayStyle={{ zIndex: 10000 }}>
                     <Button type="primary" shape="circle" icon={<EditOutlined />}
                         onClick={
                             () => { this.setState({ openEdit: true }) }
@@ -70,8 +68,8 @@ class PageEditCompontContainer extends BaseComponentContainer {
                     />
                 </Tooltip>
                 {
-                    isShowAddBtn &&
-                    <Tooltip title="添加" overlayStyle={{zIndex:10000}}>
+                    (this.componentObject instanceof ContainerComponentObject) &&
+                    <Tooltip title="添加" overlayStyle={{ zIndex: 10000 }}>
                         <Button type="default" shape="circle" icon={<AppstoreAddOutlined />}
                             onClick={
                                 () => { this.props.addChildComponent(this.props.pageComponent) }
@@ -79,8 +77,34 @@ class PageEditCompontContainer extends BaseComponentContainer {
                         />
                     </Tooltip>
                 }
+                {
+                    ((this.componentObject instanceof BaseContentLeafComponent)) &&
+                    <Tooltip title="编辑默认数据">
+                        <Button type="primary" shape="circle" icon={<FormOutlined />}
+                            onClick={
+                                () => { this.setState({ showPostEdit: true }) }
+                            }
+                        />
+                    </Tooltip>
+                }
             </div>
         );
+
+        // 如果组件不是内容组件
+        if (!(this.componentObject instanceof BaseContentLeafComponent)) {
+            return tools;
+        }
+
+        tools.push(
+            <PostEditFrame
+                key={"PostEditFrame"}
+                title={this.componentDescribe.displayName}
+                show={this.state.showPostEdit}
+                close={() => { this.setState({ showPostEdit: false }) }}
+                submit={this.props.defaultComponentDataUpdate}
+                componentData={this.props.defaultComponentData}
+                componentObject={this.componentObject}
+            ></PostEditFrame>);
 
         return tools;
     }
@@ -93,6 +117,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
 PageEditCompontContainer.propTypes = {
     addChildComponent: PropTypes.func.isRequired,
     pageComponent: PropTypes.object.isRequired,
+    defaultComponentDataUpdate: PropTypes.func.isRequired,
     childPageComponents: PropTypes.array.isRequired,
     removeComponent: PropTypes.func.isRequired,
     editComponent: PropTypes.func.isRequired,
@@ -107,8 +132,10 @@ PageEditCompontContainer.defaultProps = {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
     let childPageComponents = state.page.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
+    let defaultComponentData = state.defaultComponentDatas.find(item => item.sign == ownProps.pageComponent.sign);
 
     return {
+        defaultComponentData: defaultComponentData,
         childPageComponents: childPageComponents,
         page: state.page,
         pageData: state.pageData
@@ -122,6 +149,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         editComponent: (sign, pageComponent) => {
             dispatch(pageEditComponent(sign, pageComponent));
+        },
+        defaultComponentDataUpdate: (componentData) => {
+            dispatch(defaultComponentDataUpdate(componentData));
         },
         pageFreshen: (pageName, pageDataName) => {
             return Promise.all([dispatch(pageFetch(pageName)), dispatch(pageDataFetch(pageName, pageDataName))]);

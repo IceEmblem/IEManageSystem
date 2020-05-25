@@ -7,11 +7,14 @@ using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.ComponentDatas
 {
-    public class ContentComponentData : ComponentData
+    public abstract class ComponentData : Entity
     {
-        public PageData PageData { get; set; }
+        /// <summary>
+        /// 组件标识
+        /// </summary>
+        public string Sign { get; set; }
 
-        [ForeignKey("PageData")]
-        public int PageDataId { get; set; }
+
+        public ICollection<SingleComponentData> SingleDatas { get; set; }
     }
 }

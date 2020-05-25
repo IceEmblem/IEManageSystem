@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import ComponentFactory from '../Components/ComponentFactory'
 import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
+import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
 
 import './BaseComponentContainer.css'
 
@@ -70,8 +71,16 @@ class BaseComponentContainer extends React.Component {
     }
 
     createComponent() {
+        let contentComponentData;
+        if(this.props.contentComponentData){
+            contentComponentData = this.props.contentComponentData;
+        }
+        else if(this.props.defaultComponentData){
+            contentComponentData = new ComponentDataModel(this.props.defaultComponentData);
+        }
+
         return this.componentObject.Component({
-            componentData: this.props.contentComponentData,
+            componentData: contentComponentData,
             pageComponentSettings: this.getPageComponentSettings() || [],
             targetPageId: this.props.pageComponent.targetPageId,
             menuName: this.props.pageComponent.menuName,
@@ -119,6 +128,7 @@ class BaseComponentContainer extends React.Component {
 
 BaseComponentContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
+    defaultComponentData: PropTypes.object.isRequired,
     contentComponentData: PropTypes.object,
     page: PropTypes.object.isRequired,
     pageData: PropTypes.object.isRequired,

@@ -4,11 +4,12 @@ import {
     PageEditComponent,
     PageReceive,
     PageDataReceive,
-    ComponentDataUpdate
+    ComponentDataUpdate,
+    DefaultComponentDataUpdate
 } from './Actions'
 import PageModel from 'CMSManage/Models/Pages/PageModel';
 import PageDataModel from 'CMSManage/Models/PageDatas/PageDataModel';
-import ContentComponentDataModel from '../Models/PageDatas/ContentComponentDataModel';
+import ComponentDataModel from '../Models/ComponentDataModel';
 
 function page(
     state: PageModel = new PageModel({
@@ -47,6 +48,67 @@ function page(
     return state;
 }
 
+function defaultComponentDatas(
+    state: Array<ComponentDataModel> = [],
+    action: any): Array<ComponentDataModel> {
+    if (action.type == DefaultComponentDataUpdate) {
+        let componentData = new ComponentDataModel(action.resource);
+
+        let index = state.findIndex(e => e.sign == componentData.sign);
+        if (index == -1) {
+            state.push(componentData);
+        }
+        else {
+            state[index] = componentData;
+        }
+
+        return state;
+    }
+
+    // 添加组件
+    if (action.type == PageAddComponent) {
+        let componentData = new ComponentDataModel({
+            id: 0,
+            sign: action.pageComponent.sign,
+            singleDatas: []
+        });
+
+        state.push(componentData);
+        return state;
+    }
+
+    // 移除组件
+    if (action.type == PageRemoveComponent) {
+        let index = state.findIndex(e => e.sign == action.pageComponent.sign);
+        if (index < 0) {
+            return state
+        }
+        return state.splice(index, 1);
+    }
+
+    // 编辑组件
+    if (action.type == PageEditComponent) {
+        let index = state.findIndex(e => e.sign == action.sign);
+        if (index < 0) {
+            return state;
+        }
+        state[index].sign = action.pageComponent.sign;
+
+        return state;
+    }
+
+    if (action.type == PageReceive) {
+        let datas = [];
+        action.data.defaultComponentDatas.forEach((element: any) => {
+            datas.push(new ComponentDataModel(element));
+        });
+
+        return datas;
+    }
+
+    return state;
+}
+
 function pageData(
     state: PageDataModel = new PageDataModel({
         id: 0,
@@ -61,11 +123,10 @@ function pageData(
     return state;
 }
 
-function contentComponentDatas(state: Array<ContentComponentDataModel> = [],
-    action: any) : Array<ContentComponentDataModel>
-{
+function contentComponentDatas(state: Array<ComponentDataModel> = [],
+    action: any): Array<ComponentDataModel> {
     if (action.type == ComponentDataUpdate) {
-        let componentData = new ContentComponentDataModel(action.resource);
+        let componentData = new ComponentDataModel(action.resource);
 
         let index = state.findIndex(e => e.sign == componentData.sign);
         if (index == -1) {
@@ -80,8 +141,8 @@ function contentComponentDatas(state: Array<ContentComponentDataModel> = [],
 
     if (action.type == PageDataReceive) {
         let datas = [];
-        action.data.contentComponentDatas.forEach((element:any) => {
-            datas.push(new ContentComponentDataModel(element));
+        action.data.contentComponentDatas.forEach((element: any) => {
+            datas.push(new ComponentDataModel(element));
         });
 
         return datas;
@@ -95,6 +156,7 @@ export function reducer(state: any = {
     return Object.assign({}, state,
         {
             page: page(state.page, action),
+            defaultComponentDatas: defaultComponentDatas(state.defaultComponentDatas, action),
             pageData: pageData(state.pageData, action),
             contentComponentDatas: contentComponentDatas(state.contentComponentDatas, action)
         })

@@ -330,7 +330,8 @@
                     ]
                 }
             ]
-        }
+        },
+        "defaultComponentDatas": []
     },
     "GetPages": {
         "pages": [

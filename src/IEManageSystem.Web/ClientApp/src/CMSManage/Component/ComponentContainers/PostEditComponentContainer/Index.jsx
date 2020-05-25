@@ -7,7 +7,7 @@ import { componentDataUpdate, pageFetch, pageDataFetch } from 'CMSManage/IERedux
 import './index.css'
 import BaseComponentContainer from '../BaseComponentContainer'
 
-import EditFrame from './EditFrame'
+import PostEditFrame from '../PostEditFrame'
 
 import { Button, Tooltip } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
@@ -21,11 +21,6 @@ class PostEditComponentContainer extends BaseComponentContainer {
         }
 
         this.submit = this.submit.bind(this);
-    }
-
-    submit(resource) {
-        this.props.componentDataUpdate(resource);
-        this.setState({ show: false });
     }
 
     createChildComponent() {
@@ -55,15 +50,15 @@ class PostEditComponentContainer extends BaseComponentContainer {
 
         let tools = [];
         tools.push(
-            <EditFrame
+            <PostEditFrame
                 key={"editFrame"}
-                title={this.componentDescribe.name}
+                title={this.componentDescribe.displayName}
                 show={this.state.show}
                 close={() => { this.setState({ show: false }) }}
-                submit={this.submit}
+                submit={this.props.componentDataUpdate}
                 componentData={this.props.contentComponentData}
                 componentObject={this.componentObject}
-            ></EditFrame>);
+            ></PostEditFrame>);
         tools.push(
             <div className="parentcomponent-btns"
                 key={"editFrameBtn"}
@@ -102,9 +97,11 @@ PostEditComponentContainer.defaultProps = {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
     let childPageComponents = state.page.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
-    let contentComponentData = state.contentComponentDatas.find(e => e.sign == ownProps.pageComponent.sign)
+    let contentComponentData = state.contentComponentDatas.find(e => e.sign == ownProps.pageComponent.sign);
+    let defaultComponentData = state.defaultComponentDatas.find(item => item.sign == ownProps.pageComponent.sign);
 
     return {
+        defaultComponentData: defaultComponentData,
         childPageComponents: childPageComponents,
         contentComponentData: contentComponentData,
         page: state.page,

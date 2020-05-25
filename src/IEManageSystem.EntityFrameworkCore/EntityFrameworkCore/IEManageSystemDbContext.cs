@@ -68,6 +68,8 @@ namespace IEManageSystem.EntityFrameworkCore
 
         public DbSet<ContentComponentData> ContentComponentDatas { get; set; }
 
+        public DbSet<DefaultComponentData> DefaultComponentDatas { get; set; }
+
         public DbSet<SiteSetting> SiteSettings { get; set; }
 
         public DbSet<Logic> Logics { get; set; }

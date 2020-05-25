@@ -53,9 +53,9 @@ export default class ComponentDataConfig extends BaseConfig {
 }
 
 ComponentDataConfig.propTypes = {
-    // data 为 ContentComponentDataModel
+    // data 为 ComponentDataModel
     data: PropTypes.object,
-    // setData 为 (ContentComponentDataModel) => void;
+    // setData 为 (ComponentDataModel) => void;
     setData: PropTypes.func.isRequired,
     // 组件
     field1: PropTypes.func,
