@@ -1,18 +1,26 @@
 import React from 'react'
-import {BaseField} from '../../BaseComponents/BaseComponent';
-import BaseComponentObject, { ComponentDataConfig } from '../../BaseComponents/BaseContentLeafComponent'
+import BaseComponentObject from '../../BaseComponents/BaseContentLeafComponent'
 import Text from './Text'
 import ComponentDescribe, {componentType} from '../../ComponentDescribe';
 
-const field1 = (props) => (<BaseField text={"文本"} {...props} />);
+import ComponentSettingConfig from '../../BaseComponents/BaseComponent/ComponentSettingConfig';
+import SettingConfig from './SettingConfig'
+import DataConfig from './DataConfig'
 
 class ComponentObject extends BaseComponentObject {
+    ComponentSettingConfigs = [
+        ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "文本设置",
+            (pageComponentSetting, setPageComponentSetting) => {
+                return <SettingConfig
+                    data={pageComponentSetting}
+                    setData={setPageComponentSetting}
+                />;
+            }
+        )
+    ];
     constructor(){
         super();
-        this.ComponentDataConfig = (props) => (
-            <ComponentDataConfig {...props}
-                field1={field1}
-            />);
+        this.ComponentDataConfig = DataConfig;
     }
     Component(props) {
         return <Text {...props} />
