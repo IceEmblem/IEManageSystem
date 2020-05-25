@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 
 namespace IEManageSystem.Tests.TestDatas
 {
@@ -27,20 +28,22 @@ namespace IEManageSystem.Tests.TestDatas
             {
                 Name = "PageData1Name",
                 Title = "文章测试标题",
-                ContentComponentDatas = new List<ContentComponentData>() {
-                    new ContentComponentData(){ 
-                        Sign = "ContentPage1_Component1Sign",
-                        SingleDatas = new List<SingleComponentData>(){ 
-                            new SingleComponentData(){ Name = "PageData1_ContentComponentData1_SingleComponentData1Name" },
-                            new SingleComponentData(){ Name = "PageData1_ContentComponentData1_SingleComponentData2Name" }
-                        }
-                    },
-                    new ContentComponentData(){ Sign = "ContentPage1_Component2Sign" }
-                },
                 Page = page
             };
 
             _context.PageDatas.Add(pageData);
+
+            _context.ContentComponentDatas.AddRange(new List<ContentComponentData>() {
+                    new ContentComponentData(){
+                        Sign = "ContentPage1_Component1Sign",
+                        SingleDatas = new List<SingleComponentData>(){
+                            new SingleComponentData(){ Name = "PageData1_ContentComponentData1_SingleComponentData1Name" },
+                            new SingleComponentData(){ Name = "PageData1_ContentComponentData1_SingleComponentData2Name" }
+                        },
+                        PageData = pageData
+                    },
+                    new ContentComponentData(){ Sign = "ContentPage1_Component2Sign", PageData = pageData }
+                });
         }
     }
 }

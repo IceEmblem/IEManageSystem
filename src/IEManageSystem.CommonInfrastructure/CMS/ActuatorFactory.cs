@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Entities;
 using IEManageSystem.CMS;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
@@ -112,6 +113,7 @@ namespace IEManageSystem.CommonInfrastructure.CMS
 using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using System;
 using System.Collections.Generic;
 using System.Text;

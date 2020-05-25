@@ -18,9 +18,5 @@ namespace IEManageSystem.Repositorys.CMSRepositorys
         public PageRepository(IDbContextProvider<IEManageSystemDbContext> dbContextProvider) : base(dbContextProvider)
         {
         }
-
-        public PageBase GetPageIncludePageDataAllProperty(string pageName) {
-            return Context.Pages.Include(e => e.PageDatas).ThenInclude(e => e.ContentComponentDatas).ThenInclude(e => e.SingleDatas).FirstOrDefault(e=>e.Name == pageName);
-        }
     }
 }

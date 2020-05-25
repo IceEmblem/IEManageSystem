@@ -1,6 +1,7 @@
 ﻿using Abp.EntityFrameworkCore;
 using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
 using IEManageSystem.CMS.DomainModel;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.Menus;
 using IEManageSystem.CMS.DomainModel.PageDatas;
@@ -64,6 +65,8 @@ namespace IEManageSystem.EntityFrameworkCore
         public DbSet<MenuBase> Menus { get; set; }
 
         public DbSet<PageData> PageDatas { get; set; }
+
+        public DbSet<ContentComponentData> ContentComponentDatas { get; set; }
 
         public DbSet<SiteSetting> SiteSettings { get; set; }
 

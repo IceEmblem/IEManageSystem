@@ -9,6 +9,7 @@ using Abp.UI;
 using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.Attributes;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;

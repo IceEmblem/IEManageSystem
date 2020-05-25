@@ -10,6 +10,7 @@ using System.Linq;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Dtos.CMS;
 using IEManageSystem.CMS.DomainModel.PageDatas;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 
 namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
 {

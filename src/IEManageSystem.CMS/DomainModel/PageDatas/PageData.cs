@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,9 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
 
         public string Title { get; set; }
 
-        public ICollection<ContentComponentData> ContentComponentDatas { get; set; }
-
         public PageBase Page { get; set; }
 
         [ForeignKey("Page")]
         public int PageId { get; set; }
-
-        public ContentComponentData GetComponentDataForSign(string sign)
-        {
-            return ContentComponentDatas.FirstOrDefault(e => e.Sign == sign);
-        }
     }
 }

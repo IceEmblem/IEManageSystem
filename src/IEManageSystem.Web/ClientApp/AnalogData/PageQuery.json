@@ -372,8 +372,9 @@
         "pageData": {
             "id": 1,
             "name": "post",
-            "title": "文章1",
-            "contentComponentDatas": []
-        }
+            "title": "文章1"
+        },
+        "contentComponentDatas": [
+        ]
     }
 }

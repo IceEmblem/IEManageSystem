@@ -1,4 +1,5 @@
 ﻿using Abp.AutoMapper;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using System;
 using System.Collections.Generic;

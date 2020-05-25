@@ -9,5 +9,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys.Dto
     public class GetPageDataOutput : OutputDtoBase
     {
         public PageDataDto PageData { get; set; }
+
+        public List<ContentComponentDataDto> ContentComponentDatas { get; set; }
     }
 }

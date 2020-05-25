@@ -50,11 +50,7 @@ namespace IEManageSystem.Tests.TestDatas
             var pageData = new CMS.DomainModel.PageDatas.PageData()
             {
                 Name = "StaticPage1_PageData1Name",
-                Title = "文章测试标题",
-                ContentComponentDatas = new List<ContentComponentData>() {
-                    new ContentComponentData(){ Sign = "StaticPage1_PageComponentBase1Sign" },
-                    new ContentComponentData(){ Sign = "StaticPage1_PageComponentBase2Sign" }
-                }
+                Title = "文章测试标题"
             };
 
             var staticPage = new StaticPage("StaticPageName", pageData)

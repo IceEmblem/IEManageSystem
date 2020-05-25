@@ -1,11 +1,13 @@
 ﻿using Abp.Dependency;
 using Abp.UI;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
 using IEManageSystem.Repositorys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.PageDatas
@@ -13,6 +15,8 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
     public class PageDataManager : ITransientDependency
     {
         public IEfRepository<PageData, int> Repository { get; set; }
+
+        public IEfRepository<ContentComponentData, int> ComponentDataRepository { get; set; }
 
         public IPageRepository PageRepository { get; }
 
@@ -58,7 +62,11 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
                 throw new UserFriendlyException("找不到要删除的文章");
             }
 
-            Repository.ThenInclude(e => e.ContentComponentDatas, e => e.SingleDatas).FirstOrDefault(e=>e.Id == pageData.Id);
+            Expression<Func<ContentComponentData, object>>[] propertySelectors = {
+                e=>e.SingleDatas
+            };
+            ComponentDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageDataId == pageData.Id).ToList();
+            ComponentDataRepository.Delete(item => item.PageDataId == pageData.Id);
 
             page.PageDatas.Remove(pageData);
         }
@@ -67,19 +75,28 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         {
             PageData pageData = GetPageDataIncludeAllProperty(pageName, pageDataName);
 
-            pageData.ContentComponentDatas = contentComponentDatas;
+            Expression<Func<ContentComponentData, object>>[] propertySelectors = { 
+                e=>e.SingleDatas
+            };
+            ComponentDataRepository.GetAllIncluding(propertySelectors).Where(e=>e.PageDataId == pageData.Id).ToList();
+            ComponentDataRepository.Delete(item => item.PageDataId == pageData.Id);
+
+            contentComponentDatas.ForEach(item =>
+            {
+                item.PageData = pageData;
+                ComponentDataRepository.Insert(item);
+            });
         }
 
         public PageData GetPageDataIncludeAllProperty(string pageName, string pageDataName)
         {
             if (string.IsNullOrWhiteSpace(pageDataName))
             {
-                var page = PageRepository.GetPageIncludePageDataAllProperty(pageName);
-                return page.PageDatas.FirstOrDefault();
+                return Repository.FirstOrDefault(e => e.Page.Name == pageName);
             }
             else 
             {
-                return Repository.ThenInclude(e => e.ContentComponentDatas, e => e.SingleDatas).FirstOrDefault(e=>e.Page.Name == pageName && e.Name == pageDataName);
+                return Repository.FirstOrDefault(e=>e.Page.Name == pageName && e.Name == pageDataName);
             }
         }
     }

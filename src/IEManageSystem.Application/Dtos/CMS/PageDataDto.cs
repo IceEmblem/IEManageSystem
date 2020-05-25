@@ -15,7 +15,5 @@ namespace IEManageSystem.Dtos.CMS
         public string Name { get; set; }
 
         public string Title { get; set; }
-
-        public List<ContentComponentDataDto> ContentComponentDatas { get; set; }
     }
 }

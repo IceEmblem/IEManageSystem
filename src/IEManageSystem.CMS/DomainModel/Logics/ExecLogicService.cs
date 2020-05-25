@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.UI;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
+using IEManageSystem.Repositorys;
 
 namespace IEManageSystem.CMS.DomainModel.Logics
 {
@@ -19,15 +22,21 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 
         private IPageDataRepository _pageDataRepository { get; set; }
 
+        private IEfRepository<ContentComponentData, int> _componentDataRepository { get; set; }
+
         public ExecLogicService(
             IActuatorFactory actuatorFactory,
             IRepository<PageBase> pageRepository,
-            IPageDataRepository pageDataRepository) {
+            IPageDataRepository pageDataRepository,
+            IEfRepository<ContentComponentData, int> componentDataRepository) 
+        {
             _actuatorFactory = actuatorFactory;
 
             _pageRepository = pageRepository;
 
             _pageDataRepository = pageDataRepository;
+
+            _componentDataRepository = componentDataRepository;
         }
 
         public void Exec(
@@ -54,9 +63,12 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             }
 
             _pageRepository.EnsureCollectionLoaded(pageBase, e => e.PageComponents);
-            _pageDataRepository.ThenInclude(e => e.ContentComponentDatas, e => e.SingleDatas).First(e=>e.Id == pageData.Id);
+            Expression<Func<ContentComponentData, object>>[] propertySelectors = { 
+                e=>e.SingleDatas
+            };
+            var componentData = _componentDataRepository.GetAllIncluding(propertySelectors).FirstOrDefault(e => e.PageDataId == pageData.Id && e.Sign == pageComponentBaseSign);
 
-            actuator.Exec(pageData.GetComponentDataForSign(pageComponentBaseSign), pageBase.GetPageComponentForSign(contentComponentDataSign), pageData, request);
+            actuator.Exec(componentData, pageBase.GetPageComponentForSign(contentComponentDataSign), pageData, request);
         }
     }
 }

@@ -1,13 +1,16 @@
 ﻿using Abp.ObjectMapping;
 using Abp.UI;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
 using IEManageSystem.Dtos.CMS;
+using IEManageSystem.Repositorys;
 using IEManageSystem.Services.ManageHome.CMS.PageQuerys.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
@@ -20,12 +23,15 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
 
         private PageDataManager _pageDataManager { get; set; }
 
+        private IEfRepository<ContentComponentData, int> _componentDataRepository { get; set; }
+
         private IPageRepository _repository => _pageManager.PageRepository;
 
         public PageQueryAppService(
             IObjectMapper objectMapper,
             PageManager pageManager,
-            PageDataManager pageDataManager
+            PageDataManager pageDataManager,
+            IEfRepository<ContentComponentData, int> componentDataRepository
             )
         {
             _objectMapper = objectMapper;
@@ -33,6 +39,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             _pageManager = pageManager;
 
             _pageDataManager = pageDataManager;
+
+            _componentDataRepository = componentDataRepository;
         }
 
         public GetPagesOutput GetPages(GetPagesInput input)
@@ -222,9 +230,15 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
         {
             var pageData = _pageDataManager.GetPageDataIncludeAllProperty(input.PageName, input.PageDataName);
 
+            Expression<Func<ContentComponentData, object>>[] propertySelectors = {
+                e=>e.SingleDatas
+            };
+            var componentDatas = _componentDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageDataId == pageData.Id).ToList();
+
             return new GetPageDataOutput()
             {
-                PageData = _objectMapper.Map<PageDataDto>(pageData)
+                PageData = _objectMapper.Map<PageDataDto>(pageData),
+                ContentComponentDatas = _objectMapper.Map<List<ContentComponentDataDto>>(componentDatas)
             };
         }
     }

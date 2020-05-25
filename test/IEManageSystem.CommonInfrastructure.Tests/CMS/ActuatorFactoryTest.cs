@@ -1,4 +1,5 @@
-﻿using IEManageSystem.CMS.DomainModel.Logics;
+﻿using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CommonInfrastructure.CMS;
 using IEManageSystem.Tests;

@@ -47,7 +47,7 @@ class ComponentData extends React.Component {
                     <Button
                         type="primary"
                         icon={<CloudUploadOutlined />}
-                        onClick={() => this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.pageData.contentComponentDatas)}
+                        onClick={() => this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.contentComponentDatas)}
                     >
                         提交文章
                     </Button>
@@ -83,6 +83,7 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     return {
         page: state.page,
         pageData: state.pageData,
+        contentComponentDatas: state.contentComponentDatas,
         pageName: ownProps.match.params.pageName,
         pageDataName: ownProps.match.params.pageDataName
     }
