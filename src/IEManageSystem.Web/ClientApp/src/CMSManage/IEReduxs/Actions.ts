@@ -1,4 +1,5 @@
 import { createIEThunkAction } from 'Core/IEReduxs/Actions'
+import PageModel from '../Models/Pages/PageModel'
 import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
 import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
 
@@ -42,6 +43,16 @@ export function pageFetch(name:string){
     postData,
     PageReceive
   );
+}
+// 该动作模拟页面接收动作
+export function setPage(page:PageModel, defaultComponentDatas:Array<ComponentDataModel>){
+  return {
+    type: PageReceive,
+    data: {
+      page,
+      defaultComponentDatas
+    }
+  }
 }
 
 // 页面组件更新

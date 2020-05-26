@@ -6,6 +6,8 @@ import PageData from './PageData/PageData.jsx'
 import PictureManage from './PictureManage'
 import LogicManage from './LogicManage'
 import MenuListManage from './MenuListManage'
+import TemplateManage from './TemplateManage'
+import TemplatePageManage from './TemplatePageManage'
 
 export default class CMSManage extends React.Component{
     constructor(props)
@@ -23,6 +25,8 @@ export default class CMSManage extends React.Component{
                 <Route path="/ManageHome/CMSManage/PageData/:pageName" component={PageData} />
                 <Route path="/ManageHome/CMSManage/PictureManage" component={PictureManage} />
                 <Route path="/ManageHome/CMSManage/LogicManage" component={LogicManage} />
+                <Route path="/ManageHome/CMSManage/TemplateManage" component={TemplateManage} />
+                <Route path="/ManageHome/CMSManage/TemplatePageManage/:templateName" component={TemplatePageManage} />
             </Switch>
         </div>);
     }

@@ -1,5 +1,6 @@
 require("./createComponentDescribesFile");
 require("./createModuleListFile");
+require("./createTemplateListFile");
 
 var path = require("path");
 var pathMap = require('./pathmap.json');

@@ -13,13 +13,15 @@ import Page from 'Core/Page/Page'
 import Home from './Home'
 import PageEdit from "./PageEdit"
 import PostEdit from './PostEdit'
+import TemplatePageShow from './TemplatePageShow'
 
 import {
     SnippetsOutlined,
     OrderedListOutlined,
     FileOutlined,
     FileImageOutlined,
-    ForkOutlined
+    ForkOutlined,
+    AppstoreOutlined
 } from '@ant-design/icons';
 
 export default class Module extends BaseModule {
@@ -73,6 +75,17 @@ export default class Module extends BaseModule {
                             [
                                 AccessScope.Logic(ApiScopeNodeType.manage)
                             ]
+                    },
+                    {
+
+                        id: "TemplateManage",
+                        text: "模板管理",
+                        icon: AppstoreOutlined,
+                        url: "/ManageHome/CMSManage/TemplateManage",
+                        accessScope:
+                            [
+                                AccessScope.Page(ApiScopeNodeType.manage)
+                            ]
                     }
                 ]
             },
@@ -86,6 +99,7 @@ export default class Module extends BaseModule {
         PageProvider.register(new Page("Home", "/", Home));
         PageProvider.register(new Page("PageEdit", "/ManageHome/CMSManage/PageEdit/:pageName", PageEdit));
         PageProvider.register(new Page("PostEdit", "/ManageHome/CMSManage/PostEdit/:pageName/:pageDataName?", PostEdit));
+        PageProvider.register(new Page("TemplatePageShow", "/ManageHome/CMSManage/TemplatePageShow/:templateName/:templatePageName", TemplatePageShow));
     }
 }
 

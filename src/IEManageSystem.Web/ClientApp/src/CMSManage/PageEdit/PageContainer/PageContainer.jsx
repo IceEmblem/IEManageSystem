@@ -10,8 +10,6 @@ import PageEditCompontContainer from 'CMSManage/Component/ComponentContainers/Pa
 
 import { pageAddComponent, pageComponentUpdateFetch, pageFetch } from 'CMSManage/IEReduxs/Actions'
 
-import { ieReduxFetch } from 'Core/IEReduxFetch'
-
 import BtnLists from './BtnLists'
 import PromptBox from 'PromptBox'
 import ComponentListBox from "./ComponentListBox"
