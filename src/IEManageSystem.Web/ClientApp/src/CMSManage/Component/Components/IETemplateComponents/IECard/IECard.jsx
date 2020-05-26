@@ -1,15 +1,29 @@
 import React from 'react'
+import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
+import Data from './Data'
 import { Card } from 'antd';
 const { Meta } = Card;
 
-export default class IECard extends React.Component {
+export default class IECard extends BaseContentLeafComponent {
+    constructor(props) {
+        super(props);
+
+        this.data = new Data(this.props.componentData);
+    }
+
     render() {
-        return (<Card
-            hoverable
-            style={{ width: 240 }}
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-        >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-        </Card>);
+        this.data.setData(this.props.componentData);
+
+        return (
+            <a href={this.data.link}>
+                <Card
+                    hoverable
+                    cover={<img alt="未找到图片" src={this.data.imgUrl} />}
+                >
+                    <Meta
+                        title={this.data.title}
+                        description={this.data.content} />
+                </Card>
+            </a>);
     }
 }

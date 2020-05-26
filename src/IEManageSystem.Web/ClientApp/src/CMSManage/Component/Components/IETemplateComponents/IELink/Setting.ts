@@ -12,7 +12,7 @@ export default class Setting {
     }
 
     get text(){
-        return this.setting.getDefauleData().field1 || "IE-链接";
+        return this.setting.getDefauleData().field1;
     }
 
     set text(val){

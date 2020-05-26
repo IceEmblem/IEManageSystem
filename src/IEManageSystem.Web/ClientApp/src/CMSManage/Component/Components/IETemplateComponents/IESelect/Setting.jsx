@@ -48,4 +48,12 @@ export default class Setting {
 
         return dataList;
     }
+
+    get size(){
+        return this.setting.getDefauleData().field1 || "false";
+    }
+
+    set size(val){
+        this.setting.getDefauleData().field1 = val;
+    }
 }

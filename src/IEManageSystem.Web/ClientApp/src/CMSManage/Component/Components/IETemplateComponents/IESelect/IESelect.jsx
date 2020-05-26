@@ -21,7 +21,7 @@ export default class IESelect extends React.Component {
         this.setting.setSetting(this.getPageComponentSetting());
 
         return (
-            <Select defaultValue="" >
+            <Select size={this.setting.size} defaultValue="" >
                 {this.setting.getSeleteDatas().map((item,index)=>(
                 <Option key={index} value={item.url}><a href={item.url}>{item.text}</a></Option>))}
             </Select>

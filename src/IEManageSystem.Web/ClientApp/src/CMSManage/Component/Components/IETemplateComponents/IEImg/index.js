@@ -1,9 +1,13 @@
 import React from 'react';
-import BaseComponentObject from '../../BaseComponents/BaseStaticComponent';
+import BaseComponentObject from '../../BaseComponents/BaseContentLeafComponent';
 import IEImg from './IEImg';
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
+import DataConfig from './DataConfig'
+
 class ComponentObject extends BaseComponentObject{
+    ComponentDataConfig = DataConfig;
+    
     Component(props){
         return <IEImg {...props} />
     }

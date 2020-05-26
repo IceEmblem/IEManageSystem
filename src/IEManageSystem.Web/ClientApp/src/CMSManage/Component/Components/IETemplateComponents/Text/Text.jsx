@@ -21,10 +21,6 @@ class Text extends BaseContentLeafComponent {
     }
 
     render() {
-        if (!this.props.componentData) {
-            return <Skeleton paragraph={{ rows: 0 }} />;
-        }
-
         this.setting.setSetting(this.getPageComponentSetting());
         this.data.setData(this.props.componentData);
 
