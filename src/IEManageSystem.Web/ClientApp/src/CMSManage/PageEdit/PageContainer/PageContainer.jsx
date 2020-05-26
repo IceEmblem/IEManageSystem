@@ -52,7 +52,10 @@ class PageContainer extends React.Component {
             return;
         }
 
-        let data = JSON.stringify(this.props.page)
+        let data = JSON.stringify({
+            page:this.props.page,
+            defaultComponentDatas: this.props.defaultComponentDatas
+        })
 
         var blob = new Blob([data], { type: 'text/json' }),
             e = document.createEvent('MouseEvents'),

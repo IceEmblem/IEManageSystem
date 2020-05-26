@@ -83,7 +83,8 @@ function defaultComponentDatas(
         if (index < 0) {
             return state
         }
-        return state.splice(index, 1);
+        state.splice(index, 1);
+        return state;
     }
 
     // 编辑组件

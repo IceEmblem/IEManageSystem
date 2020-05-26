@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ComponentFactory from '../Components/ComponentFactory'
 import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
 import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
+import BaseContentLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
 
 import './BaseComponentContainer.css'
 
@@ -66,21 +67,30 @@ class BaseComponentContainer extends React.Component {
         return className;
     }
 
+    getContentComponentData(){
+        // 如果组件不是内容组件
+        if (!(this.componentObject instanceof BaseContentLeafComponentObject)) {
+            return undefined;
+        }
+
+        if(this.props.contentComponentData){
+            return this.props.contentComponentData;
+        }
+        
+        if(this.props.defaultComponentData){
+            return new ComponentDataModel(this.props.defaultComponentData);
+        }
+
+        return new ComponentDataModel({id: 0, sign: this.props.pageComponent.sign, singleDatas: []});
+    }
+
     createChildComponent() {
         return undefined;
     }
 
     createComponent() {
-        let contentComponentData;
-        if(this.props.contentComponentData){
-            contentComponentData = this.props.contentComponentData;
-        }
-        else if(this.props.defaultComponentData){
-            contentComponentData = new ComponentDataModel(this.props.defaultComponentData);
-        }
-
         return this.componentObject.Component({
-            componentData: contentComponentData,
+            componentData: this.getContentComponentData(),
             pageComponentSettings: this.getPageComponentSettings() || [],
             targetPageId: this.props.pageComponent.targetPageId,
             menuName: this.props.pageComponent.menuName,

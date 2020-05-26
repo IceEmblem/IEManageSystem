@@ -26,5 +26,5 @@ class ComponentObject extends BaseComponentObject {
 }
 
 let componentDescribe = new ComponentDescribe("Container", new ComponentObject(), componentType.container);
-componentDescribe.defauleStyle.height = "50px";
+// componentDescribe.defauleStyle.height = "50px";
 export default componentDescribe;

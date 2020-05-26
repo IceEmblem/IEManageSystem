@@ -1,43 +1,36 @@
 .parentcomponent .editableparentcom-btns {
     z-index: 9990;
     right: 0rem;
-    top: 0rem;
 }
 
 .parentcomponent .parentcomponent .editableparentcom-btns {
     z-index: 9991;
-    right: .2rem;
-    top: .2rem;
+    right: .3rem;
 }
 
 .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
     z-index: 9992;
-    right: .4rem;
-    top: .4rem;
+    right: .6rem;
 }
 
 .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
     z-index: 9993;
-    right: .6rem;
-    top: .6rem;
+    right: .9rem;
 }
 
 .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
     z-index: 9994;
-    right: .8rem;
-    top: .8rem;
+    right: 1.2rem;
 }
 
 .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
     z-index: 9995;
-    right: 1rem;
-    top: 1rem;
+    right: 1.5rem;
 }
 
 .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
     z-index: 9996;
-    right: 1.2rem;
-    top: 1.2rem;
+    right: 1.8rem;
 }
 
 .parentcomponent:hover>.editableparentcom-btns>button {
@@ -56,7 +49,7 @@
 }
 
 .editableparentcom-btns>button {
-    opacity: 0.5;
+    opacity: 0;
     transition: 0.5s;
     -webkit-transition: 0.5s;
     transform-origin:50% 50%;

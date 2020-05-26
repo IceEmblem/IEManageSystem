@@ -13,9 +13,9 @@ export default class IEImg extends BaseContentLeafComponent {
     render() {
         this.data.setData(this.props.componentData);
 
-        return <div>
-            <img alt="未找到图片" src={this.data.imgUrl}></img>
-            <p className="mt-3">{this.data.text}</p>
+        return <div className="w-100">
+            <img className="w-100" alt="未找到图片" src={this.data.imgUrl}></img>
+            <p style={{textAlign: "center"}} className="mt-3">{this.data.text}</p>
         </div>
     }
 }

@@ -12,6 +12,7 @@
     line-height: 64px;
     white-space: nowrap;
     text-decoration: none;
+    font-weight: 600;
 }
 .ie-logo img {
     position: relative;

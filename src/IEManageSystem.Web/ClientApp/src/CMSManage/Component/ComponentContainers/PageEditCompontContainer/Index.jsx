@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContainerComponent'
-import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
+import BaseContentLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
 import { pageFetch, pageDataFetch, pageRemoveComponent, pageEditComponent, defaultComponentDataUpdate } from 'CMSManage/IEReduxs/Actions'
 
 import './index.css'
@@ -46,7 +46,6 @@ class PageEditCompontContainer extends BaseComponentContainer {
             componentObject={this.componentObject}
             pageComponent={this.props.pageComponent}
             editComponent={this.props.editComponent}
-            defaultComponentData={this.props.defaultComponentData}
             show={this.state.openEdit}
             close={() => { this.setState({ openEdit: false }) }}
         ></PageEditFrame>);
@@ -54,14 +53,14 @@ class PageEditCompontContainer extends BaseComponentContainer {
         tools.push(
             <div key={"EditFrameBtn"} className="editableparentcom-btns">
                 <Tooltip title={`删除 ${this.componentDescribe.displayName}`} overlayStyle={{ zIndex: 10000 }}>
-                    <Button type="primary" shape="circle" danger icon={<DeleteOutlined />}
+                    <Button type="primary" shape="round" danger icon={<DeleteOutlined />}
                         onClick={
                             () => { this.props.removeComponent(this.props.pageComponent) }
                         }
                     />
                 </Tooltip>
                 <Tooltip title={`编辑 ${this.componentDescribe.displayName}`} overlayStyle={{ zIndex: 10000 }}>
-                    <Button type="primary" shape="circle" icon={<EditOutlined />}
+                    <Button type="primary" shape="round" icon={<EditOutlined />}
                         onClick={
                             () => { this.setState({ openEdit: true }) }
                         }
@@ -70,7 +69,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
                 {
                     (this.componentObject instanceof ContainerComponentObject) &&
                     <Tooltip title="添加" overlayStyle={{ zIndex: 10000 }}>
-                        <Button type="default" shape="circle" icon={<AppstoreAddOutlined />}
+                        <Button type="default" shape="round" icon={<AppstoreAddOutlined />}
                             onClick={
                                 () => { this.props.addChildComponent(this.props.pageComponent) }
                             }
@@ -78,9 +77,9 @@ class PageEditCompontContainer extends BaseComponentContainer {
                     </Tooltip>
                 }
                 {
-                    ((this.componentObject instanceof BaseContentLeafComponent)) &&
+                    ((this.componentObject instanceof BaseContentLeafComponentObject)) &&
                     <Tooltip title="编辑默认数据">
-                        <Button type="primary" shape="circle" icon={<FormOutlined />}
+                        <Button type="primary" shape="round" icon={<FormOutlined />}
                             onClick={
                                 () => { this.setState({ showPostEdit: true }) }
                             }
@@ -91,7 +90,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
         );
 
         // 如果组件不是内容组件
-        if (!(this.componentObject instanceof BaseContentLeafComponent)) {
+        if (!(this.componentObject instanceof BaseContentLeafComponentObject)) {
             return tools;
         }
 
@@ -102,7 +101,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
                 show={this.state.showPostEdit}
                 close={() => { this.setState({ showPostEdit: false }) }}
                 submit={this.props.defaultComponentDataUpdate}
-                componentData={this.props.defaultComponentData}
+                componentData={this.getContentComponentData()}
                 componentObject={this.componentObject}
             ></PostEditFrame>);
 
