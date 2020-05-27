@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IEManageSystem.Migrations
@@ -13,7 +12,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(maxLength: 15, nullable: false),
                     Password = table.Column<string>(maxLength: 60, nullable: false),
                     SafetyProblem_Problem = table.Column<string>(maxLength: 20, nullable: true),
@@ -29,7 +28,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Discriminator = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -42,7 +41,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -51,11 +50,25 @@ namespace IEManageSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Logics",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Code = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logics", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pages",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     DisplayName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
@@ -71,7 +84,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     DisplayName = table.Column<string>(nullable: true),
                     Describe = table.Column<string>(nullable: true)
@@ -86,7 +99,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     DisplayName = table.Column<string>(nullable: true),
                     Describe = table.Column<string>(nullable: true)
@@ -101,7 +114,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Key = table.Column<string>(nullable: true),
                     Value = table.Column<string>(nullable: true),
                     DisplayName = table.Column<string>(nullable: true),
@@ -117,7 +130,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AccountId = table.Column<int>(nullable: true),
                     EmailAddress = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 20, nullable: true),
@@ -147,7 +160,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     DisplayName = table.Column<string>(nullable: true),
                     ApiManageScopeId = table.Column<int>(nullable: true),
@@ -175,20 +188,22 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Sign = table.Column<string>(nullable: true),
                     ParentSign = table.Column<string>(nullable: true),
                     CmsComponentId = table.Column<int>(nullable: true),
-                    PageComponentBaseSetting_SortIndex = table.Column<int>(nullable: false),
-                    PageComponentBaseSetting_Col = table.Column<string>(nullable: true),
+                    PageComponentBaseSetting_SortIndex = table.Column<int>(nullable: true),
+                    PageComponentBaseSetting_Width = table.Column<string>(nullable: true),
                     PageComponentBaseSetting_Height = table.Column<string>(nullable: true),
                     PageComponentBaseSetting_Padding = table.Column<string>(nullable: true),
                     PageComponentBaseSetting_Margin = table.Column<string>(nullable: true),
                     PageComponentBaseSetting_BackgroundColor = table.Column<string>(nullable: true),
+                    PageComponentBaseSetting_BackgroundImage = table.Column<string>(nullable: true),
                     PageComponentBaseSetting_ClassName = table.Column<string>(nullable: true),
                     PageId = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
+                    MenuName = table.Column<string>(nullable: true),
                     TargetPageId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -215,20 +230,20 @@ namespace IEManageSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PageData",
+                name: "PageDatas",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     PageId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PageData", x => x.Id);
+                    table.PrimaryKey("PK_PageDatas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PageData_Pages_PageId",
+                        name: "FK_PageDatas_Pages_PageId",
                         column: x => x.PageId,
                         principalTable: "Pages",
                         principalColumn: "Id",
@@ -240,7 +255,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ApiScopeId = table.Column<int>(nullable: false),
                     PermissionId = table.Column<int>(nullable: false),
                     ApiScopeNodeId = table.Column<int>(nullable: true)
@@ -267,7 +282,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<int>(nullable: false),
                     PermissionId = table.Column<int>(nullable: false)
                 },
@@ -293,7 +308,7 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
                     RoleId = table.Column<int>(nullable: false)
                 },
@@ -319,50 +334,48 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     DisplayName = table.Column<string>(nullable: true),
-                    Field1 = table.Column<string>(nullable: true),
-                    Field2 = table.Column<string>(nullable: true),
-                    Field3 = table.Column<string>(nullable: true),
-                    Field4 = table.Column<string>(nullable: true),
-                    Field5 = table.Column<string>(nullable: true),
-                    PageComponentBaseId = table.Column<int>(nullable: true)
+                    PageComponentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PageComponentSetting", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PageComponentSetting_PageComponentBase_PageComponentBaseId",
-                        column: x => x.PageComponentBaseId,
+                        name: "FK_PageComponentSetting_PageComponentBase_PageComponentId",
+                        column: x => x.PageComponentId,
                         principalTable: "PageComponentBase",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContentComponentData",
+                name: "ComponentData",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Sign = table.Column<string>(nullable: true),
-                    Field1 = table.Column<string>(nullable: true),
-                    Field2 = table.Column<string>(nullable: true),
-                    Field3 = table.Column<string>(nullable: true),
-                    Field4 = table.Column<string>(nullable: true),
-                    Field5 = table.Column<string>(nullable: true),
-                    PageDataId = table.Column<int>(nullable: false)
+                    Discriminator = table.Column<string>(nullable: false),
+                    PageDataId = table.Column<int>(nullable: true),
+                    PageId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContentComponentData", x => x.Id);
+                    table.PrimaryKey("PK_ComponentData", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContentComponentData_PageData_PageDataId",
+                        name: "FK_ComponentData_PageDatas_PageDataId",
                         column: x => x.PageDataId,
-                        principalTable: "PageData",
+                        principalTable: "PageDatas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ComponentData_Pages_PageId",
+                        column: x => x.PageId,
+                        principalTable: "Pages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -370,11 +383,12 @@ namespace IEManageSystem.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     DisplayName = table.Column<string>(nullable: false),
                     Icon = table.Column<string>(nullable: true),
                     CompositeMenuId = table.Column<int>(nullable: true),
+                    RootMenuId = table.Column<int>(nullable: true),
                     PageDataId = table.Column<int>(nullable: true),
                     Discriminator = table.Column<string>(nullable: false)
                 },
@@ -388,22 +402,75 @@ namespace IEManageSystem.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Menus_PageData_PageDataId",
+                        name: "FK_Menus_PageDatas_PageDataId",
                         column: x => x.PageDataId,
-                        principalTable: "PageData",
+                        principalTable: "PageDatas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Menus_Menus_RootMenuId",
+                        column: x => x.RootMenuId,
+                        principalTable: "Menus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SingleSettingData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    SortIndex = table.Column<int>(nullable: false),
+                    Field1 = table.Column<string>(nullable: true),
+                    Field2 = table.Column<string>(nullable: true),
+                    Field3 = table.Column<string>(nullable: true),
+                    Field4 = table.Column<string>(nullable: true),
+                    Field5 = table.Column<string>(nullable: true),
+                    PageComponentSettingId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SingleSettingData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SingleSettingData_PageComponentSetting_PageComponentSettingId",
+                        column: x => x.PageComponentSettingId,
+                        principalTable: "PageComponentSetting",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SingleComponentData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    SortIndex = table.Column<int>(nullable: false),
+                    Field1 = table.Column<string>(nullable: true),
+                    Field2 = table.Column<string>(nullable: true),
+                    Field3 = table.Column<string>(nullable: true),
+                    Field4 = table.Column<string>(nullable: true),
+                    Field5 = table.Column<string>(nullable: true),
+                    ComponentDataId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SingleComponentData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SingleComponentData_ComponentData_ComponentDataId",
+                        column: x => x.ComponentDataId,
+                        principalTable: "ComponentData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Menus",
-                columns: new[] { "Id", "CompositeMenuId", "Discriminator", "DisplayName", "Icon", "Name", "PageDataId" },
-                values: new object[,]
-                {
-                    { 1, null, "CompositeMenu", "首页", "oi-home", "Home", null },
-                    { 2, null, "CompositeMenu", "游戏", "oi-dial", "Game", null },
-                    { 3, null, "CompositeMenu", "技术文档", "oi-document", "Document", null }
-                });
+                columns: new[] { "Id", "CompositeMenuId", "Discriminator", "DisplayName", "Icon", "Name", "PageDataId", "RootMenuId" },
+                values: new object[] { 1, null, "CompositeMenu", "主菜单", "", "Main", null, null });
 
             migrationBuilder.InsertData(
                 table: "Pages",
@@ -412,19 +479,35 @@ namespace IEManageSystem.Migrations
 
             migrationBuilder.InsertData(
                 table: "Menus",
-                columns: new[] { "Id", "CompositeMenuId", "Discriminator", "DisplayName", "Icon", "Name", "PageDataId" },
+                columns: new[] { "Id", "CompositeMenuId", "Discriminator", "DisplayName", "Icon", "Name", "PageDataId", "RootMenuId" },
                 values: new object[,]
                 {
-                    { 101, 2, "LeafMenu", "主机游戏", null, "PCGame", null },
-                    { 102, 2, "LeafMenu", "手机游戏", null, "PhoneGame", null },
-                    { 103, 3, "LeafMenu", "站点技术", null, "Web", null },
-                    { 104, 3, "LeafMenu", "桌面开发", null, "Desktop", null }
+                    { 2, 1, "CompositeMenu", "首页", "oi-home", "Home", null, 1 },
+                    { 3, 1, "CompositeMenu", "游戏", "oi-dial", "Game", null, 1 },
+                    { 4, 1, "CompositeMenu", "技术文档", "oi-document", "Document", null, 1 }
                 });
 
             migrationBuilder.InsertData(
-                table: "PageData",
+                table: "PageDatas",
                 columns: new[] { "Id", "Name", "PageId", "Title" },
                 values: new object[] { 1, "Index", 1, "首页" });
+
+            migrationBuilder.InsertData(
+                table: "Menus",
+                columns: new[] { "Id", "CompositeMenuId", "Discriminator", "DisplayName", "Icon", "Name", "PageDataId", "RootMenuId" },
+                values: new object[,]
+                {
+                    { 101, 3, "LeafMenu", "主机游戏", null, "PCGame", null, 1 },
+                    { 102, 3, "LeafMenu", "手机游戏", null, "PhoneGame", null, 1 },
+                    { 103, 4, "LeafMenu", "站点技术", null, "Web", null, 1 },
+                    { 104, 4, "LeafMenu", "桌面开发", null, "Desktop", null, 1 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Account_UserName",
+                table: "Account",
+                column: "UserName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApiScope_ApiManageScopeId",
@@ -447,9 +530,19 @@ namespace IEManageSystem.Migrations
                 column: "PermissionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContentComponentData_PageDataId",
-                table: "ContentComponentData",
+                name: "IX_ComponentData_Sign",
+                table: "ComponentData",
+                column: "Sign");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ComponentData_PageDataId",
+                table: "ComponentData",
                 column: "PageDataId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ComponentData_PageId",
+                table: "ComponentData",
+                column: "PageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menus_CompositeMenuId",
@@ -457,9 +550,20 @@ namespace IEManageSystem.Migrations
                 column: "CompositeMenuId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Menus_Name",
+                table: "Menus",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Menus_PageDataId",
                 table: "Menus",
                 column: "PageDataId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menus_RootMenuId",
+                table: "Menus",
+                column: "RootMenuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PageComponentBase_CmsComponentId",
@@ -472,19 +576,51 @@ namespace IEManageSystem.Migrations
                 column: "PageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PageComponentBase_Sign",
+                table: "PageComponentBase",
+                column: "Sign");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PageComponentBase_TargetPageId",
                 table: "PageComponentBase",
                 column: "TargetPageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PageComponentSetting_PageComponentBaseId",
+                name: "IX_PageComponentSetting_PageComponentId",
                 table: "PageComponentSetting",
-                column: "PageComponentBaseId");
+                column: "PageComponentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PageData_PageId",
-                table: "PageData",
+                name: "IX_PageDatas_Name",
+                table: "PageDatas",
+                column: "Name",
+                unique: true,
+                filter: "[Name] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PageDatas_PageId",
+                table: "PageDatas",
                 column: "PageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pages_Name",
+                table: "Pages",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_Name",
+                table: "Permission",
+                column: "Name",
+                unique: true,
+                filter: "[Name] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Role_Name",
+                table: "Role",
+                column: "Name",
+                unique: true,
+                filter: "[Name] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolePermission_PermissionId",
@@ -495,6 +631,16 @@ namespace IEManageSystem.Migrations
                 name: "IX_RolePermission_RoleId",
                 table: "RolePermission",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SingleComponentData_ComponentDataId",
+                table: "SingleComponentData",
+                column: "ComponentDataId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SingleSettingData_PageComponentSettingId",
+                table: "SingleSettingData",
+                column: "PageComponentSettingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_AccountId",
@@ -521,16 +667,19 @@ namespace IEManageSystem.Migrations
                 name: "ApiScopePermission");
 
             migrationBuilder.DropTable(
-                name: "ContentComponentData");
+                name: "Logics");
 
             migrationBuilder.DropTable(
                 name: "Menus");
 
             migrationBuilder.DropTable(
-                name: "PageComponentSetting");
+                name: "RolePermission");
 
             migrationBuilder.DropTable(
-                name: "RolePermission");
+                name: "SingleComponentData");
+
+            migrationBuilder.DropTable(
+                name: "SingleSettingData");
 
             migrationBuilder.DropTable(
                 name: "SiteSettings");
@@ -542,13 +691,13 @@ namespace IEManageSystem.Migrations
                 name: "ApiScopeNode");
 
             migrationBuilder.DropTable(
-                name: "PageData");
-
-            migrationBuilder.DropTable(
-                name: "PageComponentBase");
-
-            migrationBuilder.DropTable(
                 name: "Permission");
+
+            migrationBuilder.DropTable(
+                name: "ComponentData");
+
+            migrationBuilder.DropTable(
+                name: "PageComponentSetting");
 
             migrationBuilder.DropTable(
                 name: "Role");
@@ -557,13 +706,19 @@ namespace IEManageSystem.Migrations
                 name: "User");
 
             migrationBuilder.DropTable(
+                name: "PageDatas");
+
+            migrationBuilder.DropTable(
+                name: "PageComponentBase");
+
+            migrationBuilder.DropTable(
+                name: "Account");
+
+            migrationBuilder.DropTable(
                 name: "CmsComponents");
 
             migrationBuilder.DropTable(
                 name: "Pages");
-
-            migrationBuilder.DropTable(
-                name: "Account");
         }
     }
 }

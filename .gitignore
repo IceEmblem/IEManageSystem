@@ -37,3 +37,5 @@
 /test/IEManageSystem.Application.Tests/bin/Debug/netcoreapp3.0
 /test/IEManageSystem.Application.Tests/obj
 /src/IEManageSystem.Web/ClientApp/build
+/test/IEManageSystem.ApiAuthorization.Tests/bin/Debug/netcoreapp3.0
+/test/IEManageSystem.ApiAuthorization.Tests/obj

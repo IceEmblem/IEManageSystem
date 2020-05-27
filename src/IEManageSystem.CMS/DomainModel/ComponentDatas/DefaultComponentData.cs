@@ -11,6 +11,6 @@ namespace IEManageSystem.CMS.DomainModel.ComponentDatas
         public PageBase Page { get; set; }
 
         [ForeignKey("Page")]
-        public int PageId { get; set; }
+        public int? PageId { get; set; }
     }
 }

@@ -106,6 +106,67 @@ namespace IEManageSystem.Migrations
                     b.ToTable("CmsComponents");
                 });
 
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.ComponentData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sign")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Sign");
+
+                    b.ToTable("ComponentData");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ComponentData");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.SingleComponentData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComponentDataId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Field1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field5")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortIndex")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentDataId");
+
+                    b.ToTable("SingleComponentData");
+                });
+
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Logics.Logic", b =>
                 {
                     b.Property<int>("Id")
@@ -147,7 +208,7 @@ namespace IEManageSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("PageDataId")
                         .HasColumnType("int");
@@ -159,6 +220,9 @@ namespace IEManageSystem.Migrations
 
                     b.HasIndex("CompositeMenuId");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.HasIndex("PageDataId");
 
                     b.HasIndex("RootMenuId");
@@ -166,26 +230,6 @@ namespace IEManageSystem.Migrations
                     b.ToTable("Menus");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("MenuBase");
-                });
-
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.ContentComponentData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PageDataId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Sign")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PageDataId");
-
-                    b.ToTable("ContentComponentData");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.PageData", b =>
@@ -196,7 +240,7 @@ namespace IEManageSystem.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("PageId")
                         .HasColumnType("int");
@@ -205,6 +249,10 @@ namespace IEManageSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.HasIndex("PageId");
 
@@ -218,44 +266,6 @@ namespace IEManageSystem.Migrations
                             PageId = 1,
                             Title = "首页"
                         });
-                });
-
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.SingleComponentData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ContentComponentDataId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Field1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field5")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SortIndex")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContentComponentDataId");
-
-                    b.ToTable("SingleComponentData");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageBase", b =>
@@ -277,9 +287,12 @@ namespace IEManageSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Pages");
 
@@ -310,13 +323,15 @@ namespace IEManageSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sign")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CmsComponentId");
 
                     b.HasIndex("PageId");
+
+                    b.HasIndex("Sign");
 
                     b.ToTable("PageComponentBase");
 
@@ -422,9 +437,13 @@ namespace IEManageSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Permission");
                 });
@@ -443,9 +462,13 @@ namespace IEManageSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Role");
                 });
@@ -490,6 +513,9 @@ namespace IEManageSystem.Migrations
                         .HasMaxLength(15);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
 
                     b.ToTable("Account");
                 });
@@ -579,6 +605,30 @@ namespace IEManageSystem.Migrations
                     b.HasBaseType("IEManageSystem.ApiAuthorization.DomainModel.ApiScopes.AuthorizationNodes.ApiScopeNode");
 
                     b.HasDiscriminator().HasValue("ApiQueryScope");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.ContentComponentData", b =>
+                {
+                    b.HasBaseType("IEManageSystem.CMS.DomainModel.ComponentDatas.ComponentData");
+
+                    b.Property<int?>("PageDataId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PageDataId");
+
+                    b.HasDiscriminator().HasValue("ContentComponentData");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.DefaultComponentData", b =>
+                {
+                    b.HasBaseType("IEManageSystem.CMS.DomainModel.ComponentDatas.ComponentData");
+
+                    b.Property<int?>("PageId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PageId");
+
+                    b.HasDiscriminator().HasValue("DefaultComponentData");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Menus.CompositeMenu", b =>
@@ -757,6 +807,15 @@ namespace IEManageSystem.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.SingleComponentData", b =>
+                {
+                    b.HasOne("IEManageSystem.CMS.DomainModel.ComponentDatas.ComponentData", "ComponentData")
+                        .WithMany("SingleDatas")
+                        .HasForeignKey("ComponentDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Menus.MenuBase", b =>
                 {
                     b.HasOne("IEManageSystem.CMS.DomainModel.Menus.CompositeMenu", null)
@@ -772,29 +831,11 @@ namespace IEManageSystem.Migrations
                         .HasForeignKey("RootMenuId");
                 });
 
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.ContentComponentData", b =>
-                {
-                    b.HasOne("IEManageSystem.CMS.DomainModel.PageDatas.PageData", "PageData")
-                        .WithMany("ContentComponentDatas")
-                        .HasForeignKey("PageDataId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.PageData", b =>
                 {
                     b.HasOne("IEManageSystem.CMS.DomainModel.Pages.PageBase", "Page")
                         .WithMany("PageDatas")
                         .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.SingleComponentData", b =>
-                {
-                    b.HasOne("IEManageSystem.CMS.DomainModel.PageDatas.ContentComponentData", "ContentComponentData")
-                        .WithMany("SingleDatas")
-                        .HasForeignKey("ContentComponentDataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -930,6 +971,20 @@ namespace IEManageSystem.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.ContentComponentData", b =>
+                {
+                    b.HasOne("IEManageSystem.CMS.DomainModel.PageDatas.PageData", "PageData")
+                        .WithMany()
+                        .HasForeignKey("PageDataId");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.DefaultComponentData", b =>
+                {
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.PageBase", "Page")
+                        .WithMany()
+                        .HasForeignKey("PageId");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageLeafComponent", b =>

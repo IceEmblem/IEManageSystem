@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IEManageSystem.Migrations
 {
     [DbContext(typeof(IEManageSystemDbContext))]
-    [Migration("20200513033328_update-other")]
-    partial class updateother
+    [Migration("20200527083129_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,6 +108,67 @@ namespace IEManageSystem.Migrations
                     b.ToTable("CmsComponents");
                 });
 
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.ComponentData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sign")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Sign");
+
+                    b.ToTable("ComponentData");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ComponentData");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.SingleComponentData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComponentDataId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Field1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Field5")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortIndex")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentDataId");
+
+                    b.ToTable("SingleComponentData");
+                });
+
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Logics.Logic", b =>
                 {
                     b.Property<int>("Id")
@@ -149,55 +210,28 @@ namespace IEManageSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("PageDataId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RootMenuId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompositeMenuId");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.HasIndex("PageDataId");
+
+                    b.HasIndex("RootMenuId");
 
                     b.ToTable("Menus");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("MenuBase");
-                });
-
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.ContentComponentData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Field1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Field5")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PageDataId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Sign")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PageDataId");
-
-                    b.ToTable("ContentComponentData");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.PageData", b =>
@@ -208,7 +242,7 @@ namespace IEManageSystem.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("PageId")
                         .HasColumnType("int");
@@ -217,6 +251,10 @@ namespace IEManageSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.HasIndex("PageId");
 
@@ -251,9 +289,12 @@ namespace IEManageSystem.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Pages");
 
@@ -284,13 +325,15 @@ namespace IEManageSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sign")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CmsComponentId");
 
                     b.HasIndex("PageId");
+
+                    b.HasIndex("Sign");
 
                     b.ToTable("PageComponentBase");
 
@@ -306,6 +349,26 @@ namespace IEManageSystem.Migrations
 
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PageComponentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PageComponentId");
+
+                    b.ToTable("PageComponentSetting");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.SingleSettingData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Field1")
                         .HasColumnType("nvarchar(max)");
@@ -325,14 +388,17 @@ namespace IEManageSystem.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PageComponentBaseId")
+                    b.Property<int>("PageComponentSettingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SortIndex")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PageComponentBaseId");
+                    b.HasIndex("PageComponentSettingId");
 
-                    b.ToTable("PageComponentSetting");
+                    b.ToTable("SingleSettingData");
                 });
 
             modelBuilder.Entity("IEManageSystem.Common.DomainModel.SiteSetting", b =>
@@ -373,9 +439,13 @@ namespace IEManageSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Permission");
                 });
@@ -394,9 +464,13 @@ namespace IEManageSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Role");
                 });
@@ -441,6 +515,9 @@ namespace IEManageSystem.Migrations
                         .HasMaxLength(15);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
 
                     b.ToTable("Account");
                 });
@@ -532,6 +609,30 @@ namespace IEManageSystem.Migrations
                     b.HasDiscriminator().HasValue("ApiQueryScope");
                 });
 
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.ContentComponentData", b =>
+                {
+                    b.HasBaseType("IEManageSystem.CMS.DomainModel.ComponentDatas.ComponentData");
+
+                    b.Property<int?>("PageDataId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PageDataId");
+
+                    b.HasDiscriminator().HasValue("ContentComponentData");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.DefaultComponentData", b =>
+                {
+                    b.HasBaseType("IEManageSystem.CMS.DomainModel.ComponentDatas.ComponentData");
+
+                    b.Property<int?>("PageId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PageId");
+
+                    b.HasDiscriminator().HasValue("DefaultComponentData");
+                });
+
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Menus.CompositeMenu", b =>
                 {
                     b.HasBaseType("IEManageSystem.CMS.DomainModel.Menus.MenuBase");
@@ -543,25 +644,39 @@ namespace IEManageSystem.Migrations
                         {
                             Id = 1,
                             Discriminator = "CompositeMenu",
-                            DisplayName = "首页",
-                            Icon = "oi-home",
-                            Name = "Home"
+                            DisplayName = "主菜单",
+                            Icon = "",
+                            Name = "Main"
                         },
                         new
                         {
                             Id = 2,
+                            CompositeMenuId = 1,
                             Discriminator = "CompositeMenu",
-                            DisplayName = "游戏",
-                            Icon = "oi-dial",
-                            Name = "Game"
+                            DisplayName = "首页",
+                            Icon = "oi-home",
+                            Name = "Home",
+                            RootMenuId = 1
                         },
                         new
                         {
                             Id = 3,
+                            CompositeMenuId = 1,
+                            Discriminator = "CompositeMenu",
+                            DisplayName = "游戏",
+                            Icon = "oi-dial",
+                            Name = "Game",
+                            RootMenuId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CompositeMenuId = 1,
                             Discriminator = "CompositeMenu",
                             DisplayName = "技术文档",
                             Icon = "oi-document",
-                            Name = "Document"
+                            Name = "Document",
+                            RootMenuId = 1
                         });
                 });
 
@@ -575,34 +690,38 @@ namespace IEManageSystem.Migrations
                         new
                         {
                             Id = 101,
-                            CompositeMenuId = 2,
+                            CompositeMenuId = 3,
                             Discriminator = "LeafMenu",
                             DisplayName = "主机游戏",
-                            Name = "PCGame"
+                            Name = "PCGame",
+                            RootMenuId = 1
                         },
                         new
                         {
                             Id = 102,
-                            CompositeMenuId = 2,
+                            CompositeMenuId = 3,
                             Discriminator = "LeafMenu",
                             DisplayName = "手机游戏",
-                            Name = "PhoneGame"
+                            Name = "PhoneGame",
+                            RootMenuId = 1
                         },
                         new
                         {
                             Id = 103,
-                            CompositeMenuId = 3,
+                            CompositeMenuId = 4,
                             Discriminator = "LeafMenu",
                             DisplayName = "站点技术",
-                            Name = "Web"
+                            Name = "Web",
+                            RootMenuId = 1
                         },
                         new
                         {
                             Id = 104,
-                            CompositeMenuId = 3,
+                            CompositeMenuId = 4,
                             Discriminator = "LeafMenu",
                             DisplayName = "桌面开发",
-                            Name = "Desktop"
+                            Name = "Desktop",
+                            RootMenuId = 1
                         });
                 });
 
@@ -644,6 +763,16 @@ namespace IEManageSystem.Migrations
                     b.HasDiscriminator().HasValue("LeafComponent");
                 });
 
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.MenuComponent", b =>
+                {
+                    b.HasBaseType("IEManageSystem.CMS.DomainModel.Pages.PageComponentBase");
+
+                    b.Property<string>("MenuName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("MenuComponent");
+                });
+
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageLeafComponent", b =>
                 {
                     b.HasBaseType("IEManageSystem.CMS.DomainModel.Pages.PageComponentBase");
@@ -680,6 +809,15 @@ namespace IEManageSystem.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.SingleComponentData", b =>
+                {
+                    b.HasOne("IEManageSystem.CMS.DomainModel.ComponentDatas.ComponentData", "ComponentData")
+                        .WithMany("SingleDatas")
+                        .HasForeignKey("ComponentDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Menus.MenuBase", b =>
                 {
                     b.HasOne("IEManageSystem.CMS.DomainModel.Menus.CompositeMenu", null)
@@ -689,15 +827,10 @@ namespace IEManageSystem.Migrations
                     b.HasOne("IEManageSystem.CMS.DomainModel.PageDatas.PageData", "PageData")
                         .WithMany()
                         .HasForeignKey("PageDataId");
-                });
 
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.ContentComponentData", b =>
-                {
-                    b.HasOne("IEManageSystem.CMS.DomainModel.PageDatas.PageData", "PageData")
-                        .WithMany("ContentComponentDatas")
-                        .HasForeignKey("PageDataId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Menus.CompositeMenu", "RootMenu")
+                        .WithMany()
+                        .HasForeignKey("RootMenuId");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.PageDatas.PageData", b =>
@@ -731,10 +864,10 @@ namespace IEManageSystem.Migrations
                             b1.Property<string>("BackgroundColor")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("ClassName")
+                            b1.Property<string>("BackgroundImage")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("Col")
+                            b1.Property<string>("ClassName")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Height")
@@ -749,6 +882,9 @@ namespace IEManageSystem.Migrations
                             b1.Property<int>("SortIndex")
                                 .HasColumnType("int");
 
+                            b1.Property<string>("Width")
+                                .HasColumnType("nvarchar(max)");
+
                             b1.HasKey("PageComponentBaseId");
 
                             b1.ToTable("PageComponentBase");
@@ -760,9 +896,20 @@ namespace IEManageSystem.Migrations
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageComponentSetting", b =>
                 {
-                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.PageComponentBase", null)
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.PageComponentBase", "PageComponent")
                         .WithMany("PageComponentSettings")
-                        .HasForeignKey("PageComponentBaseId");
+                        .HasForeignKey("PageComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.SingleSettingData", b =>
+                {
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.PageComponentSetting", "PageComponent")
+                        .WithMany("SingleDatas")
+                        .HasForeignKey("PageComponentSettingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IEManageSystem.Entitys.Authorization.Roles.RolePermission", b =>
@@ -826,6 +973,20 @@ namespace IEManageSystem.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.ContentComponentData", b =>
+                {
+                    b.HasOne("IEManageSystem.CMS.DomainModel.PageDatas.PageData", "PageData")
+                        .WithMany()
+                        .HasForeignKey("PageDataId");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.ComponentDatas.DefaultComponentData", b =>
+                {
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.PageBase", "Page")
+                        .WithMany()
+                        .HasForeignKey("PageId");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageLeafComponent", b =>

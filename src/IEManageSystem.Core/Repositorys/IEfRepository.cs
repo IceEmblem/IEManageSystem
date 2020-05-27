@@ -20,5 +20,9 @@ namespace IEManageSystem.Repositorys
             Expression<Func<ThenType, IEnumerable<ThenThenType>>> thenIncludePath,
             Expression<Func<ThenThenType, object>> thenThenIncludePath
             );
+
+        void NoTracking();
+
+        void Tracking();
     }
 }

@@ -1,4 +1,4 @@
-﻿using IEManageSystem.CMS.DomainModel.Pages;
+﻿using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,12 +7,11 @@ using System.Text;
 
 namespace IEManageSystem.Configures.CMS
 {
-    public class PageComponentBaseConfigure : IEntityTypeConfiguration<PageComponentBase>
+    public class ComponentDataConfigure : IEntityTypeConfiguration<ComponentData>
     {
-        public void Configure(EntityTypeBuilder<PageComponentBase> builder)
+        public void Configure(EntityTypeBuilder<ComponentData> builder)
         {
             builder.HasIndex(e => e.Sign);
-            builder.OwnsOne(e => e.PageComponentBaseSetting);
         }
     }
 }

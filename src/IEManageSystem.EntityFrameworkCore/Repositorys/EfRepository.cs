@@ -31,5 +31,15 @@ namespace IEManageSystem.Repositorys
         {
             return Context.Set<TEntity>().Include(includePath).ThenInclude(thenIncludePath).ThenInclude(thenThenIncludePath);
         }
+
+        public void NoTracking() 
+        {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        }
+
+        public void Tracking()
+        {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+        }
     }
 }

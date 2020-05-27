@@ -16,9 +16,11 @@ namespace IEManageSystem.ApiAuthorization.DomainModel.ApiScopes
         protected ApiScope() {
         }
 
-        public ApiScope(string name)
+        public ApiScope(string name, string displayName = null)
         {
             Name = name;
+
+            DisplayName = displayName ?? name;
 
             ApiManageScope = new ApiManageScope();
 

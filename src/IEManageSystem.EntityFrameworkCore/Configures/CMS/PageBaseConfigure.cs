@@ -7,12 +7,11 @@ using System.Text;
 
 namespace IEManageSystem.Configures.CMS
 {
-    public class PageComponentBaseConfigure : IEntityTypeConfiguration<PageComponentBase>
+    public class PageBaseConfigure : IEntityTypeConfiguration<PageBase>
     {
-        public void Configure(EntityTypeBuilder<PageComponentBase> builder)
+        public void Configure(EntityTypeBuilder<PageBase> builder)
         {
-            builder.HasIndex(e => e.Sign);
-            builder.OwnsOne(e => e.PageComponentBaseSetting);
+            builder.HasIndex(e => e.Name).IsUnique();
         }
     }
 }

@@ -34,18 +34,28 @@ namespace IEManageSystem.EntityFrameworkCore
             // 配置Core
             modelBuilder.ApplyConfiguration(new UserConfigure());
             modelBuilder.ApplyConfiguration(new AccountConfigure());
+            modelBuilder.ApplyConfiguration(new RoleConfigure());
+            modelBuilder.ApplyConfiguration(new PermissionConfigure());
 
             // 配置CMS
+            modelBuilder.ApplyConfiguration(new PageBaseConfigure());
             modelBuilder.ApplyConfiguration(new StaticPageConfigure());
             modelBuilder.ApplyConfiguration(new ContentPageConfigure());
-            modelBuilder.ApplyConfiguration(new PageDataConfigure());
+            modelBuilder.ApplyConfiguration(new PageComponentBaseConfigure());
             modelBuilder.ApplyConfiguration(new CompositeComponentConfigure());
             modelBuilder.ApplyConfiguration(new LeafComponentConfigure());
             modelBuilder.ApplyConfiguration(new MenuComponentConfigure());
             modelBuilder.ApplyConfiguration(new PageLeafComponentConfigure());
+
+            modelBuilder.ApplyConfiguration(new PageDataConfigure());
+
+            modelBuilder.ApplyConfiguration(new MenuBaseConfigure());
             modelBuilder.ApplyConfiguration(new LeafMenuConfigure());
             modelBuilder.ApplyConfiguration(new CompositeMenuConfigure());
-            modelBuilder.ApplyConfiguration(new PageComponentBaseConfigure());
+
+            modelBuilder.ApplyConfiguration(new ComponentDataConfigure());
+            modelBuilder.ApplyConfiguration(new DefaultComponentDataConfigure());
+            modelBuilder.ApplyConfiguration(new ContentComponentDataConfigure());
 
             base.OnModelCreating(modelBuilder);
         }
