@@ -205,7 +205,7 @@ export default class IEImg extends React.Component {
 
         return <a href={this.setting.url} style={{fontSize:this.setting.fontSize, color:this.setting.fontColor}}>
             {Icon}
-            <span className="ml-2">{this.setting.text}</span>
+            <span className={Icon ? "ml-2" : ""}>{this.setting.text}</span>
         </a>
     }
 }

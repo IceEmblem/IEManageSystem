@@ -1,11 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
-import RootRedux from 'Core/IEReduxs/RootRedux'
 import PropTypes from 'prop-types'
 
 import { ieReduxFetch } from 'Core/IEReduxFetch'
-import { clearError } from 'Core/IEReduxs/Actions'
 import IEToken from 'Core/IEToken'
+
+import { Input, Checkbox, Button, notification } from 'antd';
+import { KeyOutlined, UserOutlined, LoginOutlined, SwapRightOutlined } from '@ant-design/icons';
 
 const LoginPanelState = {
 	Login: "l",
@@ -28,7 +28,6 @@ class Content extends React.Component {
 		this.login = this.login.bind(this);
 
 		this.state = {
-			message: "",
 			LoginPanelState: LoginPanelState.Login,
 			AccountIDL: "",
 			PasswordL: "",
@@ -73,8 +72,10 @@ class Content extends React.Component {
 		let PasswordR = this.state.PasswordR;
 		let PasswordRC = this.state.PasswordRC;
 		if (PasswordR != PasswordRC) {
-			this.setState({message:"密码不一致"});
-			setTimeout(()=>{ this.setState({message:""}); }, 3000);
+			notification.error({
+				message: '验证失败',
+				description: '两次密码输入不一致',
+			})
 			return false;
 		}
 
@@ -85,93 +86,98 @@ class Content extends React.Component {
 
 		ieReduxFetch("/api/Account/RegisterAsync", postdata)
 			.then(result => {
-				this.setState({message:"注册成功，3秒后刷新页面"});
+				notification.success({
+					message: '注册成功',
+					description: '注册成功，3秒后刷新页面',
+				})
 				setTimeout('location.reload()', 3000);
 			})
 	}
 
 	render() {
-		let inputKey = 0;
-		let form;
-
-		if(this.props.isSuccess == false){
-			setTimeout(this.props.clearError, 3000);
-		}
-
-		if (this.state.LoginPanelState === LoginPanelState.Login) {
-			form = <form id="loginform" className="form-inline">
-				<h6>继续你的旅行...</h6>
-				<div className="w-100">
-					<label className="" htmlFor="text">
-						用户名
-					<span className="oi oi-person ml-2"></span>
-					</label>
-					<input key={inputKey++} value={this.state.AccountIDL} onChange={(event) => this.setState({ AccountIDL: event.target.value })} type="text" className="form-control" id="AccountIDL" name="AccountID" />
-				</div>
-				<div className="w-100">
-					<label className="" htmlFor="pwd">
-						密&#12288;码
-					<span className="oi oi-key ml-2"></span>
-					</label>
-					<input key={inputKey++} value={this.state.PasswordL} onChange={(event) => this.setState({ PasswordL: event.target.value })} type="password" className="form-control" id="PasswordL" name="Password" />
-				</div>
-				<div className="w-100">
-					<label className="" htmlFor="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#12288;</label>
-					<input key={inputKey++} className="form-check-input" type="checkbox" />
-					<label className="form-check-label">记住我</label>
-				</div>
-				<div className="w-100">
-					<button onClick={this.login} type="button" className="btn btn-info mr-2">
-						登录
-					<span className="oi oi-account-login ml-2"></span>
-					</button>
-					<button onClick={this.toRegister} type="button" className="btn btn-primary">去注册</button>
-				</div>
-			</form>;
-		}
-		else {
-			form = <form id="registerform" className="form-inline">
-				<h6>开始你的旅行...</h6>
-				<div className="w-100">
-					<label className="" htmlFor="text">
-						用户名
-					<span className="oi oi-person ml-2"></span>
-					</label>
-					<input key={inputKey++} value={this.state.AccountIDR} onChange={(event) => this.setState({ AccountIDR: event.target.value })} type="text" className="form-control w-75" id="AccountIDR" name="AccountID" />
-				</div>
-				<div className="w-100">
-					<label className="" htmlFor="pwd">
-						密&#12288;码
-					<span className="oi oi-key ml-2"></span>
-					</label>
-					<input key={inputKey++} value={this.state.PasswordR} onChange={(event) => this.setState({ PasswordR: event.target.value })} className="form-control w-50" id="PasswordR" name="Password" type="password" />
-				</div>
-				<div className="w-100">
-					<label className="" htmlFor="pwd">
-						确&#12288;认
-					<span className="oi oi-check ml-2"></span>
-					</label>
-					<input key={inputKey++} value={this.state.PasswordRC} onChange={(event) => this.setState({ PasswordRC: event.target.value })} className="form-control w-50" id="PasswordRC" name="PasswordC" type="password" />
-				</div>
-				<div className="w-100">
-					<button onClick={this.register} type="button" className="btn btn-primary mr-2">
-						注册
-					<span className="oi oi-account-login ml-2"></span>
-					</button>
-					<button onClick={this.toLogin} type="button" className="btn btn-info">去登录</button>
-				</div>
-			</form>;
-		}
-
 		return (
 			<div className="col-md-4">
 				<div className="col-md-12">
-					<div className="col-md-12 error text-danger">
-						{this.props.isSuccess == false && this.props.error}
-						{this.state.message}
-					</div>
-					<div>
-						{form}
+					<div className="w-75">
+						<div className="">
+							<h6 className="text-white mb-3">
+								{
+									this.state.LoginPanelState == LoginPanelState.Login ?
+										"继续你的旅行..." :
+										"开始你的旅行"
+								}
+							</h6>
+							<div className="mb-3">
+								<Input
+									prefix={<span className="text-white">用户名 <UserOutlined /></span>}
+									style={{ backgroundColor: "#fff5", border: "0px" }}
+									value={
+										this.state.LoginPanelState == LoginPanelState.Login ?
+											this.state.AccountIDL :
+											this.state.AccountIDR
+									}
+									onChange={(event) => {
+										if (this.state.LoginPanelState == LoginPanelState.Login) {
+											this.setState({ AccountIDL: event.target.value })
+										}
+										else {
+											this.setState({ AccountIDR: event.target.value })
+										}
+									}}
+								/>
+							</div>
+							<div className="mb-3">
+								<Input.Password
+									prefix={<span className="text-white">密&#12288;码 <KeyOutlined /></span>}
+									style={{ backgroundColor: "#fff5", border: "0px" }}
+									value={
+										this.state.LoginPanelState == LoginPanelState.Login ?
+											this.state.PasswordL :
+											this.state.PasswordR
+									}
+									onChange={(event) => {
+										if (this.state.LoginPanelState == LoginPanelState.Login)
+											this.setState({ PasswordL: event.target.value })
+										else
+											this.setState({ PasswordR: event.target.value })
+									}}
+								/>
+							</div>
+							{
+								this.state.LoginPanelState == LoginPanelState.Login ?
+									(
+										<div className="mb-3">
+											<Checkbox className="text-white" onChange={(e) => { }}>记住我</Checkbox>
+										</div>
+									) :
+									(
+										<div className="mb-3">
+											<Input.Password
+												style={{ backgroundColor: "#fff5", border: "0px" }}
+												prefix={<span className="text-white">确&#12288;认 <KeyOutlined /></span>}
+												value={this.state.PasswordRC}
+												onChange={(event) => this.setState({ PasswordRC: event.target.value })}
+											/>
+										</div>
+									)
+							}
+							<div className="">
+								<Button
+									icon={<LoginOutlined />}
+									type="primary"
+									onClick={this.state.LoginPanelState == LoginPanelState.Login ? this.login : this.register} >
+									{this.state.LoginPanelState == LoginPanelState.Login ? "登录" : "注册"}
+								</Button>
+								<Button
+									className="ml-3 text-white"
+									icon={<SwapRightOutlined />}
+									type="ghost"
+									shape="round"
+									onClick={this.state.LoginPanelState == LoginPanelState.Login ? this.toRegister : this.toLogin} >
+									{this.state.LoginPanelState == LoginPanelState.Login ? "去注册" : "去登录"}
+								</Button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -180,26 +186,6 @@ class Content extends React.Component {
 }
 
 Content.propTypes = {
-	isSuccess: PropTypes.bool,
-	error: PropTypes.string
 }
 
-const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-	return {
-		isSuccess: state.fecth.isSuccess,
-		error: state.fecth.error
-	}
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-	return {
-		clearError: () => { dispatch(clearError()) }
-	}
-}
-
-const Contain = RootRedux.connect(
-	mapStateToProps, // 关于state
-	mapDispatchToProps // 关于dispatch
-)(withRouter(Content))
-
-export default Contain
+export default Content

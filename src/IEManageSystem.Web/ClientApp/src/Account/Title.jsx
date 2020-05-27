@@ -1,17 +1,18 @@
 import React from 'react';
+import { Typography } from 'antd';
+import { SwapLeftOutlined } from '@ant-design/icons'
 
-export default class Title extends React.Component{
-	render(){
-		return(
+export default class Title extends React.Component {
+	render() {
+		return (
 			<div className="col-md-7">
 				<div className="col-md-6">
-					<div className="card border-0">
-					  <div className="card-body">
-					    <h4 className="card-title">冰纹登录</h4>
-					    <p className="card-text">远足天际，始于脚下。。。</p>
-					    <a href="/" className="card-link">返回首页</a>
-					  </div>
-					</div>
+					<Typography.Title className="text-white" level={4}>冰纹登录</Typography.Title>
+					<p>远足天际，始于脚下......</p>
+					<a href="/" className="ant-btn text-white ant-btn-ghost ant-btn-round">
+						<SwapLeftOutlined className="mr-2" />
+						返回首页
+					</a>
 				</div>
 			</div>
 		);
