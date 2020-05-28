@@ -24,6 +24,7 @@
     "antd": "^4.2.3",
     "bootstrap": "^4.5.0",
     "braft-editor": "^2.3.7",
+    "cross-env": "^7.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "react": "^16.13.1",
@@ -44,6 +45,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "start:server": "cross-env REACT_APP_SERVER=true react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "jest": "jest",

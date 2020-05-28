@@ -98,10 +98,13 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             List<DefaultComponentData> defaultComponentDatas = new List<DefaultComponentData>();
             input.DefaultComponentDatas.ForEach(item =>
             {
-                defaultComponentDatas.Add(new DefaultComponentData() { 
+                var defaultComponentData = new DefaultComponentData()
+                {
                     Sign = item.Sign,
                     SingleDatas = _objectMapper.Map<List<SingleComponentData>>(item.SingleDatas)
-                });
+                };
+                ((List<SingleComponentData>)defaultComponentData.SingleDatas).ForEach(item => item.Id = 0);
+                defaultComponentDatas.Add(defaultComponentData);
             });
 
             _pageManager.UpdatePageComponentsAndDefaultComponentData(input.Name, pageComponents, defaultComponentDatas);
@@ -145,8 +148,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 dto.PageComponentBaseSetting.Height,
                 dto.PageComponentBaseSetting.Padding,
                 dto.PageComponentBaseSetting.Margin,
-                dto.PageComponentBaseSetting.BackgroundColor,
                 dto.PageComponentBaseSetting.BackgroundImage,
+                dto.PageComponentBaseSetting.BackgroundColor,
                 dto.PageComponentBaseSetting.ClassName
                 );
 
@@ -158,6 +161,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                     DisplayName = item.DisplayName,
                     SingleDatas = _objectMapper.Map<List<SingleSettingData>>(item.SingleDatas)
                 };
+                ((List<SingleSettingData>)pageComponentSetting.SingleDatas).ForEach(item => item.Id = 0);
                 pageComponentSettings.Add(pageComponentSetting);
             }
             pageComponent.PageComponentSettings = pageComponentSettings;

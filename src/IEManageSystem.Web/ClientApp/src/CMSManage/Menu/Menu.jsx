@@ -97,7 +97,7 @@ export default class Menu extends React.Component {
 
     updateMenu(resource) {
         try {
-            this.state.currentOperateParentMenu.replaceChildMenu(resource);
+            this.state.currentOperateParentMenu.replaceChildMenu(this.state.currentOperateMenu.name, resource);
             this.setState({ fromModalShow: false });
         }
         catch (e) {

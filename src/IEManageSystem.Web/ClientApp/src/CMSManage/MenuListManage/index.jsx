@@ -58,9 +58,12 @@ class MenuListManage extends React.Component {
 
 	// Resource组件添加资源通知
 	addResource(resource) {
-		let postData = resource;
+		resource.menuType = "CompositeMenu"
+		let postData = {
+			menu: resource
+		};
 
-		ieReduxFetch("/api/MenuManage/AddCompositeMenu", postData)
+		ieReduxFetch("/api/MenuManage/AddMenu", postData)
 			.then(value => {
 				this.setState(value);
 				this.getResourceList(this.state.pageIndex, this.state.pageSize, this.state.searchKey);

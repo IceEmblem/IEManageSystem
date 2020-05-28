@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-
+import { withRouter } from 'react-router-dom'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 import IEToken from 'Core/IEToken'
 
@@ -188,4 +188,4 @@ class Content extends React.Component {
 Content.propTypes = {
 }
 
-export default Content
+export default withRouter(Content)

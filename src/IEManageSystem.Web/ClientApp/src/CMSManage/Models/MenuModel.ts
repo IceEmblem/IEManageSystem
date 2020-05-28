@@ -81,11 +81,11 @@ export default class MenuModel {
         this.menus.splice(index, 1);
     }
 
-    replaceChildMenu(menuData: any) {
-        let index = this.menus.findIndex(e => e.name == menuData.name);
+    replaceChildMenu(menuName:string, menuData: any) {
+        let index = this.menus.findIndex(e => e.name == menuName);
 
         if (index < 0) {
-            throw new Error(`菜单${menuData.name}不存在`);
+            throw new Error(`菜单${menuName}不存在`);
         }
 
         if (!menuData.name || menuData.name == "") {

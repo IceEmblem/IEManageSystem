@@ -19,8 +19,6 @@ class PostEditComponentContainer extends BaseComponentContainer {
         this.state = {
             show: false
         }
-
-        this.submit = this.submit.bind(this);
     }
 
     createChildComponent() {
@@ -38,16 +36,6 @@ class PostEditComponentContainer extends BaseComponentContainer {
             return;
         }
 
-        // 如果内容组件没有数据对象，则申请一个数据对象
-        if (!this.props.contentComponentData) {
-            this.props.componentDataUpdate({
-                id: 0,
-                sign: this.props.pageComponent.sign,
-                singleDatas: []
-            });
-            return;
-        }
-
         let tools = [];
         tools.push(
             <PostEditFrame
@@ -56,7 +44,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
                 show={this.state.show}
                 close={() => { this.setState({ show: false }) }}
                 submit={this.props.componentDataUpdate}
-                componentData={this.props.contentComponentData}
+                componentData={this.getContentComponentData()}
                 componentObject={this.componentObject}
             ></PostEditFrame>);
         tools.push(

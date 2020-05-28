@@ -152,6 +152,9 @@ namespace IEManageSystem.CMS.DomainModel.Menus
                 var menus = GetMenus(menu);
                 // 不允许存在相同名称的菜单
                 var names = menus.Select(e => e.Name);
+                if (names.Distinct().Count() < names.Count()) {
+                    throw new UserFriendlyException($"提交的菜单中包含重复的名称，请重新命名");
+                }
                 var duplicateMenu = MenuRepository.FirstOrDefault(e => names.Contains(e.Name));
                 if (duplicateMenu != null)
                 {

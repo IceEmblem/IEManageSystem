@@ -14,9 +14,6 @@ import SideNav from './SideNav/SideNav.jsx'
 import Nav from './Nav/Nav'
 import BodyDiv from './BodyDiv/BodyDiv'
 
-import Error from './Parts/Error';
-import Loading from './Parts/Loading'
-
 import './ManageHome.css'
 
 const { Header, Sider, Content } = Layout;
@@ -71,8 +68,6 @@ export default class ManageHome extends React.Component {
                         }}
                     >
                         <BodyDiv />
-                        <Error />
-                        <Loading />
                     </Content>
                 </Layout>
             </Layout>

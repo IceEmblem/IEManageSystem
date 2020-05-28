@@ -71,6 +71,28 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             page.PageDatas.Remove(pageData);
         }
 
+        /// <summary>
+        /// 删除页面的所有文章
+        /// </summary>
+        public void DeletePagePosts(string name) 
+        {
+            var page = PageRepository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Name == name);
+            if (page is StaticPage)
+            {
+                throw new UserFriendlyException("无法删除单页文章");
+            }
+
+            IEnumerable<int> postIds = page.PageDatas.Select(e => e.Id);
+
+            Expression<Func<ContentComponentData, object>>[] propertySelectors = {
+                e=>e.SingleDatas
+            };
+            ComponentDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageDataId.HasValue && postIds.Contains(e.PageDataId.Value)).ToList();
+            ComponentDataRepository.Delete(item => item.PageDataId.HasValue && postIds.Contains(item.PageDataId.Value));
+
+            Repository.Delete(e=> postIds.Contains(e.Id));
+        }
+
         public void SetContentComponentDatas(string pageName, string pageDataName, List<ContentComponentData> contentComponentDatas)
         {
             PageData pageData = GetPageDataIncludeAllProperty(pageName, pageDataName);

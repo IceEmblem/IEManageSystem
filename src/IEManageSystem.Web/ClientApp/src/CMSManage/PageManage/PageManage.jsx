@@ -66,7 +66,7 @@ class PageManage extends React.Component {
 	getDescribes() {
 		return [
 			{ name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: false },
-			{ name: "name", text: "页面名称", isName: true, isShowOnList: true },
+			{ name: "name", text: "页面名称", isEditCanEdit: false, isName: true, isShowOnList: true },
 			{ name: "displayName", text: "显示名称", isShowOnList: true },
 			{ name: "description", text: "页面描述", isShowOnList: true },
 			{

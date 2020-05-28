@@ -21,6 +21,10 @@ namespace IEManageSystem.Api.Configuration
             Audience = appConfiguration.GetSection("WebConfiguration:Audience").Value;
 
             SymmetricKey = appConfiguration.GetSection("WebConfiguration:SymmetricKey").Value;
+
+            if (string.IsNullOrWhiteSpace(SymmetricKey)) {
+                SymmetricKey = Guid.NewGuid().ToString();
+            }
         }
     }
 }

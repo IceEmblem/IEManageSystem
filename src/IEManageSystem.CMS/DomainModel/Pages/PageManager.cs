@@ -20,12 +20,16 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; set; }
 
+        private PageDataManager _pageDataManager { get; set; }
+
         public PageManager(IPageRepository pageRepository,
-            IEfRepository<DefaultComponentData, int> defaultDataRepository
+            IEfRepository<DefaultComponentData, int> defaultDataRepository,
+            PageDataManager pageDataManager
             )
         {
             PageRepository = pageRepository;
             _defaultDataRepository = defaultDataRepository;
+            _pageDataManager = pageDataManager;
         }
 
         public IPageRepository PageRepository { get; }
@@ -64,8 +68,10 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
             var page = PageRepository.ThenInclude(e => e.PageComponents, e => e.PageComponentSettings, e => e.SingleDatas).FirstOrDefault(e=>e.Name == name);
 
-            PageRepository.Delete(page);
+            // 删除所有文章
+            _pageDataManager.DeletePagePosts(page.Name);
 
+            // 删除默认数据
             Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
                 e=>e.SingleDatas
             };
@@ -73,6 +79,9 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             oldDatas.ForEach(item => {
                 _defaultDataRepository.Delete(item);
             });
+
+            // 删除页面
+            PageRepository.Delete(page);
         }
 
         public List<PageComponentBase> GetPageComponents(string name)

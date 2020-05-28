@@ -242,7 +242,7 @@ namespace IEManageSystem.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("PageId")
+                    b.Property<int?>("PageId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -835,9 +835,7 @@ namespace IEManageSystem.Migrations
                 {
                     b.HasOne("IEManageSystem.CMS.DomainModel.Pages.PageBase", "Page")
                         .WithMany("PageDatas")
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PageId");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageComponentBase", b =>

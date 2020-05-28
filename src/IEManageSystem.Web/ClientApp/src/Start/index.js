@@ -10,6 +10,10 @@ import ModuleFactory from 'Core/Modules/ModuleFactory'
 import {getIEStore} from 'Core/IEStore'
 import PageProvider from 'Core/Page/PageProvider'
 
+// 部件
+import Error from './Parts/Error';
+import Loading from './Parts/Loading'
+
 import 'bootstrapcss'
 import 'antd/dist/antd.css';
 import 'bootstrapcssicon';
@@ -29,6 +33,8 @@ ReactDOM.render(
             <Switch>
                 {PageProvider.pages.map(item => (<Route key={item.url} path={item.url} component={item.component} />))}
             </Switch>
+            <Error />
+            <Loading />
         </BrowserRouter>
     </Provider>,
     document.getElementById('root'));

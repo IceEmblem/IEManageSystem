@@ -39,7 +39,7 @@ class PageData extends React.Component {
 	deleteResource(resource) {
 		let postData = {
 			name: resource.name,
-			pageName: this.props.pageName
+			pageName: this.props.match.params.pageName
 		};
 
 		ieReduxFetch("/api/PageManage/DeletePageData", postData)
@@ -53,7 +53,7 @@ class PageData extends React.Component {
 	addResource(resource) {
 		let postData = {
 			...resource, ...{
-				pageName: this.props.pageName
+				pageName: this.props.match.params.pageName
 			}
 		};
 
@@ -68,7 +68,7 @@ class PageData extends React.Component {
 	updateResource(resource) {
 		let postData = {
 			...resource, ...{
-				pageName: this.props.pageName
+				pageName: this.props.match.params.pageName
 			}
 		};
 
@@ -91,7 +91,7 @@ class PageData extends React.Component {
 			pageIndex: pageIndex,
 			pageSize: pageSize,
 			searchKey: searchKey,
-			pageName: this.props.pageName
+			pageName: this.props.match.params.pageName
 		};
 
 		ieReduxFetch("/api/PageQuery/GetPageDatas", postData)
@@ -105,7 +105,7 @@ class PageData extends React.Component {
 		customizeOperateBtns.push((props) => {
 			return (
 				<NavLink className="ant-btn ant-btn-sm mr-1"
-					to={`/ManageHome/CMSManage/PostEdit/${this.props.pageName}/${props.resource.name}`}
+					to={`/ManageHome/CMSManage/PostEdit/${this.props.match.params.pageName}/${props.resource.name}`}
 				>
 					<EditOutlined />
 					<span>{" 编辑文章"}</span>
@@ -114,7 +114,7 @@ class PageData extends React.Component {
 		customizeOperateBtns.push((props) => {
 			return (
 				<NavLink className="ant-btn ant-btn-sm"
-					to={`/ManageHome/CMSManage/PostEdit/${this.props.pageName}/${props.resource.name}`}
+					to={`/ManageHome/CMSManage/PostEdit/${this.props.match.params.pageName}/${props.resource.name}`}
 				>
 					<EditOutlined />
 					<span>{" 浏览"}</span>
