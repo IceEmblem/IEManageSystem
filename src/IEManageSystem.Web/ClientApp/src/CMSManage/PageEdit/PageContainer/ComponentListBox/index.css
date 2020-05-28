@@ -1,0 +1,33 @@
+.pageedit-componentlistbox{
+    z-index: 9999;
+}
+
+.pageedit-componentlistbox-frame {
+    width: 170px;
+    margin: 5px 5px;
+    height: 110px;
+    background-color: #fff0;
+}
+
+.pageedit-componentlistbox-header{
+    background-color: #586675;
+}
+
+.pageedit-componentlistbox-body{
+}
+
+.pageedit-componentlistbox-close{
+    border-radius: 50%;
+}
+
+.pageedit-componentlistbox-close>span:hover{
+    color: gray;
+}
+
+.pageedit-componentlistbox-body>div{
+    margin-bottom: 1rem;
+}
+
+.pageedit-componentlistbox-frame-active{
+    border-color: #2393a7 !important;
+}
