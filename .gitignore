@@ -39,3 +39,5 @@
 /src/IEManageSystem.Web/ClientApp/build
 /test/IEManageSystem.ApiAuthorization.Tests/bin/Debug/netcoreapp3.0
 /test/IEManageSystem.ApiAuthorization.Tests/obj
+/src/IEManageSystem.CommonInfrastructure/bin/Release/netcoreapp3.0
+/src/IEManageSystem.Web/Properties/PublishProfiles
