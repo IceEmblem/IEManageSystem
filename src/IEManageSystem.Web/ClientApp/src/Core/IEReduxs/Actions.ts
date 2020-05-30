@@ -7,8 +7,10 @@ export interface FetchAction {
   data: any,
   // 错误消息
   error: string,
-  // 是否正在发送
-  isFetch: boolean
+  // 是否属于 Fetch 类型
+  isFetch: boolean,
+  // fetch 标识
+  fecthSign: number
 }
 
 // 生成请求action
@@ -19,7 +21,8 @@ export function request(postData: any) : FetchAction
     type: Request,
     data: postData,
     error: "",
-    isFetch: true
+    isFetch: true,
+    fecthSign: -1
   }
 }
 
@@ -31,30 +34,33 @@ export function error(errorMessage: string) : FetchAction
     type: ErrorAction,
     data: null,
     error: errorMessage,
-    isFetch: false,
+    isFetch: true,
+    fecthSign: -1
   }
 }
 
 // 清理错误
 export const ClearError = "IEFecth_ClearError"
-export function clearError()  : FetchAction
+export function clearError(fecthSign: number)  : FetchAction
 {
   return {
     type: ClearError,
     data: null,
-    error: "",
-    isFetch: false,
+    error: null,
+    isFetch: true,
+    fecthSign: fecthSign
   }
 }
 
 // 对响应action进行包装
-function receivePack(actionType:string, data: any) 
+function receivePack(actionType:string, data: any) : FetchAction
 {
   return {
     type: actionType,
     data: data,
     error: "",
-    isFetch: false,
+    isFetch: true,
+    fecthSign: -1
   }
 }
 
@@ -63,7 +69,10 @@ var fecthSign = 0;
 // 生成ieThunkAcion，如果请求成功，会分发receiveActionFun生成的动作
 export function createIEThunkAction(url:string, postData:any, actionType:string) {
   return function (dispatch:any) {
-    dispatch(request(postData));
+    let curFecthSign = fecthSign++;
+    let requestAction = request(postData);
+    requestAction.fecthSign = curFecthSign;
+    dispatch(requestAction);
 
     let token = IEToken.getToken();
 
@@ -103,12 +112,16 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
       }
     ).catch(
       errorData => {
-        dispatch(error(errorData.message));
+        let errorAction = error(errorData.message);
+        errorAction.fecthSign = curFecthSign;
+        dispatch(errorAction);
         return Promise.reject(errorData.message);
       }
     ).then(
       value => {
-        dispatch(receivePack(actionType, value))  // dispatch 响应动作
+        let receiveAction = receivePack(actionType, value);
+        receiveAction.fecthSign = curFecthSign;
+        dispatch(receiveAction)  // dispatch 响应动作
         return value;
       }
     )

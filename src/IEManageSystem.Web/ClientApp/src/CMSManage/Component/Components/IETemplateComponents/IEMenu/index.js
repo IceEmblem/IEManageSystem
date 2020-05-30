@@ -12,5 +12,5 @@ class ComponentObject extends BaseComponentObject{
     };
 }
 
-let componentDescribe = new ComponentDescribe("IEMenu", new ComponentObject(), componentType.other);
+let componentDescribe = new ComponentDescribe("IEMenu", new ComponentObject(), componentType.menu);
 export default componentDescribe;

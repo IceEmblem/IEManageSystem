@@ -10,51 +10,40 @@ import RootRedux from 'Core/IEReduxs/RootRedux'
 class Error extends React.Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-            show: false,
-            message: ""
-        }
-    }
-
-    componentWillUpdate(props) {
-        if(props.isSuccess == false){
-            this.state.show = true;
-            this.state.message = props.error;
-        }
-        else{
-            this.state.show = false;
-        }
     }
 
     render() 
     {
-        if(this.state.show){
+        this.props.errorFetchDatas.forEach(element => {
             notification.error({
                 message: "请求错误", 
-                description: this.state.message,
-                onClose: this.props.close});
-        }
+                description: element.error,
+                onClose: ()=>{}});
+        });
+
+        this.props.errorFetchDatas.forEach(element => {
+            this.props.clearError(element.fecthSign)
+        });
             
         return <div></div>
     }
 }
 
 Error.propTypes = {
-    isSuccess: PropTypes.bool,
-    error: PropTypes.string
+    errorFetchDatas: PropTypes.array.isRequired,
+    clearError: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    let errorFetchDatas = state.fecths.filter(item=>item.isSuccess == false);
     return {
-        isSuccess: state.fecth.isSuccess,
-        error: state.fecth.error
+        errorFetchDatas: errorFetchDatas
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        close: ()=>{ dispatch(clearError()) }
+        clearError: (fecthSign)=>{ dispatch(clearError(fecthSign)) }
     }
 }
 

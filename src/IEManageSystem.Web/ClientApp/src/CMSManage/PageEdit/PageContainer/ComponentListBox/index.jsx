@@ -6,15 +6,20 @@ import './index.css'
 import ComponentFrame from './ComponentFrame.jsx'
 import ComponentFactory, { componentTypes } from 'CMSManage/Component/Components/ComponentFactory'
 
-import { Modal, Card } from 'antd';
+import { Modal, Card, Input, Typography  } from 'antd';
+
+const { Search } = Input;
 
 class ComponentListBox extends React.Component {
+    componentDescribes = new ComponentFactory().getComponentDescribes();
+
     constructor(props) {
         super(props);
 
         this.state = {
             selectedComponentDescribe: undefined,
-            activeIndex: 0
+            activeIndex: 0,
+            searchText: null
         }
     }
 
@@ -41,11 +46,22 @@ class ComponentListBox extends React.Component {
     }
 
     render() {
-        let componentDescribes = new ComponentFactory().getComponentDescribes();
+        let componentDescribes;
+        if(this.state.searchText){
+            componentDescribes = this.componentDescribes.filter(item=>item.displayName.indexOf(this.state.searchText) >= 0);
+        }
+        else{
+            componentDescribes = this.componentDescribes;
+        }
+        
         let list = componentTypes.map((componentType, index) => {
             let childComponentDescribes = componentDescribes.filter(e => e.componentType == componentType.name)
             let childComponents = childComponentDescribes.map(item => this.createComponent(item))
             componentDescribes = componentDescribes.filter(e => e.componentType != componentType.name)
+
+            if(childComponents.length == 0){
+                return undefined;
+            }
 
             return (
                 <Card key={index} title={componentType.text} size="small">
@@ -55,10 +71,18 @@ class ComponentListBox extends React.Component {
 
         return (
             <Modal
-                title="请选择组件"
+                title={
+                    <div className="d-flex justify-content-between align-items-center">
+                        <span className="">请选择组件</span>
+                        <div style={{marginRight: "30px"}}>
+                            <Search placeholder="搜索组件" onSearch={value => this.setState({searchText: value})} enterButton />
+                        </div>
+                    </div>
+                }
                 visible={this.props.show}
                 footer={null}
                 width={1000}
+                zIndex={9999}
                 onCancel={() => this.props.close()}
             >
                 <div className="pageedit-componentlistbox-body">

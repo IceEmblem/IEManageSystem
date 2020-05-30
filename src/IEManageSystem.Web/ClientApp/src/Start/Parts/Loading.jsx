@@ -30,7 +30,7 @@ Loading.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        show: state.fecth.isFecth,
+        show: state.fecths.filter(item => item.isFecthing).length > 0,
     }
 }
 

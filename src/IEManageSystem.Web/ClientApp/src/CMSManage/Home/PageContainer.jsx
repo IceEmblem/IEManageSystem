@@ -11,20 +11,38 @@ class PageContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.props.pageFetch(this.props.pageName);
-        this.props.pageDataFetch(this.props.pageName, this.props.pageDataName);
+        this.state = {
+            isLoad: false
+        };
+
+        Promise.all([
+            this.props.pageFetch(this.props.pageName),
+            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
+        ]).then(() => {
+            this.setState({ isLoad: true });
+        });
     }
 
     componentWillUpdate(nextProps) {
-        if(this.props.pageName == nextProps.pageName && this.props.pageDataName == nextProps.pageDataName){
+        if (this.props.pageName != nextProps.pageName) {
+            this.props.pageFetch(this.props.pageName);
+            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
+
             return;
         }
 
-        this.props.pageFetch(nextProps.pageName);
-        this.props.pageDataFetch(nextProps.pageName, nextProps.pageDataName);
+        if (this.props.pageDataName != nextProps.pageDataName) {
+            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName);
+
+            return;
+        }
     }
 
     render() {
+        if (!this.state.isLoad) {
+            return <div></div>;
+        }
+
         return (
             <Page>
                 {
