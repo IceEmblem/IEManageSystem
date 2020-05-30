@@ -27,7 +27,5 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         public string Description { get; set; }
 
         public ICollection<PageComponentBase> PageComponents { get; set; }
-
-        public ICollection<PageData> PageDatas { get; protected set; }
     }
 }

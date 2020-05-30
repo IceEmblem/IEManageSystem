@@ -17,7 +17,7 @@ class PageContainer extends React.Component {
 
         Promise.all([
             this.props.pageFetch(this.props.pageName),
-            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
+            this.getpageData()
         ]).then(() => {
             this.setState({ isLoad: true });
         });
@@ -26,16 +26,24 @@ class PageContainer extends React.Component {
     componentWillUpdate(nextProps) {
         if (this.props.pageName != nextProps.pageName) {
             this.props.pageFetch(this.props.pageName);
-            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
+            this.getpageData();
 
             return;
         }
 
         if (this.props.pageDataName != nextProps.pageDataName) {
-            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName);
+            this.getpageData();
 
             return;
         }
+    }
+
+    getpageData() {
+        if (this.props.pageDataName) {
+            return this.props.pageDataFetch(this.props.pageName, this.props.pageDataName);
+        }
+
+        return new Promise(function (resolve, reject) { resolve(); });
     }
 
     render() {

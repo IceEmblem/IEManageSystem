@@ -23,23 +23,17 @@ function EditComponent(props) {
 }
 
 function EditPageData(props) {
-	let data = props.resource.pageType == pageType.ContentPage ?
-		{
-			url: `/ManageHome/CMSManage/PageData/${props.resource.name}`,
-			text: " 管理文章"
-		} :
-		{
-			url: `/ManageHome/CMSManage/PostEdit/${props.resource.name}`,
-			text: " 编辑文章"
-		}
+	if(props.resource.pageType == pageType.ContentPage){
+		return (
+			<NavLink className="ant-btn ant-btn-sm"
+				to={`/ManageHome/CMSManage/PageData/${props.resource.name}`}
+			>
+				<EditOutlined />
+				<span>{" 管理文章"}</span>
+			</NavLink>); 
+	}
 
-	return (
-		<NavLink className="ant-btn ant-btn-sm"
-			to={`${data.url}`}
-		>
-			<EditOutlined />
-			<span>{` ${data.text}`}</span>
-		</NavLink>);
+	return (<span></span>);
 }
 
 class PageManage extends React.Component {

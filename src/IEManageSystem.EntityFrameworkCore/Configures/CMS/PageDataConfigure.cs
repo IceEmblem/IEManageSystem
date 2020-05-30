@@ -11,15 +11,7 @@ namespace IEManageSystem.Configures.CMS
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<PageData> builder)
         {
-            builder.HasIndex(e => e.Name).IsUnique();
-
-            builder.HasData(new
-            {
-                Id = 1,
-                Name = "Index",
-                Title = "首页",
-                PageId = 1
-            });
+            builder.HasIndex(e => e.Name);
         }
     }
 }

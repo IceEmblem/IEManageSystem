@@ -183,17 +183,10 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public UpdatePageDataOutput UpdatePageData(UpdatePageDataInput input)
         {
-            var page = _repository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Name == input.PageName);
-
-            if (page is StaticPage)
-            {
-                throw new UserFriendlyException("无法更改单页文章");
-            }
-
-            var post = page.PageDatas.First(e=>e.Id == input.Id);
+            var post = _pageDataManager.PostRepository.FirstOrDefault(input.Id);
             post.Name = input.Name;
             post.Title = input.Title;
-            _pageDataManager.UpdatePageData(post);
+            _pageDataManager.UpdatePageData(input.PageName, post);
 
             return new UpdatePageDataOutput();
         }

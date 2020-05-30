@@ -18,8 +18,6 @@ namespace IEManageSystem.CMS.DomainModel.Pages
     {
         public const string HomeName = "home";
 
-        public const string StaticPagePageDataName = "Index";
-
         private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; set; }
 
         private IIEMemoryCache _cache { get; set; }
@@ -68,13 +66,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public StaticPage CreateStaticPage(string pageName, string pageDisplayName)
         {
-            PageData pageData = new PageData()
-            {
-                Name = StaticPagePageDataName,
-                Title = pageDisplayName
-            };
-
-            StaticPage page = new StaticPage(pageName, pageData) {
+            StaticPage page = new StaticPage(pageName) {
                 DisplayName = pageDisplayName
             };
 

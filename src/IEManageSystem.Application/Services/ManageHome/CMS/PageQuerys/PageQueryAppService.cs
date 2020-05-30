@@ -188,26 +188,19 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
         /// <returns></returns>
         public GetPageDatasOutput GetPageDatas(GetPageDatasInput input)
         {
-            PageBase page = null;
+            List<PageData> pageDatas = null;
             if (!string.IsNullOrWhiteSpace(input.PageName))
             {
-                page = _repository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Name == input.PageName);
+                pageDatas = _pageDataManager.PostRepository.GetAllList(e => e.Page.Name == input.PageName);
             }
-
-            if (page == null && input.Id != null)
-            {
-                page = _repository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Id == input.Id);
-            }
-
-            if (page == null)
-            {
-                throw new UserFriendlyException("获取文章列表失败，未找到页面");
+            else {
+                pageDatas = _pageDataManager.PostRepository.GetAllList(e => e.Page.Id == input.Id);
             }
 
             return new GetPageDatasOutput()
             {
-                PageDatas = _objectMapper.Map<List<PageDataDto>>(page.PageDatas),
-                ResourceNum = page.PageDatas.Count,
+                PageDatas = _objectMapper.Map<List<PageDataDto>>(pageDatas),
+                ResourceNum = pageDatas.Count,
                 PageIndex = input.PageIndex
             };
         }
@@ -219,7 +212,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
         /// <returns>如果不存在文章，需返回 null</returns>
         public GetPageDataOutput GetPageData(GetPageDataInput input) 
         {
-            var pageData = _pageDataManager.GetPageDataIncludeAllProperty(input.PageName, input.PageDataName);
+            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Page.Name == input.PageName && e.Name == input.PageDataName);
 
             Expression<Func<ContentComponentData, object>>[] propertySelectors = {
                 e=>e.SingleDatas

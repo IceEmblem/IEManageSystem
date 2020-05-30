@@ -14,7 +14,7 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
 {
     public class PageDataManager : ITransientDependency
     {
-        public IEfRepository<PageData, int> Repository { get; set; }
+        public IEfRepository<PageData, int> PostRepository { get; set; }
 
         public IEfRepository<ContentComponentData, int> ComponentDataRepository { get; set; }
 
@@ -24,39 +24,40 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             IEfRepository<PageData, int> repository,
             IPageRepository pageRepository)
         {
-            Repository = repository;
+            PostRepository = repository;
             PageRepository = pageRepository;
         }
 
-        public void AddPageData(string name, PageData pageData)
+        public void AddPageData(string pageName, PageData pageData)
         {
-            var page = PageRepository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Name == name);
-            if (page is StaticPage)
+            if (PostRepository.Count(e => e.Name == pageData.Name && e.Page.Name == pageName) > 0) 
             {
-                throw new UserFriendlyException("无法为单页添加文章");
+                throw new UserFriendlyException("文章名称已重复");
             }
 
-            ((ContentPage)page).AddPageData(pageData);
+            var page = PageRepository.GetAll().OfType<ContentPage>().FirstOrDefault(e => e.Name == pageName);
+
+            if (page == null) {
+                throw new UserFriendlyException("找不到要添加的文章页面");
+            }
+
+            pageData.Page = page;
+
+            PostRepository.Insert(pageData);
         }
 
-        public void UpdatePageData(PageData pageData) {
-            var posts = Repository.GetAllList(e=>e.Name == pageData.Name);
+        public void UpdatePageData(string pageName, PageData pageData) {
+            var posts = PostRepository.GetAllList(e=>e.Name == pageData.Name && e.Page.Name == pageName);
             if (posts.Count > 1 || (posts.Count == 1 && posts[0].Id != pageData.Id)) {
                 throw new UserFriendlyException("文章名称已重复");
             }
 
-            Repository.Update(pageData);
+            PostRepository.Update(pageData);
         }
 
-        public void DeletePageData(string name, string pageDataName)
+        public void DeletePageData(string pageName, string pageDataName)
         {
-            var page = PageRepository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Name == name);
-            if (page is StaticPage)
-            {
-                throw new UserFriendlyException("无法删除单页文章");
-            }
-
-            var pageData = page.PageDatas.FirstOrDefault(e => e.Name == pageDataName);
+            var pageData = PostRepository.FirstOrDefault(e=>e.Name == pageDataName && e.Page.Name == pageName);
             if (pageData == null)
             {
                 throw new UserFriendlyException("找不到要删除的文章");
@@ -68,21 +69,15 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             ComponentDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageDataId == pageData.Id).ToList();
             ComponentDataRepository.Delete(item => item.PageDataId == pageData.Id);
 
-            page.PageDatas.Remove(pageData);
+            PostRepository.Delete(pageData);
         }
 
         /// <summary>
         /// 删除页面的所有文章
         /// </summary>
-        public void DeletePagePosts(string name) 
+        public void DeletePagePosts(string pageName) 
         {
-            var page = PageRepository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Name == name);
-            if (page is StaticPage)
-            {
-                throw new UserFriendlyException("无法删除单页文章");
-            }
-
-            IEnumerable<int> postIds = page.PageDatas.Select(e => e.Id);
+            IEnumerable<int> postIds = PostRepository.GetAll().Where(e => e.Page.Name == pageName).Select(e => e.Id);
 
             Expression<Func<ContentComponentData, object>>[] propertySelectors = {
                 e=>e.SingleDatas
@@ -90,12 +85,12 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             ComponentDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageDataId.HasValue && postIds.Contains(e.PageDataId.Value)).ToList();
             ComponentDataRepository.Delete(item => item.PageDataId.HasValue && postIds.Contains(item.PageDataId.Value));
 
-            Repository.Delete(e=> postIds.Contains(e.Id));
+            PostRepository.Delete(e=> postIds.Contains(e.Id));
         }
 
         public void SetContentComponentDatas(string pageName, string pageDataName, List<ContentComponentData> contentComponentDatas)
         {
-            PageData pageData = GetPageDataIncludeAllProperty(pageName, pageDataName);
+            PageData pageData = PostRepository.FirstOrDefault(e => e.Page.Name == pageName && e.Name == pageDataName);
 
             Expression<Func<ContentComponentData, object>>[] propertySelectors = { 
                 e=>e.SingleDatas
@@ -108,18 +103,6 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
                 item.PageData = pageData;
                 ComponentDataRepository.Insert(item);
             });
-        }
-
-        public PageData GetPageDataIncludeAllProperty(string pageName, string pageDataName)
-        {
-            if (string.IsNullOrWhiteSpace(pageDataName))
-            {
-                return Repository.FirstOrDefault(e => e.Page.Name == pageName);
-            }
-            else 
-            {
-                return Repository.FirstOrDefault(e=>e.Page.Name == pageName && e.Name == pageDataName);
-            }
         }
     }
 }

@@ -60,13 +60,7 @@ namespace IEManageSystem.Tests.TestDatas
                 new DefaultComponentData(){ Sign = "ContentPage1_Component2Sign", Page = contentPage }
             }) ;
 
-            var pageData = new CMS.DomainModel.PageDatas.PageData()
-            {
-                Name = "StaticPage1_PageData1Name",
-                Title = "文章测试标题"
-            };
-
-            var staticPage = new StaticPage("StaticPageName", pageData)
+            var staticPage = new StaticPage("StaticPageName")
             {
                 DisplayName = "测试内容页",
                 Description = "用于测试的数据",
