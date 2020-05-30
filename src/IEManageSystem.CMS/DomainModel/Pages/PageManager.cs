@@ -4,6 +4,8 @@ using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.Repositorys;
 using IEManageSystem.Repositorys;
+using IEManageSystem.Web;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,19 +22,49 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; set; }
 
+        private IIEMemoryCache _cache { get; set; }
+
         private PageDataManager _pageDataManager { get; set; }
 
         public PageManager(IPageRepository pageRepository,
             IEfRepository<DefaultComponentData, int> defaultDataRepository,
-            PageDataManager pageDataManager
+            PageDataManager pageDataManager,
+            IIEMemoryCache cache
             )
         {
             PageRepository = pageRepository;
             _defaultDataRepository = defaultDataRepository;
             _pageDataManager = pageDataManager;
+            _cache = cache;
         }
 
         public IPageRepository PageRepository { get; }
+
+        private string GetPageCacheName(string pageName) => $"PageManager_Page_{pageName}_";
+
+        public PageBase GetPageForCache(string pageName)
+        {
+            return _cache.GetOrCreate<PageBase>(GetPageCacheName(pageName), cacheEntity => {
+
+                cacheEntity.SlidingExpiration = TimeSpan.FromHours(1);
+
+                cacheEntity.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+
+                cacheEntity.SetPriority(CacheItemPriority.NeverRemove);
+
+                PageRepository.NoTracking();
+                var page = PageRepository.ThenInclude(e => e.PageComponents, e => e.PageComponentSettings, e => e.SingleDatas).FirstOrDefault(e => e.Name == pageName);
+                PageRepository.Tracking();
+
+                return page;
+            });
+        }
+
+        // 使缓存失效
+        public void SetPageInvalidForCache(string pageName)
+        {
+            _cache.Remove(GetPageCacheName(pageName));
+        }
 
         public StaticPage CreateStaticPage(string pageName, string pageDisplayName)
         {
@@ -82,23 +114,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
             // 删除页面
             PageRepository.Delete(page);
-        }
 
-        public List<PageComponentBase> GetPageComponents(string name)
-        {
-            var page = PageRepository.ThenInclude(e => e.PageComponents, e => e.PageComponentSettings).FirstOrDefault(e => e.Name == name);
-
-            if (page == null)
-            {
-                throw new UserFriendlyException("未找到页面");
-            }
-
-            if (page.PageComponents == null)
-            {
-                return new List<PageComponentBase>();
-            }
-
-            return page.PageComponents.ToList();
+            SetPageInvalidForCache(page.Name);
         }
 
         public void UpdatePageComponentsAndDefaultComponentData(string name, List<PageComponentBase> pageComponents, List<DefaultComponentData> defaultComponentDatas)
@@ -123,6 +140,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
                 item.Page = page;
                 _defaultDataRepository.Insert(item);
             });
+
+            SetPageInvalidForCache(page.Name);
         }
     }
 }

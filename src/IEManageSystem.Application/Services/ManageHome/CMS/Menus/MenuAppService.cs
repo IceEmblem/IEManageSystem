@@ -16,10 +16,15 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
     {
         private IEfRepository<MenuBase, int> _menuRepository;
 
+        private MenuManager _menuManager { get; set; }
+
         public MenuAppService(
-            IEfRepository<MenuBase, int> menuRepository)
+            IEfRepository<MenuBase, int> menuRepository,
+            MenuManager menuManager)
         {
             _menuRepository = menuRepository;
+
+            _menuManager = menuManager;
         }
 
         // 获取根菜单列表
@@ -43,12 +48,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
 
         // 获取单个菜单，包括其子菜单
         public GetMenuOutput GetMenu(GetMenuInput input) {
-            Expression<Func<MenuBase, object>>[] propertySelectors = new Expression<Func<MenuBase, object>>[] {
-                e=>e.PageData,
-                e=>e.PageData.Page,
-            };
-            var rootMenu = _menuRepository.GetAllIncluding(propertySelectors).FirstOrDefault(e => e.Name == input.MenuName);
-            _menuRepository.GetAllIncluding(propertySelectors).Where(e => e.RootMenuId == rootMenu.Id).ToList();
+            var rootMenu = _menuManager.GetMenuForCache(input.MenuName);
 
             return new GetMenuOutput() { Menu = CreateMenuDto(rootMenu) };
         }

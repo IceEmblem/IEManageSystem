@@ -86,25 +86,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
         /// <returns>如果不存在页面，需返回 null</returns>
         public GetPageOutput GetPage(GetPageInput input)
         {
-            PageBase page = null;
-            
-            if (input.Id != null)
-            {
-                page = _repository
-                    .ThenInclude(p => p.PageComponents,
-                        pageComponent => pageComponent.PageComponentSettings,
-                        pageComponentSetting => pageComponentSetting.SingleDatas)
-                    .FirstOrDefault(e => e.Id == input.Id.Value);
-            }
-
-            if (page == null && !string.IsNullOrWhiteSpace(input.Name))
-            {
-                page = _repository
-                        .ThenInclude(p => p.PageComponents,
-                            pageComponent => pageComponent.PageComponentSettings,
-                            pageComponentSetting => pageComponentSetting.SingleDatas)
-                        .FirstOrDefault(item => item.Name == input.Name);
-            }
+            PageBase page = _pageManager.GetPageForCache(input.Name);
 
             if (page == null)
             {

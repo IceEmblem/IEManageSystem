@@ -21,8 +21,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
     {
         private MenuManager _menuManager { get; set; }
 
-        private IRepository<MenuBase> _menuRepository => _menuManager.MenuRepository;
-
         private IEfRepository<PageData, int> _pageDataRepository { get; set; }
 
         public MenuManageAppService(
@@ -97,40 +95,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
 
             return new AddMenuOutput();
         }
-
-        //public AddLeafMenuOutput AddLeafMenu(AddLeafMenuInput input)
-        //{
-        //    LeafMenu leafMenu = new LeafMenu(input.Name)
-        //    {
-        //        CompositeMenuId = input.ParentMenuId,
-        //        DisplayName = input.DisplayName,
-        //        Icon = input.Icon
-        //    };
-
-        //    var pageData = GetPageData(input.PageName, input.PageDataName);
-        //    leafMenu.PageData = pageData;
-
-        //    _menuManager.AddLeafMenu(leafMenu);
-
-        //    return new AddLeafMenuOutput();
-        //}
-
-        //public AddCompositeMenuOutput AddCompositeMenu(AddCompositeMenuInput input)
-        //{
-        //    CompositeMenu compositeMenu = new CompositeMenu(input.Name)
-        //    {
-        //        CompositeMenuId = input.ParentMenuId,
-        //        DisplayName = input.DisplayName,
-        //        Icon = input.Icon
-        //    };
-
-        //    var pageData = GetPageData(input.PageName, input.PageDataName);
-        //    compositeMenu.PageData = pageData;
-
-        //    _menuManager.AddCompositeMenu(compositeMenu);
-
-        //    return new AddCompositeMenuOutput();
-        //}
 
         public RemoveMenuOutput RemoveMenu(RemoveMenuInput input)
         {

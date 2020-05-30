@@ -2,26 +2,74 @@
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.UI;
+using IEManageSystem.Repositorys;
+using IEManageSystem.Web;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.Menus
 {
     public class MenuManager : ITransientDependency
     {
-        public IRepository<MenuBase> MenuRepository { get; set; }
+        public IEfRepository<MenuBase, int> MenuRepository { get; set; }
 
         private IUnitOfWorkManager _unitOfWorkManager { get; set; }
 
+        private IIEMemoryCache _cache { get; set; }
+
         public MenuManager(
-            IRepository<MenuBase> menuRepository,
-            IUnitOfWorkManager unitOfWorkManager)
+            IEfRepository<MenuBase, int> menuRepository,
+            IUnitOfWorkManager unitOfWorkManager,
+            IIEMemoryCache cache)
         {
             MenuRepository = menuRepository;
 
             _unitOfWorkManager = unitOfWorkManager;
+
+            _cache = cache;
+        }
+
+        private string GetMenuCacheName(string menuName) => $"PageManager_Page_{menuName}_";
+
+        /// <summary>
+        /// 从缓存获取根菜单
+        /// </summary>
+        /// <param name="menuName"></param>
+        /// <returns></returns>
+        public MenuBase GetMenuForCache(string menuName)
+        {
+            return _cache.GetOrCreate<MenuBase>(GetMenuCacheName(menuName), cacheEntity => {
+
+                cacheEntity.SlidingExpiration = TimeSpan.FromHours(1);
+
+                cacheEntity.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+
+                cacheEntity.SetPriority(CacheItemPriority.NeverRemove);
+
+                MenuRepository.NoTracking();
+                Expression<Func<MenuBase, object>>[] propertySelectors = new Expression<Func<MenuBase, object>>[] 
+                {
+                    e=>e.PageData,
+                    e=>e.PageData.Page,
+                };
+                var rootMenu = MenuRepository.GetAllIncluding(propertySelectors).FirstOrDefault(e => e.Name == menuName);
+                if (rootMenu is CompositeMenu) { 
+                    ((CompositeMenu) rootMenu).Menus = MenuRepository.GetAllIncluding(propertySelectors).Where(e => e.RootMenuId == rootMenu.Id).ToList();
+                }
+                MenuRepository.Tracking();
+
+                return rootMenu;
+            });
+        }
+
+        // 使缓存失效
+        public void SetMenuInvalidForCache(string menuName)
+        {
+            _cache.Remove(GetMenuCacheName(menuName));
         }
 
         private List<MenuBase> GetMenus(MenuBase menu) 
@@ -56,94 +104,14 @@ namespace IEManageSystem.CMS.DomainModel.Menus
             MenuRepository.Insert(menu);
         }
 
-        //public void AddLeafMenu(LeafMenu menu)
-        //{
-        //    // 叶子菜单必须有父菜单
-        //    if (!menu.CompositeMenuId.HasValue)
-        //    {
-        //        throw new UserFriendlyException("叶子菜单无法成为根菜单");
-        //    }
-
-        //    var parentMenu = GetCompositeMenu(menu.CompositeMenuId.Value);
-        //    if (parentMenu == null)
-        //    {
-        //        throw new UserFriendlyException("无效的父菜单");
-        //    }
-
-        //    if (!(parentMenu is CompositeMenu)) 
-        //    {
-        //        throw new UserFriendlyException("父菜单必须为组合菜单");
-        //    }
-
-        //    menu.RootMenuId = parentMenu.RootMenuId ?? parentMenu.Id;
-
-        //    if (IsExistMenuName(menu.Name))
-        //    {
-        //        throw new UserFriendlyException("该菜单名称已存在");
-        //    }
-
-        //    MenuRepository.Insert(menu);
-        //}
-
-        //public void AddCompositeMenu(CompositeMenu menu)
-        //{
-        //    // 如果有父菜单
-        //    if (menu.CompositeMenuId.HasValue) 
-        //    {
-        //        var parentMenu = GetCompositeMenu(menu.CompositeMenuId.Value);
-        //        if (parentMenu == null)
-        //        {
-        //            throw new UserFriendlyException("无效的父菜单");
-        //        }
-
-        //        if (!(parentMenu is CompositeMenu))
-        //        {
-        //            throw new UserFriendlyException("父菜单必须为组合菜单");
-        //        }
-
-        //        menu.RootMenuId = parentMenu.RootMenuId ?? parentMenu.Id;
-        //    }
-
-        //    if (IsExistMenuName(menu.Name))
-        //    {
-        //        throw new UserFriendlyException("该菜单名称已存在");
-        //    }
-
-        //    MenuRepository.Insert(menu);
-        //}
-
-        //private CompositeMenu GetCompositeMenu(int id)
-        //{
-        //    var menu = MenuRepository.FirstOrDefault(id);
-
-        //    if (menu == null || !(menu is CompositeMenu))
-        //    {
-        //        return null;
-        //    }
-
-        //    return (CompositeMenu)menu;
-        //}
-
-        //private bool IsExistMenuName(string name)
-        //{
-        //    return MenuRepository.GetAll().Any(e => e.Name == name);
-        //}
-
-        //public void UpdateName(MenuBase menu, string name)
-        //{
-        //    var otherMenu = MenuRepository.GetAll().FirstOrDefault(e => e.Name == name);
-        //    if (otherMenu != null && otherMenu != menu)
-        //    {
-        //        throw new UserFriendlyException("该菜单名称已存在");
-        //    }
-
-        //    menu.Name = name;
-        //}
-
         public void UpdateRootMenu(int rootMenuId, CompositeMenu menu) 
         {
             using (var tran = _unitOfWorkManager.Begin()) 
             {
+                var oldMenu = MenuRepository.FirstOrDefault(e=>e.Id == rootMenuId);
+
+                SetMenuInvalidForCache(oldMenu.Name);
+
                 // 移除根菜单所有菜单
                 MenuRepository.Delete(e => e.RootMenuId == rootMenuId || e.Id == rootMenuId);
 
@@ -170,6 +138,10 @@ namespace IEManageSystem.CMS.DomainModel.Menus
         }
 
         public void RemoveRootMenu(int id) {
+            var oldMenu = MenuRepository.FirstOrDefault(e => e.Id == id);
+
+            SetMenuInvalidForCache(oldMenu.Name);
+            
             // 移除根菜单所有菜单
             MenuRepository.Delete(e => e.RootMenuId == id || e.Id == id);
         }
