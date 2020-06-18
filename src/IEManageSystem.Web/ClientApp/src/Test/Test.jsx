@@ -20,7 +20,7 @@ const IEButtonData = {
         "width": null,
         "backgroundImage": null
     },
-    "targetPageId": null,
+    "pageLeafSetting": null,
     "componentType": "LeafComponent",
     "pageComponentSettings": []
 }

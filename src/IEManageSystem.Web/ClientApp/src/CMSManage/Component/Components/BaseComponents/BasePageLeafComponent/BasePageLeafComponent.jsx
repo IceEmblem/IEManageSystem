@@ -5,7 +5,7 @@ import { BaseComponent, BaseComponentProps } from '../BaseComponent'
 export class PageLeafComponentProps extends BaseComponentProps {
     constructor(){
         super();
-        this.targetPageId = 0;
+        this.pageLeafSetting = null;
     }
 }
 
@@ -16,7 +16,6 @@ class BasePageLeafComponent extends BaseComponent
         super(props);
 
         this.state = {
-            page: {},
             pageDatas: []
         }
     }
@@ -24,17 +23,16 @@ class BasePageLeafComponent extends BaseComponent
     componentDidMount()
     {
         this.getPageDateFetchs();
-        this.getPageFetch();
     }
 
     getPageDateFetchs()
     {
-        if(this.props.targetPageId <= 0){
+        if(!this.props.pageLeafSetting){
             return;
         }
 
         let postData = {
-            id: this.props.targetPageId,
+            pageName: this.props.pageLeafSetting.pageName,
             pageIndex: 1,
             pageSize: 5
         }
@@ -42,21 +40,6 @@ class BasePageLeafComponent extends BaseComponent
         ieReduxFetch("/api/PageQuery/GetPageDatas", postData)
         .then(value=>{
             this.setState({pageDatas: value.pageDatas});
-        });
-    }
-
-    getPageFetch(){
-        if(!this.props.targetPageId){
-            return;
-        }
-        
-        let postData = {
-            id: this.props.targetPageId
-        }
-
-        ieReduxFetch("/api/PageQuery/GetPage", postData)
-        .then(value=>{
-            this.setState({page: value.page});
         });
     }
 
@@ -95,7 +78,7 @@ class BasePageLeafComponent extends BaseComponent
 }
 
 BasePageLeafComponent.propTypes = {
-    targetPageId: PropTypes.number
+    pageLeafSetting: PropTypes.object
 }
 
 BasePageLeafComponent.defaultProps = {

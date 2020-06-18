@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme from 'IEEnzyme';
-import EditFrame from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer/EditFrame';
+import EditFrame from 'CMSManage/Component/ComponentContainers/PostEditFrame';
 import TestComponent from '../TestComponent';
 
 const { shallow } = Enzyme;
@@ -20,7 +20,7 @@ const pageComponent = {
         "height": "",
         "padding": "0rem"
     },
-    "targetPageId": null,
+    "pageLeafSetting": null,
     "componentType": "LeafComponent",
     "pageComponentSettings": []
 };

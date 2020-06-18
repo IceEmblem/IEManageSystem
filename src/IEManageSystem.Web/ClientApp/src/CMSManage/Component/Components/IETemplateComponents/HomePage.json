@@ -11,7 +11,7 @@
                 "name": "Container",
                 "sign": "Header",
                 "parentSign": null,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -52,7 +52,7 @@
                 "name": "Container",
                 "sign": "Header_Nav",
                 "parentSign": "Header",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -95,7 +95,7 @@
                 "name": "Container",
                 "sign": "Header_Nav_Mid",
                 "parentSign": "Header_Nav",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -134,7 +134,7 @@
                 "name": "Container",
                 "sign": "IE_Icon",
                 "parentSign": "Header_Nav_Mid",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -173,7 +173,7 @@
                 "name": "Container",
                 "sign": "IE_Nav_Right",
                 "parentSign": "Header_Nav_Mid",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -216,7 +216,7 @@
                 "name": "Container",
                 "sign": "Header_Main",
                 "parentSign": "Header",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -259,7 +259,7 @@
                 "name": "Container",
                 "sign": "Header_Main_Text",
                 "parentSign": "Header_Main",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -300,7 +300,7 @@
                 "name": "Container",
                 "sign": "Header_Main_Btn",
                 "parentSign": "Header_Main",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -345,7 +345,7 @@
                 "name": "IELogo",
                 "sign": 1590465445070,
                 "parentSign": "IE_Icon",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -366,7 +366,7 @@
                 "name": "IESearch",
                 "sign": 1590465477345,
                 "parentSign": "IE_Nav_Right",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -387,7 +387,7 @@
                 "name": "IEMenu",
                 "sign": 1590465525792,
                 "parentSign": "IE_Nav_Right",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "MenuComponent",
                 "pageComponentBaseSetting": {
@@ -408,7 +408,7 @@
                 "name": "IESelect",
                 "sign": 1590465618076,
                 "parentSign": "IE_Nav_Right",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -467,7 +467,7 @@
                 "name": "IEButton",
                 "sign": 1590465726533,
                 "parentSign": "IE_Nav_Right",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -514,7 +514,7 @@
                 "name": "IEButton",
                 "sign": 1590465811213,
                 "parentSign": "IE_Nav_Right",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -559,7 +559,7 @@
                 "name": "IELink",
                 "sign": 1590465884071,
                 "parentSign": "IE_Nav_Right",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -604,7 +604,7 @@
                 "name": "RichTextEditor",
                 "sign": 1590466062216,
                 "parentSign": "Header_Main_Text",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -625,7 +625,7 @@
                 "name": "IEButton",
                 "sign": 1590466140455,
                 "parentSign": "Header_Main_Btn",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -672,7 +672,7 @@
                 "name": "IEButton",
                 "sign": 1590466201234,
                 "parentSign": "Header_Main_Btn",
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -719,7 +719,7 @@
                 "name": "Container",
                 "sign": 1590472253924,
                 "parentSign": null,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -758,7 +758,7 @@
                 "name": "Text",
                 "sign": 1590472362771,
                 "parentSign": 1590472253924,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -799,7 +799,7 @@
                 "name": "Container",
                 "sign": 1590472442211,
                 "parentSign": 1590472253924,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -846,7 +846,7 @@
                 "name": "Container",
                 "sign": 1590472543862,
                 "parentSign": 1590472442211,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -885,7 +885,7 @@
                 "name": "IEDrawer",
                 "sign": 1590472575307,
                 "parentSign": 1590472543862,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -906,7 +906,7 @@
                 "name": "Container",
                 "sign": 1590472680364,
                 "parentSign": 1590472442211,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -951,7 +951,7 @@
                 "name": "IEDrawer",
                 "sign": 1590472740671,
                 "parentSign": 1590472680364,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -972,7 +972,7 @@
                 "name": "IEDrawer",
                 "sign": 1590473124253,
                 "parentSign": 1590472680364,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -993,7 +993,7 @@
                 "name": "Container",
                 "sign": 1590474319979,
                 "parentSign": null,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1032,7 +1032,7 @@
                 "name": "Text",
                 "sign": 1590474462939,
                 "parentSign": 1590474319979,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1073,7 +1073,7 @@
                 "name": "Container",
                 "sign": 1590474582752,
                 "parentSign": 1590474319979,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1118,7 +1118,7 @@
                 "name": "Container",
                 "sign": 1590474610593,
                 "parentSign": 1590474582752,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1157,7 +1157,7 @@
                 "name": "RichTextEditor",
                 "sign": 1590474640493,
                 "parentSign": 1590474610593,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1178,7 +1178,7 @@
                 "name": "IELink",
                 "sign": 1590475062209,
                 "parentSign": 1590474610593,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1221,7 +1221,7 @@
                 "name": "Container",
                 "sign": 1590475412606,
                 "parentSign": 1590474582752,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1262,7 +1262,7 @@
                 "name": "IEImg",
                 "sign": 1590475436721,
                 "parentSign": 1590475412606,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1283,7 +1283,7 @@
                 "name": "IEImg",
                 "sign": 1590475488848,
                 "parentSign": 1590475412606,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1304,7 +1304,7 @@
                 "name": "IEImg",
                 "sign": 1590475624043,
                 "parentSign": 1590475412606,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1325,7 +1325,7 @@
                 "name": "IEImg",
                 "sign": 1590475701359,
                 "parentSign": 1590475412606,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1346,7 +1346,7 @@
                 "name": "Container",
                 "sign": 1590476608663,
                 "parentSign": 1590474319979,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1389,7 +1389,7 @@
                 "name": "Container",
                 "sign": 1590476626202,
                 "parentSign": 1590476608663,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1432,7 +1432,7 @@
                 "name": "Container",
                 "sign": 1590476653814,
                 "parentSign": 1590476608663,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1471,7 +1471,7 @@
                 "name": "Container",
                 "sign": 1590477582507,
                 "parentSign": 1590476626202,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1514,7 +1514,7 @@
                 "name": "IEImg",
                 "sign": 1590476785379,
                 "parentSign": 1590476626202,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1535,7 +1535,7 @@
                 "name": "Text",
                 "sign": 1590477743834,
                 "parentSign": 1590477582507,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1574,7 +1574,7 @@
                 "name": "Container",
                 "sign": 1590477823210,
                 "parentSign": 1590477582507,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1613,7 +1613,7 @@
                 "name": "IELink",
                 "sign": 1590477858292,
                 "parentSign": 1590477823210,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1654,7 +1654,7 @@
                 "name": "IELink",
                 "sign": 1590477893906,
                 "parentSign": 1590477823210,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1695,7 +1695,7 @@
                 "name": "Container",
                 "sign": 1590478017954,
                 "parentSign": 1590476653814,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1738,7 +1738,7 @@
                 "name": "Container",
                 "sign": 1590478071965,
                 "parentSign": 1590476653814,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1777,7 +1777,7 @@
                 "name": "IEImg",
                 "sign": 1590478095321,
                 "parentSign": 1590478071965,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1798,7 +1798,7 @@
                 "name": "Text",
                 "sign": 1590478186283,
                 "parentSign": 1590478017954,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1837,7 +1837,7 @@
                 "name": "Container",
                 "sign": 1590478209780,
                 "parentSign": 1590478017954,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -1876,7 +1876,7 @@
                 "name": "IELink",
                 "sign": 1590478238115,
                 "parentSign": 1590478209780,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1917,7 +1917,7 @@
                 "name": "IELink",
                 "sign": 1590478280344,
                 "parentSign": 1590478209780,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1958,7 +1958,7 @@
                 "name": "IELink",
                 "sign": 1590478328482,
                 "parentSign": 1590478209780,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -1999,7 +1999,7 @@
                 "name": "Container",
                 "sign": 1590478424124,
                 "parentSign": null,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -2042,7 +2042,7 @@
                 "name": "IECard",
                 "sign": 1590478486867,
                 "parentSign": 1590478424124,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2063,7 +2063,7 @@
                 "name": "IECard",
                 "sign": 1590478562589,
                 "parentSign": 1590478424124,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2084,7 +2084,7 @@
                 "name": "IECard",
                 "sign": 1590478653739,
                 "parentSign": 1590478424124,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2105,7 +2105,7 @@
                 "name": "IECard",
                 "sign": 1590478768599,
                 "parentSign": 1590478424124,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2126,7 +2126,7 @@
                 "name": "IECard",
                 "sign": 1590478884889,
                 "parentSign": 1590478424124,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2147,7 +2147,7 @@
                 "name": "IECard",
                 "sign": 1590478945003,
                 "parentSign": 1590478424124,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2168,7 +2168,7 @@
                 "name": "Container",
                 "sign": 1590479026318,
                 "parentSign": null,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -2207,7 +2207,7 @@
                 "name": "Text",
                 "sign": 1590479093429,
                 "parentSign": 1590479026318,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2248,7 +2248,7 @@
                 "name": "Container",
                 "sign": 1590479119552,
                 "parentSign": 1590479026318,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -2291,7 +2291,7 @@
                 "name": "IECard",
                 "sign": 1590479173261,
                 "parentSign": 1590479119552,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2312,7 +2312,7 @@
                 "name": "IECard",
                 "sign": 1590479308243,
                 "parentSign": 1590479119552,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2333,7 +2333,7 @@
                 "name": "IECard",
                 "sign": 1590479378900,
                 "parentSign": 1590479119552,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2354,7 +2354,7 @@
                 "name": "IECard",
                 "sign": 1590479438414,
                 "parentSign": 1590479119552,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2375,7 +2375,7 @@
                 "name": "Container",
                 "sign": 1590479571249,
                 "parentSign": null,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -2416,7 +2416,7 @@
                 "name": "Container",
                 "sign": 1590479614941,
                 "parentSign": 1590479571249,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -2455,7 +2455,7 @@
                 "name": "Container",
                 "sign": 1590479635766,
                 "parentSign": 1590479614941,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -2494,7 +2494,7 @@
                 "name": "Text",
                 "sign": 1590479680278,
                 "parentSign": 1590479635766,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2535,7 +2535,7 @@
                 "name": "IELink",
                 "sign": 1590479794219,
                 "parentSign": 1590479635766,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2580,7 +2580,7 @@
                 "name": "IELink",
                 "sign": 1590479865127,
                 "parentSign": 1590479635766,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2623,7 +2623,7 @@
                 "name": "IELink",
                 "sign": 1590479943181,
                 "parentSign": 1590479635766,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2666,7 +2666,7 @@
                 "name": "IELink",
                 "sign": 1590479973990,
                 "parentSign": 1590479635766,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2709,7 +2709,7 @@
                 "name": "IELink",
                 "sign": 1590480006139,
                 "parentSign": 1590479635766,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2752,7 +2752,7 @@
                 "name": "IELink",
                 "sign": 1590480037274,
                 "parentSign": 1590479635766,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2795,7 +2795,7 @@
                 "name": "IELink",
                 "sign": 1590480070570,
                 "parentSign": 1590479635766,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2838,7 +2838,7 @@
                 "name": "Container",
                 "sign": 1590480115720,
                 "parentSign": 1590479614941,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -2881,7 +2881,7 @@
                 "name": "Text",
                 "sign": 1590480143844,
                 "parentSign": 1590480115720,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2922,7 +2922,7 @@
                 "name": "IELink",
                 "sign": 1590480355754,
                 "parentSign": 1590480115720,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -2967,7 +2967,7 @@
                 "name": "IELink",
                 "sign": 1590480419115,
                 "parentSign": 1590480115720,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -3012,7 +3012,7 @@
                 "name": "IELink",
                 "sign": 1590480486171,
                 "parentSign": 1590480115720,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -3057,7 +3057,7 @@
                 "name": "Container",
                 "sign": 1590480518400,
                 "parentSign": 1590479614941,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -3100,7 +3100,7 @@
                 "name": "Text",
                 "sign": 1590480538960,
                 "parentSign": 1590480518400,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -3141,7 +3141,7 @@
                 "name": "IELink",
                 "sign": 1590480583362,
                 "parentSign": 1590480518400,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -3186,7 +3186,7 @@
                 "name": "Container",
                 "sign": 1590480775263,
                 "parentSign": 1590479614941,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -3229,7 +3229,7 @@
                 "name": "Text",
                 "sign": 1590480799584,
                 "parentSign": 1590480775263,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -3270,7 +3270,7 @@
                 "name": "IELink",
                 "sign": 1590480828380,
                 "parentSign": 1590480775263,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -3313,7 +3313,7 @@
                 "name": "IELink",
                 "sign": 1590480889791,
                 "parentSign": 1590480775263,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {
@@ -3356,7 +3356,7 @@
                 "name": "Container",
                 "sign": 1590480993440,
                 "parentSign": null,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "CompositeComponent",
                 "pageComponentBaseSetting": {
@@ -3399,7 +3399,7 @@
                 "name": "Text",
                 "sign": 1590481060464,
                 "parentSign": 1590480993440,
-                "targetPageId": null,
+                "pageLeafSetting": null,
                 "menuName": null,
                 "componentType": "LeafComponent",
                 "pageComponentBaseSetting": {

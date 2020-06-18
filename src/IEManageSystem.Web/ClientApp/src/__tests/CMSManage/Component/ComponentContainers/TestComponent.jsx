@@ -1,6 +1,6 @@
 import React from 'react'
-import { BaseField, ComponentSettingConfig } from 'CMSManage/Component/Components/BaseComponent';
-import BaseComponentObject, { ComponentDataConfig } from 'CMSManage/Component/Components/BaseContentLeafComponent'
+import { BaseField, ComponentSettingConfig } from 'CMSManage/Component/Components/BaseComponents/BaseComponent';
+import BaseComponentObject, { ComponentDataConfig } from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
 import ComponentDescribe, { componentType } from 'CMSManage/Component/Components/ComponentDescribe';
 
 const field1 = (props) => (<BaseField text={"文本"} {...props} />);

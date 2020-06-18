@@ -164,7 +164,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
             {
                 var pageLeafComponent = (PageLeafComponent)component;
 
-                dto.TargetPageId = pageLeafComponent.TargetPageId;
                 dto.SetPageLeafComponentType();
             }
             else if (component is MenuComponent) 

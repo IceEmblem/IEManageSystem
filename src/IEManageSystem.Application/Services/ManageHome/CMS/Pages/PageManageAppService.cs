@@ -122,12 +122,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             }
             else if (dto.IsPageLeafComponentType())
             {
-                pageComponent = new PageLeafComponent(dto.Name);
-                if (dto.TargetPageId.HasValue)
-                {
-                    var page = _repository.FirstOrDefault(dto.TargetPageId.Value);
-                    ((PageLeafComponent)pageComponent).TargetPage = page;
-                }
+                pageComponent = new PageLeafComponent(dto.Name) {
+                    PageLeafSetting = _objectMapper.Map<PageLeafSetting>(dto.PageLeafSetting)
+                };
             }
             else if (dto.IsMenuComponentType()) 
             {

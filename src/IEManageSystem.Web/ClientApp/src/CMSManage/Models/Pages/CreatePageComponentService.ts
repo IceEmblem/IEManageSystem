@@ -1,4 +1,5 @@
 import PageComponentModel from "./PageComponentModel";
+import PageLeafSettingModel from "./PageLeafSettingModel";
 
 class CreatePageComponentService{
     private createComponent(sign:string, name:string, componentType:string):PageComponentModel
@@ -19,7 +20,12 @@ class CreatePageComponentService{
                 backgroundImage: null,
                 className: null,
             },
-            targetPageId: null,
+            pageLeafSetting: new PageLeafSettingModel({
+                pageName: null,
+                pageSize: 10,
+                top: 0,
+                searchKey: null,
+            }),
             menuName: null,
             componentType: componentType,
             pageComponentSettings: []

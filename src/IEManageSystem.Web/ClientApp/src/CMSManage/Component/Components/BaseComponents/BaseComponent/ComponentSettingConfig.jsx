@@ -14,8 +14,8 @@ export default class ComponentSettingConfig {
 
     static BuildPageLeafComponentSettingConfig(name, displayName, settingComponentBuilder){
         return new ComponentSettingConfig(name, displayName, settingComponentBuilder, 
-            (pageComponent, name)=>{ return pageComponent.targetPageId },
-            (pageComponent, name, setting)=>{ pageComponent.targetPageId = setting });
+            (pageComponent, name)=>{ return pageComponent.pageLeafSetting },
+            (pageComponent, name, setting)=>{ pageComponent.pageLeafSetting = setting });
     }
 
     static BuildPageComponentSettingConfig(name, displayName, settingComponentBuilder){

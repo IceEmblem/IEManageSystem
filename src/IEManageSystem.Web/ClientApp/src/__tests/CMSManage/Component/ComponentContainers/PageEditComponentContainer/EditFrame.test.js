@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme from 'IEEnzyme';
-import EditFrame from 'CMSManage/Component/ComponentContainers/PageEditCompontContainer/EditFrame';
+import EditFrame from 'CMSManage/Component/ComponentContainers/PageEditFrame';
 import TestComponent from '../TestComponent';
 
 const { shallow } = Enzyme;
@@ -22,7 +22,7 @@ const pageComponent = {
     },
     "componentType": "PageLeafComponent",
     "pageComponentSettings": [],
-    "targetPageId": 1
+    "pageLeafSetting": null
 };
 const editComponent = (pageComponent) => { };
 const close = () => { };
@@ -71,34 +71,6 @@ test("select_test", () => {
     contentComponent = shallow(instance.getContentComponent());
     expect(contentComponent.text()).toEqual("组件设置配置2");
 })
-
-// 提交测试
-// 在传入时，pageComponent.pageComponentSettings为空数组
-// 提交时，应该包含根据 componentSettingConfigs 生成的 pageComponentSettings 的信息
-test("submit_test", () => {
-    let submitedPageComponent;
-
-    let editFrame = shallow(<EditFrame
-        basicSettingConfig={BasicSettingConfig}
-        pageLeafSettingConfig={PageLeafSettingConfig}
-        pageComponent={pageComponent}
-        componentObject={TestComponent.componentObject}
-        editComponent={(pageComponent) => { submitedPageComponent = pageComponent }}
-        close={close}
-        show={true}
-    />);
-
-    let instance = editFrame.instance();
-
-    // 只有在切换到选项卡时，才会生成设置，这里模拟切换选项卡
-    editFrame.setState({ selectTab: instance.tabs[1] });
-    editFrame.setState({ selectTab: instance.tabs[2] });
-
-    instance.submit();
-    expect(submitedPageComponent.pageComponentSettings.length).toEqual(2);
-    expect(submitedPageComponent.pageComponentSettings[0].name).toEqual("setting1");
-    expect(submitedPageComponent.pageComponentSettings[1].name).toEqual("setting2");
-});
 
 // 取消测试
 // 取消后，传入的pageComponent.pageComponentSettings还是为空

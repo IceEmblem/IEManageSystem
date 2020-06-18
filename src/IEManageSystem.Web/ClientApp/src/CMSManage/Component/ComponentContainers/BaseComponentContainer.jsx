@@ -92,7 +92,7 @@ class BaseComponentContainer extends React.Component {
         return this.componentObject.Component({
             componentData: this.getContentComponentData(),
             pageComponentSettings: this.getPageComponentSettings() || [],
-            targetPageId: this.props.pageComponent.targetPageId,
+            pageLeafSetting: this.props.pageComponent.pageLeafSetting,
             menuName: this.props.pageComponent.menuName,
             execLogic: this.execLogic,
             pageFreshen: this.pageFreshen
