@@ -4,10 +4,14 @@ using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace IEManageSystem.Tests.TestDatas
 {
+    /// <summary>
+    /// 运行该生成请先运行 PermissionBuilder
+    /// </summary>
     public class PageBuilder
     {
         private readonly IEManageSystemDbContext _context;
@@ -19,6 +23,8 @@ namespace IEManageSystem.Tests.TestDatas
 
         public void Build()
         {
+            var permission = _context.Permissions.FirstOrDefault(e=>e.Name == "Permission1");
+
             var contentPage = new ContentPage("ContentPage1Name")
             {
                 DisplayName = "测试内容页",
@@ -43,6 +49,15 @@ namespace IEManageSystem.Tests.TestDatas
                     new PageLeafComponent("ComponentName3"){ 
                         Sign = "ContentPage1_Component3Sign"
                     }
+                },
+                ContentPagePeimissionCollection = new ContentPagePeimissionCollection() { 
+                    ManagePermissions = new List<ContentPagePermission>() { 
+                        new ContentPagePermission(){ Permission = permission }
+                    },
+                    IsEnableQueryPermission = true,
+                    QueryPermissions = new List<ContentPagePermission>() {
+                        new ContentPagePermission(){ Permission = permission }
+                    },
                 }
             };
 

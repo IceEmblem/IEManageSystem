@@ -112,11 +112,17 @@ namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys
 
             if (page is StaticPage)
             {
-                pageDto.PageType = "StaticPage";
+                pageDto.SetStaticPage();
             }
             else if (page is ContentPage)
             {
-                pageDto.PageType = "ContentPage";
+                pageDto.SetContentPage();
+
+                var contentPage = (ContentPage)page;
+                pageDto.ContentPagePeimissionCollection =
+                    pageDto.ContentPagePeimissionCollection != null ? 
+                        _objectMapper.Map<ContentPagePeimissionCollectionDto>(contentPage.ContentPagePeimissionCollection)
+                        : null;
             }
 
             if (page.PageComponents == null) {

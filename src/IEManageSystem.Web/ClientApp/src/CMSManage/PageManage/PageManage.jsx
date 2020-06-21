@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 import Resource from 'Resource/Resource.jsx';
 import { ResourceDescribeValueType } from 'ResourceForm/ResourceDescribeValueType'
 import { ieReduxFetch } from 'Core/IEReduxFetch';
+import PostPermissionEdit from './PostPermissionEdit'
 
+import { Modal, Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 
 const pageType = {
@@ -23,14 +25,14 @@ function EditComponent(props) {
 }
 
 function EditPageData(props) {
-	if(props.resource.pageType == pageType.ContentPage){
+	if (props.resource.pageType == pageType.ContentPage) {
 		return (
-			<NavLink className="ant-btn ant-btn-sm"
+			<NavLink className="ant-btn ant-btn-sm mr-1"
 				to={`/ManageHome/CMSManage/PageData/${props.resource.name}`}
 			>
 				<EditOutlined />
 				<span>{" 管理文章"}</span>
-			</NavLink>); 
+			</NavLink>);
 	}
 
 	return (<span></span>);
@@ -45,7 +47,11 @@ class PageManage extends React.Component {
 			resourceNum: 0,
 			pageIndex: 1,
 			pageSize: 10,
-			searchKey: ""
+			searchKey: "",
+			postPermissionEdit: {
+				show: false,
+				pageName: null
+			}
 		}
 
 		this.deleteResource = this.deleteResource.bind(this);
@@ -87,21 +93,13 @@ class PageManage extends React.Component {
 
 	// Resource组件添加资源通知
 	addResource(resource) {
-		let url;
-		if(!resource.pageType){
+		if (!resource.pageType) {
 			return;
-		}
-
-		if (resource.pageType == pageType.ContentPage) {
-			url = "/api/PageManage/AddContentPage";
-		}
-		else if (resource.pageType == pageType.StaticPage) {
-			url = "/api/PageManage/AddStaticPage";
 		}
 
 		let postData = resource;
 
-		ieReduxFetch(url, postData)
+		ieReduxFetch("/api/PageManage/AddPage", postData)
 			.then(value => {
 				this.setState(value);
 				this.getResourceList(this.state.pageIndex, this.state.pageSize, this.state.searchKey);
@@ -143,6 +141,17 @@ class PageManage extends React.Component {
 		let customizeOperateBtns = [];
 		customizeOperateBtns.push(EditComponent);
 		customizeOperateBtns.push(EditPageData);
+		customizeOperateBtns.push((props) => {
+			if (props.resource.pageType != pageType.ContentPage) {
+				return (<span></span>);
+			}
+		
+			return (<Button
+				icon={<EditOutlined />}
+				onClick={() => this.setState({postPermissionEdit:{ show: true, pageName: props.resource.name }})}
+				size="small"
+			>编辑权限</Button>);
+		});
 
 		return (
 			<div className="col-md-12 bg-white pt-3 pb-3">
@@ -157,6 +166,11 @@ class PageManage extends React.Component {
 					addResource={this.addResource}
 					updateResource={this.updateResource}
 					customizeOperateBtns={customizeOperateBtns}
+				/>
+				<PostPermissionEdit 
+					show={this.state.postPermissionEdit.show}
+					pageName={this.state.postPermissionEdit.pageName}
+					close={()=>{this.setState({postPermissionEdit:{ show: false, pageName: null }})}}
 				/>
 			</div>
 		);

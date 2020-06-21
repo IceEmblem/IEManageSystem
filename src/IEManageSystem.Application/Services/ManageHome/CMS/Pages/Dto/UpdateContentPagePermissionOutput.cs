@@ -1,12 +1,11 @@
-﻿using IEManageSystem.Dtos.CMS;
+﻿using IEManageSystem.Dtos;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
 {
-    public class UpdatePageInput : PageDto
+    public class UpdateContentPagePermissionOutput:OutputDtoBase
     {
     }
 }

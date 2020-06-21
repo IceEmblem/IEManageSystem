@@ -13,10 +13,18 @@ namespace IEManageSystem.Repositorys.CMSRepositorys
 {
     public class PageRepository : EfRepository<PageBase, int>, IPageRepository
     {
-        public const string HomeName = "home";
-
         public PageRepository(IDbContextProvider<IEManageSystemDbContext> dbContextProvider) : base(dbContextProvider)
         {
+        }
+
+        public PageBase GetPageOfAllIncludes(string name) {
+            var page = Context.Set<ContentPage>()
+                .Include(e => e.ContentPagePeimissionCollection).ThenInclude(e=>e.ManagePermissions)
+                .Include(e => e.ContentPagePeimissionCollection).ThenInclude(e => e.QueryPermissions)
+                .Include(e => e.PageComponents).ThenInclude(e => e.PageComponentSettings).ThenInclude(e => e.SingleDatas)
+                .FirstOrDefault(e => e.Name == name);
+
+            return page;
         }
     }
 }

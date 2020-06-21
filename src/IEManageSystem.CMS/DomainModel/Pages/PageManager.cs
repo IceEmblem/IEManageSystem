@@ -51,7 +51,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
                 cacheEntity.SetPriority(CacheItemPriority.NeverRemove);
 
                 PageRepository.NoTracking();
-                var page = PageRepository.ThenInclude(e => e.PageComponents, e => e.PageComponentSettings, e => e.SingleDatas).FirstOrDefault(e => e.Name == pageName);
+                var page = PageRepository.GetPageOfAllIncludes(pageName);
                 PageRepository.Tracking();
 
                 return page;
@@ -64,15 +64,6 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             _cache.Remove(GetPageCacheName(pageName));
         }
 
-        public StaticPage CreateStaticPage(string pageName, string pageDisplayName)
-        {
-            StaticPage page = new StaticPage(pageName) {
-                DisplayName = pageDisplayName
-            };
-
-            return page;
-        }
-
         public void AddPage(PageBase page)
         {
             if (PageRepository.GetAll().Any(e => e.Name == page.Name))
@@ -83,6 +74,33 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             PageRepository.Insert(page);
         }
 
+        public void UpdatePage(PageBase page) 
+        {
+            PageRepository.Update(page);
+
+            SetPageInvalidForCache(page.Name);
+        }
+
+        public void UpdateContentPagePermission(string name, ContentPagePeimissionCollection contentPagePeimissionCollection) 
+        {
+            var page = PageRepository.GetPageOfAllIncludes(name);
+
+            if (page == null)
+            {
+                throw new UserFriendlyException("未找到页面");
+            }
+
+            if (!(page is ContentPage))
+            {
+                throw new UserFriendlyException("无法更改页面权限，请确保页面属于内容页");
+            }
+
+            var contentPage = (ContentPage)page;
+            contentPage.ContentPagePeimissionCollection = contentPagePeimissionCollection;
+
+            SetPageInvalidForCache(page.Name);
+        }
+
         public void DeletePage(string name)
         {
             if (name.ToLower() == HomeName)
@@ -90,7 +108,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
                 throw new UserFriendlyException("不能删除主页");
             }
 
-            var page = PageRepository.ThenInclude(e => e.PageComponents, e => e.PageComponentSettings, e => e.SingleDatas).FirstOrDefault(e=>e.Name == name);
+            var page = PageRepository.GetPageOfAllIncludes(name);
 
             // 删除所有文章
             _pageDataManager.DeletePagePosts(page.Name);
@@ -112,7 +130,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public void UpdatePageComponentsAndDefaultComponentData(string name, List<PageComponentBase> pageComponents, List<DefaultComponentData> defaultComponentDatas)
         {
-            var page = PageRepository.ThenInclude(e => e.PageComponents, e=>e.PageComponentSettings, e=>e.SingleDatas).FirstOrDefault(e => e.Name == name);
+            var page = PageRepository.GetPageOfAllIncludes(name);
             page.PageComponents = new List<PageComponentBase>();
 
             foreach (var item in pageComponents) {

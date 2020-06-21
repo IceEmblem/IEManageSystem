@@ -11,6 +11,7 @@ using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Dtos.CMS;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using Microsoft.EntityFrameworkCore;
 
 namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
 {
@@ -22,12 +23,23 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
             _pageManageAppService = Resolve<IPageManageAppService>();
         }
 
+        private void ReloadDB() {
+            UsingDbContext(context => context.Database.EnsureDeleted());
+            UsingDbContext(context => context.Database.EnsureCreated());
+            UsingDbContext(context => new PermissionBuilder(context).Build());
+            UsingDbContext(context => new PageBuilder(context).Build());
+            UsingDbContext(context => new PageDataBuilder(context).Build());
+        }
+
         [Fact]
         public void AddContentPage_BaseTest() {
-            _pageManageAppService.AddContentPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddContentPageInput() { 
+            ReloadDB();
+
+            _pageManageAppService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput() { 
                 Name = "AddContentPage_BaseTest",
                 Description = "Description1",
-                DisplayName = "DisplayName1"
+                DisplayName = "DisplayName1",
+                PageType = "ContentPage"
             });
 
             var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
@@ -38,10 +50,13 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
 
         [Fact]
         public void AddStaticPage_BaseTest() {
-            _pageManageAppService.AddStaticPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddStaticPageInput() {
+            ReloadDB();
+
+            _pageManageAppService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput() {
                 Name = "AddStaticPage_BaseTest",
                 Description = "Description1",
-                DisplayName = "DisplayName1"
+                DisplayName = "DisplayName1",
+                PageType = "StaticPage"
             });
 
             var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
@@ -52,17 +67,21 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
 
         [Fact]
         public void UpdatePage_BaseTest() {
-            _pageManageAppService.AddStaticPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddStaticPageInput()
+            ReloadDB();
+
+            _pageManageAppService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput()
             {
                 Name = "UpdatePage_BaseTest",
                 Description = "Description1",
-                DisplayName = "DisplayName1"
+                DisplayName = "DisplayName1",
+                PageType = "StaticPage"
             });
 
             _pageManageAppService.UpdatePage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdatePageInput() {
                 Name = "UpdatePage_BaseTest",
                 Description = "Description2",
-                DisplayName = "DisplayName2"
+                DisplayName = "DisplayName2",
+                PageType = "StaticPage"
             });
 
 
@@ -74,11 +93,36 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         }
 
         [Fact]
+        public void UpdateContentPagePermission() {
+            ReloadDB();
+
+            _pageManageAppService.UpdateContentPagePermission(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdateContentPagePermissionInput()
+            {
+                Name = "ContentPage1Name",
+                ContentPagePeimissionCollection = new ContentPagePeimissionCollectionDto()
+                {
+                    IsEnableQueryPermission = false,
+                    ManagePermissions = new List<ContentPagePermissionDto>(),
+                    QueryPermissions = new List<ContentPagePermissionDto>()
+                }
+            });
+
+            var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
+            dbContext.SaveChanges();
+
+            var contentPagePeimissionCollection = 
+                dbContext.Set<ContentPage>()
+                    .Include(e=>e.ContentPagePeimissionCollection).ThenInclude(e=>e.ManagePermissions)
+                    .Include(e => e.ContentPagePeimissionCollection).ThenInclude(e => e.QueryPermissions)
+                    .FirstOrDefault(e => e.Name == "ContentPage1Name").ContentPagePeimissionCollection;
+            Assert.True(contentPagePeimissionCollection.ManagePermissions.Count == 0);
+            Assert.True(contentPagePeimissionCollection.QueryPermissions.Count == 0);
+            Assert.True(contentPagePeimissionCollection.IsEnableQueryPermission == false);
+        }
+
+        [Fact]
         public void DeletePage_BaseTest() {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
+            ReloadDB();
 
             _pageManageAppService.DeletePage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.DeletePageInput() { 
                 Name = "ContentPage1Name"
@@ -99,10 +143,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
 
         [Fact]
         public void UpdatePageComponent_BaseTest() {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
+            ReloadDB();
 
             _pageManageAppService.UpdatePageComponent(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdatePageComponentInput() { 
                 Name = "ContentPage1Name",
@@ -162,10 +203,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         /// </summary>
         [Fact]
         public void AddPageData_BaseTest() {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
+            ReloadDB();
 
             _pageManageAppService.AddPageData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageDataInput() {
                 PageName= "ContentPage1Name",
@@ -185,10 +223,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         [Fact]
         public void UpdatePageData_BaseTest() 
         {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
+            ReloadDB();
 
             _pageManageAppService.AddPageData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageDataInput()
             {
@@ -220,10 +255,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         /// </summary>
         [Fact]
         public void DeletePageData_BaseTest() {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
+            ReloadDB();
 
             _pageManageAppService.DeletePageData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.DeletePageDataInput() { 
                 PageName = "ContentPage1Name",
@@ -243,10 +275,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         /// </summary>
         [Fact]
         public void UpdateComponentData_BaseTest() {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
+            ReloadDB();
 
             _pageManageAppService.UpdateComponentData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdateComponentDataInput() {
                 PageName = "ContentPage1Name",

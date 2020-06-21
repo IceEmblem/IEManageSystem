@@ -8,13 +8,13 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 {
     public interface IPageManageAppService: IApplicationService
     {
-        AddContentPageOutput AddContentPage(AddContentPageInput input);
-
-        AddStaticPageOutput AddStaticPage(AddStaticPageInput input);
+        AddPageOutput AddPage(AddPageInput input);
 
         DeletePageOutput DeletePage(DeletePageInput input);
 
         UpdatePageOutput UpdatePage(UpdatePageInput input);
+
+        UpdateContentPagePermissionOutput UpdateContentPagePermission(UpdateContentPagePermissionInput input);
 
         UpdatePageComponentOutput UpdatePageComponent(UpdatePageComponentInput input);
 

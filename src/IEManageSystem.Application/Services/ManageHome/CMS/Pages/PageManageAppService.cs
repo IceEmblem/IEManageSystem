@@ -26,8 +26,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         private PageManager _pageManager { get; set; }
 
-        private IPageRepository _repository => _pageManager.PageRepository;
-
         private PageDataManager _pageDataManager { get; set; }
 
         public PageManageAppService(
@@ -43,9 +41,17 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             _objectMapper = objectMapper;
         }
 
-        public AddContentPageOutput AddContentPage(AddContentPageInput input)
+        public AddPageOutput AddPage(AddPageInput input)
         {
-            ContentPage page = new ContentPage(input.Name);
+            PageBase page = null;
+            if (input.IsContentPage())
+            {
+                page = new ContentPage(input.Name);
+            }
+            else
+            {
+                page = new StaticPage(input.Name);
+            }
 
             page.DisplayName = input.DisplayName;
 
@@ -53,18 +59,46 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
             _pageManager.AddPage(page);
 
-            return new AddContentPageOutput();
+            return new AddPageOutput();
         }
 
-        public AddStaticPageOutput AddStaticPage(AddStaticPageInput input)
+        public UpdatePageOutput UpdatePage(UpdatePageInput input)
         {
-            StaticPage page = _pageManager.CreateStaticPage(input.Name, input.DisplayName);
+            var page = _pageManager.PageRepository.FirstOrDefault(item => item.Name == input.Name);
 
+            if (page == null)
+            {
+                throw new UserFriendlyException("未找到页面");
+            }
+
+            page.DisplayName = input.DisplayName;
             page.Description = input.Description;
 
-            _pageManager.AddPage(page);
+            _pageManager.UpdatePage(page);
 
-            return new AddStaticPageOutput();
+            return new UpdatePageOutput();
+        }
+
+        public UpdateContentPagePermissionOutput UpdateContentPagePermission(UpdateContentPagePermissionInput input) 
+        {
+            ContentPagePeimissionCollection contentPagePeimissionCollection = new ContentPagePeimissionCollection();
+            foreach (var item in input.ContentPagePeimissionCollection.ManagePermissions) {
+                contentPagePeimissionCollection.ManagePermissions.Add(new ContentPagePermission() { 
+                    PermissionId = item.PermissionId
+                });
+            }
+            contentPagePeimissionCollection.IsEnableQueryPermission = input.ContentPagePeimissionCollection.IsEnableQueryPermission;
+            foreach (var item in input.ContentPagePeimissionCollection.QueryPermissions)
+            {
+                contentPagePeimissionCollection.QueryPermissions.Add(new ContentPagePermission()
+                {
+                    PermissionId = item.PermissionId
+                });
+            }
+
+            _pageManager.UpdateContentPagePermission(input.Name, contentPagePeimissionCollection);
+
+            return new UpdateContentPagePermissionOutput();
         }
 
         public DeletePageOutput DeletePage(DeletePageInput input)
@@ -72,20 +106,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             _pageManager.DeletePage(input.Name);
 
             return new DeletePageOutput();
-        }
-
-        public UpdatePageOutput UpdatePage(UpdatePageInput input)
-        {
-            var page = _repository.FirstOrDefault(item=>item.Name == input.Name);
-
-            if (page == null) {
-                throw new UserFriendlyException("未找到页面");
-            }
-
-            page.DisplayName = input.DisplayName;
-            page.Description = input.Description;
-
-            return new UpdatePageOutput();
         }
 
         public UpdatePageComponentOutput UpdatePageComponent(UpdatePageComponentInput input)

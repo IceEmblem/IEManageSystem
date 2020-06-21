@@ -41,6 +41,7 @@ namespace IEManageSystem.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new PageBaseConfigure());
             modelBuilder.ApplyConfiguration(new StaticPageConfigure());
             modelBuilder.ApplyConfiguration(new ContentPageConfigure());
+            modelBuilder.ApplyConfiguration(new ContentPagePeimissionCollectionConfigure());
             modelBuilder.ApplyConfiguration(new PageComponentBaseConfigure());
             modelBuilder.ApplyConfiguration(new CompositeComponentConfigure());
             modelBuilder.ApplyConfiguration(new LeafComponentConfigure());

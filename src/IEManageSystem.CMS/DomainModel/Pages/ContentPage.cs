@@ -1,5 +1,6 @@
 ﻿using Abp.UI;
 using IEManageSystem.CMS.DomainModel.PageDatas;
+using IEManageSystem.Entitys.Authorization.Permissions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         public ContentPage(string name) : base(name)
         {
         }
+
+        public ContentPagePeimissionCollection ContentPagePeimissionCollection { get; set; }
     }
 }
