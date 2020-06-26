@@ -3,7 +3,7 @@ using Abp.AspNetCore.Configuration;
 using Abp.Domain.Uow;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
-using IEManageSystem.Api.Help;
+using IEManageSystem.Web.Help;
 using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.Attributes;

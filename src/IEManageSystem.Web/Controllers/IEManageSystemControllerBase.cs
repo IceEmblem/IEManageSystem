@@ -4,7 +4,7 @@ using Abp.Web.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace IEManageSystem.Api.Controllers
+namespace IEManageSystem.Web.Controllers
 {
     public abstract class IEManageSystemControllerBase : AbpController
     {

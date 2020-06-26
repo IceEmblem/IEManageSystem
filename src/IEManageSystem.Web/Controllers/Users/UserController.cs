@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IEManageSystem.Api.Controllers.Users.Dto;
-using IEManageSystem.Api.Models;
+using IEManageSystem.Web.Controllers.Users.Dto;
+using IEManageSystem.Web.Models;
 using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
@@ -14,7 +14,7 @@ using IEManageSystem.Services.Users.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IEManageSystem.Api.Controllers.Users
+namespace IEManageSystem.Web.Controllers.Users
 {
     [Route("api/[controller]/[action]")]
     public class UserController : IEManageSystemControllerBase

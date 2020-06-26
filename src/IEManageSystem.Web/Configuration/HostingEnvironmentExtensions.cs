@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace IEManageSystem.Api.Configuration
+namespace IEManageSystem.Web.Configuration
 {
     public static class HostingEnvironmentExtensions
     {

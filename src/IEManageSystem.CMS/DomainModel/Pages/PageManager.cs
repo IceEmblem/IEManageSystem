@@ -3,6 +3,7 @@ using Abp.UI;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.Repositorys;
+using IEManageSystem.Entitys.Authorization.Permissions;
 using IEManageSystem.Repositorys;
 using IEManageSystem.Web;
 using Microsoft.Extensions.Caching.Memory;
@@ -40,6 +41,11 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         private string GetPageCacheName(string pageName) => $"PageManager_Page_{pageName}_";
 
+        /// <summary>
+        /// 从缓存获取页面
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
         public PageBase GetPageForCache(string pageName)
         {
             return _cache.GetOrCreate<PageBase>(GetPageCacheName(pageName), cacheEntity => {
@@ -58,10 +64,91 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             });
         }
 
-        // 使缓存失效
+        /// <summary>
+        /// 使缓存失效
+        /// </summary>
+        /// <param name="pageName"></param>
         public void SetPageInvalidForCache(string pageName)
         {
             _cache.Remove(GetPageCacheName(pageName));
+        }
+
+        /// <summary>
+        /// 获取具有管理文章权限的页面
+        /// </summary>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
+        public IEnumerable<ContentPage> GetPagesForManagePermission(IEnumerable<Permission> permissions) 
+        {
+            IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
+
+            return PageRepository.GetAll().OfType<ContentPage>().Where(e => e.ContentPagePeimissionCollection.ManagePermissions.Any(e => permissionIds.Contains(e.Id)));
+        }
+
+        /// <summary>
+        /// 获取具有查询文章权限的页面
+        /// </summary>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
+        public IEnumerable<ContentPage> GetPagesForQueryPermission(IEnumerable<Permission> permissions) 
+        {
+            IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
+
+            return PageRepository.GetAll().OfType<ContentPage>().Where(e => 
+                e.ContentPagePeimissionCollection.ManagePermissions.Any(e => permissionIds.Contains(e.Id))
+                || e.ContentPagePeimissionCollection.IsEnableQueryPermission == false
+                || e.ContentPagePeimissionCollection.QueryPermissions.Any(e => permissionIds.Contains(e.Id))
+            );
+        }
+
+        /// <summary>
+        /// 是否可以访问该页面的文章
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCanQueryPost(string pageName, IEnumerable<Permission> permissions) 
+        {
+            var page = GetPageForCache(pageName);
+
+            if (!(page is ContentPage)) {
+                throw new UserFriendlyException($"页面{pageName}不是文章页面");
+            }
+
+            var contentPage = (ContentPage)page;
+            foreach (var item in permissions) {
+                if (contentPage.ContentPagePeimissionCollection.IsCanQueryPost(item)) 
+                {
+                    return true;
+                }
+            };
+
+            return false;
+        }
+
+        /// <summary>
+        /// 是否可以管理该页面的文章
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
+        public bool IsCanManagePost(string pageName, IEnumerable<Permission> permissions) 
+        {
+            var page = GetPageForCache(pageName);
+
+            if (!(page is ContentPage))
+            {
+                throw new UserFriendlyException($"页面{pageName}不是文章页面");
+            }
+
+            var contentPage = (ContentPage)page;
+            foreach (var item in permissions)
+            {
+                if (contentPage.ContentPagePeimissionCollection.IsCanManagePost(item))
+                {
+                    return true;
+                }
+            };
+
+            return false;
         }
 
         public void AddPage(PageBase page)

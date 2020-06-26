@@ -13,14 +13,14 @@ using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using Microsoft.EntityFrameworkCore;
 
-namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
+namespace IEManageSystem.Application.Tests.Services.Pages
 {
     public class PageManageAppServiceTest : IEManageSystemTestBase
     {
-        private IPageManageAppService _pageManageAppService { get; set; }
+        private IPageManageAppService _appService { get; set; }
 
         public PageManageAppServiceTest() {
-            _pageManageAppService = Resolve<IPageManageAppService>();
+            _appService = Resolve<IPageManageAppService>();
         }
 
         private void ReloadDB() {
@@ -35,7 +35,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         public void AddContentPage_BaseTest() {
             ReloadDB();
 
-            _pageManageAppService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput() { 
+            _appService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput() { 
                 Name = "AddContentPage_BaseTest",
                 Description = "Description1",
                 DisplayName = "DisplayName1",
@@ -52,7 +52,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         public void AddStaticPage_BaseTest() {
             ReloadDB();
 
-            _pageManageAppService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput() {
+            _appService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput() {
                 Name = "AddStaticPage_BaseTest",
                 Description = "Description1",
                 DisplayName = "DisplayName1",
@@ -69,7 +69,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         public void UpdatePage_BaseTest() {
             ReloadDB();
 
-            _pageManageAppService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput()
+            _appService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput()
             {
                 Name = "UpdatePage_BaseTest",
                 Description = "Description1",
@@ -77,7 +77,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
                 PageType = "StaticPage"
             });
 
-            _pageManageAppService.UpdatePage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdatePageInput() {
+            _appService.UpdatePage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdatePageInput() {
                 Name = "UpdatePage_BaseTest",
                 Description = "Description2",
                 DisplayName = "DisplayName2",
@@ -96,7 +96,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         public void UpdateContentPagePermission() {
             ReloadDB();
 
-            _pageManageAppService.UpdateContentPagePermission(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdateContentPagePermissionInput()
+            _appService.UpdateContentPagePermission(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdateContentPagePermissionInput()
             {
                 Name = "ContentPage1Name",
                 ContentPagePeimissionCollection = new ContentPagePeimissionCollectionDto()
@@ -124,7 +124,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         public void DeletePage_BaseTest() {
             ReloadDB();
 
-            _pageManageAppService.DeletePage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.DeletePageInput() { 
+            _appService.DeletePage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.DeletePageInput() { 
                 Name = "ContentPage1Name"
             });
 
@@ -145,7 +145,7 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
         public void UpdatePageComponent_BaseTest() {
             ReloadDB();
 
-            _pageManageAppService.UpdatePageComponent(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdatePageComponentInput() { 
+            _appService.UpdatePageComponent(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdatePageComponentInput() { 
                 Name = "ContentPage1Name",
                 PageComponents = new List<Dtos.CMS.PageComponentDto>() { 
                     new Dtos.CMS.PageComponentDto(){
@@ -198,108 +198,5 @@ namespace IEManageSystem.Application.Tests.Services.PageManageAppServices
             Assert.True(dbContext.Set<SingleComponentData>().Any(e => e.Name == "UpdatePageComponent_BaseTest_SingleComponentData1"));
         }
 
-        /// <summary>
-        /// 添加文章，期望只添加聚合根
-        /// </summary>
-        [Fact]
-        public void AddPageData_BaseTest() {
-            ReloadDB();
-
-            _pageManageAppService.AddPageData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageDataInput() {
-                PageName= "ContentPage1Name",
-                Name= "AddPageData_BaseTest_Name",
-                Title= "AddPageData_BaseTest_Title"
-            });
-
-            var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
-            dbContext.SaveChanges();
-
-            Assert.True(dbContext.PageDatas.Any(e => e.Name == "AddPageData_BaseTest_Name"));
-        }
-
-        /// <summary>
-        /// 更新文章，期望只更新聚合根
-        /// </summary>
-        [Fact]
-        public void UpdatePageData_BaseTest() 
-        {
-            ReloadDB();
-
-            _pageManageAppService.AddPageData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageDataInput()
-            {
-                PageName = "ContentPage1Name",
-                Name = "UpdatePageData_BaseTest_Name",
-                Title = "UpdatePageData_BaseTest_Title"
-            });
-
-            var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
-            dbContext.SaveChanges();
-            var post = dbContext.PageDatas.FirstOrDefault(e=>e.Name == "UpdatePageData_BaseTest_Name");
-
-            _pageManageAppService.UpdatePageData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdatePageDataInput()
-            {
-                PageName = "ContentPage1Name",
-                Id = post.Id,
-                Name = "UpdatePageData_BaseTest_Name1",
-                Title = "UpdatePageData_BaseTest_Title1"
-            });
-
-            dbContext.SaveChanges();
-
-            Assert.True(dbContext.PageDatas.Any(e => e.Name == "UpdatePageData_BaseTest_Name1"));
-            Assert.True(!dbContext.PageDatas.Any(e => e.Name == "UpdatePageData_BaseTest_Name"));
-        }
-
-        /// <summary>
-        /// 删除文章，期望文章下所有东西都删除
-        /// </summary>
-        [Fact]
-        public void DeletePageData_BaseTest() {
-            ReloadDB();
-
-            _pageManageAppService.DeletePageData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.DeletePageDataInput() { 
-                PageName = "ContentPage1Name",
-                Name = "PageData1Name"
-            });
-
-            var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
-            dbContext.SaveChanges();
-
-            Assert.True(!dbContext.Set<PageData>().Any(e => e.Name == "PageData1Name"));
-            Assert.True(!dbContext.Set<ContentComponentData>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
-            Assert.True(!dbContext.Set<SingleComponentData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
-        }
-
-        /// <summary>
-        /// 更新组件数据
-        /// </summary>
-        [Fact]
-        public void UpdateComponentData_BaseTest() {
-            ReloadDB();
-
-            _pageManageAppService.UpdateComponentData(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdateComponentDataInput() {
-                PageName = "ContentPage1Name",
-                PageDataName = "PageData1Name",
-                ComponentDatas = new List<ComponentDataDto>() {
-                    new ComponentDataDto(){
-                        Sign = "UpdateComponentData_BaseTest_ContentComponentDataSign",
-                        SingleDatas = new List<SingleComponentDataDto>(){
-                            new SingleComponentDataDto(){ Name = "UpdateComponentData_BaseTest_SingleComponentDataName" }
-                        }
-                    }
-                }
-            });
-
-            var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
-            dbContext.SaveChanges();
-
-            // 移除所有旧的数据
-            Assert.True(!dbContext.Set<ContentComponentData>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
-            Assert.True(!dbContext.Set<SingleComponentData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
-
-            // 添加新的数据
-            Assert.True(dbContext.Set<ContentComponentData>().Any(e => e.Sign == "UpdateComponentData_BaseTest_ContentComponentDataSign"));
-            Assert.True(dbContext.Set<SingleComponentData>().Any(e => e.Name == "UpdateComponentData_BaseTest_SingleComponentDataName"));
-        }
     }
 }

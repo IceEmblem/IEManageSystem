@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IEManageSystem.Services.ManageHome.CMS.PageQuerys.Dto
+namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
 {
-    public class GetPagesOutput:OutputDtoBase
+    public class GetPageDatasOutput:OutputDtoBase
     {
-        public List<PageDto> Pages { get; set; }
+        public List<PageDataDto> PageDatas { get; set; }
 
         public int ResourceNum { get; set; }
 

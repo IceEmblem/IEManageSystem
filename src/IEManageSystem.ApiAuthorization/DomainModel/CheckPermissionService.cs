@@ -28,6 +28,14 @@ namespace IEManageSystem.ApiAuthorization.DomainModel
 
         public bool IsAllowAccess(string apiScopeName, bool isQueryAction, IEnumerable<string> permissionNames)
         {
+            // 获取拥有的权限
+            var permissions = _permissionManager.GetPermissionsForCache().Where(e=> permissionNames.Contains(e.Name));
+
+            return IsAllowAccess(apiScopeName, isQueryAction, permissions);
+        }
+
+        public bool IsAllowAccess(string apiScopeName, bool isQueryAction, IEnumerable<Permission> permissions) 
+        {
             // 获取要访问的Api域
             Expression<Func<ApiScope, object>>[] apiScopeSelectors = new Expression<Func<ApiScope, object>>[]
             {
@@ -37,9 +45,6 @@ namespace IEManageSystem.ApiAuthorization.DomainModel
                 e => e.ApiQueryScope.ApiScopePermissions,
             };
             var apiScope = _apiScopeManager.GetApiScopeForCache(apiScopeName);
-
-            // 获取拥有的权限
-            var permissions = _permissionManager.GetPermissionsForCache().Where(e=> permissionNames.Contains(e.Name));
 
             if (isQueryAction == true)
             {
