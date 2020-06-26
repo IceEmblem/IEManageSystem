@@ -48,6 +48,7 @@ class ComponentListBox extends React.Component {
     render() {
         let componentDescribes;
         if(this.state.searchText){
+            debugger
             componentDescribes = this.componentDescribes.filter(item=>item.displayName.indexOf(this.state.searchText) >= 0);
         }
         else{

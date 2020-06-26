@@ -80,7 +80,7 @@ export function pageDataFetch(pageName:string, pageDataName:string){
   };
 
   return createIEThunkAction(
-    "/api/PageQuery/GetPageData",
+    "/api/PageDataQuery/GetPageData",
     postData,
     PageDataReceive
   );
@@ -97,7 +97,7 @@ export function componentDataUpdateFetch(pageName:string, pageDataName:string, c
   };
 
   return createIEThunkAction(
-    "/api/PageManage/UpdateComponentData",
+    "/api/PageDataManage/UpdateComponentData",
     postData,
     ComponentDataUpdateReceive
   );

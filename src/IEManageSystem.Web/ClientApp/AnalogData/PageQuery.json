@@ -4081,29 +4081,5 @@
         ],
         "resourceNum": 10,
         "pageIndex": 1
-    },
-    "GetPageDatas": {
-        "pageDatas": [
-            {
-                "id": 1,
-                "name": "post",
-                "title": "文章1"
-            },
-            {
-                "id": 2,
-                "name": "post",
-                "title": "文章2"
-            }
-        ],
-        "resourceNum": 10,
-        "pageIndex": 1
-    },
-    "GetPageData": {
-        "pageData": {
-            "id": 1,
-            "name": "post",
-            "title": "文章1"
-        },
-        "contentComponentDatas": []
     }
 }

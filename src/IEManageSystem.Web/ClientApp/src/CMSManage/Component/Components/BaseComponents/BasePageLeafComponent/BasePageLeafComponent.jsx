@@ -37,7 +37,7 @@ class BasePageLeafComponent extends BaseComponent
             pageSize: 5
         }
 
-        ieReduxFetch("/api/PageQuery/GetPageDatas", postData)
+        ieReduxFetch("/api/PageDataQuery/GetPageDatas", postData)
         .then(value=>{
             this.setState({pageDatas: value.pageDatas});
         });

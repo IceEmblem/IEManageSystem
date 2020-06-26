@@ -42,7 +42,7 @@ class PageData extends React.Component {
 			pageName: this.props.match.params.pageName
 		};
 
-		ieReduxFetch("/api/PageManage/DeletePageData", postData)
+		ieReduxFetch("/api/PageDataManage/DeletePageData", postData)
 			.then(value => {
 				this.setState(value);
 				this.getResourceList(this.state.pageIndex, this.state.pageSize, this.state.searchKey);
@@ -57,7 +57,7 @@ class PageData extends React.Component {
 			}
 		};
 
-		ieReduxFetch("/api/PageManage/AddPageData", postData)
+		ieReduxFetch("/api/PageDataManage/AddPageData", postData)
 			.then(value => {
 				this.setState(value);
 				this.getResourceList(this.state.pageIndex, this.state.pageSize, this.state.searchKey);
@@ -72,7 +72,7 @@ class PageData extends React.Component {
 			}
 		};
 
-		ieReduxFetch("/api/PageManage/UpdatePageData", postData)
+		ieReduxFetch("/api/PageDataManage/UpdatePageData", postData)
 			.then(value => {
 				this.setState(value);
 				this.getResourceList(this.state.pageIndex, this.state.pageSize, this.state.searchKey);
@@ -94,7 +94,7 @@ class PageData extends React.Component {
 			pageName: this.props.match.params.pageName
 		};
 
-		ieReduxFetch("/api/PageQuery/GetPageDatas", postData)
+		ieReduxFetch("/api/PageDataQuery/GetPageDatas", postData)
 			.then(value => {
 				this.setState(value);
 			});
