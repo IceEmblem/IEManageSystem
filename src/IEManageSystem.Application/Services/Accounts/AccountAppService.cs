@@ -3,6 +3,7 @@ using Abp.Application.Services;
 using Abp.Configuration;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
+using Abp.UI;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
 using IEManageSystem.Entitys.Authorization.Users;
 using IEManageSystem.Services.Accounts.Dto;
@@ -56,11 +57,11 @@ namespace IEManageSystem.Services.Accounts
             AbpLoginResult abpLoginResult = await _LoginManager.LoginAsync(input.Username, input.Password, input.TenantId ?? 0);
 
             if (abpLoginResult.Result == AbpLoginResultType.InvalidUserNameOrEmailAddress) {
-                return new LoginOutput() { ErrorMessage = "无效的用户名", AbpLoginResult = abpLoginResult };
+                throw new UserFriendlyException("用户名或密码错误");
             }
 
             if (abpLoginResult.Result == AbpLoginResultType.InvalidPassword) {
-                return new LoginOutput() { ErrorMessage = "无效的密码", AbpLoginResult = abpLoginResult };
+                throw new UserFriendlyException("用户名或密码错误");
             }
 
             return new LoginOutput() { AbpLoginResult = abpLoginResult };

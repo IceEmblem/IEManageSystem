@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.ObjectMapping;
+using Abp.UI;
 using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiAuthorization.DomainModel;
 using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
@@ -41,7 +42,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetApiScopesOutput> GetApiScopes(GetApiScopesInput input)
+        public GetApiScopesOutput GetApiScopes(GetApiScopesInput input)
         {
             return new GetApiScopesOutput() {
                 ApiScopes = _objectMapper.Map<List<ApiScopeDto>>(_apiScopeManager.GetApiScopes().ToList())
@@ -49,7 +50,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetManagePermissionsOutput> GetManagePermissions(GetManagePermissionsInput input)
+        public GetManagePermissionsOutput GetManagePermissions(GetManagePermissionsInput input)
         {
             Expression<Func<ApiScope, object>>[] propertySelectors = new Expression<Func<ApiScope, object>>[] {
                 e => e.ApiManageScope.ApiScopePermissions
@@ -57,7 +58,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
 
             var apiScope = _apiScopeManager.GetApiScopes(propertySelectors).FirstOrDefault(e=>e.Id == input.Id);
             if (apiScope == null) {
-                return new GetManagePermissionsOutput() { ErrorMessage = "未找到Api域" };
+                throw new UserFriendlyException("未找到Api域");
             }
 
             var permissionIds = apiScope.ApiManageScope.ApiScopePermissions.Select(e => e.PermissionId).ToList();
@@ -70,7 +71,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetManagePermissionsByNameOutput> GetManagePermissionsByName(GetManagePermissionsByNameInput input)
+        public GetManagePermissionsByNameOutput GetManagePermissionsByName(GetManagePermissionsByNameInput input)
         {
             Expression<Func<ApiScope, object>>[] propertySelectors = new Expression<Func<ApiScope, object>>[] {
                 e => e.ApiManageScope.ApiScopePermissions
@@ -79,7 +80,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
             var apiScope = _apiScopeManager.GetApiScopes(propertySelectors).FirstOrDefault(e => e.Name == input.Name);
             if (apiScope == null)
             {
-                return new GetManagePermissionsByNameOutput() { ErrorMessage = "未找到Api域" };
+                throw new UserFriendlyException("未找到Api域");
             }
 
             var permissionIds = apiScope.ApiManageScope.ApiScopePermissions.Select(e => e.PermissionId).ToList();
@@ -92,14 +93,14 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
             };
         }
 
-        public async Task<AddManagePermissionOutput> AddManagePermission(AddManagePermissionInput input)
+        public AddManagePermissionOutput AddManagePermission(AddManagePermissionInput input)
         {
             _apiScopeManager.AddManagePermission(input.ApiScopeId, input.PermissionId);
 
             return new AddManagePermissionOutput();
         }
 
-        public async Task<RemoveManagePermissionOutput> RemoveManagePermission(RemoveManagePermissionInput input)
+        public RemoveManagePermissionOutput RemoveManagePermission(RemoveManagePermissionInput input)
         {
             _apiScopeManager.RemoveManagePermission(input.ApiScopeId, input.PermissionId);
 
@@ -107,7 +108,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetQueryPermissionsOutput> GetQueryPermissions(GetQueryPermissionsInput input)
+        public GetQueryPermissionsOutput GetQueryPermissions(GetQueryPermissionsInput input)
         {
             Expression<Func<ApiScope, object>>[] propertySelectors = new Expression<Func<ApiScope, object>>[] {
                 e => e.ApiQueryScope.ApiScopePermissions
@@ -116,7 +117,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
             var apiScope = _apiScopeManager.GetApiScopes(propertySelectors).FirstOrDefault(e => e.Id == input.Id);
             if (apiScope == null)
             {
-                return new GetQueryPermissionsOutput() { ErrorMessage = "未找到Api域" };
+                throw new UserFriendlyException("未找到Api域");
             }
 
             var permissionIds = apiScope.ApiQueryScope.ApiScopePermissions.Select(e => e.PermissionId).ToList();
@@ -130,7 +131,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetQueryPermissionsByNameOutput> GetQueryPermissionsByName(GetQueryPermissionsByNameInput input)
+        public GetQueryPermissionsByNameOutput GetQueryPermissionsByName(GetQueryPermissionsByNameInput input)
         {
             Expression<Func<ApiScope, object>>[] propertySelectors = new Expression<Func<ApiScope, object>>[] {
                 e => e.ApiQueryScope.ApiScopePermissions
@@ -139,7 +140,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
             var apiScope = _apiScopeManager.GetApiScopes(propertySelectors).FirstOrDefault(e => e.Name == input.Name);
             if (apiScope == null)
             {
-                return new GetQueryPermissionsByNameOutput() { ErrorMessage = "未找到Api域" };
+                throw new UserFriendlyException("未找到Api域");
             }
 
             var permissionIds = apiScope.ApiQueryScope.ApiScopePermissions.Select(e => e.PermissionId).ToList();
@@ -152,14 +153,14 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
             };
         }
 
-        public async Task<AddQueryPermissionOutput> AddQueryPermission(AddQueryPermissionInput input)
+        public AddQueryPermissionOutput AddQueryPermission(AddQueryPermissionInput input)
         {
             _apiScopeManager.AddQueryPermission(input.ApiScopeId, input.PermissionId);
 
             return new AddQueryPermissionOutput();
         }
 
-        public async Task<RemoveQueryPermissionOutput> RemoveQueryPermission(RemoveQueryPermissionInput input)
+        public RemoveQueryPermissionOutput RemoveQueryPermission(RemoveQueryPermissionInput input)
         {
             _apiScopeManager.RemoveQueryPermission(input.ApiScopeId, input.PermissionId);
 

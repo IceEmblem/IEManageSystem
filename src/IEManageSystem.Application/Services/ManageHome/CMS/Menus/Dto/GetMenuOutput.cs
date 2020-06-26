@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Menus.Dto
 {
-    public class GetMenuOutput : OutputDtoBase
+    public class GetMenuOutput 
     {
         public MenuDto Menu { get; set; }
     }

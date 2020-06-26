@@ -2,7 +2,7 @@
 
 namespace IEManageSystem.Services.Accounts.Dto
 {
-    public class RegisterOutput: OutputDtoBase
+    public class RegisterOutput
     {
         public bool CanLogin { get; set; }
     }

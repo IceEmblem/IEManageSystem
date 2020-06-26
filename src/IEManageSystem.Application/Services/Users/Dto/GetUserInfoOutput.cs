@@ -7,7 +7,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.Users.Dto
 {
-    public class GetUserInfoOutput: OutputDtoBase
+    public class GetUserInfoOutput
     {
         public UserDto User { get; set; }
     }

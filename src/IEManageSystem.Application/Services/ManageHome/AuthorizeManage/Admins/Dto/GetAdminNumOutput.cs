@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins.Dto
 {
-    public class GetAdminNumOutput:OutputDtoBase
+    public class GetAdminNumOutput
     {
         public int Num { get; set; }
     }

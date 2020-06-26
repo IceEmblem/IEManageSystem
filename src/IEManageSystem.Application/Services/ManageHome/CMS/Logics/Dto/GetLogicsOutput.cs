@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Logics.Dto
 {
-    public class GetLogicsOutput : OutputDtoBase
+    public class GetLogicsOutput 
     {
         public List<LogicDto> Logics { get; set; }
     }

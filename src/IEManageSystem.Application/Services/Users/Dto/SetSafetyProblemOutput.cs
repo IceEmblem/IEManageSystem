@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.Users.Dto
 {
-    public class SetSafetyProblemOutput:OutputDtoBase
+    public class SetSafetyProblemOutput
     {
 
     }

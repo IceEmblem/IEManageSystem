@@ -9,12 +9,12 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Permissions
 {
     public interface IPermissionManageAppService : IApplicationService
     {
-        Task<GetPermissionsOutput> GetPermissions(GetPermissionsInput input);
+        GetPermissionsOutput GetPermissions(GetPermissionsInput input);
 
-        Task<AddPermissionOutput> AddPermission(AddPermissionInput input);
+        AddPermissionOutput AddPermission(AddPermissionInput input);
 
-        Task<DeletePermissionOutput> DeletePermission(DeletePermissionInput input);
+        DeletePermissionOutput DeletePermission(DeletePermissionInput input);
 
-        Task<UpdatePermissionOutput> UpdatePermission(UpdatePermissionInput input);
+        UpdatePermissionOutput UpdatePermission(UpdatePermissionInput input);
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes.Dto
 {
-    public class GetApiScopesOutput:OutputDtoBase
+    public class GetApiScopesOutput
     {
         public List<ApiScopeDto> ApiScopes { get; set; }
     }

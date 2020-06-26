@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
 {
-    public class GetPageDataOutput : OutputDtoBase
+    public class GetPageDataOutput 
     {
         public PageDataDto PageData { get; set; }
 

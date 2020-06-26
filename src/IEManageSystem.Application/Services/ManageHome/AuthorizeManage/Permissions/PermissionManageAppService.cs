@@ -12,6 +12,7 @@ using IEManageSystem.ApiAuthorization;
 using IEManageSystem.Attributes;
 using Abp.ObjectMapping;
 using IEManageSystem.ApiScopeProviders;
+using Abp.UI;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Permissions
 {
@@ -32,7 +33,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Permissions
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetPermissionsOutput> GetPermissions(GetPermissionsInput input)
+        public GetPermissionsOutput GetPermissions(GetPermissionsInput input)
         {
             IEnumerable<Permission> permissions = _permissionManager.PermissionRepository.GetAll().Where(e => (e.Name != null && e.Name.Contains(input.SearchKey)) || string.IsNullOrEmpty(input.SearchKey));
 
@@ -43,7 +44,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Permissions
             return new GetPermissionsOutput() { Permissions = _objectMapper.Map<List<PermissionDto>>(permissions), ResourceNum = num, PageIndex = input.PageIndex };
         }
 
-        public async Task<AddPermissionOutput> AddPermission(AddPermissionInput input)
+        public AddPermissionOutput AddPermission(AddPermissionInput input)
         {
             Permission permission = new Permission(input.Name);
             permission.DisplayName = input.DisplayName;
@@ -53,20 +54,20 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Permissions
             return new AddPermissionOutput();
         }
 
-        public async Task<DeletePermissionOutput> DeletePermission(DeletePermissionInput input)
+        public DeletePermissionOutput DeletePermission(DeletePermissionInput input)
         {
             _permissionManager.Delete(input.Id);
 
             return new DeletePermissionOutput();
         }
 
-        public async Task<UpdatePermissionOutput> UpdatePermission(UpdatePermissionInput input)
+        public UpdatePermissionOutput UpdatePermission(UpdatePermissionInput input)
         {
             Permission permission = _permissionManager.PermissionRepository.FirstOrDefault(input.Id);
 
             if (permission == null)
             {
-                return new UpdatePermissionOutput() { ErrorMessage = "找不到要更新的权限" };
+                throw new UserFriendlyException("找不到要更新的权限");
             }
 
             permission.DisplayName = input.DisplayName;

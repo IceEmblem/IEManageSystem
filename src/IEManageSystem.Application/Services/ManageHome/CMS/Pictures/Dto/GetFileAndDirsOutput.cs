@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Pictures.Dto
 {
-    public class GetFileAndDirsOutput:OutputDtoBase
+    public class GetFileAndDirsOutput
     {
         public List<PictureDto> Pictures { get; set; }
     }

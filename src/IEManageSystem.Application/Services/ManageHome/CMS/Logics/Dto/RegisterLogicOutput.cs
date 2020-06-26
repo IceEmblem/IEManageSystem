@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Logics.Dto
 {
-    public class RegisterLogicOutput : OutputDtoBase
+    public class RegisterLogicOutput 
     {
     }
 }

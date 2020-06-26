@@ -7,7 +7,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins.Dto
 {
-    public class GetAdminsOutput:OutputDtoBase
+    public class GetAdminsOutput
     {
         public List<UserDto> Admins { get; set; }
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.Accounts.Dto
 {
-    public class LoginOutput:OutputDtoBase
+    public class LoginOutput
     {
         public AbpLoginResult AbpLoginResult { get; set; }
     }

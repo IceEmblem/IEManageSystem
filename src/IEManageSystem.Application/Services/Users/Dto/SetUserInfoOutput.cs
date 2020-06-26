@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.Users.Dto
 {
-    public class SetUserInfoOutput:OutputDtoBase
+    public class SetUserInfoOutput
     {
     }
 }
