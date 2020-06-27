@@ -19,8 +19,7 @@ namespace IEManageSystem.Repositorys.CMSRepositorys
 
         public PageBase GetPageOfAllIncludes(string name) {
             PageBase page = Context.Set<ContentPage>()
-                .Include(e => e.ContentPagePermissionCollection).ThenInclude(e=>e.ManagePermissions)
-                .Include(e => e.ContentPagePermissionCollection).ThenInclude(e => e.QueryPermissions)
+                .Include(e => e.ContentPagePermissionCollection).ThenInclude(e => e.ContentPagePermissions)
                 .Include(e => e.PageComponents).ThenInclude(e => e.PageComponentSettings).ThenInclude(e => e.SingleDatas)
                 .FirstOrDefault(e => e.Name == name);
 

@@ -11,30 +11,41 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 {
     public class ContentPagePermissionCollection : Entity
     {
-
-        public ICollection<ContentPagePermission> ManagePermissions { get; set; }
-
         public bool IsEnableQueryPermission { get; set; }
 
-        public ICollection<ContentPagePermission> QueryPermissions { get; set; }
+        public ICollection<ContentPagePermission> ContentPagePermissions { get; set; }
 
         [ForeignKey("ContentPage")]
         public int ContentPageId { get; set; }
 
         public ContentPage ContentPage { get; set; }
-
-        public bool IsCanManagePost(Permission permission) 
+        
+        public bool IsCanManagePost(IEnumerable<Permission> permissions) 
         {
-            return ManagePermissions.Any(e => e.PermissionId == permission.Id);
+            foreach (var item in permissions) {
+                if (ContentPagePermissions.Any(e => e.PermissionId == item.Id && e.IsManage == true)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
-        public bool IsCanQueryPost(Permission permission) 
+        public bool IsCanQueryPost(IEnumerable<Permission> permissions) 
         {
             if (!IsEnableQueryPermission) {
                 return true;
             }
 
-            return ManagePermissions.Any(e => e.PermissionId == permission.Id) || QueryPermissions.Any(e => e.PermissionId == permission.Id);
+            foreach (var item in permissions)
+            {
+                if (ContentPagePermissions.Any(e => e.PermissionId == item.Id))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

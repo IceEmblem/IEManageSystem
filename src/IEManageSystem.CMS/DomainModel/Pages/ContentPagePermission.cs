@@ -13,5 +13,12 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         public int PermissionId { get; set; }
 
         public Permission Permission { get; set; }
+
+        [ForeignKey("ContentPagePermissionCollection")]
+        public int ContentPagePermissionCollectionId { get; set; }
+
+        public ContentPagePermissionCollection ContentPagePermissionCollection { get; set; }
+
+        public bool IsManage { get; set; }
     }
 }

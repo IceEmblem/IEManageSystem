@@ -132,7 +132,7 @@ class PageData extends React.Component {
 				this.setState({
 					resourceNum: value.resourceNum,
 					pageIndex: value.pageIndex,
-					pageSize: value.pageSize,
+					pageSize: pageSize,
 					searchKey: value.searchKey,
 					pageDatas: value.pageDatas.map(item=>{
 						let page = this.state.managePages.find(e=>e.id == item.pageId);
@@ -155,7 +155,7 @@ class PageData extends React.Component {
 
 		let resources;
 		if(this.state.selectPageName && this.state.selectPageName.trim() != ""){
-			resources = this.state.pageDatas.filter(item=>item.pageName == this.state.selectPageName);
+			resources = this.state.pageDatas.filter(item=>item.pageNameLookup == this.state.selectPageName);
 		}
 		else{
 			resources = this.state.pageDatas;

@@ -9,10 +9,8 @@ namespace IEManageSystem.Dtos.CMS
     [AutoMap(typeof(ContentPagePermissionCollection))]
     public class ContentPagePeimissionCollectionDto
     {
-        public List<ContentPagePermissionDto> ManagePermissions { get; set; }
-
         public bool IsEnableQueryPermission { get; set; }
 
-        public List<ContentPagePermissionDto> QueryPermissions { get; set; }
+        public List<ContentPagePermissionDto> ContentPagePermissions { get; set; }
     }
 }

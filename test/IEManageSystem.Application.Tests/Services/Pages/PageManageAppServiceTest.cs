@@ -102,8 +102,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
                 ContentPagePeimissionCollection = new ContentPagePeimissionCollectionDto()
                 {
                     IsEnableQueryPermission = false,
-                    ManagePermissions = new List<ContentPagePermissionDto>(),
-                    QueryPermissions = new List<ContentPagePermissionDto>()
+                    ContentPagePermissions = new List<ContentPagePermissionDto>()
                 }
             });
 
@@ -112,11 +111,9 @@ namespace IEManageSystem.Application.Tests.Services.Pages
 
             var contentPagePeimissionCollection = 
                 dbContext.Set<ContentPage>()
-                    .Include(e=>e.ContentPagePermissionCollection).ThenInclude(e=>e.ManagePermissions)
-                    .Include(e => e.ContentPagePermissionCollection).ThenInclude(e => e.QueryPermissions)
+                    .Include(e => e.ContentPagePermissionCollection).ThenInclude(e => e.ContentPagePermissions)
                     .FirstOrDefault(e => e.Name == "ContentPage1Name").ContentPagePermissionCollection;
-            Assert.True(contentPagePeimissionCollection.ManagePermissions.Count == 0);
-            Assert.True(contentPagePeimissionCollection.QueryPermissions.Count == 0);
+            Assert.True(contentPagePeimissionCollection.ContentPagePermissions.Count == 0);
             Assert.True(contentPagePeimissionCollection.IsEnableQueryPermission == false);
         }
 

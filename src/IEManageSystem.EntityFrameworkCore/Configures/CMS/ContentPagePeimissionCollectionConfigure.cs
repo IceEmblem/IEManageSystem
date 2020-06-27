@@ -11,8 +11,6 @@ namespace IEManageSystem.Configures.CMS
     {
         public void Configure(EntityTypeBuilder<ContentPagePermissionCollection> builder)
         {
-            builder.HasMany(e => e.ManagePermissions).WithOne();
-            builder.HasMany(e => e.QueryPermissions).WithOne();
         }
     }
 }

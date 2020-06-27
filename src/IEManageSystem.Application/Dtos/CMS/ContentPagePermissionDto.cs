@@ -12,5 +12,7 @@ namespace IEManageSystem.Dtos.CMS
         public int Id { get; set; }
 
         public int PermissionId { get; set; }
+
+        public bool IsManage { get; set; }
     }
 }

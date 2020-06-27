@@ -82,7 +82,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         {
             IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
 
-            return PageRepository.GetAll().OfType<ContentPage>().Where(e => e.ContentPagePermissionCollection.ManagePermissions.Any(e => permissionIds.Contains(e.Id)));
+            return PageRepository.GetAll().OfType<ContentPage>().Where(e => e.ContentPagePermissionCollection.ContentPagePermissions.Any(e => e.IsManage && permissionIds.Contains(e.Id)));
         }
 
         /// <summary>
@@ -95,9 +95,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
 
             return PageRepository.GetAll().OfType<ContentPage>().Where(e => 
-                e.ContentPagePermissionCollection.ManagePermissions.Any(e => permissionIds.Contains(e.Id))
-                || e.ContentPagePermissionCollection.IsEnableQueryPermission == false
-                || e.ContentPagePermissionCollection.QueryPermissions.Any(e => permissionIds.Contains(e.Id))
+                e.ContentPagePermissionCollection.IsEnableQueryPermission == false
+                || e.ContentPagePermissionCollection.ContentPagePermissions.Any(e => permissionIds.Contains(e.Id))
             );
         }
 
@@ -114,12 +113,10 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             }
 
             var contentPage = (ContentPage)page;
-            foreach (var item in permissions) {
-                if (contentPage.ContentPagePermissionCollection.IsCanQueryPost(item)) 
-                {
-                    return true;
-                }
-            };
+            if (contentPage.ContentPagePermissionCollection.IsCanQueryPost(permissions))
+            {
+                return true;
+            }
 
             return false;
         }
@@ -140,13 +137,10 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             }
 
             var contentPage = (ContentPage)page;
-            foreach (var item in permissions)
+            if (contentPage.ContentPagePermissionCollection.IsCanManagePost(permissions))
             {
-                if (contentPage.ContentPagePermissionCollection.IsCanManagePost(item))
-                {
-                    return true;
-                }
-            };
+                return true;
+            }
 
             return false;
         }

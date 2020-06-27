@@ -3448,13 +3448,11 @@
                 }
             ],
             "contentPagePeimissionCollection": {
-                "managePermissions": [
-                    {"permissionId": 1}
+                "contentPagePermissions": [
+                    {"permissionId": 1, "isManage": true},
+                    {"permissionId": 1, "isManage": false}
                 ],
-                "isEnableQueryPermission": false,
-                "queryPermissions": [
-                    {"permissionId": 1}
-                ]
+                "isEnableQueryPermission": false
             }
         },
         "defaultComponentDatas": [

@@ -7,7 +7,7 @@ export default class PostPermissionEdit extends React.Component {
     state = {
         page: null,
         contentPagePeimissionCollection: {
-            managePermissions: [],
+            contentPagePermissions: [],
             isEnableQueryPermission: false,
             queryPermissions: []
         },
@@ -49,7 +49,7 @@ export default class PostPermissionEdit extends React.Component {
         });
     }
 
-    updatePagePeimission(){
+    updatePagePeimission() {
         ieReduxFetch("/api/PageManage/UpdateContentPagePermission", {
             name: this.props.pageName,
             contentPagePeimissionCollection: this.state.contentPagePeimissionCollection
@@ -59,12 +59,6 @@ export default class PostPermissionEdit extends React.Component {
     }
 
     render() {
-        let managePermissions = [];
-        let queryPermissions = [];
-        if (this.state.contentPagePeimissionCollection) {
-            managePermissions = this.state.contentPagePeimissionCollection.managePermissions.map(item => item.id);
-            queryPermissions = this.state.contentPagePeimissionCollection.queryPermissions.map(item => item.id);
-        }
 
         return (<Modal
             title={`${this.state.page ? this.state.page.name : ""} 信息`}
@@ -75,9 +69,13 @@ export default class PostPermissionEdit extends React.Component {
             <Card className="mb-3" bordered={false} title={<h6>文章管理权限<small className="ml-3">能够发表，修改，删除文章</small></h6>}>
                 <Checkbox.Group
                     options={this.state.permissionOptions}
-                    value={this.state.contentPagePeimissionCollection.managePermissions.map(item => item.permissionId)}
+                    value={this.state.contentPagePeimissionCollection.contentPagePermissions.filter(item => item.isManage).map(item=>item.permissionId)}
                     onChange={(values) => {
-                        this.state.contentPagePeimissionCollection.managePermissions = values.map(item => ({ permissionId: item }))
+                        this.state.contentPagePeimissionCollection.contentPagePermissions =
+                            this.state.contentPagePeimissionCollection.contentPagePermissions.filter(item => item.isManage == false);
+                        values.forEach(item => {
+                            this.state.contentPagePeimissionCollection.contentPagePermissions.push({ permissionId: item, isManage: true });
+                        });
                         this.setState({});
                     }}
                 ></Checkbox.Group>
@@ -97,9 +95,13 @@ export default class PostPermissionEdit extends React.Component {
                 <div>
                     <Checkbox.Group
                         options={this.state.permissionOptions}
-                        value={this.state.contentPagePeimissionCollection.queryPermissions.map(item => item.permissionId)}
+                        value={this.state.contentPagePeimissionCollection.contentPagePermissions.filter(item => !item.isManage).map(item=>item.permissionId)}
                         onChange={(values) => {
-                            this.state.contentPagePeimissionCollection.queryPermissions = values.map(item => ({ permissionId: item }))
+                            this.state.contentPagePeimissionCollection.contentPagePermissions =
+                                this.state.contentPagePeimissionCollection.contentPagePermissions.filter(item => item.isManage == true);
+                            values.forEach(item => {
+                                this.state.contentPagePeimissionCollection.contentPagePermissions.push({ permissionId: item, isManage: false });
+                            });
                             this.setState({});
                         }}
                     ></Checkbox.Group>

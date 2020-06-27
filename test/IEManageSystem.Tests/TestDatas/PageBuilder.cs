@@ -51,12 +51,10 @@ namespace IEManageSystem.Tests.TestDatas
                     }
                 },
                 ContentPagePermissionCollection = new ContentPagePermissionCollection() { 
-                    ManagePermissions = new List<ContentPagePermission>() { 
-                        new ContentPagePermission(){ Permission = permission }
-                    },
                     IsEnableQueryPermission = true,
-                    QueryPermissions = new List<ContentPagePermission>() {
-                        new ContentPagePermission(){ Permission = permission }
+                    ContentPagePermissions = new List<ContentPagePermission>() {
+                        new ContentPagePermission(){ Permission = permission, IsManage = false },
+                        new ContentPagePermission(){ Permission = permission, IsManage = true }
                     },
                 }
             };
