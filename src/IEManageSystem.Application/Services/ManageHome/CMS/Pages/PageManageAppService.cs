@@ -76,13 +76,15 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public UpdateContentPagePermissionOutput UpdateContentPagePermission(UpdateContentPagePermissionInput input) 
         {
-            ContentPagePeimissionCollection contentPagePeimissionCollection = new ContentPagePeimissionCollection();
+            ContentPagePermissionCollection contentPagePeimissionCollection = new ContentPagePermissionCollection();
+            contentPagePeimissionCollection.ManagePermissions = new List<ContentPagePermission>();
             foreach (var item in input.ContentPagePeimissionCollection.ManagePermissions) {
                 contentPagePeimissionCollection.ManagePermissions.Add(new ContentPagePermission() { 
                     PermissionId = item.PermissionId
                 });
             }
             contentPagePeimissionCollection.IsEnableQueryPermission = input.ContentPagePeimissionCollection.IsEnableQueryPermission;
+            contentPagePeimissionCollection.QueryPermissions = new List<ContentPagePermission>();
             foreach (var item in input.ContentPagePeimissionCollection.QueryPermissions)
             {
                 contentPagePeimissionCollection.QueryPermissions.Add(new ContentPagePermission()

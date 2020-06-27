@@ -4,6 +4,7 @@ import FormRadio from './FormRadio.jsx';
 import FormCheck from './FormCheck.jsx';
 import TextGroup from './TextGroup.jsx';
 import Text from './Text.jsx';
+import FormSelect from './FormSelect'
 import './ResourceForm.css'
 
 import { Modal, Button, Card } from 'antd';
@@ -102,17 +103,26 @@ export default class ResourceForm extends React.Component {
 
         if (describe.valueType === ResourceDescribeValueType.check) {
             return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
-                <div className="card">
-                    <div className="card-header bg-secondary text-white">{describe.text}</div>
-                    <div className="card-body">
-                        <FormCheck
-                            name={describe.name}
-                            values={describe.valueTexts}
-                            isEdit={describe.isEdit}
-                            selectValues={this.resource[describe.name]}
-                            onChange={(name, selectValues) => { this.resource[describe.name] = selectValues; this.setState({}) }} />
-                    </div>
-                </div>
+                <Card size="small" title={describe.text}>
+                    <FormCheck
+                        name={describe.name}
+                        values={describe.valueTexts}
+                        isEdit={describe.isEdit}
+                        selectValues={this.resource[describe.name]}
+                        onChange={(name, selectValues) => { this.resource[describe.name] = selectValues; this.setState({}) }} />
+                </Card>
+            </div>);
+        }
+
+        if (describe.valueType === ResourceDescribeValueType.select) {
+            return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
+                <FormSelect
+                    title={describe.text}
+                    name={describe.name}
+                    values={describe.valueTexts}
+                    isEdit={describe.isEdit}
+                    selectValue={this.resource[describe.name]}
+                    onChange={(name, selectValue) => { this.resource[describe.name] = selectValue; this.setState({}) }} />
             </div>);
         }
 
@@ -131,7 +141,7 @@ export default class ResourceForm extends React.Component {
             footer={false}
             onCancel={this.props.close}
         >
-            <div className="w-100" style={{display:"inline-block"}}>
+            <div className="w-100" style={{ display: "inline-block" }}>
                 {elements}
             </div>
             <div className="modal-footer mt-3">

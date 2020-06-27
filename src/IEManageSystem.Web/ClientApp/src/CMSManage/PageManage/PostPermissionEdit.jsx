@@ -27,18 +27,20 @@ export default class PostPermissionEdit extends React.Component {
             this.setState({ permissionOptions: value.permissions.map(item => ({ label: item.displayName, value: item.id })) });
         });
 
-        this.getPage();
+        if (this.props.show) {
+            this.getPage(this.props);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.show) {
-            this.getPage();
+            this.getPage(nextProps);
         }
     }
 
-    getPage() {
+    getPage(props) {
         ieReduxFetch("/api/PageQuery/GetPage", {
-            name: this.props.pageName
+            name: props.pageName
         }).then(value => {
             this.setState({
                 page: value.page,
@@ -48,7 +50,7 @@ export default class PostPermissionEdit extends React.Component {
     }
 
     updatePagePeimission(){
-        ieReduxFetch("/api/PageQuery/GetPage", {
+        ieReduxFetch("/api/PageManage/UpdateContentPagePermission", {
             name: this.props.pageName,
             contentPagePeimissionCollection: this.state.contentPagePeimissionCollection
         }).then(value => {
@@ -86,9 +88,9 @@ export default class PostPermissionEdit extends React.Component {
                     <Switch
                         checkedChildren={<CheckOutlined />}
                         unCheckedChildren={<CloseOutlined />}
-                        checked={this.state.contentPagePeimissionCollection.IsEnableQueryPermission}
+                        checked={this.state.contentPagePeimissionCollection.isEnableQueryPermission}
                         onChange={(checked) => {
-                            this.state.contentPagePeimissionCollection.IsEnableQueryPermission = checked;
+                            this.state.contentPagePeimissionCollection.isEnableQueryPermission = checked;
                             this.setState({});
                         }} />
                 </div>

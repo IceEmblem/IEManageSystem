@@ -7,6 +7,7 @@ import './SideNav.css'
 
 import RootRedux from 'Core/IEReduxs/RootRedux';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
+import { createTopLevelMenusFetch } from 'Core/IEReduxs/Actions'
 
 class SideNav extends React.Component {
     // props.selectTopMenu
@@ -18,8 +19,11 @@ class SideNav extends React.Component {
             userName: null,              // 用户名称
             headSculpture: "",
         };
+    }
 
+    componentDidMount(){
         this.getUserName();
+        this.props.createTopLevelMenusFetch();
     }
 
     // 获取用户名称
@@ -67,9 +71,9 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    // return {
-    //     sideMenuSelect: (menu) => dispatch(sideMenuSelect(menu))
-    // }
+    return {
+        createTopLevelMenusFetch: () => dispatch(createTopLevelMenusFetch())
+    }
 }
 
 const SideNavContain = RootRedux.connect(

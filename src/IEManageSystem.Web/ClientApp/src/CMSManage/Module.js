@@ -21,7 +21,8 @@ import {
     FileOutlined,
     FileImageOutlined,
     ForkOutlined,
-    AppstoreOutlined
+    AppstoreOutlined,
+    FileTextOutlined
 } from '@ant-design/icons';
 
 export default class Module extends BaseModule {
@@ -49,6 +50,17 @@ export default class Module extends BaseModule {
                         text: "页面管理",
                         icon: FileOutlined,
                         url: "/ManageHome/CMSManage/PageManage",
+                        accessScope:
+                            [
+                                AccessScope.Page(ApiScopeNodeType.manage)
+                            ]
+                    },
+                    {
+
+                        id: "PageData",
+                        text: "文章管理",
+                        icon: FileTextOutlined,
+                        url: "/ManageHome/CMSManage/PageData",
                         accessScope:
                             [
                                 AccessScope.Page(ApiScopeNodeType.manage)

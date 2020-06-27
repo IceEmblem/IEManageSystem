@@ -20,6 +20,7 @@ export default class ResourceList extends React.Component {
     // props.resourceLookupClick()
     // props.hideEdit
     // props.hideDelete
+    // props.hideLookup
     // props.customizeOperateBtns	自定义操作按钮组件
     constructor(props) {
         super(props);
@@ -78,6 +79,22 @@ export default class ResourceList extends React.Component {
             return texts;
         }
 
+        if (describe.valueType === ResourceDescribeValueType.select) {
+            let valueTexts = describe.valueTexts;
+            if (valueTexts === undefined) {
+                texts.push(resource[describe.name]);
+            }
+            else {
+                let value = resource[describe.name];
+
+                valueTexts.map(valueText => {
+                    if (valueText.value === value)
+                        texts.push(valueText.text);
+                });
+            }
+            return texts;
+        }
+
         return texts;
     }
 
@@ -102,13 +119,21 @@ export default class ResourceList extends React.Component {
             {resourceBodyTds}
             <td>
                 <div className="btn-group btn-group-sm">
-                    <Button className="mr-1" size="small" icon={<ZoomInOutlined />} type="primary" ghost onClick={() => this.props.resourceLookupClick(resource)}>查看</Button>
+                    {this.props.hideLookup != true &&
+                        <Button className="mr-1" size="small" icon={<ZoomInOutlined />} type="primary" ghost onClick={() => this.props.resourceLookupClick(resource)}>查看</Button>}
                     {this.props.hideEdit != true &&
                         <Button className="mr-1" size="small" icon={<EditOutlined />} type="primary" onClick={() => this.props.resourceEditClick(resource)}>编辑</Button>}
-                    {this.props.hideDelete != true && 
+                    {this.props.hideDelete != true &&
                         <Button className="mr-1" size="small" icon={<DeleteOutlined />} type="primary" danger onClick={() => this.props.resourceDeleteClick(resource)}> 删除 </Button>}
                     {this.props.customizeOperateBtns && this.props.customizeOperateBtns.map(
-                        (Item, index) => <Item key={index} resource={resource}></Item>
+                        (Item, index) => (
+                            <Item key={index} 
+                                resource={resource}
+                                resourceLookupClick={() => this.props.resourceLookupClick(resource)}
+                                resourceEditClick={() => this.props.resourceEditClick(resource)}
+                                resourceDeleteClick={() => this.props.resourceDeleteClick(resource)}
+                            />
+                        )
                     )}
                 </div>
             </td>

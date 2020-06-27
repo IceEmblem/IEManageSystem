@@ -73,9 +73,15 @@ namespace IEManageSystem.EntityFrameworkCore
 
         public DbSet<PageBase> Pages { get; set; }
 
+        public DbSet<StaticPage> StaticPages { get; set; }
+
+        public DbSet<ContentPage> ContentPages { get; set; }
+
         public DbSet<MenuBase> Menus { get; set; }
 
         public DbSet<PageData> PageDatas { get; set; }
+
+        public DbSet<ComponentData> ComponentDatas { get; set; }
 
         public DbSet<ContentComponentData> ContentComponentDatas { get; set; }
 

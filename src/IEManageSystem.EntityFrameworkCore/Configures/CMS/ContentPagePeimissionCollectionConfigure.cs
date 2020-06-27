@@ -7,12 +7,12 @@ using System.Text;
 
 namespace IEManageSystem.Configures.CMS
 {
-    public class ContentPagePeimissionCollectionConfigure : IEntityTypeConfiguration<ContentPagePeimissionCollection>
+    public class ContentPagePeimissionCollectionConfigure : IEntityTypeConfiguration<ContentPagePermissionCollection>
     {
-        public void Configure(EntityTypeBuilder<ContentPagePeimissionCollection> builder)
+        public void Configure(EntityTypeBuilder<ContentPagePermissionCollection> builder)
         {
-            builder.HasMany(e => e.ManagePermissions).WithOne().IsRequired();
-            builder.HasMany(e => e.QueryPermissions).WithOne().IsRequired();
+            builder.HasMany(e => e.ManagePermissions).WithOne();
+            builder.HasMany(e => e.QueryPermissions).WithOne();
         }
     }
 }

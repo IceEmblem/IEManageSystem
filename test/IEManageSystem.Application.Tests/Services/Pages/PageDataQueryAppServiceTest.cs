@@ -28,7 +28,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             {
                 PageIndex = 1,
                 PageSize = 10,
-                PageName = "ContentPage1Name"
+                EnablePageFilter = false,
             });
 
             Assert.True(output.PageDatas.Count > 0);

@@ -50,7 +50,7 @@ namespace IEManageSystem.Tests.TestDatas
                         Sign = "ContentPage1_Component3Sign"
                     }
                 },
-                ContentPagePeimissionCollection = new ContentPagePeimissionCollection() { 
+                ContentPagePermissionCollection = new ContentPagePermissionCollection() { 
                     ManagePermissions = new List<ContentPagePermission>() { 
                         new ContentPagePermission(){ Permission = permission }
                     },

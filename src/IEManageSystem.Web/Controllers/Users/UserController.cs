@@ -13,6 +13,7 @@ using IEManageSystem.Services.Users;
 using IEManageSystem.Services.Users.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IEManageSystem.Web.Controllers.Users
 {
@@ -39,7 +40,7 @@ namespace IEManageSystem.Web.Controllers.Users
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<GetUserScopeAccessAuthoritiesOutput>> GetUserScopeAccessAuthorities([FromBody]GetUserScopeAccessAuthoritiesInput input)
+        public ActionResult<GetUserScopeAccessAuthoritiesOutput> GetUserScopeAccessAuthorities([FromBody]GetUserScopeAccessAuthoritiesInput input)
         {
             IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
 

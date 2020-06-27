@@ -124,7 +124,7 @@ namespace IEManageSystem.Migrations
 
                     b.HasIndex("Sign");
 
-                    b.ToTable("ComponentData");
+                    b.ToTable("ComponentDatas");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("ComponentData");
                 });
@@ -257,7 +257,34 @@ namespace IEManageSystem.Migrations
                     b.ToTable("PageDatas");
                 });
 
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.ContentPagePeimissionCollection", b =>
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.ContentPagePermission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ContentPagePermissionCollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ContentPagePermissionCollectionId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContentPagePermissionCollectionId");
+
+                    b.HasIndex("ContentPagePermissionCollectionId1");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("ContentPagePermission");
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.ContentPagePermissionCollection", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -275,34 +302,7 @@ namespace IEManageSystem.Migrations
                     b.HasIndex("ContentPageId")
                         .IsUnique();
 
-                    b.ToTable("ContentPagePeimissionCollection");
-                });
-
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.ContentPagePermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ContentPagePeimissionCollectionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ContentPagePeimissionCollectionId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContentPagePeimissionCollectionId");
-
-                    b.HasIndex("ContentPagePeimissionCollectionId1");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("ContentPagePermission");
+                    b.ToTable("ContentPagePermissionCollection");
                 });
 
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.PageBase", b =>
@@ -872,32 +872,28 @@ namespace IEManageSystem.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.ContentPagePeimissionCollection", b =>
-                {
-                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.ContentPage", "ContentPage")
-                        .WithOne("ContentPagePeimissionCollection")
-                        .HasForeignKey("IEManageSystem.CMS.DomainModel.Pages.ContentPagePeimissionCollection", "ContentPageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.ContentPagePermission", b =>
                 {
-                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.ContentPagePeimissionCollection", null)
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.ContentPagePermissionCollection", null)
                         .WithMany("ManagePermissions")
-                        .HasForeignKey("ContentPagePeimissionCollectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ContentPagePermissionCollectionId");
 
-                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.ContentPagePeimissionCollection", null)
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.ContentPagePermissionCollection", null)
                         .WithMany("QueryPermissions")
-                        .HasForeignKey("ContentPagePeimissionCollectionId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ContentPagePermissionCollectionId1");
 
                     b.HasOne("IEManageSystem.Entitys.Authorization.Permissions.Permission", "Permission")
                         .WithMany()
                         .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("IEManageSystem.CMS.DomainModel.Pages.ContentPagePermissionCollection", b =>
+                {
+                    b.HasOne("IEManageSystem.CMS.DomainModel.Pages.ContentPage", "ContentPage")
+                        .WithOne("ContentPagePermissionCollection")
+                        .HasForeignKey("IEManageSystem.CMS.DomainModel.Pages.ContentPagePermissionCollection", "ContentPageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

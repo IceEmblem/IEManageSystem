@@ -64,8 +64,7 @@ namespace IEManageSystem.Entitys.Authorization
 
                     _permissionManager.Create(userPermission);
 
-
-                    _unitOfWorkManager.Current.SaveChangesAsync();
+                    _unitOfWorkManager.Current.SaveChanges();
 
 
                     var superAdminRole = Role.SuperAdmin;
@@ -88,19 +87,21 @@ namespace IEManageSystem.Entitys.Authorization
 
                     _roleManager.AddPermission(userRole, userPermission);
 
-
-                    _unitOfWorkManager.Current.SaveChangesAsync();
+                    _unitOfWorkManager.Current.SaveChanges();
 
 
                     User superAdmin = _userManager.CreateUser("SuperAdmin", "123456", "超级管理员").Result;
 
                     _userManager.AddUserRole(superAdmin, superAdminRole);
 
+                    _unitOfWorkManager.Current.SaveChanges();
+
                     unitOfWork.Complete();
                 }
                 catch(Exception ex)
                 {
                     Logger.Error(ex.Message);
+                    throw ex;
                 }
             }
         }

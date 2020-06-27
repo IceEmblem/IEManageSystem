@@ -18,11 +18,17 @@ namespace IEManageSystem.Repositorys.CMSRepositorys
         }
 
         public PageBase GetPageOfAllIncludes(string name) {
-            var page = Context.Set<ContentPage>()
-                .Include(e => e.ContentPagePeimissionCollection).ThenInclude(e=>e.ManagePermissions)
-                .Include(e => e.ContentPagePeimissionCollection).ThenInclude(e => e.QueryPermissions)
+            PageBase page = Context.Set<ContentPage>()
+                .Include(e => e.ContentPagePermissionCollection).ThenInclude(e=>e.ManagePermissions)
+                .Include(e => e.ContentPagePermissionCollection).ThenInclude(e => e.QueryPermissions)
                 .Include(e => e.PageComponents).ThenInclude(e => e.PageComponentSettings).ThenInclude(e => e.SingleDatas)
                 .FirstOrDefault(e => e.Name == name);
+
+            if (page == null) {
+                page = Context.Set<StaticPage>()
+                .Include(e => e.PageComponents).ThenInclude(e => e.PageComponentSettings).ThenInclude(e => e.SingleDatas)
+                .FirstOrDefault(e => e.Name == name);
+            }
 
             return page;
         }

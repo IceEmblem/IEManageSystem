@@ -82,7 +82,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         {
             IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
 
-            return PageRepository.GetAll().OfType<ContentPage>().Where(e => e.ContentPagePeimissionCollection.ManagePermissions.Any(e => permissionIds.Contains(e.Id)));
+            return PageRepository.GetAll().OfType<ContentPage>().Where(e => e.ContentPagePermissionCollection.ManagePermissions.Any(e => permissionIds.Contains(e.Id)));
         }
 
         /// <summary>
@@ -95,9 +95,9 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
 
             return PageRepository.GetAll().OfType<ContentPage>().Where(e => 
-                e.ContentPagePeimissionCollection.ManagePermissions.Any(e => permissionIds.Contains(e.Id))
-                || e.ContentPagePeimissionCollection.IsEnableQueryPermission == false
-                || e.ContentPagePeimissionCollection.QueryPermissions.Any(e => permissionIds.Contains(e.Id))
+                e.ContentPagePermissionCollection.ManagePermissions.Any(e => permissionIds.Contains(e.Id))
+                || e.ContentPagePermissionCollection.IsEnableQueryPermission == false
+                || e.ContentPagePermissionCollection.QueryPermissions.Any(e => permissionIds.Contains(e.Id))
             );
         }
 
@@ -115,7 +115,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
             var contentPage = (ContentPage)page;
             foreach (var item in permissions) {
-                if (contentPage.ContentPagePeimissionCollection.IsCanQueryPost(item)) 
+                if (contentPage.ContentPagePermissionCollection.IsCanQueryPost(item)) 
                 {
                     return true;
                 }
@@ -142,7 +142,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             var contentPage = (ContentPage)page;
             foreach (var item in permissions)
             {
-                if (contentPage.ContentPagePeimissionCollection.IsCanManagePost(item))
+                if (contentPage.ContentPagePermissionCollection.IsCanManagePost(item))
                 {
                     return true;
                 }
@@ -168,7 +168,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             SetPageInvalidForCache(page.Name);
         }
 
-        public void UpdateContentPagePermission(string name, ContentPagePeimissionCollection contentPagePeimissionCollection) 
+        public void UpdateContentPagePermission(string name, ContentPagePermissionCollection contentPagePeimissionCollection) 
         {
             var page = PageRepository.GetPageOfAllIncludes(name);
 
@@ -183,7 +183,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             }
 
             var contentPage = (ContentPage)page;
-            contentPage.ContentPagePeimissionCollection = contentPagePeimissionCollection;
+            contentPage.ContentPagePermissionCollection = contentPagePeimissionCollection;
 
             SetPageInvalidForCache(page.Name);
         }

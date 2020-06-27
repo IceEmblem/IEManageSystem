@@ -34,7 +34,7 @@ export function reducer(
         // 类型 FetchData
         fecths: [],
         // 后台菜单
-        topLevelMenus: undefined,
+        topLevelMenus: new MenuProvider().getTopLevelMenus(null),
         // 站点设置
         siteSettings: undefined
     }, action: any) {

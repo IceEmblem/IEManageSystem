@@ -32,6 +32,7 @@ export default class Resource extends React.Component {
 	// props.hideAdd = false
 	// props.hideEdit = false
 	// props.hideDelete = false
+	// props.hideLookup = false
 	// props.hidePadding = false
 	constructor(props) {
 		super(props);
@@ -114,6 +115,7 @@ export default class Resource extends React.Component {
 			resourceLookupClick={resource => this._resourceOperationClick(operationState.lookup, resource)}
 			hideEdit={this.props.hideEdit}
 			hideDelete={this.props.hideDelete}
+			hideLookup={this.props.hideLookup}
 			customizeOperateBtns={this.props.customizeOperateBtns}
 		/>;
 

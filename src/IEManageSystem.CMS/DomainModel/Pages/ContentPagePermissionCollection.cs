@@ -9,7 +9,7 @@ using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.Pages
 {
-    public class ContentPagePeimissionCollection : Entity
+    public class ContentPagePermissionCollection : Entity
     {
 
         public ICollection<ContentPagePermission> ManagePermissions { get; set; }
@@ -18,9 +18,9 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public ICollection<ContentPagePermission> QueryPermissions { get; set; }
 
+        [ForeignKey("ContentPage")]
         public int ContentPageId { get; set; }
 
-        [ForeignKey("ContentPageId")]
         public ContentPage ContentPage { get; set; }
 
         public bool IsCanManagePost(Permission permission) 

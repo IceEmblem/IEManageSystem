@@ -120,8 +120,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
                 var contentPage = (ContentPage)page;
                 pageDto.ContentPagePeimissionCollection =
-                    pageDto.ContentPagePeimissionCollection != null ? 
-                        _objectMapper.Map<ContentPagePeimissionCollectionDto>(contentPage.ContentPagePeimissionCollection)
+                    contentPage.ContentPagePermissionCollection != null ? 
+                        _objectMapper.Map<ContentPagePeimissionCollectionDto>(contentPage.ContentPagePermissionCollection)
                         : null;
             }
 

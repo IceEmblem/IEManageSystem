@@ -4,12 +4,14 @@
             {
                 "id": 1,
                 "name": "post",
-                "title": "文章1"
+                "title": "文章1",
+                "pageId": 2
             },
             {
                 "id": 2,
                 "name": "post",
-                "title": "文章2"
+                "title": "文章2",
+                "pageId": 3
             }
         ],
         "resourceNum": 10,
@@ -19,8 +21,27 @@
         "pageData": {
             "id": 1,
             "name": "post",
-            "title": "文章1"
+            "title": "文章1",
+            "pageId": 2
         },
         "contentComponentDatas": []
+    },
+    "GetPagesOfUserCanAccessPost": {
+        "pages": [
+            {
+                "id": 2,
+                "name": "Post",
+                "displayName": "文章",
+                "description": "这是一个文章页",
+                "pageType": "ContentPage"
+            },
+            {
+                "id": 3,
+                "name": "Post3",
+                "displayName": "文章3",
+                "description": "这是一个文章页",
+                "pageType": "ContentPage"
+            }
+        ]
     }
 }

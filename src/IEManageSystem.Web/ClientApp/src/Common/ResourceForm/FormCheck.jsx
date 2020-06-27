@@ -22,7 +22,7 @@ export default class FormCheck extends React.Component {
 	render() {
 		return (<CheckboxGroup
 			disabled={this.props.isEdit}
-			options={this.props.values}
+			options={this.props.values.map(item=>({label: item.text, value: item.value}))}
 			value={this.props.selectValues}
 			onChange={this.onChange}
 		/>);

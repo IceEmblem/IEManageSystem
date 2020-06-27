@@ -1,4 +1,5 @@
-﻿using Abp.Modules;
+﻿using Abp.Domain.Uow;
+using Abp.Modules;
 using Abp.Reflection.Extensions;
 using IEManageSystem.Entitys.Authorization;
 using IEManageSystem.Localization;
@@ -21,9 +22,17 @@ namespace IEManageSystem
 
         public override void PostInitialize()
         {
-            InitializeSuperAdmin initializeSuperAdmin = IocManager.Resolve<InitializeSuperAdmin>();
+            IUnitOfWorkManager unitOfWorkManager = IocManager.Resolve<IUnitOfWorkManager>();
 
-            initializeSuperAdmin.Initialize();
+            using (var unitOfWork = unitOfWorkManager.Begin())
+            {
+                // 动态添加Api域
+                IocManager.Resolve<InitializeSuperAdmin>().Initialize();
+
+                unitOfWorkManager.Current.SaveChanges();
+
+                unitOfWork.Complete();
+            }
         }
     }
 }

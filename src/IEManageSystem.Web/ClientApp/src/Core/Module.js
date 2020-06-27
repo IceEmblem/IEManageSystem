@@ -16,7 +16,7 @@ export default class Module extends BaseModule
 
     postInitialize(){
         createIEStore();
-        getIEStore().dispatch(createTopLevelMenusFetch());
+        // getIEStore().dispatch(createTopLevelMenusFetch());
         getIEStore().dispatch(getSiteSettingsFetch());
     }
 }

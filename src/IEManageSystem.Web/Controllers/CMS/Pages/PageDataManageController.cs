@@ -58,7 +58,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
                 _checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions);
         }
 
-        public ActionResult<AddPageDataOutput> AddPageData(AddPageDataInput input)
+        [HttpPost]
+        public ActionResult<AddPageDataOutput> AddPageData([FromBody] AddPageDataInput input)
         {
             if (!IsCanAccess(input.PageName))
             {
@@ -68,7 +69,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             return _pageDataManageAppService.AddPageData(input);
         }
 
-        public ActionResult<UpdatePageDataOutput> UpdatePageData(UpdatePageDataInput input)
+        [HttpPost]
+        public ActionResult<UpdatePageDataOutput> UpdatePageData([FromBody] UpdatePageDataInput input)
         {
             if (!IsCanAccess(input.PageName))
             {
@@ -78,7 +80,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             return _pageDataManageAppService.UpdatePageData(input);
         }
 
-        public ActionResult<DeletePageDataOutput> DeletePageData(DeletePageDataInput input)
+        [HttpPost]
+        public ActionResult<DeletePageDataOutput> DeletePageData([FromBody] DeletePageDataInput input)
         {
             if (!IsCanAccess(input.PageName))
             {
@@ -88,7 +91,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             return _pageDataManageAppService.DeletePageData(input);
         }
 
-        public ActionResult<UpdateComponentDataOutput> UpdateComponentData(UpdateComponentDataInput input)
+        [HttpPost]
+        public ActionResult<UpdateComponentDataOutput> UpdateComponentData([FromBody] UpdateComponentDataInput input)
         {
             if (!IsCanAccess(input.PageName))
             {

@@ -42,20 +42,27 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         /// <returns></returns>
         public GetPageDatasOutput GetPageDatas(GetPageDatasInput input)
         {
-            List<PageData> pageDatas = null;
-            if (!string.IsNullOrWhiteSpace(input.PageName))
+            IEnumerable<PageData> pageDatas = null;
+            if (input.EnablePageFilter)
             {
-                pageDatas = _pageDataManager.PostRepository.GetAllList(e => e.Page.Name == input.PageName);
+                pageDatas = _pageDataManager.PostRepository.GetAll().Where(e => input.PageIds.Contains(e.PageId));
             }
             else
             {
-                pageDatas = _pageDataManager.PostRepository.GetAllList(e => e.Page.Id == input.Id);
+                pageDatas = _pageDataManager.PostRepository.GetAll();
             }
+
+            if (!string.IsNullOrWhiteSpace(input.SearchKey)) {
+                pageDatas = pageDatas.Where(e => e.Title.Contains(input.SearchKey));
+            }
+            
+            int num = pageDatas.Count();
+            pageDatas = pageDatas.OrderByDescending(e => e.Id).Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
 
             return new GetPageDatasOutput()
             {
                 PageDatas = _objectMapper.Map<List<PageDataDto>>(pageDatas),
-                ResourceNum = pageDatas.Count,
+                ResourceNum = num,
                 PageIndex = input.PageIndex
             };
         }

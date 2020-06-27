@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
+namespace IEManageSystem.Web.Controllers.CMS.Pages.Dto
 {
     public class GetPageDatasInput
     {
@@ -15,8 +16,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
 
         public string SearchKey { get; set; }
 
-        public bool EnablePageFilter { get; set; }
-
-        public List<int> PageIds { get; set; }
+        // 可通过页面名称或页面Id查找页面文章
+        public string PageName { get; set; }
     }
 }

@@ -22,7 +22,7 @@ export default class CMSManage extends React.Component{
                 <Route path="/ManageHome/CMSManage/Menu/:menuName" component={Menu} />
                 <Route path="/ManageHome/CMSManage/MenuListManage" component={MenuListManage} />
                 <Route path="/ManageHome/CMSManage/PageManage" component={PageManage} />
-                <Route path="/ManageHome/CMSManage/PageData/:pageName" component={PageData} />
+                <Route path="/ManageHome/CMSManage/PageData/:pageName?" component={PageData} />
                 <Route path="/ManageHome/CMSManage/PictureManage" component={PictureManage} />
                 <Route path="/ManageHome/CMSManage/LogicManage" component={LogicManage} />
                 <Route path="/ManageHome/CMSManage/TemplateManage" component={TemplateManage} />
