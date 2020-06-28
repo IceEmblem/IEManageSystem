@@ -16,6 +16,12 @@ namespace IEManageSystem.Dtos.CMS
 
         public string Title { get; set; }
 
+        public string Content { get; set; }
+
+        public string Tags { get; set; }
+
+        public string Images { get; set; }
+
         public int PageId { get; set; }
     }
 }

@@ -12,7 +12,7 @@ export default class Text extends React.Component {
 
     render() {
         return (
-            <div className={"input-group mb-3"}>
+            <div className={"input-group"}>
                 <Input placeholder={`输入${this.props.title}`} prefix={<Tag style={{width:"80px"}} className="text-right" color="#55acee">{this.props.title}</Tag>} 
                     disabled={!this.props.isEdit}
                     value={this.props.value == null ? "" : this.props.value}

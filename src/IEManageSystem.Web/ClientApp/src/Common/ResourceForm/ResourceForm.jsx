@@ -5,6 +5,7 @@ import FormCheck from './FormCheck.jsx';
 import TextGroup from './TextGroup.jsx';
 import Text from './Text.jsx';
 import FormSelect from './FormSelect'
+import RichText from './RichText'
 import './ResourceForm.css'
 
 import { Modal, Button, Card } from 'antd';
@@ -68,7 +69,7 @@ export default class ResourceForm extends React.Component {
     createElement(describe) {
         if (describe.valueType === ResourceDescribeValueType.text) {
             return (
-                <div name={describe.name} className={"col-md-" + describe.col}>
+                <div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
                     <Text
                         title={describe.text}
                         value={this.resource[describe.name]}
@@ -79,7 +80,7 @@ export default class ResourceForm extends React.Component {
         }
 
         if (describe.valueType === ResourceDescribeValueType.textGroup) {
-            return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
                 <TextGroup
                     title={describe.text}
                     values={this.resource[describe.name]}
@@ -89,7 +90,7 @@ export default class ResourceForm extends React.Component {
         }
 
         if (describe.valueType === ResourceDescribeValueType.radio) {
-            return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
                 <Card size="small" title={describe.text}>
                     <FormRadio
                         name={describe.name}
@@ -102,7 +103,7 @@ export default class ResourceForm extends React.Component {
         }
 
         if (describe.valueType === ResourceDescribeValueType.check) {
-            return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
                 <Card size="small" title={describe.text}>
                     <FormCheck
                         name={describe.name}
@@ -115,7 +116,7 @@ export default class ResourceForm extends React.Component {
         }
 
         if (describe.valueType === ResourceDescribeValueType.select) {
-            return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
                 <FormSelect
                     title={describe.text}
                     name={describe.name}
@@ -123,6 +124,16 @@ export default class ResourceForm extends React.Component {
                     isEdit={describe.isEdit}
                     selectValue={this.resource[describe.name]}
                     onChange={(name, selectValue) => { this.resource[describe.name] = selectValue; this.setState({}) }} />
+            </div>);
+        }
+
+        if (describe.valueType === ResourceDescribeValueType.richText) {
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
+                <RichText
+                    title={describe.text}
+                    isEdit={describe.isEdit}
+                    value={this.resource[describe.name]}
+                    onChange={(value) => { this.resource[describe.name] = value; this.setState({}) }} />
             </div>);
         }
 
@@ -140,6 +151,7 @@ export default class ResourceForm extends React.Component {
             visible={this.props.show}
             footer={false}
             onCancel={this.props.close}
+            width={this.props.width || 520}
         >
             <div className="w-100" style={{ display: "inline-block" }}>
                 {elements}

@@ -34,6 +34,7 @@ export default class Resource extends React.Component {
 	// props.hideDelete = false
 	// props.hideLookup = false
 	// props.hidePadding = false
+	// props.width = undefind	编辑框的宽度，示例 1200
 	constructor(props) {
 		super(props);
 
@@ -153,7 +154,8 @@ export default class Resource extends React.Component {
 						resourceUpdate={resource => this._resourceUpdate(this.state.operationState, resource)}
 						show={this.state.fromModalShow}
 						isHideSubmit={isHideSubmit}
-						close={()=>{this.setState({fromModalShow:false})}} />
+						close={()=>{this.setState({fromModalShow:false})}}
+						width={this.props.width} />
 				<ResourceDelete
 						title={`删除 ${this.props.title}`}
 						nameDescribe={resourceDescribe.nameDescribes}

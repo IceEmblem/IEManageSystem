@@ -1,15 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-export default class TextGroup extends React.Component
-{
+import { Input, Tag, Button } from 'antd';
+import { DeleteOutlined, PlusSquareOutlined } from '@ant-design/icons'
+
+export default class TextGroup extends React.Component {
 	// 
 	// props.name
 	// props.values
 	// props.title
 	// props.isEdit
 	// props.onChange(name, values)
-	constructor(props){
+	constructor(props) {
 		super(props);
 
 		this.state = {
@@ -17,69 +18,67 @@ export default class TextGroup extends React.Component
 		};
 
 		this.AddClick = this.AddClick.bind(this);
-	    this.DeleteClick = this.DeleteClick.bind(this);
-	    this.OnChange = this.OnChange.bind(this);
+		this.DeleteClick = this.DeleteClick.bind(this);
+		this.OnChange = this.OnChange.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps){
+	componentWillReceiveProps(nextProps) {
 		this.state.values = nextProps.values || [];
 	}
 
-	// 登录重定向添加单击
-	AddClick(){
-	    this.setState(
-	      (preState)=>{
-	        preState.values.push("");
-	        return ({ values: preState.values });
-	      }
-	    )
+	AddClick() {
+		this.setState(
+			(preState) => {
+				preState.values.push("");
+				return ({ values: preState.values });
+			}
+		)
 	}
 
-	// 登录重定向删除单击
-	DeleteClick(index){
-	    this.setState(
-	      (preState)=>{
-	        preState.values.splice(index, 1);
-	        return ({ values: preState.values });
-	      }
-	    )
+	DeleteClick(index) {
+		this.setState(
+			(preState) => {
+				preState.values.splice(index, 1);
+				return ({ values: preState.values });
+			}
+		)
 	}
 
-	// 登录重定向表单输入
-	OnChange(index, value)
-	{
-	    this.setState(
-	      (preState)=>{
-	        preState.values[index] = value;
-	        return ({ values: preState.values });
-	      },
-	      ()=>this.props.onChange(this.props.name, this.state.values)
-	    )
+	OnChange(index, value) {
+		this.setState(
+			(preState) => {
+				preState.values[index] = value;
+				return ({ values: preState.values });
+			},
+			() => this.props.onChange(this.props.name, this.state.values)
+		)
 	}
 
-	render(){
+	render() {
 		let list = this.state.values.map(
-      		(item, index)=>
-      		<div className="d-flex margin-buttom10">
-              <input name={this.props.name} type="text" className="form-control" value={item} 
-              	readonly={ this.props.isEdit ? null:"readonly" }
-                onChange={(event)=>this.OnChange(index, event.target.value)} />
-              { 
-              	this.props.isEdit && 
-              	<button className="btn btn-danger btn-sm" onClick={()=>this.DeleteClick(index)}>删除</button>
-              }
-            </div>);
+			(item, index) =>
+				<div className="d-flex mb-2">
+					<Input
+						disabled={!this.props.isEdit}
+						value={item}
+						onChange={(event) => this.OnChange(index, event.target.value)}
+					/>
+					{
+						this.props.isEdit &&
+						<Button icon={<DeleteOutlined />} type="danger" onClick={() => this.DeleteClick(index)}>删除</Button>
+					}
+				</div>);
 
-		return(
-			<div className="card">
-                <div className="card-header bg-secondary text-white">{this.props.title}</div>
-                <div className="card-body">
-                    {list}
-                    { 
-		              	this.props.isEdit && 
-		              	<button className="btn btn-success btn-sm" onClick={this.AddClick}>+添加</button>
-		            }
-                </div> 
-            </div>);
+		return (
+			<div className="">
+				<h5 class="font-weight-bold">{this.props.title}</h5>
+				<div className="=">
+					{list}
+					{
+						this.props.isEdit &&
+						<Button icon={<PlusSquareOutlined />} type="primary" className="btn btn-success btn-sm" onClick={this.AddClick}>添加</Button>
+					}
+				</div>
+			</div>);
 	}
 }

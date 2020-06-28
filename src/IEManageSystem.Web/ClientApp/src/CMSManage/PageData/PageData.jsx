@@ -44,7 +44,7 @@ class PageData extends React.Component {
 					this.setState({ managePages: value.pages });
 				})
 		]).then((results) => {
-			this.setState({isLoad: true});
+			this.setState({ isLoad: true });
 		});
 	}
 
@@ -53,6 +53,9 @@ class PageData extends React.Component {
 			{ name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: false },
 			{ name: "name", text: "文章名称", isName: true, isShowOnList: true },
 			{ name: "title", text: "标题", isShowOnList: true },
+			{
+				name: "content", text: "文章内容", isShowOnList: false, valueType: ResourceDescribeValueType.richText,
+			},
 			{
 				name: "pageName", text: "文章类型", isShowOnList: false, isLookupShow: false,
 				valueType: ResourceDescribeValueType.select,
@@ -64,7 +67,13 @@ class PageData extends React.Component {
 				valueType: ResourceDescribeValueType.select,
 				valueTexts: this.state.queryPages.map(item => ({ text: item.displayName, value: item.name })),
 				isEditCanEdit: false
-			}
+			},
+			{
+				name: "imageList", text: "图片", isShowOnList: false, valueType: ResourceDescribeValueType.textGroup, col: 8
+			},
+			{
+				name: "tagList", text: "标签", isShowOnList: true, valueType: ResourceDescribeValueType.textGroup, col: 4
+			},
 		];
 	}
 
@@ -84,6 +93,8 @@ class PageData extends React.Component {
 
 	// Resource组件添加资源通知
 	addResource(resource) {
+		this.resourceToPageData(resource);
+
 		let postData = {
 			...resource, ...{
 				pageName: resource.pageName
@@ -99,6 +110,7 @@ class PageData extends React.Component {
 
 	// Resource组件更新资源通知
 	updateResource(resource) {
+		this.resourceToPageData(resource);
 		let postData = {
 			...resource, ...{
 				pageName: resource.pageName
@@ -134,30 +146,69 @@ class PageData extends React.Component {
 					pageIndex: value.pageIndex,
 					pageSize: pageSize,
 					searchKey: value.searchKey,
-					pageDatas: value.pageDatas.map(item=>{
-						let page = this.state.managePages.find(e=>e.id == item.pageId);
-						item.pageName = page ? page.name : null;
+					pageDatas: value.pageDatas.map(item => {
+						this.pageDataToResource(item);
 
-						let pageLookup = this.state.queryPages.find(e=>e.id == item.pageId);
-						item.pageNameLookup = pageLookup ? pageLookup.name : null;
 						return item;
 					})
 				});
 			});
 	}
 
+	// 将接收的文章数据转为Resource组件可编辑的数据
+	pageDataToResource(pageData) {
+		let page = this.state.managePages.find(e => e.id == pageData.pageId);
+		pageData.pageName = page ? page.name : null;
+
+		let pageLookup = this.state.queryPages.find(e => e.id == pageData.pageId);
+		pageData.pageNameLookup = pageLookup ? pageLookup.name : null;
+
+		pageData.tagList = [];
+		if (pageData.tags) {
+			pageData.tagList = pageData.tags.split('|');
+		}
+
+		pageData.imageList = [];
+		if (pageData.images) {
+			pageData.imageList = pageData.images.split('|');
+		}
+	}
+
+	// 将Resource组件的数据转为文章数据
+	resourceToPageData(resource) {
+		resource.tags = "";
+		for(let index = 0; index < resource.tagList.length; index++){
+			if (index == resource.tagList.length - 1) {
+				resource.tags = resource.tags + resource.tagList[index];
+			}
+			else {
+				resource.tags = resource.tags + resource.tagList[index] + "|";
+			}
+		}
+
+		resource.images = "";
+		for(let index = 0; index < resource.imageList.length; index++){
+			if (index == resource.imageList.length - 1) {
+				resource.images = resource.images + resource.imageList[index];
+			}
+			else {
+				resource.images = resource.images + resource.imageList[index] + "|";
+			}
+		}
+	}
+
 	render() {
-		if(!this.state.isLoad){
+		if (!this.state.isLoad) {
 			return (<div></div>);
 		}
 
 		let customizeOperateBtns = [(props) => (<CustomizeOperateBtnList {...props} />)];
 
 		let resources;
-		if(this.state.selectPageName && this.state.selectPageName.trim() != ""){
-			resources = this.state.pageDatas.filter(item=>item.pageNameLookup == this.state.selectPageName);
+		if (this.state.selectPageName && this.state.selectPageName.trim() != "") {
+			resources = this.state.pageDatas.filter(item => item.pageNameLookup == this.state.selectPageName);
 		}
-		else{
+		else {
 			resources = this.state.pageDatas;
 		}
 
@@ -186,6 +237,7 @@ class PageData extends React.Component {
 					hideEdit={true}
 					hideDelete={true}
 					hideLookup={true}
+					width={1200}
 				/>
 			</div>
 		);

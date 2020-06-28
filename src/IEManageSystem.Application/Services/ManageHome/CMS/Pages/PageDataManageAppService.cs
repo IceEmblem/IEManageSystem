@@ -31,7 +31,10 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             PageData pageData = new PageData()
             {
                 Name = input.Name,
-                Title = input.Title
+                Title = input.Title,
+                Content = input.Content,
+                Tags = input.Tags,
+                Images = input.Images
             };
 
             _pageDataManager.AddPageData(input.PageName, pageData);
@@ -44,6 +47,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             var post = _pageDataManager.PostRepository.FirstOrDefault(input.Id);
             post.Name = input.Name;
             post.Title = input.Title;
+            post.Content = input.Content;
+            post.Tags = input.Tags;
+            post.Images = input.Images;
             _pageDataManager.UpdatePageData(input.PageName, post);
 
             return new UpdatePageDataOutput();

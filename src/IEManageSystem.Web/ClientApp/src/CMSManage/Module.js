@@ -80,7 +80,7 @@ export default class Module extends BaseModule {
                     {
 
                         id: "LogicManage",
-                        text: "组件逻辑管理",
+                        text: "组件逻辑",
                         icon: ForkOutlined,
                         url: "/ManageHome/CMSManage/LogicManage",
                         accessScope:
