@@ -22,9 +22,12 @@ namespace IEManageSystem.Web.Startup
 {
     public class Startup
     {
+        private IConfigurationRoot _configurationRoot { get; }
+
         public Startup(IWebHostEnvironment env)
         {
-            WebConfiguration.Init(AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName));
+            _configurationRoot = AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName);
+            WebConfiguration.Init(_configurationRoot);
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -32,7 +35,10 @@ namespace IEManageSystem.Web.Startup
             // 注册数据库上下文
             services.AddAbpDbContext<IEManageSystemDbContext>(options =>
             {
-                DbContextOptionsConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
+                DbContextOptionsConfigurer.Configure(
+                    options.DbContextOptions,
+                    _configurationRoot.GetConnectionString(IEManageSystemConsts.ConnectionStringName),
+                    _configurationRoot.GetSection("ConnectionType").Value);
             });
 
             services.AddControllersWithViews(options =>
