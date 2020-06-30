@@ -177,22 +177,26 @@ class PageData extends React.Component {
 	// 将Resource组件的数据转为文章数据
 	resourceToPageData(resource) {
 		resource.tags = "";
-		for(let index = 0; index < resource.tagList.length; index++){
-			if (index == resource.tagList.length - 1) {
-				resource.tags = resource.tags + resource.tagList[index];
-			}
-			else {
-				resource.tags = resource.tags + resource.tagList[index] + "|";
+		if(resource.tagList){
+			for(let index = 0; index < resource.tagList.length; index++){
+				if (index == resource.tagList.length - 1) {
+					resource.tags = resource.tags + resource.tagList[index];
+				}
+				else {
+					resource.tags = resource.tags + resource.tagList[index] + "|";
+				}
 			}
 		}
 
 		resource.images = "";
-		for(let index = 0; index < resource.imageList.length; index++){
-			if (index == resource.imageList.length - 1) {
-				resource.images = resource.images + resource.imageList[index];
-			}
-			else {
-				resource.images = resource.images + resource.imageList[index] + "|";
+		if(resource.imageList){
+			for(let index = 0; index < resource.imageList.length; index++){
+				if (index == resource.imageList.length - 1) {
+					resource.images = resource.images + resource.imageList[index];
+				}
+				else {
+					resource.images = resource.images + resource.imageList[index] + "|";
+				}
 			}
 		}
 	}

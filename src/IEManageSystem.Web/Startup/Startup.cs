@@ -95,7 +95,7 @@ namespace IEManageSystem.Web.Startup
 
             app.UseSpa(spa =>
             {
-                spa.Options.DefaultPage = "/Index.html";
+                spa.Options.DefaultPage = "/index.html";
             });
         }
     }

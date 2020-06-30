@@ -9,6 +9,7 @@ namespace IEManageSystem.Web.Startup
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseUrls(args)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

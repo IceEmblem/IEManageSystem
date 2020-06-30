@@ -63,7 +63,6 @@ export default class Module extends BaseModule {
                         url: "/ManageHome/CMSManage/PageData",
                         accessScope:
                             [
-                                AccessScope.Page(ApiScopeNodeType.manage)
                             ]
                     },
                     {

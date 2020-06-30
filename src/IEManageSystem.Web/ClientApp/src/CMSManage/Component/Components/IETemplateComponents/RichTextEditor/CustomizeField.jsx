@@ -6,11 +6,27 @@ import 'braft-editor/dist/index.css'
 
 class CustomizeField extends React.Component 
 {
+    state = {
+        editorState: null
+    }
+
     constructor(props){
         super(props)
 
         this.submitContent = this.submitContent.bind(this)
         this.handleEditorChange = this.handleEditorChange.bind(this)
+    }
+
+    componentDidMount() {
+        this.setState({
+            editorState: BraftEditor.createEditorState(this.props.fieldValue)
+        })
+    }
+
+    componentWillReceiveProps(nextprops){
+        this.setState({
+            editorState: BraftEditor.createEditorState(nextprops.fieldValue)
+        })
     }
     
     submitContent(){
@@ -29,7 +45,7 @@ class CustomizeField extends React.Component
             <div className="richtexteditor-editor">
                 <BraftEditor
                     className="richtexteditor-editor-bf"
-                    value={this.props.fieldValue}
+                    value={this.state.editorState}
                     onChange={this.handleEditorChange}
                     onSave={this.submitContent}
                 />
