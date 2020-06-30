@@ -39,3 +39,4 @@
 /test/IEManageSystem.ApiAuthorization.Tests/bin
 /test/IEManageSystem.ApiAuthorization.Tests/obj
 /src/IEManageSystem.Web/Properties/PublishProfiles
+/src/IEManageSystem.EntityFrameworkCore/Migrations
