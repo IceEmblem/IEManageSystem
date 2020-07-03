@@ -81,8 +81,9 @@ class PageContainer extends React.Component {
         let pageComponent = CreateComponentService.createComponent(
             selectedComponentDescribe,
             this.state.curParentComponent ? this.state.curParentComponent.sign : null);
+        let isAddDefaultComponentData = CreateComponentService.isExistDefaultComponentData(selectedComponentDescribe);
 
-        this.props.addComponent(pageComponent);
+        this.props.addComponent(pageComponent, isAddDefaultComponentData);
         this.setState({});
     }
 
@@ -169,15 +170,15 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     return {
         page: state.page,
         pageName: ownProps.pageName,
-        childPageComponents: state.page.getRootPageComponents(),
+        childPageComponents: state.page.pageComponents,
         defaultComponentDatas: state.defaultComponentDatas
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        addComponent: (pageComponent) => {
-            dispatch(pageAddComponent(pageComponent));
+        addComponent: (pageComponent, isAddDefaultComponentData) => {
+            dispatch(pageAddComponent(pageComponent, isAddDefaultComponentData));
         },
         pageComponentUpdateFetch: (name, components, defaultComponentDatas) => {
             dispatch(pageComponentUpdateFetch(name, components, defaultComponentDatas));

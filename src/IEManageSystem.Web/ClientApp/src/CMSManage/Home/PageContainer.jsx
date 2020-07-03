@@ -54,7 +54,7 @@ class PageContainer extends React.Component {
         return (
             <Page>
                 {
-                    this.props.page.pageComponentCollection.pageComponents.filter(item => !item.parentSign).map(item =>
+                    this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
                         <FrontCompontContainer
                             key={item.sign}
                             pageComponent={item}

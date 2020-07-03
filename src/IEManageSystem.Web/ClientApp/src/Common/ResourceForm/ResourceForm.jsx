@@ -37,26 +37,10 @@ export default class ResourceForm extends React.Component {
     }
 
     initClient(inputResource) {
-        if (inputResource == null) {
-            this.resource = {};
-
-            for (let item in this.props.describes) {
-                if (this.props.describes[item].valueType === ResourceDescribeValueType.textGroup
-                    || this.props.describes[item].valueType === ResourceDescribeValueType.check) {
-                    this.resource[this.props.describes[item].name] = new Array();
-                }
-                else {
-                    this.resource[this.props.describes[item].name] = "";
-                }
-            }
-            return;
-        }
-
         this.resource = Object.assign({}, inputResource);
 
         for (let item in this.props.describes) {
-            if (this.props.describes[item].valueType === ResourceDescribeValueType.textGroup
-                && this.props.describes[item].valueType === ResourceDescribeValueType.check) {
+            if(Array.isArray(this.resource[this.props.describes[item].name])){
                 this.resource[this.props.describes[item].name] = Object.assign([], inputResource[this.props.describes[item].name]);
             }
         }
@@ -64,7 +48,9 @@ export default class ResourceForm extends React.Component {
 
     // 提交
     submit() {
-        this.props.resourceUpdate(this.resource);
+        let resource = Object.assign(this.props.resource, this.resource);
+        
+        this.props.resourceUpdate(resource);
     }
 
     createElement(describe) {

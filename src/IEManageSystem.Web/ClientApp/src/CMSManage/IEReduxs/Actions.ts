@@ -5,10 +5,11 @@ import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
 
 // 页面添加组件
 export const PageAddComponent = 'PageAddComponent'
-export function pageAddComponent(pageComponent:PageComponentModel) {
+export function pageAddComponent(pageComponent:PageComponentModel, isAddDefaultComponentData) {
   return {
     type: PageAddComponent,
-    pageComponent
+    pageComponent,
+    isAddDefaultComponentData
   }
 }
 
@@ -23,10 +24,9 @@ export function pageRemoveComponent(pageComponent:PageComponentModel) {
 
 // 页面编辑组件
 export const PageEditComponent = "PageEditComponent"
-export function pageEditComponent(sign:string, pageComponent:PageComponentModel) {
+export function pageEditComponent(pageComponent:PageComponentModel) {
   return {
     type: PageEditComponent,
-    sign,
     pageComponent
   }
 }

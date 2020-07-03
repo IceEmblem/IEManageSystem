@@ -130,7 +130,7 @@ PageEditCompontContainer.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
-    let childPageComponents = ownProps.pageComponent.pageComponentCollection.pageComponents;
+    let childPageComponents = ownProps.pageComponent.pageComponents;
     let defaultComponentData = state.defaultComponentDatas.find(item => item.sign == ownProps.pageComponent.sign);
 
     return {
@@ -146,8 +146,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         removeComponent: (pageComponent) => {
             dispatch(pageRemoveComponent(pageComponent));
         },
-        editComponent: (sign, pageComponent) => {
-            dispatch(pageEditComponent(sign, pageComponent));
+        editComponent: (pageComponent) => {
+            dispatch(pageEditComponent(pageComponent));
         },
         defaultComponentDataUpdate: (componentData) => {
             dispatch(defaultComponentDataUpdate(componentData));

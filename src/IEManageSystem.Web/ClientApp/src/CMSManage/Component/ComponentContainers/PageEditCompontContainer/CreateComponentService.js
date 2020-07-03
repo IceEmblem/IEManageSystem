@@ -2,6 +2,7 @@ import ContainerComponentObject from 'CMSManage/Component/Components/BaseCompone
 import PageLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BasePageLeafComponent'
 import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseLeafComponent'
 import BaseMenuComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseMenuComponent'
+import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
 import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
 import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
 
@@ -40,6 +41,14 @@ class CreateComponentService{
         });
 
         return pageComponent;
+    }
+
+    isExistDefaultComponentData(componentDescribe){
+        if(componentDescribe.componentObject instanceof BaseContentLeafComponent){
+            return true;
+        }
+
+        return false;
     }
 }
 

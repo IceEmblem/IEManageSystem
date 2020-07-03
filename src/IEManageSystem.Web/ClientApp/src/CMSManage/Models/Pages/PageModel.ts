@@ -7,11 +7,13 @@ export default class PageModel {
     public displayName: string;
     public description: string;
     public pageType: string;
-    // public pageComponents: Array<PageComponentModel>;
 
-    public pageComponentCollection: PageComponentCollection = null;
+    public get pageComponents() : Array<PageComponentModel>
+    {
+        return this._pageComponentCollection.pageComponents;
+    }
 
-    public pageComponents: Map<string, PageComponentModel> = new Map<string, PageComponentModel>();
+    private _pageComponentCollection: PageComponentCollection = null;
 
     constructor(data?: any) 
     {
@@ -27,14 +29,10 @@ export default class PageModel {
         });
         pageComponents.forEach(item => {
             let childs = pageComponents.filter(e => e.parentSign == item.sign);
-            item.pageComponentCollection = new PageComponentCollection(childs);
+            item.setChilds(childs);
         })
 
-        this.pageComponentCollection = new PageComponentCollection(pageComponents.filter(e=>!e.parentSign));
-    }
-
-    getRootPageComponents(){
-        return this.pageComponentCollection.pageComponents;
+        this._pageComponentCollection = new PageComponentCollection(pageComponents.filter(e=>!e.parentSign));
     }
 
     addPageComponent(pageComponentData: PageComponentModel): void {
@@ -45,7 +43,7 @@ export default class PageModel {
             return;
         }
 
-        this.pageComponentCollection.addPageComponent(pageComponentData);
+        this._pageComponentCollection.addPageComponent(pageComponentData);
     }
 
     removePageComponent(pageComponentData: PageComponentModel): void {
@@ -56,22 +54,34 @@ export default class PageModel {
             return;
         }
 
-        this.pageComponentCollection.removePageComponent(pageComponentData);
+        this._pageComponentCollection.removePageComponent(pageComponentData);
     }
 
-    editPageComponent(sign: string, pageComponentData: PageComponentModel): void {
+    editPageComponent(pageComponentData: PageComponentModel): void {
+        let allComponents = this.getAllChilds();
+        let pageComponents = allComponents.filter(e => e.sign == pageComponentData.sign);
+        if(pageComponents.length > 1){
+            throw Error(`标识已重复，Sign：${pageComponentData.sign}`);
+        }
+
         if(pageComponentData.parentSign){
-            let parent = this.getAllChilds().find(e=>e.sign == pageComponentData.parentSign);
-            parent.editPageComponent(sign, pageComponentData);
+            let parent = allComponents.find(e=>e.sign == pageComponentData.parentSign);
+            parent.childComponentsSort();
 
             return;
         }
 
-        this.pageComponentCollection.editPageComponent(sign, pageComponentData);
+        this._pageComponentCollection.pageComponentSort();
     }
 
-    getAllChilds(){
-        return this.pageComponentCollection.getAllChilds();
+    // 获取树下所有节点
+    getAllChilds(): Array<PageComponentModel> {
+        let childs = [...this.pageComponents];
+        this.pageComponents.forEach(item => {
+            childs = [...childs, ...item.getAllChilds()]
+        })
+
+        return childs;
     }
 
     toJsonObject() {
@@ -81,7 +91,7 @@ export default class PageModel {
             displayName: this.displayName,
             description: this.description,
             pageType: this.pageType,
-            pageComponents: this.pageComponents.map(item=>item.toJsonObject())
+            pageComponents: this._pageComponentCollection.pageComponents.map(item=>item.toJsonObject())
         }
     }
 }

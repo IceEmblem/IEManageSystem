@@ -20,12 +20,16 @@ class EditFrame extends React.Component {
         this.state = {
             // 当前选择的选项卡的索引
             selectTab: this.tabs.length > 0 ? this.tabs[0] : null,
-            // 拷贝一份，用于取消操作
-            pageComponent: new PageComponentModel(this.props.pageComponent)
         }
 
         this.cancel = this.cancel.bind(this);
         this.submit = this.submit.bind(this);
+
+        this.props.pageComponent.snapshot();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        nextProps.pageComponent.snapshot();
     }
 
     // 生成选项卡列表
@@ -46,21 +50,23 @@ class EditFrame extends React.Component {
 
     cancel() {
         this.props.close();
+        this.props.pageComponent.resumeForsnapshot()
         this.setState({
-            selectTab: this.tabs.length > 0 ? this.tabs[0] : null,
-            pageComponent: new PageComponentModel(this.props.pageComponent)
+            selectTab: this.tabs.length > 0 ? this.tabs[0] : null
         });
     }
 
     submit() {
-        try{
-            this.props.editComponent(this.props.pageComponent.sign, this.state.pageComponent);
+        try {
+            this.props.editComponent(this.props.pageComponent);
+            this.props.pageComponent.clearSnapshot();
         }
-        catch(e){
+        catch (e) {
             notification.error({
                 message: '提交失败',
                 description: e.message,
-              })
+            });
+            this.props.pageComponent.resumeForsnapshot()
         }
 
         this.props.close();
@@ -76,7 +82,7 @@ class EditFrame extends React.Component {
         let componentSettingConfig = this.props.componentObject.getComponentSettingConfigs().find(item => item.name == this.state.selectTab.name);
 
         // 组件设置配置使用的组件
-        return componentSettingConfig.bulidConfigComponent(this.state.pageComponent,
+        return componentSettingConfig.bulidConfigComponent(this.props.pageComponent,
             (pageComponent) => {
                 this.setState({ pageComponent: pageComponent });
             });
@@ -90,7 +96,7 @@ class EditFrame extends React.Component {
                 onOk={this.submit}
                 onCancel={this.cancel}
                 width={1000}
-                bodyStyle={{backgroundColor:"#f8f9fa"}}
+                bodyStyle={{ backgroundColor: "#f8f9fa" }}
                 zIndex={9999}
                 okText="提交"
                 cancelText="取消"

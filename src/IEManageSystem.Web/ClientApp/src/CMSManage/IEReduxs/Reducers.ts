@@ -35,7 +35,7 @@ function page(
 
     // 编辑组件
     if (action.type == PageEditComponent) {
-        state.editPageComponent(action.sign, action.pageComponent);
+        state.editPageComponent(action.pageComponent);
 
         return state;
     }
@@ -67,6 +67,10 @@ function defaultComponentDatas(
 
     // 添加组件
     if (action.type == PageAddComponent) {
+        if(!action.isAddDefaultComponentData){
+            return state;
+        }
+
         let componentData = new ComponentDataModel({
             id: 0,
             sign: action.pageComponent.sign,
@@ -79,11 +83,12 @@ function defaultComponentDatas(
 
     // 移除组件
     if (action.type == PageRemoveComponent) {
-        let index = state.findIndex(e => e.sign == action.pageComponent.sign);
-        if (index < 0) {
-            return state
-        }
-        state.splice(index, 1);
+        let childs = action.pageComponent.getAllChilds().map(e=>e.sign);
+
+        let reomveItems = [action.pageComponent.sign, ...childs];
+
+        state = state.filter(e => !reomveItems.some(ie => ie == e.sign));
+
         return state;
     }
 
@@ -101,7 +106,10 @@ function defaultComponentDatas(
     if (action.type == PageReceive) {
         let datas = [];
         action.data.defaultComponentDatas.forEach((element: any) => {
-            datas.push(new ComponentDataModel(element));
+            let signs = action.data.page.pageComponents.map(e=>e.sign);
+            if(signs.some(e=>e==element.sign)){
+                datas.push(new ComponentDataModel(element));
+            }
         });
 
         return datas;

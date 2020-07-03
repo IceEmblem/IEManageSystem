@@ -77,14 +77,21 @@ export default class Resource extends React.Component {
 			this.setState({ 
 				operationState: operation, 
 				deleteModalShow: true, 
-				curResource: resource || {}
+				curResource: resource
+			});
+		}
+		else if(operation == operationState.add){
+			this.setState({ 
+				operationState: operation, 
+				fromModalShow: true, 
+				curResource: {}
 			});
 		}
 		else{
 			this.setState({ 
 				operationState: operation, 
 				fromModalShow: true, 
-				curResource: resource || {}
+				curResource: resource
 			});
 		}
 	}
