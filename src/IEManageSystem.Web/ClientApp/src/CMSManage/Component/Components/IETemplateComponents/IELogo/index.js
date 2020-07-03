@@ -12,5 +12,5 @@ class ComponentObject extends BaseComponentObject{
     };
 }
 
-let componentDescribe = new ComponentDescribe("IELogo", new ComponentObject(), componentType.other);
+let componentDescribe = new ComponentDescribe("IELogo", new ComponentObject(), componentType.other, "IE链接");
 export default componentDescribe;

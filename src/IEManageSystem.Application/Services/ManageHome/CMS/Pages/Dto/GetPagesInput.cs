@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -14,5 +15,13 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
         public int PageSize { get; set; }
 
         public string SearchKey { get; set; }
+
+        public string PageType { get; set; }
+
+        public bool IsAllPage() => string.IsNullOrWhiteSpace(PageType);
+
+        public bool IsStaticPage() => PageType == "StaticPage";
+
+        public bool IsContentPage() => PageType == "ContentPage";
     }
 }

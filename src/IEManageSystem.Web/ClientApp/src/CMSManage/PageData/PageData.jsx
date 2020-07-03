@@ -52,7 +52,8 @@ class PageData extends React.Component {
 		return [
 			{ name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: false },
 			{ name: "name", text: "文章名称", isName: true, isShowOnList: true },
-			{ name: "title", text: "标题", isShowOnList: true },
+			{ name: "title", text: "文章标题", isShowOnList: true },
+			{ name: "describe", text: "简短描述", isShowOnList: true },
 			{
 				name: "content", text: "文章内容", isShowOnList: false, valueType: ResourceDescribeValueType.richText,
 			},
@@ -74,6 +75,9 @@ class PageData extends React.Component {
 			{
 				name: "tagList", text: "标签", isShowOnList: true, valueType: ResourceDescribeValueType.textGroup, col: 4
 			},
+			{
+				name: "creationTime", text: "发表时间", isShowOnList: true, isAddShow: false, isEditShow: false, valueType: ResourceDescribeValueType.dateTime,
+			}
 		];
 	}
 

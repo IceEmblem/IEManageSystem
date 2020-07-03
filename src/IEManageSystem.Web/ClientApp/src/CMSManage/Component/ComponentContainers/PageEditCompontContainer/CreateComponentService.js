@@ -6,15 +6,8 @@ import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageCompone
 import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
 
 class CreateComponentService{
-    createComponent(pageComponents, componentDescribe, parentSign){
-        var timetamp = Number(new Date());
-        while (true) {
-            if (!pageComponents.some(item => item.sign === timetamp)) {
-                break;
-            }
-
-            timetamp = Number(new Date());
-        }
+    createComponent(componentDescribe, parentSign){
+        var timetamp = new Date().getTime();
 
         let pageComponent;
         if (componentDescribe.componentObject instanceof ContainerComponentObject) 

@@ -25,5 +25,5 @@ class ComponentObject extends BaseComponentObject{
     };
 }
 
-let componentDescribe = new ComponentDescribe("IESelect", new ComponentObject(), componentType.other);
+let componentDescribe = new ComponentDescribe("IESelect", new ComponentObject(), componentType.other, "IE选择框");
 export default componentDescribe;

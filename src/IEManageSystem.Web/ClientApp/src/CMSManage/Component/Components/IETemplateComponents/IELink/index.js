@@ -25,5 +25,5 @@ class ComponentObject extends BaseComponentObject{
     };
 }
 
-let componentDescribe = new ComponentDescribe("IELink", new ComponentObject(), componentType.other);
+let componentDescribe = new ComponentDescribe("IELink", new ComponentObject(), componentType.other, "IE链接");
 export default componentDescribe;

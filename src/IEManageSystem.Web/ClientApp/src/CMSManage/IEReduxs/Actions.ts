@@ -60,7 +60,7 @@ export const PageComponentUpdateReceive = "PageComponentUpdateReceive"
 export function pageComponentUpdateFetch(name:string, components:Array<PageComponentModel>, defaultComponentDatas:Array<ComponentDataModel>) {
   let postData = {
     name: name,
-    pageComponents: components,
+    pageComponents: components.map(item=>item.toJsonObject()),
     defaultComponentDatas: defaultComponentDatas
   };
 

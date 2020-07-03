@@ -5,5 +5,6 @@ export const ResourceDescribeValueType = {
 	radio: "radio",
 	check: "check",
 	select: "select",
-	richText: "richText"
+	richText: "richText",
+	dateTime: "dateTime"
 }

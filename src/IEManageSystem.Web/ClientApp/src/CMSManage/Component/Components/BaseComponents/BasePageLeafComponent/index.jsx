@@ -7,7 +7,7 @@ export default class PageLeafComponentObject extends BaseComponentObject {
     constructor(){
         super();
 
-        this.PageLeafSettingConfig = ComponentSettingConfig.BuildPageLeafComponentSettingConfig("iePageLeafSetting", "页面配置", 
+        this.PageLeafSettingConfig = ComponentSettingConfig.BuildPageLeafComponentSettingConfig("iePageLeafSetting", "文章配置", 
             (pageComponentSetting, setPageComponentSetting) => {
                 return <PageLeafSettingConfig 
                     data={pageComponentSetting}

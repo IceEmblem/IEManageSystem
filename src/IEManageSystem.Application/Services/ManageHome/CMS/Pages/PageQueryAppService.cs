@@ -54,6 +54,13 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 _repository.GetAll() :
                 GetPagesForSearchKey(input.SearchKey);
 
+            if (input.IsStaticPage()) {
+                pages = pages.OfType<StaticPage>();
+            }
+            else if (input.IsContentPage()){
+                pages = pages.OfType<ContentPage>();
+            }
+
             int pageNum = pages.Count();
 
             pages = pages.Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize);

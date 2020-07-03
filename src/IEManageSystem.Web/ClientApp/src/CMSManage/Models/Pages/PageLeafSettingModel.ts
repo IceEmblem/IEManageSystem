@@ -1,10 +1,13 @@
 export default class PageLeafSettingModel {
-    public pageName:string;
-    public pageSize:number
-    public top:number
-    public searchKey:number
+    public pageName:string = "";
+    public pageSize:number = 10;
+    public top:number = 0
+    public searchKey:string = "";
 
     constructor(data:any){
+        if(!data){
+            return;
+        }
         this.pageName = data.pageName;
         this.pageSize = data.pageSize;
         this.top = data.top;

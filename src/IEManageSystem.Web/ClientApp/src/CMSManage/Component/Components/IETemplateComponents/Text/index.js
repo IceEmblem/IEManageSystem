@@ -30,5 +30,5 @@ class ComponentObject extends BaseComponentObject {
     }
 }
 
-let componentDescribe = new ComponentDescribe("Text", new ComponentObject(), componentType.text);
+let componentDescribe = new ComponentDescribe("Text", new ComponentObject(), componentType.text, "文本框");
 export default componentDescribe;

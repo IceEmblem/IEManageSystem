@@ -7,8 +7,8 @@ import {
     ComponentDataUpdate,
     DefaultComponentDataUpdate
 } from './Actions'
-import PageModel from 'CMSManage/Models/Pages/PageModel';
-import PageDataModel from 'CMSManage/Models/PageDatas/PageDataModel';
+import PageModel from '../Models/Pages/PageModel'
+import PageDataModel from '../Models/PageDatas/PageDataModel'
 import ComponentDataModel from '../Models/ComponentDataModel';
 
 function page(

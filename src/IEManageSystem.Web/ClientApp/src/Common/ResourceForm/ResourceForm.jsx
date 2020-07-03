@@ -6,6 +6,7 @@ import TextGroup from './TextGroup.jsx';
 import Text from './Text.jsx';
 import FormSelect from './FormSelect'
 import RichText from './RichText'
+import DataTime from './DateTime'
 import './ResourceForm.css'
 
 import { Modal, Button, Card } from 'antd';
@@ -130,6 +131,16 @@ export default class ResourceForm extends React.Component {
         if (describe.valueType === ResourceDescribeValueType.richText) {
             return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
                 <RichText
+                    title={describe.text}
+                    isEdit={describe.isEdit}
+                    value={this.resource[describe.name]}
+                    onChange={(value) => { this.resource[describe.name] = value; this.setState({}) }} />
+            </div>);
+        }
+
+        if (describe.valueType === ResourceDescribeValueType.dateTime) {
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
+                <DataTime
                     title={describe.text}
                     isEdit={describe.isEdit}
                     value={this.resource[describe.name]}

@@ -95,7 +95,9 @@ class BaseComponentContainer extends React.Component {
             pageLeafSetting: this.props.pageComponent.pageLeafSetting,
             menuName: this.props.pageComponent.menuName,
             execLogic: this.execLogic,
-            pageFreshen: this.pageFreshen
+            pageFreshen: this.pageFreshen,
+            page: this.props.page,
+            pageData: this.props.pageData,
         }, this.createChildComponent())
     }
 

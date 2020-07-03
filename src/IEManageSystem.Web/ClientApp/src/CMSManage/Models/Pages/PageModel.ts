@@ -1,14 +1,19 @@
 import PageComponentModel from "./PageComponentModel";
+import PageComponentCollection from "./PageComponentCollection";
 
-export default class PageModel{
-    public id:number;
-    public name:string;
-    public displayName:string;
-    public description:string;
-    public pageType:string;
-    public pageComponents:Array<PageComponentModel>;
+export default class PageModel {
+    public id: number;
+    public name: string;
+    public displayName: string;
+    public description: string;
+    public pageType: string;
+    // public pageComponents: Array<PageComponentModel>;
 
-    constructor(data?:any)
+    public pageComponentCollection: PageComponentCollection = null;
+
+    public pageComponents: Map<string, PageComponentModel> = new Map<string, PageComponentModel>();
+
+    constructor(data?: any) 
     {
         this.id = data.id;
         this.name = data.name;
@@ -16,57 +21,67 @@ export default class PageModel{
         this.description = data.description;
         this.pageType = data.pageType;
 
-        this.pageComponents = [];
-        data.pageComponents.forEach((element:any) => {
-            this.pageComponents.push(new PageComponentModel(element));
+        let pageComponents: Array<PageComponentModel> = [];
+        data.pageComponents.forEach((element: any) => {
+            pageComponents.push(new PageComponentModel(element));
         });
-        this.pageComponentSort();
-    }
-    
-    addPageComponent(pageComponentData:any):void
-    {
-        let newPageComponent = new PageComponentModel(pageComponentData);
+        pageComponents.forEach(item => {
+            let childs = pageComponents.filter(e => e.parentSign == item.sign);
+            item.pageComponentCollection = new PageComponentCollection(childs);
+        })
 
-        if(this.pageComponents.some(e=>e.sign == pageComponentData.sign)){
-            throw new Error(`标识已重复，Sign：${pageComponentData.sign}`);
-        }
-
-        let maxSortIndex = 0;
-        if(this.pageComponents.length > 0){
-            maxSortIndex = this.pageComponents[this.pageComponents.length - 1].pageComponentBaseSetting.sortIndex;
-        }
-        
-        newPageComponent.pageComponentBaseSetting.sortIndex = maxSortIndex + 1;
-        this.pageComponents.push(newPageComponent);
+        this.pageComponentCollection = new PageComponentCollection(pageComponents.filter(e=>!e.parentSign));
     }
 
-    removePageComponent(pageComponentData:any):void{
-        this.pageComponents = this.pageComponents.filter(item => item.sign != pageComponentData.sign);
+    getRootPageComponents(){
+        return this.pageComponentCollection.pageComponents;
     }
 
-    editPageComponent(sign:string, pageComponentData:any):void{
-        let needEditIndex = this.pageComponents.findIndex(e=>e.sign == sign);
-        if(needEditIndex < 0){
-            throw new Error(`未找到要编辑的组件，Sign：${sign}`);
+    addPageComponent(pageComponentData: PageComponentModel): void {
+        if(pageComponentData.parentSign){
+            let parent = this.getAllChilds().find(e=>e.sign == pageComponentData.parentSign);
+            parent.addPageComponent(pageComponentData);
+
+            return;
         }
-        if(sign != pageComponentData.sign && this.pageComponents.some(e=>e.sign == pageComponentData.sign)){
-            throw new Error(`标识已重复，Sign：${pageComponentData.sign}`);
-        }
-        this.pageComponents[needEditIndex] = new PageComponentModel(pageComponentData);
-        this.pageComponentSort();
+
+        this.pageComponentCollection.addPageComponent(pageComponentData);
     }
 
-    pageComponentSort() : void {
-        var len = this.pageComponents.length;
-        var preIndex, current;
-        for (var i = 1; i < len; i++) {
-            preIndex = i - 1;
-            current = this.pageComponents[i];
-            while(preIndex >= 0 && this.pageComponents[preIndex].pageComponentBaseSetting.sortIndex > current.pageComponentBaseSetting.sortIndex) {
-                this.pageComponents[preIndex+1] = this.pageComponents[preIndex];
-                preIndex--;
-            }
-            this.pageComponents[preIndex+1] = current;
+    removePageComponent(pageComponentData: PageComponentModel): void {
+        if(pageComponentData.parentSign){
+            let parent = this.getAllChilds().find(e=>e.sign == pageComponentData.parentSign);
+            parent.removePageComponent(pageComponentData);
+
+            return;
+        }
+
+        this.pageComponentCollection.removePageComponent(pageComponentData);
+    }
+
+    editPageComponent(sign: string, pageComponentData: PageComponentModel): void {
+        if(pageComponentData.parentSign){
+            let parent = this.getAllChilds().find(e=>e.sign == pageComponentData.parentSign);
+            parent.editPageComponent(sign, pageComponentData);
+
+            return;
+        }
+
+        this.pageComponentCollection.editPageComponent(sign, pageComponentData);
+    }
+
+    getAllChilds(){
+        return this.pageComponentCollection.getAllChilds();
+    }
+
+    toJsonObject() {
+        return {
+            id: this.id,
+            name: this.name,
+            displayName: this.displayName,
+            description: this.description,
+            pageType: this.pageType,
+            pageComponents: this.pageComponents.map(item=>item.toJsonObject())
         }
     }
 }

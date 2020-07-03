@@ -84,7 +84,7 @@ PostEditComponentContainer.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
-    let childPageComponents = state.page.pageComponents.filter(item => item.parentSign == ownProps.pageComponent.sign);
+    let childPageComponents = ownProps.pageComponent.pageComponentCollection.pageComponents;
     let contentComponentData = state.contentComponentDatas.find(e => e.sign == ownProps.pageComponent.sign);
     let defaultComponentData = state.defaultComponentDatas.find(item => item.sign == ownProps.pageComponent.sign);
 

@@ -20,5 +20,5 @@ class ComponentObject extends BaseComponentObject {
     }
 }
 
-let componentDescribe = new ComponentDescribe("RichTextEditor", new ComponentObject(), componentType.text);
+let componentDescribe = new ComponentDescribe("RichTextEditor", new ComponentObject(), componentType.text, "富文本框");
 export default componentDescribe;

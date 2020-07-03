@@ -16,5 +16,5 @@ class ComponentObject extends BaseComponentObject{
     };
 }
 
-let componentDescribe = new ComponentDescribe("IEImg", new ComponentObject(), componentType.other);
+let componentDescribe = new ComponentDescribe("IEImg", new ComponentObject(), componentType.other, "IE图片");
 export default componentDescribe;

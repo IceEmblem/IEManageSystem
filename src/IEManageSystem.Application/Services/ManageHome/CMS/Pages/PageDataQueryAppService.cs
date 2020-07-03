@@ -57,7 +57,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             }
             
             int num = pageDatas.Count();
-            pageDatas = pageDatas.OrderByDescending(e => e.Id).Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
+            pageDatas = pageDatas.OrderByDescending(e => e.Id).Skip((input.PageIndex - 1) * input.PageSize + input.Top).Take(input.PageSize).ToList();
 
             return new GetPageDatasOutput()
             {

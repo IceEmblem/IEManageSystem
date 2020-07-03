@@ -32,6 +32,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             {
                 Name = input.Name,
                 Title = input.Title,
+                Describe = input.Describe,
                 Content = input.Content,
                 Tags = input.Tags,
                 Images = input.Images
@@ -47,6 +48,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             var post = _pageDataManager.PostRepository.FirstOrDefault(input.Id);
             post.Name = input.Name;
             post.Title = input.Title;
+            post.Describe = input.Describe;
             post.Content = input.Content;
             post.Tags = input.Tags;
             post.Images = input.Images;

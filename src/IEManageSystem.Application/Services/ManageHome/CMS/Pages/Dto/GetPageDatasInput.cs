@@ -13,6 +13,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
         [Range(1, 99999999)]
         public int PageSize { get; set; }
 
+        public int Top { get; set; }
+
         public string SearchKey { get; set; }
 
         public bool EnablePageFilter { get; set; }

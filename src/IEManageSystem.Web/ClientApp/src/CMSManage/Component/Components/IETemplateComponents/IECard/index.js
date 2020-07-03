@@ -16,5 +16,5 @@ class ComponentObject extends BaseComponentObject{
     };
 }
 
-let componentDescribe = new ComponentDescribe("IECard", new ComponentObject(), componentType.other);
+let componentDescribe = new ComponentDescribe("IECard", new ComponentObject(), componentType.other, "IE卡片");
 export default componentDescribe;

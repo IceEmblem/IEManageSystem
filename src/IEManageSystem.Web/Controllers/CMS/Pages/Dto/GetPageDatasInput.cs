@@ -14,9 +14,10 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages.Dto
         [Range(1, 99999999)]
         public int PageSize { get; set; }
 
+        public int Top { get; set; }
+
         public string SearchKey { get; set; }
 
-        // 可通过页面名称或页面Id查找页面文章
         public string PageName { get; set; }
     }
 }

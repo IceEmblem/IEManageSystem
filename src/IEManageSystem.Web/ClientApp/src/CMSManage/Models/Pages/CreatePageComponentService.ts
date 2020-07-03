@@ -4,7 +4,7 @@ import PageLeafSettingModel from "./PageLeafSettingModel";
 class CreatePageComponentService{
     private createComponent(sign:string, name:string, componentType:string):PageComponentModel
     {
-        let pageComponent:PageComponentModel = {
+        let pageComponent:PageComponentModel = new PageComponentModel({
             id: 0,
             sign: sign,
             name: name,
@@ -20,16 +20,16 @@ class CreatePageComponentService{
                 backgroundImage: null,
                 className: null,
             },
-            pageLeafSetting: new PageLeafSettingModel({
-                pageName: null,
+            pageLeafSetting: {
+                pageName: "",
                 pageSize: 10,
                 top: 0,
-                searchKey: null,
-            }),
+                searchKey: "",
+            },
             menuName: null,
             componentType: componentType,
             pageComponentSettings: []
-        };
+        });
 
         return pageComponent;
     }

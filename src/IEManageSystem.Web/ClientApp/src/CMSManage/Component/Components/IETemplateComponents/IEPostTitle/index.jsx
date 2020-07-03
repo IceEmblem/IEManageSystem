@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseComponentObject from '../../BaseComponents/BaseStaticComponent';
-import IEPageSetting from './IEPageSetting';
+
+import IEPostTitle from './IEPostTitle';
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
 import ComponentSettingConfig from '../../BaseComponents/BaseComponent/ComponentSettingConfig';
@@ -8,7 +9,7 @@ import SettingConfig from './SettingConfig'
 
 class ComponentObject extends BaseComponentObject{
     ComponentSettingConfigs = [
-        ComponentSettingConfig.BuildPageComponentSettingConfig("PageSetting", "页面设置",
+        ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "组件设置",
             (pageComponentSetting, setPageComponentSetting) => {
                 return <SettingConfig
                     data={pageComponentSetting}
@@ -18,12 +19,12 @@ class ComponentObject extends BaseComponentObject{
         )
     ];
     Component(props){
-        return <IEPageSetting {...props} />
+        return <IEPostTitle {...props} />
     }
     Preview() {
-        return <p>IE-页面设置</p>
+        return <p>IE-文章标题</p>
     };
 }
 
-let componentDescribe = new ComponentDescribe("IEPageSetting", new ComponentObject(), componentType.other, "IE页面设置");
+let componentDescribe = new ComponentDescribe("IEPostTitle", new ComponentObject(), componentType.text, "IE文章标题");
 export default componentDescribe;

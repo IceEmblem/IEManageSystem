@@ -68,7 +68,7 @@ class PageContainer extends React.Component {
     submitPage() {
         this.props.pageComponentUpdateFetch(
             this.props.pageName,
-            this.props.page.pageComponents,
+            this.props.page.getAllChilds(),
             this.props.defaultComponentDatas
         );
     }
@@ -79,11 +79,11 @@ class PageContainer extends React.Component {
         }
 
         let pageComponent = CreateComponentService.createComponent(
-            this.props.page.pageComponents,
             selectedComponentDescribe,
             this.state.curParentComponent ? this.state.curParentComponent.sign : null);
 
         this.props.addComponent(pageComponent);
+        this.setState({});
     }
 
     render() {
@@ -166,15 +166,11 @@ PageContainer.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-
-    let childPageComponents = state.page.pageComponents.filter(item => !item.parentSign);
-    let defaultComponentDatas = state.defaultComponentDatas;
-
     return {
         page: state.page,
         pageName: ownProps.pageName,
-        childPageComponents: childPageComponents,
-        defaultComponentDatas: defaultComponentDatas
+        childPageComponents: state.page.getRootPageComponents(),
+        defaultComponentDatas: state.defaultComponentDatas
     }
 }
 

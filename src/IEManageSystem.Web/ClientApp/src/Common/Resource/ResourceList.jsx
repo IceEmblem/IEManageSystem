@@ -95,6 +95,11 @@ export default class ResourceList extends React.Component {
             return texts;
         }
 
+        if (describe.valueType === ResourceDescribeValueType.dateTime) {
+            texts.push(resource[describe.name]);
+            return texts;
+        }
+
         return texts;
     }
 

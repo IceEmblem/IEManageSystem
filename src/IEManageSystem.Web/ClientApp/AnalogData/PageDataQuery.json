@@ -5,18 +5,22 @@
                 "id": 1,
                 "name": "post",
                 "title": "文章1",
+                "describe": "文章1的简短描述",
                 "content":"文章内容1",
                 "tags": "标签1|标签2",
                 "images": "/1.jpg|/2.jpg",
+                "creationTime": "2020-7-1 12:00:00",
                 "pageId": 2
             },
             {
                 "id": 2,
                 "name": "post",
                 "title": "文章2",
+                "describe": "文章2的简短描述",
                 "content":"文章内容2",
                 "tags": "标签1|标签2",
                 "images": "/1.jpg|/2.jpg",
+                "creationTime": "2020-7-1 12:00:00",
                 "pageId": 3
             }
         ],
@@ -28,9 +32,11 @@
             "id": 1,
             "name": "post",
             "title": "文章1",
+            "describe": "文章1的简短描述",
             "content":"文章内容",
             "tags": "标签1|标签2",
             "images": "/1.jpg|/2.jpg",
+            "creationTime": "2020-7-1 12:00:00",
             "pageId": 2
         },
         "contentComponentDatas": []

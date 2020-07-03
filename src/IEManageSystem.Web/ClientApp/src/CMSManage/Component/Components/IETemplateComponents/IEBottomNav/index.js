@@ -25,5 +25,5 @@ class ComponentObject extends BaseComponentObject{
     };
 }
 
-const componentDescribe = new ComponentDescribe("IEBottomNav", new ComponentObject(), componentType.nav);
+const componentDescribe = new ComponentDescribe("IEBottomNav", new ComponentObject(), componentType.nav, "IE底部导航栏");
 export default componentDescribe;
