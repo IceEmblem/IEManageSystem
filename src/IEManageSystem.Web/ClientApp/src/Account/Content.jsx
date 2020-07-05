@@ -34,6 +34,7 @@ class Content extends React.Component {
 			AccountIDR: "",
 			PasswordR: "",
 			PasswordRC: "",
+			isRemember: false
 		}
 	}
 
@@ -60,7 +61,7 @@ class Content extends React.Component {
 
 		ieReduxFetch("/api/Account/LoginAsync", postdata)
 			.then(result => {
-				IEToken.setToken(result.access_token);
+				IEToken.setToken(result.access_token, this.state.isRemember);
 
 				// 跳转管理中心
 				this.props.history.push("/ManageHome/Index");
@@ -147,7 +148,7 @@ class Content extends React.Component {
 								this.state.LoginPanelState == LoginPanelState.Login ?
 									(
 										<div className="mb-3">
-											<Checkbox className="text-white" onChange={(e) => { }}>记住我</Checkbox>
+											<Checkbox className="text-white" onChange={(e) => { this.setState({isRemember: e.target.checked}) }}>记住我</Checkbox>
 										</div>
 									) :
 									(

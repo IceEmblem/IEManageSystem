@@ -27,8 +27,8 @@ export default class PageLeafSettingConfig extends BaseConfig {
         let pageList = this.state.pages.map(item => <Select.Option key={item.id} value={item.name}>{item.displayName}</Select.Option>);
 
         return (
-            <div className="w-100">
-                <div className="col-md-12 mb-3">
+            <div className="w-100 d-flex flex-wrap">
+                <div className="col-md-6 mb-3">
                     <label htmlFor="sel1">指定文章类型:</label>
                     <div className="input-group mb-3">
                         <Select
@@ -47,7 +47,7 @@ export default class PageLeafSettingConfig extends BaseConfig {
                         </Select>
                     </div>
                 </div>
-                <div className="col-md-12 mb-3">
+                <div className="col-md-3 mb-3">
                     <label>页大小</label>
                     <div className="input-group mb-3">
                         <InputNumber
@@ -60,22 +60,6 @@ export default class PageLeafSettingConfig extends BaseConfig {
                                 }
                             }
                             suffix={<Tag color="#55acee">页大小</Tag>}
-                        />
-                    </div>
-                </div>
-                <div className="col-md-12 mb-3">
-                    <label>过滤数</label>
-                    <div className="input-group mb-3">
-                        <InputNumber
-                            placeholder="过滤数"
-                            value={this.props.data.top}
-                            onChange={
-                                (value) => {
-                                    this.props.data.top = value || 0;
-                                    this.props.setData(this.props.data)
-                                }
-                            }
-                            suffix={<Tag color="#55acee">过滤数</Tag>}
                         />
                     </div>
                 </div>
@@ -92,6 +76,22 @@ export default class PageLeafSettingConfig extends BaseConfig {
                                 }
                             }
                             suffix={<Tag color="#55acee">搜索关键字</Tag>}
+                        />
+                    </div>
+                </div>
+                <div className="col-md-3 mb-3">
+                    <label>过滤数</label>
+                    <div className="input-group mb-3">
+                        <InputNumber
+                            placeholder="过滤数"
+                            value={this.props.data.top}
+                            onChange={
+                                (value) => {
+                                    this.props.data.top = value || 0;
+                                    this.props.setData(this.props.data)
+                                }
+                            }
+                            suffix={<Tag color="#55acee">过滤数</Tag>}
                         />
                     </div>
                 </div>
