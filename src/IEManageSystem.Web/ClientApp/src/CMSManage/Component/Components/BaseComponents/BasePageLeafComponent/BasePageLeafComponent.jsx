@@ -1,58 +1,76 @@
 import PropTypes from 'prop-types'
-import {ieReduxFetch} from "Core/IEReduxFetch"
+import { ieReduxFetch } from "Core/IEReduxFetch"
 import { BaseComponent, BaseComponentProps } from '../BaseComponent'
 import PageDataModel from '../../../../Models/PageDatas/PageDataModel'
 
 export class PageLeafComponentProps extends BaseComponentProps {
-    constructor(){
+    constructor() {
         super();
         this.pageLeafSetting = null;
     }
 }
 
 
-class BasePageLeafComponent extends BaseComponent 
-{
+class BasePageLeafComponent extends BaseComponent {
     constructor(props) {
         super(props);
 
         this.state = {
-            pageDatas: []
-        }
-    }
-
-    componentDidMount()
-    {
-        this.getPageDateFetchs(1);
-    }
-
-    getPageDateFetchs(pageIndex)
-    {
-        if(!this.props.pageLeafSetting){
-            return;
-        }
-
-        let postData = {
             pageName: this.props.pageLeafSetting.pageName,
-            pageIndex: pageIndex,
+            pageIndex: 1,
             pageSize: this.props.pageLeafSetting.pageSize,
             top: this.props.pageLeafSetting.top,
             searchKey: this.props.pageLeafSetting.searchKey,
+            pageDatas: [],
+            resourceNum: 0,
+            invalid: false,
+        }
+    }
+
+    componentDidMount() {
+        this.getPageDateFetchs();
+    }
+
+    componentWillReceiveProps(nextprops) {
+        this.setState({
+            pageName: nextprops.pageLeafSetting.pageName,
+            pageSize: nextprops.pageLeafSetting.pageSize,
+            top: nextprops.pageLeafSetting.top,
+            searchKey: nextprops.pageLeafSetting.searchKey,
+        })
+    }
+
+    componentWillUpdate(nextProps, nextState){
+        if ( nextState.pageName != this.state.pageName
+            ||  nextState.pageIndex != this.state.pageIndex
+            ||  nextState.pageSize != this.state.pageSize
+            ||  nextState.top != this.state.top
+            ||  nextState.searchKey != this.state.searchKey) 
+        {
+            this.setState({invalid: true});
+        }
+    }
+    
+    componentDidUpdate(){
+        if(this.state.invalid){
+            this.setState({invalid: false});
+            this.getPageDateFetchs();
+        }
+    }
+
+    getPageDateFetchs() {
+        let postData = {
+            pageName: this.state.pageName,
+            pageIndex: this.state.pageIndex,
+            pageSize: this.state.pageSize,
+            top: this.state.top,
+            searchKey: this.state.searchKey,
         }
 
         ieReduxFetch("/api/PageDataQuery/GetPageDatas", postData)
-        .then(value=>{
-            this.setState({pageDatas: value.pageDatas.map(item=>new PageDataModel(item))});
-        });
-    }
-
-    // 获取页面文章数据，如果没有，则返回基本组件提供的示例数据
-    getPageDatasOrDemoDatas(){
-        if(this.state.pageDatas.length == 0){
-            return [].map(item=>new PageDataModel(item));
-        }
-
-        return this.state.pageDatas;
+            .then(value => {
+                this.setState({ pageDatas: value.pageDatas.map(item => new PageDataModel(item)), resourceNum: value.resourceNum  });
+            });
     }
 }
 

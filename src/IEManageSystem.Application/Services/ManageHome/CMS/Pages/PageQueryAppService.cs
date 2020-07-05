@@ -176,6 +176,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             else if (component is PageLeafComponent)
             {
                 var pageLeafComponent = (PageLeafComponent)component;
+                dto.PageLeafSetting = _objectMapper.Map<PageLeafSettingDto>(pageLeafComponent.PageLeafSetting);
 
                 dto.SetPageLeafComponentType();
             }
