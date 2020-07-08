@@ -4,6 +4,8 @@ import Container from "CMSManage/Component/Components/IETemplateComponents/Conta
 import IEBottomNav from "CMSManage/Component/Components/IETemplateComponents/IEBottomNav";
 import IEButton from "CMSManage/Component/Components/IETemplateComponents/IEButton";
 import IECard from "CMSManage/Component/Components/IETemplateComponents/IECard";
+import IECarousel from "CMSManage/Component/Components/IETemplateComponents/IECarousel";
+import IECategoryLabel from "CMSManage/Component/Components/IETemplateComponents/IECategoryLabel";
 import IEDrawer from "CMSManage/Component/Components/IETemplateComponents/IEDrawer";
 import IEImg from "CMSManage/Component/Components/IETemplateComponents/IEImg";
 import IELink from "CMSManage/Component/Components/IETemplateComponents/IELink";
@@ -19,5 +21,5 @@ import NotFind from "CMSManage/Component/Components/IETemplateComponents/NotFind
 import RichTextEditor from "CMSManage/Component/Components/IETemplateComponents/RichTextEditor";
 import Text from "CMSManage/Component/Components/IETemplateComponents/Text";
 
-const componentDescribes = [Container,IEBottomNav,IEButton,IECard,IEDrawer,IEImg,IELink,IELogo,IEMenu,IEPageSetting,IEPostContent,IEPostList,IEPostTitle,IESearch,IESelect,NotFind,RichTextEditor,Text,];
+const componentDescribes = [Container,IEBottomNav,IEButton,IECard,IECarousel,IECategoryLabel,IEDrawer,IEImg,IELink,IELogo,IEMenu,IEPageSetting,IEPostContent,IEPostList,IEPostTitle,IESearch,IESelect,NotFind,RichTextEditor,Text,];
 export default componentDescribes;

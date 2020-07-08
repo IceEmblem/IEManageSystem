@@ -1,4 +1,4 @@
-import ContentComponentDataModel from "../ComponentDataModel";
+import TagModel from "./TagModel";
 
 export default class PageDataModel{
     public id: number;
@@ -7,8 +7,7 @@ export default class PageDataModel{
     public describe: string | null;
     public pageId : number;
     public content : string | null;
-    public tags : string | null;
-    public tagList : Array<string> = [];
+    public tags : Array<TagModel>;
     public images : string | null;
     public imageList : Array<string> = [];
     public creationTime : Date;
@@ -22,9 +21,11 @@ export default class PageDataModel{
         this.content = data.content;
         this.creationTime = data.creationTime;
 
-        this.tags = data.tags;
-        if(this.tags){
-            this.tagList = this.tags.split('|');
+        this.tags = [];
+        if(data.tags) {
+            data.tags.forEach(element => {
+                this.tags.push(new TagModel(element));
+            });
         }
 
         this.images = data.images;

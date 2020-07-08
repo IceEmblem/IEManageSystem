@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
-import { pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch, pageDataClear } from 'CMSManage/IEReduxs/Actions'
 import FrontCompontContainer from 'CMSManage/Component/ComponentContainers/FrontCompontContainer'
 import Page from './Page'
 
@@ -15,6 +15,7 @@ class PageContainer extends React.Component {
             isLoad: false
         };
 
+        this.props.pageDataClear();
         Promise.all([
             this.props.pageFetch(this.props.pageName),
             this.getpageData()
@@ -25,6 +26,7 @@ class PageContainer extends React.Component {
 
     componentWillUpdate(nextProps) {
         if (this.props.pageName != nextProps.pageName) {
+            this.props.pageDataClear();
             this.props.pageFetch(this.props.pageName);
             this.getpageData();
 
@@ -32,6 +34,7 @@ class PageContainer extends React.Component {
         }
 
         if (this.props.pageDataName != nextProps.pageDataName) {
+            this.props.pageDataClear();
             this.getpageData();
 
             return;
@@ -71,7 +74,8 @@ PageContainer.propTypes = {
     pageName: PropTypes.string.isRequired,
     pageDataName: PropTypes.string,
     pageFetch: PropTypes.func.isRequired,
-    pageDataFetch: PropTypes.func.isRequired
+    pageDataFetch: PropTypes.func.isRequired,
+    pageDataClear: PropTypes.func.isRequired,
 }
 
 PageContainer.defaultProps = {
@@ -93,6 +97,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         pageDataFetch: (pageName, pageDataName) => {
             dispatch(pageDataFetch(pageName, pageDataName));
+        },
+        pageDataClear: () => {
+            return dispatch(pageDataClear());
         }
     }
 }

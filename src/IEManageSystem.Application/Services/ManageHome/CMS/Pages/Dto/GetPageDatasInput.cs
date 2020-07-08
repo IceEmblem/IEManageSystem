@@ -20,5 +20,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
         public bool EnablePageFilter { get; set; }
 
         public List<int> PageIds { get; set; }
+
+        public List<string> Tags { get; set; }
     }
 }

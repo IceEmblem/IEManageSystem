@@ -49,6 +49,10 @@ export default abstract class DataCollectionBase {
         return data;
     }
 
+    deleteSingleData(sortIndex: Number){
+        this.singleDatas = this.singleDatas.filter(item=>item.sortIndex != sortIndex);
+    }
+
     getSingleDatas(name:string){
         return this.singleDatas.filter(e=>e.name == name);
     }

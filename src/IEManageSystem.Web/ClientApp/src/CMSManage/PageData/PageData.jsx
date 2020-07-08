@@ -169,7 +169,7 @@ class PageData extends React.Component {
 
 		pageData.tagList = [];
 		if (pageData.tags) {
-			pageData.tagList = pageData.tags.split('|');
+			pageData.tagList = pageData.tags.map(item=>item.name);
 		}
 
 		pageData.imageList = [];
@@ -180,15 +180,13 @@ class PageData extends React.Component {
 
 	// 将Resource组件的数据转为文章数据
 	resourceToPageData(resource) {
-		resource.tags = "";
+		resource.tags = [];
 		if(resource.tagList){
 			for(let index = 0; index < resource.tagList.length; index++){
-				if (index == resource.tagList.length - 1) {
-					resource.tags = resource.tags + resource.tagList[index];
-				}
-				else {
-					resource.tags = resource.tags + resource.tagList[index] + "|";
-				}
+				resource.tags.push({
+					name: resource.tagList[index],
+					displayName: resource.tagList[index]
+				});
 			}
 		}
 

@@ -57,7 +57,10 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
 
         public void DeletePageData(string pageName, string pageDataName)
         {
-            var pageData = PostRepository.FirstOrDefault(e=>e.Name == pageDataName && e.Page.Name == pageName);
+            var pageData = PostRepository.GetAllIncluding(new Expression<Func<PageData, object>>[] {
+                    e=>e.Tags
+                }).FirstOrDefault(e => e.Name == pageDataName && e.Page.Name == pageName);
+
             if (pageData == null)
             {
                 throw new UserFriendlyException("找不到要删除的文章");

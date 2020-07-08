@@ -18,6 +18,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages.Dto
 
         public string SearchKey { get; set; }
 
+        public List<string> Tags { get; set; }
+
         public string PageName { get; set; }
     }
 }

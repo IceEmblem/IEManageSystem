@@ -45,15 +45,21 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             IEnumerable<PageData> pageDatas = null;
             if (input.EnablePageFilter)
             {
-                pageDatas = _pageDataManager.PostRepository.GetAll().Where(e => input.PageIds.Contains(e.PageId));
+                pageDatas = _pageDataManager.PostRepository.GetAllIncluding(e=>e.Tags).Where(e => input.PageIds.Contains(e.PageId));
             }
             else
             {
-                pageDatas = _pageDataManager.PostRepository.GetAll();
+                pageDatas = _pageDataManager.PostRepository.GetAllIncluding(e => e.Tags);
             }
 
             if (!string.IsNullOrWhiteSpace(input.SearchKey)) {
                 pageDatas = pageDatas.Where(e => e.Title.Contains(input.SearchKey));
+            }
+
+            if (input.Tags != null && input.Tags.Count > 0) {
+                foreach (var item in input.Tags) {
+                    pageDatas = pageDatas.Where(e => e.Tags.Any(ie => ie.Name == item));
+                }
             }
             
             int num = pageDatas.Count();

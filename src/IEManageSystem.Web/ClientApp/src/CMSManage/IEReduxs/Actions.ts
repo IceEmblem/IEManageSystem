@@ -44,6 +44,7 @@ export function pageFetch(name:string){
     PageReceive
   );
 }
+
 // 该动作模拟页面接收动作
 export function setPage(page:PageModel, defaultComponentDatas:Array<ComponentDataModel>){
   return {
@@ -84,6 +85,14 @@ export function pageDataFetch(pageName:string, pageDataName:string){
     postData,
     PageDataReceive
   );
+}
+
+// 清理文章数据（如果页面是静态页，则文章没有数据，这时候应该清理文章）
+export const PageDataClear = "PageDataClear";
+export function pageDataClear(){
+  return {
+    type: PageDataClear
+  }
 }
 
 // 文章数据更新请求

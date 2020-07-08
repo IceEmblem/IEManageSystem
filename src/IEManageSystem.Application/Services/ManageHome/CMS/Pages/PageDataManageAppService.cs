@@ -8,6 +8,8 @@ using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Services.ManageHome.CMS.Pages.Dto;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Pages
@@ -34,7 +36,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 Title = input.Title,
                 Describe = input.Describe,
                 Content = input.Content,
-                Tags = input.Tags,
+                Tags = input.Tags.Select(e=>new Tag() { Name = e.Name, DisplayName = e.DisplayName }).ToList(),
                 Images = input.Images
             };
 
@@ -45,12 +47,14 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public UpdatePageDataOutput UpdatePageData(UpdatePageDataInput input)
         {
-            var post = _pageDataManager.PostRepository.FirstOrDefault(input.Id);
+            var post = _pageDataManager.PostRepository.GetAllIncluding(new Expression<Func<PageData, object>>[] {
+                    e=>e.Tags
+                }).FirstOrDefault(e => e.Id == input.Id);
             post.Name = input.Name;
             post.Title = input.Title;
             post.Describe = input.Describe;
             post.Content = input.Content;
-            post.Tags = input.Tags;
+            post.Tags = input.Tags.Select(e => new Tag() { Name = e.Name, DisplayName = e.DisplayName }).ToList();
             post.Images = input.Images;
             _pageDataManager.UpdatePageData(input.PageName, post);
 

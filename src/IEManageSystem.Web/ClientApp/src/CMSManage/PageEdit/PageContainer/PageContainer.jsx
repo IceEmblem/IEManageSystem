@@ -8,7 +8,7 @@ import './PageContainer.css'
 
 import PageEditCompontContainer from 'CMSManage/Component/ComponentContainers/PageEditCompontContainer'
 
-import { pageAddComponent, pageComponentUpdateFetch, pageFetch } from 'CMSManage/IEReduxs/Actions'
+import { pageAddComponent, pageComponentUpdateFetch, pageFetch, pageDataClear } from 'CMSManage/IEReduxs/Actions'
 
 import BtnLists from './BtnLists'
 import PromptBox from 'PromptBox'
@@ -30,6 +30,7 @@ class PageContainer extends React.Component {
         this.submitPage = this.submitPage.bind(this);
         this.addComponent = this.addComponent.bind(this);
 
+        this.props.pageDataClear();
         this.props.pageFetch(props.pageName)
             .then(value => {
                 this.setState({ isload: true });
@@ -163,7 +164,8 @@ PageContainer.propTypes = {
     defaultComponentDatas: PropTypes.array.isRequired,
     addComponent: PropTypes.func.isRequired,
     pageComponentUpdateFetch: PropTypes.func.isRequired,
-    pageFetch: PropTypes.func.isRequired
+    pageFetch: PropTypes.func.isRequired,
+    pageDataClear: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -185,6 +187,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         pageFetch: (name) => {
             return dispatch(pageFetch(name));
+        },
+        pageDataClear: () => {
+            return dispatch(pageDataClear());
         }
     }
 }

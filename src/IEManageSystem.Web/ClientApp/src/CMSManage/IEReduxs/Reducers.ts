@@ -5,7 +5,8 @@ import {
     PageReceive,
     PageDataReceive,
     ComponentDataUpdate,
-    DefaultComponentDataUpdate
+    DefaultComponentDataUpdate,
+    PageDataClear,
 } from './Actions'
 import PageModel from '../Models/Pages/PageModel'
 import PageDataModel from '../Models/PageDatas/PageDataModel'
@@ -120,13 +121,17 @@ function defaultComponentDatas(
 
 function pageData(
     state: PageDataModel = new PageDataModel({
-        id: 0,
-        name: "initPage",
-        title: ""
+        id: 0
     }),
     action: any) {
     if (action.type == PageDataReceive) {
         return new PageDataModel(action.data.pageData);
+    }
+
+    if(action.type == PageDataClear){
+        return new PageDataModel({
+            id: 0
+        });
     }
 
     return state;
@@ -155,6 +160,10 @@ function contentComponentDatas(state: Array<ComponentDataModel> = [],
         });
 
         return datas;
+    }
+
+    if(action.type == PageDataClear){
+        return [];
     }
 
     return state;

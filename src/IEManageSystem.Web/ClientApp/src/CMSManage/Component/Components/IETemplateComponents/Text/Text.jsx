@@ -25,19 +25,19 @@ class Text extends BaseContentLeafComponent {
         this.data.setData(this.props.componentData);
 
         if (this.setting.textType == "h1") {
-            return (<Title level={1} style={{ color: this.setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
+            return (<Title className="mb-0" level={1} style={{ color: this.setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
         }
         if (this.setting.textType == "h2") {
-            return (<Title level={2} style={{ color: this.setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
+            return (<Title className="mb-0" level={2} style={{ color: this.setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
         }
         if (this.setting.textType == "h3") {
-            return (<Title level={3} style={{ color: this.setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
+            return (<Title className="mb-0" level={3} style={{ color: this.setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
         }
         if (this.setting.textType == "h4") {
-            return (<Title level={4} style={{ color: this.setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
+            return (<Title className="mb-0" level={4} style={{ color: this.setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
         }
 
-        return (<p style={{ color: this.setting.fontColor }}>{this.data.text} <small>{this.data.smallText}</small></p>);
+        return (<p className="mb-0" style={{ color: this.setting.fontColor }}>{this.data.text} <small>{this.data.smallText}</small></p>);
     }
 }
 

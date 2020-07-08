@@ -75,7 +75,11 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         pageFreshen: (pageName, pageDataName) => {
-            return Promise.all([dispatch(pageFetch(pageName)), dispatch(pageDataFetch(pageName, pageDataName))]);
+            let promises = [dispatch(pageFetch(pageName))];
+            if(pageDataName && pageDataName != ""){
+                promises.push(dispatch(pageDataFetch(pageName, pageDataName)));
+            }
+            return Promise.all(promises);
         }
     }
 }
