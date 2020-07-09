@@ -11,6 +11,9 @@ export default class PageDataModel{
     public images : string | null;
     public imageList : Array<string> = [];
     public creationTime : Date;
+    public score: number;
+    public scoreNum: number;
+    public click: number;
 
     constructor(data:any)
     {
@@ -20,6 +23,9 @@ export default class PageDataModel{
         this.describe = data.describe;
         this.content = data.content;
         this.creationTime = data.creationTime;
+        this.score = data.score;
+        this.scoreNum = data.scoreNum;
+        this.click = data.click;
 
         this.tags = [];
         if(data.tags) {

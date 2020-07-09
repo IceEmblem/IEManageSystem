@@ -58,19 +58,6 @@ namespace IEManageSystem.Web.Startup
                                  );
                              }
                          }
-
-                         foreach (var attr in controllerModel.Attributes)
-                         {
-                             // 如果控制器有应用ApiAuthorization特性
-                             if (attr.GetType() == typeof(ApiAuthorizationAttribute) ||
-                                attr.GetType().IsSubclassOf(typeof(ApiAuthorizationAttribute))) {
-
-                                 var apiAuthorizationAttribute = (ApiAuthorizationAttribute)attr;
-
-                                 // 添加授权过滤器
-                                 controllerModel.Filters.Add(new ApiAuthorizationFilter(apiAuthorizationAttribute.ApiScopeName));
-                             }
-                         }
                      }
                  });
         }

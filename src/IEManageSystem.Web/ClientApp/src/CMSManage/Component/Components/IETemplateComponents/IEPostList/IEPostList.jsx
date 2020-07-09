@@ -37,7 +37,7 @@ export default class IEPostList extends BasePageLeafComponent {
                                 }
                             >
                                 <Card.Meta className="mb-2" title={item.title} description={item.describe || "暂无简介"} />
-                                <Card.Meta className="mb-2" description={`标签：${tagDisplayNames.join("，")}`} />
+                                <Card.Meta className="mb-2" description={`评分：${item.score} | 点击量：${item.click}`} />
                                 <Card.Meta className="text-right" description={new Date(item.creationTime).toLocaleDateString()} />
                             </Card>
                         </List.Item>)

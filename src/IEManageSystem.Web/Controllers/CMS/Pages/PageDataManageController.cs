@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IEManageSystem.Web.Controllers.CMS.Pages.Dto;
+using IEManageSystem.Attributes;
 
 namespace IEManageSystem.Web.Controllers.CMS.Pages
 {
@@ -121,43 +122,13 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             return _pageDataManageAppService.UpdateComponentData(input);
         }
 
-        ///// <summary>
-        ///// 访问文章（增加文章访问量）
-        ///// </summary>
-        ///// <param name="input"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //public ActionResult<VisitPageDataOutput> VisitPageData([FromBody] VisitPageDataInput input)
-        //{
-        //    int pageId;
-        //    if (int.TryParse(input.PageName, out pageId))
-        //    {
-        //        string pageName = _pageManager.GetPageNameCache(pageId);
-
-        //        if (!string.IsNullOrWhiteSpace(pageName))
-        //        {
-        //            input.PageName = pageName;
-        //        }
-        //    }
-
-        //    if (!IsQueryAccess(input.PageName))
-        //    {
-        //        throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
-        //    }
-
-        //    var post = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.Page.Name == input.PageName);
-        //    post.ToClick();
-
-        //    return new VisitPageDataOutput();
-        //}
-
         /// <summary>
         /// 文章评分
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        [Microsoft.AspNetCore.Authorization.Authorize()]
+        [ApiAuthorization]
         public ActionResult<ScorePageDataOutput> ScorePageData([FromBody] ScorePageDataInput input) 
         {
             int pageId;

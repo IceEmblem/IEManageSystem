@@ -1,6 +1,7 @@
 ﻿using Abp.Collections.Extensions;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
+using Abp.UI;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Entitys.Authorization.Users;
@@ -54,13 +55,17 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         public void ToScore(int score, int userId) 
         {
             if (score < 0 || score > 10) {
-                throw new Exception("评分范围错误");
+                throw new UserFriendlyException("无效的评分范围");
             }
 
             string userIdStr = userId.ToString();
-            List<string> userIds = ScoreUser.Split("|").ToList();
+            List<string> userIds = ScoreUser == null ? new List<string>() : ScoreUser.Split("|").ToList();
             if (userIds.Any(e=>e == userIdStr)) {
-                throw new Exception("用户已评论过，无法再评论");
+                throw new UserFriendlyException("已评分，无法再次评分");
+            }
+
+            if (userIds.Count > 5000) {
+                throw new UserFriendlyException("评分人数已达到上限");
             }
 
             double sum = Score * ScoreNum;

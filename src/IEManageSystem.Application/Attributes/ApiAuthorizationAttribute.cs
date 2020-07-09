@@ -11,7 +11,7 @@ namespace IEManageSystem.Attributes
     /// <summary>
     /// Api授权特性，作用于控制器上或AppService上，应用此特性将会启用Api域的授权检查
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class , AllowMultiple = true, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public class ApiAuthorizationAttribute : Attribute
     {
         public string ApiScopeName { get; set; }

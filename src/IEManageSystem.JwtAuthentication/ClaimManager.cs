@@ -34,7 +34,7 @@ namespace IEManageSystem.JwtAuthentication
         public UserClaimInfo CreateUserClaimInfo(IEnumerable<Claim> claims) 
         {
             return new UserClaimInfo(
-                claims.FirstOrDefault(e=>e.Type == JwtClaimType.Subject).Value, 
+                claims.FirstOrDefault(e=>e.Type == JwtClaimType.NameIdentifier).Value, 
                 claims.Where(e => e.Type == JwtClaimType.Permission).Select(e => e.Value));
         }
 

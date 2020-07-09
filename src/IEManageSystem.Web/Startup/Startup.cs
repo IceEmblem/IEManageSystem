@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.StaticFiles.Infrastructure;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging.Debug;
+using IEManageSystem.Web.Conventions;
 
 namespace IEManageSystem.Web.Startup
 {
@@ -59,6 +60,8 @@ namespace IEManageSystem.Web.Startup
                 // .net core 自动将移除 Async 后缀，如方法 LoginAsync 的路由为 /Controller/Login
                 // 设为发 false 则不会移除
                 options.SuppressAsyncSuffixInActionNames = false;
+
+                options.Conventions.Insert(0, new IEApiConvention());
             }).AddNewtonsoftJson(options => { 
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });

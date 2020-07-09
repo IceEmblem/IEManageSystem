@@ -74,14 +74,17 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
     requestAction.fecthSign = curFecthSign;
     dispatch(requestAction);
 
+    let headers : any = {
+      'Content-Type': 'application/json'
+    }
     let token = IEToken.getToken();
+    if(token && token != ""){
+      headers.Authorization = "Bearer " + token;
+    }
 
     return fetch(url, {
       method: 'post',
-      headers: {
-        'Authorization': "Bearer " + token || "",
-        'Content-Type': 'application/json'
-      },
+      headers: headers,
       body: JSON.stringify(postData)
     }).then(
       response => {

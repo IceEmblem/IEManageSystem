@@ -24,6 +24,8 @@ namespace IEManageSystem.Dtos.CMS
 
         public int Score { get; set; }
 
+        public int ScoreNum { get; protected set; }
+
         public int Click { get; set; }
 
         public DateTime CreationTime { get; set; }
