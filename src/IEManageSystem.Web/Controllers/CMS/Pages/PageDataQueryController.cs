@@ -154,6 +154,16 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         [HttpPost]
         public ActionResult<GetPageDataOutput> GetPageData([FromBody] GetPageDataInput input)
         {
+            int pageId;
+            if (int.TryParse(input.PageName, out pageId)) 
+            {
+                string pageName = _pageManager.GetPageNameCache(pageId);
+
+                if (!string.IsNullOrWhiteSpace(pageName)) {
+                    input.PageName = pageName;
+                }
+            }
+
             if (!IsCanAccess(input.PageName))
             {
                 throw new Abp.Authorization.AbpAuthorizationException("未授权操作");

@@ -41,6 +41,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         private string GetPageCacheName(string pageName) => $"PageManager_Page_{pageName}_";
 
+        private string GetPageNameCacheName(int id) => $"PageManager_PageName_{id}_";
+
         /// <summary>
         /// 从缓存获取页面
         /// </summary>
@@ -61,6 +63,28 @@ namespace IEManageSystem.CMS.DomainModel.Pages
                 PageRepository.Tracking();
 
                 return page;
+            });
+        }
+
+        /// <summary>
+        /// 从缓存中获取页面的名称
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetPageNameCache(int id) {
+            return _cache.GetOrCreate<string>(GetPageNameCacheName(id), cacheEntity => {
+
+                cacheEntity.SlidingExpiration = TimeSpan.FromHours(1);
+
+                cacheEntity.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+
+                cacheEntity.SetPriority(CacheItemPriority.NeverRemove);
+
+                PageRepository.NoTracking();
+                var pageName = PageRepository.GetAll().Where(e => e.Id == id).Select(e => e.Name).FirstOrDefault();
+                PageRepository.Tracking();
+
+                return pageName;
             });
         }
 

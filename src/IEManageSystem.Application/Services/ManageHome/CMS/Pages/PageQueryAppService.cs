@@ -93,6 +93,18 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         /// <returns>如果不存在页面，需返回 null</returns>
         public GetPageOutput GetPage(GetPageInput input)
         {
+            // 如果输入的是数值字符串，会试图转为 PageId
+            int pageId;
+            if (int.TryParse(input.Name, out pageId))
+            {
+                string pageName = _pageManager.GetPageNameCache(pageId);
+
+                if (!string.IsNullOrWhiteSpace(pageName))
+                {
+                    input.Name = pageName;
+                }
+            }
+
             PageBase page = _pageManager.GetPageForCache(input.Name);
 
             if (page == null)
