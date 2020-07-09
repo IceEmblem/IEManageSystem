@@ -2,6 +2,7 @@ import React from "react";
 import { BaseStaticComponent, BaseStaticComponentProps } from '../../BaseComponents/BaseStaticComponent';
 import Setting from './Setting'
 import './IEBottomNav.css'
+import BeianIcon from './BeianIcon.png'
 
 export default class IEBottomNav extends BaseStaticComponent {
     constructor(props) {
@@ -16,18 +17,27 @@ export default class IEBottomNav extends BaseStaticComponent {
 
     render() {
         this.setting.setSetting(this.getPageComponentSetting());
+        let style = { color: this.setting.color };
 
         return (
             <div className="iebottomnav">
-                <small>&nbsp;</small>
-                <nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-bottom">
-                    <small className="text-white">
+                <div className="d-flex justify-content-center" style={style}>
+                    <small className="mr-3">
                         {this.setting.copyright}
                     </small>
-                    <small className="text-white ml-auto">
+                    <small>
                         {this.setting.text}
                     </small>
-                </nav>
+                </div>
+                {
+                    this.setting.code &&
+                    <div className="d-flex justify-content-center pt-2 pb-2" style={style}>
+                        <div className="d-flex align-items-center mr-1">
+                            <img src={this.setting.beianIcon || BeianIcon} alt="" />
+                        </div>
+                        <div className="d-flex align-items-center" dangerouslySetInnerHTML={{ __html: this.setting.code }}></div>
+                    </div>
+                }
             </div>
         );
     }

@@ -41,18 +41,9 @@ class PageContainer extends React.Component {
         if (!this.props.page) {
             return;
         }
-        var content = JSON.stringify(this.props.page);
-        var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-        window.saveAs(blob, "page.json");
-    }
-
-    exportPage() {
-        if (!this.props.page) {
-            return;
-        }
 
         let data = JSON.stringify({
-            page:this.props.page,
+            page:this.props.page.toJsonObject(),
             defaultComponentDatas: this.props.defaultComponentDatas
         })
 

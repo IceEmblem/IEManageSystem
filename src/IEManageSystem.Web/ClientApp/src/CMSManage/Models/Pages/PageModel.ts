@@ -91,7 +91,7 @@ export default class PageModel {
             displayName: this.displayName,
             description: this.description,
             pageType: this.pageType,
-            pageComponents: this._pageComponentCollection.pageComponents.map(item=>item.toJsonObject())
+            pageComponents: this.getAllChilds().map(item=>item.toJsonObject())
         }
     }
 }

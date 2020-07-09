@@ -20,10 +20,34 @@ export default class Setting {
     }
 
     get text(){
-        return this.setting.getDefauleData().field2 || "由 IceEmblem 开发开发";
+        return this.setting.getDefauleData().field2 || "由 IceEmblem 开发";
     }
 
     set text(val){
         this.setting.getDefauleData().field2 = val;
+    }
+
+    get beianIcon(){
+        return this.setting.getDefauleData().field3;
+    }
+
+    set beianIcon(val){
+        this.setting.getDefauleData().field3 = val;
+    }
+
+    get code(){
+        return this.setting.getDefauleData().field4;
+    }
+
+    set code(val){
+        this.setting.getDefauleData().field4 = val;
+    }
+
+    get color(){
+        return this.setting.getDefauleData().field5;
+    }
+
+    set color(val){
+        this.setting.getDefauleData().field5 = val;
     }
 }
