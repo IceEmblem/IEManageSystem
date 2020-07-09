@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Http;
 using IEManageSystem.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.StaticFiles.Infrastructure;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging.Debug;
 
 namespace IEManageSystem.Web.Startup
 {
@@ -24,9 +26,12 @@ namespace IEManageSystem.Web.Startup
     {
         private IConfigurationRoot _configurationRoot { get; }
 
+        private IWebHostEnvironment _env { get; }
+
         public Startup(IWebHostEnvironment env)
         {
             _configurationRoot = AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName);
+            _env = env;
             WebConfiguration.Init(_configurationRoot);
         }
 
@@ -39,6 +44,14 @@ namespace IEManageSystem.Web.Startup
                     options.DbContextOptions,
                     _configurationRoot.GetConnectionString(IEManageSystemConsts.ConnectionStringName),
                     _configurationRoot.GetSection("ConnectionType").Value);
+
+                if(_env.IsDevelopment()){
+                    LoggerFilterOptions loggerFilterOptions = new LoggerFilterOptions();
+                    loggerFilterOptions.AddFilter((level) => level >= LogLevel.Information);
+
+                    // 日志过滤器
+                    options.DbContextOptions.UseLoggerFactory(new LoggerFactory(new[] { new DebugLoggerProvider() }, loggerFilterOptions));
+                }
             });
 
             services.AddControllersWithViews(options =>

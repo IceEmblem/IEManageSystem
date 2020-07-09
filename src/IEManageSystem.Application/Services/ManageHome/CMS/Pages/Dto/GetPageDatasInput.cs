@@ -22,5 +22,13 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
         public List<int> PageIds { get; set; }
 
         public List<string> Tags { get; set; }
+
+        public string Orderby { get; set; }
+
+        public bool IsScore() => Orderby == "Score";
+
+        public bool IsClick() => Orderby == "Click";
+
+        public bool IsDate() => Orderby == "Date";
     }
 }

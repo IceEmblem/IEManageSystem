@@ -42,7 +42,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         /// <returns></returns>
         public GetPageDatasOutput GetPageDatas(GetPageDatasInput input)
         {
-            IEnumerable<PageData> pageDatas = null;
+            IQueryable<PageData> pageDatas = null;
             if (input.EnablePageFilter)
             {
                 pageDatas = _pageDataManager.PostRepository.GetAllIncluding(e=>e.Tags).Where(e => input.PageIds.Contains(e.PageId));
@@ -63,11 +63,24 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             }
             
             int num = pageDatas.Count();
-            pageDatas = pageDatas.OrderByDescending(e => e.Id).Skip((input.PageIndex - 1) * input.PageSize + input.Top).Take(input.PageSize).ToList();
+            if (input.IsScore())
+            {
+                pageDatas = pageDatas.OrderByDescending(e => e.Score);
+            }
+            else if (input.IsClick())
+            {
+                pageDatas = pageDatas.OrderByDescending(e => e.Click);
+            }
+            else 
+            {
+                pageDatas = pageDatas.OrderByDescending(e => e.Id);
+            }
+
+            var queryResults = pageDatas.Skip((input.PageIndex - 1) * input.PageSize + input.Top).Take(input.PageSize).ToList();
 
             return new GetPageDatasOutput()
             {
-                PageDatas = _objectMapper.Map<List<PageDataDto>>(pageDatas),
+                PageDatas = _objectMapper.Map<List<PageDataDto>>(queryResults),
                 ResourceNum = num,
                 PageIndex = input.PageIndex
             };
@@ -81,6 +94,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         public GetPageDataOutput GetPageData(GetPageDataInput input)
         {
             var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Page.Name == input.PageName && e.Name == input.PageDataName);
+            pageData.ToClick();
 
             Expression<Func<ContentComponentData, object>>[] propertySelectors = {
                 e=>e.SingleDatas

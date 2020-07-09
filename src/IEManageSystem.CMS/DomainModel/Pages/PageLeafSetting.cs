@@ -15,6 +15,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public string SearchKey { get; set; }
 
+        public string Orderby { get; set; }
+
         protected override IEnumerable<object> GetAtomicValues()
         {
             return new List<object>()
@@ -22,7 +24,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
                 PageName,
                 PageSize,
                 Top,
-                SearchKey
+                SearchKey,
+                Orderby
             };
         }
     }

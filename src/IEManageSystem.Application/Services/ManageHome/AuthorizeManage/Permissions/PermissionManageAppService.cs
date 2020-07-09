@@ -35,7 +35,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Permissions
         [ApiAuthorizationQuery]
         public GetPermissionsOutput GetPermissions(GetPermissionsInput input)
         {
-            IEnumerable<Permission> permissions = _permissionManager.PermissionRepository.GetAll().Where(e => (e.Name != null && e.Name.Contains(input.SearchKey)) || string.IsNullOrEmpty(input.SearchKey));
+            IEnumerable<Permission> permissions = _permissionManager.GetPermissionsForCache().Where(e => (e.Name != null && e.Name.Contains(input.SearchKey)) || string.IsNullOrEmpty(input.SearchKey));
 
             int num = permissions.Count();
 

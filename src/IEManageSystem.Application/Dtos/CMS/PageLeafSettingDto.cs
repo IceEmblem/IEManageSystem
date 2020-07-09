@@ -16,5 +16,7 @@ namespace IEManageSystem.Dtos.CMS
         public int Top { get; set; }
 
         public string SearchKey { get; set; }
+
+        public string Orderby { get; set; }
     }
 }

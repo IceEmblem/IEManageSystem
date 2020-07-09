@@ -31,6 +31,13 @@ namespace IEManageSystem.JwtAuthentication
             return claims;
         }
 
+        public UserClaimInfo CreateUserClaimInfo(IEnumerable<Claim> claims) 
+        {
+            return new UserClaimInfo(
+                claims.FirstOrDefault(e=>e.Type == JwtClaimType.Subject).Value, 
+                claims.Where(e => e.Type == JwtClaimType.Permission).Select(e => e.Value));
+        }
+
         /// <summary>
         /// 获取公布的claim类型
         /// </summary>

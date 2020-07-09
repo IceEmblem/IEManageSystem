@@ -93,10 +93,10 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         pageFetch: (name) => {
-            dispatch(pageFetch(name));
+            return dispatch(pageFetch(name));
         },
         pageDataFetch: (pageName, pageDataName) => {
-            dispatch(pageDataFetch(pageName, pageDataName));
+            return dispatch(pageDataFetch(pageName, pageDataName));
         },
         pageDataClear: () => {
             return dispatch(pageDataClear());

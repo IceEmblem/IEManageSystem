@@ -21,6 +21,7 @@ class BasePageLeafComponent extends BaseComponent {
             pageSize: this.props.pageLeafSetting.pageSize,
             top: this.props.pageLeafSetting.top,
             searchKey: this.props.pageLeafSetting.searchKey,
+            orderby: this.props.pageLeafSetting.orderby,
             pageDatas: [],
             resourceNum: 0,
             curtag: this.getQueryVariable("tag"),
@@ -40,6 +41,7 @@ class BasePageLeafComponent extends BaseComponent {
             pageSize: nextprops.pageLeafSetting.pageSize,
             top: nextprops.pageLeafSetting.top,
             searchKey: nextprops.pageLeafSetting.searchKey,
+            orderby: nextprops.pageLeafSetting.orderby,
             curtag: this.getQueryVariable("tag")
         })
     }
@@ -50,6 +52,7 @@ class BasePageLeafComponent extends BaseComponent {
             || nextState.pageSize != this.state.pageSize
             || nextState.top != this.state.top
             || nextState.searchKey != this.state.searchKey
+            || nextState.orderby != this.state.orderby
             || nextState.curtag != this.state.curtag) 
         {
             this.setState({ invalid: true });
@@ -93,6 +96,7 @@ class BasePageLeafComponent extends BaseComponent {
             pageSize: this.state.pageSize,
             top: this.state.top,
             searchKey: this.state.searchKey,
+            orderby: this.state.orderby,
             tags: tags
         }
 

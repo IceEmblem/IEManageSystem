@@ -129,6 +129,7 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             appServiceInput.SearchKey = input.SearchKey;
             appServiceInput.Top = input.Top;
             appServiceInput.Tags = input.Tags;
+            appServiceInput.Orderby = input.Orderby;
             // 如果用户具有 Page域 的管理权限，则用户具有所有页面的管理权限
             if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions))
             {

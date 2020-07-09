@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IEManageSystem.Web.Controllers.CMS.Pages.Dto;
 
 namespace IEManageSystem.Web.Controllers.CMS.Pages
 {
@@ -22,6 +23,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         private IPageDataManageAppService _pageDataManageAppService { get; }
 
         private PageManager _pageManager { get; }
+
+        private PageDataManager _pageDataManager { get; set; }
 
         private PermissionManager _permissionManager { get; }
 
@@ -34,7 +37,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             PageManager pageManager,
             PermissionManager permissionManager,
             ClaimManager claimManager,
-            CheckPermissionService checkPermissionService
+            CheckPermissionService checkPermissionService,
+             PageDataManager pageDataManager
             )
         {
             _pageDataManageAppService = pageDataManageAppService;
@@ -42,14 +46,15 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             _permissionManager = permissionManager;
             _claimManager = claimManager;
             _checkPermissionService = checkPermissionService;
+            _pageDataManager = pageDataManager;
         }
 
         /// <summary>
-        /// 是否拥有访问权限
+        /// 是否拥有管理权限
         /// </summary>
         /// <param name="pageName"></param>
         /// <returns></returns>
-        private bool IsCanAccess(string pageName) 
+        private bool IsCanManage(string pageName) 
         {
             IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
             var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
@@ -58,10 +63,24 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
                 _checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions);
         }
 
+        /// <summary>
+        /// 是否拥有查询权限
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        private bool IsQueryAccess(string pageName)
+        {
+            IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
+            var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
+
+            return _pageManager.IsCanQueryPost(pageName, permissions) ||
+                _checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions);
+        }
+
         [HttpPost]
         public ActionResult<AddPageDataOutput> AddPageData([FromBody] AddPageDataInput input)
         {
-            if (!IsCanAccess(input.PageName))
+            if (!IsCanManage(input.PageName))
             {
                 throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
             }
@@ -72,7 +91,7 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         [HttpPost]
         public ActionResult<UpdatePageDataOutput> UpdatePageData([FromBody] UpdatePageDataInput input)
         {
-            if (!IsCanAccess(input.PageName))
+            if (!IsCanManage(input.PageName))
             {
                 throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
             }
@@ -83,7 +102,7 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         [HttpPost]
         public ActionResult<DeletePageDataOutput> DeletePageData([FromBody] DeletePageDataInput input)
         {
-            if (!IsCanAccess(input.PageName))
+            if (!IsCanManage(input.PageName))
             {
                 throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
             }
@@ -94,12 +113,76 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         [HttpPost]
         public ActionResult<UpdateComponentDataOutput> UpdateComponentData([FromBody] UpdateComponentDataInput input)
         {
-            if (!IsCanAccess(input.PageName))
+            if (!IsCanManage(input.PageName))
             {
                 throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
             }
 
             return _pageDataManageAppService.UpdateComponentData(input);
+        }
+
+        ///// <summary>
+        ///// 访问文章（增加文章访问量）
+        ///// </summary>
+        ///// <param name="input"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //public ActionResult<VisitPageDataOutput> VisitPageData([FromBody] VisitPageDataInput input)
+        //{
+        //    int pageId;
+        //    if (int.TryParse(input.PageName, out pageId))
+        //    {
+        //        string pageName = _pageManager.GetPageNameCache(pageId);
+
+        //        if (!string.IsNullOrWhiteSpace(pageName))
+        //        {
+        //            input.PageName = pageName;
+        //        }
+        //    }
+
+        //    if (!IsQueryAccess(input.PageName))
+        //    {
+        //        throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
+        //    }
+
+        //    var post = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.Page.Name == input.PageName);
+        //    post.ToClick();
+
+        //    return new VisitPageDataOutput();
+        //}
+
+        /// <summary>
+        /// 文章评分
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.Authorize()]
+        public ActionResult<ScorePageDataOutput> ScorePageData([FromBody] ScorePageDataInput input) 
+        {
+            int pageId;
+            if (int.TryParse(input.PageName, out pageId))
+            {
+                string pageName = _pageManager.GetPageNameCache(pageId);
+
+                if (!string.IsNullOrWhiteSpace(pageName))
+                {
+                    input.PageName = pageName;
+                }
+            }
+
+            if (!IsQueryAccess(input.PageName))
+            {
+                throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
+            }
+
+            var userInfo = _claimManager.CreateUserClaimInfo(User.Claims);
+            int userId;
+            int.TryParse(userInfo.Subject, out userId);
+            var post = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.Page.Name == input.PageName);
+            post.ToScore(input.Score, userId);
+
+            return new ScorePageDataOutput();
         }
     }
 }

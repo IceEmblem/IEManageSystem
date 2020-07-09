@@ -20,6 +20,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages.Dto
 
         public List<string> Tags { get; set; }
 
+        public string Orderby { get; set; }
+
         public string PageName { get; set; }
     }
 }

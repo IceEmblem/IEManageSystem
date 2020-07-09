@@ -9,20 +9,20 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
 {
     public interface IAdminManageAppService : IApplicationService
     {
-        Task<GetAdminsOutput> GetAdmins(GetAdminsInput input);
+        GetAdminsOutput GetAdmins(GetAdminsInput input);
 
         Task<CreateAdminOutput> CreateAdmin(CreateAdminInput input);
 
-        Task<UpdateAdminOutput> UpdateAdmin(UpdateAdminInput input);
+        UpdateAdminOutput UpdateAdmin(UpdateAdminInput input);
 
-        Task<DeleteAdminOutput> DeleteAdmin(DeleteAdminInput input);
+        DeleteAdminOutput DeleteAdmin(DeleteAdminInput input);
 
-        Task<GetAdminRolesOutput> GetAdminRoles(GetAdminRolesInput input);
+        GetAdminRolesOutput GetAdminRoles(GetAdminRolesInput input);
 
-        Task<AddRoleOutput> AddRole(AddRoleInput input);
+        AddRoleOutput AddRole(AddRoleInput input);
 
-        Task<RemoveRoleOutput> RemoveRole(RemoveRoleInput input);
+        RemoveRoleOutput RemoveRole(RemoveRoleInput input);
 
-        Task<GetPermissionsOutput> GetPermissions(GetPermissionsInput input);
+        GetPermissionsOutput GetPermissions(GetPermissionsInput input);
     }
 }

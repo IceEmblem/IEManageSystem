@@ -95,6 +95,26 @@ export default class PageLeafSettingConfig extends BaseConfig {
                         />
                     </div>
                 </div>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="sel1">文章排序:</label>
+                    <div className="input-group mb-3">
+                        <Select
+                            showSearch
+                            onChange={(value) => {
+                                this.props.data.orderby = value;
+                                this.props.setData(this.props.data)
+                                this.setState({});
+                            }}
+                            value={this.props.data.orderby}
+                            className="w-100"
+                            dropdownStyle={{ zIndex: 10000 }}
+                        >
+                            <Select.Option key={0} value="Date">发表时间</Select.Option>
+                            <Select.Option key={1} value="Click">点击量</Select.Option>
+                            <Select.Option key={2} value="Score">评分</Select.Option>
+                        </Select>
+                    </div>
+                </div>
             </div>
         );
     }

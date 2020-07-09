@@ -1,5 +1,6 @@
 ﻿using Abp.ObjectMapping;
 using Abp.UI;
+using AutoMapper.QueryableExtensions;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
@@ -50,7 +51,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public GetPagesOutput GetPages(GetPagesInput input)
         {
-            IEnumerable<PageBase> pages = string.IsNullOrEmpty(input.SearchKey) ?
+            // GetAll() 返回 IQueryable<TEntity>
+            var pages = string.IsNullOrEmpty(input.SearchKey) ?
                 _repository.GetAll() :
                 GetPagesForSearchKey(input.SearchKey);
 
@@ -63,11 +65,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
             int pageNum = pages.Count();
 
-            pages = pages.Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize);
+            var pageResults = pages.Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
 
             List<PageDto> pageDtos = new List<PageDto>();
 
-            foreach (var page in pages) {
+            foreach (var page in pageResults) {
                 pageDtos.Add(CreatePageDtos(page));
             }
 
@@ -79,11 +81,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             };
         }
 
-        private IEnumerable<PageBase> GetPagesForSearchKey(string searchKey)
+        private IQueryable<PageBase> GetPagesForSearchKey(string searchKey)
         {
-            return _repository.GetAll().Where(e =>
-                e.DisplayName.Contains(searchKey) || e.Name.Contains(searchKey)
-            );
+            return _repository.GetAll().Where(e => e.DisplayName.Contains(searchKey));
         }
 
         /// <summary>
