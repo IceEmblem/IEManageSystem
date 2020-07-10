@@ -31,26 +31,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
             _pageDataRepository = pageDataRepository;
         }
 
-        private PageData GetPageData(string pageName, string pageDataName)
-        {
-            if (string.IsNullOrWhiteSpace(pageName) && string.IsNullOrWhiteSpace(pageDataName)) {
-                return null;
-            }
-
-            var pageDatas = _pageDataRepository.GetAll();
-            if (!string.IsNullOrWhiteSpace(pageName))
-            {
-                pageDatas = pageDatas.Where(e => e.Page.Name == pageName);
-            }
-            if (!string.IsNullOrWhiteSpace(pageDataName))
-            {
-                pageDatas = pageDatas.Where(e => e.Name == pageDataName);
-            }
-            var pageData = pageDatas.FirstOrDefault();
-
-            return pageData;
-        }
-
         private MenuBase CreateRootMenuForDto(MenuDto menuDto) 
         {
             MenuBase menu;
@@ -78,7 +58,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
 
             menu.DisplayName = menuDto.DisplayName;
             menu.Icon = menuDto.Icon;
-            menu.PageData = GetPageData(menuDto.PageName, menuDto.PageDataName);
+            menu.PageName = menuDto.PageName;
+            menu.PageDataName = menuDto.PageDataName;
 
             return menu;
 

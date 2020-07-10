@@ -67,7 +67,7 @@ export default class TemplatePageManage extends React.Component {
 
         let postData = {
             name: pageName,
-            pageComponents: templatePage.page.getAllChilds(),
+            pageComponents: templatePage.page.pageComponents,
             defaultComponentDatas: templatePage.defaultComponentDatas
         }
 

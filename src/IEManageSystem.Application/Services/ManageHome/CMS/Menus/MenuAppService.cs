@@ -30,11 +30,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
         // 获取根菜单列表
         public GetMenusOutput GetMenus(GetMenusInput input)
         {
-            Expression<Func<MenuBase, object>>[] propertySelectors = new Expression<Func<MenuBase, object>>[] {
-                e=>e.PageData,
-                e=>e.PageData.Page,
-            };
-            List<MenuBase> rootMenus = _menuRepository.GetAllIncluding(propertySelectors).Where(e => e.CompositeMenuId == null).ToList();
+            List<MenuBase> rootMenus = _menuRepository.GetAllList(e => e.CompositeMenuId == null);
 
             List<MenuDto> results = new List<MenuDto>();
 
@@ -61,8 +57,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Menus
             returnMenu.Name = menu.Name;
             returnMenu.DisplayName = menu.DisplayName;
             returnMenu.Icon = menu.Icon;
-            returnMenu.PageName = menu.PageData?.Page?.Name;
-            returnMenu.PageDataName = menu.PageData?.Name;
+            returnMenu.PageName = menu.PageName;
+            returnMenu.PageDataName = menu.PageDataName;
 
             if (menu is LeafMenu)
             {

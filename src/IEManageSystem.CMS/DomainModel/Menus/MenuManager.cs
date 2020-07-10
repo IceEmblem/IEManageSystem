@@ -51,14 +51,9 @@ namespace IEManageSystem.CMS.DomainModel.Menus
                 cacheEntity.SetPriority(CacheItemPriority.NeverRemove);
 
                 MenuRepository.NoTracking();
-                Expression<Func<MenuBase, object>>[] propertySelectors = new Expression<Func<MenuBase, object>>[] 
-                {
-                    e=>e.PageData,
-                    e=>e.PageData.Page,
-                };
-                var rootMenu = MenuRepository.GetAllIncluding(propertySelectors).FirstOrDefault(e => e.Name == menuName);
+                var rootMenu = MenuRepository.FirstOrDefault(e => e.Name == menuName);
                 if (rootMenu is CompositeMenu) { 
-                    ((CompositeMenu) rootMenu).Menus = MenuRepository.GetAllIncluding(propertySelectors).Where(e => e.RootMenuId == rootMenu.Id).ToList();
+                    ((CompositeMenu) rootMenu).Menus = MenuRepository.GetAllList(e => e.RootMenuId == rootMenu.Id);
                 }
                 MenuRepository.Tracking();
 

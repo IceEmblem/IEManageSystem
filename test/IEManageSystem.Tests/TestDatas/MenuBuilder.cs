@@ -21,7 +21,7 @@ namespace IEManageSystem.Tests.TestDatas
 
         public void Build()
         {
-            var pageData = _context.PageDatas.FirstOrDefault(e=>e.Name == "PageData");
+            var pageData = _context.PageDatas.FirstOrDefault(e=>e.Name == "PageData1Name");
 
             var menu = new CompositeMenu("Main")
             {
@@ -29,7 +29,8 @@ namespace IEManageSystem.Tests.TestDatas
                 Icon = "",
                 CompositeMenuId = null,
                 RootMenuId = null,
-                PageData = null,
+                PageName = null,
+                PageDataName = null,
                 Menus = new List<MenuBase>() { 
                     
                 }
@@ -40,7 +41,8 @@ namespace IEManageSystem.Tests.TestDatas
                 DisplayName = "主页",
                 Icon = "",
                 RootMenu = menu,
-                PageData = pageData
+                PageName = "ContentPage1Name",
+                PageDataName = "PageData1Name",
             };
 
             var postMenu = new CompositeMenu("post")
