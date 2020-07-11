@@ -6,13 +6,11 @@
 }
 
 .PageContainer-btnlists-pageInfoComponent{
-    left: -4rem;
     position: relative;
 }
 
 .PageContainer-btnlists-bnts>*{
     padding: .2rem 0rem;
-    background-color: rgba(255, 255, 255, 0.8);
     display: flex;
     align-items: center;
 }

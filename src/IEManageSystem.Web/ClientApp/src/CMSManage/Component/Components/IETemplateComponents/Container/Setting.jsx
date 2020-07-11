@@ -28,7 +28,7 @@ export default class Setting {
     }
 
     get alignItems(){
-        return this.setting.getDefauleData().field3;
+        return this.setting.getDefauleData().field3 || "align-items-start";
     }
 
     set alignItems(val){
@@ -36,7 +36,7 @@ export default class Setting {
     }
     
     get wrap(){
-        return this.setting.getDefauleData().field4;
+        return this.setting.getDefauleData().field4 || "flex-wrap";
     }
 
     set wrap(val){

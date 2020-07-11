@@ -40,6 +40,8 @@ class BaseComponentContainer extends React.Component {
 
         if (this.props.pageComponent.pageComponentBaseSetting.backgroundImage) {
             style.backgroundImage = `url(${this.props.pageComponent.pageComponentBaseSetting.backgroundImage})`;
+            style.backgroundRepeat = "no-repeat"
+            style.backgroundSize = "100% auto";
         }
 
         if (this.props.pageComponent.pageComponentBaseSetting.height) {

@@ -46,7 +46,7 @@ export function pageFetch(name:string){
 }
 
 // 该动作模拟页面接收动作
-export function setPage(page:PageModel, defaultComponentDatas:Array<ComponentDataModel>){
+export function setPage(page:any, defaultComponentDatas:Array<any>){
   return {
     type: PageReceive,
     data: {

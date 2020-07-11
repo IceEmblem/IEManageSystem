@@ -3,6 +3,7 @@
 import Container from "CMSManage/Component/Components/IETemplateComponents/Container";
 import IEBottomNav from "CMSManage/Component/Components/IETemplateComponents/IEBottomNav";
 import IEButton from "CMSManage/Component/Components/IETemplateComponents/IEButton";
+import IECalendar from "CMSManage/Component/Components/IETemplateComponents/IECalendar";
 import IECard from "CMSManage/Component/Components/IETemplateComponents/IECard";
 import IECarousel from "CMSManage/Component/Components/IETemplateComponents/IECarousel";
 import IECategoryLabel from "CMSManage/Component/Components/IETemplateComponents/IECategoryLabel";
@@ -22,5 +23,5 @@ import NotFind from "CMSManage/Component/Components/IETemplateComponents/NotFind
 import RichTextEditor from "CMSManage/Component/Components/IETemplateComponents/RichTextEditor";
 import Text from "CMSManage/Component/Components/IETemplateComponents/Text";
 
-const componentDescribes = [Container,IEBottomNav,IEButton,IECard,IECarousel,IECategoryLabel,IEDrawer,IEImg,IELink,IELogo,IEMenu,IEPageSetting,IEPostContent,IEPostList,IEPostTitle,IERate,IESearch,IESelect,NotFind,RichTextEditor,Text,];
+const componentDescribes = [Container,IEBottomNav,IEButton,IECalendar,IECard,IECarousel,IECategoryLabel,IEDrawer,IEImg,IELink,IELogo,IEMenu,IEPageSetting,IEPostContent,IEPostList,IEPostTitle,IERate,IESearch,IESelect,NotFind,RichTextEditor,Text,];
 export default componentDescribes;

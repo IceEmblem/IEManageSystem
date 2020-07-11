@@ -26,4 +26,12 @@ export default class Setting {
     set heigth(val){
         this.setting.getDefauleData().field2 = val;
     }
+
+    get isShowImg(){
+        return this.setting.getDefauleData().field3 || "true";
+    }
+
+    set isShowImg(val){
+        this.setting.getDefauleData().field3 = val;
+    }
 }

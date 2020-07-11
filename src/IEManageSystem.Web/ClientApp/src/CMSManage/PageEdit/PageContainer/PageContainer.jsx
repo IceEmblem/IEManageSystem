@@ -84,35 +84,6 @@ class PageContainer extends React.Component {
             return <div className="pageedit-page-container"></div>
         }
 
-        let promptBox = (<PromptBox>
-            <div className="pageedit-page-container-header-info">
-                <div className="input-group shadow-sm">
-                    <input value={this.props.page.displayName} type="text" className="form-control" placeholder="" disabled />
-                    <div className="input-group-append">
-                        <span className="input-group-text text-white">显示名称</span>
-                    </div>
-                </div>
-                <div className="input-group shadow-sm">
-                    <input value={this.props.page.name} type="text" className="form-control" placeholder="" disabled />
-                    <div className="input-group-append">
-                        <span className="input-group-text text-white">
-                            <span className="oi oi-key" title="icon name" aria-hidden="true"></span>
-                                &#12288;名称
-                            </span>
-                    </div>
-                </div>
-                <div className="input-group shadow-sm">
-                    <input value={this.props.page.description} type="text" className="form-control" placeholder="" disabled />
-                    <div className="input-group-append">
-                        <span className="input-group-text text-white">
-                            <span className="oi oi-info mr-2" title="icon name" aria-hidden="true"></span>
-                                &#12288;描述
-                            </span>
-                    </div>
-                </div>
-            </div>
-        </PromptBox>);
-
         return (
             <div className="pageedit-page-container">
                 <div>
@@ -134,7 +105,6 @@ class PageContainer extends React.Component {
                     <BtnLists
                         addComponent={() => { this.setState({ curParentComponent: undefined, showComponentListBox: true }) }}
                         submitPage={this.submitPage}
-                        pageInfoComponent={promptBox}
                         exportPage={this.exportPage}
                     />
                 </div>

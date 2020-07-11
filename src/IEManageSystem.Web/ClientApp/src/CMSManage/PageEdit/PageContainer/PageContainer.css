@@ -30,25 +30,11 @@
     margin: .5rem 0rem;
 }
 
-.pageedit-page-container-header-info>.input-group .input-group-text {
-    background-color: #5a8e9a;
-}
-
-.pageedit-page-container-header-info>.input-group input{
-    color: #fff;
-    background-color: #77777782;
-}
-
-.pageedit-page-container-header-info>.input-group input,
-.pageedit-page-container-header-info>.input-group span {
-    border: 0rem;
-}
-
 .pageedit-page-container-btns {
     position: absolute !important;
     display: flex;
-    justify-content: center;
-    right: 20rem;
+    justify-content: flex-end;
+    right: 5rem;
     bottom: 4rem;
     width: 0rem !important;
     opacity: 0.9;

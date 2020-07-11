@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import BaseConfig from 'CMSManage/Component/Components/BaseComponents/BaseComponent/BaseConfig'
 import Setting from './Setting'
 
-import { Input, Tag, InputNumber } from 'antd';
+import { Input, Tag, InputNumber, Switch } from 'antd';
 
 export default class SettingConfig extends BaseConfig {
     setting = null;
@@ -40,6 +40,15 @@ export default class SettingConfig extends BaseConfig {
                 }}
                 suffix={<Tag color="#55acee">图片高度</Tag>}
             />
+            <div>
+                <span>是否显示文章图片：</span>
+                <Switch 
+                checked={JSON.parse(this.setting.isShowImg)}
+                onChange={(value)=>{
+                    this.setting.isShowImg = value.toString();
+                    this.props.setData(this.setting.setting);
+                }} />
+            </div>
         </div>)
     }
 }
