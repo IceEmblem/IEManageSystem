@@ -60,6 +60,7 @@ class EditFrame extends React.Component {
                         <this.props.componentObject.ComponentDataConfig
                             data={this.state.contentComponentDataModel}
                             setData={(value) => this.setState({ contentComponentDataModel: value })}
+                            pageComponentSettings={this.props.pageComponent.pageComponentSettings}
                         />
                     </Tab>
                 </div>
@@ -73,7 +74,8 @@ EditFrame.propTypes = {
     close: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     componentData: PropTypes.object,
-    componentObject: PropTypes.object.isRequired
+    componentObject: PropTypes.object.isRequired,
+    pageComponent: PropTypes.object.isRequired,
 }
 
 export default EditFrame

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import ContainerComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContainerComponent'
 import BaseContentLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
-import { pageFetch, pageDataFetch, pageRemoveComponent, pageEditComponent, defaultComponentDataUpdate } from 'CMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch, pageRemoveComponent, pageEditComponent, defaultComponentDataUpdate, setActiveComponent } from 'CMSManage/IEReduxs/Actions'
 
 import './index.css'
 
@@ -50,8 +50,16 @@ class PageEditCompontContainer extends BaseComponentContainer {
             close={() => { this.setState({ openEdit: false }) }}
         ></PageEditFrame>);
 
+        let editFrameBtnStyle = {};
+        if(this.props.isActivePageComponent){
+            editFrameBtnStyle.opacity = 1;
+            editFrameBtnStyle.zIndex = 9999;
+        }
+
         tools.push(
-            <div key={"EditFrameBtn"} className="editableparentcom-btns">
+            <div key={"EditFrameBtn"} className="editableparentcom-btns"
+                style={editFrameBtnStyle}
+            >
                 <Tooltip title={`删除 ${this.componentDescribe.displayName}`} overlayStyle={{ zIndex: 10000 }}>
                     <Button type="primary" shape="round" danger icon={<DeleteOutlined />}
                         onClick={
@@ -102,6 +110,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
                 close={() => { this.setState({ showPostEdit: false }) }}
                 submit={this.props.defaultComponentDataUpdate}
                 componentData={this.getContentComponentData()}
+                pageComponent={this.props.pageComponent}
                 componentObject={this.componentObject}
             ></PostEditFrame>);
 
@@ -110,6 +119,32 @@ class PageEditCompontContainer extends BaseComponentContainer {
 
     execLogic(requestData) {
         throw new Error("不能在编辑页面时执行逻辑");
+    }
+
+    propsEX(){
+        return {
+            onClick: (e)=>{
+                this.props.setActiveComponent(this.props.pageComponent.sign);
+                e.stopPropagation();
+                return false;
+            }
+        }
+    }
+
+    styleEX(){
+        if(!this.props.isActivePageComponent){
+            return {};
+        }
+
+        return {
+            // background: "#1b94f9",
+            // boxShadow: "0px 0px 3px #00ffb3",
+            backgroundColor: "#1890ff20",
+        }
+    }
+
+    getClassName(){
+        return `${super.getClassName()} editableparentcom`;
     }
 }
 
@@ -122,7 +157,9 @@ PageEditCompontContainer.propTypes = {
     editComponent: PropTypes.func.isRequired,
     page: PropTypes.object.isRequired,
     pageData: PropTypes.object.isRequired,
-    pageFreshen: PropTypes.func.isRequired
+    pageFreshen: PropTypes.func.isRequired,
+    // 是否是活跃的组件（鼠标是否压在组件上）
+    isActivePageComponent: PropTypes.bool.isRequired
 }
 
 PageEditCompontContainer.defaultProps = {
@@ -132,12 +169,14 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     // 新增属性 parentSign
     let childPageComponents = ownProps.pageComponent.pageComponents;
     let defaultComponentData = state.defaultComponentDatas.find(item => item.sign == ownProps.pageComponent.sign);
+    let isActivePageComponent = ownProps.pageComponent.sign == state.activePageComponentSign;
 
     return {
         defaultComponentData: defaultComponentData,
         childPageComponents: childPageComponents,
         page: state.page,
-        pageData: state.pageData
+        pageData: state.pageData,
+        isActivePageComponent: isActivePageComponent
     }
 }
 
@@ -158,6 +197,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 promises.push(dispatch(pageDataFetch(pageName, pageDataName)));
             }
             return Promise.all(promises);
+        },
+        setActiveComponent: (componentSign)=>{
+            dispatch(setActiveComponent(componentSign));
         }
     }
 }

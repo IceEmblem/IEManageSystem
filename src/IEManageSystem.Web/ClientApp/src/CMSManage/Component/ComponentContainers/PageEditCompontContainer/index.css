@@ -1,40 +1,45 @@
-.parentcomponent .editableparentcom-btns {
+.editableparentcom .editableparentcom-btns {
     z-index: 9990;
     right: 0rem;
 }
 
-.parentcomponent .parentcomponent .editableparentcom-btns {
+.editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9991;
     right: .3rem;
 }
 
-.parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
+.editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9992;
     right: .6rem;
 }
 
-.parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
+.editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9993;
     right: .9rem;
 }
 
-.parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
+.editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9994;
     right: 1.2rem;
 }
 
-.parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
+.editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9995;
     right: 1.5rem;
 }
 
-.parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .editableparentcom-btns {
+.editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9996;
     right: 1.8rem;
 }
 
-.parentcomponent:hover>.editableparentcom-btns>button {
+.editableparentcom:hover>.editableparentcom-btns {
     opacity: 1;
+}
+
+.editableparentcom:hover{
+    background-color: #1890ff20;
+    /* background-color: #1890ff20 !important; */
 }
 
 .editableparentcom-btns {
@@ -46,14 +51,14 @@
     transform-origin:0% 50%;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
-}
-
-.editableparentcom-btns>button {
     opacity: 0.1;
     transition: 0.5s;
     -webkit-transition: 0.5s;
+}
+
+.editableparentcom-btns>button {
     transform-origin:50% 50%;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
-    margin: 0px 3px;
+    margin: 0px 5px;
 }

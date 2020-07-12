@@ -45,6 +45,7 @@ class PostEditComponentContainer extends BaseComponentContainer {
                 close={() => { this.setState({ show: false }) }}
                 submit={this.props.componentDataUpdate}
                 componentData={this.getContentComponentData()}
+                pageComponent={this.props.pageComponent}
                 componentObject={this.componentObject}
             ></PostEditFrame>);
         tools.push(

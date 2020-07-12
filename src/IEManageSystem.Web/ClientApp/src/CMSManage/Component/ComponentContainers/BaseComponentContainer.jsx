@@ -130,9 +130,21 @@ class BaseComponentContainer extends React.Component {
         return undefined;
     }
 
+    // 各自容器可实现自己需要扩展的props
+    propsEX(){
+        return {};
+    }
+
+    // 各自容器可实现自己需要扩展的style
+    styleEX(){
+        return {};
+    }
+
     render() {
         return (
-            <div style={this.getStyle()} className={`parentcomponent ${this.getClassName()}`}>
+            <div style={{...this.getStyle(), ...this.styleEX()}} className={`parentcomponent ${this.getClassName()}`}
+                {...this.propsEX()}
+            >
                 {this.createComponent()}
                 {this.getTools()}
             </div>

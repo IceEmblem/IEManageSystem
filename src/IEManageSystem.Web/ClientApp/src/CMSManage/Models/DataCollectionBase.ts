@@ -56,4 +56,14 @@ export default abstract class DataCollectionBase {
     getSingleDatas(name:string){
         return this.singleDatas.filter(e=>e.name == name);
     }
+
+    // 获取单个组件数据，不存在则创建
+    getOrCreateSingleDate(name:string){
+        let single = this.singleDatas.find(item=>item.name == name);
+        if(!single){
+            this.createSingleData(name);
+            single = this.singleDatas.find(item=>item.name == name);
+        }
+        return single;
+    }
 }

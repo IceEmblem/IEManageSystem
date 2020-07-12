@@ -57,6 +57,8 @@ ComponentDataConfig.propTypes = {
     data: PropTypes.object,
     // setData 为 (ComponentDataModel) => void;
     setData: PropTypes.func.isRequired,
+    // 页面组件配置
+    pageComponentSettings: PropTypes.array.isRequired,
     // 组件
     field1: PropTypes.func,
     field2: PropTypes.func,

@@ -7,6 +7,7 @@ import {
     ComponentDataUpdate,
     DefaultComponentDataUpdate,
     PageDataClear,
+    SetActiveComponent,
 } from './Actions'
 import PageModel from '../Models/Pages/PageModel'
 import PageDataModel from '../Models/PageDatas/PageDataModel'
@@ -68,7 +69,7 @@ function defaultComponentDatas(
 
     // 添加组件
     if (action.type == PageAddComponent) {
-        if(!action.isAddDefaultComponentData){
+        if (!action.isAddDefaultComponentData) {
             return state;
         }
 
@@ -84,7 +85,7 @@ function defaultComponentDatas(
 
     // 移除组件
     if (action.type == PageRemoveComponent) {
-        let childs = action.pageComponent.getAllChilds().map(e=>e.sign);
+        let childs = action.pageComponent.getAllChilds().map(e => e.sign);
 
         let reomveItems = [action.pageComponent.sign, ...childs];
 
@@ -107,8 +108,8 @@ function defaultComponentDatas(
     if (action.type == PageReceive) {
         let datas = [];
         action.data.defaultComponentDatas.forEach((element: any) => {
-            let signs = action.data.page.pageComponents.map(e=>e.sign);
-            if(signs.some(e=>e==element.sign)){
+            let signs = action.data.page.pageComponents.map(e => e.sign);
+            if (signs.some(e => e == element.sign)) {
                 datas.push(new ComponentDataModel(element));
             }
         });
@@ -128,7 +129,7 @@ function pageData(
         return new PageDataModel(action.data.pageData);
     }
 
-    if(action.type == PageDataClear){
+    if (action.type == PageDataClear) {
         return new PageDataModel({
             id: 0
         });
@@ -162,8 +163,21 @@ function contentComponentDatas(state: Array<ComponentDataModel> = [],
         return datas;
     }
 
-    if(action.type == PageDataClear){
+    if (action.type == PageDataClear) {
         return [];
+    }
+
+    return state;
+}
+
+function activePageComponentSign(state: "", action: any) {
+    if (action.type == SetActiveComponent) {
+        return action.activePageComponentSign
+    }
+
+    // 添加组件
+    if (action.type == PageAddComponent) {
+        return action.pageComponent.sign;
     }
 
     return state;
@@ -176,6 +190,7 @@ export function reducer(state: any = {
             page: page(state.page, action),
             defaultComponentDatas: defaultComponentDatas(state.defaultComponentDatas, action),
             pageData: pageData(state.pageData, action),
-            contentComponentDatas: contentComponentDatas(state.contentComponentDatas, action)
+            contentComponentDatas: contentComponentDatas(state.contentComponentDatas, action),
+            activePageComponentSign: activePageComponentSign(state.activePageComponentSign, action),
         })
 }

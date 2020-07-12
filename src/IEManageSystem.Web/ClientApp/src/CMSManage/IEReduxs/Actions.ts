@@ -31,6 +31,14 @@ export function pageEditComponent(pageComponent:PageComponentModel) {
   }
 }
 
+export const SetActiveComponent = "SetActiveComponent";
+export function setActiveComponent(activePageComponentSign: string){
+  return {
+    type: SetActiveComponent,
+    activePageComponentSign
+  }
+}
+
 // 页面组件请求
 export const PageReceive = "PageReceive"
 export function pageFetch(name:string){
