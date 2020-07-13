@@ -147,8 +147,9 @@ public class {CreateActuatorClassName(name)} {{
 
                 MethodInfo mInfo = type.GetMethod("Exec");
 
-                Action<ContentComponentData, PageComponentBase, PageData, string> action = (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, string request) => {
-                    mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, request });
+                Action<ContentComponentData, PageComponentBase, PageData, PageBase, string> action = 
+                    (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, string request) => {
+                    mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, page, request });
                 };
 
                 var actuator = new Actuator(action);

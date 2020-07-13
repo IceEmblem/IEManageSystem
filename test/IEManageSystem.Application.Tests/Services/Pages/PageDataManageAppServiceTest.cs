@@ -44,7 +44,8 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             {
                 PageName = "ContentPage1Name",
                 Name = "AddPageData_BaseTest_Name",
-                Title = "AddPageData_BaseTest_Title"
+                Title = "AddPageData_BaseTest_Title",
+                Tags = new List<TagDto>()
             });
 
             var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
@@ -65,7 +66,8 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             {
                 PageName = "ContentPage1Name",
                 Name = "UpdatePageData_BaseTest_Name",
-                Title = "UpdatePageData_BaseTest_Title"
+                Title = "UpdatePageData_BaseTest_Title",
+                Tags = new List<TagDto>()
             });
 
             var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
@@ -77,7 +79,8 @@ namespace IEManageSystem.Application.Tests.Services.Pages
                 PageName = "ContentPage1Name",
                 Id = post.Id,
                 Name = "UpdatePageData_BaseTest_Name1",
-                Title = "UpdatePageData_BaseTest_Title1"
+                Title = "UpdatePageData_BaseTest_Title1",
+                Tags = new List<TagDto>()
             });
 
             dbContext.SaveChanges();

@@ -20,7 +20,7 @@ namespace IEManageSystem.Tests.TestDatas
             var logic = new Logic() {
                 Name = "ComponentName1",
                 Code = @"
-        public void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, string request)
+        public void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, string request)
         {
             componentData.SingleDatas.ElementAt(0).Field1 = ""1"";
         }

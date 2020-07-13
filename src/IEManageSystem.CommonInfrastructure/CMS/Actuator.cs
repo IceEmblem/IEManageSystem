@@ -10,14 +10,14 @@ namespace IEManageSystem.CommonInfrastructure.CMS
 {
     public class Actuator : IActuator
     {
-        private Action<ContentComponentData, PageComponentBase, PageData, string
+        private Action<ContentComponentData, PageComponentBase, PageData, PageBase, string
             > _action { get; }
 
-        public Actuator(Action<ContentComponentData, PageComponentBase, PageData, string> action) => _action = action;
+        public Actuator(Action<ContentComponentData, PageComponentBase, PageData, PageBase, string> action) => _action = action;
 
-        public void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, string request)
+        public void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, string request)
         {
-            _action(componentData, pageComponent, pageData, request);
+            _action(componentData, pageComponent, pageData, page, request);
         }
     }
 }
