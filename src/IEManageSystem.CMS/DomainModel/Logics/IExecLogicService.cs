@@ -15,6 +15,7 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             string pageComponentBaseSign,
             string pageDataName,
             string contentComponentDataSign,
+            int userId,
             string request);
     }
 }

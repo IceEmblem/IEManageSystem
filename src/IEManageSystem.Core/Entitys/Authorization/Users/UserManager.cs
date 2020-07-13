@@ -4,6 +4,7 @@ using Abp.Domain.Uow;
 using Abp.UI;
 using IEManageSystem.Entitys.Authorization.Roles;
 using IEManageSystem.Entitys.Authorization.Users.Accounts;
+using IEManageSystem.Repositorys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace IEManageSystem.Entitys.Authorization.Users
 {
     public class UserManager:IDomainService
     {
-        public IRepository<User> UserRepository { get; private set; }
+        public IEfRepository<User, int> UserRepository { get; private set; }
 
         private IUnitOfWorkManager _unitOfWorkManager { get; set; }
 
@@ -26,7 +27,7 @@ namespace IEManageSystem.Entitys.Authorization.Users
         public bool AutoSaveChanges { get; set; } = true;
 
         public UserManager(
-            IRepository<User> userRepository,
+            IEfRepository<User, int> userRepository,
             RoleManager roleManager,
             IUnitOfWorkManager unitOfWorkManager
             )

@@ -4,6 +4,7 @@ using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
+using IEManageSystem.Entitys.Authorization.Users;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
@@ -114,6 +115,7 @@ using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using IEManageSystem.Entitys.Authorization.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -147,9 +149,9 @@ public class {CreateActuatorClassName(name)} {{
 
                 MethodInfo mInfo = type.GetMethod("Exec");
 
-                Action<ContentComponentData, PageComponentBase, PageData, PageBase, string> action = 
-                    (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, string request) => {
-                    mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, page, request });
+                Action<ContentComponentData, PageComponentBase, PageData, PageBase, User, string> action = 
+                    (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request) => {
+                    mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, page, user, request });
                 };
 
                 var actuator = new Actuator(action);

@@ -11,6 +11,7 @@ using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
+using IEManageSystem.Entitys.Authorization.Users;
 using IEManageSystem.Repositorys;
 
 namespace IEManageSystem.CMS.DomainModel.Logics
@@ -25,11 +26,14 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 
         private IEfRepository<ContentComponentData, int> _componentDataRepository { get; set; }
 
+        private UserManager _userManager { get; set; }
+
         public ExecLogicService(
             IActuatorFactory actuatorFactory,
             PageManager pageManager,
             PageDataManager pageDataManager,
-            IEfRepository<ContentComponentData, int> componentDataRepository) 
+            IEfRepository<ContentComponentData, int> componentDataRepository,
+            UserManager userManager) 
         {
             _actuatorFactory = actuatorFactory;
 
@@ -38,6 +42,8 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             _pageDataManager = pageDataManager;
 
             _componentDataRepository = componentDataRepository;
+
+            _userManager = userManager;
         }
 
         public void Exec(
@@ -46,6 +52,7 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             string pageComponentBaseSign,
             string pageDataName,
             string contentComponentDataSign,
+            int userId,
             string request)
         {
             var page = _pageManager.GetPageForCache(pageName);
@@ -67,7 +74,7 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             ContentComponentData componentData = null;
             if (post != null) 
             {
-                componentData = _componentDataRepository.GetAllIncluding(e => e.SingleDatas).FirstOrDefault(e => e.PageDataId == post.Id && e.Sign == pageComponentBaseSign);
+                componentData = _componentDataRepository.GetAllIncluding(e => e.SingleDatas).FirstOrDefault(e => e.PageDataId == post.Id && e.Sign == contentComponentDataSign);
             }
 
             var actuator = _actuatorFactory.GetActuator(logic.Name);
@@ -84,9 +91,16 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 
                 actuator = _actuatorFactory.GetActuator(logic.Name);
             }
+
+            User user = null;
+            if (userId > 0) {
+                _userManager.UserRepository.NoTracking();
+                user = _userManager.UserRepository.FirstOrDefault(userId);
+                _userManager.UserRepository.Tracking();
+            }
             
 
-            actuator.Exec(componentData, pageComponent, post, page, request);
+            actuator.Exec(componentData, pageComponent, post, page, user, request);
         }
     }
 }

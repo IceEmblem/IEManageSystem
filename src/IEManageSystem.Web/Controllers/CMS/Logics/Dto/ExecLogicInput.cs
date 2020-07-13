@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace IEManageSystem.Services.ManageHome.CMS.Logics.Dto
+namespace IEManageSystem.Web.Controllers.CMS.Logics.Dto
 {
     public class ExecLogicInput
     {
@@ -17,7 +18,5 @@ namespace IEManageSystem.Services.ManageHome.CMS.Logics.Dto
         public string ContentComponentDataSign { get; set; }
 
         public string Request { get; set; }
-
-        public int UserId { get; set; }
     }
 }
