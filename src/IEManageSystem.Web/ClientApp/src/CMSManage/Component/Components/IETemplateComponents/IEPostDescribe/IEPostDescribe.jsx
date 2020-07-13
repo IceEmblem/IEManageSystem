@@ -7,6 +7,6 @@ export default class IEPostDescribe extends BaseStaticComponent {
     render() {
         let title = this.props.pageData.title || "这里是文章的简短描述";
 
-        return (<p>{title}</p>);
+        return (<p className="mb-0">{title}</p>);
     }
 }

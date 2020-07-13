@@ -7,6 +7,7 @@ import IECalendar from "CMSManage/Component/Components/IETemplateComponents/IECa
 import IECard from "CMSManage/Component/Components/IETemplateComponents/IECard";
 import IECarousel from "CMSManage/Component/Components/IETemplateComponents/IECarousel";
 import IECategoryLabel from "CMSManage/Component/Components/IETemplateComponents/IECategoryLabel";
+import IEComment from "CMSManage/Component/Components/IETemplateComponents/IEComment";
 import IEDrawer from "CMSManage/Component/Components/IETemplateComponents/IEDrawer";
 import IEImg from "CMSManage/Component/Components/IETemplateComponents/IEImg";
 import IEInfoGroup from "CMSManage/Component/Components/IETemplateComponents/IEInfoGroup";
@@ -15,6 +16,7 @@ import IELogo from "CMSManage/Component/Components/IETemplateComponents/IELogo";
 import IEMenu from "CMSManage/Component/Components/IETemplateComponents/IEMenu";
 import IEPageSetting from "CMSManage/Component/Components/IETemplateComponents/IEPageSetting";
 import IEPostContent from "CMSManage/Component/Components/IETemplateComponents/IEPostContent";
+import IEPostDescribe from "CMSManage/Component/Components/IETemplateComponents/IEPostDescribe";
 import IEPostList from "CMSManage/Component/Components/IETemplateComponents/IEPostList";
 import IEPostTitle from "CMSManage/Component/Components/IETemplateComponents/IEPostTitle";
 import IERankingList from "CMSManage/Component/Components/IETemplateComponents/IERankingList";
@@ -24,8 +26,6 @@ import IESelect from "CMSManage/Component/Components/IETemplateComponents/IESele
 import NotFind from "CMSManage/Component/Components/IETemplateComponents/NotFind";
 import RichTextEditor from "CMSManage/Component/Components/IETemplateComponents/RichTextEditor";
 import Text from "CMSManage/Component/Components/IETemplateComponents/Text";
-import IEPostDescribe from "CMSManage/Component/Components/IETemplateComponents/IEPostDescribe";
-import IEComment from "CMSManage/Component/Components/IETemplateComponents/IEComment";
 
-const componentDescribes = [Container,IEBottomNav,IEButton,IECalendar,IECard,IECarousel,IECategoryLabel,IEDrawer,IEImg,IEInfoGroup,IELink,IELogo,IEMenu,IEPageSetting,IEPostContent,IEPostList,IEPostTitle,IERankingList,IERate,IESearch,IESelect,NotFind,RichTextEditor,Text,IEPostDescribe,IEComment,];
+const componentDescribes = [Container,IEBottomNav,IEButton,IECalendar,IECard,IECarousel,IECategoryLabel,IEComment,IEDrawer,IEImg,IEInfoGroup,IELink,IELogo,IEMenu,IEPageSetting,IEPostContent,IEPostDescribe,IEPostList,IEPostTitle,IERankingList,IERate,IESearch,IESelect,NotFind,RichTextEditor,Text,];
 export default componentDescribes;

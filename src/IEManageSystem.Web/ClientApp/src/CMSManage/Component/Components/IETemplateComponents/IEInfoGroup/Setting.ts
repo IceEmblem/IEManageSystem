@@ -28,6 +28,22 @@ export default class Setting {
         this.setting.getOrCreateSingleDate(Setting.styleSettingName).field2 = val;
     }
 
+    get color(){
+        return this.setting.getOrCreateSingleDate(Setting.styleSettingName).field3;
+    }
+
+    set color(val){
+        this.setting.getOrCreateSingleDate(Setting.styleSettingName).field3 = val;
+    }
+
+    get bordered(){
+        return this.setting.getOrCreateSingleDate(Setting.styleSettingName).field4 == "true" || this.setting.getOrCreateSingleDate(Setting.styleSettingName).field4 == true;
+    }
+
+    set bordered(val){
+        this.setting.getOrCreateSingleDate(Setting.styleSettingName).field4 = val;
+    }
+
     get field1(){
         return this.setting.getDefauleData().field1;
     }

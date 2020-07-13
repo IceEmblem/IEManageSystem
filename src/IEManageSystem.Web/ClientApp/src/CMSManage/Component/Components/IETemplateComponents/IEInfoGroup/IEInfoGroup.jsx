@@ -10,8 +10,8 @@ export default class IEInfoGroup extends BaseContentLeafComponent {
         return this.props.pageComponentSettings.find(e => e.name == "DefaultSetting");
     }
 
-    createItem(settingField, dataField) {
-        return <List.Item>
+    createItem(settingField, dataField, color) {
+        return <List.Item style={{ color: color }} className="mb-0 pt-2 pb-2" >
             <span>{settingField}</span>
             <span>{dataField}</span>
         </List.Item>
@@ -34,18 +34,11 @@ export default class IEInfoGroup extends BaseContentLeafComponent {
             itemDatas.push({ settingField: setting.field5, dataField: data.field5 });
 
         return <List
+            bordered={setting.bordered}
             grid={{ column: setting.col }}
-            header={setting.title}
+            header={setting.title ? <div style={{ color: setting.color }}>{setting.title}</div> : ""}
             dataSource={itemDatas}
-            renderItem={item => this.createItem(item.settingField, item.dataField)}
+            renderItem={item => this.createItem(item.settingField, item.dataField, setting.color)}
         />
-
-        return <div>
-            {setting.field1 && this.createItem(setting.field1, data.field1)}
-            {setting.field2 && this.createItem(setting.field2, data.field2)}
-            {setting.field3 && this.createItem(setting.field3, data.field3)}
-            {setting.field4 && this.createItem(setting.field4, data.field4)}
-            {setting.field5 && this.createItem(setting.field5, data.field5)}
-        </div>
     }
 }

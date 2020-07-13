@@ -19,11 +19,14 @@ class IECarousel extends BaseContentLeafComponent {
 
     createItem(singleData, setting) {
         return (
-            <div className="d-flex justify-content-center">
-                <div className="d-flex flex-column align-items-center justify-content-center pb-5"
-                    style={{ backgroundImage: "", height: setting.height, width: setting.width }}>
-                    <Title style={{ color: setting.fontColor }} level={4}>{singleData.title}</Title>
-                    <Paragraph style={{ color: setting.fontColor }}>{singleData.content}</Paragraph>
+            <div>
+                <div className="d-flex justify-content-center"
+                    style={{ backgroundImage: `url(${singleData.img})`, backgroundSize: "100% auto", backgroundRepeat: "no-repeat" }}>
+                    <div className="d-flex flex-column align-items-center justify-content-center pb-5"
+                        style={{ height: setting.height, width: setting.width }}>
+                        <Title style={{ color: setting.fontColor }} level={4}>{singleData.title}</Title>
+                        <Paragraph style={{ color: setting.fontColor }}>{singleData.content}</Paragraph>
+                    </div>
                 </div>
             </div>
         );
@@ -34,9 +37,11 @@ class IECarousel extends BaseContentLeafComponent {
         let setting = new Setting(this.getPageComponentSetting());
 
         return (
-            <Carousel autoplay>
-                {data.getDatas().map(item => this.createItem(item, setting))}
-            </Carousel >
+            <div style={{width: "0px", flexGrow: 1}}>
+                <Carousel autoplay>
+                    {data.getDatas().map(item => this.createItem(item, setting))}
+                </Carousel >
+            </div>
         );
     }
 }

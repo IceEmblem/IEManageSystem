@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import BaseConfig from 'CMSManage/Component/Components/BaseComponents/BaseComponent/BaseConfig'
 import Setting from './Setting'
 
-import { Input, Tag, Radio, Button, InputNumber } from 'antd';
+import { Input, Tag, Switch, Button, InputNumber } from 'antd';
 
 export default class SettingConfig extends BaseConfig {
     render() {
@@ -11,18 +11,20 @@ export default class SettingConfig extends BaseConfig {
 
         return (<div>
             <div className="mb-3">
-                <h6 className="font-weight-bold">文章样式</h6>
-                <Tag color="#55acee">列数</Tag>
-                <InputNumber
-                    value={setting.col}
-                    onChange={(value) => {
-                        setting.col = value;
-                        this.props.setData(setting.setting);
-                    }}
-                />
+                <div className="font-weight-bold mb-3">文章样式</div>
+                <div className="mb-3">
+                    <Tag color="#55acee">列数</Tag>
+                    <InputNumber
+                        value={setting.col}
+                        onChange={(value) => {
+                            setting.col = value;
+                            this.props.setData(setting.setting);
+                        }}
+                    />
+                </div>
                 <Input
                     placeholder="示例：文章信息介绍"
-                    className="mb-3 mt-3"
+                    className="mb-3"
                     value={setting.title}
                     onChange={(e) => {
                         setting.title = e.currentTarget.value;
@@ -30,9 +32,29 @@ export default class SettingConfig extends BaseConfig {
                     }}
                     suffix={<Tag color="#55acee">信息标题</Tag>}
                 />
+                <Input
+                    placeholder="示例：#fff"
+                    className="mb-3"
+                    value={setting.color}
+                    onChange={(e) => {
+                        setting.color = e.currentTarget.value;
+                        this.props.setData(setting.setting);
+                    }}
+                    suffix={<Tag color="#55acee">字体颜色</Tag>}
+                />
+                <div className="mb-3">
+                    <span>是否显示边框：</span>
+                    <Switch
+                        checked={setting.bordered}
+                        onChange={(value) => {
+                            setting.bordered = value;
+                            this.props.setData(setting.setting);
+                        }}
+                    />
+                </div>
             </div>
             <div>
-                <h6 className="font-weight-bold">字段配置</h6>
+                <div className="font-weight-bold mb-3">字段配置</div>
                 <Input
                     placeholder="示例：上市时间"
                     className="mb-3"
