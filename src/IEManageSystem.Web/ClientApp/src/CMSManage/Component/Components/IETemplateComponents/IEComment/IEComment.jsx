@@ -1,15 +1,15 @@
 import React from 'react';
-import { BaseStaticComponent } from '../../BaseComponents/BaseStaticComponent'
+import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
 
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
-import moment from 'moment';
+import defaultAvatar from 'images/default_avatar.png'
 
 const { TextArea } = Input;
 
 const CommentList = ({ comments }) => (
     <List
         dataSource={comments}
-        header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
+        header={`${comments.length} 条评论`}
         itemLayout="horizontal"
         renderItem={props => <Comment {...props} />}
     />
@@ -28,42 +28,46 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </>
 );
 
-export default class extends React.Component {
+export default class extends BaseContentLeafComponent {
     state = {
-        comments: [{
-            author: 'Han Solo',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            content: <p>没有评论，没有评论，没有评论，没有评论，没有评论，没有评论，没有评论，没有评论，没有评论，没有评论，没有评论，没有评论，</p>,
-            datetime: moment().fromNow(),
-        }],
         submitting: false,
         value: '',
     };
 
     handleSubmit = () => {
-    };
-
-    handleChange = e => {
-        this.setState({
-            value: e.target.value,
-        });
+        this.setState({submitting: true});
+        this.props.execLogic(this.state.value)
+            .then(value => {
+                this.setState({submitting: false, value: ''});
+                this.props.pageFreshen();
+            });
     };
 
     render() {
-        const { comments, submitting, value } = this.state;
+        let comments = this.props.componentData.getSingleDatas("commentData").map(item => ({
+            author: item.field2,
+            avatar: item.field3 || defaultAvatar,
+            content: <p>{item.field4}</p>,
+            datetime: item.field5,
+        }));
+        const { submitting, value } = this.state;
 
         return (
             <div>
                 <Comment
                     avatar={
                         <Avatar
-                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            src={defaultAvatar}
                             alt="Han Solo"
                         />
                     }
                     content={
                         <Editor
-                            onChange={this.handleChange}
+                            onChange={e => {
+                                this.setState({
+                                    value: e.target.value,
+                                });
+                            }}
                             onSubmit={this.handleSubmit}
                             submitting={submitting}
                             value={value}

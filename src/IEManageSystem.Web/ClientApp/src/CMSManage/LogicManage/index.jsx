@@ -4,6 +4,8 @@ import Resource from 'Resource/Resource.jsx';
 import { ResourceDescribeValueType } from 'ResourceForm/ResourceDescribeValueType'
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 
+import { Button } from 'antd'
+
 export default class LogicManage extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +25,9 @@ export default class LogicManage extends React.Component {
 
         // 注册按钮组件
         this.registerBtn = (props) => (
-            <button className="btn btn-secondary"
+            <Button 
+                type='primary'
+                size='small'
                 onClick={() => {
                     let postData = {
                         name: props.resource.name,
@@ -38,7 +42,7 @@ export default class LogicManage extends React.Component {
             >
                 <span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>
                 {props.resource.isRegister ? " 重新注册" : " 注册逻辑"}
-            </button>);
+            </Button>);
     }
 
     getDescribes() {

@@ -20,7 +20,8 @@ namespace IEManageSystem.Web.Controllers.CMS.Logics
             _claimManager = claimManager;
         }
 
-        public ActionResult<Services.ManageHome.CMS.Logics.Dto.ExecLogicOutput> ExecLogic(Dto.ExecLogicInput input)
+        [HttpPost]
+        public ActionResult<Services.ManageHome.CMS.Logics.Dto.ExecLogicOutput> ExecLogic([FromBody] Dto.ExecLogicInput input)
         {
             Services.ManageHome.CMS.Logics.Dto.ExecLogicInput appInput = new Services.ManageHome.CMS.Logics.Dto.ExecLogicInput();
             appInput.LogicName = input.LogicName;

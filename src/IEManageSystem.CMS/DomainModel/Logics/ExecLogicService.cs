@@ -98,9 +98,14 @@ namespace IEManageSystem.CMS.DomainModel.Logics
                 user = _userManager.UserRepository.FirstOrDefault(userId);
                 _userManager.UserRepository.Tracking();
             }
-            
 
-            actuator.Exec(componentData, pageComponent, post, page, user, request);
+            try
+            {
+                actuator.Exec(componentData, pageComponent, post, page, user, request);
+            }
+            catch (Exception ex) {
+                throw ex.InnerException;
+            }
         }
     }
 }

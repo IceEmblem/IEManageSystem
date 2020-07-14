@@ -16,7 +16,7 @@ export default class CustomizeOperateBtnList extends React.Component {
             <div>
                 <Button className="mr-1" size="small" icon={<ZoomInOutlined />} type="primary" ghost onClick={this.props.resourceLookupClick}>查看</Button>
                 <NavLink className="ant-btn ant-btn-sm mr-3"
-                    to={`/ManageHome/CMSManage/PostEdit/${this.props.resource.pageNameLookup}/${this.props.resource.name}`}
+                    to={`/Page/${this.props.resource.pageNameLookup}/${this.props.resource.name}`}
                 >
                     <EditOutlined />
                     <span>{" 浏览"}</span>

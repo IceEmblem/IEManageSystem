@@ -6,6 +6,8 @@ import { Carousel, Typography } from 'antd';
 import Data from './Data'
 import Setting from './Setting'
 
+import defaultImg from 'images/nofind.jpg'
+
 const { Title, Paragraph } = Typography;
 
 class IECarousel extends BaseContentLeafComponent {
@@ -21,7 +23,7 @@ class IECarousel extends BaseContentLeafComponent {
         return (
             <div>
                 <div className="d-flex justify-content-center"
-                    style={{ backgroundImage: `url(${singleData.img})`, backgroundSize: "100% auto", backgroundRepeat: "no-repeat" }}>
+                    style={{ backgroundImage: `url(${singleData.img || defaultImg})`, backgroundSize: "100% auto", backgroundRepeat: "no-repeat" }}>
                     <div className="d-flex flex-column align-items-center justify-content-center pb-5"
                         style={{ height: setting.height, width: setting.width }}>
                         <Title style={{ color: setting.fontColor }} level={4}>{singleData.title}</Title>

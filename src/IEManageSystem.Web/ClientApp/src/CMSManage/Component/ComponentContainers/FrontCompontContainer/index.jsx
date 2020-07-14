@@ -22,14 +22,6 @@ class FrontCompontContainer extends BaseComponentContainer {
     }
 
     execLogic(requestData){
-        if(!(this.props.pageComponent && 
-            this.props.pageComponent.name && 
-            this.props.pageData &&
-            this.props.pageData.name
-        ))
-        {
-            throw new Error("无法执行逻辑，请确保页面或文章存在");
-        }
 
         let postData = {
             logicName: this.props.pageComponent.name,

@@ -3,7 +3,8 @@ import { BasePageLeafComponent } from '../../BaseComponents/BasePageLeafComponen
 import { Link } from 'react-router-dom'
 import { List, Card, Pagination, Button } from 'antd';
 import Setting from './Setting'
-import { spawn } from 'child_process';
+
+import defaultImg from 'images/default_post_img.jpg'
 
 export default class IEPostList extends BasePageLeafComponent {
     constructor(props) {
@@ -41,7 +42,7 @@ export default class IEPostList extends BasePageLeafComponent {
                                                 alt={item.title}
                                                 height={setting.heigth}
                                                 width="100%"
-                                                src={item.imageList.length > 0 && item.imageList[0] ? item.imageList[0] : "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"} />
+                                                src={item.imageList.length > 0 && item.imageList[0] ? item.imageList[0] : defaultImg } />
                                         }
                                     </Link>
                                 }

@@ -116,13 +116,16 @@ using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.Entitys.Authorization.Users;
+using IEManageSystem.CommonInfrastructure.CMS;
+using Abp.UI;
+using Abp.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using System.Linq;
 
-public class {CreateActuatorClassName(name)} {{
+public class {CreateActuatorClassName(name)} : BaseActuator {{
     {funCode}
 }}
 ";
@@ -132,7 +135,8 @@ public class {CreateActuatorClassName(name)} {{
         {
             _rwlock.EnterReadLock();
 
-            try {
+            try
+            {
                 if (_actuators.ContainsKey(name))
                 {
                     return _actuators[name];
@@ -149,16 +153,21 @@ public class {CreateActuatorClassName(name)} {{
 
                 MethodInfo mInfo = type.GetMethod("Exec");
 
-                Action<ContentComponentData, PageComponentBase, PageData, PageBase, User, string> action = 
-                    (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request) => {
-                    mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, page, user, request });
-                };
+                Action<ContentComponentData, PageComponentBase, PageData, PageBase, User, string> action =
+                    (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request) =>
+                    {
+                        mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, page, user, request });
+                    };
 
                 var actuator = new Actuator(action);
 
                 _actuators[name] = actuator;
 
                 return actuator;
+            }
+            catch (Exception ex) 
+            {
+                throw ex;
             }
             finally
             {
