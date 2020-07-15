@@ -62,8 +62,8 @@ export default class TemplatePageManage extends React.Component {
             });
     }
 
-    registerPage(pageName){
-        let templatePage = this.template.templatePages.find(e=>e.page.name == pageName);
+    registerPage(pageName, isAddPage) {
+        let templatePage = this.template.templatePages.find(e => e.page.name == pageName);
 
         let postData = {
             name: pageName,
@@ -71,10 +71,23 @@ export default class TemplatePageManage extends React.Component {
             defaultComponentDatas: templatePage.defaultComponentDatas
         }
 
-        ieReduxFetch("/api/PageManage/UpdatePageComponent", postData)
-        .then(value => {
-            this.getPagesList();
-        });
+        if (isAddPage == true) {
+            ieReduxFetch("/api/PageManage/AddPage", {
+                name: pageName,
+                displayName: pageName
+            }).then(() => {
+                ieReduxFetch("/api/PageManage/UpdatePageComponent", postData)
+                    .then(value => {
+                        this.getPagesList();
+                    });
+            })
+        }
+        else {
+            ieReduxFetch("/api/PageManage/UpdatePageComponent", postData)
+                .then(value => {
+                    this.getPagesList();
+                });
+        }
     }
 
     render() {
@@ -84,20 +97,20 @@ export default class TemplatePageManage extends React.Component {
                 icon={<FormOutlined />}
                 type="primary"
                 onClick={() => {
-                    if(this.state.registerPages.some(item => item.name == props.resource.name)){
+                    if (this.state.registerPages.some(item => item.name == props.resource.name)) {
                         Modal.confirm({
                             title: `注册 ${props.resource.name}`,
                             icon: <ExclamationCircleOutlined />,
                             content: "该页面已存在，如果重新注册将导致旧的组件数据丢失，是否重新注册",
                             okText: '注册',
                             cancelText: '取消',
-                            onOk: ()=>{
-                                this.registerPage(props.resource.name);
+                            onOk: () => {
+                                this.registerPage(props.resource.name, false);
                             }
                         })
                     }
-                    else{
-                        this.registerPage(props.resource.name);
+                    else {
+                        this.registerPage(props.resource.name, true);
                     }
                 }}
             >
