@@ -3,10 +3,11 @@ using Abp.AspNetCore.Configuration;
 using Abp.Domain.Uow;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
-using IEManageSystem.Api.Help;
+using IEManageSystem.Web.Help;
 using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.Attributes;
+using IEManageSystem.CommonInfrastructure;
 using IEManageSystem.Configuration;
 using IEManageSystem.EntityFrameworkCore;
 using IEManageSystem.JwtAuthentication;
@@ -22,12 +23,13 @@ namespace IEManageSystem.Web.Startup
         typeof(IEJwtAuthenticationModule),
         typeof(IEManageSystemApplicationModule), 
         typeof(IEManageSystemEntityFrameworkCoreModule), 
+        typeof(IEManageSystemCommonInfrastructureModule),
         typeof(AbpAspNetCoreModule))]
     public class IEManageSystemWebModule : AbpModule
     {
         private readonly IConfigurationRoot _appConfiguration;
 
-        public IEManageSystemWebModule(IHostingEnvironment env)
+        public IEManageSystemWebModule(IWebHostEnvironment env)
         {
             _appConfiguration = AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName);
         }
@@ -54,19 +56,6 @@ namespace IEManageSystem.Web.Startup
                                          IEUrlHelper.CreateUrl(controllerModel.ControllerName, action.ActionName)
                                      )
                                  );
-                             }
-                         }
-
-                         foreach (var attr in controllerModel.Attributes)
-                         {
-                             // 如果控制器有应用ApiAuthorization特性
-                             if (attr.GetType() == typeof(ApiAuthorizationAttribute) ||
-                                attr.GetType().IsSubclassOf(typeof(ApiAuthorizationAttribute))) {
-
-                                 var apiAuthorizationAttribute = (ApiAuthorizationAttribute)attr;
-
-                                 // 添加授权过滤器
-                                 controllerModel.Filters.Add(new ApiAuthorizationFilter(apiAuthorizationAttribute.ApiScopeName));
                              }
                          }
                      }

@@ -1,0 +1,95 @@
+{
+    "GetPageDatas": {
+        "pageDatas": [
+            {
+                "id": 1,
+                "name": "post",
+                "title": "文章1",
+                "describe": "文章1的简短描述",
+                "content": "文章内容1",
+                "tags": [
+                    {
+                        "id": 1,
+                        "name": "tag1",
+                        "displayName": "标签1"
+                    },
+                    {
+                        "id": 2,
+                        "name": "tag2",
+                        "displayName": "标签2"
+                    }
+                ],
+                "images": "/1.jpg|/2.jpg",
+                "creationTime": "2020-7-1 12:00:00",
+                "pageId": 2
+            },
+            {
+                "id": 2,
+                "name": "post",
+                "title": "文章2",
+                "describe": "文章2的简短描述",
+                "content": "文章内容2",
+                "tags": [
+                    {
+                        "id": 1,
+                        "name": "tag1",
+                        "displayName": "标签1"
+                    },
+                    {
+                        "id": 2,
+                        "name": "tag2",
+                        "displayName": "标签2"
+                    }
+                ],
+                "images": "/1.jpg|/2.jpg",
+                "creationTime": "2020-7-1 12:00:00",
+                "pageId": 3
+            }
+        ],
+        "resourceNum": 10,
+        "pageIndex": 1
+    },
+    "GetPageData": {
+        "pageData": {
+            "id": 1,
+            "name": "post",
+            "title": "文章1",
+            "describe": "文章1的简短描述",
+            "content": "文章内容",
+            "tags": [
+                {
+                    "id": 1,
+                    "name": "tag1",
+                    "displayName": "标签1"
+                },
+                {
+                    "id": 2,
+                    "name": "tag2",
+                    "displayName": "标签2"
+                }
+            ],
+            "images": "/1.jpg|/2.jpg",
+            "creationTime": "2020-7-1 12:00:00",
+            "pageId": 2
+        },
+        "contentComponentDatas": []
+    },
+    "GetPagesOfUserCanAccessPost": {
+        "pages": [
+            {
+                "id": 2,
+                "name": "Post",
+                "displayName": "文章",
+                "description": "这是一个文章页",
+                "pageType": "ContentPage"
+            },
+            {
+                "id": 3,
+                "name": "Post3",
+                "displayName": "文章3",
+                "description": "这是一个文章页",
+                "pageType": "ContentPage"
+            }
+        ]
+    }
+}

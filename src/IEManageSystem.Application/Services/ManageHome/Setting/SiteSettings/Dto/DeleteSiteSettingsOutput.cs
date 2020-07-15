@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.Setting.SiteSettings.Dto
 {
-    public class DeleteSiteSettingsOutput:OutputDtoBase
+    public class DeleteSiteSettingsOutput
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Pictures.Dto
 {
-    public class DeleteDirOutput:OutputDtoBase
+    public class DeleteDirOutput
     {
     }
 }

@@ -3,7 +3,7 @@ import { Switch, Route, NavLink } from 'react-router-dom';
 import './BodyDiv.css';
 import MenuProvider from 'Core/Menu/MenuProvider'
 
-import Index from "./Index/Index.jsx";
+import Index from "./Index/index.jsx";
 
 export default class BodyDiv extends React.Component
 {

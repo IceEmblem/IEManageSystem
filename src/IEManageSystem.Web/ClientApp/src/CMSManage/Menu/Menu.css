@@ -9,7 +9,6 @@
     height: auto;
     overflow: hidden;
     border-radius: 4px;
-    position: absolute;
     width: 100%;
     left: 0px;
 }
@@ -20,7 +19,7 @@
     background: #2a394f;
 }
 .cms-menu label {
-    border-bottom: 1px solid #293649;
+    border-bottom: 1px solid #b5b3b3;
     width: 100%;
     color: #eff4fa;
     -webkit-transition: text-indent .15s, height .3s;
@@ -37,7 +36,7 @@
 }
 
 .cms-menu-title{
-    padding: 1rem 1.5rem;
+    padding: .8rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,10 +52,15 @@
 }
 .cms-menu-content li {
     width: 100%;
-    background: #15a4fa;
-    padding: 15px 25px;
-    box-shadow: 0px 0px #126CA1 inset;
+    background: #1890ff;
+    padding: .8rem 1.5rem;
     -webkit-transition: box-shadow .3s, text-indent .3s;
     transition: box-shadow .3s, text-indent .3s;
     position: relative;
+}
+
+.cms-menu-btns{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }

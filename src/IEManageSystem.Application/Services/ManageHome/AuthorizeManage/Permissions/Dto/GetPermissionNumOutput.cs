@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Permissions.Dto
 {
-    public class GetPermissionNumOutput : OutputDtoBase
+    public class GetPermissionNumOutput 
     {
         public int Num { get; set; }
     }

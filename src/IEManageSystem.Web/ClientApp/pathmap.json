@@ -1,0 +1,7 @@
+{
+  "bootstrapcss": "css/bootstrap.min.css",
+  "bootstrapcssicon": "css/open-iconic-bootstrap.min.css",
+  "commoncss": "css/common.css",
+  "ielib": "js/IELib.js",
+  "@": "src"
+}

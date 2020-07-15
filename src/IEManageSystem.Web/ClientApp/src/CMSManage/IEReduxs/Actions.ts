@@ -1,11 +1,15 @@
 import { createIEThunkAction } from 'Core/IEReduxs/Actions'
+import PageModel from '../Models/Pages/PageModel'
+import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
+import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
 
 // 页面添加组件
 export const PageAddComponent = 'PageAddComponent'
-export function pageAddComponent(pageComponent:PageComponentModel) {
+export function pageAddComponent(pageComponent:PageComponentModel, isAddDefaultComponentData) {
   return {
     type: PageAddComponent,
-    pageComponent
+    pageComponent,
+    isAddDefaultComponentData
   }
 }
 
@@ -27,6 +31,14 @@ export function pageEditComponent(pageComponent:PageComponentModel) {
   }
 }
 
+export const SetActiveComponent = "SetActiveComponent";
+export function setActiveComponent(activePageComponentSign: string){
+  return {
+    type: SetActiveComponent,
+    activePageComponentSign
+  }
+}
+
 // 页面组件请求
 export const PageReceive = "PageReceive"
 export function pageFetch(name:string){
@@ -41,12 +53,24 @@ export function pageFetch(name:string){
   );
 }
 
+// 该动作模拟页面接收动作
+export function setPage(page:any, defaultComponentDatas:Array<any>){
+  return {
+    type: PageReceive,
+    data: {
+      page,
+      defaultComponentDatas
+    }
+  }
+}
+
 // 页面组件更新
 export const PageComponentUpdateReceive = "PageComponentUpdateReceive"
-export function pageComponentUpdateFetch(name:string, components:PageComponentModel) {
+export function pageComponentUpdateFetch(name:string, components:Array<PageComponentModel>, defaultComponentDatas:Array<ComponentDataModel>) {
   let postData = {
     name: name,
-    pageComponents: components
+    pageComponents: components.map(item=>item.toJsonObject()),
+    defaultComponentDatas: defaultComponentDatas
   };
 
   return createIEThunkAction(
@@ -65,13 +89,21 @@ export function pageDataFetch(pageName:string, pageDataName:string){
   };
 
   return createIEThunkAction(
-    "/api/PageQuery/GetPageData",
+    "/api/PageDataQuery/GetPageData",
     postData,
     PageDataReceive
   );
 }
 
-// 文章数据更新
+// 清理文章数据（如果页面是静态页，则文章没有数据，这时候应该清理文章）
+export const PageDataClear = "PageDataClear";
+export function pageDataClear(){
+  return {
+    type: PageDataClear
+  }
+}
+
+// 文章数据更新请求
 export const ComponentDataUpdateReceive = "ComponentDataUpdateReceive"
 export function componentDataUpdateFetch(pageName:string, pageDataName:string, componentDatas:PageComponentModel)
 {
@@ -82,7 +114,7 @@ export function componentDataUpdateFetch(pageName:string, pageDataName:string, c
   };
 
   return createIEThunkAction(
-    "/api/PageManage/UpdateComponentData",
+    "/api/PageDataManage/UpdateComponentData",
     postData,
     ComponentDataUpdateReceive
   );
@@ -90,10 +122,20 @@ export function componentDataUpdateFetch(pageName:string, pageDataName:string, c
 
 // 文章组件数据更新
 export const ComponentDataUpdate = "ComponentDataUpdate"
-export function componentDataUpdate(resource: ContentComponentDataModel)
+export function componentDataUpdate(resource: ComponentDataModel)
 {
   return {
     type: ComponentDataUpdate,
+    resource
+  }
+}
+
+// 默认组件数据更新
+export const DefaultComponentDataUpdate = "DefaultComponentDataUpdate"
+export function defaultComponentDataUpdate(resource: ComponentDataModel)
+{
+  return {
+    type: DefaultComponentDataUpdate,
     resource
   }
 }

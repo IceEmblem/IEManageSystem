@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Linq;
 
 namespace IEManageSystem.CMS.DomainModel.Pages
 {
@@ -14,6 +15,10 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             Name = name;
         }
 
+        public PageComponentBase GetPageComponentForSign(string sign) {
+            return PageComponents.FirstOrDefault(e => e.Sign == sign);
+        }
+
         [Required]
         public string Name { get; protected set; }
 
@@ -22,7 +27,5 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         public string Description { get; set; }
 
         public ICollection<PageComponentBase> PageComponents { get; set; }
-
-        public ICollection<PageData> PageDatas { get; protected set; }
     }
 }

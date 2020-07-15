@@ -42,19 +42,19 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetAdminsOutput> GetAdmins(GetAdminsInput input)
+        public GetAdminsOutput GetAdmins(GetAdminsInput input)
         {
             Expression<Func<User, object>>[] propertySelectors = new Expression<Func<User, object>>[] {
                 e=>e.Account
             };
 
-            IEnumerable<User> admins = _adminManager.GetAdminsIncluding(propertySelectors).Where(e => (string.IsNullOrEmpty(input.SearchKey) || e.Name.Contains(input.SearchKey)));
+            var admins = _adminManager.GetAdminsIncluding(propertySelectors).Where(e => (string.IsNullOrEmpty(input.SearchKey) || e.Name.Contains(input.SearchKey)));
 
             int num = admins.Count();
 
-            admins = admins.Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
+            var queryResults = admins.Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
 
-            return new GetAdminsOutput() { Admins = _objectMapper.Map<List<UserDto>>(admins), ResourceNum = num, PageIndex = input.PageIndex };
+            return new GetAdminsOutput() { Admins = _objectMapper.Map<List<UserDto>>(queryResults), ResourceNum = num, PageIndex = input.PageIndex };
         }
 
         public async Task<CreateAdminOutput> CreateAdmin(CreateAdminInput input)
@@ -67,7 +67,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
             return new CreateAdminOutput();
         }
 
-        public async Task<UpdateAdminOutput> UpdateAdmin(UpdateAdminInput input)
+        public UpdateAdminOutput UpdateAdmin(UpdateAdminInput input)
         {
             var admin = _adminManager.GetAdmin(input.Id);
 
@@ -86,7 +86,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
             return new UpdateAdminOutput();
         }
 
-        public async Task<DeleteAdminOutput> DeleteAdmin(DeleteAdminInput input)
+        public DeleteAdminOutput DeleteAdmin(DeleteAdminInput input)
         {
             _adminManager.DeleteAdmin(input.Id);
 
@@ -94,7 +94,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetAdminRolesOutput> GetAdminRoles(GetAdminRolesInput input)
+        public GetAdminRolesOutput GetAdminRoles(GetAdminRolesInput input)
         {
             Expression<Func<User, object>>[] propertySelectors = new Expression<Func<User, object>>[] {
                 e => e.UserRoles
@@ -111,7 +111,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
             return new GetAdminRolesOutput() { Roles = _objectMapper.Map<List<RoleDto>>(roles) };
         }
 
-        public async Task<AddRoleOutput> AddRole(AddRoleInput input)
+        public AddRoleOutput AddRole(AddRoleInput input)
         {
             var admin = _adminManager.GetAdmin(input.AdminId);
             if (admin == null)
@@ -130,7 +130,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
             return new AddRoleOutput();
         }
 
-        public async Task<RemoveRoleOutput> RemoveRole(RemoveRoleInput input)
+        public RemoveRoleOutput RemoveRole(RemoveRoleInput input)
         {
             var admin = _adminManager.GetAdmin(input.AdminId);
             if (admin == null)
@@ -150,7 +150,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
         }
 
         [ApiAuthorizationQuery]
-        public async Task<GetPermissionsOutput> GetPermissions(GetPermissionsInput input)
+        public GetPermissionsOutput GetPermissions(GetPermissionsInput input)
         {
             Expression<Func<User, object>>[] adminProperty = new Expression<Func<User, object>>[] {
                 e => e.UserRoles
@@ -175,7 +175,7 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins
             });
             permissionIds = permissionIds.Distinct().ToList();
 
-            var permissions = await _permissionManager.PermissionRepository.GetAllListAsync(e => permissionIds.Contains(e.Id));
+            var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionIds.Contains(e.Id));
 
             return new GetPermissionsOutput() { Permissions = _objectMapper.Map<List<PermissionDto>>(permissions) };
         }

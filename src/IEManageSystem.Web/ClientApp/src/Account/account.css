@@ -151,16 +151,11 @@
     }
 
     .account input {
-        background-color:rgba(255,255,255,0.3);
+        background-color:rgba(255,255,255,0);
         color: #ffffff;
         border: 0rem;
     }
-    .account input:focus{
-        background-color:rgba(255,255,255,0.3);
-    }
-    .account img {
-        padding-left: 20px;
-    }
+
     .account > .col-md-7 {
         display: -webkit-flex;
         display: flex;
@@ -168,17 +163,11 @@
 
         .account > .col-md-7 > div {
             margin: auto;
-            padding-bottom: 100px;
             color: white;
+            top: -50px;
+            background-color: rgba(0,191,255,0.3);
+            padding: 24px;
         }
-
-            .account > .col-md-7 > div h4 {
-                color: white;
-            }
-
-    .account .card {
-        background-color: rgba(0,191,255,0.3);
-    }
 
     .account > .col-md-4 {
         display: -webkit-flex;
@@ -188,31 +177,13 @@
         .account > .col-md-4 > div {
             margin: auto;
             color: #ffffff;
-            padding-bottom: 100px;
+            top: -50px;
+            background-color: rgba(0,191,255,0.3);
         }
 
             .account > .col-md-4 > div > div {
-                background-color: rgba(0,191,255,0.3);
                 padding: 20px 20px 20px 20px;
             }
-
-        .account > .col-md-4 label {
-            padding: 0px;
-            display: inline-block;
-            height: 100%;
-            text-align: justify;
-            margin-right: 10px;
-        }
-
-        .account > .col-md-4 .form-inline {
-        }
-
-            .account > .col-md-4 .form-inline > div {
-            }
-
-        .account > .col-md-4 .w-100 {
-            padding: 5px 0px 5px 0px;
-        }
 
 .error {
     padding-top: 10px !important;

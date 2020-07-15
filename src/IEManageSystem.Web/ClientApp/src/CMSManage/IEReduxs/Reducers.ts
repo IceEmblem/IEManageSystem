@@ -4,100 +4,180 @@ import {
     PageEditComponent,
     PageReceive,
     PageDataReceive,
-    ComponentDataUpdate
+    ComponentDataUpdate,
+    DefaultComponentDataUpdate,
+    PageDataClear,
+    SetActiveComponent,
 } from './Actions'
+import PageModel from '../Models/Pages/PageModel'
+import PageDataModel from '../Models/PageDatas/PageDataModel'
+import ComponentDataModel from '../Models/ComponentDataModel';
 
 function page(
-    state: PageModel = {
-        id:0,
-        name:"initPage",
-        displayName:"初始化页面",
-        description:"",
-        pageType:"StaticPage",
-        pageComponents:[]
-    }, 
-    action: any) 
-{
+    state: PageModel = new PageModel({
+        id: 0,
+        name: "initPage",
+        displayName: "初始化页面",
+        description: "",
+        pageType: "StaticPage",
+        pageComponents: []
+    }),
+    action: any) {
     // 添加组件
     if (action.type == PageAddComponent) {
-        let maxSortIndex = 0;
-        if(state.pageComponents.length > 0){
-            maxSortIndex = state.pageComponents[state.pageComponents.length - 1].pageComponentBaseSetting.sortIndex;
-        }
-        action.pageComponent.pageComponentBaseSetting.sortIndex = maxSortIndex + 1;
-        state.pageComponents.push(action.pageComponent);
-        return {...state};
+        state.addPageComponent(action.pageComponent);
+        return state;
     }
 
     // 移除组件
     if (action.type == PageRemoveComponent) {
-        state.pageComponents = state.pageComponents.filter(item => item.sign != action.pageComponent.sign);
-        return {...state};
+        state.removePageComponent(action.pageComponent);
+        return state;
     }
 
     // 编辑组件
     if (action.type == PageEditComponent) {
-        state.pageComponents = state.pageComponents.map(item => {
-            if (item.sign == action.pageComponent.sign) {
-                return action.pageComponent;
-            }
-            return item;
-        });
-        pageComponentSort(state.pageComponents);
+        state.editPageComponent(action.pageComponent);
 
-        return {...state};
+        return state;
     }
 
     // 页面接收
     if (action.type == PageReceive) {
-        // 对接收的组件按sortIndex进行排序
-        pageComponentSort(action.data.page.pageComponents)
-
-        return action.data.page;
+        return new PageModel(action.data.page);
     }
 
     return state;
 }
 
-// 插入排序
-function pageComponentSort(arr: Array<PageComponentModel>) {
-    var len = arr.length;
-    var preIndex, current;
-    for (var i = 1; i < len; i++) {
-        preIndex = i - 1;
-        current = arr[i];
-        while(preIndex >= 0 && arr[preIndex].pageComponentBaseSetting.sortIndex > current.pageComponentBaseSetting.sortIndex) {
-            arr[preIndex+1] = arr[preIndex];
-            preIndex--;
+function defaultComponentDatas(
+    state: Array<ComponentDataModel> = [],
+    action: any): Array<ComponentDataModel> {
+    if (action.type == DefaultComponentDataUpdate) {
+        let componentData = new ComponentDataModel(action.resource);
+
+        let index = state.findIndex(e => e.sign == componentData.sign);
+        if (index == -1) {
+            state.push(componentData);
         }
-        arr[preIndex+1] = current;
+        else {
+            state[index] = componentData;
+        }
+
+        return state;
     }
-    return arr;
+
+    // 添加组件
+    if (action.type == PageAddComponent) {
+        if (!action.isAddDefaultComponentData) {
+            return state;
+        }
+
+        let componentData = new ComponentDataModel({
+            id: 0,
+            sign: action.pageComponent.sign,
+            singleDatas: []
+        });
+
+        state.push(componentData);
+        return state;
+    }
+
+    // 移除组件
+    if (action.type == PageRemoveComponent) {
+        let childs = action.pageComponent.getAllChilds().map(e => e.sign);
+
+        let reomveItems = [action.pageComponent.sign, ...childs];
+
+        state = state.filter(e => !reomveItems.some(ie => ie == e.sign));
+
+        return state;
+    }
+
+    // 编辑组件
+    if (action.type == PageEditComponent) {
+        let index = state.findIndex(e => e.sign == action.sign);
+        if (index < 0) {
+            return state;
+        }
+        state[index].sign = action.pageComponent.sign;
+
+        return state;
+    }
+
+    if (action.type == PageReceive) {
+        let datas = [];
+        action.data.defaultComponentDatas.forEach((element: any) => {
+            let signs = action.data.page.pageComponents.map(e => e.sign);
+            if (signs.some(e => e == element.sign)) {
+                datas.push(new ComponentDataModel(element));
+            }
+        });
+
+        return datas;
+    }
+
+    return state;
 }
 
 function pageData(
-    state: PageDataModel = {
-        id:0,
-        name:"initPage",
-        title:"",
-        contentComponentDatas:[]
-    }, 
-    action: any) 
-{
-    if (action.type == ComponentDataUpdate) {
-        let index = state.contentComponentDatas.findIndex(e => e.sign == action.resource.sign);
-        if (index == -1) {
-            state.contentComponentDatas.push(action.resource);
-        }
-        else {
-            state.contentComponentDatas[index] = action.resource;
-        }
-
-        return {...state};
+    state: PageDataModel = new PageDataModel({
+        id: 0
+    }),
+    action: any) {
+    if (action.type == PageDataReceive) {
+        return new PageDataModel(action.data.pageData);
     }
 
-    if(action.type == PageDataReceive){
-        return action.data.pageData;
+    if (action.type == PageDataClear) {
+        return new PageDataModel({
+            id: 0
+        });
+    }
+
+    return state;
+}
+
+function contentComponentDatas(state: Array<ComponentDataModel> = [],
+    action: any): Array<ComponentDataModel> {
+    if (action.type == ComponentDataUpdate) {
+        let componentData = new ComponentDataModel(action.resource);
+
+        let index = state.findIndex(e => e.sign == componentData.sign);
+        if (index == -1) {
+            state.push(componentData);
+        }
+        else {
+            state[index] = componentData;
+        }
+
+        return state;
+    }
+
+    if (action.type == PageDataReceive) {
+        let datas = [];
+        action.data.contentComponentDatas.forEach((element: any) => {
+            datas.push(new ComponentDataModel(element));
+        });
+
+        return datas;
+    }
+
+    if (action.type == PageDataClear) {
+        return [];
+    }
+
+    return state;
+}
+
+function activePageComponentSign(state: "", action: any) {
+    if (action.type == SetActiveComponent) {
+        return action.activePageComponentSign
+    }
+
+    // 添加组件
+    if (action.type == PageAddComponent) {
+        return action.pageComponent.sign;
     }
 
     return state;
@@ -108,6 +188,9 @@ export function reducer(state: any = {
     return Object.assign({}, state,
         {
             page: page(state.page, action),
-            pageData: pageData(state.pageData, action)
+            defaultComponentDatas: defaultComponentDatas(state.defaultComponentDatas, action),
+            pageData: pageData(state.pageData, action),
+            contentComponentDatas: contentComponentDatas(state.contentComponentDatas, action),
+            activePageComponentSign: activePageComponentSign(state.activePageComponentSign, action),
         })
 }

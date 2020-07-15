@@ -19,7 +19,8 @@ namespace IEManageSystem.Configures.CMS
                     Id = 101,
                     Name = "PCGame",
                     DisplayName = "主机游戏",
-                    CompositeMenuId = 2,
+                    CompositeMenuId = 3,
+                    RootMenuId = 1,
                     Discriminator = "LeafMenu"
                 },
                 new
@@ -27,7 +28,8 @@ namespace IEManageSystem.Configures.CMS
                     Id = 102,
                     Name = "PhoneGame",
                     DisplayName = "手机游戏",
-                    CompositeMenuId = 2,
+                    CompositeMenuId = 3,
+                    RootMenuId = 1,
                     Discriminator = "LeafMenu"
                 },
                 new
@@ -35,7 +37,8 @@ namespace IEManageSystem.Configures.CMS
                     Id = 103,
                     Name = "Web",
                     DisplayName = "站点技术",
-                    CompositeMenuId = 3,
+                    CompositeMenuId = 4,
+                    RootMenuId = 1,
                     Discriminator = "LeafMenu"
                 },
                 new
@@ -43,7 +46,8 @@ namespace IEManageSystem.Configures.CMS
                     Id = 104,
                     Name = "Desktop",
                     DisplayName = "桌面开发",
-                    CompositeMenuId = 3,
+                    CompositeMenuId = 4,
+                    RootMenuId = 1,
                     Discriminator = "LeafMenu"
                 });
         }

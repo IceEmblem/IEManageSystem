@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Version>1.0.0.0</Version>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AssemblyName>IEManageSystem.Application</AssemblyName>
     <PackageId>IEManageSystem.Application</PackageId>
@@ -17,7 +17,7 @@
     <ProjectReference Include="..\IEManageSystem.Core\IEManageSystem.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Abp.EntityFrameworkCore" Version="4.9.0" />
-    <PackageReference Include="Abp.AutoMapper" Version="4.9.0" />
+    <PackageReference Include="Abp.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Abp.AutoMapper" Version="5.0.0" />
   </ItemGroup>
 </Project>

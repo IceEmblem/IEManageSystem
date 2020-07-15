@@ -1,69 +1,9 @@
-.navbar_css {
-    background: linear-gradient(to right, #00214080, #00eeee00);
-}
 
-.navbar_css a:hover{
-    color: white;
-}
-
-.navbar-site-title{
-    width: 16%;
-    padding-left: 1rem;
-}
-
-.navbar-menu{
-    padding-right: 1rem;
-}
-
-.navbar-avatar{
+.nav-avatar{
     width: 2.5rem;
-    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
-.navbar-search{
-    width: 17%  !important;;
-    margin-right: 0.75rem;
-}
-
-.navbar-search input{
-    font-size: 0.75rem;
-}
-
-.navbar_logo_css{
-    width: 3rem;
-}
-    .navbar_css .navbar-collapse {
-        display: -webkit-flex;
-        display: flex;
-    }
-    .navbar_css .navbar-collapse>span {
-        margin-left: auto;
-        margin-right: 1.25rem;
-    }
-    .navbar_css .navbar-collapse>button>span {
-        margin-left: auto;
-        margin-right:0.3rem;
-    }
-    .navbar_css a {
-        color: #FFFFFF;
-    }
-    .navbar_css li {
-        border-radius:0.3rem;
-        overflow:hidden;
-    }
-    .navbar_css li a {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-    .navbar_css li a:hover {
-        background-color: #00E5CD;
-    }
-
-.navbar_css_li_click {
-    background-color: #00E5CD !important;
-    color: #fff !important;
-}
-
-.navbar_css li a:focus {
-    background-color: #00E5CD;
+.antlayout-nav-iconsize{
+    font-size: 1.5rem;
 }

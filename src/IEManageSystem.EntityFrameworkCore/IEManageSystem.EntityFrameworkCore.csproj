@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Version>1.0.0.0</Version>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <AssemblyName>IEManageSystem.EntityFrameworkCore</AssemblyName>
     <OutputType>Library</OutputType>
@@ -15,36 +15,23 @@
     <RootNamespace>IEManageSystem</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\20180726084415_Upgrade_ABP_3.8.0.cs" />
-    <Compile Remove="Migrations\20180726084415_Upgrade_ABP_3.8.0.Designer.cs" />
-    <Compile Remove="Migrations\20181015085310_Upgraded_To_ABP_v3_9_0.cs" />
-    <Compile Remove="Migrations\20181015085310_Upgraded_To_ABP_v3_9_0.Designer.cs" />
-    <Compile Remove="Migrations\20190719145525_Upgraded_To_Abp_4_8_0.cs" />
-    <Compile Remove="Migrations\20190719145525_Upgraded_To_Abp_4_8_0.Designer.cs" />
-    <Compile Remove="Migrations\20191106102411_Init.cs" />
-    <Compile Remove="Migrations\20191106102411_Init.Designer.cs" />
-    <Compile Remove="Migrations\20191214045316_Rename_LeafComponent.cs" />
-    <Compile Remove="Migrations\20191214045316_Rename_LeafComponent.Designer.cs" />
-    <Compile Remove="Migrations\20191216111834_Add_PageComponentBase_SortIndex.cs" />
-    <Compile Remove="Migrations\20191216111834_Add_PageComponentBase_SortIndex.Designer.cs" />
-    <Compile Remove="Migrations\20191217022034_Add_ValueObject_PageComponentBaseSetting.cs" />
-    <Compile Remove="Migrations\20191217022034_Add_ValueObject_PageComponentBaseSetting.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\IEManageSystem.ApiAuthorization\IEManageSystem.ApiAuthorization.csproj" />
     <ProjectReference Include="..\IEManageSystem.CMS\IEManageSystem.CMS.csproj" />
     <ProjectReference Include="..\IEManageSystem.Common\IEManageSystem.Common.csproj" />
     <ProjectReference Include="..\IEManageSystem.Core\IEManageSystem.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Abp.EntityFrameworkCore" Version="4.9.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4">
+    <PackageReference Include="Abp.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />

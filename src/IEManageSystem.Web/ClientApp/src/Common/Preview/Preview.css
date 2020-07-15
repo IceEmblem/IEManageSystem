@@ -14,28 +14,7 @@
 }
 
 .preview>h6{
-    padding: 0.67rem 1.25rem;
-    color: #fff;
-    background-color: #5d6b79;
     font-size: 1rem;
-    margin-bottom: 0.25rem;
-    border-radius: .33rem;
-}
-
-.preview-search{
-    padding: 0.3rem 0.7rem !important;
-}
-
-.preview>h6 input{
-    font-size: 0.75rem;
-    padding: 0.3rem;
-    width: 6rem !important;
-    display: inline-block;
-}
-
-.preview>h6 .input-group{
-    padding-top: .33rem;
-    padding-bottom: .33rem;
 }
 
 .preview>div
@@ -50,17 +29,13 @@
 
 .preview li{
     border: 0px;
-    background-color: #bcc5c5;
     margin-bottom: 2px;
-    color: #ffffff;
-}
-
-.preview li:hover{
-    background: #989a9a;
-    color: #ffffff;
+    padding: .5rem;
+    border-radius: .3rem;
 }
 
 .preview-selected{
-    background: #989a9a !important;
-    color: #ffffff;
+    color: #40a9ff !important;
+    background-color: #fff !important;
+    border-color: #40a9ff !important;
 }

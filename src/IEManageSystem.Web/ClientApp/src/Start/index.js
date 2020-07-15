@@ -10,13 +10,17 @@ import ModuleFactory from 'Core/Modules/ModuleFactory'
 import {getIEStore} from 'Core/IEStore'
 import PageProvider from 'Core/Page/PageProvider'
 
-import 'bootstrap';
-import 'bootstrapcss';
+// 部件
+import Error from './Parts/Error';
+import Loading from './Parts/Loading'
+
+import 'bootstrapcss'
+import 'antd/dist/antd.css';
 import 'bootstrapcssicon';
-import 'mousewheel';
 import 'commoncss';
 import 'ielib';
-import 'css/simple-btn.css'
+
+import './index.css';
 
 let moduleFactory = new ModuleFactory();
 moduleFactory.init();
@@ -29,22 +33,24 @@ ReactDOM.render(
             <Switch>
                 {PageProvider.pages.map(item => (<Route key={item.url} path={item.url} component={item.component} />))}
             </Switch>
+            <Error />
+            <Loading />
         </BrowserRouter>
     </Provider>,
-    document.getElementById('Home'));
+    document.getElementById('root'));
 
-// 设置根字体大小
-let width = document.body.clientWidth
-let fontsize = parseInt(width / 124);
-document.documentElement.style.fontSize = fontsize + "px";
-document.body.style.fontSize = fontsize + "px";
+// // 设置根字体大小
+// let width = document.body.clientWidth
+// let fontsize = parseInt(width / 124);
+// document.documentElement.style.fontSize = fontsize + "px";
+// document.body.style.fontSize = fontsize + "px";
 
-// 窗口改变是重新设置根字体大小
-(function () {
-    window.onresize = function () {
-        let width = document.body.clientWidth
-        let fontsize = parseInt(width / 124);
-        document.documentElement.style.fontSize = fontsize + "px";
-        document.body.style.fontSize = fontsize + "px";
-    };
-})();
+// // 窗口改变是重新设置根字体大小
+// (function () {
+//     window.onresize = function () {
+//         let width = document.body.clientWidth
+//         let fontsize = parseInt(width / 124);
+//         document.documentElement.style.fontSize = fontsize + "px";
+//         document.body.style.fontSize = fontsize + "px";
+//     };
+// })();

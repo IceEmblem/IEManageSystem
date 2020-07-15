@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Permissions.Dto
 {
-    public class DeletePermissionOutput : OutputDtoBase
+    public class DeletePermissionOutput 
     {
     }
 }

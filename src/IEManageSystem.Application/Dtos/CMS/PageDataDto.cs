@@ -16,6 +16,22 @@ namespace IEManageSystem.Dtos.CMS
 
         public string Title { get; set; }
 
-        public List<ContentComponentDataDto> ContentComponentDatas { get; set; }
+        public string Describe { get; set; }
+
+        public string Content { get; set; }
+
+        public string Images { get; set; }
+
+        public int Score { get; set; }
+
+        public int ScoreNum { get; protected set; }
+
+        public int Click { get; set; }
+
+        public DateTime CreationTime { get; set; }
+
+        public int PageId { get; set; }
+
+        public List<TagDto> Tags { get; set; }
     }
 }

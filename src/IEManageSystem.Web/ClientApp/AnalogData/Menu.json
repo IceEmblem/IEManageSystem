@@ -2,27 +2,66 @@
     "GetMenus": {
         "menus": [
             {
-                "name": "home",
-                "displayName": "首页",
-                "icon": "oi-home",
-                "pageName": "Home",
-                "pageDataName": "Home",
+                "id": 4,
+                "name": "main",
+                "displayName": "主菜单",
+                "icon": "",
+                "pageName": "",
+                "pageDataName": "",
                 "menus": []
             },
             {
-                "name": "post",
-                "displayName": "技术文档",
-                "menus": [
-                    {
-                        "name": "web",
-                        "displayName": "站点技术"
-                    },
-                    {
-                        "name": "dosktop",
-                        "displayName": "桌面应用"
-                    }
-                ]
+                "id": 3,
+                "name": "menu1",
+                "displayName": "副菜单1",
+                "icon": "",
+                "pageName": "",
+                "pageDataName": "",
+                "menus": []
             }
         ]
+    },
+    "GetMenu": {
+        "menu": {
+            "id": 4,
+            "name": "main",
+            "displayName": "主菜单",
+            "icon": "",
+            "pageName": "",
+            "pageDataName": "",
+            "menuType": "CompositeMenu",
+            "menus": [
+                {
+                    "id": 5,
+                    "name": "home",
+                    "displayName": "首页",
+                    "icon": "oi-home",
+                    "pageName": "Home",
+                    "pageDataName": "Home",
+                    "menuType": "LeafMenu",
+                    "menus": []
+                },
+                {
+                    "id": 6,
+                    "name": "post",
+                    "displayName": "技术文档",
+                    "menuType": "CompositeMenu",
+                    "menus": [
+                        {
+                            "id": 7,
+                            "name": "web",
+                            "displayName": "站点技术",
+                            "menuType": "LeafMenu"
+                        },
+                        {
+                            "id": 8,
+                            "name": "dosktop",
+                            "displayName": "桌面应用",
+                            "menuType": "LeafMenu"
+                        }
+                    ]
+                }
+            ]
+        }
     }
 }

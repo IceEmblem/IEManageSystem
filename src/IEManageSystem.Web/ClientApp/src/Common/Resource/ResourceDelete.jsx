@@ -1,5 +1,7 @@
 import React from 'react';
-import Modal from 'Modal/Modal.jsx'
+
+import { Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 export default class ResourceDelete extends React.Component {
   // props.title
@@ -20,31 +22,19 @@ export default class ResourceDelete extends React.Component {
   }
 
   render() {
-    return (
-      <Modal
-        show={this.props.show}
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-
-            <div className="modal-header bg-info text-white">
-              <h4 className="modal-title">删除 {this.props.title}</h4>
-              <button type="button" className="close" data-dismiss="modal" onClick={this.props.close}>&times;</button>
-            </div>
-
-            <div className="modal-body">
-              你正要删除 {this.props.resource[this.props.nameDescribe.name]} ，确定删除吗？
-                  </div>
-
-            <div className="modal-footer">
-              <span id="dataDeleteError" className="text-danger"></span>
-              <button type="button" className="btn btn-danger btn-sm" onClick={this.delete}>删除</button>
-              <button id="dataDeleteCloseBtn" type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.props.close}>关闭</button>
-            </div>
-
-          </div>
-        </div>
-      </Modal>
-    );
+    return (<Modal
+      title={
+        <div className="d-flex align-items-center">
+          <ExclamationCircleOutlined className="mr-3" style={{ fontSize: "22px", color: "#faad14" }} />
+          <span>{this.props.title}</span>
+        </div>}
+      visible={this.props.show}
+      onOk={this.delete}
+      onCancel={this.props.close}
+      okText="确认"
+      cancelText="取消"
+    >
+      <p>你正要删除 {this.props.resource[this.props.nameDescribe.name]} ，确定删除吗？</p>
+    </Modal>)
   }
 }

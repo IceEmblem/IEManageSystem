@@ -18,13 +18,27 @@ namespace IEManageSystem.Dtos.CMS
 
         public PageComponentBaseSettingDto PageComponentBaseSetting { get; set; }
 
-        public int? TargetPageId { get; set; }
+        public PageLeafSettingDto PageLeafSetting { get; set; }
+
+        public string MenuName { get; set; }
+
+        public List<PageComponentSettingDto> PageComponentSettings { get; set; }
 
         /// <summary>
-        /// CompositeComponent, LeafComponent, PageLeafComponent
+        /// CompositeComponent, LeafComponent, PageLeafComponent, MenuComponent
         /// </summary>
         public string ComponentType { get; set; }
 
-        public List<PageComponentSettingDto> PageComponentSettings { get; set; }
+        public void SetCompositeComponentType() => ComponentType = "CompositeComponent";
+        public bool IsCompositeComponentType() => ComponentType == "CompositeComponent";
+
+        public void SetLeafComponentType() => ComponentType = "LeafComponent";
+        public bool IsLeafComponentType() => ComponentType == "LeafComponent";
+
+        public void SetPageLeafComponentType() => ComponentType = "PageLeafComponent";
+        public bool IsPageLeafComponentType() => ComponentType == "PageLeafComponent";
+
+        public void SetMenuComponentType() => ComponentType = "MenuComponent";
+        public bool IsMenuComponentType() => ComponentType == "MenuComponent";
     }
 }

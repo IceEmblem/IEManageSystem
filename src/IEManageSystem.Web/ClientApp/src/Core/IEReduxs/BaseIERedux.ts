@@ -11,7 +11,9 @@ export default abstract class BaseIERedux
     parentIERedux:BaseIERedux | null;
 
     constructor(){
-        this.reducer = (state, action)=>{ return state }
+        this.reducer = (state, action)=>{ 
+            return state 
+        }
         this.ieRedux = [];
         this.parentIERedux = null;
     }

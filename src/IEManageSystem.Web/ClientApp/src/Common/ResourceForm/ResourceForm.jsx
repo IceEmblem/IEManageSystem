@@ -4,8 +4,13 @@ import FormRadio from './FormRadio.jsx';
 import FormCheck from './FormCheck.jsx';
 import TextGroup from './TextGroup.jsx';
 import Text from './Text.jsx';
-import Modal from 'Modal/Modal.jsx'
+import FormSelect from './FormSelect'
+import RichText from './RichText'
+import DataTime from './DateTime'
 import './ResourceForm.css'
+
+import { Modal, Button, Card } from 'antd';
+import { SaveOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 export default class ResourceForm extends React.Component {
     // props.title
@@ -32,26 +37,10 @@ export default class ResourceForm extends React.Component {
     }
 
     initClient(inputResource) {
-        if (inputResource == null) {
-            this.resource = {};
-
-            for (let item in this.props.describes) {
-                if (this.props.describes[item].valueType === ResourceDescribeValueType.textGroup
-                    || this.props.describes[item].valueType === ResourceDescribeValueType.check) {
-                    this.resource[this.props.describes[item].name] = new Array();
-                }
-                else {
-                    this.resource[this.props.describes[item].name] = "";
-                }
-            }
-            return;
-        }
-
         this.resource = Object.assign({}, inputResource);
 
         for (let item in this.props.describes) {
-            if (this.props.describes[item].valueType === ResourceDescribeValueType.textGroup
-                && this.props.describes[item].valueType === ResourceDescribeValueType.check) {
+            if(Array.isArray(this.resource[this.props.describes[item].name])){
                 this.resource[this.props.describes[item].name] = Object.assign([], inputResource[this.props.describes[item].name]);
             }
         }
@@ -59,13 +48,15 @@ export default class ResourceForm extends React.Component {
 
     // 提交
     submit() {
-        this.props.resourceUpdate(this.resource);
+        let resource = Object.assign(this.props.resource, this.resource);
+        
+        this.props.resourceUpdate(resource);
     }
 
     createElement(describe) {
         if (describe.valueType === ResourceDescribeValueType.text) {
             return (
-                <div name={describe.name} className={"col-md-" + describe.col}>
+                <div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
                     <Text
                         title={describe.text}
                         value={this.resource[describe.name]}
@@ -76,44 +67,70 @@ export default class ResourceForm extends React.Component {
         }
 
         if (describe.valueType === ResourceDescribeValueType.textGroup) {
-            return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
                 <TextGroup
                     title={describe.text}
                     values={this.resource[describe.name]}
                     isEdit={describe.isEdit}
-                    onChange={(name, values) => { this.resource[describe.name] = values }} />
+                    onChange={(name, values) => { this.resource[describe.name] = values; this.setState({}) }} />
             </div>);
         }
 
         if (describe.valueType === ResourceDescribeValueType.radio) {
-            return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
-                <div className="card">
-                    <div className="card-header bg-secondary text-white">{describe.text}</div>
-                    <div className="card-body">
-                        <FormRadio
-                            name={describe.name}
-                            values={describe.valueTexts}
-                            isEdit={describe.isEdit}
-                            selectValue={this.resource[describe.name]}
-                            onChange={(name, selectValue) => { this.resource[describe.name] = selectValue }} />
-                    </div>
-                </div>
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
+                <Card size="small" title={describe.text}>
+                    <FormRadio
+                        name={describe.name}
+                        values={describe.valueTexts}
+                        isEdit={describe.isEdit}
+                        selectValue={this.resource[describe.name]}
+                        onChange={(name, selectValue) => { this.resource[describe.name] = selectValue; this.setState({}) }} />
+                </Card>
             </div>);
         }
 
         if (describe.valueType === ResourceDescribeValueType.check) {
-            return (<div name={describe.name} className={"float-left col-md-" + describe.col}>
-                <div className="card">
-                    <div className="card-header bg-secondary text-white">{describe.text}</div>
-                    <div className="card-body">
-                        <FormCheck
-                            name={describe.name}
-                            values={describe.valueTexts}
-                            isEdit={describe.isEdit}
-                            selectValues={this.resource[describe.name]}
-                            onChange={(name, selectValues) => { this.resource[describe.name] = selectValues }} />
-                    </div>
-                </div>
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
+                <Card size="small" title={describe.text}>
+                    <FormCheck
+                        name={describe.name}
+                        values={describe.valueTexts}
+                        isEdit={describe.isEdit}
+                        selectValues={this.resource[describe.name]}
+                        onChange={(name, selectValues) => { this.resource[describe.name] = selectValues; this.setState({}) }} />
+                </Card>
+            </div>);
+        }
+
+        if (describe.valueType === ResourceDescribeValueType.select) {
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
+                <FormSelect
+                    title={describe.text}
+                    name={describe.name}
+                    values={describe.valueTexts}
+                    isEdit={describe.isEdit}
+                    selectValue={this.resource[describe.name]}
+                    onChange={(name, selectValue) => { this.resource[describe.name] = selectValue; this.setState({}) }} />
+            </div>);
+        }
+
+        if (describe.valueType === ResourceDescribeValueType.richText) {
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
+                <RichText
+                    title={describe.text}
+                    isEdit={describe.isEdit}
+                    value={this.resource[describe.name]}
+                    onChange={(value) => { this.resource[describe.name] = value; this.setState({}) }} />
+            </div>);
+        }
+
+        if (describe.valueType === ResourceDescribeValueType.dateTime) {
+            return (<div name={describe.name} className={"mb-3 float-left col-md-" + describe.col}>
+                <DataTime
+                    title={describe.text}
+                    isEdit={describe.isEdit}
+                    value={this.resource[describe.name]}
+                    onChange={(value) => { this.resource[describe.name] = value; this.setState({}) }} />
             </div>);
         }
 
@@ -126,33 +143,24 @@ export default class ResourceForm extends React.Component {
             elements.push(this.createElement(this.props.describes[item]));
         }
 
-        return (
-            <Modal
-                show={this.props.show}
-            >
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content data-form">
-                        <div className="modal-header bg-info text-white">
-                            <h4 className="modal-title">{this.props.title}信息</h4>
-                            <button type="button" className="close" onClick={this.props.close}>&times;</button>
-                        </div>
-
-                        <div className="modal-body jumbotron">
-                            {elements}
-                        </div>
-
-                        <div className="modal-footer">
-                            <span id="dataFormError" className="text-danger"></span>
-                            {
-                                !this.props.isHideSubmit &&
-                                <button type="button" className="btn btn-info" onClick={this.submit}>提交</button>
-                            }
-                            <button type="button" className="btn btn-secondary" onClick={this.props.close}>关闭</button>
-                        </div>
-
-                    </div>
-                </div>
-            </Modal>
-        );
+        return (<Modal
+            title={`${this.props.title}信息`}
+            visible={this.props.show}
+            footer={false}
+            onCancel={this.props.close}
+            width={this.props.width || 520}
+        >
+            <div className="w-100" style={{ display: "inline-block" }}>
+                {elements}
+            </div>
+            <div className="modal-footer mt-3">
+                <span id="dataFormError" className="text-danger"></span>
+                <Button icon={<CloseCircleOutlined />} onClick={this.props.close}>关闭</Button>
+                {
+                    !this.props.isHideSubmit &&
+                    <Button icon={<SaveOutlined />} type="primary" onClick={this.submit}>提交</Button>
+                }
+            </div>
+        </Modal>)
     }
 }

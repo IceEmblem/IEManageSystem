@@ -1,6 +1,3 @@
-import 'labelauty';
-import 'labelautycss';
-
 import React from 'react';
 import ResourceDescribe from './ResourceDescribe.js';
 import ResourceList from './ResourceList.jsx';
@@ -23,27 +20,25 @@ export default class Resource extends React.Component {
 	// props.title  标题
 	// props.describes  资源描述
 	// props.resources  资源
-	// ++++props.pageIndex	页索引
-	// ++++props.resourceNum	资源数量
+	// props.pageIndex	页索引
+	// props.pageSize	每一页资源数量
+	// props.resourceNum	总资源数量
 	// props.freshenResources()  刷新数据接口
 	// props.addResource()  添加数据接口
 	// props.updateResource()  更新数据接口
 	// props.deleteResource()  删除数据接口
-	// -----props.setResourceRef()  设置当前组件的引用
 	// props.customizeOperateBtns	自定义操作按钮组件
 	// props.customizeBottomOperateBtns	自定义底部操作按钮组件
 	// props.hideAdd = false
 	// props.hideEdit = false
 	// props.hideDelete = false
+	// props.hideLookup = false
 	// props.hidePadding = false
+	// props.width = undefind	编辑框的宽度，示例 1200
 	constructor(props) {
 		super(props);
 
-		if (this.props.hidePadding == true) {
-			this.pageSize = 999999;
-		}
-
-		this.pageSize = 10;
+		this.pageSize = this.props.pageSize || 10;
 		this.searchKey = "";
 
 		this.state =
@@ -64,15 +59,6 @@ export default class Resource extends React.Component {
 		this.props.freshenResources(1, this.pageSize, this.searchKey);
 	}
 
-	getResourceNum(){
-		let pageNum = parseInt(this.props.resourceNum / this.pageSize);
-		if ((this.props.resourceNum % this.pageSize) > 0) {
-			pageNum++;
-		}
-
-		return pageNum;
-	}
-
 	// 搜索单击
 	_searchClick(searchKey) {
 		this.searchKey = searchKey;
@@ -91,14 +77,21 @@ export default class Resource extends React.Component {
 			this.setState({ 
 				operationState: operation, 
 				deleteModalShow: true, 
-				curResource: resource || {}
+				curResource: resource
+			});
+		}
+		else if(operation == operationState.add){
+			this.setState({ 
+				operationState: operation, 
+				fromModalShow: true, 
+				curResource: {}
 			});
 		}
 		else{
 			this.setState({ 
 				operationState: operation, 
 				fromModalShow: true, 
-				curResource: resource || {}
+				curResource: resource
 			});
 		}
 	}
@@ -130,6 +123,7 @@ export default class Resource extends React.Component {
 			resourceLookupClick={resource => this._resourceOperationClick(operationState.lookup, resource)}
 			hideEdit={this.props.hideEdit}
 			hideDelete={this.props.hideDelete}
+			hideLookup={this.props.hideLookup}
 			customizeOperateBtns={this.props.customizeOperateBtns}
 		/>;
 
@@ -137,7 +131,8 @@ export default class Resource extends React.Component {
 			resourceAddClick={() => this._resourceOperationClick(operationState.add)}
 			hideAdd={this.props.hideAdd}
 			hidePadding={this.props.hidePadding}
-			pageNum={this.getResourceNum()}
+			total={this.props.resourceNum}
+			pageSize={this.pageSize}
 			pageIndex={this.props.pageIndex}
 			pageIndexChange={this._pageIndexChange}
 			customizeBottomOperateBtns={this.props.customizeBottomOperateBtns} />;
@@ -156,7 +151,7 @@ export default class Resource extends React.Component {
 		}
 
 		return (
-			<div className="w-100 h-100 d-flex flex-column pb-3">
+			<div className="w-100 h-100 d-flex flex-column">
 				{resourceList}
 				{paging}
 				<ResourceForm
@@ -166,9 +161,10 @@ export default class Resource extends React.Component {
 						resourceUpdate={resource => this._resourceUpdate(this.state.operationState, resource)}
 						show={this.state.fromModalShow}
 						isHideSubmit={isHideSubmit}
-						close={()=>{this.setState({fromModalShow:false})}} />
+						close={()=>{this.setState({fromModalShow:false})}}
+						width={this.props.width} />
 				<ResourceDelete
-						title={this.props.title}
+						title={`删除 ${this.props.title}`}
 						nameDescribe={resourceDescribe.nameDescribes}
 						resource={this.state.curResource}
 						resourceUpdate={resource => this._resourceUpdate(operationState.delete, resource)}

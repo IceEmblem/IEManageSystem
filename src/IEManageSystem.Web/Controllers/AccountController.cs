@@ -12,10 +12,10 @@ using Abp.Runtime.Session;
 using Abp.UI;
 using IdentityModel;
 using IdentityModel.Client;
-using IEManageSystem.Api.Configuration;
-using IEManageSystem.Api.Help;
-using IEManageSystem.Api.Models;
-using IEManageSystem.Api.Models.AccountModels;
+using IEManageSystem.Web.Configuration;
+using IEManageSystem.Web.Help;
+using IEManageSystem.Web.Models;
+using IEManageSystem.Web.Models.AccountModels;
 using IEManageSystem.Entitys.Authorization.Identitys;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
 using IEManageSystem.JwtAuthentication;
@@ -29,7 +29,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using UtilityAction.ValidateFun;
 
-namespace IEManageSystem.Api.Controllers
+namespace IEManageSystem.Web.Controllers
 {
     [Route("api/[controller]/[action]")]
     public class AccountController : IEManageSystemControllerBase

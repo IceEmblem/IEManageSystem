@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Admins.Dto
 {
-    public class GetAdminRolesOutput:OutputDtoBase
+    public class GetAdminRolesOutput
     {
         public List<RoleDto> Roles { get; set; }
     }

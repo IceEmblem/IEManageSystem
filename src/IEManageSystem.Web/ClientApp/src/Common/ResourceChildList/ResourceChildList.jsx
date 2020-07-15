@@ -46,7 +46,7 @@ export default class ResourceChildList extends React.Component {
     render() {
         return (
             <div className="w-100 h-100">
-                <div className="left-preview float-left h-100">
+                <div className="left-preview float-left h-100 bg-white">
                     <Preview
                         title={this.props.previewTitle}
                         previewResources={this.props.previewResources}
@@ -55,7 +55,7 @@ export default class ResourceChildList extends React.Component {
                         operationName="查看"
                     />
                 </div>
-                <div className="right-resource float-left h-100">
+                <div className="right-resource float-right h-100 bg-white">
                     <Tab tabs={this.props.tabs}
                         nameField="text"
                         selectIndex={this.state.tabSelectIndex}

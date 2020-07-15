@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Roles.Dto
 {
-    public class UpdateRoleOutput:OutputDtoBase
+    public class UpdateRoleOutput
     {
     }
 }

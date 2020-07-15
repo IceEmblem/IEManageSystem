@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes.Dto
 {
-    public class AddQueryPermissionOutput:OutputDtoBase
+    public class AddQueryPermissionOutput
     {
     }
 }

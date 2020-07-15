@@ -32,6 +32,8 @@ namespace IEManageSystem.ApiScopeProviders
         public const string Menu = "CMSManage.Menu";
         public const string Page = "CMSManage.Page";
         public const string Picture = "CMSManage.Picture";
+        public const string Logic = "CMSManage.Logic";
+        // public const string LogicExec = "CMSManage.LogicExec";
 
         // common域
         public const string SiteSetting = "Common.SiteSetting";
@@ -52,19 +54,27 @@ namespace IEManageSystem.ApiScopeProviders
         /// </summary>
         public void Register()
         {
+            List<ApiScope> apiScopes = new List<ApiScope>();
+
             var userPermission = _permissionManager.UserPermission;
-            _apiScopeManager.Register(User, "用户信息", new List<Permission>() { userPermission }, new List<Permission>() { userPermission });
+            var userApiScope = new ApiScope(User, "用户信息");
+            userApiScope.ApiManageScope.AddPermission(userPermission);
+            userApiScope.ApiQueryScope.AddPermission(userPermission);
 
-            _apiScopeManager.Register(AdminManage, "管理员管理");
-            _apiScopeManager.Register(RoleManage, "角色管理");
-            _apiScopeManager.Register(PermissionManage, "权限管理");
-            _apiScopeManager.Register(ApiScopeManage, "Api域管理");
+            apiScopes.Add(userApiScope);
+            apiScopes.Add(new ApiScope(AdminManage, "管理员管理"));
+            apiScopes.Add(new ApiScope(RoleManage, "角色管理"));
+            apiScopes.Add(new ApiScope(PermissionManage, "权限管理"));
+            apiScopes.Add(new ApiScope(ApiScopeManage, "Api域管理"));
 
-            _apiScopeManager.Register(Menu, "菜单管理");
-            _apiScopeManager.Register(Page, "页面管理");
-            _apiScopeManager.Register(Picture, "图片管理");
+            apiScopes.Add(new ApiScope(Menu, "菜单管理"));
+            apiScopes.Add(new ApiScope(Page, "页面管理"));
+            apiScopes.Add(new ApiScope(Picture, "图片管理"));
+            apiScopes.Add(new ApiScope(Logic, "逻辑管理"));
 
-            _apiScopeManager.Register(SiteSetting, "站点设置");
+            apiScopes.Add(new ApiScope(SiteSetting, "站点设置"));
+
+            _apiScopeManager.RegisterRange(apiScopes);
         }
     }
 }

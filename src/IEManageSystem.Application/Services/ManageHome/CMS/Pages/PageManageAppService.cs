@@ -4,10 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Abp.Domain.Repositories;
+using Abp.ObjectMapping;
 using Abp.UI;
 using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.Attributes;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
@@ -20,25 +22,31 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
     [ApiAuthorization(ApiScopeProvider.Page)]
     public class PageManageAppService : IEManageSystemAppServiceBase, IPageManageAppService
     {
+        private readonly IObjectMapper _objectMapper;
+
         private PageManager _pageManager { get; set; }
-
-        private IPageRepository _repository => _pageManager.PageRepository;
-
-        private PageDataManager _pageDataManager { get; set; }
 
         public PageManageAppService(
             PageManager pageManager,
-            PageDataManager pageDataManager
+            IObjectMapper objectMapper
             )
         {
             _pageManager = pageManager;
 
-            _pageDataManager = pageDataManager;
+            _objectMapper = objectMapper;
         }
 
-        public AddContentPageOutput AddContentPage(AddContentPageInput input)
+        public AddPageOutput AddPage(AddPageInput input)
         {
-            ContentPage page = new ContentPage(input.Name);
+            PageBase page = null;
+            if (input.IsContentPage())
+            {
+                page = new ContentPage(input.Name);
+            }
+            else
+            {
+                page = new StaticPage(input.Name);
+            }
 
             page.DisplayName = input.DisplayName;
 
@@ -46,18 +54,44 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
             _pageManager.AddPage(page);
 
-            return new AddContentPageOutput();
+            return new AddPageOutput();
         }
 
-        public AddStaticPageOutput AddStaticPage(AddStaticPageInput input)
+        public UpdatePageOutput UpdatePage(UpdatePageInput input)
         {
-            StaticPage page = _pageManager.CreateStaticPage(input.Name, input.DisplayName);
+            var page = _pageManager.PageRepository.FirstOrDefault(item => item.Name == input.Name);
 
+            if (page == null)
+            {
+                throw new UserFriendlyException("未找到页面");
+            }
+
+            page.DisplayName = input.DisplayName;
             page.Description = input.Description;
 
-            _pageManager.AddPage(page);
+            _pageManager.UpdatePage(page);
 
-            return new AddStaticPageOutput();
+            return new UpdatePageOutput();
+        }
+
+        public UpdateContentPagePermissionOutput UpdateContentPagePermission(UpdateContentPagePermissionInput input) 
+        {
+            ContentPagePermissionCollection contentPagePeimissionCollection = new ContentPagePermissionCollection();
+
+            contentPagePeimissionCollection.IsEnableQueryPermission = input.ContentPagePeimissionCollection.IsEnableQueryPermission;
+            contentPagePeimissionCollection.ContentPagePermissions = new List<ContentPagePermission>();
+            foreach (var item in input.ContentPagePeimissionCollection.ContentPagePermissions)
+            {
+                contentPagePeimissionCollection.ContentPagePermissions.Add(new ContentPagePermission()
+                {
+                    PermissionId = item.PermissionId,
+                    IsManage = item.IsManage
+                });
+            }
+
+            _pageManager.UpdateContentPagePermission(input.Name, contentPagePeimissionCollection);
+
+            return new UpdateContentPagePermissionOutput();
         }
 
         public DeletePageOutput DeletePage(DeletePageInput input)
@@ -67,20 +101,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             return new DeletePageOutput();
         }
 
-        public UpdatePageOutput UpdatePage(UpdatePageInput input)
-        {
-            var page = _repository.FirstOrDefault(item=>item.Name == input.Name);
-
-            if (page == null) {
-                throw new UserFriendlyException("未找到页面");
-            }
-
-            page.DisplayName = input.DisplayName;
-            page.Description = input.Description;
-
-            return new UpdatePageOutput();
-        }
-
         public UpdatePageComponentOutput UpdatePageComponent(UpdatePageComponentInput input)
         {
             List<PageComponentBase> pageComponents = new List<PageComponentBase>();
@@ -88,7 +108,19 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 pageComponents.Add(CreatePageComponent(item));
             }
 
-            _pageManager.UpdatePageComponents(input.Name, pageComponents);
+            List<DefaultComponentData> defaultComponentDatas = new List<DefaultComponentData>();
+            input.DefaultComponentDatas.ForEach(item =>
+            {
+                var defaultComponentData = new DefaultComponentData()
+                {
+                    Sign = item.Sign,
+                    SingleDatas = _objectMapper.Map<List<SingleComponentData>>(item.SingleDatas)
+                };
+                ((List<SingleComponentData>)defaultComponentData.SingleDatas).ForEach(item => item.Id = 0);
+                defaultComponentDatas.Add(defaultComponentData);
+            });
+
+            _pageManager.UpdatePageComponentsAndDefaultComponentData(input.Name, pageComponents, defaultComponentDatas);
 
             return new UpdatePageComponentOutput();
         }
@@ -97,17 +129,21 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         {
             PageComponentBase pageComponent = null;
 
-            if (dto.ComponentType == "CompositeComponent")
+            if (dto.IsCompositeComponentType())
             {
                 pageComponent = new CompositeComponent(dto.Name);
             }
-            else if (dto.ComponentType == "PageLeafComponent")
+            else if (dto.IsPageLeafComponentType())
             {
-                pageComponent = new PageLeafComponent(dto.Name);
-                if (dto.TargetPageId.HasValue) {
-                    var page = _repository.FirstOrDefault(dto.TargetPageId.Value);
-                    ((PageLeafComponent)pageComponent).TargetPage = page;
-                }
+                pageComponent = new PageLeafComponent(dto.Name) {
+                    PageLeafSetting = _objectMapper.Map<PageLeafSetting>(dto.PageLeafSetting)
+                };
+            }
+            else if (dto.IsMenuComponentType()) 
+            {
+                pageComponent = new MenuComponent(dto.Name) { 
+                    MenuName = dto.MenuName
+                };
             }
             else
             {
@@ -118,10 +154,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             pageComponent.ParentSign = dto.ParentSign;
             pageComponent.PageComponentBaseSetting = new PageComponentBaseSetting(
                 dto.PageComponentBaseSetting.SortIndex,
-                dto.PageComponentBaseSetting.Col,
+                dto.PageComponentBaseSetting.Width,
                 dto.PageComponentBaseSetting.Height,
                 dto.PageComponentBaseSetting.Padding,
                 dto.PageComponentBaseSetting.Margin,
+                dto.PageComponentBaseSetting.BackgroundImage,
                 dto.PageComponentBaseSetting.BackgroundColor,
                 dto.PageComponentBaseSetting.ClassName
                 );
@@ -132,72 +169,14 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 {
                     Name = item.Name,
                     DisplayName = item.DisplayName,
-                    Field1 = item.Field1,
-                    Field2 = item.Field2,
-                    Field3 = item.Field3,
-                    Field4 = item.Field4,
-                    Field5 = item.Field5
+                    SingleDatas = _objectMapper.Map<List<SingleSettingData>>(item.SingleDatas)
                 };
+                ((List<SingleSettingData>)pageComponentSetting.SingleDatas).ForEach(item => item.Id = 0);
                 pageComponentSettings.Add(pageComponentSetting);
             }
             pageComponent.PageComponentSettings = pageComponentSettings;
 
             return pageComponent;
-        }
-
-        public AddPageDataOutput AddPageData(AddPageDataInput input)
-        {
-            PageData pageData = new PageData() {
-                Name = input.Name,
-                Title = input.Title
-            };
-
-            _pageDataManager.AddPageData(input.PageName, pageData);
-
-            return new AddPageDataOutput();
-        }
-
-        public UpdatePageDataOutput UpdatePageData(UpdatePageDataInput input)
-        {
-            var page = _repository.GetAllIncluding(e => e.PageDatas).FirstOrDefault(e => e.Name == input.PageName);
-
-            if (page is StaticPage)
-            {
-                throw new UserFriendlyException("无法更改单页文章");
-            }
-
-            var contentPage = (ContentPage) page;
-            contentPage.SetPageDataName(input.Id, input.Name);
-            contentPage.SetPageDataTitle(input.Id, input.Title);
-
-            return new UpdatePageDataOutput();
-        }
-
-        public DeletePageDataOutput DeletePageData(DeletePageDataInput input)
-        {
-            _pageDataManager.DeletePageData(input.PageName, input.Name);
-
-            return new DeletePageDataOutput();
-        }
-
-        public UpdateComponentDataOutput UpdateComponentData(UpdateComponentDataInput input)
-        {
-            List<ContentComponentData> contentComponentDatas = new List<ContentComponentData>();
-            foreach (var item in input.ComponentDatas)
-            {
-                contentComponentDatas.Add(new ContentComponentData() {
-                    Sign = item.Sign,
-                    Field1 = item.Field1,
-                    Field2 = item.Field2,
-                    Field3 = item.Field3,
-                    Field4 = item.Field4,
-                    Field5 = item.Field5,
-                });
-            }
-
-            _pageDataManager.SetContentComponentDatas(input.PageName, input.PageDataName, contentComponentDatas);
-
-            return new UpdateComponentDataOutput();
         }
     }
 }

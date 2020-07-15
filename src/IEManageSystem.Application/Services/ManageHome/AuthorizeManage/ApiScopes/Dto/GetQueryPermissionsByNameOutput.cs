@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes.Dto
 {
-    public class GetQueryPermissionsByNameOutput:OutputDtoBase
+    public class GetQueryPermissionsByNameOutput
     {
         public List<PermissionDto> Permissions { get; set; }
     }

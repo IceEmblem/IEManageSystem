@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IEManageSystem.Api.Models.ConsentModels
+namespace IEManageSystem.Web.Models.ConsentModels
 {
     public class ConsentModel
     {

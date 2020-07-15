@@ -1,0 +1,16 @@
+.PageContainer-btnlists{
+}
+
+.PageContainer-btnlists-bnts{
+    justify-content: flex-end;
+}
+
+.PageContainer-btnlists-pageInfoComponent{
+    position: relative;
+}
+
+.PageContainer-btnlists-bnts>*{
+    padding: .2rem 0rem;
+    display: flex;
+    align-items: center;
+}

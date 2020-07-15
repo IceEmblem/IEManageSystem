@@ -9,22 +9,22 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.ApiScopes
 {
     public interface IApiScopeManageAppService : IApplicationService
     {
-        Task<GetApiScopesOutput> GetApiScopes(GetApiScopesInput input);
+        GetApiScopesOutput GetApiScopes(GetApiScopesInput input);
 
-        Task<GetManagePermissionsOutput> GetManagePermissions(GetManagePermissionsInput input);
+        GetManagePermissionsOutput GetManagePermissions(GetManagePermissionsInput input);
 
-        Task<GetManagePermissionsByNameOutput> GetManagePermissionsByName(GetManagePermissionsByNameInput input);
+        GetManagePermissionsByNameOutput GetManagePermissionsByName(GetManagePermissionsByNameInput input);
 
-        Task<AddManagePermissionOutput> AddManagePermission(AddManagePermissionInput input);
+        AddManagePermissionOutput AddManagePermission(AddManagePermissionInput input);
 
-        Task<RemoveManagePermissionOutput> RemoveManagePermission(RemoveManagePermissionInput input);
+        RemoveManagePermissionOutput RemoveManagePermission(RemoveManagePermissionInput input);
 
-        Task<GetQueryPermissionsOutput> GetQueryPermissions(GetQueryPermissionsInput input);
+        GetQueryPermissionsOutput GetQueryPermissions(GetQueryPermissionsInput input);
 
-        Task<GetQueryPermissionsByNameOutput> GetQueryPermissionsByName(GetQueryPermissionsByNameInput input);
+        GetQueryPermissionsByNameOutput GetQueryPermissionsByName(GetQueryPermissionsByNameInput input);
 
-        Task<AddQueryPermissionOutput> AddQueryPermission(AddQueryPermissionInput input);
+        AddQueryPermissionOutput AddQueryPermission(AddQueryPermissionInput input);
 
-        Task<RemoveQueryPermissionOutput> RemoveQueryPermission(RemoveQueryPermissionInput input);
+        RemoveQueryPermissionOutput RemoveQueryPermission(RemoveQueryPermissionInput input);
     }
 }

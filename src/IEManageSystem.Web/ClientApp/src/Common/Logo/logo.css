@@ -1,40 +1,40 @@
         .logo{
             display: flex;
             
-            animation-name: logoshow;
+            /* animation-name: logoshow;
             animation-duration: 1s;
             animation-timing-function: linear;
             animation-delay: 0s;
             animation-iteration-count: 1;
             animation-direction: normal;
-            animation-play-state: running;
+            animation-play-state: running; */
             /* Safari 与 Chrome: */
-            -webkit-animation-name: logoshow;
+            /* -webkit-animation-name: logoshow;
             -webkit-animation-duration: 1s;
             -webkit-animation-timing-function: linear;
             -webkit-animation-delay: 0s;
             -webkit-animation-iteration-count: 1;
             -webkit-animation-direction: normal;
-            -webkit-animation-play-state: running;
+            -webkit-animation-play-state: running; */
         }
         .logo>div{
             margin:auto;
 
-            animation-name: logoanimation;
+            /* animation-name: logoanimation;
             animation-duration: 5s;
             animation-timing-function: linear;
             animation-delay: 1s;
             animation-iteration-count: infinite;
             animation-direction: normal;
-            animation-play-state: running;
+            animation-play-state: running; */
             /* Safari 与 Chrome: */
-            -webkit-animation-name: logoanimation;
+            /* -webkit-animation-name: logoanimation;
             -webkit-animation-duration: 5s;
             -webkit-animation-timing-function: linear;
             -webkit-animation-delay: 1s;
             -webkit-animation-iteration-count: infinite;
             -webkit-animation-direction: normal;
-            -webkit-animation-play-state: running;
+            -webkit-animation-play-state: running; */
         }
 
         @keyframes logoanimation{

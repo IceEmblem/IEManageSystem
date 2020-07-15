@@ -26,5 +26,20 @@ namespace IEManageSystem.Repositorys
         {
             return Context.Set<TEntity>().Include(includePath).ThenInclude(thenIncludePath);
         }
+
+        public IQueryable<TEntity> ThenInclude<ThenType, ThenThenType>(Expression<Func<TEntity, IEnumerable<ThenType>>> includePath, Expression<Func<ThenType, IEnumerable<ThenThenType>>> thenIncludePath, Expression<Func<ThenThenType, object>> thenThenIncludePath)
+        {
+            return Context.Set<TEntity>().Include(includePath).ThenInclude(thenIncludePath).ThenInclude(thenThenIncludePath);
+        }
+
+        public void NoTracking() 
+        {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        }
+
+        public void Tracking()
+        {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+        }
     }
 }

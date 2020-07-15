@@ -42,13 +42,13 @@ namespace IEManageSystem.Services.ManageHome.AuthorizeManage.Roles
         [ApiAuthorizationQuery]
         public async Task<GetRolesOutput> GetRoles(GetRolesInput input)
         {
-            IEnumerable<Role> roles = _roleManager.GetRoles().Where(e => (string.IsNullOrEmpty(input.SearchKey) || e.Name.Contains(input.SearchKey)));
+            var roles = _roleManager.GetRoles().Where(e => (string.IsNullOrEmpty(input.SearchKey) || e.Name.Contains(input.SearchKey)));
 
             int num = roles.Count();
 
-            roles = roles.Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
+            var queryResults = roles.Skip((input.PageIndex - 1) * input.PageSize).Take(input.PageSize).ToList();
 
-            return new GetRolesOutput() { Roles = _objectMapper.Map<List<RoleDto>>(roles), ResourceNum = num, PageIndex =input.PageIndex };
+            return new GetRolesOutput() { Roles = _objectMapper.Map<List<RoleDto>>(queryResults), ResourceNum = num, PageIndex =input.PageIndex };
         }
 
         public async Task<AddRoleOutput> AddRole(AddRoleInput input)

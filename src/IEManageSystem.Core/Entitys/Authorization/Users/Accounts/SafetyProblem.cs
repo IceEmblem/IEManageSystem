@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Entitys.Authorization.Users.Accounts
 {
-    public class SafetyProblem:ValueObject<SafetyProblem>
+    public class SafetyProblem:ValueObject
     {
         public SafetyProblem(string problem, string answer)
         {
@@ -27,5 +27,11 @@ namespace IEManageSystem.Entitys.Authorization.Users.Accounts
         [MaxLength(20)]
         [MinLength(4)]
         public string Answer { get; protected set; }
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return Problem;
+            yield return Answer;
+        }
     }
 }

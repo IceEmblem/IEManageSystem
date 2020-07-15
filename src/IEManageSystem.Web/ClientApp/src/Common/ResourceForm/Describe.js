@@ -4,7 +4,7 @@
 // 	isId=true,  是否是Id字段
 // 	isName=true,  是否是名称字段
 // 	valueType="",  字段类型
-// 	valueTexts=[{value:"", text:""}],  如果字段为单选或复选时需指定
+// 	valueTexts=[{value:"", text:""}],  如果字段为单选或复选或选择时需指定
 //	col=12  网格长度
 //  isEdit=true,  是否可以编辑
 // }]

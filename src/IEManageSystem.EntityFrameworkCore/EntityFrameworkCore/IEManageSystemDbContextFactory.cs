@@ -16,7 +16,8 @@ namespace IEManageSystem.EntityFrameworkCore
 
             DbContextOptionsConfigurer.Configure(
                 builder,
-                configuration.GetConnectionString(IEManageSystemConsts.ConnectionStringName)
+                configuration.GetConnectionString(IEManageSystemConsts.ConnectionStringName),
+                configuration.GetSection("ConnectionType").Value
             );
 
             return new IEManageSystemDbContext(builder.Options);

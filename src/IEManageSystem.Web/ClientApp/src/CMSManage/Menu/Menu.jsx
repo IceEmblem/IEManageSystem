@@ -2,12 +2,17 @@ import React from "react";
 import ResourceForm from 'ResourceForm/ResourceForm.jsx';
 import Describe from 'ResourceForm/Describe.js';
 import { ResourceDescribeValueType } from 'ResourceForm/ResourceDescribeValueType.js';
+import MenuModel from 'CMSManage/Models/MenuModel'
 
-import ConfirmBox from 'ConfirmBox/ConfirmBox.jsx';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
 
-import {ieReduxFetch} from 'Core/IEReduxFetch'
+import { ieReduxFetch } from 'Core/IEReduxFetch'
 
 import "./Menu.css";
+
+import { Button, message } from 'antd';
+import { UndoOutlined, SaveOutlined, EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 const operateState = {
     add: "add",
@@ -28,15 +33,20 @@ export default class Menu extends React.Component {
             { name: "icon", text: "图标", isId: false, isName: false, isEditCanEdit: false, valueType: ResourceDescribeValueType.text, col: 12 },
             { name: "pageName", text: "页面名称", isId: false, isName: false, isEditCanEdit: false, valueType: ResourceDescribeValueType.text, col: 12 },
             { name: "pageDataName", text: "文章名称", isId: false, isName: false, isEditCanEdit: false, valueType: ResourceDescribeValueType.text, col: 12 },
+            {
+                name: "menuType", text: "菜单类型", isId: false, isName: false, isEditCanEdit: false, valueType: ResourceDescribeValueType.radio, col: 12,
+                valueTexts: [{ value: "CompositeMenu", text: "组合菜单" }, { value: "LeafMenu", text: "叶子菜单" }]
+            },
         ].forEach(element => {
             this.describes.push(new Describe(element));
         });
 
         this.state = {
+            rootMenu: null,
             menus: [],
-            parentMenuId: null,
             operateState: operateState.none,
-            currentMenu: null,
+            currentOperateParentMenu: null,
+            currentOperateMenu: null,
             fromModalShow: false,
             confirmBoxShow: false
         };
@@ -47,58 +57,116 @@ export default class Menu extends React.Component {
         this.updateMenu = this.updateMenu.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getMenus();
     }
 
     getMenus() {
         let postData = {
+            menuName: this.props.match.params.menuName
         };
 
-        ieReduxFetch("/api/Menu/GetMenus", postData)
-		.then(value => {
-            this.setState({ menus: value.menus });
-		});
+        ieReduxFetch("/api/Menu/GetMenu", postData)
+            .then(value => {
+                let menu = new MenuModel(value.menu);
+                this.setState({ rootMenu: menu, menus: menu.menus });
+            });
     }
 
     addMenu(resource) {
-        this.setState({ fromModalShow: false });
-
-        let postData = resource;
-        postData.parentMenuId = this.state.parentMenuId;
-
-        let url = null;
-        if (this.state.parentMenuId == null) {
-            url = "/api/MenuManage/AddCompositeMenu";
+        try {
+            this.state.currentOperateParentMenu.addChildMenu(resource);
+            this.setState({ fromModalShow: false });
         }
-        else {
-            url = "/api/MenuManage/AddLeafMenu";
+        catch (e) {
+            this.setState({ fromModalShow: false });
+            message.error(e.message);
         }
-
-        ieReduxFetch(url, postData)
-		.then(value => {
-            this.getMenus();
-		});
     }
 
     deleteMenu(resource) {
-        let postData = resource;
-
-        ieReduxFetch("/api/MenuManage/RemoveMenu", postData)
-		.then(value => {
-            this.getMenus();
-		});
+        try {
+            this.state.currentOperateParentMenu.deleteChildMenu(resource);
+            this.setState({ confirmBoxShow: false })
+        }
+        catch (e) {
+            this.setState({ confirmBoxShow: false });
+            message.error(e.message);
+        }
     }
 
     updateMenu(resource) {
-        this.setState({ fromModalShow: false });
+        try {
+            this.state.currentOperateParentMenu.replaceChildMenu(this.state.currentOperateMenu.name, resource);
+            this.setState({ fromModalShow: false });
+        }
+        catch (e) {
+            this.setState({ fromModalShow: false });
+            message.error(e.message);
+        }
+    }
 
-        let postData = resource;
+    submit() {
+        let postData = {
+            menu: this.state.rootMenu
+        }
 
         ieReduxFetch("/api/MenuManage/UpdateMenu", postData)
-		.then(value => {
-            this.getMenus();
-		});
+            .then(() => {
+                this.getMenus();
+            })
+    }
+
+    createAddItem(parentMenu) {
+        return (<li className="bg-white">
+            <Button icon={<PlusCircleOutlined />}
+                size="small"
+                type="ghost"
+                onClick={
+                    () => {
+                        this.setState({
+                            operateState: operateState.add,
+                            currentOperateMenu: {},
+                            currentOperateParentMenu: parentMenu,
+                            fromModalShow: true
+                        });
+                    }
+                }
+            >添加</Button>
+        </li>)
+    }
+
+    createItem(menu, parentMenu) {
+        return (
+            <div className="w-100 d-flex">
+                <span className="">{menu.displayName}</span>
+                <div className="flex-grow-1"></div>
+                <Button size="small" type="primary" shape="circle" icon={<EditOutlined />}
+                    onClick={
+                        () => {
+                            this.setState({
+                                operateState: operateState.update,
+                                currentOperateMenu: menu,
+                                currentOperateParentMenu: parentMenu,
+                                fromModalShow: true
+                            })
+                        }
+                    }
+                ></Button>
+                <Button size="small" danger type="primary" shape="circle" icon={<DeleteOutlined />}
+                    onClick={
+                        () => {
+                            this.setState({
+                                operateState: operateState.delete,
+                                currentOperateMenu: menu,
+                                currentOperateParentMenu: parentMenu,
+                                confirmBoxShow: true
+                            })
+                        }
+                    }
+                ></Button>
+            </div>
+        );
     }
 
     createRootMenu(menu) {
@@ -108,46 +176,19 @@ export default class Menu extends React.Component {
             <div>
                 <label>
                     <div className="cms-menu-title">
-                        <div>
-                            <a href="javescript:void(0);"
-                                onClick={
-                                    () => { this.setState({ operateState: operateState.update, currentMenu: menu, fromModalShow: true }) }
-                                }
-                            ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span></a>
-                            <a href="javescript:void(0);"
-                                onClick={
-                                    () => { this.setState({ operateState: operateState.delete, currentMenu: menu, confirmBoxShow: true }) }
-                                }
-                            ><span className="oi oi-trash padding-right-10" title="icon name" aria-hidden="true"></span></a>
-                            <span>{menu.displayName}</span>
-                        </div>
+                        {this.createItem(menu, this.state.rootMenu)}
                     </div>
                     <div className='cms-menu-content'>
                         <ul>
                             {childsMenus.map(item => (
                                 <li>
-                                    <a href="javescript:void(0);"
-                                        onClick={
-                                            () => { this.setState({ operateState: operateState.update, currentMenu: item, fromModalShow: true }) }
-                                        }
-                                    ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span></a>
-                                    <a href="javescript:void(0);"
-                                        onClick={
-                                            () => { this.setState({ operateState: operateState.delete, currentMenu: item, confirmBoxShow: true }) }
-                                        }
-                                    ><span className="oi oi-trash padding-right-10" title="icon name" aria-hidden="true"></span></a>
-                                    <span>{item.displayName}</span>
+                                    {this.createItem(item, menu)}
                                 </li>))
                             }
-                            <li className="bg-success">
-                                <a className="text-white w-100" href="javescript:void(0);"
-                                    onClick={
-                                        () => {
-                                            this.setState({ operateState: operateState.add, parentMenuId: menu.id, fromModalShow: true });
-                                        }
-                                    }
-                                ><span className="oi oi-plus padding-right-10" title="icon name" aria-hidden="true"></span>添加</a>
-                            </li>
+                            {
+                                menu.isCompositeMenuType() &&
+                                this.createAddItem(menu)
+                            }
                         </ul>
                     </div>
                 </label>
@@ -156,50 +197,58 @@ export default class Menu extends React.Component {
     }
 
     render() {
-        let resourceUpdate
-        let resource
-        if(this.state.operateState == operateState.add){
-            resourceUpdate = resource => this.addMenu(resource);
-            resource = {};
-        }
-        else if(this.state.operateState == operateState.update){
-            resourceUpdate = resource => this.updateMenu(resource);
-            resource = this.state.currentMenu;
-        }
-
         return (
-            <div className="col-md-12">
-                <div className='cms-menu'>
+            <div className="col-md-12 d-flex flex-column">
+                <div className='cms-menu flex-grow-1 flex-shrink-1'>
                     {this.state.menus.map(item => this.createRootMenu(item))}
                     <div>
-                        <label className="bg-success">
+                        <label className="bg-white">
                             <div className="cms-menu-title">
-                                <a className="text-white w-100" href="javescript:void(0);"
-                                    onClick={
-                                        () => {
-                                            this.setState({ operateState: operateState.add, parentMenuId: null, fromModalShow: true });
-                                        }
-                                    }
-                                ><span className="oi oi-plus padding-right-10" title="icon name" aria-hidden="true"></span>添加</a>
+                                {this.createAddItem(this.state.rootMenu)}
                             </div>
                         </label>
                     </div>
                 </div>
+                <div className="d-flex justify-content-end cms-menu-btns">
+                    <Button type="default" icon={<UndoOutlined />} className="mr-2"
+                        onClick={() => {
+                            this.getMenus();
+                        }}
+                    >重新加载</Button>
+                    <Button type="primary" icon={<SaveOutlined />}
+                        onClick={() => {
+                            this.submit();
+                        }}
+                    >提交保存</Button>
+                </div>
                 <ResourceForm
-                        title="编辑菜单"
-                        describes={this.describes}
-                        resource={resource}
-                        resourceUpdate={resourceUpdate}
-                        show={this.state.fromModalShow}
-                        close={()=>{this.setState({fromModalShow: false})}}
-                    />
-                <ConfirmBox
-                        title="删除菜单"
-                        text="确定删除菜单吗？"
-                        backcall={() => { this.deleteMenu(this.state.currentMenu) }}
-                        show={this.state.confirmBoxShow}
-                        close={()=>{this.setState({confirmBoxShow: false})}}
-                    />
+                    title="编辑菜单"
+                    describes={this.describes}
+                    resource={
+                        this.state.currentOperateMenu
+                    }
+                    resourceUpdate={
+                        this.state.operateState == operateState.add ?
+                            resource => this.addMenu(resource) :
+                            resource => this.updateMenu(resource)
+                    }
+                    show={this.state.fromModalShow}
+                    close={() => { this.setState({ fromModalShow: false }) }}
+                />
+                <Modal
+                    title={
+                        <div className="d-flex align-items-center">
+                          <ExclamationCircleOutlined className="mr-3" style={{ fontSize: "22px", color: "#faad14" }} />
+                          <span>删除菜单</span>
+                        </div>}
+                    visible={this.state.confirmBoxShow}
+                    onOk={() => { this.deleteMenu(this.state.currentOperateMenu) }}
+                    onCancel={() => { this.setState({ confirmBoxShow: false }) }}
+                    okText="确认"
+                    cancelText="取消"
+                >
+                    <p>确定删除菜单吗？</p>
+                </Modal>
             </div>
         );
     }

@@ -1,95 +1,86 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
-import MenuTag from "./MenuTag/MenuTag.jsx";
-import { sideMenuSelect } from 'Layout/IEReduxs/Actions';
 import IESideNav from 'IESideNav';
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import './SideNav.css'
 
-import DefaultAvatar from 'images/default_avatar.png';
+import RootRedux from 'Core/IEReduxs/RootRedux';
+import { ieReduxFetch } from 'Core/IEReduxFetch'
+import { createTopLevelMenusFetch } from 'Core/IEReduxs/Actions'
 
-import Weather from 'Weather/Weather.jsx';
-
-import LayoutRedux from 'Layout/IEReduxs/LayoutRedux';
-import {ieReduxFetch} from 'Core/IEReduxFetch'
-
-class SideNav extends React.Component
-{
+class SideNav extends React.Component {
     // props.selectTopMenu
-	constructor(props){
-		super(props);
+    constructor(props) {
+        super(props);
 
-        this.state = 
+        this.state =
         {
-            userName:null,              // 用户名称
-            headSculpture:"",
+            userName: null,              // 用户名称
+            headSculpture: "",
         };
+    }
 
-		this.getUserName();
-	}
+    componentDidMount(){
+        this.getUserName();
+        this.props.createTopLevelMenusFetch();
+    }
 
     // 获取用户名称
-    getUserName(){
+    getUserName() {
         let postData = {};
 
         ieReduxFetch("/api/User/GetUserInfo", postData)
-        .then(value=>{
-            this.setState({userName:value.user.name, headSculpture:value.user.headSculpture});
-        })
+            .then(value => {
+                this.setState({ userName: value.user.name, headSculpture: value.user.headSculpture });
+            })
     }
 
-    render()
-    {
-        return(
-            <div className="d-flex flex-column sidenav_css">
-                <div className="flex-shrink-0 sidenav-avatar">
-                    <div className="d-flex justify-content-center">
-                        <img className="rounded-circle img-thumbnail" 
-                            src={(this.state.headSculpture === null || this.state.headSculpture === "") ? DefaultAvatar:this.state.headSculpture} alt="Card image" />
-                    </div>
-                    <p>你好，{this.state.userName}</p>
-                </div>
-                <div className="flex-shrink-0 sidenav-weather">
-                    <Weather showWeatherCityandtext={true} />
-                </div>
-                <IESideNav 
-                    mainMenu={this.props.selectTopMenu}
-                    sideMenuSelect={(menuItem)=>{
-                        this.props.history.push(menuItem.url);
-                        this.props.sideMenuSelect(menuItem);
-                    }}
-                />
-                <MenuTag selectedSideMenu={this.props.selectedSideMenu} sideMenuSelect={this.props.sideMenuSelect} />
-            </div>
+    render() {
+        return (
+            <IESideNav
+                className={this.props.className}
+                mainMenu={this.props.rootMenu}
+                sideMenuSelect={(menuItem) => {
+                    this.props.history.push(menuItem.url);
+                    // this.props.sideMenuSelect(menuItem);
+                }}
+            />
         );
     }
 }
 
 SideNav.propTypes = {
-    selectTopMenu: PropsTypes.object,
-    selectedSideMenu: PropsTypes.object,
-    sideMenuSelect: PropsTypes.func.isRequired
+    rootMenu: PropsTypes.object.isRequired,
+    // selectTopMenu: PropsTypes.object,
+    // selectedSideMenu: PropsTypes.object,
+    // sideMenuSelect: PropsTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    let rootMenu = {
+        id: "IERootMenu",
+        menuItems: state.topLevelMenus
+    }
+
     return {
-        selectTopMenu: state.selectedTopMenu,
-        selectedSideMenu: state.selectedSideMenu
+        rootMenu: rootMenu,
+        // selectTopMenu: state.selectedTopMenu,
+        // selectedSideMenu: state.selectedSideMenu
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        sideMenuSelect: (menu) => dispatch(sideMenuSelect(menu))
+        createTopLevelMenusFetch: () => dispatch(createTopLevelMenusFetch())
     }
 }
 
-const SideNavContain = LayoutRedux.connect(
+const SideNavContain = RootRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps, // 关于dispatch
     undefined,
-    { pure:false }
+    { pure: false }
 )(SideNav)
 
 export default withRouter(SideNavContain);

@@ -1,9 +1,14 @@
 import React from 'react';
 import './UserInfo.css';
 import imgAvatar from 'images/default_avatar.png';
-import {getUserInfoFetch, setUserInfoFetch} from '../IEReduxs/Actions'
+import { getUserInfoFetch, setUserInfoFetch } from '../IEReduxs/Actions'
 import IERedux from '../IEReduxs/PersonalRedux'
 import IETool from 'ToolLibrary/IETool'
+
+import { Radio, Card, Upload, Input, Tooltip, Button, Skeleton, Tag, Calendar } from 'antd';
+import { UploadOutlined, UserOutlined, InfoCircleOutlined, EditOutlined, ReloadOutlined, SmileOutlined } from '@ant-design/icons';
+
+const { Meta } = Card;
 
 class UserInfo extends React.Component {
     constructor(props) {
@@ -39,26 +44,24 @@ class UserInfo extends React.Component {
     }
 
     componentDidMount() {
-        $(':input:not(.labelauty)').labelauty();
-
-        if(!this.props.userInfoData.invalidate){
+        if (!this.props.userInfoData.invalidate) {
             return;
         }
 
         this._getUserInfo();
     }
 
-    componentWillUpdate(props){
+    componentWillUpdate(props) {
         this.setNextStateForProps(props);
     }
 
-    setNextStateForProps(props){
-        if(!props.userInfoData.user){
+    setNextStateForProps(props) {
+        if (!props.userInfoData.user) {
             return;
         }
-        
+
         let birthDate = props.userInfoData.user.birthDate != null ?
-            (new Date(props.userInfoData.user.birthDate)).Format("yyyy-MM-dd"):
+            (new Date(props.userInfoData.user.birthDate)).Format("yyyy-MM-dd") :
             "";
 
         Object.assign(this.state, {
@@ -76,12 +79,8 @@ class UserInfo extends React.Component {
         });
     }
 
-    componentDidUpdate() {
-        $(':input:not(.labelauty)').labelauty();
-    }
-
-    _readFile(event) {
-        IETool.imageToBase64String(event.target.files[0], (base64)=>{
+    _readFile(file) {
+        IETool.imageToBase64String(file, (base64) => {
             this.headSculptureBase64 = base64;
             this.setState({ headSculpture: base64 });
         });
@@ -117,226 +116,221 @@ class UserInfo extends React.Component {
             <div className="hide-scroll">
                 <div>
                     <div className="userinfo">
-                        <div className="d-flex w-100">
-                            <div className="card border-0 userinfo-introduce w-25">
-                                <div className="w-100">
-                                    <div className="inputfile-img">
-                                        <button className="btn text-white">修改头像</button>
-                                        <input name="headSculpture" type="file" onChange={this._readFile} />
-                                    </div>
-                                    <img id="userInfoHeadSculpture" className="card-img-top w-100"
-                                        src={userInfoHeadSculpture} alt="Card image" />
+                        <div className="w-100 d-flex">
+                            <div className="d-flex bg-white col-md-8 float-left">
+                                <div className="card border-0 userinfo-introduce w-50 pt-2 pb-2">
+                                    <Card
+                                        hoverable
+                                        cover={
+                                            <Upload
+                                                name="avatar"
+                                                showUploadList={false}
+                                                beforeUpload={(file) => {
+                                                    this._readFile(file);
+                                                    return false;
+                                                }}
+                                            >
+                                                <img className="w-100" alt={this.state.name} src={userInfoHeadSculpture} />
+                                            </Upload>
+                                        }
+                                    >
+                                        <Meta description={this.state.personSignature} />
+
+                                    </Card>
                                 </div>
-                                <div className="card-body">
-                                    <h6 className="card-title">{this.state.name}</h6>
-                                    <p className="card-text">{this.state.personSignature}</p>
+                                <div className="card border-0 text-white flex-grow-1 userinfo-transparent">
+                                    <div className="card-body">
+                                        <div className="input-group mb-3 w-75 float-left">
+                                            <Input
+                                                value={this.state.userName}
+                                                prefix={<Tag icon={<UserOutlined />} color="#55acee">账号</Tag>}
+                                                suffix={
+                                                    <Tooltip title="无法修改账号">
+                                                        <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                    </Tooltip>
+                                                }
+                                            />
+                                        </div>
+                                        <div className="input-group mb-3">
+                                            <Input
+                                                value={this.state.name}
+                                                prefix={<Tag icon={<SmileOutlined />} color="#55acee">昵称</Tag>}
+                                                suffix={
+                                                    <Tooltip title="昵称">
+                                                        <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                    </Tooltip>
+                                                }
+                                                onChange={
+                                                    (event) => {
+                                                        this.setState({ name: event.target.value });
+                                                    }
+                                                }
+                                            />
+                                        </div>
+                                        <div className="input-group mb-3">
+                                            <Input
+                                                value={this.state.phone}
+                                                prefix={<Tag color="#55acee">手机号&#8194;</Tag>}
+                                                suffix={
+                                                    <Tooltip title="手机号">
+                                                        <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                    </Tooltip>
+                                                }
+                                                onChange={
+                                                    (event) => {
+                                                        this.setState({ phone: event.target.phone });
+                                                    }
+                                                }
+                                            />
+                                        </div>
+                                        <div className="input-group mb-3">
+                                            <Input
+                                                value={this.state.emailAddress}
+                                                prefix={<Tag color="#55acee">邮箱号&#8194;</Tag>}
+                                                suffix={
+                                                    <Tooltip title="邮箱号">
+                                                        <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                                                    </Tooltip>
+                                                }
+                                                onChange={
+                                                    (event) => {
+                                                        this.setState({ emailAddress: event.target.emailAddress });
+                                                    }
+                                                }
+                                            />
+                                        </div>
+                                        <div className="input-group mb-3">
+                                            <Input.TextArea placeholder="输入你的个性签名" allowClear
+                                                autoSize={{ minRows: 4, maxRows: 6 }}
+                                                value={this.state.personSignature}
+                                                onChange={
+                                                    (event) => {
+                                                        this.setState({ personSignature: event.target.value });
+                                                    }
+                                                }
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="card border-0 text-white flex-grow-1 userinfo-transparent">
-                                <div className="card-body">
-                                    <div className="input-group mb-3 w-75 float-left">
-                                        <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text bg-info text-white border-0">账号</span>
-                                        </div>
-                                        <input value={this.state.userName} name="userName" type="text" className="form-control" placeholder="AccountNo" readOnly="readonly"
-                                            onChange={
-                                                (event) => {
-                                                    this.setState({ userName: event.target.value });
-                                                }
-                                            }
-                                        />
-                                    </div>
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text bg-info text-white border-0">昵称</span>
-                                        </div>
-                                        <input value={this.state.name || ""} name="name" type="text" className="form-control" placeholder="请输入昵称"
-                                            readOnly={this.state.nameReadonly}
-                                            onChange={
-                                                (event) => {
-                                                    this.setState({ name: event.target.value });
-                                                }
-                                            }
-                                        />
-                                        <div className="input-group-append">
-                                            <button className="btn btn-info" type="button"
-                                                onClick={
-                                                    () => {
-                                                        this.setState((preState) => ({ nameReadonly: !preState.nameReadonly }));
-                                                    }
-                                                }
-                                            ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.nameReadonly ? "编辑" : "保存"}</button>
-                                        </div>
-                                    </div>
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text bg-info text-white border-0">手机号</span>
-                                        </div>
-                                        <input value={this.state.phone || ""} name="phone" type="text" className="form-control" placeholder="请输入手机号"
-                                            readOnly={this.state.phoneReadonly}
-                                            onChange={
-                                                (event) => {
-                                                    this.setState({ phone: event.target.value });
-                                                }
-                                            }
-                                        />
-                                        <div className="input-group-append">
-                                            <button className="btn btn-info" type="button"
-                                                onClick={
-                                                    () => {
-                                                        this.setState((preState) => ({ phoneReadonly: !preState.phoneReadonly }));
-                                                    }
-                                                }
-                                            ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.phoneReadonly ? "编辑" : "保存"}</button>
-                                        </div>
-                                    </div>
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text bg-info text-white border-0">邮箱号</span>
-                                        </div>
-                                        <input value={this.state.emailAddress || ""} name="emailAddress" type="text" className="form-control" placeholder="请输入电子邮箱"
-                                            readOnly={this.state.emailAddressReadonly}
-                                            onChange={
-                                                (event) => {
-                                                    this.setState({ emailAddress: event.target.value });
-                                                }
-                                            }
-                                        />
-                                        <div className="input-group-append">
-                                            <button className="btn btn-info" type="button"
-                                                onClick={
-                                                    () => {
-                                                        this.setState((preState) => ({ emailAddressReadonly: !preState.emailAddressReadonly }));
-                                                    }
-                                                }
-                                            ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.emailAddressReadonly ? "编辑" : "保存"}</button>
-                                        </div>
-                                    </div>
-                                    <div className="input-group mb-3">
-                                        <div className="input-group-prepend userinfo-lable">
-                                            <span className="input-group-text bg-info text-white border-0">个性签名</span>
-                                        </div>
-                                        <textarea className="form-control" rows="4" id="comment" placeholder="请输入个性签名"
-                                            value={this.state.personSignature}
-                                            onChange={
-                                                (event) => {
-                                                    this.setState({ personSignature: event.target.value });
-                                                }
-                                            }
-                                        ></textarea>
-                                    </div>
-                                </div>
+                            <div className="col-md-4 float-left">
+                                <Calendar fullscreen={false} />
                             </div>
                         </div>
-                        <div className="w-100 mt-3">
-                            <h5 className="mb-3">完善个人信息</h5>
-                            <div className="col-md-9">
+
+                        <Card className="w-100 mt-3" title="完善个人信息" bordered={false}>
+                            <div className="col-md-8 float-left">
                                 <div className="input-group mb-3">
-                                    <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text bg-info text-white border-0">真实姓名</span>
-                                    </div>
-                                    <input value={this.state.realName || ""} name="phone" type="text" className="form-control" placeholder="请输入真实姓名"
-                                        readOnly={this.state.realNameReadonly}
+                                    <Input
+                                        value={this.state.realName}
+                                        prefix={<Tag color="#55acee">真实姓名</Tag>}
+                                        disabled={this.state.realNameReadonly}
+                                        suffix={
+                                            <Button type="primary" icon={<EditOutlined />}
+                                                onClick={
+                                                    () => {
+                                                        this.setState((preState) => ({ realNameReadonly: !preState.realNameReadonly }));
+                                                    }
+                                                }
+                                            >
+                                                {this.state.realNameReadonly ? "编辑" : "保存"}
+                                            </Button>
+                                        }
                                         onChange={
                                             (event) => {
                                                 this.setState({ realName: event.target.value });
                                             }
                                         }
                                     />
-                                    <div className="input-group-append">
-                                        <button className="btn btn-info" type="button"
-                                            onClick={
-                                                () => {
-                                                    this.setState((preState) => ({ realNameReadonly: !preState.realNameReadonly }));
-                                                }
-                                            }
-                                        ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.realNameReadonly ? "编辑" : "保存"}</button>
-                                    </div>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text bg-info text-white border-0">身份证号</span>
-                                    </div>
-                                    <input value={this.state.idNumber || ""} name="phone" type="text" className="form-control" placeholder="请输入身份证号"
-                                        readOnly={this.state.idNumberReadonly}
+                                    <Input
+                                        value={this.state.idNumber}
+                                        prefix={<Tag color="#55acee">身份证号</Tag>}
+                                        disabled={this.state.idNumberReadonly}
+                                        suffix={
+                                            <Button type="primary" icon={<EditOutlined />}
+                                                onClick={
+                                                    () => {
+                                                        this.setState((preState) => ({ idNumberReadonly: !preState.idNumberReadonly }));
+                                                    }
+                                                }
+                                            >
+                                                {this.state.idNumberReadonly ? "编辑" : "保存"}
+                                            </Button>
+                                        }
                                         onChange={
                                             (event) => {
                                                 this.setState({ idNumber: event.target.value });
                                             }
                                         }
                                     />
-                                    <div className="input-group-append">
-                                        <button className="btn btn-info" type="button"
-                                            onClick={
-                                                () => {
-                                                    this.setState((preState) => ({ idNumberReadonly: !preState.idNumberReadonly }));
-                                                }
-                                            }
-                                        ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.idNumberReadonly ? "编辑" : "保存"}</button>
-                                    </div>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text bg-info text-white border-0">地址</span>
-                                    </div>
-                                    <input value={this.state.address || ""} name="phone" type="text" className="form-control" placeholder="请输入地址"
-                                        readOnly={this.state.addressReadonly}
+                                    <Input
+                                        value={this.state.address}
+                                        prefix={<Tag color="#55acee">地&#12288;&#12288;址</Tag>}
+                                        disabled={this.state.addressReadonly}
+                                        suffix={
+                                            <Button type="primary" icon={<EditOutlined />}
+                                                onClick={
+                                                    () => {
+                                                        this.setState((preState) => ({ addressReadonly: !preState.addressReadonly }));
+                                                    }
+                                                }
+                                            >
+                                                {this.state.addressReadonly ? "编辑" : "保存"}
+                                            </Button>
+                                        }
                                         onChange={
                                             (event) => {
                                                 this.setState({ address: event.target.value });
                                             }
                                         }
                                     />
-                                    <div className="input-group-append">
-                                        <button className="btn btn-info" type="button"
-                                            onClick={
-                                                () => {
-                                                    this.setState((preState) => ({ addressReadonly: !preState.addressReadonly }));
+                                </div>
+                                <div className="input-group mb-3">
+                                    <Input
+                                        value={this.state.birthDate}
+                                        prefix={<Tag color="#55acee">出生日期</Tag>}
+                                        disabled={this.state.birthDateReadonly}
+                                        suffix={
+                                            <Button type="primary" icon={<EditOutlined />}
+                                                onClick={
+                                                    () => {
+                                                        this.setState((preState) => ({ birthDateReadonly: !preState.birthDateReadonly }));
+                                                    }
                                                 }
-                                            }
-                                        ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.addressReadonly ? "编辑" : "保存"}</button>
-                                    </div>
-                                </div>
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text bg-info text-white border-0">性别</span>
-                                    </div>
-                                    <div className="d-flex flex-grow-1 align-items-center">
-                                        <span className="ml-3 userinfo-radio">
-                                            <input type="radio" name="sex" data-labelauty="男" value={true} checked={(this.state.sex === true)} onChange={() => { this.setState({ sex: true }) }} />
-                                        </span>
-                                        <span className="ml-3 userinfo-radio">
-                                            <input type="radio" name="sex" data-labelauty="女" value={false} checked={(this.state.sex === false)} onChange={() => { this.setState({ sex: false }) }} />
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="input-group mb-3">
-                                    <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text bg-info text-white border-0">出生日期</span>
-                                    </div>
-                                    <input value={this.state.birthDate} name="phone" type="date" className="form-control" placeholder="请输入出生年月日"
-                                        readOnly={this.state.birthDateReadonly}
+                                            >
+                                                {this.state.birthDateReadonly ? "编辑" : "保存"}
+                                            </Button>
+                                        }
                                         onChange={
                                             (event) => {
                                                 this.setState({ birthDate: event.target.value });
                                             }
                                         }
                                     />
-                                    <div className="input-group-append">
-                                        <button className="btn btn-info" type="button"
-                                            onClick={
-                                                () => {
-                                                    this.setState((preState) => ({ birthDateReadonly: !preState.birthDateReadonly }));
-                                                }
-                                            }
-                                        ><span className="oi oi-pencil padding-right-10" title="icon name" aria-hidden="true"></span>{this.state.birthDateReadonly ? "编辑" : "保存"}</button>
+                                </div>
+                                <div className="input-group mb-3">
+                                    <div className="input-group-prepend userinfo-lable">
+                                        <span className="input-group-text bg-info text-white border-0">性别</span>
+                                    </div>
+                                    <div className="ml-3 d-flex align-content-center align-items-center">
+                                        <Radio.Group onChange={(event) => { this.setState({ sex: event.target.value }) }} value={this.state.sex}>
+                                            <Radio value={true}>男</Radio>
+                                            <Radio value={false}>女</Radio>
+                                        </Radio.Group>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="w-100 mt-3">
-                            <button className="btn btn-info float-right" type="button" onClick={this._setUserInfo}>提交修改</button>
-                            <button className="btn btn-secondary float-right mr-3" type="button" onClick={this._getUserInfo}>取消修改</button>
+                            <div className="col-md-4 float-left">
+                                <Skeleton avatar paragraph={{ rows: 4 }} />
+                            </div>
+                        </Card>
+                        <div className="w-100 mt-3 mb-3 d-flex justify-content-end">
+                            <Button onClick={this._getUserInfo} icon={<ReloadOutlined />} >取消修改</Button>
+                            <Button className="mr-2 ml-2" onClick={this._setUserInfo} type="primary" icon={<UploadOutlined />} >提交修改</Button>
                         </div>
                     </div>
                 </div>

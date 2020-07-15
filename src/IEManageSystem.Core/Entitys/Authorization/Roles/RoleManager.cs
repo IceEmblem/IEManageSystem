@@ -67,7 +67,23 @@ namespace IEManageSystem.Entitys.Authorization.Roles
 
         public void DeleteRole(int id)
         {
-            RoleRepository.Delete(id);
+            var role = RoleRepository.Get(id);
+
+            if (role.Name == Role.SuperAdminName) {
+                throw new UserFriendlyException("无法删除超级管理员角色");
+            }
+
+            if (role.Name == Role.AdminName)
+            {
+                throw new UserFriendlyException("无法删除管理员角色");
+            }
+
+            if (role.Name == Role.UserName)
+            {
+                throw new UserFriendlyException("无法删除用户角色");
+            }
+
+            RoleRepository.Delete(role);
         }
 
         public void AddPermission(Role role, Permission permission)

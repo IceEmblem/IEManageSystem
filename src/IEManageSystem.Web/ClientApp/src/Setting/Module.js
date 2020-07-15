@@ -7,6 +7,10 @@ import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScop
 
 import Setting from './Setting';
 
+import {
+    SettingOutlined
+} from '@ant-design/icons';
+
 export default class Module extends BaseModule
 {
     initialize(){
@@ -14,13 +18,12 @@ export default class Module extends BaseModule
             {
                 id: "Setting",
                 text: "环境设置",
-                icon: "oi-wrench",
+                icon: SettingOutlined,
                 url: "/ManageHome/Setting",
                 menuItems: [
                     {
                         id: "SiteSetting",
                         text: "站点设置",
-                        icon: "",
                         url: "/ManageHome/Setting/SiteSetting",
                         accessScope:
                             [

@@ -28,3 +28,15 @@
 /test/IEManageSystem.Web.Tests/bin
 /test/IEManageSystem.Web.Tests/obj
 *.ldb
+/src/IEManageSystem.CommonInfrastructure/bin
+/src/IEManageSystem.CommonInfrastructure/obj
+/test/IEManageSystem.CommonInfrastructure.Tests/bin
+/test/IEManageSystem.CommonInfrastructure.Tests/obj
+/src/IEManageSystem.Web/App_Data/Logs
+/test/IEManageSystem.Application.Tests/bin
+/test/IEManageSystem.Application.Tests/obj
+/src/IEManageSystem.Web/ClientApp/build
+/test/IEManageSystem.ApiAuthorization.Tests/bin
+/test/IEManageSystem.ApiAuthorization.Tests/obj
+/src/IEManageSystem.Web/Properties/PublishProfiles
+/src/IEManageSystem.EntityFrameworkCore/Migrations

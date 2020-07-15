@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.Setting.SiteSettingQuerys.Dto
 {
-    public class GetSiteSettingsOutput: OutputDtoBase
+    public class GetSiteSettingsOutput
     {
         public List<SiteSettingDto> SiteSettings { get; set; }
     }

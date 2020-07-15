@@ -1,10 +1,16 @@
 ﻿using Abp.Dependency;
 using Abp.UI;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.Repositorys;
+using IEManageSystem.Entitys.Authorization.Permissions;
+using IEManageSystem.Repositorys;
+using IEManageSystem.Web;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.Pages
@@ -13,28 +19,154 @@ namespace IEManageSystem.CMS.DomainModel.Pages
     {
         public const string HomeName = "home";
 
-        public const string StaticPagePageDataName = "Index";
+        private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; set; }
 
-        public PageManager(IPageRepository pageRepository)
+        private IIEMemoryCache _cache { get; set; }
+
+        private PageDataManager _pageDataManager { get; set; }
+
+        public PageManager(IPageRepository pageRepository,
+            IEfRepository<DefaultComponentData, int> defaultDataRepository,
+            PageDataManager pageDataManager,
+            IIEMemoryCache cache
+            )
         {
             PageRepository = pageRepository;
+            _defaultDataRepository = defaultDataRepository;
+            _pageDataManager = pageDataManager;
+            _cache = cache;
         }
 
         public IPageRepository PageRepository { get; }
 
-        public StaticPage CreateStaticPage(string pageName, string pageDisplayName)
+        private string GetPageCacheName(string pageName) => $"PageManager_Page_{pageName}_";
+
+        private string GetPageNameCacheName(int id) => $"PageManager_PageName_{id}_";
+
+        /// <summary>
+        /// 从缓存获取页面
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        public PageBase GetPageForCache(string pageName)
         {
-            PageData pageData = new PageData()
+            return _cache.GetOrCreate<PageBase>(GetPageCacheName(pageName), cacheEntity => {
+
+                cacheEntity.SlidingExpiration = TimeSpan.FromHours(1);
+
+                cacheEntity.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+
+                cacheEntity.SetPriority(CacheItemPriority.NeverRemove);
+
+                PageRepository.NoTracking();
+                var page = PageRepository.GetPageOfAllIncludes(pageName);
+                PageRepository.Tracking();
+
+                return page;
+            });
+        }
+
+        /// <summary>
+        /// 从缓存中获取页面的名称
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetPageNameCache(int id) {
+            return _cache.GetOrCreate<string>(GetPageNameCacheName(id), cacheEntity => {
+
+                cacheEntity.SlidingExpiration = TimeSpan.FromHours(1);
+
+                cacheEntity.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+
+                cacheEntity.SetPriority(CacheItemPriority.NeverRemove);
+
+                PageRepository.NoTracking();
+                var pageName = PageRepository.GetAll().Where(e => e.Id == id).Select(e => e.Name).FirstOrDefault();
+                PageRepository.Tracking();
+
+                return pageName;
+            });
+        }
+
+        /// <summary>
+        /// 使缓存失效
+        /// </summary>
+        /// <param name="pageName"></param>
+        public void SetPageInvalidForCache(string pageName)
+        {
+            _cache.Remove(GetPageCacheName(pageName));
+        }
+
+        /// <summary>
+        /// 获取具有管理文章权限的页面
+        /// </summary>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
+        public IEnumerable<ContentPage> GetPagesForManagePermission(IEnumerable<Permission> permissions) 
+        {
+            IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
+
+            return PageRepository.GetAll().OfType<ContentPage>().Where(e => e.ContentPagePermissionCollection.ContentPagePermissions.Any(e => e.IsManage && permissionIds.Contains(e.Id)));
+        }
+
+        /// <summary>
+        /// 获取具有查询文章权限的页面
+        /// </summary>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
+        public IEnumerable<ContentPage> GetPagesForQueryPermission(IEnumerable<Permission> permissions) 
+        {
+            IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
+
+            return PageRepository.GetAll().OfType<ContentPage>().Where(e => 
+                e.ContentPagePermissionCollection.IsEnableQueryPermission == false
+                || e.ContentPagePermissionCollection.ContentPagePermissions.Any(e => permissionIds.Contains(e.Id))
+            );
+        }
+
+        /// <summary>
+        /// 是否可以访问该页面的文章
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCanQueryPost(string pageName, IEnumerable<Permission> permissions) 
+        {
+            var page = GetPageForCache(pageName);
+
+            if (!(page is ContentPage)) {
+                throw new UserFriendlyException($"页面{pageName}不是文章页面");
+            }
+
+            var contentPage = (ContentPage)page;
+            if (contentPage.ContentPagePermissionCollection.IsCanQueryPost(permissions))
             {
-                Name = StaticPagePageDataName,
-                Title = pageDisplayName
-            };
+                return true;
+            }
 
-            StaticPage page = new StaticPage(pageName, pageData) {
-                DisplayName = pageDisplayName
-            };
+            return false;
+        }
 
-            return page;
+        /// <summary>
+        /// 是否可以管理该页面的文章
+        /// </summary>
+        /// <param name="pageName"></param>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
+        public bool IsCanManagePost(string pageName, IEnumerable<Permission> permissions) 
+        {
+            var page = GetPageForCache(pageName);
+
+            if (!(page is ContentPage))
+            {
+                throw new UserFriendlyException($"页面{pageName}不是文章页面");
+            }
+
+            var contentPage = (ContentPage)page;
+            if (contentPage.ContentPagePermissionCollection.IsCanManagePost(permissions))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public void AddPage(PageBase page)
@@ -47,6 +179,33 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             PageRepository.Insert(page);
         }
 
+        public void UpdatePage(PageBase page) 
+        {
+            PageRepository.Update(page);
+
+            SetPageInvalidForCache(page.Name);
+        }
+
+        public void UpdateContentPagePermission(string name, ContentPagePermissionCollection contentPagePeimissionCollection) 
+        {
+            var page = PageRepository.GetPageOfAllIncludes(name);
+
+            if (page == null)
+            {
+                throw new UserFriendlyException("未找到页面");
+            }
+
+            if (!(page is ContentPage))
+            {
+                throw new UserFriendlyException("无法更改页面权限，请确保页面属于内容页");
+            }
+
+            var contentPage = (ContentPage)page;
+            contentPage.ContentPagePermissionCollection = contentPagePeimissionCollection;
+
+            SetPageInvalidForCache(page.Name);
+        }
+
         public void DeletePage(string name)
         {
             if (name.ToLower() == HomeName)
@@ -54,34 +213,50 @@ namespace IEManageSystem.CMS.DomainModel.Pages
                 throw new UserFriendlyException("不能删除主页");
             }
 
-            PageRepository.Delete(item => item.Name == name);
+            var page = PageRepository.GetPageOfAllIncludes(name);
+
+            // 删除所有文章
+            _pageDataManager.DeletePagePosts(page.Name);
+
+            // 删除默认数据
+            Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
+                e=>e.SingleDatas
+            };
+            var oldDatas = _defaultDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageId == page.Id).ToList();
+            oldDatas.ForEach(item => {
+                _defaultDataRepository.Delete(item);
+            });
+
+            // 删除页面
+            PageRepository.Delete(page);
+
+            SetPageInvalidForCache(page.Name);
         }
 
-        public List<PageComponentBase> GetPageComponents(string name)
+        public void UpdatePageComponentsAndDefaultComponentData(string name, List<PageComponentBase> pageComponents, List<DefaultComponentData> defaultComponentDatas)
         {
-            var page = PageRepository.ThenInclude(e => e.PageComponents, e => e.PageComponentSettings).FirstOrDefault(e => e.Name == name);
-
-            if (page == null)
-            {
-                throw new UserFriendlyException("未找到页面");
-            }
-
-            if (page.PageComponents == null)
-            {
-                return new List<PageComponentBase>();
-            }
-
-            return page.PageComponents.ToList();
-        }
-
-        public void UpdatePageComponents(string name, List<PageComponentBase> pageComponents)
-        {
-            var page = PageRepository.ThenInclude(e => e.PageComponents, e=>e.PageComponentSettings).FirstOrDefault(e => e.Name == name);
+            var page = PageRepository.GetPageOfAllIncludes(name);
             page.PageComponents = new List<PageComponentBase>();
 
             foreach (var item in pageComponents) {
                 page.PageComponents.Add(item);
             }
+
+            Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
+                e=>e.SingleDatas
+            };
+            var oldDatas = _defaultDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageId == page.Id).ToList();
+            oldDatas.ForEach(item=> {
+                _defaultDataRepository.Delete(item);
+            });
+
+            defaultComponentDatas.ForEach(item =>
+            {
+                item.Page = page;
+                _defaultDataRepository.Insert(item);
+            });
+
+            SetPageInvalidForCache(page.Name);
         }
     }
 }

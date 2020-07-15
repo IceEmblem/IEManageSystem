@@ -27,6 +27,20 @@ namespace IEManageSystem.Web.Filters
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
+            if (!context.HttpContext.User.Identity.IsAuthenticated)
+            {
+                context.Result = new ObjectResult(new AjaxResponse(new ErrorInfo("未登录，请先登录"), true))
+                {
+                    StatusCode = (int)System.Net.HttpStatusCode.Unauthorized
+                };
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_apiScopeName)) 
+            {
+                return;
+            }
+
             var controllerActionDescriptor = (Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)context.ActionDescriptor;
 
             // 是否有应用Api查询特性
@@ -54,10 +68,10 @@ namespace IEManageSystem.Web.Filters
             {
                 context.Result = new ObjectResult(new AjaxResponse(new ErrorInfo("未授权操作"), true))
                 {
-                    StatusCode = context.HttpContext.User.Identity.IsAuthenticated
-                            ? (int)System.Net.HttpStatusCode.Forbidden
-                            : (int)System.Net.HttpStatusCode.Unauthorized
+                    StatusCode = (int)System.Net.HttpStatusCode.Forbidden
                 };
+
+                return;
             }
         }
     }

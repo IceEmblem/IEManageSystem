@@ -96,7 +96,7 @@ class AdminManage extends React.Component {
 
 	render() {
 		return (
-			<div className="col-md-12">
+			<div className="col-md-12 pt-3 pb-3 bg-white">
 				<Resource
 					title="管理员管理"
 					describes={this.getDescribes()}

@@ -6,10 +6,10 @@
     }
 
     //写cookies  
-    static setCookie(name: string, value: string, expiredays: number) {
+    static setCookie(name: string, value: string, expiredays: number, path: string = "/") {
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + expiredays);
-        document.cookie = name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toUTCString());
+        document.cookie = name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toUTCString()) + ";path=" + path;
     }
 
     //删除cookies  

@@ -15,18 +15,26 @@ namespace IEManageSystem.ApiAuthorization.DomainModel
     {
         private ApiScopeManager _apiScopeManager { get; set; }
 
-        private IRepository<Permission> _permissionRepository { get; set; }
+        private PermissionManager _permissionManager { get; set; }
 
         public CheckPermissionService(
             ApiScopeManager apiScopeManager,
-            IRepository<Permission> permissionRepository)
+            PermissionManager permissionManager)
         {
             _apiScopeManager = apiScopeManager;
 
-            _permissionRepository = permissionRepository;
+            _permissionManager = permissionManager;
         }
 
         public bool IsAllowAccess(string apiScopeName, bool isQueryAction, IEnumerable<string> permissionNames)
+        {
+            // 获取拥有的权限
+            var permissions = _permissionManager.GetPermissionsForCache().Where(e=> permissionNames.Contains(e.Name));
+
+            return IsAllowAccess(apiScopeName, isQueryAction, permissions);
+        }
+
+        public bool IsAllowAccess(string apiScopeName, bool isQueryAction, IEnumerable<Permission> permissions) 
         {
             // 获取要访问的Api域
             Expression<Func<ApiScope, object>>[] apiScopeSelectors = new Expression<Func<ApiScope, object>>[]
@@ -36,10 +44,7 @@ namespace IEManageSystem.ApiAuthorization.DomainModel
                 e => e.ApiQueryScope,
                 e => e.ApiQueryScope.ApiScopePermissions,
             };
-            var apiScope = _apiScopeManager.ApiScopeRepository.GetAllIncluding(apiScopeSelectors).FirstOrDefault(e => e.Name == apiScopeName);
-
-            // 获取拥有的权限
-            var permissions = _permissionRepository.GetAllList(e => permissionNames.Contains(e.Name)).ToList();
+            var apiScope = _apiScopeManager.GetApiScopeForCache(apiScopeName);
 
             if (isQueryAction == true)
             {

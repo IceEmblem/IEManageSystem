@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IEManageSystem.Api.Configuration
+namespace IEManageSystem.Web.Configuration
 {
     public static class WebConfiguration
     {
@@ -21,6 +21,10 @@ namespace IEManageSystem.Api.Configuration
             Audience = appConfiguration.GetSection("WebConfiguration:Audience").Value;
 
             SymmetricKey = appConfiguration.GetSection("WebConfiguration:SymmetricKey").Value;
+
+            if (string.IsNullOrWhiteSpace(SymmetricKey)) {
+                SymmetricKey = Guid.NewGuid().ToString();
+            }
         }
     }
 }

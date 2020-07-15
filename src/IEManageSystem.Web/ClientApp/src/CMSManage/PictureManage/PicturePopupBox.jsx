@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Modal from 'Modal/Modal';
+import { Modal, Button } from 'antd';
 import PictureBox from './PictureBox';
 
 // 图片弹出框
@@ -22,47 +22,34 @@ export default class PicturePopupBox extends React.Component {
     render() {
         return (
             <Modal
-                // show={this.props.isShow}
-                show={this.props.isShow}
+                title="图片选择"
+                visible={this.props.isShow}
+                zIndex={10000}
+                width={800}
+                onOk={() => {
+                    this.props.closePopupBox();
+
+                    if (!this.state.curSeletePic) {
+                        this.props.selectPictruePath("");
+                        return;
+                    }
+
+                    if (this.state.curSeletePic.isDir) {
+                        this.props.selectPictruePath("");
+                        return;
+                    }
+
+                    this.props.selectPictruePath(this.state.curSeletePic.webPath);
+                }}
+                onCancel={this.props.closePopupBox}
+                okText="选择图片"
+                cancelText="关闭"
             >
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
-
-                        <div className="modal-header bg-info text-white">
-                            <h4 className="modal-title">图片选择</h4>
-                            <button type="button" className="close" data-dismiss="modal" onClick={() => { this.props.closePopupBox(); }}>&times;</button>
-                        </div>
-
-                        <div className="modal-body">
-                            <PictureBox
-                                selectPath={(curPath, curSeletePic) => { this.setState({ curPath: curPath, curSeletePic: curSeletePic }) }}
-                                isReload={this.state.isReload}
-                                reloadDid={() => { this.setState({ isReload: false }) }}
-                            />
-                        </div>
-
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-danger btn-sm"
-                                onClick={() => {
-                                    this.props.closePopupBox();
-
-                                    if(!this.state.curSeletePic){
-                                        this.props.selectPictruePath("");
-                                        return;
-                                    }
-
-                                    if(this.state.curSeletePic.isDir){
-                                        this.props.selectPictruePath("");
-                                        return;
-                                    }
-
-                                    this.props.selectPictruePath(this.state.curSeletePic.webPath);
-                                }}>选择图片</button>
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => { this.props.closePopupBox(); }}>关闭</button>
-                        </div>
-
-                    </div>
-                </div>
+                <PictureBox
+                    selectPath={(curPath, curSeletePic) => { this.setState({ curPath: curPath, curSeletePic: curSeletePic }) }}
+                    isReload={this.state.isReload}
+                    reloadDid={() => { this.setState({ isReload: false }) }}
+                />
             </Modal>
         );
     }

@@ -8,6 +8,12 @@ import RootRedux from 'Core/IEReduxs/RootRedux'
 
 import Personal from './Personal.jsx';
 
+import {
+    UserOutlined,
+    SolutionOutlined,
+    SafetyOutlined
+} from '@ant-design/icons';
+
 export default class Module extends BaseModule
 {
     initialize()
@@ -16,20 +22,20 @@ export default class Module extends BaseModule
             {
                 id: "Personal",
                 text: "个人中心",
-                icon: "oi-person",
+                icon: UserOutlined,
                 default: true,
                 menuItems: [
                     {
                         id:"UserInfo",
                         text: "用户信息",
                         url: "/ManageHome/Personal/UserInfo",
-                        icon: "oi-person"
+                        icon: SolutionOutlined
                     },
                     {
                         id:"AccountSecurity",
                         text: "账号安全",
                         url: "/ManageHome/Personal/AccountSecurity",
-                        icon: "oi-envelope-closed"
+                        icon: SafetyOutlined
                     }
                 ]
             },

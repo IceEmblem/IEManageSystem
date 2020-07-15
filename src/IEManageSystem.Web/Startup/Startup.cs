@@ -10,21 +10,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using IEManageSystem.JwtAuthentication;
-using IEManageSystem.Api.Configuration;
+using IEManageSystem.Web.Configuration;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using IEManageSystem.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.StaticFiles.Infrastructure;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging.Debug;
+using IEManageSystem.Web.Conventions;
 
 namespace IEManageSystem.Web.Startup
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        private IConfigurationRoot _configurationRoot { get; }
+
+        private IWebHostEnvironment _env { get; }
+
+        public Startup(IWebHostEnvironment env)
         {
-            WebConfiguration.Init(AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName));
+            _configurationRoot = AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName);
+            _env = env;
+            WebConfiguration.Init(_configurationRoot);
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -32,17 +41,28 @@ namespace IEManageSystem.Web.Startup
             // 注册数据库上下文
             services.AddAbpDbContext<IEManageSystemDbContext>(options =>
             {
-                DbContextOptionsConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
+                DbContextOptionsConfigurer.Configure(
+                    options.DbContextOptions,
+                    _configurationRoot.GetConnectionString(IEManageSystemConsts.ConnectionStringName),
+                    _configurationRoot.GetSection("ConnectionType").Value);
+
+                if(_env.IsDevelopment()){
+                    LoggerFilterOptions loggerFilterOptions = new LoggerFilterOptions();
+                    loggerFilterOptions.AddFilter((level) => level >= LogLevel.Information);
+
+                    // 日志过滤器
+                    options.DbContextOptions.UseLoggerFactory(new LoggerFactory(new[] { new DebugLoggerProvider() }, loggerFilterOptions));
+                }
             });
 
-            services.AddMvc(options =>
+            services.AddControllersWithViews(options =>
             {
-                // 防止 XSRF/CSRF（跨站请求伪造） 攻击，我们使用 JWT 进行身份验证，不存在 XSRF/CSRF
-                // options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            })
-            .AddJsonOptions(options =>
-            {
-                // 解决循环引用时的序列化
+                // .net core 自动将移除 Async 后缀，如方法 LoginAsync 的路由为 /Controller/Login
+                // 设为发 false 则不会移除
+                options.SuppressAsyncSuffixInActionNames = false;
+
+                options.Conventions.Insert(0, new IEApiConvention());
+            }).AddNewtonsoftJson(options => { 
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
@@ -82,11 +102,16 @@ namespace IEManageSystem.Web.Startup
 
             app.UseSpaStaticFiles();
 
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.UseSpa(spa =>
             {
-                spa.Options.DefaultPage = "/Index.html";
+                spa.Options.DefaultPage = "/index.html";
             });
         }
     }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IEManageSystem.Api.Models.AccountModels
+namespace IEManageSystem.Web.Models.AccountModels
 {
     public class RegisterApiModel
     {

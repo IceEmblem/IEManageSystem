@@ -22,6 +22,16 @@ namespace IEManageSystem.Dtos.CMS
         /// </summary>
         public string PageType { get; set; }
 
+        public ContentPagePeimissionCollectionDto ContentPagePeimissionCollection { get; set; }
+
         public IEnumerable<PageComponentDto> PageComponents { get; set; }
+
+        public void SetStaticPage() => PageType = "StaticPage";
+
+        public bool IsStaticPage() => PageType == "StaticPage";
+
+        public void SetContentPage() => PageType = "ContentPage";
+
+        public bool IsContentPage() => PageType == "ContentPage";
     }
 }

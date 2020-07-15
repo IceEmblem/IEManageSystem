@@ -1,0 +1,22 @@
+.ie-logo > a {
+    padding-right: 16px;
+    padding-left: 40px;
+}
+.ie-logo > a {
+    height: 64px;
+    padding-left: 40px;
+    overflow: hidden;
+    color: rgba(0,0,0,.85);
+    font-size: 18px;
+    font-family: Avenir,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji,sans-serif;
+    line-height: 64px;
+    white-space: nowrap;
+    text-decoration: none;
+    font-weight: 600;
+}
+.ie-logo img {
+    position: relative;
+    top: -1.5px;
+    height: 32px;
+    margin-right: 16px;
+}

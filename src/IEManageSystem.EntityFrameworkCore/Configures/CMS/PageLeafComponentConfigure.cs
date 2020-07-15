@@ -12,6 +12,7 @@ namespace IEManageSystem.Configures.CMS
         public void Configure(EntityTypeBuilder<PageLeafComponent> builder)
         {
             builder.HasBaseType<PageComponentBase>();
+            builder.OwnsOne(e => e.PageLeafSetting);
         }
     }
 }

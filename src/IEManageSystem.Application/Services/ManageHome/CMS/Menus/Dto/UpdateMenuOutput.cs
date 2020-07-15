@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Menus.Dto
 {
-    public class UpdateMenuOutput:OutputDtoBase
+    public class UpdateMenuOutput
     {
     }
 }

@@ -23,8 +23,6 @@ namespace IEManageSystem.ApiAuthorization.DomainModel.ApiScopes.AuthorizationNod
 
         public bool IsAllowAccess(IEnumerable<Permission> permissions)
         {
-            var superPermissionName = Permission.SuperPermission.Name;
-
             foreach (var permission in permissions)
             {
                 if (IsAllowAccess(permission)) {

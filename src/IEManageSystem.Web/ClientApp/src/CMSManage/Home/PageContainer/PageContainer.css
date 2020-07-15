@@ -1,8 +1,0 @@
-.front-page-container{
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    overflow-x: hidden;
-}

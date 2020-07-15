@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 import Folder from './folder.png'
 
+import { Tag, Card } from 'antd';
+import { FolderOpenOutlined } from "@ant-design/icons"
+
 import './PictureBox.css';
 
 export default class PictureBox extends React.Component {
@@ -62,41 +65,43 @@ export default class PictureBox extends React.Component {
     }
 
     createPictureHtmls() {
-        let pictureHtmls = this.state.pictures.map((item, index) => (
-            <div key={index+1} className={`photobox photobox_type1 picturemanage-picturebox-noactive ${this.state.selectIndex == index && "picturemanage-picturebox-active"}`}>
-                <div className="photobox__previewbox"
-                    onClick={
-                        () => {
-                            if (item.isDir && this.state.selectIndex == index) {
-                                this.entreDir();
-                                return;
-                            }
-                            this.setState({ selectIndex: index });
-                            this.props.selectPath(this.state.curPath, this.state.pictures[index]);
-                        }
-                    }
-                >
-                    <img src={item.isDir ? Folder : item.webPath} className="photobox__preview" alt="Preview" />
-                    <span className="photobox__label">{item.name}</span>
-                </div>
-            </div>
-        )
+        let pictureHtmls = this.state.pictures.map((item, index) => {
+            // this.state.selectIndex == index && "picturemanage-picturebox-active"
+            let onClick = () => {
+                if (item.isDir && this.state.selectIndex == index) {
+                    this.entreDir();
+                    return;
+                }
+                this.setState({ selectIndex: index });
+                this.props.selectPath(this.state.curPath, this.state.pictures[index]);
+            };
+
+            let className = this.state.selectIndex == index && "picturemanage-picturebox-active";
+
+            let cover = item.isDir ?
+                <div style={{ fontSize: "104px" }} onClick={onClick}><FolderOpenOutlined /></div> :
+                <img src={item.webPath} alt="Preview" onClick={onClick} />;
+
+            return <Card
+                className={className}
+                key={index + 1}
+                hoverable
+                cover={cover}
+            >
+                <Card.Meta description={item.name} />
+            </Card>
+        }
         );
 
         // 在最前面添加
         pictureHtmls.unshift(
-            <div key={0} className={`photobox photobox_type1 picturemanage-picturebox-noactive`}>
-                <div className="photobox__previewbox"
-                    onClick={
-                        () => {
-                            this.gobackDir();
-                        }
-                    }
-                >
-                    <img src={Folder} className="photobox__preview" alt="Preview" />
-                    <span className="photobox__label">../</span>
-                </div>
-            </div>
+            <Card
+                key={0}
+                hoverable
+                cover={<div onClick={() => this.gobackDir()} style={{ fontSize: "104px" }}><FolderOpenOutlined /></div>}
+            >
+                <Card.Meta description={"../"} />
+            </Card>
         );
 
         return pictureHtmls;
@@ -104,16 +109,19 @@ export default class PictureBox extends React.Component {
 
     render() {
         // 如果需要重新载入
-        if(this.props.isReload){
+        if (this.props.isReload) {
             this.getFileAndDirs();
         }
 
-        return (<div className="picturemanage-picturebox hide-scroll">
-            <div>
-                <h5 className="clearfix bg-info text-white rounded shadow pl-3 pr-3 pt-1 pb-1">
+        return (<div className="picturemanage-picturebox bg-white">
+            <div className="w-100">
+                <Tag color="#55acee">
                     <span className="float-left">当前路径：</span>
-                    <small className="float-left">{this.state.curPath == "" ? " > " : this.state.curPath.replace(/\//g, " > ")}
-                    </small></h5>
+                    <span className="float-left">{this.state.curPath == "" ? " > " : this.state.curPath.replace(/\//g, " > ")}
+                    </span>
+                </Tag>
+            </div>
+            <div className="d-flex justify-content-between picturemanage-picturebox-piclist">
                 {this.createPictureHtmls()}
             </div>
         </div>);
@@ -126,5 +134,5 @@ PictureBox.propTypes = {
     // 是否重新载入
     isReload: PropTypes.bool.isRequired,
     // 重载完成回调函数
-    reloadDid: PropTypes.func.isRequire
+    reloadDid: PropTypes.func.isRequired
 }

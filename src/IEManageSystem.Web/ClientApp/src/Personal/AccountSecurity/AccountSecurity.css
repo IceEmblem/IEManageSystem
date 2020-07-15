@@ -1,19 +1,8 @@
-﻿.account-security > div:nth-child(2) {
-    padding: 1rem;
-    border-radius: .5rem;
-    background-color: #5b697780;
-}
-
+﻿
 .account-security > div:nth-child(3) {
     padding: 1rem;
     border-radius: .5rem;
     display: inline-block;
-}
-
-.account-security > div:nth-child(2) h5 {
-    background-color: #5a8e9a;
-    color: #fff;
-    padding: .5rem;
 }
 
 .account-security-lable {
@@ -24,13 +13,4 @@
         width: 100%;
         text-align: right;
         justify-content: center;
-    }
-
-    .account-security-transparent{
-        background-color: #ffffff00 !important;
-    }
-
-    .account-security-introduce{
-        background-color: #5b697780 !important;
-        color: #fff;
     }

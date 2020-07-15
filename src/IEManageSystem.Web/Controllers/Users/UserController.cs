@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IEManageSystem.Api.Controllers.Users.Dto;
-using IEManageSystem.Api.Models;
+using IEManageSystem.Web.Controllers.Users.Dto;
+using IEManageSystem.Web.Models;
 using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
 using IEManageSystem.Entitys.Authorization.LoginManagers;
@@ -13,8 +13,9 @@ using IEManageSystem.Services.Users;
 using IEManageSystem.Services.Users.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
-namespace IEManageSystem.Api.Controllers.Users
+namespace IEManageSystem.Web.Controllers.Users
 {
     [Route("api/[controller]/[action]")]
     public class UserController : IEManageSystemControllerBase
@@ -39,7 +40,7 @@ namespace IEManageSystem.Api.Controllers.Users
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<GetUserScopeAccessAuthoritiesOutput>> GetUserScopeAccessAuthorities([FromBody]GetUserScopeAccessAuthoritiesInput input)
+        public ActionResult<GetUserScopeAccessAuthoritiesOutput> GetUserScopeAccessAuthorities([FromBody]GetUserScopeAccessAuthoritiesInput input)
         {
             IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
 

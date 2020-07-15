@@ -12,6 +12,7 @@ namespace IEManageSystem.Configures.Core
         public void Configure(EntityTypeBuilder<Account> builder)
         {
             builder.OwnsOne(e => e.SafetyProblem);
+            builder.HasIndex(e => e.UserName).IsUnique();
         }
     }
 }

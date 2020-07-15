@@ -9,5 +9,6 @@ namespace IEManageSystem.CMS.Repositorys
 {
     public interface IPageRepository : IEfRepository<PageBase, int>
     {
+        PageBase GetPageOfAllIncludes(string name);
     }
 }

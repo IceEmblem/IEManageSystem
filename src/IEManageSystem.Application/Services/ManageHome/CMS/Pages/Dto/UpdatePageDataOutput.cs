@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
 {
-    public class UpdatePageDataOutput:OutputDtoBase
+    public class UpdatePageDataOutput
     {
     }
 }

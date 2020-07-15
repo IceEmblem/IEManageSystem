@@ -11,9 +11,6 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         {
         }
 
-        public PageBase TargetPage { get; set; }
-
-        [ForeignKey("TargetPage")]
-        public int? TargetPageId { get; set; }
+        public PageLeafSetting PageLeafSetting { get; set; }
     }
 }

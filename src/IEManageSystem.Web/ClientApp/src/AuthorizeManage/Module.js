@@ -4,6 +4,15 @@ import MenuProvider from 'Core/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 import AuthorizeManage from "./AuthorizeManage.jsx";
 import CoreModel from 'Core/Module';
+import {
+    SafetyCertificateOutlined,
+    TeamOutlined,
+    UserOutlined,
+    UserSwitchOutlined,
+    AlertOutlined,
+    GlobalOutlined,
+    BarsOutlined
+} from '@ant-design/icons';
 
 export default class Module extends BaseModule {
     initialize() {
@@ -11,18 +20,19 @@ export default class Module extends BaseModule {
             {
                 id: "AuthorizeManage",
                 text: "站点授权管理",
-                icon: "oi-shield",
+                icon: SafetyCertificateOutlined,
                 menuItems:
                     [
                         {
                             id: "Admin",
                             text: "管理员",
-                            icon: "oi-people",
+                            icon: TeamOutlined,
                             menuItems: [
                                 {
                                     id: "AdminManage",
                                     text: "管理员管理",
                                     url: "/ManageHome/AuthorizeManage/AdminManage",
+                                    icon: UserOutlined,
                                     accessScope:
                                         [
                                             AccessScope.AdminManage(ApiScopeNodeType.manage)
@@ -52,6 +62,7 @@ export default class Module extends BaseModule {
                         {
                             id: "Role",
                             text: "角色",
+                            icon: UserSwitchOutlined,
                             menuItems: [
                                 {
                                     id: "RoleManage",
@@ -78,7 +89,7 @@ export default class Module extends BaseModule {
                             id: "Permission",
                             text: "权限管理",
                             url: "/ManageHome/AuthorizeManage/Permission",
-                            icon: "oi-cog",
+                            icon: AlertOutlined,
                             accessScope:
                                 [
                                     AccessScope.PermissionManage(ApiScopeNodeType.manage)
@@ -87,13 +98,12 @@ export default class Module extends BaseModule {
                         {
                             id: "ApiScopeManage",
                             text: "功能域管理",
-                            icon: "oi-globe",
+                            icon: GlobalOutlined,
                             menuItems: [
                                 {
                                     id: "ApiScopePermission",
                                     text: "功能域权限",
                                     url: "/ManageHome/AuthorizeManage/ApiScopePermission",
-                                    icon: "oi-cog",
                                     accessScope:
                                         [
                                             AccessScope.ApiScopeManage(ApiScopeNodeType.manage),
@@ -104,7 +114,7 @@ export default class Module extends BaseModule {
                                     id: "MenuPermission",
                                     text: "菜单权限",
                                     url: "/ManageHome/AuthorizeManage/MenuPermission",
-                                    icon: "oi-menu",
+                                    icon: BarsOutlined,
                                     accessScope:
                                         [
                                             AccessScope.ApiScopeManage(ApiScopeNodeType.query)
