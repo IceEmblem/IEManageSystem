@@ -12,7 +12,7 @@ export default abstract class DataCollectionBase {
             this.singleDatas.push(new SingleDataModel(element));
         });
 
-        this.singleDatas.sort(e=>e.sortIndex);
+        this.singleDatas.sort((a, b)=>(a.sortIndex - b.sortIndex));
     }
 
     // 获取默认数据，不存在则创建

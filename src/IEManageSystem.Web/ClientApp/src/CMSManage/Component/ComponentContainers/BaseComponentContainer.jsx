@@ -92,6 +92,7 @@ class BaseComponentContainer extends React.Component {
 
     createComponent() {
         return this.componentObject.Component({
+            pageComponent: this.props.pageComponent,
             componentData: this.getContentComponentData(),
             pageComponentSettings: this.getPageComponentSettings() || [],
             pageLeafSetting: this.props.pageComponent.pageLeafSetting,
