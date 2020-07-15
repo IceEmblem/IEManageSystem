@@ -7,6 +7,8 @@ import ComponentSettingConfig from '../../BaseComponents/BaseComponent/Component
 import SettingConfig from './SettingConfig'
 import DataConfig from './DataConfig'
 
+import PreviewImg from './Preview.png'
+
 class ComponentObject extends BaseComponentObject {
     ComponentSettingConfigs = [
         ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "图表设置",
@@ -26,11 +28,11 @@ class ComponentObject extends BaseComponentObject {
         return <IELine {...props} />
     }
     Preview() {
-        return <p>IE-折线图</p>;
+        return <img width="100%" height="100%" src={PreviewImg} alt="IE-折线|柱状|条形"/>;
     }
 }
 
-let componentDescribe = new ComponentDescribe("IELine", new ComponentObject(), componentType.graph, "IE折线图");
+let componentDescribe = new ComponentDescribe("IELine", new ComponentObject(), componentType.graph, "IE-折线|柱状|条形");
 componentDescribe.defauleStyle = {
     height: "400px"
 }

@@ -60,14 +60,14 @@ class PageEditCompontContainer extends BaseComponentContainer {
             <div key={"EditFrameBtn"} className="editableparentcom-btns"
                 style={editFrameBtnStyle}
             >
-                <Tooltip title={`删除 ${this.componentDescribe.displayName}`} overlayStyle={{ zIndex: 10000 }}>
+                <Tooltip title={`删除 ${this.componentDescribe.displayName}，组件标识：${this.props.pageComponent.sign}`} overlayStyle={{ zIndex: 10000 }}>
                     <Button type="primary" shape="round" danger icon={<DeleteOutlined />}
                         onClick={
                             () => { this.props.removeComponent(this.props.pageComponent) }
                         }
                     />
                 </Tooltip>
-                <Tooltip title={`编辑 ${this.componentDescribe.displayName}`} overlayStyle={{ zIndex: 10000 }}>
+                <Tooltip title={`编辑 ${this.componentDescribe.displayName}，组件标识：${this.props.pageComponent.sign}`} overlayStyle={{ zIndex: 10000 }}>
                     <Button type="primary" shape="round" icon={<EditOutlined />}
                         onClick={
                             () => { this.setState({ openEdit: true }) }
@@ -76,7 +76,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
                 </Tooltip>
                 {
                     (this.componentObject instanceof ContainerComponentObject) &&
-                    <Tooltip title="添加" overlayStyle={{ zIndex: 10000 }}>
+                    <Tooltip title={`添加，组件标识：${this.props.pageComponent.sign}`} overlayStyle={{ zIndex: 10000 }}>
                         <Button type="default" shape="round" icon={<AppstoreAddOutlined />}
                             onClick={
                                 () => { this.props.addChildComponent(this.props.pageComponent) }
@@ -86,7 +86,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
                 }
                 {
                     ((this.componentObject instanceof BaseContentLeafComponentObject)) &&
-                    <Tooltip title="编辑默认数据">
+                    <Tooltip title={`编辑默认数据，组件标识：${this.props.pageComponent.sign}`} overlayStyle={{ zIndex: 10000 }}>
                         <Button type="primary" shape="round" icon={<FormOutlined />}
                             onClick={
                                 () => { this.setState({ showPostEdit: true }) }

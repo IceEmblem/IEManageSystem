@@ -10,12 +10,96 @@ import { Input, Tag, Button, Select, InputNumber, Typography } from 'antd';
 const { Title } = Typography;
 const { Option } = Select;
 
+class ListItem extends React.Component {
+    // isReceiveProps = false;
+
+    // componentWillReceiveProps(nextProps){
+    //     this.isReceiveProps = true;
+    // }
+
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if(this.isReceiveProps){
+    //         this.isReceiveProps = false;
+    //         return false;
+    //     }
+        
+    //     return true;
+    // }
+
+    render() {
+        return <div key={this.props.singleData.sortIndex} className="d-flex mb-3">
+            <Input
+                placeholder="输入 x 轴的值"
+                className="ml-1 mr-1"
+                value={this.props.singleData.x}
+                onChange={(e) => {
+                    this.props.singleData.x = e.currentTarget.value;
+                    this.setState({});
+                }}
+                prefix={<Tag color="#55acee">输入 x 轴的值</Tag>}
+            />
+            <InputNumber
+                style={{ minWidth: "250px" }}
+                placeholder="输入 y 轴的值"
+                className="ml-1 mr-1"
+                value={this.props.singleData.y}
+                onChange={(value) => {
+                    this.props.singleData.y = value;
+                    this.setState({});
+                }}
+                prefix={<Tag color="#55acee">输入 y 轴的值</Tag>}
+            />
+            <Select style={{ width: 400 }}
+                value={this.props.singleData.line}
+                dropdownStyle={{ zIndex: 9999 }}
+                onChange={(value) => {
+                    this.props.singleData.line = value;
+                    this.setState({});
+                }}>
+                {
+                    this.props.lines.map(line => (
+                        <Option value={line}>{line}</Option>
+                    ))
+                }
+            </Select>
+            <Button icon={<DeleteOutlined />} className="ml-1 mr-1" type="primary" danger
+                onClick={() => {
+                    this.props.deleteSingleData()
+                }}
+            >删除</Button>
+        </div>
+    }
+}
+
+class GroupItem extends React.Component {
+    render() {
+        return (
+            <div className="mb-5 bg-light" key={this.props.line}>
+                <Title level={4}>{this.props.line}</Title>
+                {
+                    this.props.lineDatas.map((singleData) => (
+                        <ListItem
+                            singleData={singleData}
+                            lines={this.props.lines}
+                            deleteSingleData={() => { this.props.deleteSingleData(singleData) }}
+                        />
+                    ))
+                }
+            </div>
+        );
+    }
+}
+
 export default class DataConfig extends BaseConfig {
 
     state = {
         x: "",
         y: "",
         line: "",
+    }
+
+    constructor(props) {
+        super(props);
     }
 
     getPageComponentSetting() {
@@ -28,55 +112,17 @@ export default class DataConfig extends BaseConfig {
         let lines = setting.getLines();
         let datas = data.getDatas();
 
-        let items = lines.map((lineName, lineIndex) => {
+        let items = lines.map((lineName) => {
             let curLineDatas = datas.filter(e => e.line == lineName);
-            return <div className="mb-5 bg-light" key={lineName}>
-                <Title level={4}>{lineName}</Title>
-                {
-                    curLineDatas.map((singleData, index) => (
-                        <div key={index} className="d-flex mb-3">
-                            <Input
-                                placeholder="输入 x 轴的值"
-                                className="ml-1 mr-1"
-                                value={singleData.x}
-                                onChange={(e) => {
-                                    singleData.x = e.currentTarget.value;
-                                    this.props.setData(data.componentData);
-                                }}
-                                prefix={<Tag color="#55acee">输入 x 轴的值</Tag>}
-                            />
-                            <InputNumber
-                                style={{ minWidth: "250px" }}
-                                placeholder="输入 y 轴的值"
-                                className="ml-1 mr-1"
-                                value={singleData.y}
-                                onChange={(value) => {
-                                    singleData.y = value;
-                                    this.props.setData(data.componentData);
-                                }}
-                                prefix={<Tag color="#55acee">输入 y 轴的值</Tag>}
-                            />
-                            <Select style={{ width: 400 }}
-                                value={singleData.line}
-                                dropdownStyle={{ zIndex: 9999 }}
-                                onChange={(value) => {
-                                    singleData.line = value;
-                                    this.props.setData(data.componentData);
-                                }}>
-                                {lines.map(line => (
-                                    <Option value={line}>{line}</Option>
-                                ))}
-                            </Select>
-                            <Button icon={<DeleteOutlined />} className="ml-1 mr-1" type="primary" danger
-                                onClick={() => {
-                                    data.deleteSingleData(singleData.sortIndex);
-                                    this.setState({});
-                                }}
-                            >删除</Button>
-                        </div>
-                    ))
-                }
-            </div>
+            return <GroupItem
+                line={lineName}
+                lines={lines}
+                lineDatas={curLineDatas}
+                deleteSingleData={(singleData) => { 
+                    data.deleteSingleData(singleData.sortIndex); 
+                    this.setState({});
+                }}
+            />
         })
 
         return (<div>
@@ -100,7 +146,7 @@ export default class DataConfig extends BaseConfig {
                     }}
                     prefix={<Tag color="#55acee">输入 y 轴的值</Tag>}
                 />
-                <Select 
+                <Select
                     className="ml-1 mr-1"
                     style={{ width: 400 }}
                     value={this.state.line}
