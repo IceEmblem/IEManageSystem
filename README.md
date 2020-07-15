@@ -9,26 +9,26 @@ IEManageSystem
 
 ##### 源码与功能
 > 分支 dev1.0_c 为个人开发分支，最新代码会先提交到该分支<br>
-> 以集成个人中心，授权管理，CMS管理<br>
+> 以集成个人中心，授权管理，CMS管理 等功能<br>
 > 前端源码目录：\src\IEManageSystem.Web\ClientApp<br>
 <br>
 
 #### 项目演示地址
-> 站点是国外的服务器，有点慢<br>
-> http://iemanagesystem.azurewebsites.net/Account/<br>
+> 没钱买服务器，有点慢<br>
+> http://www.iceemblem.cn/<br>
 > 账号：admini<br>
 > 密码：123456<br>
 <br>
 
 #### 项目截图如下：
-![image](img/show1.png)<br>
-![image](img/show2.png)<br>
+![image](img/show1.jpg)<br>
+![image](img/show2.jpg)<br>
 <br>
 
 #### 技术使用：
-> 冰纹后台管理系统 领域驱动设计实践，前后端分离，认证使用JwtBearer认证，前端可以以多种方式访问后端，项目前端使用浏览器<br>
+> 冰纹后台管理系统 领域驱动设计实践，前后端分离，JwtBearer认证<br>
 前端：<br>
-> ReactJs，react-router 4.0， redux， TypeScript，Css3，BootStrap4，ES6语法， jq，Webpack打包<br>
+> ReactJs，redux，TypeScript，Css3，BootStrap4，ES6语法，ant<br>
 后端：<br>
 > asp.net core，abp框架，ORM框架Ef<br>
 <br>
@@ -36,38 +36,12 @@ IEManageSystem
 #### 数据库：
 > 程序包管理器控制台运行如下命令：<br>
 >> 默认项目选择：IEManageSystem.EntityFramewordCore<br>
+>> 执行：Add-Migration Init<br>
 >> 执行：Update-Database<br>
 <br>
 
-#### 前端模块开发
-简单的模块代码：<br>
-```javascript
-import React from 'react'
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
-import CoreModule from 'Core/Module';
-
-import PageProvider from 'Core/Page/PageProvider'
-import Page from 'Core/Page/Page'
-
-// 导出模块
-export default class Module extends BaseModule
-{
-    initialize(){
-        // 注册一个 url
-        PageProvider.register(new Page("MyModule", "/MyModule", (props) => <p>Hello World</p>));
-    }
-}
-
-// 指定该模块依赖于 CoreModule
-new ModuleFactory().register(Module, [
-    CoreModule
-]);
-```
-<br>
-
-#### 前端组件开发
-简单的组件代码：<br>
+#### 前端的组件开发
+一个简单的组件代码：<br>
 ```javascript
 import React from 'react'
 import BaseComponentObject from '../BaseStaticComponent';
@@ -93,4 +67,11 @@ let componentDescribe = new ComponentDescribe(
 // 导出组件描述
 export default componentDescribe;
 ```
+<br>
+<br>
+
+#### 加入项目：
+> 项目目前由我一人开发，好累呀 >_<||
+>> 如果想加入的话，都可以联系我邮箱：<br>
+>> 1373611035@qq.com<br>
 <br>
