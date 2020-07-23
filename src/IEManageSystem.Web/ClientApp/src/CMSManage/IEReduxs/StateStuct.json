@@ -1,0 +1,46 @@
+{
+    // 这是一个 reducer
+    "pages": {
+        "id": {}
+    },
+    "pageNameToIds": {
+        "pageName": 1
+    },
+    // 这是一个 reducer
+    "pageComponents": {
+        "pageId": {
+            // 问题，如何更新某个 sign 下的 pageComponentBaseSetting 属性
+            // 问题，我要更新 pageComponentBaseSetting，上级 reducer 如何知道这个动作并传进来
+            "sign": {
+                "pageComponentSigns": [
+                    "signs"
+                ],
+                "pageComponentBaseSetting": {},
+                "pageLeafSetting": {},
+                "pageComponentSettings": [
+                    {}
+                ]
+            }
+        }
+    },
+    // 这是一个 reducer
+    "defaultComponentDatas": {
+        "pageId": {
+            "sign": {}
+        }
+    },
+    // 这是一个 reducer
+    "pageDatas": {
+        "id": {}
+    },
+    "pageDataNameToIds": {
+        "pageDataId": 1
+    },
+    // 这是一个 reducer
+    "contentComponentDatas": {
+        "pageDataId": {
+            "sign": {}
+        }
+    },
+    "activePageComponentSign"
+}

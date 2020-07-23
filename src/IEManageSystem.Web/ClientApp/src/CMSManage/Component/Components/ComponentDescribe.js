@@ -1,3 +1,10 @@
+import ContainerComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContainerComponent'
+import PageLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BasePageLeafComponent'
+import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseLeafComponent'
+import BaseMenuComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseMenuComponent'
+import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
+import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
+
 export const componentType = {
     container: "container",
     nav: "nav",
@@ -25,5 +32,53 @@ export default class ComponentDescribe {
         this.displayName = displayName || name;
         this.logicCode = undefined;
         this.defauleStyle = {};
+    }
+
+    createPageComponent(parentSign){
+        var timetamp = new Date().getTime();
+
+        let pageComponent;
+        if (this.componentObject instanceof ContainerComponentObject) 
+        {
+            pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.name)
+        }
+        else if(this.componentObject instanceof PageLeafComponentObject)
+        {
+            pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.name)
+        }
+        else if((this.componentObject instanceof BaseLeafComponentObject))
+        {
+            pageComponent = CreatePageComponentService.createLeafComponent(timetamp, this.name)
+        }
+        else if((this.componentObject instanceof BaseMenuComponentObject))
+        {
+            pageComponent = CreatePageComponentService.createMenuComponent(timetamp, this.name)
+        }
+        else
+        {
+            throw new Error("无法识别的组件类型");
+        }
+
+        pageComponent.parentSign = parentSign;
+
+        this.componentObject.ComponentSettingConfigs.forEach(element => {
+            pageComponent.pageComponentSettings.push(
+                {id: 0, name: element.name, displayName:element.displayName, singleDatas: []}
+            );
+        });
+
+        return pageComponent;
+    }
+
+    isExistDefaultComponentData(){
+        if(this.componentObject instanceof BaseContentLeafComponent){
+            return true;
+        }
+
+        return false;
+    }
+
+    isExistChildComponent(){
+        return (this.componentObject instanceof ContainerComponentObject);
     }
 }

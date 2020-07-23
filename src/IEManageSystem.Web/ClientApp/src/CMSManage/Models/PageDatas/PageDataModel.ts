@@ -9,36 +9,20 @@ export default class PageDataModel{
     public content : string | null;
     public tags : Array<TagModel>;
     public images : string | null;
-    public imageList : Array<string> = [];
     public creationTime : Date;
     public score: number;
     public scoreNum: number;
     public click: number;
 
-    constructor(data:any)
-    {
-        this.id = data.id;
-        this.name = data.name;
-        this.title = data.title;
-        this.describe = data.describe;
-        this.content = data.content;
-        this.creationTime = data.creationTime;
-        this.score = data.score;
-        this.scoreNum = data.scoreNum;
-        this.click = data.click;
+    public static CreatePageDataModel() : PageDataModel{
+        let page = new PageDataModel();
+        page.id = 0;
+        page.name = "DefaultPost";
+        page.tags = [];
+        return page;
+    }
 
-        this.tags = [];
-        if(data.tags) {
-            data.tags.forEach(element => {
-                this.tags.push(new TagModel(element));
-            });
-        }
-
-        this.images = data.images;
-        if(this.images){
-            this.imageList = this.images.split('|');
-        }
-        
-        this.pageId = data.pageId;
+    public get imageList(){
+        return this.images.split('|');
     }
 }

@@ -21,7 +21,7 @@ export default abstract class BaseIERedux
     abstract getStateType():string;
 
     // 在state中获取当前state
-    private getCurrentState(state:any): any
+    getCurrentState(state:any): any
     {
         if(this.parentIERedux == null){
             return state;

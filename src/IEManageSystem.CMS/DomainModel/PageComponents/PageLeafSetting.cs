@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IEManageSystem.CMS.DomainModel.Pages
+namespace IEManageSystem.CMS.DomainModel.PageComponents
 {
     public class PageLeafSetting : ValueObject
     {

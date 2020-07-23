@@ -1,38 +1,25 @@
-import { createIEThunkAction } from 'Core/IEReduxs/Actions'
-import PageModel from '../Models/Pages/PageModel'
-import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
-import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
+import { createIEThunkAction } from '../../Core/IEReduxs/Actions'
+import { ComponentDataUpdateAction } from './ContentComponentDatas/Action';
+import { DefaultComponentDataUpdateAction } from './DefaultComponentDatas/Action';
+import {
+  AddComponentAction, 
+  RemoveComponentAction,
+  EditComponentAction,
+  RootComponentSign
+} from './PageComponents/Action';
 
-// 页面添加组件
-export const PageAddComponent = 'PageAddComponent'
-export function pageAddComponent(pageComponent:PageComponentModel, isAddDefaultComponentData) {
-  return {
-    type: PageAddComponent,
-    pageComponent,
-    isAddDefaultComponentData
-  }
+export {
+  ComponentDataUpdateAction,
+  DefaultComponentDataUpdateAction,
+  AddComponentAction, 
+  RemoveComponentAction,
+  EditComponentAction,
+  RootComponentSign
 }
 
-// 页面移除组件
-export const PageRemoveComponent = 'PageRemoveComponent'
-export function pageRemoveComponent(pageComponent:PageComponentModel) {
-  return {
-    type: PageRemoveComponent,
-    pageComponent
-  }
-}
-
-// 页面编辑组件
-export const PageEditComponent = "PageEditComponent"
-export function pageEditComponent(pageComponent:PageComponentModel) {
-  return {
-    type: PageEditComponent,
-    pageComponent
-  }
-}
-
+// 设置当前活跃的组件
 export const SetActiveComponent = "SetActiveComponent";
-export function setActiveComponent(activePageComponentSign: string){
+export function setActiveComponent(activePageComponentSign: string) {
   return {
     type: SetActiveComponent,
     activePageComponentSign
@@ -41,7 +28,7 @@ export function setActiveComponent(activePageComponentSign: string){
 
 // 页面组件请求
 export const PageReceive = "PageReceive"
-export function pageFetch(name:string){
+export function pageFetch(name: string) {
   let postData = {
     name: name
   };
@@ -54,23 +41,24 @@ export function pageFetch(name:string){
 }
 
 // 该动作模拟页面接收动作
-export function setPage(page:any, defaultComponentDatas:Array<any>){
+export function setPage(page: any, pageComponents: Array<any>, defaultComponentDatas: Array<any>) {
   return {
     type: PageReceive,
     data: {
       page,
+      pageComponents,
       defaultComponentDatas
     }
   }
 }
 
-// 页面组件更新
+// 页面组件更新请求
 export const PageComponentUpdateReceive = "PageComponentUpdateReceive"
-export function pageComponentUpdateFetch(name:string, components:Array<PageComponentModel>, defaultComponentDatas:Array<ComponentDataModel>) {
+export function pageComponentUpdateFetch(name: string, components: object, defaultComponentDatas: object) {
   let postData = {
     name: name,
-    pageComponents: components.map(item=>item.toJsonObject()),
-    defaultComponentDatas: defaultComponentDatas
+    pageComponents: Object.values(components),
+    defaultComponentDatas: Object.values(defaultComponentDatas)
   };
 
   return createIEThunkAction(
@@ -82,7 +70,7 @@ export function pageComponentUpdateFetch(name:string, components:Array<PageCompo
 
 // 文章数据请求
 export const PageDataReceive = "PageDataReceive"
-export function pageDataFetch(pageName:string, pageDataName:string){
+export function pageDataFetch(pageName: string, pageDataName: string) {
   let postData = {
     pageName: pageName,
     pageDataName: pageDataName
@@ -95,22 +83,13 @@ export function pageDataFetch(pageName:string, pageDataName:string){
   );
 }
 
-// 清理文章数据（如果页面是静态页，则文章没有数据，这时候应该清理文章）
-export const PageDataClear = "PageDataClear";
-export function pageDataClear(){
-  return {
-    type: PageDataClear
-  }
-}
-
-// 文章数据更新请求
+// 文章组件数据更新请求
 export const ComponentDataUpdateReceive = "ComponentDataUpdateReceive"
-export function componentDataUpdateFetch(pageName:string, pageDataName:string, componentDatas:PageComponentModel)
-{
+export function componentDataUpdateFetch(pageName: string, pageDataName: string, componentDatas: object) {
   let postData = {
     pageName: pageName,
     pageDataName: pageDataName,
-    componentDatas: componentDatas
+    componentDatas: Object.values(componentDatas)
   };
 
   return createIEThunkAction(
@@ -118,24 +97,4 @@ export function componentDataUpdateFetch(pageName:string, pageDataName:string, c
     postData,
     ComponentDataUpdateReceive
   );
-}
-
-// 文章组件数据更新
-export const ComponentDataUpdate = "ComponentDataUpdate"
-export function componentDataUpdate(resource: ComponentDataModel)
-{
-  return {
-    type: ComponentDataUpdate,
-    resource
-  }
-}
-
-// 默认组件数据更新
-export const DefaultComponentDataUpdate = "DefaultComponentDataUpdate"
-export function defaultComponentDataUpdate(resource: ComponentDataModel)
-{
-  return {
-    type: DefaultComponentDataUpdate,
-    resource
-  }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.UI;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
@@ -18,21 +19,24 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 {
     public class ExecLogicService : IExecLogicService
     {
-        private IActuatorFactory _actuatorFactory { get; set; }
+        private IActuatorFactory _actuatorFactory { get; }
 
-        private PageManager _pageManager { get; set; }
+        private PageManager _pageManager { get; }
 
-        private PageDataManager _pageDataManager { get; set; }
+        private PageDataManager _pageDataManager { get; }
 
-        private IEfRepository<ContentComponentData, int> _componentDataRepository { get; set; }
+        private ComponentDataManager _componentDataManager { get; }
 
-        private UserManager _userManager { get; set; }
+        private PageComponentManager _pageComponentManager { get; }
+
+        private UserManager _userManager { get; }
 
         public ExecLogicService(
             IActuatorFactory actuatorFactory,
             PageManager pageManager,
             PageDataManager pageDataManager,
-            IEfRepository<ContentComponentData, int> componentDataRepository,
+            PageComponentManager pageComponentManager,
+            ComponentDataManager componentDataManager,
             UserManager userManager) 
         {
             _actuatorFactory = actuatorFactory;
@@ -41,7 +45,9 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 
             _pageDataManager = pageDataManager;
 
-            _componentDataRepository = componentDataRepository;
+            _pageComponentManager = pageComponentManager;
+
+            _componentDataManager = componentDataManager;
 
             _userManager = userManager;
         }
@@ -62,7 +68,7 @@ namespace IEManageSystem.CMS.DomainModel.Logics
                 throw new UserFriendlyException($"指定的页面{pageName}不存在");
             }
 
-            var pageComponent = page.GetPageComponentForSign(pageComponentBaseSign);
+            var pageComponent = _pageComponentManager.GetPageComponentsForCache(page.Name).FirstOrDefault(e => e.Sign == pageComponentBaseSign);
 
             if (pageComponent == null)
             {
@@ -74,7 +80,7 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             ContentComponentData componentData = null;
             if (post != null) 
             {
-                componentData = _componentDataRepository.GetAllIncluding(e => e.SingleDatas).FirstOrDefault(e => e.PageDataId == post.Id && e.Sign == contentComponentDataSign);
+                componentData = _componentDataManager.ContentComponentDataRepository.GetAllIncluding(e => e.SingleDatas).FirstOrDefault(e => e.PageDataId == post.Id && e.Sign == contentComponentDataSign);
             }
 
             var actuator = _actuatorFactory.GetActuator(logic.Name);

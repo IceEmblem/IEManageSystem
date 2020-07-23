@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ComponentFactory from '../Components/ComponentFactory'
-import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
-import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
-import BaseContentLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
+import ComponentDataModel from '../../Models/ComponentDataModel'
+import PageDataModel from '../../Models/PageDatas/PageDataModel'
 
 import './BaseComponentContainer.css'
+
+const pageDataModel = PageDataModel.CreatePageDataModel();
 
 class BaseComponentContainer extends React.Component {
     constructor(props) {
@@ -71,7 +72,7 @@ class BaseComponentContainer extends React.Component {
 
     getContentComponentData(){
         // 如果组件不是内容组件
-        if (!(this.componentObject instanceof BaseContentLeafComponentObject)) {
+        if (!this.componentDescribe.isExistDefaultComponentData()) {
             return undefined;
         }
 
@@ -80,10 +81,13 @@ class BaseComponentContainer extends React.Component {
         }
         
         if(this.props.defaultComponentData){
-            return new ComponentDataModel(this.props.defaultComponentData);
+            return this.props.defaultComponentData;
         }
 
-        return new ComponentDataModel({id: 0, sign: this.props.pageComponent.sign, singleDatas: []});
+        let componentDataModel = {id: 0, sign: this.props.pageComponent.sign, singleDatas: []};
+        componentDataModel.__proto__ =  ComponentDataModel.prototype;
+        
+        return componentDataModel;
     }
 
     createChildComponent() {
@@ -100,7 +104,7 @@ class BaseComponentContainer extends React.Component {
             execLogic: this.execLogic,
             pageFreshen: this.pageFreshen,
             page: this.props.page,
-            pageData: this.props.pageData,
+            pageData: this.props.pageData || pageDataModel,
         }, this.createChildComponent())
     }
 
@@ -114,7 +118,7 @@ class BaseComponentContainer extends React.Component {
         this.componentObject.ComponentSettingConfigs.forEach(element => {
             if(!this.props.pageComponent.pageComponentSettings.some(e=>e.name == element.name)){
                 this.props.pageComponent.pageComponentSettings.push(
-                    PageComponentSettingModel.createDefaultSettingData(element.name, element.displayName)
+                    {id: 0, name: element.name, displayName: element.displayName, singleDatas: []}
                 );
             }
         });
@@ -155,7 +159,7 @@ class BaseComponentContainer extends React.Component {
 
 BaseComponentContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
-    defaultComponentData: PropTypes.object.isRequired,
+    defaultComponentData: PropTypes.object,
     contentComponentData: PropTypes.object,
     page: PropTypes.object.isRequired,
     pageData: PropTypes.object.isRequired,

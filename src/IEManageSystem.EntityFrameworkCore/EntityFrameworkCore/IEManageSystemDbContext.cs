@@ -4,6 +4,7 @@ using IEManageSystem.CMS.DomainModel;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.Menus;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Common.DomainModel;
@@ -76,6 +77,8 @@ namespace IEManageSystem.EntityFrameworkCore
         public DbSet<StaticPage> StaticPages { get; set; }
 
         public DbSet<ContentPage> ContentPages { get; set; }
+
+        public DbSet<PageComponentBase> PageComponents { get; set; }
 
         public DbSet<MenuBase> Menus { get; set; }
 

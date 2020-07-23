@@ -1,10 +1,7 @@
-import PageComponentModel from "./PageComponentModel";
-import PageLeafSettingModel from "./PageLeafSettingModel";
-
 class CreatePageComponentService{
-    private createComponent(sign:string, name:string, componentType:string):PageComponentModel
+    private createComponent(sign:string, name:string, componentType:string)
     {
-        let pageComponent:PageComponentModel = new PageComponentModel({
+        return {
             id: 0,
             sign: sign,
             name: name,
@@ -29,9 +26,7 @@ class CreatePageComponentService{
             menuName: null,
             componentType: componentType,
             pageComponentSettings: []
-        });
-
-        return pageComponent;
+        };
     }
 
     createCompositeComponent(sign:string, name:string)

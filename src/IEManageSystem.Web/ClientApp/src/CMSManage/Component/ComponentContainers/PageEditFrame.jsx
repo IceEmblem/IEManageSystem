@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PageComponentModel from 'CMSManage/Models/Pages/PageComponentModel'
 
 import Tab from 'Tab/Tab.jsx'
 
 import { Modal, notification } from 'antd';
+import IETool from 'ToolLibrary/IETool'
 
 class EditFrame extends React.Component {
     // props.close()
@@ -20,16 +20,15 @@ class EditFrame extends React.Component {
         this.state = {
             // 当前选择的选项卡的索引
             selectTab: this.tabs.length > 0 ? this.tabs[0] : null,
+            pageComponent: IETool.deepCopy(this.props.pageComponent)
         }
 
         this.cancel = this.cancel.bind(this);
         this.submit = this.submit.bind(this);
-
-        this.props.pageComponent.snapshot();
     }
 
     componentWillReceiveProps(nextProps) {
-        nextProps.pageComponent.snapshot();
+        this.setState({pageComponent: IETool.deepCopy(nextProps.pageComponent)});
     }
 
     // 生成选项卡列表
@@ -50,7 +49,6 @@ class EditFrame extends React.Component {
 
     cancel() {
         this.props.close();
-        this.props.pageComponent.resumeForsnapshot()
         this.setState({
             selectTab: this.tabs.length > 0 ? this.tabs[0] : null
         });
@@ -58,15 +56,13 @@ class EditFrame extends React.Component {
 
     submit() {
         try {
-            this.props.editComponent(this.props.pageComponent);
-            this.props.pageComponent.clearSnapshot();
+            this.props.editComponent(this.state.pageComponent);
         }
         catch (e) {
             notification.error({
                 message: '提交失败',
                 description: e.message,
             });
-            this.props.pageComponent.resumeForsnapshot()
         }
 
         this.props.close();
@@ -82,7 +78,7 @@ class EditFrame extends React.Component {
         let componentSettingConfig = this.props.componentObject.getComponentSettingConfigs().find(item => item.name == this.state.selectTab.name);
 
         // 组件设置配置使用的组件
-        return componentSettingConfig.bulidConfigComponent(this.props.pageComponent,
+        return componentSettingConfig.bulidConfigComponent(this.state.pageComponent,
             (pageComponent) => {
                 this.setState({ pageComponent: pageComponent });
             });

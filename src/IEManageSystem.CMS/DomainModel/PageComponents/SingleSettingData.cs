@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace IEManageSystem.CMS.DomainModel.Pages
+namespace IEManageSystem.CMS.DomainModel.PageComponents
 {
     public class SingleSettingData : Entity, ISingleData
     {

@@ -5,7 +5,7 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
 import './index.css'
 
-import { pageFetch, pageDataFetch, componentDataUpdateFetch } from 'CMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch, componentDataUpdateFetch, RootComponentSign, } from 'CMSManage/IEReduxs/Actions'
 import PostEditComponentContainer from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer'
 
 import { Button } from 'antd';
@@ -17,20 +17,17 @@ class ComponentData extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            isLoad: false
-        };
-
-        Promise.all([
-            this.props.pageFetch(this.props.pageName),
+        if (!this.props.page) {
+            this.props.pageFetch(this.props.pageName);
             this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
-        ]).then(() => {
-            this.setState({ isLoad: true });
-        });
+        }
+        else if (!this.props.pageData) {
+            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
+        }
     }
 
     render() {
-        if (this.state.isLoad == false) {
+        if (!this.props.rootPageComponent) {
             return (<div className="postedit-page-container"></div>);
         }
 
@@ -55,10 +52,12 @@ class ComponentData extends React.Component {
                 <div>
                     <Page>
                         {
-                            this.props.page.pageComponents.filter(item => !item.parentSign).map(item =>
+                            this.props.rootPageComponent.pageComponentSigns.map(sign =>
                                 <PostEditComponentContainer
-                                    key={item.sign}
-                                    pageComponent={item}
+                                    key={sign}
+                                    sign={sign}
+                                    pageId={this.props.pageId}
+                                    pageDataId={this.props.pageDataId}
                                 >
                                 </PostEditComponentContainer>)
                         }
@@ -70,22 +69,46 @@ class ComponentData extends React.Component {
 }
 
 ComponentData.propTypes = {
+    pageId: PropTypes.number.isRequired,
+    pageDataId: PropTypes.number.isRequired,
+    pageName: PropTypes.string.isRequired,
+    pageDataName: PropTypes.string.isRequired,
     page: PropTypes.object,
     pageData: PropTypes.object,
-    pageName: PropTypes.string.isRequired,
-    pageDataName: PropTypes.string,
     pageFetch: PropTypes.func.isRequired,
     pageDataFetch: PropTypes.func.isRequired,
     componentDataUpdateFetch: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    let pageName = ownProps.match.params.pageName;
+
+    // pageName 即可能是 id, 也肯是 name
+    let pageId = parseInt(pageName);
+    if (isNaN(pageId)) {
+        // 如果为 NaN，那么 pageName 保存的应该是页面的 name
+        pageId = state.pageNameToIds[pageName];
+    }
+
+    // 获取根组件
+    let rootPageComponent = undefined;
+    if (state.pageComponents[pageId]) {
+        rootPageComponent = state.pageComponents[pageId][RootComponentSign];
+    }
+
+    let postName = ownProps.match.params.pageDataName;
+    // 获取文章
+    let postId = state.pageDataNameToIds[postName];
+
     return {
-        page: state.page,
-        pageData: state.pageData,
-        contentComponentDatas: state.contentComponentDatas,
-        pageName: ownProps.match.params.pageName,
-        pageDataName: ownProps.match.params.pageDataName
+        pageId: pageId,
+        pageDataId: postId,
+        pageName: pageName,
+        pageDataName: postName,
+        page: state.pages[pageId],
+        rootPageComponent: rootPageComponent,
+        pageData: state.pageDatas[postId],
+        contentComponentDatas: state.contentComponentDatas[postId],
     }
 }
 

@@ -1,19 +1,10 @@
 import SingleDataModel from "./SingleDataModel";
 
+const defaultDataName = "__default__";
 
 export default abstract class DataCollectionBase {
-    public static defaultDataName : string = "__default__";
     public singleDatas: Array<SingleDataModel>;
     private _defaultData: SingleDataModel;
-
-    constructor(data:Array<any>){
-        this.singleDatas = [];
-        data.forEach((element:any) => {
-            this.singleDatas.push(new SingleDataModel(element));
-        });
-
-        this.singleDatas.sort((a, b)=>(a.sortIndex - b.sortIndex));
-    }
 
     // 获取默认数据，不存在则创建
     getDefauleData(): SingleDataModel {
@@ -21,12 +12,12 @@ export default abstract class DataCollectionBase {
             return this._defaultData;
         }
 
-        let defaultData = this.singleDatas.find(e => e.name == DataCollectionBase.defaultDataName);
+        let defaultData = this.singleDatas.find(e => e.name == defaultDataName);
         if (!defaultData) {
             let sortIndex = this.singleDatas.length == 0 ? 0 : (this.singleDatas[this.singleDatas.length-1].sortIndex + 1);
             defaultData = new SingleDataModel({
                 id: 0,
-                name: DataCollectionBase.defaultDataName,
+                name: defaultDataName,
                 sortIndex: sortIndex
             });
             this.singleDatas.push(defaultData);

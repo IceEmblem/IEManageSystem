@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import {pageFetch, pageDataFetch} from 'CMSManage/IEReduxs/Actions'
-import {ieReduxFetch} from 'Core/IEReduxFetch'
+import { pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
+import { ieReduxFetch } from 'Core/IEReduxFetch'
 
 import BaseComponentContainer from '../BaseComponentContainer.jsx'
 
@@ -11,17 +11,19 @@ class FrontCompontContainer extends BaseComponentContainer {
         super(props);
     }
 
-    createChildComponent(){
-        return this.props.childPageComponents.map(item => (
+    createChildComponent() {
+        return this.props.pageComponent.pageComponentSigns.map(sign => (
             <Contain
-                key={item.sign}
-                pageComponent={item}
+                key={sign}
+                sign={sign}
+                pageId={this.props.pageId}
+                pageDataId={this.props.pageDataId}
             >
             </Contain>)
         );
     }
 
-    execLogic(requestData){
+    execLogic(requestData) {
 
         let postData = {
             logicName: this.props.pageComponent.name,
@@ -38,8 +40,13 @@ class FrontCompontContainer extends BaseComponentContainer {
 }
 
 FrontCompontContainer.propTypes = {
+    // 如下 3 个属性由父组件传入
+    sign: PropTypes.string.isRequired,
+    pageId: PropTypes.number.isRequired,
+    pageDataId: PropTypes.number.isRequired,
+
     pageComponent: PropTypes.object.isRequired,
-    childPageComponents: PropTypes.array.isRequired,
+    defaultComponentData: PropTypes.object,
     contentComponentData: PropTypes.object,
     page: PropTypes.object.isRequired,
     pageData: PropTypes.object.isRequired,
@@ -50,17 +57,20 @@ FrontCompontContainer.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    // 新增属性 parentSign
-    let childPageComponents = ownProps.pageComponent.pageComponents;
-    let contentComponentData = state.contentComponentDatas.find(e=>e.sign == ownProps.pageComponent.sign);
-    let defaultComponentData = state.defaultComponentDatas.find(item => item.sign == ownProps.pageComponent.sign);
+    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.sign];
+    let defaultComponentData = state.defaultComponentDatas[ownProps.pageId][ownProps.sign];
+    let contentComponentData = undefined;
+
+    if(ownProps.pageDataId){
+        contentComponentData = state.contentComponentDatas[ownProps.pageDataId][ownProps.sign]
+    }
 
     return {
+        pageComponent: pageComponent,
         defaultComponentData: defaultComponentData,
-        childPageComponents: childPageComponents,
         contentComponentData: contentComponentData,
-        page: state.page,
-        pageData: state.pageData
+        page: state.pages[ownProps.pageId],
+        pageData: state.pageDatas[ownProps.pageDataId],
     }
 }
 
@@ -68,7 +78,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         pageFreshen: (pageName, pageDataName) => {
             let promises = [dispatch(pageFetch(pageName))];
-            if(pageDataName && pageDataName != ""){
+            if (pageDataName && pageDataName != "") {
                 promises.push(dispatch(pageDataFetch(pageName, pageDataName)));
             }
             return Promise.all(promises);

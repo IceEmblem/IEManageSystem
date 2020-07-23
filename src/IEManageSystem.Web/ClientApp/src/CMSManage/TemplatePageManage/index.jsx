@@ -67,20 +67,18 @@ export default class TemplatePageManage extends React.Component {
 
         let postData = {
             name: pageName,
-            pageComponents: templatePage.page.pageComponents,
+            pageComponents: templatePage.pageComponents,
             defaultComponentDatas: templatePage.defaultComponentDatas
         }
 
         if (isAddPage == true) {
-            ieReduxFetch("/api/PageManage/AddPage", {
-                name: pageName,
-                displayName: pageName
-            }).then(() => {
-                ieReduxFetch("/api/PageManage/UpdatePageComponent", postData)
-                    .then(value => {
-                        this.getPagesList();
-                    });
-            })
+            ieReduxFetch("/api/PageManage/AddPage", { ...templatePage.page, ...{ id: 0 } })
+                .then(() => {
+                    ieReduxFetch("/api/PageManage/UpdatePageComponent", postData)
+                        .then(value => {
+                            this.getPagesList();
+                        });
+                })
         }
         else {
             ieReduxFetch("/api/PageManage/UpdatePageComponent", postData)

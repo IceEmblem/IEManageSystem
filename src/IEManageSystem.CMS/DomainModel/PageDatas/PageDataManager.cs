@@ -78,9 +78,9 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         /// <summary>
         /// 删除页面的所有文章
         /// </summary>
-        public void DeletePagePosts(string pageName) 
+        public void DeletePagePosts(PageBase page) 
         {
-            IEnumerable<int> postIds = PostRepository.GetAll().Where(e => e.Page.Name == pageName).Select(e => e.Id);
+            IEnumerable<int> postIds = PostRepository.GetAll().Where(e => e.PageId == page.Id).Select(e => e.Id);
 
             Expression<Func<ContentComponentData, object>>[] propertySelectors = {
                 e=>e.SingleDatas

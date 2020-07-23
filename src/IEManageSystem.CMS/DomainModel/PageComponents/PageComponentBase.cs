@@ -1,10 +1,11 @@
 ﻿using Abp.Domain.Entities;
+using IEManageSystem.CMS.DomainModel.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace IEManageSystem.CMS.DomainModel.Pages
+namespace IEManageSystem.CMS.DomainModel.PageComponents
 {
     public abstract class PageComponentBase:Entity
     {

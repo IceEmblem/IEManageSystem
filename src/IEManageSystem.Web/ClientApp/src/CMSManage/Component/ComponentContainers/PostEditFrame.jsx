@@ -5,6 +5,7 @@ import ContentComponentDataModel from 'CMSManage/Models/ComponentDataModel'
 import Tab from 'Tab/Tab.jsx'
 
 import { Modal, Button } from 'antd';
+import IETool from 'ToolLibrary/IETool'
 
 // props.submit
 // props.close    fun
@@ -18,22 +19,23 @@ class EditFrame extends React.Component {
 
         // 新建一个副本，供取消时使用
         this.state = {
-            contentComponentDataModel: new ContentComponentDataModel(this.props.componentData)
+            componentData: IETool.deepCopy(this.props.componentData)
         };
 
         this.submit = this.submit.bind(this);
         this.cancel = this.cancel.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({componentData: IETool.deepCopy(nextProps.componentData)});
+    }
+
     submit() {
-        this.props.submit(this.state.contentComponentDataModel);
+        this.props.submit(this.state.componentData);
         this.props.close();
     }
 
     cancel() {
-        this.setState({
-            contentComponentDataModel: new ContentComponentDataModel(this.props.componentData)
-        });
         this.props.close();
     }
 
@@ -58,8 +60,8 @@ class EditFrame extends React.Component {
                         selectOnclick={() => { }}
                     >
                         <this.props.componentObject.ComponentDataConfig
-                            data={this.state.contentComponentDataModel}
-                            setData={(value) => this.setState({ contentComponentDataModel: value })}
+                            data={this.state.componentData}
+                            setData={(value) => this.setState({ componentData: value })}
                             pageComponentSettings={this.props.pageComponent.pageComponentSettings}
                         />
                     </Tab>

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IEManageSystem.CMS.DomainModel.Pages
+namespace IEManageSystem.CMS.DomainModel.PageComponents
 {
     /// <summary>
     /// 页面组件基本设置

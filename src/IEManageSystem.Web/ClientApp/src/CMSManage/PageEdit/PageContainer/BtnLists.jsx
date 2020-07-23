@@ -179,6 +179,8 @@ class BtnLists extends React.Component {
 }
 
 BtnLists.propTypes = {
+    pageId: PropTypes.string.isRequired,
+
     addComponent: PropTypes.func.isRequired,
     submitPage: PropTypes.func.isRequired,
     exportPage: PropTypes.func.isRequired
@@ -186,7 +188,7 @@ BtnLists.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        page: state.page,
+        page: state.pages[ownProps.pageId],
     }
 }
 

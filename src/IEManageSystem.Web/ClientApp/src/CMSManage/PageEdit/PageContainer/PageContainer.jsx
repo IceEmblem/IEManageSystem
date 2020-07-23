@@ -2,16 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import CreateComponentService from 'CMSManage/Component/ComponentContainers/PageEditCompontContainer/CreateComponentService'
 
 import './PageContainer.css'
 
 import PageEditCompontContainer from 'CMSManage/Component/ComponentContainers/PageEditCompontContainer'
 
-import { pageAddComponent, pageComponentUpdateFetch, pageFetch, pageDataClear } from 'CMSManage/IEReduxs/Actions'
+import {
+    pageComponentUpdateFetch,
+    pageFetch,
+    AddComponentAction,
+    RootComponentSign,
+} from 'CMSManage/IEReduxs/Actions'
 
 import BtnLists from './BtnLists'
-import PromptBox from 'PromptBox'
 import ComponentListBox from "./ComponentListBox"
 import Page from 'CMSManage/Home/Page'
 
@@ -21,20 +24,19 @@ class PageContainer extends React.Component {
 
         this.state = {
             // 要将组件添加到那个父组件下，undefined 表示没有父组件
-            curParentComponent: undefined,
+            curParentComponentSign: undefined,
             showComponentListBox: false,
-            isload: false
         }
 
         this.exportPage = this.exportPage.bind(this);
         this.submitPage = this.submitPage.bind(this);
         this.addComponent = this.addComponent.bind(this);
+    }
 
-        this.props.pageDataClear();
-        this.props.pageFetch(props.pageName)
-            .then(value => {
-                this.setState({ isload: true });
-            });
+    componentDidMount(){
+        if (!this.props.page) {
+            this.props.pageFetch(this.props.pageName)
+        }
     }
 
     exportPage() {
@@ -43,7 +45,8 @@ class PageContainer extends React.Component {
         }
 
         let data = JSON.stringify({
-            page:this.props.page.toJsonObject(),
+            page: this.props.page,
+            pageComponents: this.props.pageComponents,
             defaultComponentDatas: this.props.defaultComponentDatas
         })
 
@@ -60,7 +63,7 @@ class PageContainer extends React.Component {
     submitPage() {
         this.props.pageComponentUpdateFetch(
             this.props.pageName,
-            this.props.page.getAllChilds(),
+            this.props.pageComponents,
             this.props.defaultComponentDatas
         );
     }
@@ -70,17 +73,18 @@ class PageContainer extends React.Component {
             return;
         }
 
-        let pageComponent = CreateComponentService.createComponent(
-            selectedComponentDescribe,
-            this.state.curParentComponent ? this.state.curParentComponent.sign : null);
-        let isAddDefaultComponentData = CreateComponentService.isExistDefaultComponentData(selectedComponentDescribe);
+        let pageComponent = selectedComponentDescribe.createPageComponent(this.state.curParentComponentSign);
+        let isAddDefaultComponentData = selectedComponentDescribe.isExistDefaultComponentData();
 
-        this.props.addComponent(pageComponent, isAddDefaultComponentData);
-        this.setState({});
+        this.props.addComponent(new AddComponentAction(
+            this.props.page.id,
+            pageComponent,
+            isAddDefaultComponentData
+        ));
     }
 
     render() {
-        if (!this.state.isload) {
+        if (!this.props.rootPageComponent) {
             return <div className="pageedit-page-container"></div>
         }
 
@@ -89,21 +93,24 @@ class PageContainer extends React.Component {
                 <div>
                     <Page>
                         {
-                            this.props.childPageComponents.map(item =>
+                            this.props.rootPageComponent.pageComponentSigns.map(sign => (
                                 <PageEditCompontContainer
-                                    key={item.sign}
-                                    pageComponent={item}
-                                    addChildComponent={(curParentPageComponent) => {
-                                        this.setState({ curParentComponent: curParentPageComponent, showComponentListBox: true });
+                                    key={sign}
+                                    pageId={this.props.pageId}
+                                    sign={sign}
+                                    addChildComponent={(curParentComponentSign) => {
+                                        this.setState({ curParentComponentSign: curParentComponentSign, showComponentListBox: true });
                                     }}
                                 >
-                                </PageEditCompontContainer>)
+                                </PageEditCompontContainer>
+                            ))
                         }
                     </Page>
                 </div>
                 <div className="col-md-12 padding-0 pageedit-page-container-btns">
                     <BtnLists
-                        addComponent={() => { this.setState({ curParentComponent: undefined, showComponentListBox: true }) }}
+                        addComponent={() => { this.setState({ curParentComponentSign: RootComponentSign, showComponentListBox: true }) }}
+                        pageId={this.props.pageId}
                         submitPage={this.submitPage}
                         exportPage={this.exportPage}
                     />
@@ -119,38 +126,50 @@ class PageContainer extends React.Component {
 }
 
 PageContainer.propTypes = {
-    page: PropTypes.object,
     pageName: PropTypes.string.isRequired,
-    childPageComponents: PropTypes.array.isRequired,
-    defaultComponentDatas: PropTypes.array.isRequired,
+    pageId: PropTypes.number,
+    page: PropTypes.object,
+    rootPageComponent: PropTypes.object,
+    pageComponents: PropTypes.object,
+    defaultComponentDatas: PropTypes.object,
     addComponent: PropTypes.func.isRequired,
     pageComponentUpdateFetch: PropTypes.func.isRequired,
     pageFetch: PropTypes.func.isRequired,
-    pageDataClear: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    // pageName 即可能是 id, 也肯是 name
+    let pageId = parseInt(ownProps.pageName);
+    if (isNaN(pageId)) {
+        // 如果为 NaN，那么 pageName 保存的应该是页面的 name
+        pageId = state.pageNameToIds[ownProps.pageName];
+    }
+
+    // 获取根组件
+    let rootPageComponent = undefined;
+    if (state.pageComponents[pageId]) {
+        rootPageComponent = state.pageComponents[pageId][RootComponentSign];
+    }
+
     return {
-        page: state.page,
-        pageName: ownProps.pageName,
-        childPageComponents: state.page.pageComponents,
-        defaultComponentDatas: state.defaultComponentDatas
+        pageId: pageId,
+        page: state.pages[pageId],
+        rootPageComponent: rootPageComponent,
+        pageComponents: state.pageComponents[pageId],
+        defaultComponentDatas: state.defaultComponentDatas[pageId],
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        addComponent: (pageComponent, isAddDefaultComponentData) => {
-            dispatch(pageAddComponent(pageComponent, isAddDefaultComponentData));
+        addComponent: (addComponentAction) => {
+            dispatch(addComponentAction);
         },
         pageComponentUpdateFetch: (name, components, defaultComponentDatas) => {
             dispatch(pageComponentUpdateFetch(name, components, defaultComponentDatas));
         },
         pageFetch: (name) => {
             return dispatch(pageFetch(name));
-        },
-        pageDataClear: () => {
-            return dispatch(pageDataClear());
         }
     }
 }

@@ -10,5 +10,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
         public PageDto Page { get; set; }
 
         public List<ComponentDataDto> DefaultComponentDatas { get; set; }
+
+        public List<PageComponentDto> PageComponents { get; set; }
     }
 }

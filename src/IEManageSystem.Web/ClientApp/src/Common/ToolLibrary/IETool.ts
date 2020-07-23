@@ -51,6 +51,7 @@
                 }
             }
         }
+        result.__proto__ = obj.__proto__;
         return result;
     }
 }
