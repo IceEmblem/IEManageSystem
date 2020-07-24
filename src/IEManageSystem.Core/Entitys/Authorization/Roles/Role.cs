@@ -57,5 +57,9 @@ namespace IEManageSystem.Entitys.Authorization.Roles
                 }
             }
         }
+
+        public bool IsSuperAdmin() {
+            return Name == SuperAdminName;
+        }
     }
 }

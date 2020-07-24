@@ -88,6 +88,11 @@ namespace IEManageSystem.Entitys.Authorization.Roles
 
         public void AddPermission(Role role, Permission permission)
         {
+            if (permission.IsSuperPermission())
+            {
+                throw new UserFriendlyException("无法添加超级管理权限");
+            }
+
             RoleRepository.EnsureCollectionLoaded(role, e => e.RolePermissions);
 
             List<int> permissionIds = role.RolePermissions.Select(e => e.PermissionId).ToList();
@@ -106,6 +111,11 @@ namespace IEManageSystem.Entitys.Authorization.Roles
 
         public void RemovePermission(Role role, Permission permission)
         {
+            if (permission.IsSuperPermission())
+            {
+                throw new UserFriendlyException("无法移除超级管理权限");
+            }
+
             RoleRepository.EnsureCollectionLoaded(role, e => e.RolePermissions);
 
             role.RemovePermission(permission);

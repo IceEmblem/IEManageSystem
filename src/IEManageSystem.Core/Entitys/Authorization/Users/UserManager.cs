@@ -155,6 +155,10 @@ namespace IEManageSystem.Entitys.Authorization.Users
         /// <param name="role"></param>
         public void AddUserRole(User user, Role role)
         {
+            if (role.IsSuperAdmin()) {
+                throw new UserFriendlyException("无法添加超级管理员角色");
+            }
+
             UserRepository.EnsureCollectionLoaded(user, e => e.UserRoles);
 
             List<int> roleIds = user.UserRoles.Select(e => e.RoleId).ToList();
@@ -179,6 +183,11 @@ namespace IEManageSystem.Entitys.Authorization.Users
         /// <param name="role"></param>
         public void RemoveRole(User user, Role role)
         {
+            if (role.IsSuperAdmin())
+            {
+                throw new UserFriendlyException("无法移除超级管理员角色");
+            }
+
             UserRepository.EnsureCollectionLoaded(user, e => e.UserRoles);
 
             var userRole = user.UserRoles.FirstOrDefault(e => e.RoleId == role.Id);
