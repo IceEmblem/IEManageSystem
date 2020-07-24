@@ -42,5 +42,9 @@
             "sign": {}
         }
     },
-    "activePageComponentSign"
+    "activePageComponentSign": "",
+    "menus": {
+        "menuName": {}
+        ...
+    }
 }

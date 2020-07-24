@@ -17,8 +17,8 @@ class ComponentObject extends BaseComponentObject {
             }
         )
     ];
-    Component(props, childrens) {
-        return <Container {...props} >{childrens}</Container>
+    Component(props) {
+        return <Container {...props} >{props.children}</Container>
     }
     Preview() {
         return <p>容器组件</p>;

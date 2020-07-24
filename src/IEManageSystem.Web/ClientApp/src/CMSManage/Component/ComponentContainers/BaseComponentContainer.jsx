@@ -33,7 +33,7 @@ class BaseComponentContainer extends React.Component {
 
         style.width = "100%";
 
-        style = {...style, ...this.componentDescribe.defauleStyle}
+        style = { ...style, ...this.componentDescribe.defauleStyle }
 
         if (this.props.pageComponent.pageComponentBaseSetting.width) {
             style.width = this.props.pageComponent.pageComponentBaseSetting.width;
@@ -70,23 +70,23 @@ class BaseComponentContainer extends React.Component {
         return className;
     }
 
-    getContentComponentData(){
+    getContentComponentData() {
         // 如果组件不是内容组件
         if (!this.componentDescribe.isExistDefaultComponentData()) {
             return undefined;
         }
 
-        if(this.props.contentComponentData){
+        if (this.props.contentComponentData) {
             return this.props.contentComponentData;
         }
-        
-        if(this.props.defaultComponentData){
+
+        if (this.props.defaultComponentData) {
             return this.props.defaultComponentData;
         }
 
-        let componentDataModel = {id: 0, sign: this.props.pageComponent.sign, singleDatas: []};
-        componentDataModel.__proto__ =  ComponentDataModel.prototype;
-        
+        let componentDataModel = { id: 0, sign: this.props.pageComponent.sign, singleDatas: [] };
+        componentDataModel.__proto__ = ComponentDataModel.prototype;
+
         return componentDataModel;
     }
 
@@ -95,17 +95,19 @@ class BaseComponentContainer extends React.Component {
     }
 
     createComponent() {
-        return this.componentObject.Component({
-            pageComponent: this.props.pageComponent,
-            componentData: this.getContentComponentData(),
-            pageComponentSettings: this.getPageComponentSettings() || [],
-            pageLeafSetting: this.props.pageComponent.pageLeafSetting,
-            menuName: this.props.pageComponent.menuName,
-            execLogic: this.execLogic,
-            pageFreshen: this.pageFreshen,
-            page: this.props.page,
-            pageData: this.props.pageData || pageDataModel,
-        }, this.createChildComponent())
+        return <this.componentObject.Component
+            pageComponent={this.props.pageComponent}
+            componentData={this.getContentComponentData()}
+            pageComponentSettings={this.getPageComponentSettings() || []}
+            pageLeafSetting={this.props.pageComponent.pageLeafSetting}
+            menuName={this.props.pageComponent.menuName}
+            execLogic={this.execLogic}
+            pageFreshen={this.pageFreshen}
+            page={this.props.page}
+            pageData={this.props.pageData || pageDataModel}
+        >
+            {this.createChildComponent()}
+        </this.componentObject.Component>
     }
 
     getTools() {
@@ -116,9 +118,9 @@ class BaseComponentContainer extends React.Component {
         // 检查 this.props.pageComponent.pageComponentSettings 是否有对应的配置
         // 没有则实例一个
         this.componentObject.ComponentSettingConfigs.forEach(element => {
-            if(!this.props.pageComponent.pageComponentSettings.some(e=>e.name == element.name)){
+            if (!this.props.pageComponent.pageComponentSettings.some(e => e.name == element.name)) {
                 this.props.pageComponent.pageComponentSettings.push(
-                    {id: 0, name: element.name, displayName: element.displayName, singleDatas: []}
+                    { id: 0, name: element.name, displayName: element.displayName, singleDatas: [] }
                 );
             }
         });
@@ -136,18 +138,18 @@ class BaseComponentContainer extends React.Component {
     }
 
     // 各自容器可实现自己需要扩展的props
-    propsEX(){
+    propsEX() {
         return {};
     }
 
     // 各自容器可实现自己需要扩展的style
-    styleEX(){
+    styleEX() {
         return {};
     }
 
     render() {
         return (
-            <div style={{...this.getStyle(), ...this.styleEX()}} className={`parentcomponent ${this.getClassName()}`}
+            <div style={{ ...this.getStyle(), ...this.styleEX() }} className={`parentcomponent ${this.getClassName()}`}
                 {...this.propsEX()}
             >
                 {this.createComponent()}
