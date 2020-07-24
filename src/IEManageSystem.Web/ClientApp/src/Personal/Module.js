@@ -1,3 +1,4 @@
+import React from 'react'
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'Core/Menu/MenuProvider'
@@ -6,13 +7,14 @@ import IERedux from './IEReduxs/PersonalRedux'
 import {reducer} from './IEReduxs/Reducers'
 import RootRedux from 'Core/IEReduxs/RootRedux'
 
-import Personal from './Personal.jsx';
-
 import {
     UserOutlined,
     SolutionOutlined,
     SafetyOutlined
 } from '@ant-design/icons';
+
+// 动态加载
+const Personal = React.lazy(() => import('./Personal'));
 
 export default class Module extends BaseModule
 {

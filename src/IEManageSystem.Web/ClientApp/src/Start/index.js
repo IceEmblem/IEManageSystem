@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux'
@@ -22,6 +22,8 @@ import 'ielib';
 
 import './index.css';
 
+import {Spin} from 'antd'
+
 let moduleFactory = new ModuleFactory();
 moduleFactory.init();
 
@@ -30,9 +32,11 @@ let store = getIEStore();
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <Switch>
-                {PageProvider.pages.map(item => (<Route key={item.url} path={item.url} component={item.component} />))}
-            </Switch>
+            <Suspense fallback={<Spin className="w-100 h-100" size="large"></Spin>}>
+                <Switch>
+                    {PageProvider.pages.map(item => (<Route key={item.url} path={item.url} component={item.component} />))}
+                </Switch>
+            </Suspense>
             <Error />
             <Loading />
         </BrowserRouter>

@@ -93,9 +93,7 @@ class BtnLists extends React.Component {
         ieReduxFetch("/api/PageQuery/GetPage", {
             name: pageName
         }).then(value => {
-            value.page.id = this.props.page.id;
-            value.page.name = this.props.page.name;
-            this.props.setPage(value.page, value.defaultComponentDatas);
+            this.props.setPage(this.props.page, value.pageComponents, value.defaultComponentDatas);
         });
     }
 
@@ -194,8 +192,8 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        setPage: (page, defaultComponentDatas) => {
-            dispatch(setPage(page, defaultComponentDatas));
+        setPage: (page, pageComponents, defaultComponentDatas) => {
+            dispatch(setPage(page, pageComponents, defaultComponentDatas));
         }
     }
 }

@@ -62,7 +62,7 @@ function removeComponent(state, action: RemoveComponentAction){
 
     // 这里用一个问题，如果删除子组件的默认数据
     let defaultComponentDatas = {...state[action.pageId]};
-    defaultComponentDatas[action.pageComponentSign] = undefined;
+    delete defaultComponentDatas[action.pageComponentSign];
     state[action.pageId] = defaultComponentDatas;
 
     return state;
@@ -76,7 +76,7 @@ function editComponent(state, action: EditComponentAction){
 
     let defaultComponentDatas = {...state[action.pageId]};
     defaultComponentDatas[action.pageComponent.sign] = {...defaultComponentDatas[action.pageComponentSign], ...{sign: action.pageComponent.sign}};
-    defaultComponentDatas[action.pageComponentSign] = undefined;
+    delete defaultComponentDatas[action.pageComponentSign];
     setComponentDataModel(defaultComponentDatas[action.pageComponent.sign]);
     
     state[action.pageId] = defaultComponentDatas;
@@ -91,6 +91,7 @@ function pageReceive(state, action: FetchAction){
     action.data.defaultComponentDatas.forEach((element: any) => {
         let signs = action.data.pageComponents.map(e => e.sign);
         if (signs.some(e => e == element.sign)) {
+            element.singleDatas.sort((l, r)=> l.sortIndex - r.sortIndex);
             defaultComponentDatas[element.sign] = element;
             setComponentDataModel(defaultComponentDatas[element.sign]);
         }

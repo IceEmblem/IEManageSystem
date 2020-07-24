@@ -13,12 +13,12 @@ import PageComponentModel from '../../Models/Pages/PageComponentModel'
 import PageComponentSettingModel from '../../Models/Pages/PageComponentSettingModel'
 import SingleDataModel from '../../Models/SingleDataModel'
 
-function setPageComponentModel(pageComponentData: any){
-    pageComponentData.__proto__ =  PageComponentModel.prototype;
+function setPageComponentModel(pageComponentData: any) {
+    pageComponentData.__proto__ = PageComponentModel.prototype;
     pageComponentData.pageComponentSettings.forEach(pageComponentSetting => {
-        pageComponentSetting.__proto__ =  PageComponentSettingModel.prototype;
+        pageComponentSetting.__proto__ = PageComponentSettingModel.prototype;
         pageComponentSetting.singleDatas.forEach(singleData => {
-            singleData.__proto__ =  SingleDataModel.prototype;
+            singleData.__proto__ = SingleDataModel.prototype;
         });
     });
 }
@@ -86,7 +86,7 @@ function addComponent(state: object, action: AddComponentAction): object {
     // 组件的索引为当前子元素的最大索引 + 1
     let sortIndex = 0;
     let sortIndexs = Object.values(getChildComponents(pageComponents, action.pageComponent.parentSign)).map<number>(e => e.sortIndex);
-    if(sortIndexs.length > 0){
+    if (sortIndexs.length > 0) {
         sortIndex = Math.max(
             ...sortIndexs
         ) + 1;
@@ -174,6 +174,10 @@ function pageReceive(state: object, action): object {
     // 将组件实例 state
     for (let n = 0; n < receivePageComponents.length; n++) {
         let pageComponent = receivePageComponents[n];
+        // 对组件设置数据进行排序
+        pageComponent.pageComponentSettings.forEach(pageComponentSetting => {
+            pageComponentSetting.singleDatas.sort((l, r) => l.sortIndex - r.sortIndex)
+        });
         setPageComponentModel(pageComponent);
         pageComponents[pageComponent.sign] = pageComponent;
     }

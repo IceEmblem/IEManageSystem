@@ -4,14 +4,9 @@ const defaultDataName = "__default__";
 
 export default abstract class DataCollectionBase {
     public singleDatas: Array<SingleDataModel>;
-    private _defaultData: SingleDataModel;
 
     // 获取默认数据，不存在则创建
     getDefauleData(): SingleDataModel {
-        if(this._defaultData){
-            return this._defaultData;
-        }
-
         let defaultData = this.singleDatas.find(e => e.name == defaultDataName);
         if (!defaultData) {
             let sortIndex = this.singleDatas.length == 0 ? 0 : (this.singleDatas[this.singleDatas.length-1].sortIndex + 1);
@@ -22,9 +17,8 @@ export default abstract class DataCollectionBase {
             });
             this.singleDatas.push(defaultData);
         }
-        this._defaultData = defaultData;
 
-        return this._defaultData;
+        return defaultData;
     }
 
     createSingleData(name:string){

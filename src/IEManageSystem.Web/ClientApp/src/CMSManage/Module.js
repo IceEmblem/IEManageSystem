@@ -1,19 +1,19 @@
+import React from 'react'
+
+// 核心模块依赖
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'Core/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
-
-import CMSManage from './CMSManage.jsx';
-import { reducer } from 'CMSManage/IEReduxs/Reducers'
-import IERedux from 'CMSManage/IEReduxs/CmsRedux'
 import RootRedux from 'Core/IEReduxs/RootRedux'
 import CoreModel from 'Core/Module';
 import PageProvider from 'Core/Page/PageProvider'
 import Page from 'Core/Page/Page'
+
+// 初始化时加载
+import { reducer } from 'CMSManage/IEReduxs/Reducers'
+import IERedux from 'CMSManage/IEReduxs/CmsRedux'
 import Home from './Home'
-import PageEdit from "./PageEdit"
-import PostEdit from './PostEdit'
-import TemplatePageShow from './TemplatePageShow'
 
 import {
     SnippetsOutlined,
@@ -24,6 +24,12 @@ import {
     AppstoreOutlined,
     FileTextOutlined
 } from '@ant-design/icons';
+
+// 动态加载
+const PageEdit = React.lazy(() => import('./PageEdit'));
+const PostEdit = React.lazy(() => import('./PostEdit'));
+const TemplatePageShow = React.lazy(() => import('./TemplatePageShow'));
+const CMSManage = React.lazy(() => import('./CMSManage'));
 
 export default class Module extends BaseModule {
     initialize() {

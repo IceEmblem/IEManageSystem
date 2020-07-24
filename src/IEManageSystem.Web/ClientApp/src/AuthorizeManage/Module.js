@@ -1,8 +1,10 @@
+import React from 'react'
+
+// 核心模块依赖
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'Core/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
-import AuthorizeManage from "./AuthorizeManage.jsx";
 import CoreModel from 'Core/Module';
 import {
     SafetyCertificateOutlined,
@@ -13,6 +15,9 @@ import {
     GlobalOutlined,
     BarsOutlined
 } from '@ant-design/icons';
+
+// 动态加载
+const AuthorizeManage = React.lazy(() => import('./AuthorizeManage'));
 
 export default class Module extends BaseModule {
     initialize() {

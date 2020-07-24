@@ -58,7 +58,7 @@ class PageEditCompontContainer extends BaseComponentContainer {
         tools.push(<ToolBtns 
             key={"EditFrameBtn"}
             sign={this.props.sign}
-            displayName={this.props.pageComponent.displayName}
+            displayName={this.componentDescribe.displayName}
             isActivePageComponent={this.props.isActivePageComponent}
             isExistDefaultComponentData={this.componentDescribe.isExistDefaultComponentData()}
             isExistChildComponent={this.componentDescribe.isExistChildComponent()}

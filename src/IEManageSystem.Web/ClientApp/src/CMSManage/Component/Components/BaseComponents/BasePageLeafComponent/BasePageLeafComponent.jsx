@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { ieReduxFetch } from "Core/IEReduxFetch"
 import { BaseComponent, BaseComponentProps } from '../BaseComponent'
 import PageDataModel from '../../../../Models/PageDatas/PageDataModel'
+import TagModel from '../../../../Models/PageDatas/TagModel'
 
 export class PageLeafComponentProps extends BaseComponentProps {
     constructor() {
@@ -102,7 +103,14 @@ class BasePageLeafComponent extends BaseComponent {
 
         ieReduxFetch("/api/PageDataQuery/GetPageDatas", postData)
             .then(value => {
-                this.setState({ pageDatas: value.pageDatas.map(item => new PageDataModel(item)), resourceNum: value.resourceNum });
+                value.pageDatas.forEach(pageData=>{
+                    pageData.__proto__ = PageDataModel.prototype;
+                    pageData.tags.forEach(tag=>{
+                        tag.__proto__ = TagModel.prototype;
+                    })
+                })
+
+                this.setState({ pageDatas: value.pageDatas, resourceNum: value.resourceNum });
             });
     }
 }

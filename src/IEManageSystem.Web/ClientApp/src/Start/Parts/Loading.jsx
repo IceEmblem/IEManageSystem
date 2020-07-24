@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-import { Spin, Button } from 'antd';
+import { Spin } from 'antd';
 
 import RootRedux from 'Core/IEReduxs/RootRedux'
 

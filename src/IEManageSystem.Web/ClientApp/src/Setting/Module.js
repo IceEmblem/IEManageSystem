@@ -1,3 +1,4 @@
+import React from 'react'
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import CoreModule from 'Core/Module';
@@ -5,11 +6,12 @@ import CoreModule from 'Core/Module';
 import MenuProvider from 'Core/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 
-import Setting from './Setting';
-
 import {
     SettingOutlined
 } from '@ant-design/icons';
+
+// 动态加载
+const Setting = React.lazy(() => import('./Setting'));
 
 export default class Module extends BaseModule
 {

@@ -43,13 +43,13 @@ FrontCompontContainer.propTypes = {
     // 如下 3 个属性由父组件传入
     sign: PropTypes.string.isRequired,
     pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number.isRequired,
+    pageDataId: PropTypes.number,
 
     pageComponent: PropTypes.object.isRequired,
     defaultComponentData: PropTypes.object,
     contentComponentData: PropTypes.object,
     page: PropTypes.object.isRequired,
-    pageData: PropTypes.object.isRequired,
+    pageData: PropTypes.object,
     pageFreshen: PropTypes.func.isRequired
 }
 
