@@ -5,7 +5,6 @@ import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseComponen
 import BaseMenuComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseMenuComponent'
 import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
 import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
-import ComponentContainer from './BaseComponents/BaseComponent/ComponentContainer'
 
 export const componentType = {
     container: "container",
@@ -81,13 +80,12 @@ export default class ComponentDescribe {
 
     // 生成 React 组件
     createComponent(pageId, pageDataId, sign, childs) {
-        return <ComponentContainer
-            componentDescribe={this}
+        return <this.componentObject.ComponentContainer
             pageId={pageId}
             pageDataId={pageDataId}
             sign={sign}
         >
             {childs}
-        </ComponentContainer>
+        </this.componentObject.ComponentContainer>
     }
 }

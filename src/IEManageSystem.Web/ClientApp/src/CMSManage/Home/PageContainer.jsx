@@ -5,7 +5,7 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
 import { pageFetch, pageDataFetch, RootComponentSign, } from 'CMSManage/IEReduxs/Actions'
 import Page from './Page'
-import BaseComponentContainer from 'CMSManage/Component/ComponentContainers/BaseComponentContainer'
+import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -56,13 +56,13 @@ class PageContainer extends React.Component {
             <Page>
                 {
                     this.props.rootPageComponent.pageComponentSigns.map(sign =>
-                        <BaseComponentContainer
+                        <ComponentContainerBox
                             key={sign}
                             sign={sign}
                             pageId={this.props.pageId}
                             pageDataId={this.props.pageDataId}
                         >
-                        </BaseComponentContainer>)
+                        </ComponentContainerBox>)
                 }
             </Page>
         );

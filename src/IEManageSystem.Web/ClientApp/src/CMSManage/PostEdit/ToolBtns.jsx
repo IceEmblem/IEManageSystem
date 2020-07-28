@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { ComponentDataUpdateAction } from 'CMSManage/IEReduxs/Actions'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import PostEditFrame from 'CMSManage/Component/ComponentContainers/PostEditFrame'
+import PostEditFrame from 'CMSManage/Component/ComponentContainerBoxs/PostEditFrame'
 
 import ComponentFactory from 'CMSManage/Component/Components/ComponentFactory'
 import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'

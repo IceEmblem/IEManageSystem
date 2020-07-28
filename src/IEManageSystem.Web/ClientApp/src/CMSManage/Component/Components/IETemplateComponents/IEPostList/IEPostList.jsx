@@ -11,12 +11,8 @@ export default class IEPostList extends BasePageLeafComponent {
         super(props);
     }
 
-    getPageComponentSetting() {
-        return this.props.pageComponentSettings.find(e => e.name == "DefaultSetting");
-    }
-
     render() {
-        let setting = new Setting(this.getPageComponentSetting());
+        let setting = new Setting(this.getSetting("DefaultSetting"));
 
         return (
             <div>

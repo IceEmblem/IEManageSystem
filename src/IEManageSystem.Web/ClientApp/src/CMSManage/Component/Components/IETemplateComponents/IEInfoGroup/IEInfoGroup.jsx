@@ -6,10 +6,6 @@ import Setting from './Setting'
 import Data from './Data'
 
 export default class IEInfoGroup extends BaseContentLeafComponent {
-    getPageComponentSetting() {
-        return this.props.pageComponentSettings.find(e => e.name == "DefaultSetting");
-    }
-
     createItem(settingField, dataField, color) {
         return <List.Item style={{ color: color }} className="mb-0 pt-2 pb-2" >
             <span>{settingField}</span>
@@ -18,7 +14,7 @@ export default class IEInfoGroup extends BaseContentLeafComponent {
     }
 
     render() {
-        let setting = new Setting(this.getPageComponentSetting());
+        let setting = new Setting(this.getSetting("DefaultSetting"));
         let data = new Data(this.props.componentData);
 
         let itemDatas = [];

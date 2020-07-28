@@ -21,7 +21,7 @@ class IECategoryLabel extends BaseStaticComponent {
     }
 
     getPageComponentSetting() {
-        return this.props.pageComponentSettings.find(e => e.name == "DefaultSetting");
+        return this.getSetting("DefaultSetting");
     }
 
     createTags() {

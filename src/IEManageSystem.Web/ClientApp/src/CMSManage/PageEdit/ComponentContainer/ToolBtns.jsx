@@ -10,8 +10,8 @@ import {
     DefaultComponentDataUpdateAction,
 } from 'CMSManage/IEReduxs/Actions'
 
-import PageEditFrame from 'CMSManage/Component/ComponentContainers/PageEditFrame'
-import PostEditFrame from 'CMSManage/Component/ComponentContainers/PostEditFrame'
+import PageEditFrame from 'CMSManage/Component/ComponentContainerBoxs/PageEditFrame'
+import PostEditFrame from 'CMSManage/Component/ComponentContainerBoxs/PostEditFrame'
 
 import ComponentFactory from 'CMSManage/Component/Components/ComponentFactory'
 import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'

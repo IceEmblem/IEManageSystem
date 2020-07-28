@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import './index.css'
 
-import BaseComponentContainer from 'CMSManage/Component/ComponentContainers/BaseComponentContainer'
+import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
 import ToolBtns from './ToolBtns';
 import Page from 'CMSManage/Home/Page'
 
@@ -153,7 +153,7 @@ class PageEditCompontContainer extends React.Component {
                         {
                             this.props.rootPageComponent.pageComponentSigns.map(sign => (
                                 <>
-                                    <BaseComponentContainer
+                                    <ComponentContainerBox
                                         key={sign}
                                         sign={sign}
                                         pageId={this.props.pageId}
@@ -164,7 +164,7 @@ class PageEditCompontContainer extends React.Component {
                                         propsEX={this.propsEX}
                                         ToolBtn={this.Tools}
                                     >
-                                    </BaseComponentContainer>
+                                    </ComponentContainerBox>
                                 </>
                             ))
                         }

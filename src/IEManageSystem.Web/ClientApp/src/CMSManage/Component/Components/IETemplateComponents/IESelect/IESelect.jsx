@@ -1,28 +1,22 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
 import Setting from './Setting'
 
 import { Select } from 'antd';
 const { Option } = Select;
 
 
-export default class IESelect extends React.Component {
+export default class IESelect extends BaseStaticComponent {
     constructor(props) {
         super(props);
-
-        this.setting = new Setting(this.getPageComponentSetting());
-    }
-    
-    getPageComponentSetting(){
-        return this.props.pageComponentSettings.find(e=>e.name == "Select");
     }
 
     render() {
-        this.setting.setSetting(this.getPageComponentSetting());
+        let setting = new Setting(this.getSetting("Select"));
 
         return (
-            <Select defaultValue="No Select" size={this.setting.size} >
-                {this.setting.getSeleteDatas().map((item,index)=>(
+            <Select defaultValue="No Select" size={setting.size} >
+                {setting.getSeleteDatas().map((item,index)=>(
                 <Option key={index} value={item.url}><a href={item.url}>{item.text}</a></Option>))}
             </Select>
         );

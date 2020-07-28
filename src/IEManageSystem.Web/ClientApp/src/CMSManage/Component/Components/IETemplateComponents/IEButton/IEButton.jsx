@@ -1,27 +1,21 @@
 import React from 'react';
-
+import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
 import { Button } from 'antd';
 
 import IEButtonSetting from './IEButtonSetting.ts'
 
-export default class IEButton extends React.Component {
+export default class IEButton extends BaseStaticComponent {
     constructor(props) {
         super(props);
-
-        this.setting = new IEButtonSetting(this.getButtonSetting());
-    }
-
-    getButtonSetting(){
-        return this.props.pageComponentSettings.find(e=>e.name == "BtnSetting");
     }
 
     render() {
-        this.setting.setSetting(this.getButtonSetting());
+        let setting = new IEButtonSetting(this.getSetting("BtnSetting"));
 
         return (
-        <Button shape={this.setting.shape} type={this.setting.btnType} size={this.setting.size}>
-            <a href={this.setting.url}>
-                {this.setting.text}
+        <Button shape={setting.shape} type={setting.btnType} size={setting.size}>
+            <a href={setting.url}>
+                {setting.text}
             </a>
         </Button>
         );

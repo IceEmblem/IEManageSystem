@@ -1,9 +1,10 @@
 import React from 'react';
+import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
 import Setting from './Setting'
 
 import './IEPageSetting.css';
 
-export default class IEPageSetting extends React.Component{
+export default class IEPageSetting extends BaseStaticComponent{
     constructor(props){
         super(props);
 
@@ -19,7 +20,7 @@ export default class IEPageSetting extends React.Component{
     }
 
     getPageComponentSetting(){
-        return this.props.pageComponentSettings.find(e=>e.name == "PageSetting");
+        return this.getSetting("PageSetting");
     }
     
     setElement(element){

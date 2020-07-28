@@ -7,7 +7,6 @@ import TagModel from '../../../../Models/PageDatas/TagModel'
 export class PageLeafComponentProps extends BaseComponentProps {
     constructor() {
         super();
-        this.pageLeafSetting = null;
     }
 }
 
@@ -17,12 +16,12 @@ class BasePageLeafComponent extends BaseComponent {
         super(props);
 
         this.state = {
-            pageName: this.props.pageLeafSetting.pageName,
+            pageName: this.props.pageComponent.pageLeafSetting.pageName,
             pageIndex: 1,
-            pageSize: this.props.pageLeafSetting.pageSize,
-            top: this.props.pageLeafSetting.top,
-            searchKey: this.props.pageLeafSetting.searchKey,
-            orderby: this.props.pageLeafSetting.orderby,
+            pageSize: this.props.pageComponent.pageLeafSetting.pageSize,
+            top: this.props.pageComponent.pageLeafSetting.top,
+            searchKey: this.props.pageComponent.pageLeafSetting.searchKey,
+            orderby: this.props.pageComponent.pageLeafSetting.orderby,
             pageDatas: [],
             resourceNum: 0,
             curtag: this.getQueryVariable("tag"),
@@ -38,11 +37,11 @@ class BasePageLeafComponent extends BaseComponent {
 
     componentWillReceiveProps(nextprops) {
         this.setState({
-            pageName: nextprops.pageLeafSetting.pageName,
-            pageSize: nextprops.pageLeafSetting.pageSize,
-            top: nextprops.pageLeafSetting.top,
-            searchKey: nextprops.pageLeafSetting.searchKey,
-            orderby: nextprops.pageLeafSetting.orderby,
+            pageName: nextprops.pageComponent.pageLeafSetting.pageName,
+            pageSize: nextprops.pageComponent.pageLeafSetting.pageSize,
+            top: nextprops.pageComponent.pageLeafSetting.top,
+            searchKey: nextprops.pageComponent.pageLeafSetting.searchKey,
+            orderby: nextprops.pageComponent.pageLeafSetting.orderby,
             curtag: this.getQueryVariable("tag")
         })
     }
@@ -116,7 +115,6 @@ class BasePageLeafComponent extends BaseComponent {
 }
 
 BasePageLeafComponent.propTypes = {
-    pageLeafSetting: PropTypes.object
 }
 
 BasePageLeafComponent.defaultProps = {

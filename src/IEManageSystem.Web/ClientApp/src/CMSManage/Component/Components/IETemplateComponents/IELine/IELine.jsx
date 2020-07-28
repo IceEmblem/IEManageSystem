@@ -10,14 +10,10 @@ export default class IELine extends BaseContentLeafComponent {
     constructor(props) {
         super(props);
     }
-
-    getPageComponentSetting() {
-        return this.props.pageComponentSettings.find(e => e.name == "DefaultSetting");
-    }
-
+    
     render() {
         let data = new Data(this.props.componentData);
-        let setting = new Setting(this.getPageComponentSetting());
+        let setting = new Setting(this.getSetting("DefaultSetting"));
 
         const chartData = data.getDatas().map(item => ({ x: item.x, line: item.line, y: Number(item.y) }))
 

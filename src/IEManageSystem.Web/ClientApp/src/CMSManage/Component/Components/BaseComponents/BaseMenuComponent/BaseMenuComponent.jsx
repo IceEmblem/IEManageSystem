@@ -5,7 +5,6 @@ import MenuModel from 'CMSManage/Models/MenuModel'
 export class BaseMenuComponentProps extends BaseComponentProps {
     constructor(){
         super();
-        this.menuName = null;
     }
 }
 
@@ -63,12 +62,12 @@ export default class BaseMenuComponent extends BaseComponent {
     }
 
     componentDidMount(){
-        this.getMenus(this.props.menuName);
+        this.getMenus(this.props.pageComponent.menuName);
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.menuName != this.props.menuName){
-            this.getMenus(nextProps.menuName);
+        if(nextProps.pageComponent.menuName != this.props.pageComponent.menuName){
+            this.getMenus(nextProps.pageComponent.menuName);
         }
     }
 

@@ -3,7 +3,6 @@ import React from 'react'
 export class BaseComponentProps{
     constructor(){
         this.pageComponent = null;
-        this.pageComponentSettings = []
         // 执行逻辑 (requestData) => Promise;
         this.execLogic = (requestData)=>{};
         // 刷新页面
@@ -16,4 +15,7 @@ export class BaseComponentProps{
 }
 
 export default class BaseComponent extends React.Component {
+    getSetting(name){
+        return this.props.pageComponent.getOrCreatePageComponentSetting(name);
+    }
 }

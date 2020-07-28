@@ -3,11 +3,7 @@ import BaseComponentObject from '../BaseLeafComponent';
 import {BaseField} from '../BaseComponent'
 import React from 'react';
 import ComponentDataConfig from './ComponentDataConfig';
-
-// const ComponentDataConfigField =
-//     (name) =>
-//         (props) =>
-//             <BaseField text={name} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
+import ComponentContainer from './ComponentContainer'
 
 const field1 = (props) => <BaseField text={"字段1"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
 const field2 = (props) => <BaseField text={"字段2"} fieldValue={props.fieldValue} setFieldValue={props.setFieldValue} />;
@@ -27,6 +23,8 @@ export default class ContentLeafComponentObject extends BaseComponentObject {
                 field4={field4}
                 field5={field5}
             />);
+            
+        this.ComponentContainer = ComponentContainer(this.Component);
     }
     Component(props) {
         let isInherit = props instanceof BaseContentLeafComponentProps;

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.Menus
@@ -52,8 +53,24 @@ namespace IEManageSystem.CMS.DomainModel.Menus
 
                 MenuRepository.NoTracking();
                 var rootMenu = MenuRepository.FirstOrDefault(e => e.Name == menuName);
-                if (rootMenu is CompositeMenu) { 
-                    ((CompositeMenu) rootMenu).Menus = MenuRepository.GetAllList(e => e.RootMenuId == rootMenu.Id);
+                if (rootMenu is CompositeMenu) {
+                    var rootCompositeMenu = (CompositeMenu) rootMenu;
+                    var menus = MenuRepository.GetAllList(e => e.RootMenuId == rootMenu.Id);
+                    // 还原菜单树结构
+                    foreach (var menu in menus) {
+                        if (!(menu is CompositeMenu)) {
+                            continue;
+                        }
+
+                        ((CompositeMenu)menu).Menus = new List<MenuBase>();
+                        foreach (var childMenu in menus) 
+                        {
+                            if (childMenu.CompositeMenuId == menu.Id) {
+                                ((CompositeMenu)menu).Menus.Add(childMenu);
+                            }
+                        }
+                    }
+                    rootCompositeMenu.Menus = menus.Where(e=>e.CompositeMenuId == rootCompositeMenu.Id).ToList();
                 }
                 MenuRepository.Tracking();
 

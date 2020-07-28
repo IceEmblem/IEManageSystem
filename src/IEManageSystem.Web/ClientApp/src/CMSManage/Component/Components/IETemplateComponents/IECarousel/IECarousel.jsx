@@ -15,10 +15,6 @@ class IECarousel extends BaseContentLeafComponent {
         super(props);
     }
 
-    getPageComponentSetting() {
-        return this.props.pageComponentSettings.find(e => e.name == "DefaultSetting");
-    }
-
     createItem(singleData, setting) {
         return (
             <div>
@@ -36,7 +32,7 @@ class IECarousel extends BaseContentLeafComponent {
 
     render() {
         let data = new Data(this.props.componentData);
-        let setting = new Setting(this.getPageComponentSetting());
+        let setting = new Setting(this.getSetting("DefaultSetting"));
 
         return (
             <div style={{width: "0px", flexGrow: 1}}>

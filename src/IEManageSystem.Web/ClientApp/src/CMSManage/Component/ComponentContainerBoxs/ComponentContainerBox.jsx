@@ -6,7 +6,7 @@ import ComponentDataModel from '../../Models/ComponentDataModel'
 
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
-import './BaseComponentContainer.css'
+import './ComponentContainerBox.css'
 
 class BaseComponentContainer extends React.Component {
     constructor(props) {

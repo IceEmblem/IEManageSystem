@@ -8,19 +8,12 @@ import './Container.css'
 class Container extends BaseContainerComponent {
     constructor(props) {
         super(props);
-
-        this.setting = new Setting(this.getFlexSetting());
-    }
-
-    getFlexSetting() {
-        return this.props.pageComponentSettings.find(e => e.name == "FlexSetting");
     }
 
     render() {
-        this.setting.setSetting(this.getFlexSetting());
+        let setting = new Setting(this.getSetting("FlexSetting"));
 
-
-        return (<div className={`containercss ${this.setting.direction || ""} ${this.setting.justifyContent || ""} ${this.setting.alignItems || ""} ${this.setting.wrap || ""} ${this.setting.alignContent || ""} `}>
+        return (<div className={`containercss ${setting.direction || ""} ${setting.justifyContent || ""} ${setting.alignItems || ""} ${setting.wrap || ""} ${setting.alignContent || ""} `}>
             {this.props.children}
         </div>);
     }

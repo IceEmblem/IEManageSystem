@@ -178,13 +178,13 @@ function pageReceive(state: object, action): object {
         pageComponent.pageComponentSettings.forEach(pageComponentSetting => {
             pageComponentSetting.singleDatas.sort((l, r) => l.sortIndex - r.sortIndex)
         });
-        setPageComponentModel(pageComponent);
         pageComponents[pageComponent.sign] = pageComponent;
     }
 
     // 设置组件的子组件标识
     for (let key of Object.keys(pageComponents)) {
         pageComponents[key] = setChildComponentSigns(pageComponents, pageComponents[key]);
+        setPageComponentModel(pageComponents[key]);
     }
 
     let newState = { ...state };

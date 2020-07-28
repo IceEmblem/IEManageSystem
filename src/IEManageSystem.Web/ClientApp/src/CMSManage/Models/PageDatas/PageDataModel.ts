@@ -17,7 +17,8 @@ export default class PageDataModel{
     public static CreatePageDataModel() : PageDataModel{
         let page = new PageDataModel();
         page.id = 0;
-        page.name = "DefaultPost";
+        // 不能更改页面名称，否则一些方法会认定为这是一个正常页面
+        page.name = null;
         page.tags = [];
         return page;
     }
