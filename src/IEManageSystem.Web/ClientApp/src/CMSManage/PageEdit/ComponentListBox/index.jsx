@@ -14,7 +14,7 @@ class ComponentListBox extends React.Component {
     constructor(props) {
         super(props);
 
-        this.componentDescribes = new ComponentFactory().getComponentDescribes();
+        this.componentDescribes = ComponentFactory.getComponentDescribes();
         this.Preview = new Map();
         this.componentDescribes.map(item=>{
             this.Preview[item.name] = item.componentObject.Preview()

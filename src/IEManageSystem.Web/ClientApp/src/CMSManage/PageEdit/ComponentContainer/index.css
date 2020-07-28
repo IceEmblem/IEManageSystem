@@ -1,36 +1,29 @@
 .editableparentcom .editableparentcom-btns {
     z-index: 9990;
-    right: 0rem;
 }
 
 .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9991;
-    right: .3rem;
 }
 
 .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9992;
-    right: .6rem;
 }
 
 .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9993;
-    right: .9rem;
 }
 
 .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9994;
-    right: 1.2rem;
 }
 
 .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9995;
-    right: 1.5rem;
 }
 
 .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
     z-index: 9996;
-    right: 1.8rem;
 }
 
 .editableparentcom:hover>.editableparentcom-btns {
@@ -44,21 +37,31 @@
 
 .editableparentcom-btns {
     width: 0px;
-    height: 0.3rem;
     position: relative;
     display: flex;
     align-items: start;
-    transform-origin:0% 50%;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
     opacity: 0.1;
     transition: 0.5s;
     -webkit-transition: 0.5s;
 }
 
 .editableparentcom-btns>button {
+    margin: 0px 0px 0px 5px;
+}
+
+.editableparentcom-btns-transform {
+    transform-origin:0% 50%;
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
+}
+
+.editableparentcom-btns-transform>button{
     transform-origin:50% 50%;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
-    margin: 0px 5px;
 }
+
+.editableparentcom-btns-active{
+    opacity: 1;
+}
+

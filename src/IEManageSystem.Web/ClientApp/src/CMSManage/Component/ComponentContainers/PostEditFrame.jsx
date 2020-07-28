@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ContentComponentDataModel from 'CMSManage/Models/ComponentDataModel'
 
 import Tab from 'Tab/Tab.jsx'
 
@@ -42,7 +41,7 @@ class EditFrame extends React.Component {
     render() {
         return (
             <Modal
-                title={`${this.props.title} 组件数据编辑`}
+                title={`${this.props.componentDescribe.displayName} 组件数据编辑`}
                 visible={this.props.show}
                 onOk={this.submit}
                 onCancel={this.cancel}
@@ -59,7 +58,7 @@ class EditFrame extends React.Component {
                         selectIndex={this.selectIndex}
                         selectOnclick={() => { }}
                     >
-                        <this.props.componentObject.ComponentDataConfig
+                        <this.props.componentDescribe.componentObject.ComponentDataConfig
                             data={this.state.componentData}
                             setData={(value) => this.setState({ componentData: value })}
                             pageComponentSettings={this.props.pageComponent.pageComponentSettings}
@@ -76,8 +75,8 @@ EditFrame.propTypes = {
     close: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     componentData: PropTypes.object,
-    componentObject: PropTypes.object.isRequired,
     pageComponent: PropTypes.object.isRequired,
+    componentDescribe: PropTypes.object.isRequired,
 }
 
 export default EditFrame

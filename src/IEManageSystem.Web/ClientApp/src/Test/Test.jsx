@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Test.css";
 
-import PageEditCompontContainer from 'CMSManage/Component/ComponentContainers/PageEditCompontContainer'
+import PageEditCompontContainer from 'CMSManage/PageEdit/ComponentContainer'
 
 import PageComponentModel from "CMSManage/Models/Pages/PageComponentModel"
 

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
 import { pageFetch, pageDataFetch, RootComponentSign, } from 'CMSManage/IEReduxs/Actions'
-import FrontCompontContainer from 'CMSManage/Component/ComponentContainers/FrontCompontContainer'
 import Page from './Page'
+import BaseComponentContainer from 'CMSManage/Component/ComponentContainers/BaseComponentContainer'
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -56,13 +56,13 @@ class PageContainer extends React.Component {
             <Page>
                 {
                     this.props.rootPageComponent.pageComponentSigns.map(sign =>
-                        <FrontCompontContainer
+                        <BaseComponentContainer
                             key={sign}
                             sign={sign}
                             pageId={this.props.pageId}
                             pageDataId={this.props.pageDataId}
                         >
-                        </FrontCompontContainer>)
+                        </BaseComponentContainer>)
                 }
             </Page>
         );

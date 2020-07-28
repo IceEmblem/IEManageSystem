@@ -6,12 +6,13 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import './index.css'
 
 import { pageFetch, pageDataFetch, componentDataUpdateFetch, RootComponentSign, } from 'CMSManage/IEReduxs/Actions'
-import PostEditComponentContainer from 'CMSManage/Component/ComponentContainers/PostEditComponentContainer'
+import BaseComponentContainer from 'CMSManage/Component/ComponentContainers/BaseComponentContainer'
 
 import { Button } from 'antd';
 import { CloudUploadOutlined, UndoOutlined } from '@ant-design/icons'
 
 import Page from 'CMSManage/Home/Page'
+import ToolBtns from './ToolBtns'
 
 class ComponentData extends React.Component {
     constructor(props) {
@@ -53,13 +54,15 @@ class ComponentData extends React.Component {
                     <Page>
                         {
                             this.props.rootPageComponent.pageComponentSigns.map(sign =>
-                                <PostEditComponentContainer
+                                <BaseComponentContainer
                                     key={sign}
                                     sign={sign}
                                     pageId={this.props.pageId}
                                     pageDataId={this.props.pageDataId}
+
+                                    ToolBtn={ToolBtns}
                                 >
-                                </PostEditComponentContainer>)
+                                </BaseComponentContainer>)
                         }
                     </Page>
                 </div>

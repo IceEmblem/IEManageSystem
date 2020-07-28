@@ -11,7 +11,12 @@ export const componentTypes = [
     { name: componentType.other, text: "其他组件", icon: "oi-puzzle-piece" }
 ];
 
-export default class ComponentFactory {
+const ComponentDescribeMaps = new Map();
+ComponentDescribes.forEach(item => { 
+    ComponentDescribeMaps[item.name] = item;
+})
+
+class ComponentFactory {
     constructor() {
     }
 
@@ -20,6 +25,15 @@ export default class ComponentFactory {
     }
 
     getComponentDescribeForName(name) {
-        return ComponentDescribes.find(item => item.name == name);
+        let componentDescribe = ComponentDescribeMaps[name];
+        if (!componentDescribe) {
+            return ComponentDescribeMaps["NotFind"];
+        }
+
+        return componentDescribe;
     }
 }
+
+const componentFactory = new ComponentFactory();
+
+export default componentFactory;

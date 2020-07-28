@@ -18,7 +18,7 @@ export default class LogicManage extends React.Component {
         this.freshenResources = this.freshenResources.bind(this);
 
         // 存在逻辑代码的组件
-        this.existLogicCodeComponentDescribes = new ComponentFactory().getComponentDescribes()
+        this.existLogicCodeComponentDescribes = ComponentFactory.getComponentDescribes()
             .filter(e =>
                 e.logicCode &&
                 e.logicCode.trim() != "");

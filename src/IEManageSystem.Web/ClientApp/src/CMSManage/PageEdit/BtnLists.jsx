@@ -9,7 +9,7 @@ import { Button, Popover, Input, Tag, Select } from 'antd';
 import { PlusCircleOutlined, InfoCircleOutlined, SyncOutlined, SaveOutlined, VerticalAlignBottomOutlined } from "@ant-design/icons"
 
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import { setPage } from '../../IEReduxs/Actions'
+import { setPage } from '../IEReduxs/Actions'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 
 import "./BtnLists.css";
@@ -34,7 +34,7 @@ const Layout = (props) => {
 };
 
 const PageInfo = (props) => (<div className="pageedit-page-container-header-info">
-    <div className="input-group">
+    <div className="mb-3">
         <Input
             placeholder="背景颜色"
             value={props.page.displayName}
@@ -42,7 +42,7 @@ const PageInfo = (props) => (<div className="pageedit-page-container-header-info
             suffix={<Tag color="#55acee">显示名称</Tag>}
         />
     </div>
-    <div className="input-group">
+    <div className="mb-3">
         <Input
             placeholder="背景颜色"
             value={props.page.name}
@@ -50,7 +50,7 @@ const PageInfo = (props) => (<div className="pageedit-page-container-header-info
             suffix={<Tag color="#55acee">页面名称</Tag>}
         />
     </div>
-    <div className="input-group">
+    <div className="mb-3">
         <Input
             placeholder="背景颜色"
             value={props.page.description}

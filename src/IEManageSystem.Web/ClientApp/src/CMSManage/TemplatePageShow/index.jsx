@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import TemplateList from 'CMSManage/Component/Components/TemplateList'
 import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import { setPage, RootComponentSign } from '../IEReduxs/Actions'
-import FrontCompontContainer from 'CMSManage/Component/ComponentContainers/FrontCompontContainer'
+import BaseComponentContainer from 'CMSManage/Component/ComponentContainers/BaseComponentContainer'
 import Page from '../Home/Page'
 
 const pageId = 999999;
@@ -28,13 +28,13 @@ class TemplatePageShow extends React.Component {
             <Page>
                 {
                     this.props.rootPageComponent.pageComponentSigns.map(sign =>
-                        <FrontCompontContainer
+                        <BaseComponentContainer
                             key={sign}
                             sign={sign}
                             pageId={pageId}
                             pageDataId={undefined}
                         >
-                        </FrontCompontContainer>)
+                        </BaseComponentContainer>)
                 }
             </Page>
         );

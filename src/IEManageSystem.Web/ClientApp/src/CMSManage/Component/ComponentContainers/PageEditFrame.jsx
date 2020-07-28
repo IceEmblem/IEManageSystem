@@ -38,7 +38,7 @@ class EditFrame extends React.Component {
         let tabs = [];
 
         // 根据组件的配置，配置选项卡
-        this.props.componentObject.getComponentSettingConfigs().forEach(element => {
+        this.props.componentDescribe.componentObject.getComponentSettingConfigs().forEach(element => {
             // 添加 选项卡 选项
             tabs.push({ index: index, text: element.displayName, name: element.name })
             index++;
@@ -75,7 +75,7 @@ class EditFrame extends React.Component {
         }
 
         // 组件设置配置
-        let componentSettingConfig = this.props.componentObject.getComponentSettingConfigs().find(item => item.name == this.state.selectTab.name);
+        let componentSettingConfig = this.props.componentDescribe.componentObject.getComponentSettingConfigs().find(item => item.name == this.state.selectTab.name);
 
         // 组件设置配置使用的组件
         return componentSettingConfig.bulidConfigComponent(this.state.pageComponent,
@@ -87,7 +87,7 @@ class EditFrame extends React.Component {
     render() {
         return (
             <Modal
-                title={`${this.props.title} 组件编辑`}
+                title={`${this.props.componentDescribe.displayName} 组件编辑`}
                 visible={this.props.show}
                 onOk={this.submit}
                 onCancel={this.cancel}
@@ -115,7 +115,7 @@ class EditFrame extends React.Component {
 }
 
 EditFrame.propTypes = {
-    componentObject: PropTypes.object.isRequired,
+    componentDescribe: PropTypes.object.isRequired,
     pageComponent: PropTypes.object.isRequired,
     editComponent: PropTypes.func.isRequired,
     close: PropTypes.func.isRequired,
