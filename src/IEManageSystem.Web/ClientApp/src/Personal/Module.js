@@ -7,6 +7,8 @@ import LayoutModule from 'Layout/Module';
 import IERedux from './IEReduxs/PersonalRedux'
 import {reducer} from './IEReduxs/Reducers'
 import RootRedux from 'Core/IEReduxs/RootRedux'
+import UserTagNavTools from './UserTagNavTools'
+import NavToolProvider from 'Layout/NavTools/NavToolProvider'
 
 import {
     UserOutlined,
@@ -46,6 +48,7 @@ export default class Module extends BaseModule
             Personal,
             1
         );
+        NavToolProvider.registerToolRight(1, <UserTagNavTools />);
 
         IERedux.setReducer(reducer);
         RootRedux.register(IERedux);

@@ -15,6 +15,8 @@ import Page from 'Core/Page/Page'
 import { reducer } from 'CMSManage/IEReduxs/Reducers'
 import IERedux from 'CMSManage/IEReduxs/CmsRedux'
 import Home from './Home'
+import SearchBoxTool from './SearchBoxTool'
+import NavToolProvider from 'Layout/NavTools/NavToolProvider'
 
 import {
     SnippetsOutlined,
@@ -111,6 +113,7 @@ export default class Module extends BaseModule {
             CMSManage,
             3
         );
+        NavToolProvider.registerToolOfLeft(1, <SearchBoxTool />);
 
         IERedux.setReducer(reducer);
         RootRedux.register(IERedux);
