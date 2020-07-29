@@ -12,9 +12,9 @@ interface NavMenuComponent{
 
 var navMenuComponents:Array<NavMenuComponent> = [];
 
-export default class MenuProvider {
+class MenuProvider {
     // 注册导航栏菜单
-    static registerMenu(menu:Menu, baseUrl:string, component:any, sortIndex: number = 0) {
+    registerMenu(menu:Menu, baseUrl:string, component:any, sortIndex: number = 0) {
         navMenuComponents.push({
             menu,
             baseUrl,
@@ -111,3 +111,7 @@ export default class MenuProvider {
         return navMenuComponents;
     }
 }
+
+const menuProvider = new MenuProvider();
+
+export default menuProvider;

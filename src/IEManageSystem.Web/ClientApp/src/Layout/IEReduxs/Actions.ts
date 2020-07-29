@@ -1,4 +1,5 @@
 import Menu from "Core/Menu/Menu";
+import {createIEThunkAction} from 'Core/IEReduxs/Actions'
 
 export const TopLevelMenusSelect = 'TopLevelMenusSelect'
 export function topLevelMenusSelect(menu:Menu) 
@@ -15,4 +16,12 @@ export function sideMenuSelect(menu:Menu){
     type: SideMenuSelect,
     menu
   }
+}
+
+export const CreateTopLevelMenusReceive = "CreateTopLevelMenusReceive"
+export function createTopLevelMenusFetch(){
+  return createIEThunkAction(
+    "/api/User/GetUserScopeAccessAuthorities",
+    {},
+    CreateTopLevelMenusReceive);
 }

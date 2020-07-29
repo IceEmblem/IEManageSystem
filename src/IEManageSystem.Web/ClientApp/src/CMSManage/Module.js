@@ -3,10 +3,11 @@ import React from 'react'
 // 核心模块依赖
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
-import MenuProvider from 'Core/Menu/MenuProvider'
+import MenuProvider from 'Layout/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 import RootRedux from 'Core/IEReduxs/RootRedux'
-import CoreModel from 'Core/Module';
+import CoreModule from 'Core/Module';
+import LayoutModule from 'Layout/Module';
 import PageProvider from 'Core/Page/PageProvider'
 import Page from 'Core/Page/Page'
 
@@ -121,5 +122,6 @@ export default class Module extends BaseModule {
 }
 
 new ModuleFactory().register(Module, [
-    CoreModel
+    CoreModule,
+    LayoutModule
 ]);

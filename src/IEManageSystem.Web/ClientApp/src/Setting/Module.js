@@ -2,8 +2,9 @@ import React from 'react'
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import CoreModule from 'Core/Module';
+import LayoutModule from 'Layout/Module';
 
-import MenuProvider from 'Core/Menu/MenuProvider'
+import MenuProvider from 'Layout/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 
 import {
@@ -42,5 +43,6 @@ export default class Module extends BaseModule
 }
 
 new ModuleFactory().register(Module, [
-    CoreModule
+    CoreModule,
+    LayoutModule
 ]);

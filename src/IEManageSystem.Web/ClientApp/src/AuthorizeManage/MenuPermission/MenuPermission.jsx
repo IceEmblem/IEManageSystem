@@ -4,7 +4,7 @@ import Tab from 'Tab/Tab.jsx';
 
 import "./MenuPermission.css";
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import RootRedux from 'Core/IEReduxs/RootRedux'
+import LayoutRedux from 'Layout/IEReduxs/LayoutRedux'
 
 import IESideNav from 'IESideNav';
 
@@ -151,7 +151,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const Contain = RootRedux.connect(
+const Contain = LayoutRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps // 关于dispatch
 )(MenuPermission)

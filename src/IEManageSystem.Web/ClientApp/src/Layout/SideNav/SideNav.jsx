@@ -5,35 +5,17 @@ import { withRouter } from "react-router-dom";
 
 import './SideNav.css'
 
-import RootRedux from 'Core/IEReduxs/RootRedux';
-import { ieReduxFetch } from 'Core/IEReduxFetch'
-import { createTopLevelMenusFetch } from 'Core/IEReduxs/Actions'
+import LayoutRedux from 'Layout/IEReduxs/LayoutRedux';
+import { createTopLevelMenusFetch } from 'Layout/IEReduxs/Actions'
 
 class SideNav extends React.Component {
     // props.selectTopMenu
     constructor(props) {
         super(props);
-
-        this.state =
-        {
-            userName: null,              // 用户名称
-            headSculpture: "",
-        };
     }
 
     componentDidMount(){
-        this.getUserName();
         this.props.createTopLevelMenusFetch();
-    }
-
-    // 获取用户名称
-    getUserName() {
-        let postData = {};
-
-        ieReduxFetch("/api/User/GetUserInfo", postData)
-            .then(value => {
-                this.setState({ userName: value.user.name, headSculpture: value.user.headSculpture });
-            })
     }
 
     render() {
@@ -76,11 +58,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const SideNavContain = RootRedux.connect(
+const SideNavContain = LayoutRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps, // 关于dispatch
-    undefined,
-    { pure: false }
 )(SideNav)
 
 export default withRouter(SideNavContain);

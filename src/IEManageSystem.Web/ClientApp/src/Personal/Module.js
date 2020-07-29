@@ -1,8 +1,9 @@
 import React from 'react'
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
-import MenuProvider from 'Core/Menu/MenuProvider'
-import CoreModel from 'Core/Module';
+import MenuProvider from 'Layout/Menu/MenuProvider'
+import CoreModule from 'Core/Module';
+import LayoutModule from 'Layout/Module';
 import IERedux from './IEReduxs/PersonalRedux'
 import {reducer} from './IEReduxs/Reducers'
 import RootRedux from 'Core/IEReduxs/RootRedux'
@@ -52,5 +53,6 @@ export default class Module extends BaseModule
 }
 
 new ModuleFactory().register(Module, [
-    CoreModel
+    CoreModule,
+    LayoutModule
 ]);

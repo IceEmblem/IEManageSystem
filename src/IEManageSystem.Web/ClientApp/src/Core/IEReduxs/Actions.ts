@@ -131,14 +131,6 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
   }
 }
 
-export const CreateTopLevelMenusReceive = "CreateTopLevelMenusReceive"
-export function createTopLevelMenusFetch(){
-  return createIEThunkAction(
-    "/api/User/GetUserScopeAccessAuthorities",
-    {},
-    CreateTopLevelMenusReceive);
-}
-
 export const GetSiteSettingsReceive = "GetSiteSettingsReceive";
 export function getSiteSettingsFetch(){
   return createIEThunkAction(
