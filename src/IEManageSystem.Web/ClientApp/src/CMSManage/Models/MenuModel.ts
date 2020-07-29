@@ -6,25 +6,7 @@ export default class MenuModel {
     public pageName: string;
     public pageDataName: string;
     public menuType: string;
-    public menus: Array<MenuModel>;
-
-    constructor(data: any) {
-        this.id = data.id;
-        this.name = data.name;
-        this.displayName = data.displayName;
-        this.icon = data.icon;
-        this.pageName = data.pageName;
-        this.pageDataName = data.pageDataName;
-        this.menuType = data.menuType;
-
-        this.menus = [];
-        if (!data.menus) {
-            return;
-        }
-        data.menus.forEach((element: any) => {
-            this.menus.push(new MenuModel(element));
-        });
-    }
+    public menus: Array<MenuModel> = [];
 
     isCompositeMenuType(): boolean {
         return this.menuType == "CompositeMenu";
@@ -67,8 +49,11 @@ export default class MenuModel {
             throw new Error("菜单名称以重复");
         }
 
-        let childMenu = new MenuModel(menuData);
-        this.menus.push(childMenu);
+        menuData.__proto__ =  MenuModel.prototype;
+        if(!this.menus) {
+            this.menus = [];
+        }
+        this.menus.push(menuData);
     }
 
     deleteChildMenu(menuData: any) {
@@ -101,7 +86,7 @@ export default class MenuModel {
             throw new Error("菜单名称已重复");
         }
 
-        let childMenu = new MenuModel(menuData);
-        this.menus.splice(index, 1, childMenu);
+        menuData.__proto__ =  MenuModel.prototype;
+        this.menus.splice(index, 1, menuData);
     }
 }

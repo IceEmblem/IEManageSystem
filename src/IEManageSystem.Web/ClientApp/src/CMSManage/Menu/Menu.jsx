@@ -2,7 +2,6 @@ import React from "react";
 import ResourceForm from 'ResourceForm/ResourceForm.jsx';
 import Describe from 'ResourceForm/Describe.js';
 import { ResourceDescribeValueType } from 'ResourceForm/ResourceDescribeValueType.js';
-import MenuModel from 'CMSManage/Models/MenuModel'
 
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
@@ -14,6 +13,10 @@ import "./Menu.css";
 import { Button, message } from 'antd';
 import { UndoOutlined, SaveOutlined, EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
+import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
+import { menuFetch } from 'CMSManage/IEReduxs/Actions'
+import IETool from 'ToolLibrary/IETool'
+
 const operateState = {
     add: "add",
     update: "update",
@@ -21,7 +24,7 @@ const operateState = {
     none: "none"
 };
 
-export default class Menu extends React.Component {
+class Menu extends React.Component {
     constructor(props) {
         super(props);
 
@@ -43,7 +46,6 @@ export default class Menu extends React.Component {
 
         this.state = {
             rootMenu: null,
-            menus: [],
             operateState: operateState.none,
             currentOperateParentMenu: null,
             currentOperateMenu: null,
@@ -51,26 +53,24 @@ export default class Menu extends React.Component {
             confirmBoxShow: false
         };
 
-        this.getMenus = this.getMenus.bind(this);
         this.addMenu = this.addMenu.bind(this);
         this.deleteMenu = this.deleteMenu.bind(this);
         this.updateMenu = this.updateMenu.bind(this);
     }
 
     componentDidMount() {
-        this.getMenus();
+        if (!this.props.rootMenu) {
+            this.props.menuFetch();
+        }
+        else {
+            this.setState({rootMenu: IETool.deepCopy(this.props.rootMenu)});
+        }
     }
 
-    getMenus() {
-        let postData = {
-            menuName: this.props.match.params.menuName
-        };
-
-        ieReduxFetch("/api/Menu/GetMenu", postData)
-            .then(value => {
-                let menu = new MenuModel(value.menu);
-                this.setState({ rootMenu: menu, menus: menu.menus });
-            });
+    componentWillReceiveProps(nextProps){
+        if(this.props.rootMenu != nextProps.rootMenu){
+            this.setState({rootMenu: IETool.deepCopy(nextProps.rootMenu)});
+        }
     }
 
     addMenu(resource) {
@@ -87,7 +87,7 @@ export default class Menu extends React.Component {
     deleteMenu(resource) {
         try {
             this.state.currentOperateParentMenu.deleteChildMenu(resource);
-            this.setState({ confirmBoxShow: false })
+            this.setState({ confirmBoxShow: false });
         }
         catch (e) {
             this.setState({ confirmBoxShow: false });
@@ -113,7 +113,7 @@ export default class Menu extends React.Component {
 
         ieReduxFetch("/api/MenuManage/UpdateMenu", postData)
             .then(() => {
-                this.getMenus();
+                this.props.menuFetch();
             })
     }
 
@@ -200,7 +200,10 @@ export default class Menu extends React.Component {
         return (
             <div className="col-md-12 d-flex flex-column">
                 <div className='cms-menu flex-grow-1 flex-shrink-1'>
-                    {this.state.menus.map(item => this.createRootMenu(item))}
+                    {
+                        this.state.rootMenu
+                        && this.state.rootMenu.menus.map(item => this.createRootMenu(item))
+                    }
                     <div>
                         <label className="bg-white">
                             <div className="cms-menu-title">
@@ -238,8 +241,8 @@ export default class Menu extends React.Component {
                 <Modal
                     title={
                         <div className="d-flex align-items-center">
-                          <ExclamationCircleOutlined className="mr-3" style={{ fontSize: "22px", color: "#faad14" }} />
-                          <span>删除菜单</span>
+                            <ExclamationCircleOutlined className="mr-3" style={{ fontSize: "22px", color: "#faad14" }} />
+                            <span>删除菜单</span>
                         </div>}
                     visible={this.state.confirmBoxShow}
                     onOk={() => { this.deleteMenu(this.state.currentOperateMenu) }}
@@ -253,3 +256,26 @@ export default class Menu extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    let menuName = ownProps.match.params.menuName
+
+    return {
+        rootMenu: state.menus[menuName]
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        menuFetch: () => {
+            return dispatch(menuFetch(ownProps.match.params.menuName));
+        }
+    }
+}
+
+const Contain = CmsRedux.connect(
+    mapStateToProps, // 关于state
+    mapDispatchToProps
+)(Menu)
+
+export default Contain;

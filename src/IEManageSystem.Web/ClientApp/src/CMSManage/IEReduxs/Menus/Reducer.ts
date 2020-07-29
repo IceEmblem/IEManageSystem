@@ -1,4 +1,4 @@
-import {MenuReceive} from './Action'
+import {MenuReceive, UpdateMenu, UpdateMenuAction} from './Action'
 import {
     FetchAction
 } from '../../../Core/IEReduxs/Actions'
@@ -22,9 +22,21 @@ function menuReceive(state, action:FetchAction){
     return newState;
 }
 
+function updateMenu(state, action: UpdateMenuAction){
+    let newState = {...state};
+    newState[action.menu.name] = action.menu;
+    setMenuModel(newState[action.menu.name]);
+
+    return newState;
+}
+
 export default function reducer(state = {}, action) {
     if(action.type == MenuReceive){
         return menuReceive(state, action);
+    }
+
+    if(action.type == UpdateMenu){
+        return updateMenu(state, action);
     }
 
     return state;

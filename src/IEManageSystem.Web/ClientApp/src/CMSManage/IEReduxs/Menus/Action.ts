@@ -13,3 +13,8 @@ export function menuFetch(menuName: string) {
     MenuReceive
   );
 }
+
+export const UpdateMenu = "UpdateMenu"
+export class UpdateMenuAction{
+  constructor(public menu: any){}
+}

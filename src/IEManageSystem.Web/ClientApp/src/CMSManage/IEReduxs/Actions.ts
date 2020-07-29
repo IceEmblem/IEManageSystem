@@ -7,7 +7,10 @@ import {
   EditComponentAction,
   RootComponentSign
 } from './PageComponents/Action';
-import {menuFetch} from './Menus/Action'
+import {
+  menuFetch,
+  UpdateMenuAction
+} from './Menus/Action'
 
 export {
   ComponentDataUpdateAction,
@@ -16,7 +19,8 @@ export {
   RemoveComponentAction,
   EditComponentAction,
   RootComponentSign,
-  menuFetch
+  menuFetch,
+  UpdateMenuAction
 }
 
 // 设置当前活跃的组件
