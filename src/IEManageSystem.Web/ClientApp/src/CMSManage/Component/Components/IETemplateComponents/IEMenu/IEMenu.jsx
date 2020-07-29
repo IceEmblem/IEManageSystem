@@ -13,7 +13,7 @@ export default class IEMenu extends BaseMenuComponent {
     }
 
     createMenus() {
-        let mainMenu = this.state.menu;
+        let mainMenu = this.props.menu;
         if (!mainMenu) {
             return null;
         }

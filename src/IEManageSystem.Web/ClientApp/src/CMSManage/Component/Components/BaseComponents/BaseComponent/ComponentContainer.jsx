@@ -17,7 +17,7 @@ export const mapStateToProps = (state, ownProps) => { // ownProps为当前组件
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        pageFreshen: (pageName, pageDataName) => {
+        dispatchPageFreshen: (pageName, pageDataName) => {
             let promises = [dispatch(pageFetch(pageName))];
             if (pageDataName && pageDataName != "") {
                 promises.push(dispatch(pageDataFetch(pageName, pageDataName)));
@@ -30,11 +30,12 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
 export const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return {
         ...stateProps,
-        ... ownProps,
+        ...dispatchProps,
+        ...ownProps,
         pageFreshen: () => {
             let pageName = stateProps.page.name;
             let pageDataName = stateProps.pageData ? stateProps.pageData.name : undefined;
-            return  dispatchProps.pageFreshen(pageName, pageDataName);
+            return  dispatchProps.dispatchPageFreshen(pageName, pageDataName);
         },
         execLogic: (requestData) => {
             let postData = {

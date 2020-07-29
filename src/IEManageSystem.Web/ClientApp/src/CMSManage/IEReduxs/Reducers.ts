@@ -14,6 +14,7 @@ import pageComponentReducer from './PageComponents/Reducer';
 import defaultComponentDataReducer from './DefaultComponentDatas/Reducer';
 import pageDataReducer from './PageDatas/Reducer';
 import contentComponentDataReducer from './ContentComponentDatas/Reducer';
+import menuReducer from './Menus/Reducer'
 
 function activePageComponentSign(state: "", action: any) {
     if (action.type == SetActiveComponent) {
@@ -62,5 +63,6 @@ export function reducer(state: any = {
             pageDataNameToIds: pageDataNameToIds(state.pageDataNameToIds, action),
             contentComponentDatas: contentComponentDataReducer(state.contentComponentDatas, action),
             activePageComponentSign: activePageComponentSign(state.activePageComponentSign, action),
+            menus: menuReducer(state.menus, action),
         })
 }

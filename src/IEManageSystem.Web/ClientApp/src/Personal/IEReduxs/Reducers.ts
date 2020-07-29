@@ -26,9 +26,6 @@ function userInfoData(state = {
 
 export function reducer(state:any = {}, action:any) {
     return {
-        ...state,
-        ...{
-            userInfoData: userInfoData(state.userInfoData, action)
-        }
+        userInfoData: userInfoData(state.userInfoData, action)
     }
 }
