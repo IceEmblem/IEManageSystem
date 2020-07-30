@@ -53,46 +53,38 @@ namespace IEManageSystem.Entitys.Authorization
                 try
                 {
                     var superPermission = Permission.SuperPermission;
-
-                    _permissionManager.Create(superPermission);
+                    _permissionManager.PermissionRepository.Insert(superPermission);
 
                     var adminPermission = Permission.AdminPermission;
-
-                    _permissionManager.Create(adminPermission);
+                    _permissionManager.PermissionRepository.Insert(adminPermission);
 
                     var userPermission = Permission.UserPermission;
-
-                    _permissionManager.Create(userPermission);
+                    _permissionManager.PermissionRepository.Insert(userPermission);
 
                     _unitOfWorkManager.Current.SaveChanges();
 
 
                     var superAdminRole = Role.SuperAdmin;
-
-                    _roleManager.CreateRole(superAdminRole).Wait();
-
-                    _roleManager.AddPermission(superAdminRole, superPermission);
-
+                    superAdminRole.RolePermissions = new List<RolePermission>();
+                    superAdminRole.AddPermission(superPermission);
+                    _roleManager.RoleRepository.Insert(superAdminRole);
 
                     var adminRole = Role.Admin;
-
-                    _roleManager.CreateRole(adminRole).Wait();
-
-                    _roleManager.AddPermission(adminRole, adminPermission);
+                    adminRole.RolePermissions = new List<RolePermission>();
+                    adminRole.AddPermission(adminPermission);
+                    _roleManager.RoleRepository.Insert(adminRole);
 
 
                     var userRole = Role.User;
-
-                    _roleManager.CreateRole(userRole).Wait();
-
-                    _roleManager.AddPermission(userRole, userPermission);
+                    userRole.RolePermissions = new List<RolePermission>();
+                    userRole.AddPermission(userPermission);
+                    _roleManager.RoleRepository.Insert(userRole);
 
                     _unitOfWorkManager.Current.SaveChanges();
 
 
                     User superAdmin = _userManager.CreateUser("SuperAdmin", "123456", "超级管理员").Result;
-
-                    _userManager.AddUserRole(superAdmin, superAdminRole);
+                    superAdmin.AddRole(superAdminRole);
 
                     _unitOfWorkManager.Current.SaveChanges();
 

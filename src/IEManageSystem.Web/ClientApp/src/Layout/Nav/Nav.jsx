@@ -1,9 +1,9 @@
-import React from 'react';;
-import './Nav.css';
-
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { BankOutlined } from '@ant-design/icons';
 import NavToolProvider from '../NavTools/NavToolProvider'
+
+import './Nav.css';
 
 export default class Nav extends React.Component {
     constructor(props) {

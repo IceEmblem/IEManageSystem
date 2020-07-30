@@ -23,17 +23,6 @@ namespace IEManageSystem
 
         public override void PostInitialize()
         {
-            IUnitOfWorkManager unitOfWorkManager = IocManager.Resolve<IUnitOfWorkManager>();
-
-            using (var unitOfWork = unitOfWorkManager.Begin())
-            {
-                // 动态添加Api域
-                IocManager.Resolve<ApiScopeProvider>().Register();
-
-                unitOfWorkManager.Current.SaveChanges();
-
-                unitOfWork.Complete();
-            }
         }
     }
 }

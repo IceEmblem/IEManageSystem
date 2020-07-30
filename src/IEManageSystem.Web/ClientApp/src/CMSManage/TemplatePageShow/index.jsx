@@ -6,6 +6,7 @@ import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
 import { setPage, RootComponentSign } from '../IEReduxs/Actions'
 import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
 import Page from '../Home/Page'
+import IETool from 'ToolLibrary/IETool'
 
 const pageId = 999999;
 
@@ -14,8 +15,10 @@ class TemplatePageShow extends React.Component {
         super(props);
 
         this.template = TemplateList.find(e => e.name == props.match.params.templateName);
-        this.templatePage = this.template.templatePages.find(item => item.page.name == props.match.params.templatePageName);
+        this.templatePage = IETool.deepCopy(this.template.templatePages.find(item => item.page.name == props.match.params.templatePageName));
+    }
 
+    componentDidMount(){
         this.props.setPage({ ...this.templatePage.page, ...{ id: pageId, name: `TemplatePageShow_${this.templatePage.page}` } }, this.templatePage.pageComponents, this.templatePage.defaultComponentDatas)
     }
 

@@ -39,21 +39,25 @@ namespace IEManageSystem.Web.Startup
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // 注册数据库上下文
-            services.AddAbpDbContext<IEManageSystemDbContext>(options =>
+            if (!string.IsNullOrWhiteSpace(_configurationRoot.GetConnectionString(IEManageSystemConsts.ConnectionStringName))) 
             {
-                DbContextOptionsConfigurer.Configure(
-                    options.DbContextOptions,
-                    _configurationRoot.GetConnectionString(IEManageSystemConsts.ConnectionStringName),
-                    _configurationRoot.GetSection("ConnectionType").Value);
+                services.AddAbpDbContext<IEManageSystemDbContext>(options =>
+                {
+                    DbContextOptionsConfigurer.Configure(
+                        options.DbContextOptions,
+                        _configurationRoot.GetConnectionString(IEManageSystemConsts.ConnectionStringName),
+                        _configurationRoot.GetSection("ConnectionType").Value);
 
-                if(_env.IsDevelopment()){
-                    LoggerFilterOptions loggerFilterOptions = new LoggerFilterOptions();
-                    loggerFilterOptions.AddFilter((level) => level >= LogLevel.Information);
+                    if (_env.IsDevelopment())
+                    {
+                        LoggerFilterOptions loggerFilterOptions = new LoggerFilterOptions();
+                        loggerFilterOptions.AddFilter((level) => level >= LogLevel.Information);
 
-                    // 日志过滤器
-                    options.DbContextOptions.UseLoggerFactory(new LoggerFactory(new[] { new DebugLoggerProvider() }, loggerFilterOptions));
-                }
-            });
+                        // 日志过滤器
+                        options.DbContextOptions.UseLoggerFactory(new LoggerFactory(new[] { new DebugLoggerProvider() }, loggerFilterOptions));
+                    }
+                });
+            }
 
             services.AddControllersWithViews(options =>
             {
