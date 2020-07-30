@@ -10,8 +10,8 @@ const { Step } = Steps;
 class Init extends React.Component {
     state = {
         stepIndex: 0,
-        sqlType: undefined,
-        sqlConnect: undefined,
+        sqlType: "sqlite",
+        sqlConnect: "Filename=.\\IceEmblem.db",
     }
 
     constructor(props) {

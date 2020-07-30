@@ -22,6 +22,12 @@ export default class DBConfigure extends React.Component {
                         <Radio.Button value="sqlserver">SQL Server</Radio.Button>
                     </Radio.Group>
                 </div>
+                <div className="ml-3">
+                    {
+                        this.props.sqlType == "sqlite" && 
+                        "IceEmblemCMS 提供了一个 SQLite 类型的本地数据库，如果你没有数据库，那么你可以直接进入下一步"
+                    }
+                </div>
             </div>
             <div className="d-flex mt-3">
                 <div className="mr-3">

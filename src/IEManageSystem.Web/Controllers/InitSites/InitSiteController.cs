@@ -51,16 +51,13 @@ namespace IEManageSystem.Web.Controllers.InitSites
 
             // 测试数据库连接
             DbContextOptionsBuilder<IEManageSystemDbContext> dbOptionsBuilder = new DbContextOptionsBuilder<IEManageSystemDbContext>();
-            if (input.SqlType == "sqlserver")
+            try
             {
-                dbOptionsBuilder.UseSqlServer(input.ConnectString);
+                DbContextOptionsConfigurer.Configure(dbOptionsBuilder, input.ConnectString, input.SqlType);
             }
-            else if (input.SqlType == "mysql")
+            catch (Exception ex) 
             {
-                dbOptionsBuilder.UseMySql(input.ConnectString);
-            }
-            else {
-                throw new UserFriendlyException("无效的数据库类型");
+                throw new UserFriendlyException(ex.Message);
             }
 
             var db = new IEManageSystemDbContext(dbOptionsBuilder.Options);

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Carousel } from 'antd';
 import { Typography } from 'antd';
+import {GithubOutlined} from '@ant-design/icons'
 
 import Show1 from './Show1.jpg'
 import Show2 from './Show2.jpg'
@@ -26,6 +27,9 @@ export default class Introduce extends React.Component {
                     你可以使用 IceEmblem CMS 作为公司的官网，或者你可以把它当作一个工具。
                     如果你是一名开发者，那么开发 IceEmblem CMS 组件，你只需要了解 React 和 IceEmblem CMS 的组件设计即可
                 </Paragraph>
+                <div>
+                    <a href="https://github.com/IceEmblem/IEManageSystem"><GithubOutlined /><span className="ml-2">Github: https://github.com/IceEmblem/IEManageSystem</span></a>
+                </div>
             </>)
     }
 }
