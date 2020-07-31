@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme from 'IEEnzyme';
-import EditFrame from 'CMSManage/Component/ComponentContainers/PageEditFrame';
+import EditFrame from 'CMSManage/Component/ComponentContainerBoxs/PageEditFrame';
 import TestComponent from '../TestComponent';
 
 const { shallow } = Enzyme;
@@ -30,10 +30,8 @@ const close = () => { };
 // 初始化设置
 test("init_test", () => {
     let editFrame = shallow(<EditFrame
-        basicSettingConfig={BasicSettingConfig}
-        pageLeafSettingConfig={PageLeafSettingConfig}
         pageComponent={pageComponent}
-        componentObject={TestComponent.componentObject}
+        componentDescribe={TestComponent}
         editComponent={editComponent}
         close={close}
         show={true}
@@ -50,10 +48,8 @@ test("init_test", () => {
 // 选择选项卡测试
 test("select_test", () => {
     let editFrame = shallow(<EditFrame
-        basicSettingConfig={BasicSettingConfig}
-        pageLeafSettingConfig={PageLeafSettingConfig}
         pageComponent={pageComponent}
-        componentObject={TestComponent.componentObject}
+        componentDescribe={TestComponent}
         editComponent={editComponent}
         close={close}
         show={true}
@@ -77,10 +73,8 @@ test("select_test", () => {
 // state中的pageComponent.pageComponentSettings与初始化时一致
 test("cancel_test", () => {
     let editFrame = shallow(<EditFrame
-        basicSettingConfig={BasicSettingConfig}
-        pageLeafSettingConfig={PageLeafSettingConfig}
         pageComponent={pageComponent}
-        componentObject={TestComponent.componentObject}
+        componentDescribe={TestComponent}
         editComponent={(pageComponent) => { submitedPageComponent = pageComponent }}
         close={close}
         show={true}

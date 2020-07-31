@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme from 'IEEnzyme';
-import EditFrame from 'CMSManage/Component/ComponentContainers/PostEditFrame';
+import EditFrame from 'CMSManage/Component/ComponentContainerBoxs/PostEditFrame';
 import TestComponent from '../TestComponent';
 
 const { shallow } = Enzyme;
@@ -46,11 +46,11 @@ test("submit_test", ()=>{
         submit={(data)=>{submitData = data}}
         pageComponent={pageComponent}
         componentData={componentData}
-        componentObject={TestComponent.componentObject}
+        componentDescribe={TestComponent}
     />);
 
     let state = editFrame.state();
-    state.contentComponentDataModel.singleDatas[0].field1 = "1111";
+    state.componentData.singleDatas[0].field1 = "1111";
 
     let instance = editFrame.instance();
     instance.submit();
@@ -65,20 +65,20 @@ test("cancel_test",()=>{
         submit={(data)=>{submitData = data}}
         pageComponent={pageComponent}
         componentData={componentData}
-        componentObject={TestComponent.componentObject}
+        componentDescribe={TestComponent}
     />);
 
     // 更改组件数据
     let state = editFrame.state();
-    state.contentComponentDataModel.singleDatas[0].field1 = "1111";
-    state.contentComponentDataModel.singleDatas[0].field2 = "2222";
+    state.componentData.singleDatas[0].field1 = "1111";
+    state.componentData.singleDatas[0].field2 = "2222";
 
     let instance = editFrame.instance();
     // 取消更改
     instance.cancel();
 
-    // state回复到初始化状态
+    // 原来的 componentData 不能被更改
     state = editFrame.state();
-    expect(state.contentComponentDataModel.singleDatas[0].field1).toEqual("field1Data");
-    expect(state.contentComponentDataModel.singleDatas[0].field2).toEqual("field2Data");
+    expect(componentData.singleDatas[0].field1).toEqual("field1Data");
+    expect(componentData.singleDatas[0].field2).toEqual("field2Data");
 })
