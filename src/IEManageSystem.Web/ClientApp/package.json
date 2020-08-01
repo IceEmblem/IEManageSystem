@@ -1,13 +1,5 @@
 {
   "name": "iemanagesystem",
-  "jest": {
-    "modulePaths": [
-      "<rootDir>/src/",
-      "<rootDir>/src/lib/",
-      "<rootDir>/src/Common/",
-      "<rootDir>/src/__tests/"
-    ]
-  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
