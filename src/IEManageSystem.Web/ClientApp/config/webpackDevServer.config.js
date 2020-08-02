@@ -1,5 +1,7 @@
 'use strict';
 
+const serverProxy = require('http-proxy-middleware')
+
 const fs = require('fs');
 const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 const evalSourceMapMiddleware = require('react-dev-utils/evalSourceMapMiddleware');
@@ -14,7 +16,7 @@ const sockHost = process.env.WDS_SOCKET_HOST;
 const sockPath = process.env.WDS_SOCKET_PATH; // default: '/sockjs-node'
 const sockPort = process.env.WDS_SOCKET_PORT;
 
-module.exports = function(proxy, allowedHost) {
+module.exports = function (proxy, allowedHost) {
   return {
     // WebpackDevServer 2.4.3 introduced a security fix that prevents remote
     // websites from potentially accessing local content through DNS rebinding:
@@ -103,16 +105,51 @@ module.exports = function(proxy, allowedHost) {
     // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
     proxy,
     before(app, server) {
-      // Keep `evalSourceMapMiddleware` and `errorOverlayMiddleware`
-      // middlewares before `redirectServedPath` otherwise will not have any effect
-      // This lets us fetch source contents from webpack for the error overlay
-      app.use(evalSourceMapMiddleware(server));
-      // This lets us open files from the runtime error overlay.
-      app.use(errorOverlayMiddleware());
+      if (process.env.REACT_APP_SERVER) {
+        console.log("use server");
 
-      if (fs.existsSync(paths.proxySetup)) {
-        // This registers user provided middleware for proxy reasons
-        require(paths.proxySetup)(app);
+        app.use(
+          serverProxy(
+            '/api/', {
+            target: 'http://localhost:5000/',
+            changeOrigin: true
+          }
+          )
+        )
+      }
+      else {
+        // 将AnalogData文件夹的json文件require到data中
+        const datas = require('require-all')({
+          dirname: __dirname + '/AnalogData',
+        });
+
+        // 处理/api开头的post请求
+        app.post(/^\/api/i, function (req, res) {
+          console.log(req.url)
+
+          // 匹配url
+          let regex = /\/api\/([^\/]*)\/(.*)/i
+          let match = regex.exec(req.url)
+
+          if (match == null || match.isSuccess == false) {
+            res.json({
+              success: true,
+              result: {
+              }
+            });
+            return;
+          }
+
+          // /api/controller/action 匹配controller
+          let file = match[1]
+          // /api/controller/action 匹配action
+          let name = match[2]
+
+          res.json({
+            success: true,
+            result: (datas[file] || {})[name]
+          });
+        });
       }
     },
     after(app) {

@@ -1,5 +1,24 @@
 'use strict';
 
+// require("./createComponentDescribesFile");
+// require("./createModuleListFile");
+// require("./createTemplateListFile");
+const createModulesFile = require('./createModulesFile').createModulesFile;
+createModulesFile(
+  "src/WebApp",
+  ["Start"],
+  "Module.js",
+  "",
+  "src/WebApp/ModuleList.js"
+);
+createModulesFile(
+  "src/Common",
+  [],
+  "Module.js",
+  "",
+  "src/Common/ModuleList.js"
+)
+
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
@@ -49,6 +68,14 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+
+// Ice 模块路径
+const pathMap = require('./pathmap.json');
+const ieModules = [
+  path.resolve('src/WebApp'),
+  path.resolve('src/Common'),
+  path.resolve('src/WebApp/lib'),
+]
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -278,7 +305,7 @@ module.exports = function(webpackEnv) {
       // https://github.com/facebook/create-react-app/issues/253
       modules: ['node_modules', paths.appNodeModules].concat(
         modules.additionalModulePaths || []
-      ),
+      ).concat(ieModules),
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
       // some tools, although we do not recommend using it, see:
@@ -298,6 +325,8 @@ module.exports = function(webpackEnv) {
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         ...(modules.webpackAliases || {}),
+        // Ice 映射路径
+        ...pathMap,
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
