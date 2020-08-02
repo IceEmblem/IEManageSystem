@@ -72,8 +72,6 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 // Ice 模块路径
 const pathMap = require('./pathmap.json');
 const ieModules = [
-  path.resolve('src/WebApp'),
-  path.resolve('src/Common'),
   path.resolve('src/WebApp/lib'),
 ]
 
