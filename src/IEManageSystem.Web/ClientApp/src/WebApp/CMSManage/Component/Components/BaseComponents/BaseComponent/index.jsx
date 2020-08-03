@@ -1,44 +1,16 @@
-import React from 'react';
-import BaseComponent, { BaseComponentProps } from './BaseComponent';
-import BaseConfig from './BaseConfig';
-import BasicSettingConfig from './BasicSettingConfig';
-import DefaultSettingConfig from './DefaultSettingConfig';
-import ComponentSettingConfig from './ComponentSettingConfig';
-import BaseField from './BaseField';
-import BasePreview from './BasePreview';
-import ComponentContainer from './ComponentContainer'
+import BaseCommonComponentObject, {BaseConfig, BaseComponent, BaseComponentProps, ComponentSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
+import {buildBasicSettingConfig} from './BasicSettingConfig';
 
 // 组件对象
-export default class BaseComponentObject {
-    constructor() {
-        this.ComponentSettingConfigs = [];
-        this.BasicSettingConfig = ComponentSettingConfig.BuildBasicComponentSettingConfig("ieBaiscSetting", "基本设置",
-            (pageComponentSetting, setPageComponentSetting) => {
-                return <BasicSettingConfig 
-                    data={pageComponentSetting}
-                    setData={setPageComponentSetting}
-                />;
-            }
-        );
-        this.ComponentContainer = ComponentContainer(this.Component);
-    }
-    Preview() {
-        return <BasePreview />
-    };
-    getComponentSettingConfigs(){
-        return [this.BasicSettingConfig, ...this.ComponentSettingConfigs]
-    }
-    Component(props) {
-        return undefined;
-    };
+export default class BaseComponentObject extends BaseCommonComponentObject {
+    BasicSettingConfig = buildBasicSettingConfig();
 }
 
-export { 
-    BaseConfig, 
-    BasicSettingConfig, 
-    DefaultSettingConfig, 
+export {
+    buildBasicSettingConfig,
+    // 以下属性为 BaseCMSManage 模块
+    BaseConfig,
     ComponentSettingConfig,
-    BaseField, 
-    BaseComponent, 
-    BaseComponentProps, 
+    BaseComponent,
+    BaseComponentProps,
 }

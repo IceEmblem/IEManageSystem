@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import TemplateList from 'CMSManage/Component/Components/TemplateList'
-import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import { setPage, RootComponentSign } from '../IEReduxs/Actions'
+import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
+import { setPage, RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
 import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
 import Page from '../Home/Page'
 import IETool from 'Common/ToolLibrary/IETool'
@@ -14,7 +14,7 @@ class TemplatePageShow extends React.Component {
     constructor(props) {
         super(props);
 
-        this.template = TemplateList.find(e => e.name == props.match.params.templateName);
+        this.template = ComponentFactory.TemplateList.find(e => e.name == props.match.params.templateName);
         this.templatePage = IETool.deepCopy(this.template.templatePages.find(item => item.page.name == props.match.params.templatePageName));
     }
 

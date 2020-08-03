@@ -1,9 +1,9 @@
 import React from 'react';
 import BaseComponentObject from '../../BaseComponents/BaseStaticComponent';
 import IEPageSetting from './IEPageSetting';
-import ComponentDescribe, {componentType} from '../../ComponentDescribe'
+import ComponentDescribe, {componentType} from 'BaseCMSManage/Components/ComponentDescribe'
 
-import ComponentSettingConfig from '../../BaseComponents/BaseComponent/ComponentSettingConfig';
+import {ComponentSettingConfig} from '../../BaseComponents/BaseComponent';
 import SettingConfig from './SettingConfig'
 
 class ComponentObject extends BaseComponentObject{
@@ -17,12 +17,8 @@ class ComponentObject extends BaseComponentObject{
             }
         )
     ];
-    Component(props){
-        return <IEPageSetting {...props} />
-    }
-    Preview() {
-        return <p>IE-页面设置</p>
-    };
+    Component=IEPageSetting;
+    Preview=<p>IE-页面设置</p>
 }
 
 let componentDescribe = new ComponentDescribe("IEPageSetting", new ComponentObject(), componentType.other, "IE页面设置");

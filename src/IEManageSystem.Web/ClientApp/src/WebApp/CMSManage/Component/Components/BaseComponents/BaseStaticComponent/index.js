@@ -1,12 +1,8 @@
-import BaseComponentObject from '../BaseLeafComponent';
-import BaseStaticComponent, {BaseStaticComponentProps} from './BaseStaticComponent'
+import BaseCommonComponentObject, {BaseStaticComponent, BaseStaticComponentProps} from 'BaseCMSManage/Components/BaseComponents/BaseStaticComponent'
+import {buildBasicSettingConfig} from '../BaseComponent';
 
-export default class StaticComponentObject extends BaseComponentObject {
-    Component(props){
-        let isInherit = props instanceof BaseStaticComponentProps;
-
-        throw new Error("Component function undefined");
-    }
+export default class StaticComponentObject extends BaseCommonComponentObject {
+    BasicSettingConfig = buildBasicSettingConfig();
 } 
 
 export {BaseStaticComponent, BaseStaticComponentProps}

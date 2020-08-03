@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ComponentFactory from '../Components/ComponentFactory'
-import ComponentDataModel from '../../Models/ComponentDataModel'
-
-import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
+import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
+import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 import './ComponentContainerBox.css'
 

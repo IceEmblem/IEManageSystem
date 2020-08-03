@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseConfig from '../BaseComponent/BaseConfig';
+import {BaseConfig, ComponentSettingConfig} from '../BaseComponent';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 
 import { Select, Input, InputNumber, Tag } from 'antd';
@@ -118,4 +118,15 @@ export default class PageLeafSettingConfig extends BaseConfig {
             </div>
         );
     }
+}
+
+export const buildPageLeafSettingConfig = function(){
+    return ComponentSettingConfig.BuildPageLeafComponentSettingConfig("iePageLeafSetting", "文章配置",
+        (pageComponentSetting, setPageComponentSetting) => {
+            return <PageLeafSettingConfig
+                data={pageComponentSetting}
+                setData={setPageComponentSetting}
+            />;
+        }
+    );
 }

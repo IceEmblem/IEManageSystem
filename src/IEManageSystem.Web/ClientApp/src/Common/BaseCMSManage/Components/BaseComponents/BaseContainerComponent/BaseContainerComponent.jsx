@@ -1,4 +1,4 @@
-import { BaseComponent, BaseComponentProps } from '../BaseComponent'
+import { BaseComponent } from '../BaseComponent'
 
 export default class BaseContainerComponent extends BaseComponent {
 }

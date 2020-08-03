@@ -63,4 +63,5 @@
   <ItemGroup>
     <Folder Include="wwwroot\Picture\image\" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

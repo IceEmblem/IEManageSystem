@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types'
 import { ieReduxFetch } from "Core/IEReduxFetch"
 import { BaseComponent, BaseComponentProps } from '../BaseComponent'
-import PageDataModel from '../../../../Models/PageDatas/PageDataModel'
-import TagModel from '../../../../Models/PageDatas/TagModel'
+import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
+import TagModel from 'BaseCMSManage/Models/PageDatas/TagModel'
 
 export class PageLeafComponentProps extends BaseComponentProps {
     constructor() {

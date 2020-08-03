@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './index.css'
 
 import ComponentFrame from './ComponentFrame.jsx'
-import ComponentFactory, { componentTypes } from 'CMSManage/Component/Components/ComponentFactory'
+import ComponentFactory, { componentTypes } from 'BaseCMSManage/Components/ComponentFactory'
 
 import { Modal, Card, Input, Typography } from 'antd';
 
@@ -17,7 +17,7 @@ class ComponentListBox extends React.Component {
         this.componentDescribes = ComponentFactory.getComponentDescribes();
         this.Preview = new Map();
         this.componentDescribes.map(item=>{
-            this.Preview[item.name] = item.componentObject.Preview()
+            this.Preview[item.name] = item.componentObject.Preview;
         });
 
         this.state = {

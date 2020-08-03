@@ -1,6 +1,4 @@
 import { BaseComponent, BaseComponentProps } from '../BaseComponent'
-import {ieReduxFetch} from 'Core/IEReduxFetch'
-import MenuModel from 'CMSManage/Models/MenuModel'
 
 export class BaseMenuComponentProps extends BaseComponentProps {
     constructor(){

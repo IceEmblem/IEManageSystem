@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
-import { pageFetch, pageDataFetch, RootComponentSign, } from 'CMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
 import Page from './Page'
 import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 import './index.css'
 
@@ -12,7 +12,7 @@ import {
     pageFetch,
     AddComponentAction,
     RootComponentSign,
-} from 'CMSManage/IEReduxs/Actions'
+} from 'BaseCMSManage/IEReduxs/Actions'
 
 import BtnLists from './BtnLists'
 import ComponentListBox from "./ComponentListBox"

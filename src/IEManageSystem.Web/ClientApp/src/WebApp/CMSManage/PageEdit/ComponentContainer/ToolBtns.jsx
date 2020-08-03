@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { Button, Tooltip } from 'antd';
 import { DeleteOutlined, EditOutlined, AppstoreAddOutlined, FormOutlined } from '@ant-design/icons';
 
@@ -8,13 +8,13 @@ import {
     RemoveComponentAction,
     EditComponentAction,
     DefaultComponentDataUpdateAction,
-} from 'CMSManage/IEReduxs/Actions'
+} from 'BaseCMSManage/IEReduxs/Actions'
 
 import PageEditFrame from 'CMSManage/Component/ComponentContainerBoxs/PageEditFrame'
 import PostEditFrame from 'CMSManage/Component/ComponentContainerBoxs/PostEditFrame'
 
-import ComponentFactory from 'CMSManage/Component/Components/ComponentFactory'
-import ComponentDataModel from 'CMSManage/Models/ComponentDataModel'
+import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
+import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
 
 class ToolBtns extends React.Component {
     state = {

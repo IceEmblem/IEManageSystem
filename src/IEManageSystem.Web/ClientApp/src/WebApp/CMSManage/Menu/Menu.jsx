@@ -13,8 +13,8 @@ import "./Menu.css";
 import { Button, message } from 'antd';
 import { UndoOutlined, SaveOutlined, EditOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
-import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
-import { menuFetch } from 'CMSManage/IEReduxs/Actions'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
+import { menuFetch } from 'BaseCMSManage/IEReduxs/Actions'
 import IETool from 'Common/ToolLibrary/IETool'
 
 const operateState = {

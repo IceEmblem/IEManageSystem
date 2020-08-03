@@ -2,9 +2,9 @@ import React from 'react';
 import BaseComponentObject from '../../BaseComponents/BasePageLeafComponent';
 
 import IEPostList from './IEPostList';
-import ComponentDescribe, {componentType} from '../../ComponentDescribe'
+import ComponentDescribe, {componentType} from 'BaseCMSManage/Components/ComponentDescribe'
 
-import ComponentSettingConfig from '../../BaseComponents/BaseComponent/ComponentSettingConfig';
+import {ComponentSettingConfig} from '../../BaseComponents/BaseComponent';
 import SettingConfig from './SettingConfig'
 
 class ComponentObject extends BaseComponentObject{
@@ -18,12 +18,8 @@ class ComponentObject extends BaseComponentObject{
             }
         )
     ];
-    Component(props){
-        return <IEPostList {...props} />
-    }
-    Preview() {
-        return <p>IE-文章列表</p>
-    };
+    Component=IEPostList;
+    Preview=<p>IE-文章列表</p>;
 }
 
 let componentDescribe = new ComponentDescribe("IEPostList", new ComponentObject(), componentType.page, "IE文章列表");

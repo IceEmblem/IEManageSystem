@@ -1,5 +1,3 @@
-import PageComponentSettingModel from 'CMSManage/Models/Pages/PageComponentSettingModel'
-
 export default class ComponentSettingConfig {
     static BuildBasicComponentSettingConfig(name, displayName, settingComponentBuilder){
         return new ComponentSettingConfig(name, displayName, settingComponentBuilder, 

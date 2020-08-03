@@ -1,6 +1,7 @@
 import React from 'react';
-import BaseConfig from './BaseConfig';
+import { BaseConfig, ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
+
 
 import { Input, Tag, InputNumber, Button } from 'antd';
 
@@ -8,7 +9,7 @@ import { Input, Tag, InputNumber, Button } from 'antd';
 // props.setData 类型为 (PageComponentModel) => void
 // 基本设置 配置
 export default class BasicSettingConfig extends BaseConfig {
-    state={
+    state = {
         isShowPicturePopupBox: false
     }
 
@@ -107,13 +108,13 @@ export default class BasicSettingConfig extends BaseConfig {
                                     this.props.setData(this.props.data)
                                 }
                             }
-                            suffix={<Button size="small" type="primary" onClick={()=>{this.setState({isShowPicturePopupBox: true})}} >选择图片</Button>}
+                            suffix={<Button size="small" type="primary" onClick={() => { this.setState({ isShowPicturePopupBox: true }) }} >选择图片</Button>}
                         />
                     </div>
-                    <PicturePopupBox 
+                    <PicturePopupBox
                         isShow={this.state.isShowPicturePopupBox}
-                        closePopupBox={()=>{this.setState({isShowPicturePopupBox: false})}}
-                        selectPictruePath={(path)=>{
+                        closePopupBox={() => { this.setState({ isShowPicturePopupBox: false }) }}
+                        selectPictruePath={(path) => {
                             this.props.data.pageComponentBaseSetting.backgroundImage = path;
                             this.props.setData(this.props.data)
                         }}
@@ -152,7 +153,7 @@ export default class BasicSettingConfig extends BaseConfig {
                     </div>
                 </div>
                 <div className="col-md-12 float-left">
-                    <label>组件标识 <small style={{color:"#0005"}}>不要随意改动组件标识，否则无法展示组件数据</small> ：</label>
+                    <label>组件标识 <small style={{ color: "#0005" }}>不要随意改动组件标识，否则无法展示组件数据</small> ：</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="组件标识"
@@ -170,4 +171,15 @@ export default class BasicSettingConfig extends BaseConfig {
             </div>
         );
     }
+}
+
+export const buildBasicSettingConfig = function () {
+    return ComponentSettingConfig.BuildBasicComponentSettingConfig("ieBaiscSetting", "基本设置",
+        (pageComponentSetting, setPageComponentSetting) => {
+            return <BasicSettingConfig
+                data={pageComponentSetting}
+                setData={setPageComponentSetting}
+            />;
+        }
+    );
 }

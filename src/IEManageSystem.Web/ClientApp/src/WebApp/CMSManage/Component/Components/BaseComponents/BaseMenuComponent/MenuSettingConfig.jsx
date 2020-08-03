@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseConfig from '../BaseComponent/BaseConfig';
+import {BaseConfig, ComponentSettingConfig} from '../BaseComponent';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 
 import { Select } from 'antd';
@@ -49,4 +49,15 @@ export default class MenuSettingConfig extends BaseConfig {
             </div>
         );
     }
+}
+
+export const buildMenuSettingConfig = function(){
+    return ComponentSettingConfig.BuildMenuComponentSettingConfig("ieMenuSetting", "菜单配置",
+        (pageComponentSetting, setPageComponentSetting) => {
+            return <MenuSettingConfig
+                data={pageComponentSetting}
+                setData={setPageComponentSetting}
+            />;
+        }
+    );
 }

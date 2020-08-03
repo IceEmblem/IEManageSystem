@@ -1,6 +1,6 @@
 import React from 'react'
 import Resource from 'Common/Resource/Resource.jsx';
-import TemplateList from 'CMSManage/Component/Components/TemplateList'
+import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import { NavLink } from 'react-router-dom'
 
 import { Button, Modal } from 'antd'
@@ -23,7 +23,7 @@ export default class TemplatePageManage extends React.Component {
         }
 
         this.freshenResources = this.freshenResources.bind(this);
-        this.template = TemplateList.find(e => e.name == props.match.params.templateName);
+        this.template = ComponentFactory.TemplateList.find(e => e.name == props.match.params.templateName);
         this.pages = this.template.templatePages.map(item => item.page);
 
         this.getPagesList = this.getPagesList.bind(this);

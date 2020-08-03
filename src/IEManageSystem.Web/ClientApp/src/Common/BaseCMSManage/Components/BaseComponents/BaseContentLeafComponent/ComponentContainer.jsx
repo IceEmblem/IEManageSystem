@@ -1,5 +1,5 @@
-import CmsRedux from '../../../../IEReduxs/CmsRedux'
-import ComponentDataModel from '../../../../Models/ComponentDataModel'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
+import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
 import * as BaseComponentContainer from '../BaseComponent/ComponentContainer'
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props

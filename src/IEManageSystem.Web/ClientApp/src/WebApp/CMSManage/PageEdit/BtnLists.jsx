@@ -9,8 +9,8 @@ import { Button, Popover, Input, Tag, Select } from 'antd';
 import { PlusCircleOutlined, InfoCircleOutlined, SyncOutlined, SaveOutlined, VerticalAlignBottomOutlined } from "@ant-design/icons"
 
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import { setPage } from '../IEReduxs/Actions'
-import CmsRedux from 'CMSManage/IEReduxs/CmsRedux'
+import { setPage } from 'BaseCMSManage/IEReduxs/Actions'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 import "./BtnLists.css";
 

@@ -5,18 +5,21 @@ import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'Layout/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
-import RootRedux from 'Core/IEReduxs/RootRedux'
 import CoreModule from 'Core/Module';
 import LayoutModule from 'Layout/Module';
 import PageProvider from 'Core/Page/PageProvider'
 import Page from 'Core/Page/Page'
 
+// BaseCmsManage 模块依赖
+import BaseCmsManageModule from 'BaseCMSManage/Module';
+import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory';
+
 // 初始化时加载
-import { reducer } from 'CMSManage/IEReduxs/Reducers'
-import IERedux from 'CMSManage/IEReduxs/CmsRedux'
 import Home from './Home'
 import SearchBoxTool from './SearchBoxTool'
 import NavToolProvider from 'Layout/NavTools/NavToolProvider'
+
+import TemplateList from './Component/Components/TemplateList'
 
 import {
     SnippetsOutlined,
@@ -115,16 +118,17 @@ export default class Module extends BaseModule {
         );
         NavToolProvider.registerToolOfLeft(1, <SearchBoxTool />);
 
-        IERedux.setReducer(reducer);
-        RootRedux.register(IERedux);
         PageProvider.register(new Page("Home", "/", Home));
         PageProvider.register(new Page("PageEdit", "/ManageHome/CMSManage/PageEdit/:pageName", PageEdit));
         PageProvider.register(new Page("PostEdit", "/ManageHome/CMSManage/PostEdit/:pageName/:pageDataName?", PostEdit));
         PageProvider.register(new Page("TemplatePageShow", "/ManageHome/CMSManage/TemplatePageShow/:templateName/:templatePageName", TemplatePageShow));
+
+        ComponentFactory.register(TemplateList);
     }
 }
 
 new ModuleFactory().register(Module, [
     CoreModule,
+    BaseCmsManageModule,
     LayoutModule
 ]);

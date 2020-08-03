@@ -1,6 +1,6 @@
 import React from 'react'
 import Resource from 'Common/Resource/Resource.jsx';
-import TemplateList from 'CMSManage/Component/Components/TemplateList'
+import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import {NavLink} from 'react-router-dom'
 import {ZoomInOutlined} from '@ant-design/icons'
 
@@ -39,7 +39,7 @@ export default class TemplateManage extends React.Component {
             <Resource
                 title="模板管理"
                 describes={this.getDescribes()}
-                resources={TemplateList}	// ++
+                resources={ComponentFactory.TemplateList}	// ++
                 freshenResources={this.freshenResources}
                 customizeOperateBtns={[LookupTemplatePages]}
                 hideAdd={true}

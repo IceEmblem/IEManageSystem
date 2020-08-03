@@ -1,13 +1,8 @@
-import React from 'react'
-import BaseContainerComponent from './BaseContainerComponent';
-import BaseComponentObject, { BasePreview, ComponentSettingConfig, BaseComponentProps} from '../BaseComponent';
+import BaseCommonComponentObject, {BaseContainerComponent} from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent'
+import {buildBasicSettingConfig} from '../BaseComponent';
 
-export default class ContainerComponentObject extends BaseComponentObject {
-    Component(props) {
-        let isInherit = props instanceof BaseComponentProps;
-
-        throw new Error("Component function undefined");
-    }
+export default class ContainerComponentObject extends BaseCommonComponentObject {
+    BasicSettingConfig = buildBasicSettingConfig();
 } 
 
 export {BaseContainerComponent}

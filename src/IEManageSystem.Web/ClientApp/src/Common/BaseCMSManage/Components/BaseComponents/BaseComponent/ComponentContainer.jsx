@@ -1,7 +1,7 @@
-import CmsRedux from '../../../../IEReduxs/CmsRedux'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
-import { pageFetch, pageDataFetch } from 'CMSManage/IEReduxs/Actions'
-import PageDataModel from '../../../../Models/PageDatas/PageDataModel'
+import { pageFetch, pageDataFetch } from 'BaseCMSManage/IEReduxs/Actions'
+import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
 
 const pageDataModel = PageDataModel.CreatePageDataModel();
 

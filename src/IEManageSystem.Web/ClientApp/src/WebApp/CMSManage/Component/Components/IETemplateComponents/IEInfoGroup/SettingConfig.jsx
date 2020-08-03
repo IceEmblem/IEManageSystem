@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BaseConfig from 'CMSManage/Component/Components/BaseComponents/BaseComponent/BaseConfig'
+import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
 import Setting from './Setting'
 
 import { Input, Tag, Switch, Button, InputNumber } from 'antd';

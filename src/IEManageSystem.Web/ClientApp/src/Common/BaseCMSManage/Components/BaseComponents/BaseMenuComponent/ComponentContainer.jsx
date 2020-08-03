@@ -1,7 +1,7 @@
-import CmsRedux from '../../../../IEReduxs/CmsRedux'
+import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import * as BaseComponentContainer from '../BaseComponent/ComponentContainer'
-import { menuFetch } from '../../../../IEReduxs/Actions'
-import MenuModel from '../../../../Models/MenuModel'
+import { menuFetch } from 'BaseCMSManage/IEReduxs/Actions'
+import MenuModel from 'BaseCMSManage/Models/MenuModel'
 
 const defaultMenuData = function(){
     let root = new MenuModel();

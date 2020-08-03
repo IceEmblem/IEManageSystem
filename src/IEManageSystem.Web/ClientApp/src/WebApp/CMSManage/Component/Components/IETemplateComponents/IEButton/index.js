@@ -1,9 +1,9 @@
 import React from 'react';
 import BaseComponentObject from '../../BaseComponents/BaseStaticComponent';
 import IEButton from './IEButton';
-import ComponentDescribe, { componentType } from '../../ComponentDescribe'
+import ComponentDescribe, {componentType} from 'BaseCMSManage/Components/ComponentDescribe'
 
-import ComponentSettingConfig from '../../BaseComponents/BaseComponent/ComponentSettingConfig';
+import {ComponentSettingConfig} from '../../BaseComponents/BaseComponent';
 import IEButtonSettingConfig from './IEButtonSettingConfig'
 
 class ComponentObject extends BaseComponentObject {
@@ -17,12 +17,8 @@ class ComponentObject extends BaseComponentObject {
             }
         )
     ];
-    Component(props) {
-        return <IEButton {...props} />
-    }
-    Preview() {
-        return <p>IE-按钮</p>
-    };
+    Component=IEButton;
+    Preview=<p>IE-按钮</p>
 }
 
 let componentDescribe = new ComponentDescribe("IEButton", new ComponentObject(), componentType.other, "IE按钮");

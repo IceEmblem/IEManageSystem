@@ -1,10 +1,10 @@
 import React from 'react'
-import ContainerComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseContainerComponent'
-import PageLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BasePageLeafComponent'
-import BaseLeafComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseLeafComponent'
-import BaseMenuComponentObject from 'CMSManage/Component/Components/BaseComponents/BaseMenuComponent'
-import BaseContentLeafComponent from 'CMSManage/Component/Components/BaseComponents/BaseContentLeafComponent'
-import CreatePageComponentService from 'CMSManage/Models/Pages/CreatePageComponentService'
+import ContainerComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent'
+import PageLeafComponentObject from 'BaseCMSManage/Components/BaseComponents/BasePageLeafComponent'
+import BaseLeafComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseLeafComponent'
+import BaseMenuComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseMenuComponent'
+import BaseContentLeafComponent from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent'
+import CreatePageComponentService from 'BaseCMSManage/Models/Pages/CreatePageComponentService'
 
 export const componentType = {
     container: "container",
@@ -80,12 +80,14 @@ export default class ComponentDescribe {
 
     // 生成 React 组件
     createComponent(pageId, pageDataId, sign, childs) {
-        return <this.componentObject.ComponentContainer
+        let ComponentContainer = this.componentObject.getComponentContainer();
+
+        return <ComponentContainer
             pageId={pageId}
             pageDataId={pageDataId}
             sign={sign}
         >
             {childs}
-        </this.componentObject.ComponentContainer>
+        </ComponentContainer>
     }
 }

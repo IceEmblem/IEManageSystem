@@ -2,9 +2,9 @@ import React from 'react';
 import BaseComponentObject from '../../BaseComponents/BaseStaticComponent';
 
 import IEPostTitle from './IEPostTitle';
-import ComponentDescribe, {componentType} from '../../ComponentDescribe'
+import ComponentDescribe, {componentType} from 'BaseCMSManage/Components/ComponentDescribe'
 
-import ComponentSettingConfig from '../../BaseComponents/BaseComponent/ComponentSettingConfig';
+import {ComponentSettingConfig} from '../../BaseComponents/BaseComponent';
 import SettingConfig from './SettingConfig'
 
 class ComponentObject extends BaseComponentObject{
@@ -18,12 +18,8 @@ class ComponentObject extends BaseComponentObject{
             }
         )
     ];
-    Component(props){
-        return <IEPostTitle {...props} />
-    }
-    Preview() {
-        return <p>IE-文章标题</p>
-    };
+    Component=IEPostTitle;
+    Preview=<p>IE-文章标题</p>;
 }
 
 let componentDescribe = new ComponentDescribe("IEPostTitle", new ComponentObject(), componentType.text, "IE文章标题");

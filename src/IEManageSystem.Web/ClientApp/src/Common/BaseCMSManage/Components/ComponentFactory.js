@@ -1,5 +1,4 @@
 import {componentType} from './ComponentDescribe'
-import ComponentDescribes from './ComponentDescribeList';
 
 export const componentTypes = [
     { name: componentType.container, text: "容器组件", icon: "oi-box" },
@@ -11,23 +10,35 @@ export const componentTypes = [
     { name: componentType.other, text: "其他组件", icon: "oi-puzzle-piece" }
 ];
 
-const ComponentDescribeMaps = new Map();
-ComponentDescribes.forEach(item => { 
-    ComponentDescribeMaps[item.name] = item;
-})
-
 class ComponentFactory {
     constructor() {
     }
 
+    TemplateList = [];
+    ComponentDescribes = [];
+    ComponentDescribeMaps = new Map();
+
+    register(templateList){
+        this.TemplateList = templateList;
+        this.TemplateList.forEach(item => {
+            item.components.forEach(
+                component => this.ComponentDescribes.push(component)
+            );
+        })
+        
+        this.ComponentDescribes.forEach(item => { 
+            this.ComponentDescribeMaps[item.name] = item;
+        })
+    }
+
     getComponentDescribes() {
-        return [...ComponentDescribes];
+        return [...this.ComponentDescribes];
     }
 
     getComponentDescribeForName(name) {
-        let componentDescribe = ComponentDescribeMaps[name];
+        let componentDescribe = this.ComponentDescribeMaps[name];
         if (!componentDescribe) {
-            return ComponentDescribeMaps["NotFind"];
+            return this.ComponentDescribeMaps["NotFind"];
         }
 
         return componentDescribe;

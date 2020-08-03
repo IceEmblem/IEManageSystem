@@ -1,5 +1,5 @@
 import React from 'react'
-import ComponentFactory from 'CMSManage/Component/Components/ComponentFactory';
+import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory';
 import Resource from 'Common/Resource/Resource.jsx';
 import { ResourceDescribeValueType } from 'Common/ResourceForm/ResourceDescribeValueType'
 import { ieReduxFetch } from 'Core/IEReduxFetch';

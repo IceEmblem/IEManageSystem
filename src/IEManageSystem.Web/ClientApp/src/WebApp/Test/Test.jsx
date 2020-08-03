@@ -3,7 +3,7 @@ import "./Test.css";
 
 import PageEditCompontContainer from 'CMSManage/PageEdit/ComponentContainer'
 
-import PageComponentModel from "CMSManage/Models/Pages/PageComponentModel"
+import PageComponentModel from "BaseCMSManage/Models/Pages/PageComponentModel"
 
 const IEButtonData = {
     "name": "IEButton",
