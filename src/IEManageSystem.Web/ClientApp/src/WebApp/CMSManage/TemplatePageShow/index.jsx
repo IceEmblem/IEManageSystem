@@ -6,7 +6,7 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { setPage, RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
 import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
 import Page from '../Home/Page'
-import IETool from 'Common/ToolLibrary/IETool'
+import IETool from 'Core/ToolLibrary/IETool'
 
 const pageId = 999999;
 

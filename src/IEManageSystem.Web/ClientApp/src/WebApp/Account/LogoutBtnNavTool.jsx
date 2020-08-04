@@ -15,9 +15,9 @@ class SearchBoxTool extends React.Component
 
     // 退出登录单击
     logoutClick() {
-        IEToken.clearToken();
-
-        this.props.history.push("/Account");
+        IEToken.clearToken().then(()=>{
+            this.props.history.push("/Account");
+        });
     }
 
     render() {

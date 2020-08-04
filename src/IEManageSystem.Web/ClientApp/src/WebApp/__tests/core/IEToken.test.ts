@@ -2,9 +2,15 @@ import IEToken from 'Core/IEToken'
 
 test('IEToken_Test', () => 
 {
-    IEToken.setToken("abc");
-    expect(IEToken.getToken()).toEqual("abc");
+    IEToken.setToken("abc").then(value=>{
+        IEToken.getToken().then(cookie=>{
+            expect(cookie).toEqual("abc");
+        })
+    })
 
-    IEToken.clearToken();
-    expect(IEToken.getToken()).toEqual(null);
+    IEToken.clearToken().then(value=>{
+        IEToken.getToken().then(cookie=>{
+            expect(cookie).toEqual(null);
+        })
+    })
 })

@@ -3,7 +3,7 @@ import './UserInfo.css';
 import imgAvatar from 'images/default_avatar.png';
 import { getUserInfoFetch, setUserInfoFetch } from '../IEReduxs/Actions'
 import IERedux from '../IEReduxs/PersonalRedux'
-import IETool from 'Common/ToolLibrary/IETool'
+import IETool from 'Core/ToolLibrary/IETool'
 
 import { Radio, Card, Upload, Input, Tooltip, Button, Skeleton, Tag, Calendar } from 'antd';
 import { UploadOutlined, UserOutlined, InfoCircleOutlined, EditOutlined, ReloadOutlined, SmileOutlined } from '@ant-design/icons';

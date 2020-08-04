@@ -69,6 +69,7 @@
     "react-native": "0.62.2",
     "react-redux": "^7.0.2",
     "react-router-dom": "^5.2.0",
+    "react-router-native": "^5.2.0",
     "react-test-renderer": "^16.13.1",
     "reactstrap": "^8.4.1",
     "redux": "^4.0.1",
@@ -172,7 +173,6 @@
   },
   "babel": {
     "presets": [
-      "react-app",
       "module:metro-react-native-babel-preset"
     ],
     "plugins": [
@@ -185,12 +185,6 @@
             "src/WebApp"
           ],
           "extensions": [
-            ".js",
-            ".jsx",
-            ".ts",
-            ".tsx"
-          ],
-          "stripExtensions": [
             ".js",
             ".jsx",
             ".ts",

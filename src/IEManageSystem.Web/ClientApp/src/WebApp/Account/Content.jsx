@@ -61,10 +61,10 @@ class Content extends React.Component {
 
 		ieReduxFetch("/api/Account/LoginAsync", postdata)
 			.then(result => {
-				IEToken.setToken(result.access_token, this.state.isRemember);
-
-				// 跳转管理中心
-				this.props.history.push("/ManageHome/Index");
+				IEToken.setToken(result.access_token, this.state.isRemember).then(()=>{
+					// 跳转管理中心
+					this.props.history.push("/ManageHome/Index");
+				})
 			})
 	}
 

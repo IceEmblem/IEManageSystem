@@ -5,6 +5,22 @@
  * @format
  */
 
+const createModulesFile = require('./config/createModulesFile').createModulesFile;
+createModulesFile(
+  "src/RNApp",
+  ["RNStart"],
+  "Module.js",
+  "",
+  "src/RNApp/ModuleList.js"
+);
+createModulesFile(
+  "src/Common",
+  [],
+  "Module.js",
+  "",
+  "src/Common/ModuleList.js"
+);
+
 module.exports = {
   transformer: {
     getTransformOptions: async () => ({

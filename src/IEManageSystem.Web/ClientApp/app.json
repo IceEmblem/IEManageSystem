@@ -1,4 +1,5 @@
 {
   "name": "IceEmblem",
-  "displayName": "IceEmblem"
+  "displayName": "IceEmblem",
+  "baseUrl": "http://localhost:5000/"
 }

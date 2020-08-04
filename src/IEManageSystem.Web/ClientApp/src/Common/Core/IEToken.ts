@@ -1,12 +1,12 @@
-import IETool from 'Common/ToolLibrary/IETool'
+import IETool from 'Core/ToolLibrary/IETool'
 
 export default class IEToken {
     static setToken(token: string, isRemember: boolean) {
         if(isRemember){
-            IETool.setCookie('ie_token', token, 7);
+            return IETool.setCookie('ie_token', token, 7);
         }
         else{
-            IETool.setCookie('ie_token', token);
+            return IETool.setCookie('ie_token', token);
         }
     }
 
@@ -15,6 +15,6 @@ export default class IEToken {
     }
 
     static clearToken() {
-        IETool.delCookie('ie_token');
+        return IETool.delCookie('ie_token');
     }
 }

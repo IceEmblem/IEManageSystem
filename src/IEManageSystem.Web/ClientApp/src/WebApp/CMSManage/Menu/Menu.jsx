@@ -15,7 +15,7 @@ import { UndoOutlined, SaveOutlined, EditOutlined, DeleteOutlined, PlusCircleOut
 
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { menuFetch } from 'BaseCMSManage/IEReduxs/Actions'
-import IETool from 'Common/ToolLibrary/IETool'
+import IETool from 'Core/ToolLibrary/IETool'
 
 const operateState = {
     add: "add",

@@ -42,19 +42,3 @@ ReactDOM.render(
         </BrowserRouter>
     </Provider>,
     document.getElementById('root'));
-
-// // 设置根字体大小
-// let width = document.body.clientWidth
-// let fontsize = parseInt(width / 124);
-// document.documentElement.style.fontSize = fontsize + "px";
-// document.body.style.fontSize = fontsize + "px";
-
-// // 窗口改变是重新设置根字体大小
-// (function () {
-//     window.onresize = function () {
-//         let width = document.body.clientWidth
-//         let fontsize = parseInt(width / 124);
-//         document.documentElement.style.fontSize = fontsize + "px";
-//         document.body.style.fontSize = fontsize + "px";
-//     };
-// })();

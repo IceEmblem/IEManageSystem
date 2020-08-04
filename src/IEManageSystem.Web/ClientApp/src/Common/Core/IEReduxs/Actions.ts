@@ -66,23 +66,30 @@ function receivePack(actionType:string, data: any) : FetchAction
 
 // 发生请求标识，每发生一个请求，会增加 1
 var fecthSign = 0;
+var baseUrl = ""
 // 生成ieThunkAcion，如果请求成功，会分发receiveActionFun生成的动作
 export function createIEThunkAction(url:string, postData:any, actionType:string) {
-  return function (dispatch:any) {
+  return async function (dispatch:any) {
     let curFecthSign = fecthSign++;
     let requestAction = request(postData);
     requestAction.fecthSign = curFecthSign;
     dispatch(requestAction);
 
+    let token = await IEToken.getToken();
     let headers : any = {
       'Content-Type': 'application/json'
     }
-    let token = IEToken.getToken();
+
     if(token && token != ""){
       headers.Authorization = "Bearer " + token;
     }
 
-    return fetch(url, {
+    let fullUrl = url;
+    if(!fullUrl.startsWith("http")){
+      fullUrl = baseUrl + url;
+    }
+
+    return await fetch(fullUrl, {
       method: 'post',
       headers: headers,
       body: JSON.stringify(postData)
@@ -129,6 +136,9 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
       }
     )
   }
+}
+export function setBaseUrl(url) {
+  baseUrl = url;
 }
 
 export const GetSiteSettingsReceive = "GetSiteSettingsReceive";
