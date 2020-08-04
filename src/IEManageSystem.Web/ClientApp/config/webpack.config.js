@@ -18,6 +18,13 @@ createModulesFile(
   "",
   "src/Common/ModuleList.js"
 )
+createModulesFile(
+  "src/WebApp/CMSManage/Component/Components",
+  ["BaseComponents"],
+  "index.js",
+  "CMSManage/Component/Components/",
+  "src/WebApp/CMSManage/Component/Components/TemplateList.js"
+)
 
 const fs = require('fs');
 const path = require('path');
