@@ -1,13 +1,11 @@
 import React from 'react';
-import { BaseMenuComponent } from '../../BaseComponents/BaseMenuComponent';
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEMenu/IComponent'
+import IocContainer from 'Core/IocContainer';
 import { Link } from 'react-router-dom'
-
 import { Menu } from 'antd';
-import {  } from '@ant-design/icons';
 const { SubMenu } = Menu;
 
-export default class IEMenu extends BaseMenuComponent {
+class IEMenu extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -58,3 +56,5 @@ export default class IEMenu extends BaseMenuComponent {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEMenu);

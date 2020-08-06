@@ -1,11 +1,11 @@
 import React from 'react'
-import { BasePageLeafComponent } from '../../BaseComponents/BasePageLeafComponent';
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IERankingList/IComponent'
+import IocContainer from 'Core/IocContainer';
 import { Link } from 'react-router-dom'
-import { List, Card, Pagination, Button } from 'antd';
 import { TrophyFilled } from '@ant-design/icons'
 import './IERankingList.css'
 
-export default class IERankingList extends BasePageLeafComponent {
+class IERankingList extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -31,3 +31,5 @@ export default class IERankingList extends BasePageLeafComponent {
         )
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IERankingList);

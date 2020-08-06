@@ -1,10 +1,10 @@
 import React from 'react';
-import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
-import Setting from './Setting'
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPageSetting/IComponent'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPageSetting/Setting'
+import IocContainer from 'Core/IocContainer';
 import './IEPageSetting.css';
 
-export default class IEPageSetting extends BaseStaticComponent{
+class IEPageSetting extends IComponent{
     constructor(props){
         super(props);
 
@@ -50,3 +50,5 @@ export default class IEPageSetting extends BaseStaticComponent{
         return <div></div>;
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEPageSetting);

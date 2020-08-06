@@ -14,23 +14,6 @@ class BaseComponentContainer extends React.Component {
         this.componentDescribe = ComponentFactory.getComponentDescribeForName(this.props.pageComponent.name);
     }
 
-    getContentComponentData() {
-        // 如果组件不是内容组件
-        if (!this.componentDescribe.isExistComponentData()) {
-            return undefined;
-        }
-
-        if (this.props.contentComponentData) {
-            return this.props.contentComponentData;
-        }
-
-        if (this.props.defaultComponentData) {
-            return this.props.defaultComponentData;
-        }
-
-        return ComponentDataModel.CreateDefaultComponentData(this.props.sign);
-    }
-
     getStyle() {
         let style =
         {

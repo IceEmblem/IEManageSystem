@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
-import Data from './Data'
-import Setting from './Setting'
-
+import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/IELine/IDataConfig'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IELine/Data'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELine/Setting'
+import IocContainer from 'Core/IocContainer';
 import { PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Input, Tag, Button, Select, InputNumber, Typography } from 'antd';
 
@@ -11,21 +11,6 @@ const { Title } = Typography;
 const { Option } = Select;
 
 class ListItem extends React.Component {
-    // isReceiveProps = false;
-
-    // componentWillReceiveProps(nextProps){
-    //     this.isReceiveProps = true;
-    // }
-
-    // shouldComponentUpdate(nextProps, nextState){
-    //     if(this.isReceiveProps){
-    //         this.isReceiveProps = false;
-    //         return false;
-    //     }
-        
-    //     return true;
-    // }
-
     render() {
         return <div key={this.props.singleData.sortIndex} className="d-flex mb-3">
             <Input
@@ -90,7 +75,7 @@ class GroupItem extends React.Component {
     }
 }
 
-export default class DataConfig extends BaseConfig {
+class DataConfig extends IDataConfig {
 
     state = {
         x: "",
@@ -179,3 +164,5 @@ DataConfig.propType = {
     data: PropTypes.object,
     setData: PropTypes.func.isRequired,
 }
+
+IocContainer.registerSingleIntances(IDataConfig, DataConfig);

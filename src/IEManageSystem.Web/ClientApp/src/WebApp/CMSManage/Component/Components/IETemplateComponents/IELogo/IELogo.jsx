@@ -3,10 +3,11 @@ import LogoImg from 'images/logo.png';
 
 import RootRedux from 'Core/IEReduxs/RootRedux'
 import SiteSettingManager from 'Core/SiteSettings/SiteSettingManager'
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IELogo/IComponent'
+import IocContainer from 'Core/IocContainer';
 import './IELogo.css'
 
-class IELogo extends React.Component {
+class IELogo extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -40,4 +41,4 @@ const Container = RootRedux.connect(
     mapDispatchToProps
 )(IELogo)
 
-export default Container;
+IocContainer.registerSingleIntances(IComponent, Container);

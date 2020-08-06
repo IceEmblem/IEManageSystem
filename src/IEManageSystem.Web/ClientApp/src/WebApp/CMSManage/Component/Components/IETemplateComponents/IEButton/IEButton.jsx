@@ -1,16 +1,12 @@
 import React from 'react';
-import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEButton/IComponent'
 import { Button } from 'antd';
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEButton/Setting'
+import IocContainer from 'Core/IocContainer';
 
-import IEButtonSetting from './IEButtonSetting.ts'
-
-export default class IEButton extends BaseStaticComponent {
-    constructor(props) {
-        super(props);
-    }
-
+class IEButton extends IComponent {
     render() {
-        let setting = new IEButtonSetting(this.getSetting("BtnSetting"));
+        let setting = new Setting(this.getSetting("BtnSetting"));
 
         return (
         <Button shape={setting.shape} type={setting.btnType} size={setting.size}>
@@ -21,3 +17,5 @@ export default class IEButton extends BaseStaticComponent {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEButton);

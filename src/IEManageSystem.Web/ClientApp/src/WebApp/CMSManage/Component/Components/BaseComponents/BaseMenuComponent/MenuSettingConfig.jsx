@@ -1,11 +1,14 @@
 import React from 'react';
-import {BaseConfig, ComponentSettingConfig} from '../BaseComponent';
+import {ComponentSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
+import {IMenuSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseMenuComponent';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
+import IocContainer from 'Core/IocContainer';
 
 import { Select } from 'antd';
+
 const { Option } = Select;
 
-export default class MenuSettingConfig extends BaseConfig {
+class MenuSettingConfig extends IMenuSettingConfig {
     constructor(props) {
         super(props)
 
@@ -51,7 +54,7 @@ export default class MenuSettingConfig extends BaseConfig {
     }
 }
 
-export const buildMenuSettingConfig = function(){
+const buildMenuSettingConfig = function(){
     return ComponentSettingConfig.BuildMenuComponentSettingConfig("ieMenuSetting", "菜单配置",
         (pageComponentSetting, setPageComponentSetting) => {
             return <MenuSettingConfig
@@ -61,3 +64,5 @@ export const buildMenuSettingConfig = function(){
         }
     );
 }
+
+IocContainer.registerTransient(IMenuSettingConfig, buildMenuSettingConfig);

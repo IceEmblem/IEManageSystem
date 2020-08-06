@@ -1,14 +1,15 @@
 import React from 'react';
-import { BaseConfig, ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
-import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
-
+import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
+import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox';
+import IocContainer from 'Core/IocContainer';
+import {IBasicSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 
 import { Input, Tag, InputNumber, Button } from 'antd';
 
 // props.data 类型为 PageComponentModel
 // props.setData 类型为 (PageComponentModel) => void
 // 基本设置 配置
-export default class BasicSettingConfig extends BaseConfig {
+class BasicSettingConfig extends IBasicSettingConfig {
     state = {
         isShowPicturePopupBox: false
     }
@@ -173,7 +174,7 @@ export default class BasicSettingConfig extends BaseConfig {
     }
 }
 
-export const buildBasicSettingConfig = function () {
+const buildBasicSettingConfig = function () {
     return ComponentSettingConfig.BuildBasicComponentSettingConfig("ieBaiscSetting", "基本设置",
         (pageComponentSetting, setPageComponentSetting) => {
             return <BasicSettingConfig
@@ -183,3 +184,5 @@ export const buildBasicSettingConfig = function () {
         }
     );
 }
+
+IocContainer.registerTransient(IBasicSettingConfig, buildBasicSettingConfig);

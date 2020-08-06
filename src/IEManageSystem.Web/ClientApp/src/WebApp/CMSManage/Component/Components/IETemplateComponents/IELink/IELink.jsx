@@ -1,6 +1,6 @@
 import React from 'react';
-import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IELink/IComponent'
+import IocContainer from 'Core/IocContainer';
 import {
     GithubOutlined,
     AccountBookFilled,
@@ -94,9 +94,9 @@ import {
     ZoomOutOutlined,
 } from '@ant-design/icons';
 
-import Setting from './Setting'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELink/Setting'
 
-export default class IEImg extends BaseStaticComponent {
+class IELink extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -204,3 +204,5 @@ export default class IEImg extends BaseStaticComponent {
         </a>
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IELink);

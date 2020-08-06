@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
-import Data from './Data'
-
+import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/IDataConfig'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/Data'
+import IocContainer from 'Core/IocContainer';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
-import { Input, Tag, Radio, Button } from 'antd';
+import { Input, Tag, Button } from 'antd';
 
-export default class DataConfig extends BaseConfig {
+class DataConfig extends IDataConfig {
     data = null;
 
     state={
@@ -71,3 +71,5 @@ DataConfig.propType = {
     data: PropTypes.object,
     setData: PropTypes.func.isRequired,
 }
+
+IocContainer.registerSingleIntances(IDataConfig, DataConfig);

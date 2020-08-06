@@ -1,10 +1,13 @@
 import React from 'react';
-import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostDescribe/IComponent'
+import IocContainer from 'Core/IocContainer';
 
-export default class IEPostDescribe extends BaseStaticComponent {
+class IEPostDescribe extends IComponent {
     render() {
         let title = this.props.pageData.describe || "这里是文章的简短描述";
 
         return (<p className="mb-0">{title}</p>);
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEPostDescribe);

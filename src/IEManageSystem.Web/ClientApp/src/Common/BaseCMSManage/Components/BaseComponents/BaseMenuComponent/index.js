@@ -1,9 +1,11 @@
 import BaseComponentObject from '../BaseComponent';
-import BaseMenuComponent, { BaseMenuComponentProps } from './BaseMenuComponent'
-import ReduxComponentContainer from './ComponentContainer'
+import BaseMenuComponent, { BaseMenuComponentProps } from './BaseMenuComponent';
+import ReduxComponentContainer from './ComponentContainer';
+import IocContainer from 'Core/IocContainer';
+import IMenuSettingConfig from './IMenuSettingConfig';
 
 export default class MenuComponentObject extends BaseComponentObject {
-    MenuSettingConfig = undefined;
+    MenuSettingConfig = IocContainer.getService(IMenuSettingConfig);
     getComponentContainer(){
         if(this.ComponentContainerIntance){
             return this.ComponentContainerIntance;
@@ -17,4 +19,4 @@ export default class MenuComponentObject extends BaseComponentObject {
     }
 } 
 
-export {BaseMenuComponent, BaseMenuComponentProps }
+export {BaseMenuComponent, BaseMenuComponentProps, IMenuSettingConfig }

@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
-import Setting from './Setting'
-
+import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IEPageSetting/ISettingConfig'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPageSetting/Setting'
+import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
+import IocContainer from 'Core/IocContainer';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 import { Input, Tag, Radio, Button } from 'antd';
 
-export default class SettingConfig extends BaseConfig {
+class SettingConfig extends ISettingConfig {
     state = {
         isShowPicturePopupBox: false
     }
@@ -84,3 +85,12 @@ SettingConfig.propType = {
     data: PropTypes.object,
     setData: PropTypes.func.isRequired,
 }
+
+IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("PageSetting", "页面设置",
+(pageComponentSetting, setPageComponentSetting) => {
+    return <SettingConfig
+        data={pageComponentSetting}
+        setData={setPageComponentSetting}
+    />;
+}
+));

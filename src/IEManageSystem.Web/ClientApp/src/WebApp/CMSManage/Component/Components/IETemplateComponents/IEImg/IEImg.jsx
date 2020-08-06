@@ -1,10 +1,10 @@
 import React from 'react';
-import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
-
-import Data from './Data'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEImg/IComponent'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IEImg/Data'
+import IocContainer from 'Core/IocContainer';
 import {Empty} from 'antd'
 
-export default class IEImg extends BaseContentLeafComponent {
+class IEImg extends IComponent {
     constructor(props) {
         super(props);
 
@@ -24,3 +24,5 @@ export default class IEImg extends BaseContentLeafComponent {
         </div>
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEImg);

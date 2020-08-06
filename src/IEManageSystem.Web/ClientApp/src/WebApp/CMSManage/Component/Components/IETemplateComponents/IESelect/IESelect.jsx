@@ -1,16 +1,11 @@
 import React from 'react';
-import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
-import Setting from './Setting'
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IESelect/IComponent'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IESelect/Setting'
+import IocContainer from 'Core/IocContainer';
 import { Select } from 'antd';
 const { Option } = Select;
 
-
-export default class IESelect extends BaseStaticComponent {
-    constructor(props) {
-        super(props);
-    }
-
+class IESelect extends IComponent {
     render() {
         let setting = new Setting(this.getSetting("Select"));
 
@@ -22,3 +17,5 @@ export default class IESelect extends BaseStaticComponent {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IESelect);

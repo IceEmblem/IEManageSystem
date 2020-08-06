@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
-import Data from './Data'
-
+import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/IDataConfig'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Data'
+import IocContainer from 'Core/IocContainer';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 import { PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Input, Tag, Button } from 'antd';
 
-export default class DataConfig extends BaseConfig {
+class DataConfig extends IDataConfig {
     state = {
         isShowPicturePopupBox: false,
         picturePopupBoxCallBack: (path) => { }
@@ -106,3 +106,5 @@ DataConfig.propType = {
     data: PropTypes.object,
     setData: PropTypes.func.isRequired,
 }
+
+IocContainer.registerSingleIntances(IDataConfig, DataConfig);

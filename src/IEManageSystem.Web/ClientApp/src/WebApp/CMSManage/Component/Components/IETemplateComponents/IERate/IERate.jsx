@@ -1,10 +1,10 @@
 import React from 'react';
-import { BaseStaticComponent } from '../../BaseComponents/BaseStaticComponent'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IERate/IComponent'
 import { ieReduxFetch } from "Core/IEReduxFetch"
-
+import IocContainer from 'Core/IocContainer';
 import { Rate } from 'antd';
 
-export default class IESearch extends BaseStaticComponent {
+class IERate extends IComponent {
     constructor(props) {
         super(props);
 
@@ -28,3 +28,5 @@ export default class IESearch extends BaseStaticComponent {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IERate);

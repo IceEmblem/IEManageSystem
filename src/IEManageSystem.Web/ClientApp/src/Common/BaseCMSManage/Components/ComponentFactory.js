@@ -1,4 +1,5 @@
 import {componentType} from './ComponentDescribe'
+import TemplateList from './TemplateList'
 
 export const componentTypes = [
     { name: componentType.container, text: "容器组件", icon: "oi-box" },
@@ -11,18 +12,15 @@ export const componentTypes = [
 ];
 
 class ComponentFactory {
-    constructor() {
-    }
-
     TemplateList = [];
     ComponentDescribes = [];
     ComponentDescribeMaps = new Map();
 
-    register(templateList){
-        this.TemplateList = templateList;
+    init(){
+        this.TemplateList = TemplateList;
         this.TemplateList.forEach(item => {
-            item.components.forEach(
-                component => this.ComponentDescribes.push(component)
+            item.componentBuilders.forEach(
+                componentBuilder => this.ComponentDescribes.push(componentBuilder())
             );
         })
         
@@ -46,5 +44,4 @@ class ComponentFactory {
 }
 
 const componentFactory = new ComponentFactory();
-
 export default componentFactory;

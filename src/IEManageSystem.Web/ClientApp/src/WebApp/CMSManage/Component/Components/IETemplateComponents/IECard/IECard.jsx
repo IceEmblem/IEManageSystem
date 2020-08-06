@@ -1,10 +1,11 @@
 import React from 'react'
-import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
-import Data from './Data'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECard/IComponent'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IECard/Data'
+import IocContainer from 'Core/IocContainer';
 import { Card } from 'antd';
 const { Meta } = Card;
 
-export default class IECard extends BaseContentLeafComponent {
+class IECard extends IComponent {
     constructor(props) {
         super(props);
 
@@ -27,3 +28,5 @@ export default class IECard extends BaseContentLeafComponent {
             </a>);
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IECard);

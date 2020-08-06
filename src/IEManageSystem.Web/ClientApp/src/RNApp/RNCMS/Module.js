@@ -7,7 +7,6 @@ import Page from 'Core/Page/Page'
 
 // BaseCmsManage 模块依赖
 import BaseCmsManageModule from 'BaseCMSManage/Module';
-import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory';
 
 // 初始化时加载
 import Home from './Home'

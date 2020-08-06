@@ -1,11 +1,12 @@
 import React from 'react';
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IESearch/IComponent'
+import IocContainer from 'Core/IocContainer';
 import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons'
 
 import './IESearch.css'
 
-export default class IESearch extends React.Component {
+class IESearch extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -18,3 +19,5 @@ export default class IESearch extends React.Component {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IESearch);

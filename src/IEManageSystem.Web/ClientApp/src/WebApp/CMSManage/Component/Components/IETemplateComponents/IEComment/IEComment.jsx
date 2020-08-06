@@ -1,6 +1,6 @@
 import React from 'react';
-import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEComment/IComponent'
+import IocContainer from 'Core/IocContainer';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import defaultAvatar from 'images/default_avatar.png'
 
@@ -28,7 +28,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
     </>
 );
 
-export default class extends BaseContentLeafComponent {
+class IEComment extends IComponent {
     state = {
         submitting: false,
         value: '',
@@ -79,3 +79,5 @@ export default class extends BaseContentLeafComponent {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEComment);

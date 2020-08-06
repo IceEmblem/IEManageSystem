@@ -12,14 +12,12 @@ import Page from 'Core/Page/Page'
 
 // BaseCmsManage 模块依赖
 import BaseCmsManageModule from 'BaseCMSManage/Module';
-import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory';
 
 // 初始化时加载
 import Home from './Home'
 import SearchBoxTool from './SearchBoxTool'
 import NavToolProvider from 'Layout/NavTools/NavToolProvider'
-
-import TemplateList from './Component/Components/TemplateList'
+import './Component/Components/RegisterTemplateParts'
 
 import {
     SnippetsOutlined,
@@ -122,8 +120,6 @@ export default class Module extends BaseModule {
         PageProvider.register(new Page("PageEdit", "/ManageHome/CMSManage/PageEdit/:pageName", PageEdit));
         PageProvider.register(new Page("PostEdit", "/ManageHome/CMSManage/PostEdit/:pageName/:pageDataName?", PostEdit));
         PageProvider.register(new Page("TemplatePageShow", "/ManageHome/CMSManage/TemplatePageShow/:templateName/:templatePageName", TemplatePageShow));
-
-        ComponentFactory.register(TemplateList);
     }
 }
 

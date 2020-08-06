@@ -1,16 +1,14 @@
 import React from 'react'
-import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/IComponent'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Data'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Setting'
+import IocContainer from 'Core/IocContainer';
 import { Carousel, Typography } from 'antd';
-
-import Data from './Data'
-import Setting from './Setting'
-
 import defaultImg from 'images/nofind.jpg'
 
 const { Title, Paragraph } = Typography;
 
-class IECarousel extends BaseContentLeafComponent {
+class IECarousel extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -47,4 +45,4 @@ class IECarousel extends BaseContentLeafComponent {
 IECarousel.defaultProps = {
 };
 
-export default IECarousel;
+IocContainer.registerSingleIntances(IComponent, IECarousel);

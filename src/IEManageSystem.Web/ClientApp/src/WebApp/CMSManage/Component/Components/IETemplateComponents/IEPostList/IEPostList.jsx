@@ -1,12 +1,12 @@
 import React from 'react'
-import { BasePageLeafComponent } from '../../BaseComponents/BasePageLeafComponent';
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostList/IComponent'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPostList/Setting'
+import IocContainer from 'Core/IocContainer';
 import { Link } from 'react-router-dom'
 import { List, Card, Pagination, Button } from 'antd';
-import Setting from './Setting'
-
 import defaultImg from 'images/default_post_img.jpg'
 
-export default class IEPostList extends BasePageLeafComponent {
+class IEPostList extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -67,3 +67,5 @@ export default class IEPostList extends BasePageLeafComponent {
         )
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEPostList);

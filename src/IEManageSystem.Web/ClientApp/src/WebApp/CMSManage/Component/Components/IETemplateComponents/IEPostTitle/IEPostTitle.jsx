@@ -1,12 +1,12 @@
 import React from 'react';
-import {BaseStaticComponent} from '../../BaseComponents/BaseStaticComponent';
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostTitle/IComponent'
+import IocContainer from 'Core/IocContainer';
 import { Typography } from 'antd';
-import Setting from './Setting'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPostTitle/Setting'
 
 const { Title } = Typography;
 
-export default class IEPostTitle extends BaseStaticComponent {
+class IEPostTitle extends IComponent {
     constructor(props){
         super(props);
     }
@@ -32,3 +32,5 @@ export default class IEPostTitle extends BaseStaticComponent {
         return (<p style={{ color: setting.fontColor }}>{title}</p>);
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEPostTitle);

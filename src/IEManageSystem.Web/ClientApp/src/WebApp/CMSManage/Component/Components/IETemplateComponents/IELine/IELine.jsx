@@ -1,12 +1,12 @@
 import React from 'react'
-import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IELine/IComponent'
 
-import Data from './Data'
-import Setting from './Setting'
-
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IELine/Data'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELine/Setting'
+import IocContainer from 'Core/IocContainer';
 import { Chart, Line, Point, Tooltip, Legend, Axis, Interval, Coord, Coordinate } from 'bizcharts';
 
-export default class IELine extends BaseContentLeafComponent {
+class IELine extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -76,3 +76,5 @@ export default class IELine extends BaseContentLeafComponent {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IELine);

@@ -1,13 +1,13 @@
 import React from 'react';
-import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/IComponent'
 import "./IEDrawer.css";
-
-import Data from './Data'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/Data'
+import IocContainer from 'Core/IocContainer';
 import { Drawer, Typography } from 'antd';
 
 const { Title } = Typography;
 
-export default class IEDrawer extends BaseContentLeafComponent {
+class IEDrawer extends IComponent {
     state={
         visible: false
     }
@@ -47,3 +47,5 @@ export default class IEDrawer extends BaseContentLeafComponent {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEDrawer);

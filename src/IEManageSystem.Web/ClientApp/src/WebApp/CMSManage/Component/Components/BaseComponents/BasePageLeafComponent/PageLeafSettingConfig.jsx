@@ -1,10 +1,12 @@
 import React from 'react';
-import {BaseConfig, ComponentSettingConfig} from '../BaseComponent';
+import {ComponentSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
+import IocContainer from 'Core/IocContainer';
+import {IPageLeafSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BasePageLeafComponent'
 
 import { Select, Input, InputNumber, Tag } from 'antd';
 
-export default class PageLeafSettingConfig extends BaseConfig {
+class PageLeafSettingConfig extends IPageLeafSettingConfig {
     constructor(props) {
         super(props)
 
@@ -120,7 +122,7 @@ export default class PageLeafSettingConfig extends BaseConfig {
     }
 }
 
-export const buildPageLeafSettingConfig = function(){
+const buildPageLeafSettingConfig = function(){
     return ComponentSettingConfig.BuildPageLeafComponentSettingConfig("iePageLeafSetting", "文章配置",
         (pageComponentSetting, setPageComponentSetting) => {
             return <PageLeafSettingConfig
@@ -130,3 +132,5 @@ export const buildPageLeafSettingConfig = function(){
         }
     );
 }
+
+IocContainer.registerTransient(IPageLeafSettingConfig, buildPageLeafSettingConfig);

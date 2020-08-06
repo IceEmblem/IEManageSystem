@@ -1,11 +1,11 @@
 import React from 'react'
-import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/IComponent'
+import IocContainer from 'Core/IocContainer';
 import { List } from 'antd'
-import Setting from './Setting'
-import Data from './Data'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Setting'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Data'
 
-export default class IEInfoGroup extends BaseContentLeafComponent {
+class IEInfoGroup extends IComponent {
     createItem(settingField, dataField, color) {
         return <List.Item style={{ color: color }} className="mb-0 pt-2 pb-2" >
             <span>{settingField}</span>
@@ -38,3 +38,5 @@ export default class IEInfoGroup extends BaseContentLeafComponent {
         />
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEInfoGroup);

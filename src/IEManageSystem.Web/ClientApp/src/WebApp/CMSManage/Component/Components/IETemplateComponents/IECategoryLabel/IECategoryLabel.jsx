@@ -1,11 +1,10 @@
 import React from 'react'
-import { BaseStaticComponent } from '../../BaseComponents/BaseStaticComponent'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/IComponent'
 import { Link, withRouter } from 'react-router-dom'
-import { List, Button } from 'antd';
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/Setting'
+import IocContainer from 'Core/IocContainer';
 
-import Setting from './Setting'
-
-class IECategoryLabel extends BaseStaticComponent {
+class IECategoryLabel extends IComponent {
 
     curSelectOtherTags = [];
     curSelectTagName = "";
@@ -107,4 +106,4 @@ class IECategoryLabel extends BaseStaticComponent {
 IECategoryLabel.defaultProps = {
 };
 
-export default withRouter(IECategoryLabel);
+IocContainer.registerSingleIntances(IComponent, withRouter(IECategoryLabel));

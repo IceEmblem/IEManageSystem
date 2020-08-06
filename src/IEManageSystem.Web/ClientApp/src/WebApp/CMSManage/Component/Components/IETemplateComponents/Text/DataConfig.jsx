@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
-import Data from './Data'
+import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/Text/IDataConfig'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/Text/Data'
+import IocContainer from 'Core/IocContainer';
+import { Input, Tag } from 'antd';
 
-import { Input, Tag, Radio, Button } from 'antd';
-
-export default class DataConfig extends BaseConfig {
+class DataConfig extends IDataConfig {
     data = null;
 
     constructor(props) {
@@ -47,3 +47,5 @@ DataConfig.propType = {
     data: PropTypes.object,
     setData: PropTypes.func.isRequired,
 }
+
+IocContainer.registerSingleIntances(IDataConfig, DataConfig);

@@ -29,5 +29,5 @@ class ComponentObject extends BaseComponentObject {
     }
 }
 
-let componentDescribe = new ComponentDescribe("Test", new ComponentObject(), componentType.text);
-export default componentDescribe;
+const componentDescribeBuilder = () => new ComponentDescribe("Test", new ComponentObject(), componentType.text);
+export default componentDescribeBuilder;

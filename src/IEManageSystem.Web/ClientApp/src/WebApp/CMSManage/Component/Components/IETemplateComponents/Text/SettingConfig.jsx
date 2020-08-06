@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
-import Setting from './Setting'
+import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/Text/ISettingConfig'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/Text/Setting'
+import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
+import { Input, Tag, Radio } from 'antd';
+import IocContainer from 'Core/IocContainer';
 
-import { Input, Tag, Radio, Button } from 'antd';
-
-export default class SettingConfig extends BaseConfig {
+class SettingConfig extends ISettingConfig {
     setting = null;
 
     constructor(props) {
@@ -53,3 +54,12 @@ SettingConfig.propType = {
     data: PropTypes.object,
     setData: PropTypes.func.isRequired,
 }
+
+IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "文本设置",
+(pageComponentSetting, setPageComponentSetting) => {
+    return <SettingConfig
+        data={pageComponentSetting}
+        setData={setPageComponentSetting}
+    />;
+}
+));

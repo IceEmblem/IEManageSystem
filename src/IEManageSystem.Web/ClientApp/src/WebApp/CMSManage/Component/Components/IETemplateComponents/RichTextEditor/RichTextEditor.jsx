@@ -1,14 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {BaseContentLeafComponent} from '../../BaseComponents/BaseContentLeafComponent'
-
-import BraftEditor from 'braft-editor'
-import 'braft-editor/dist/index.css'
-
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/RichTextEditor/IComponent'
+import IocContainer from 'Core/IocContainer';
 import './RichTextEditor.css'
 
-class RichTextEditor extends BaseContentLeafComponent {
+class RichTextEditor extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -28,4 +23,4 @@ RichTextEditor.defaultProps = {
 
 };
 
-export default RichTextEditor;
+IocContainer.registerSingleIntances(IComponent, RichTextEditor);

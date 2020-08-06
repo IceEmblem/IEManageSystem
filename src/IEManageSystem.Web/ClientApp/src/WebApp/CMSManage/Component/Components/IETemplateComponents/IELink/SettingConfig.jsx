@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
-import Setting from './Setting'
-
-import { Input, Tag, Radio, Button } from 'antd';
+import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IELink/ISettingConfig'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELink/Setting'
+import IocContainer from 'Core/IocContainer';
+import { Input, Tag, Radio } from 'antd';
 import {
     GithubOutlined,
     AccountBookFilled,
@@ -96,8 +96,9 @@ import {
     ZoomInOutlined,
     ZoomOutOutlined,
 } from '@ant-design/icons';
+import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 
-export default class SettingConfig extends BaseConfig {
+class SettingConfig extends ISettingConfig {
     state = {
         isShowPicturePopupBox: false
     }
@@ -267,3 +268,12 @@ SettingConfig.propType = {
     data: PropTypes.object,
     setData: PropTypes.func.isRequired,
 }
+
+IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "链接设置",
+(pageComponentSetting, setPageComponentSetting) => {
+    return <SettingConfig
+        data={pageComponentSetting}
+        setData={setPageComponentSetting}
+    />;
+}
+));

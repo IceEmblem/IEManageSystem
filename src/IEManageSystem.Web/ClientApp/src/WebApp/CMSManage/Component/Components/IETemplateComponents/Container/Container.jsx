@@ -1,11 +1,12 @@
 import React from 'react'
-import { BaseContainerComponent } from '../../BaseComponents/BaseContainerComponent'
-import Setting from './Setting'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/Container/IComponent'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/Container//Setting'
+import IocContainer from 'Core/IocContainer';
 
 import './Container.css'
 
 
-class Container extends BaseContainerComponent {
+class Container extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -19,7 +20,4 @@ class Container extends BaseContainerComponent {
     }
 }
 
-Container.defaultProps = {
-};
-
-export default Container;
+IocContainer.registerSingleIntances(IComponent, Container);

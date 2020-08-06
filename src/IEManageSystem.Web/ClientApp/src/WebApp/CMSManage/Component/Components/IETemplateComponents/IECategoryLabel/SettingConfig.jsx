@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BaseConfig} from 'CMSManage/Component/Components/BaseComponents/BaseComponent'
-import Setting from './Setting'
-
+import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/ISettingConfig'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/Setting'
+import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
+import IocContainer from 'Core/IocContainer';
 import { PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Input, Tag, Button } from 'antd';
 
-export default class DataConfig extends BaseConfig {
+class SettingConfig extends ISettingConfig {
     render() {
         let setting = new Setting(this.props.data);
 
@@ -62,8 +63,17 @@ export default class DataConfig extends BaseConfig {
     }
 }
 
-DataConfig.propType = {
+SettingConfig.propType = {
     // IEButtonSetting
     data: PropTypes.object,
     setData: PropTypes.func.isRequired,
 }
+
+IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "标签设置",
+(pageComponentSetting, setPageComponentSetting) => {
+    return <SettingConfig
+        data={pageComponentSetting}
+        setData={setPageComponentSetting}
+    />;
+}
+));

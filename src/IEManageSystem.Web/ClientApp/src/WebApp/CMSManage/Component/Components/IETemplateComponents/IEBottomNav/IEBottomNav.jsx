@@ -1,10 +1,11 @@
 import React from "react";
-import { BaseStaticComponent, BaseStaticComponentProps } from '../../BaseComponents/BaseStaticComponent';
-import Setting from './Setting'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNav/IComponent'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNav/Setting'
 import './IEBottomNav.css'
-import BeianIcon from './BeianIcon.png'
+import BeianIcon from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNav/BeianIcon.png'
+import IocContainer from 'Core/IocContainer';
 
-export default class IEBottomNav extends BaseStaticComponent {
+class IEBottomNav extends IComponent {
     constructor(props) {
         super(props);
     }
@@ -37,3 +38,5 @@ export default class IEBottomNav extends BaseStaticComponent {
         );
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IEBottomNav);

@@ -1,15 +1,14 @@
 import React from 'react';
-import { BaseStaticComponent } from '../../BaseComponents/BaseStaticComponent'
-
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECalendar/IComponent'
 import { Calendar, Select, Row, Col } from 'antd';
-
+import IocContainer from 'Core/IocContainer';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 
 // 设置区域
 moment.locale('zh-cn');
 
-export default class extends BaseStaticComponent {
+class IECalendar extends IComponent {
     render() {
         return <Calendar
             fullscreen={false}
@@ -82,3 +81,5 @@ export default class extends BaseStaticComponent {
         />;
     }
 }
+
+IocContainer.registerSingleIntances(IComponent, IECalendar);

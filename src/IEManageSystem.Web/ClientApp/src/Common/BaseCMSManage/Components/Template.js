@@ -4,5 +4,5 @@ export default class Template {
     describe = undefined;
     company = undefined;
     templatePages = [];
-    components = [];
+    componentBuilders = [];
 }

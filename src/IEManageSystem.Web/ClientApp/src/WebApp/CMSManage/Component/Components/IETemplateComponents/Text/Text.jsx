@@ -1,14 +1,13 @@
 import React from 'react'
-import { BaseContentLeafComponent } from '../../BaseComponents/BaseContentLeafComponent'
-
-import { Skeleton, Typography } from 'antd';
-
-import Setting from './Setting'
-import Data from './Data'
+import IComponent from 'BaseCMSManage/Components/IETemplateComponents/Text/IComponent'
+import IocContainer from 'Core/IocContainer';
+import { Typography } from 'antd';
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/Text/Setting'
+import Data from 'BaseCMSManage/Components/IETemplateComponents/Text/Data'
 
 const { Title } = Typography;
 
-class Text extends BaseContentLeafComponent {
+class Text extends IComponent {
     constructor(props) {
         super(props);
 
@@ -39,4 +38,4 @@ class Text extends BaseContentLeafComponent {
 Text.defaultProps = {
 };
 
-export default Text;
+IocContainer.registerSingleIntances(IComponent, Text);
