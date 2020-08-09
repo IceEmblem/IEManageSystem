@@ -33,10 +33,10 @@ class SettingConfig extends ISettingConfig {
                         this.props.setData(this.setting.setting);
                     }}
                 >
-                    <Radio value="flex-row">对平</Radio>
-                    <Radio value="flex-row-reverse">方向反向</Radio>
-                    <Radio value="flex-column">垂直</Radio>
-                    <Radio value="flex-column-reverse">方向垂直</Radio>
+                    <Radio value="row">对平</Radio>
+                    <Radio value="row-reverse">方向反向</Radio>
+                    <Radio value="column">垂直</Radio>
+                    <Radio value="column-reverse">方向垂直</Radio>
                 </Radio.Group>
             </div>
             <div className="mb-3">
@@ -48,11 +48,11 @@ class SettingConfig extends ISettingConfig {
                         this.props.setData(this.setting.setting);
                     }}
                 >
-                    <Radio value="justify-content-start">头部</Radio>
-                    <Radio value="justify-content-end">尾部</Radio>
-                    <Radio value="justify-content-center">中间</Radio>
-                    <Radio value="justify-content-between">等距</Radio>
-                    <Radio value="justify-content-around">等距（头尾有间隔）</Radio>
+                    <Radio value="flex-start">头部</Radio>
+                    <Radio value="flex-end">尾部</Radio>
+                    <Radio value="center">中间</Radio>
+                    <Radio value="space-between">等距</Radio>
+                    <Radio value="space-around">等距（头尾有间隔）</Radio>
                 </Radio.Group>
             </div>
             <div className="mb-3">
@@ -64,11 +64,11 @@ class SettingConfig extends ISettingConfig {
                         this.props.setData(this.setting.setting);
                     }}
                 >
-                    <Radio value="align-items-start">头部</Radio>
-                    <Radio value="align-items-end">尾部</Radio>
-                    <Radio value="align-items-center">中间</Radio>
-                    <Radio value="align-items-baseline">基线对齐</Radio>
-                    <Radio value="align-items-stretch">头部（子元素等高）</Radio>
+                    <Radio value="flex-start">头部</Radio>
+                    <Radio value="flex-end">尾部</Radio>
+                    <Radio value="center">中间</Radio>
+                    <Radio value="baseline">基线对齐（第一行文字对齐）</Radio>
+                    <Radio value="stretch">头部（子元素等高）</Radio>
                 </Radio.Group>
             </div>
             <div className="mb-3">
@@ -80,8 +80,8 @@ class SettingConfig extends ISettingConfig {
                         this.props.setData(this.setting.setting);
                     }}
                 >
-                    <Radio value="flex-wrap">换行</Radio>
-                    <Radio value="flex-nowrap">不换行</Radio>
+                    <Radio value="wrap">换行</Radio>
+                    <Radio value="nowrap">不换行</Radio>
                 </Radio.Group>
             </div>
             <div className="mb-3">
@@ -93,11 +93,11 @@ class SettingConfig extends ISettingConfig {
                         this.props.setData(this.setting.setting);
                     }}
                 >
-                    <Radio value="align-content-start">头部</Radio>
-                    <Radio value="align-content-end">尾部</Radio>
-                    <Radio value="align-content-center">中间</Radio>
-                    <Radio value="align-content-around">对称</Radio>
-                    <Radio value="align-content-stretch">对称（子元素等高）</Radio>
+                    <Radio value="flex-start">头部</Radio>
+                    <Radio value="flex-end">尾部</Radio>
+                    <Radio value="center">中间</Radio>
+                    <Radio value="space-around">对称</Radio>
+                    <Radio value="space-stretch">对称（子元素等高）</Radio>
                 </Radio.Group>
             </div>
         </div>)

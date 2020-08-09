@@ -19,6 +19,8 @@ namespace IEManageSystem.CMS.DomainModel.PageComponents
 
         public string ParentSign { get; set; }
 
+        public ComponentOSType ComponentOSType { get; set; }
+
         public CmsComponent CmsComponent { get; set; }
 
         public PageComponentBaseSetting PageComponentBaseSetting { get; set; }

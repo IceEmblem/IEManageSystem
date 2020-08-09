@@ -154,6 +154,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             dto.Name = component.Name;
             dto.Sign = component.Sign;
             dto.ParentSign = component.ParentSign;
+            dto.OS = component.ComponentOSType.OS;
             dto.PageComponentBaseSetting = _objectMapper.Map<PageComponentBaseSettingDto>(component.PageComponentBaseSetting);
             dto.PageComponentSettings = new List<PageComponentSettingDto>();
 

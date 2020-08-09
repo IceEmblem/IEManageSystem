@@ -150,6 +150,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
                     new Dtos.CMS.PageComponentDto(){
                         Name = "UpdatePageComponent_BaseTest_ComponentName",
                         Sign = "UpdatePageComponent_BaseTest_PageComponentSign",
+                        OS = "Web",
                         PageComponentBaseSetting = new PageComponentBaseSettingDto(){ 
                             Width = "12",
                         },

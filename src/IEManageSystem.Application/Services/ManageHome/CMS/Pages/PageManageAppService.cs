@@ -187,6 +187,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 pageComponent = new LeafComponent(dto.Name);
             }
 
+            pageComponent.ComponentOSType = ComponentOSType.CreateOSType(dto.OS);
             pageComponent.Sign = dto.Sign;
             pageComponent.ParentSign = dto.ParentSign;
             pageComponent.PageComponentBaseSetting = new PageComponentBaseSetting(

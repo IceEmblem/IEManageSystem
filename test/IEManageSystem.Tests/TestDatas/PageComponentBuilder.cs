@@ -26,6 +26,7 @@ namespace IEManageSystem.Tests.TestDatas
                     new LeafComponent("ComponentName1"){
                         Sign = "ContentPage1_Component1Sign",
                         PageComponentBaseSetting = new PageComponentBaseSetting(1, "12", "27rem", null, null, null, null, null),
+                        ComponentOSType = ComponentOSType.WebComponent,
                         PageComponentSettings = new List<PageComponentSetting>(){
                             new PageComponentSetting(){
                                 Name = "ContentPage1_Component1_PageComponentSetting1Name",
@@ -39,11 +40,13 @@ namespace IEManageSystem.Tests.TestDatas
                     },
                     new CompositeComponent("ComponentName2"){
                         Sign = "ContentPage1_Component2Sign",
-                        Page = contentPage1
+                        Page = contentPage1,
+                        ComponentOSType = ComponentOSType.WebComponent,
                     },
                     new PageLeafComponent("ComponentName3"){
                         Sign = "ContentPage1_Component3Sign",
-                        Page = contentPage1
+                        Page = contentPage1,
+                        ComponentOSType = ComponentOSType.WebComponent,
                     }
                 });
 
@@ -52,11 +55,13 @@ namespace IEManageSystem.Tests.TestDatas
             _context.PageComponents.AddRange(new List<PageComponentBase>() {
                     new LeafComponent("ComponentName1"){
                         Sign = "StaticPage1_PageComponentBase1Sign",
-                        Page = staticPage
+                        Page = staticPage,
+                        ComponentOSType = ComponentOSType.WebComponent,
                     },
                     new LeafComponent("ComponentName1"){
                         Sign = "StaticPage1_PageComponentBase2Sign",
-                        Page = staticPage
+                        Page = staticPage,
+                        ComponentOSType = ComponentOSType.WebComponent,
                     }
                 });
         }

@@ -14,9 +14,19 @@ class Container extends IComponent {
     render() {
         let setting = new Setting(this.getSetting("FlexSetting"));
 
-        return (<div className={`containercss ${setting.direction || ""} ${setting.justifyContent || ""} ${setting.alignItems || ""} ${setting.wrap || ""} ${setting.alignContent || ""} `}>
-            {this.props.children}
-        </div>);
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: setting.direction,
+                    justifyContent: setting.justifyContent,
+                    alignItems: setting.alignItems,
+                    alignContent: setting.alignContent,
+                    flexWrap: setting.wrap
+                }}
+            >
+                {this.props.children}
+            </div>);
     }
 }
 
