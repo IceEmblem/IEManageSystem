@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 
 import './index.css'
 
-import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
+import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
+import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import ToolBtns from './ToolBtns';
 import Page from 'CMSManage/Home/Page'
 
@@ -17,23 +18,18 @@ class SignSquareFrame extends React.Component {
         let style = {
             position: "absolute",
             border: `1px solid ${this.props.color}`,
-            maxHeight: "100hv"
         }
 
-        // 计算方框的绘画范围
-        // 必须在浏览器可视范围内，否则会出现多余的滚动条
-        var rect = this.props.targetElement.getBoundingClientRect();
-
-        let left = rect.left;
-        let right = rect.right;
-        let top = rect.top < 0 ? 0 : rect.top;
-        let bottom = (rect.bottom > window.innerHeight ? window.innerHeight : rect.bottom) - 2;
+        let left = this.props.targetElement.offsetLeft;
+        let top = this.props.targetElement.offsetTop;
+        let width = this.props.targetElement.clientWidth;
+        let height = this.props.targetElement.clientHeight;
 
         return <div>
-            <span style={{ ...{ left: left, top: top, width: right-left }, ...style }}></span>
-            <span style={{ ...{ left: right, top: top, height: bottom-top }, ...style }}></span>
-            <span style={{ ...{ left: left, top: bottom, width: right-left }, ...style }}></span>
-            <span style={{ ...{ left: left, top: top, height: bottom-top }, ...style }}></span>
+            <span style={{ ...{ left: left, top: top, width: width }, ...style }}></span>
+            <span style={{ ...{ left: left + width, top: top, height: height }, ...style }}></span>
+            <span style={{ ...{ left: left, top: top + height, width: width }, ...style }}></span>
+            <span style={{ ...{ left: left, top: top, height: height }, ...style }}></span>
         </div>
     }
 }
@@ -52,7 +48,7 @@ class CurrentToolBtns extends React.Component {
 
         return (
             <div>
-                <span style={{ right: 60, bottom: 100, position: "absolute" }} >
+                <span style={{ right: 60, bottom: 100, position: "fixed" }} >
                     {
                         selectedPageComponents.map(item => (
                             <div
@@ -66,8 +62,7 @@ class CurrentToolBtns extends React.Component {
                                     pageId={pageId}
                                     pageDataId={pageDataId}
                                     addChildComponent={addChildComponent}
-                                    className="editableparentcom-btns-active mb-1"
-                                    style={{ width: "auto" }}
+                                    style={{opacity: 1, marginBottom: "5px"}}
                                 />
                             </div>
                         ))
@@ -105,7 +100,6 @@ class PageEditCompontContainer extends React.Component {
             pageId={pageId}
             pageDataId={pageDataId}
             addChildComponent={this.props.addChildComponent}
-            className="editableparentcom-btns-transform"
         />;
     }
 
@@ -138,7 +132,6 @@ class PageEditCompontContainer extends React.Component {
             <div
                 className="w-100 h-100"
                 style={{ overflowY: "auto" }}
-                onScroll={() => this.setState({})}
             >
                 <div
                     className="w-100 h-100"
@@ -158,6 +151,7 @@ class PageEditCompontContainer extends React.Component {
                                         sign={sign}
                                         pageId={this.props.pageId}
                                         pageDataId={this.props.pageDataId}
+                                        ComponentContainerBoxShow={ComponentContainerBoxShow}
 
                                         style={this.getStyle}
                                         className={this.getClassName}

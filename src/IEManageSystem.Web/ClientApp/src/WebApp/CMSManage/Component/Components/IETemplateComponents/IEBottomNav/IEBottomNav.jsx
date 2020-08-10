@@ -3,7 +3,6 @@ import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNa
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNav/Setting'
 import './IEBottomNav.css'
 import BeianIcon from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNav/BeianIcon.png'
-import IocContainer from 'Core/IocContainer';
 
 class IEBottomNav extends IComponent {
     constructor(props) {
@@ -39,4 +38,4 @@ class IEBottomNav extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEBottomNav);
+export default (register) => register(IComponent, IEBottomNav);

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/IELine/IDataConfig'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IELine/Data'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELine/Setting'
-import IocContainer from 'Core/IocContainer';
 import { PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Input, Tag, Button, Select, InputNumber, Typography } from 'antd';
 
@@ -165,4 +164,4 @@ DataConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(IDataConfig, DataConfig);
+export default (register) => register(IDataConfig, DataConfig);

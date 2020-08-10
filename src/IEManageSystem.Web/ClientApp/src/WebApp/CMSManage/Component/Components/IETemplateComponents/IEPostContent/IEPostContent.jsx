@@ -1,6 +1,5 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostContent/IComponent'
-import IocContainer from 'Core/IocContainer';
 
 class IEPostContent extends IComponent {
     constructor(props) {
@@ -17,4 +16,4 @@ class IEPostContent extends IComponent {
 IEPostContent.defaultProps = {
 };
 
-IocContainer.registerSingleIntances(IComponent, IEPostContent);
+export default (register) => register(IComponent, IEPostContent);

@@ -1,7 +1,6 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEImg/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEImg/Data'
-import IocContainer from 'Core/IocContainer';
 import {Empty} from 'antd'
 
 class IEImg extends IComponent {
@@ -25,4 +24,4 @@ class IEImg extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEImg);
+export default (register) => register(IComponent, IEImg);

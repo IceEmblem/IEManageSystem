@@ -10,7 +10,7 @@
     background-image: url(./login_back.jpg);
     background-repeat: no-repeat;
     background-position: bottom left;
-    height: 100%;
+    height: 100vh;
 }
 
     .Content > div:last-child {

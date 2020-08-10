@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/RichTextEditor/IDataConfig'
 import CustomizeField from './CustomizeField'
-import IocContainer from 'Core/IocContainer';
 
 class DataConfig extends IDataConfig {
     render() {
@@ -22,4 +21,4 @@ DataConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(IDataConfig, DataConfig);
+export default (register) => register(IDataConfig, DataConfig);

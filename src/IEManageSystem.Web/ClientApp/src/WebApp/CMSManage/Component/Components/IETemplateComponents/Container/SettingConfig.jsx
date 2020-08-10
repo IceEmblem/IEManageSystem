@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/Container/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/Container/Setting'
-import IocContainer from 'Core/IocContainer';
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 
 import { Tag, Radio } from 'antd';
@@ -110,7 +109,7 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("FlexSetting", "内容对齐设置",
+export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("FlexSetting", "内容对齐设置",
     (pageComponentSetting, setPageComponentSetting) => {
         return <SettingConfig
             data={pageComponentSetting}

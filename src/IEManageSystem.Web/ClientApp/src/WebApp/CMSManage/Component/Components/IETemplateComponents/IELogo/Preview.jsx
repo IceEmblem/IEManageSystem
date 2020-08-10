@@ -1,6 +1,5 @@
 import React from 'react'
 import IPreview from 'BaseCMSManage/Components/IETemplateComponents/IELogo/IPreview'
-import IocContainer from 'Core/IocContainer';
 
 class Preview extends IPreview{
     render(){
@@ -8,4 +7,4 @@ class Preview extends IPreview{
     }
 }
 
-IocContainer.registerSingleIntances(IPreview, Preview);
+export default (register) => register(IPreview, Preview);

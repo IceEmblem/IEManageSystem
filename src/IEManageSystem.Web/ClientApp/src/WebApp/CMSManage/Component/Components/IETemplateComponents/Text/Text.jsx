@@ -1,6 +1,5 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/Text/IComponent'
-import IocContainer from 'Core/IocContainer';
 import { Typography } from 'antd';
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/Text/Setting'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/Text/Data'
@@ -38,4 +37,4 @@ class Text extends IComponent {
 Text.defaultProps = {
 };
 
-IocContainer.registerSingleIntances(IComponent, Text);
+export default (register) => register(IComponent, Text);

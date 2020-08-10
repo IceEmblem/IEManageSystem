@@ -1,6 +1,5 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/NotFind/IComponent'
-import IocContainer from 'Core/IocContainer';
 
 class NotFind extends IComponent{
     render() {
@@ -8,4 +7,4 @@ class NotFind extends IComponent{
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, NotFind);
+export default (register) => register(IComponent, NotFind);

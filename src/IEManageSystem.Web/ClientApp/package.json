@@ -67,6 +67,7 @@
     "react-dom": "^16.13.1",
     "react-move": "^5.2.1",
     "react-native": "0.62.2",
+    "react-native-web": "^0.13.5",
     "react-redux": "^7.0.2",
     "react-router-dom": "^5.2.0",
     "react-router-native": "^5.2.0",

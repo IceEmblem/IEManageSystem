@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/Text/IDataConfig'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/Text/Data'
-import IocContainer from 'Core/IocContainer';
 import { Input, Tag } from 'antd';
 
 class DataConfig extends IDataConfig {
@@ -48,4 +47,4 @@ DataConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(IDataConfig, DataConfig);
+export default (register) => register(IDataConfig, DataConfig);

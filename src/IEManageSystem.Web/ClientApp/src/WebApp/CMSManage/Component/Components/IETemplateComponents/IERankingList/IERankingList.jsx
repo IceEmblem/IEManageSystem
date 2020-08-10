@@ -1,6 +1,5 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IERankingList/IComponent'
-import IocContainer from 'Core/IocContainer';
 import { Link } from 'react-router-dom'
 import { TrophyFilled } from '@ant-design/icons'
 import './IERankingList.css'
@@ -32,4 +31,4 @@ class IERankingList extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IERankingList);
+export default (register) => register(IComponent, IERankingList);

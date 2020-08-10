@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IELink/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELink/Setting'
-import IocContainer from 'Core/IocContainer';
 import { Input, Tag, Radio } from 'antd';
 import {
     GithubOutlined,
@@ -269,7 +268,7 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "链接设置",
+export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "链接设置",
 (pageComponentSetting, setPageComponentSetting) => {
     return <SettingConfig
         data={pageComponentSetting}

@@ -1,7 +1,6 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPageSetting/IComponent'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPageSetting/Setting'
-import IocContainer from 'Core/IocContainer';
 import './IEPageSetting.css';
 
 class IEPageSetting extends IComponent{
@@ -51,4 +50,4 @@ class IEPageSetting extends IComponent{
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEPageSetting);
+export default (register) => register(IComponent, IEPageSetting);

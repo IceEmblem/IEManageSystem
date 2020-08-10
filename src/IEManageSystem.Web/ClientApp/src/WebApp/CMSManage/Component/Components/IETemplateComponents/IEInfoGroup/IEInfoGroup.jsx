@@ -1,6 +1,5 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/IComponent'
-import IocContainer from 'Core/IocContainer';
 import { List } from 'antd'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Setting'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Data'
@@ -39,4 +38,4 @@ class IEInfoGroup extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEInfoGroup);
+export default (register) => register(IComponent, IEInfoGroup);

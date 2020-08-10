@@ -31,7 +31,7 @@ export default class ManageHome extends React.Component {
 
     render() {
         return (
-            <Layout className="antlayout h-100">
+            <Layout className="antlayout">
                 <Sider
                     className="hide-scroll"
                     trigger={null}

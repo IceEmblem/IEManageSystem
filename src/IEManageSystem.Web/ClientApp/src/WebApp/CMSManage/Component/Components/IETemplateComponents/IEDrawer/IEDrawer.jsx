@@ -2,7 +2,6 @@ import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/IComponent'
 import "./IEDrawer.css";
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/Data'
-import IocContainer from 'Core/IocContainer';
 import { Drawer, Typography } from 'antd';
 
 const { Title } = Typography;
@@ -48,4 +47,4 @@ class IEDrawer extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEDrawer);
+export default (register) => register(IComponent, IEDrawer);

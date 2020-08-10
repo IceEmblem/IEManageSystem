@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/IDataConfig'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Data'
-import IocContainer from 'Core/IocContainer';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 import { PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Input, Tag, Button } from 'antd';
@@ -107,4 +106,4 @@ DataConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(IDataConfig, DataConfig);
+export default (register) => register(IDataConfig, DataConfig);

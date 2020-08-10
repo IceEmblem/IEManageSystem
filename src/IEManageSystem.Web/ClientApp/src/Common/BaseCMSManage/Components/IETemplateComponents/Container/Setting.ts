@@ -28,7 +28,7 @@ export default class Setting {
     }
 
     get alignItems(){
-        return this.setting.getDefauleData().field3 || "flex-start";
+        return this.setting.getDefauleData().field3;
     }
 
     set alignItems(val){

@@ -2,7 +2,6 @@ import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEButton/IComponent'
 import { Button } from 'antd';
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEButton/Setting'
-import IocContainer from 'Core/IocContainer';
 
 class IEButton extends IComponent {
     render() {
@@ -18,4 +17,4 @@ class IEButton extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEButton);
+export default (register) => register(IComponent, IEButton);

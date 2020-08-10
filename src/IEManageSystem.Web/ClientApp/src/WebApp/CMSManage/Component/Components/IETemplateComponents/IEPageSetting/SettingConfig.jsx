@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IEPageSetting/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPageSetting/Setting'
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
-import IocContainer from 'Core/IocContainer';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 import { Input, Tag, Radio, Button } from 'antd';
 
@@ -86,7 +85,7 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("PageSetting", "页面设置",
+export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("PageSetting", "页面设置",
 (pageComponentSetting, setPageComponentSetting) => {
     return <SettingConfig
         data={pageComponentSetting}

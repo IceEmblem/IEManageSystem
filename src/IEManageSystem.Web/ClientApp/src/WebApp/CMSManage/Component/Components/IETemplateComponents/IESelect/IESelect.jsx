@@ -1,7 +1,6 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IESelect/IComponent'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IESelect/Setting'
-import IocContainer from 'Core/IocContainer';
 import { Select } from 'antd';
 const { Option } = Select;
 
@@ -18,4 +17,4 @@ class IESelect extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IESelect);
+export default (register) => register(IComponent, IESelect);

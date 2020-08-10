@@ -2,7 +2,6 @@ import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/IComponent'
 import { Link, withRouter } from 'react-router-dom'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/Setting'
-import IocContainer from 'Core/IocContainer';
 
 class IECategoryLabel extends IComponent {
 
@@ -106,4 +105,4 @@ class IECategoryLabel extends IComponent {
 IECategoryLabel.defaultProps = {
 };
 
-IocContainer.registerSingleIntances(IComponent, withRouter(IECategoryLabel));
+export default (register) => register(IComponent, withRouter(IECategoryLabel));

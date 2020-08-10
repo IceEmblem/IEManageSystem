@@ -3,7 +3,6 @@ import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IELine/ICo
 
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IELine/Data'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELine/Setting'
-import IocContainer from 'Core/IocContainer';
 import { Chart, Line, Point, Tooltip, Legend, Axis, Interval, Coord, Coordinate } from 'bizcharts';
 
 class IELine extends IComponent {
@@ -77,4 +76,4 @@ class IELine extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IELine);
+export default (register) => register(IComponent, IELine);

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/IDataConfig'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Data'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Setting'
-import IocContainer from 'Core/IocContainer';
 import { Input, Tag } from 'antd';
 
 class DataConfig extends IDataConfig {
@@ -91,4 +90,4 @@ DataConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(IDataConfig, DataConfig);
+export default (register) => register(IDataConfig, DataConfig);

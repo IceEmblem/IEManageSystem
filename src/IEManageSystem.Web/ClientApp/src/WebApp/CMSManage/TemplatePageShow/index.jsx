@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { setPage, RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
-import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
+import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
+import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import Page from '../Home/Page'
 import IETool from 'Core/ToolLibrary/IETool'
 
@@ -36,6 +37,7 @@ class TemplatePageShow extends React.Component {
                             sign={sign}
                             pageId={pageId}
                             pageDataId={undefined}
+                            ComponentContainerBoxShow={ComponentContainerBoxShow}
                         >
                         </ComponentContainerBox>)
                 }

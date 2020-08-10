@@ -1,6 +1,5 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEMenu/IComponent'
-import IocContainer from 'Core/IocContainer';
 import { Link } from 'react-router-dom'
 import { Menu } from 'antd';
 const { SubMenu } = Menu;
@@ -57,4 +56,4 @@ class IEMenu extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEMenu);
+export default (register) => register(IComponent, IEMenu);

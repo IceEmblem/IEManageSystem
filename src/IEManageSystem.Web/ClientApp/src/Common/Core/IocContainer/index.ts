@@ -11,6 +11,12 @@ class IocContainer {
 
     keyTypeToSigns = [];
 
+    constructor(){
+        this.registerSingle = this.registerSingle.bind(this);
+        this.registerSingleIntances = this.registerSingleIntances.bind(this);
+        this.registerTransient = this.registerTransient.bind(this);
+    }
+
     registerSingle(keyType: any, valueBuilder: ()=>any){
         let sign = IETool.guid();
         this.singles[sign] = valueBuilder;

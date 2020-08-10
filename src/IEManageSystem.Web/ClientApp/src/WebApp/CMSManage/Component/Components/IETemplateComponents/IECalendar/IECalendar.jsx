@@ -1,7 +1,6 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECalendar/IComponent'
 import { Calendar, Select, Row, Col } from 'antd';
-import IocContainer from 'Core/IocContainer';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 
@@ -82,4 +81,4 @@ class IECalendar extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IECalendar);
+export default (register) => register(IComponent, IECalendar);

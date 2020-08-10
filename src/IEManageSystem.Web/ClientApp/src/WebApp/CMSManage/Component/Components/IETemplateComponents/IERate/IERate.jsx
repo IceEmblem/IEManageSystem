@@ -1,7 +1,6 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IERate/IComponent'
 import { ieReduxFetch } from "Core/IEReduxFetch"
-import IocContainer from 'Core/IocContainer';
 import { Rate } from 'antd';
 
 class IERate extends IComponent {
@@ -29,4 +28,4 @@ class IERate extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IERate);
+export default (register) => register(IComponent, IERate);

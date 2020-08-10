@@ -1,7 +1,6 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECard/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IECard/Data'
-import IocContainer from 'Core/IocContainer';
 import { Card } from 'antd';
 const { Meta } = Card;
 
@@ -29,4 +28,4 @@ class IECard extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IECard);
+export default (register) => register(IComponent, IECard);

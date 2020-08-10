@@ -1,6 +1,5 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IELink/IComponent'
-import IocContainer from 'Core/IocContainer';
 import {
     GithubOutlined,
     AccountBookFilled,
@@ -205,4 +204,4 @@ class IELink extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IELink);
+export default (register) => register(IComponent, IELink);

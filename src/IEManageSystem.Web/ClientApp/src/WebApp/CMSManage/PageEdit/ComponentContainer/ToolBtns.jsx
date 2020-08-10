@@ -39,7 +39,7 @@ class ToolBtns extends React.Component {
 
         return (
             <div 
-                className={`editableparentcom-btns ${this.props.className}`} 
+                className={`editableparentcom-btns editableparentcom-btns-transform`} 
                 style={this.props.style}
             >
                 <PageEditFrame
@@ -102,6 +102,7 @@ ToolBtns.propTypes = {
     pageDataId: PropTypes.number,
     sign: PropTypes.string.isRequired,
     addChildComponent: PropTypes.func.isRequired,
+    style: PropTypes.object,
 
     // redux state
     pageComponent: PropTypes.object.isRequired,

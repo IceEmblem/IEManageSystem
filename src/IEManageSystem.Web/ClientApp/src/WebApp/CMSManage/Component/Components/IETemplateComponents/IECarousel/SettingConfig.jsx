@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Setting'
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
-import IocContainer from 'Core/IocContainer';
 import { Input, Tag } from 'antd';
 
 class SettingConfig extends ISettingConfig {
@@ -51,7 +50,7 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "幻灯片设置",
+export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "幻灯片设置",
 (pageComponentSetting, setPageComponentSetting) => {
     return <SettingConfig
         data={pageComponentSetting}

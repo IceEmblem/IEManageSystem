@@ -1,0 +1,9 @@
+.cms-componentcontainerboxshow{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.cms-componentcontainerboxshow>*:first-child{
+    width: 100%;
+    height: 100%;
+}

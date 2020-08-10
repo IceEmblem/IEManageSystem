@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/Setting'
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
-import IocContainer from 'Core/IocContainer';
 import { PlusCircleOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Input, Tag, Button } from 'antd';
 
@@ -69,7 +68,7 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "标签设置",
+export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "标签设置",
 (pageComponentSetting, setPageComponentSetting) => {
     return <SettingConfig
         data={pageComponentSetting}

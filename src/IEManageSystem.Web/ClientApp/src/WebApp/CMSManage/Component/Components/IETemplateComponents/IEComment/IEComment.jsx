@@ -1,6 +1,5 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEComment/IComponent'
-import IocContainer from 'Core/IocContainer';
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import defaultAvatar from 'images/default_avatar.png'
 
@@ -80,4 +79,4 @@ class IEComment extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEComment);
+export default (register) => register(IComponent, IEComment);

@@ -2,7 +2,6 @@ import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Data'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Setting'
-import IocContainer from 'Core/IocContainer';
 import { Carousel, Typography } from 'antd';
 import defaultImg from 'images/nofind.jpg'
 
@@ -45,4 +44,4 @@ class IECarousel extends IComponent {
 IECarousel.defaultProps = {
 };
 
-IocContainer.registerSingleIntances(IComponent, IECarousel);
+export default (register) => register(IComponent, IECarousel);

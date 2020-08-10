@@ -1,6 +1,5 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostTitle/IComponent'
-import IocContainer from 'Core/IocContainer';
 import { Typography } from 'antd';
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPostTitle/Setting'
 
@@ -33,4 +32,4 @@ class IEPostTitle extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEPostTitle);
+export default (register) => register(IComponent, IEPostTitle);

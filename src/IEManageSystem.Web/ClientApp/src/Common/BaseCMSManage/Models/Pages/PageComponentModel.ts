@@ -9,6 +9,7 @@ export default class PageComponentModel {
     public parentSign: string | null;
     public menuName: string | null;
     public componentType: string;
+    public os: string;
     public pageComponentBaseSetting: PageComponentBaseSettingModel;
     public pageLeafSetting: PageLeafSettingModel;
     public pageComponentSettings: Array<PageComponentSettingModel>;

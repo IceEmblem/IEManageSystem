@@ -1,6 +1,5 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostDescribe/IComponent'
-import IocContainer from 'Core/IocContainer';
 
 class IEPostDescribe extends IComponent {
     render() {
@@ -10,4 +9,4 @@ class IEPostDescribe extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEPostDescribe);
+export default (register) => register(IComponent, IEPostDescribe);

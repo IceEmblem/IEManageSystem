@@ -5,7 +5,6 @@ import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNav/S
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { Input, Tag, Button } from 'antd';
-import IocContainer from 'Core/IocContainer';
 
 class SettingConfig extends ISettingConfig {
     setting = null;
@@ -92,7 +91,7 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "文本设置",
+export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "文本设置",
 (pageComponentSetting, setPageComponentSetting) => {
     return <SettingConfig
         data={pageComponentSetting}

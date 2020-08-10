@@ -4,7 +4,6 @@ import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/Text/I
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/Text/Setting'
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { Input, Tag, Radio } from 'antd';
-import IocContainer from 'Core/IocContainer';
 
 class SettingConfig extends ISettingConfig {
     setting = null;
@@ -55,7 +54,7 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "文本设置",
+export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "文本设置",
 (pageComponentSetting, setPageComponentSetting) => {
     return <SettingConfig
         data={pageComponentSetting}

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import IDataConfig from 'BaseCMSManage/Components/IETemplateComponents/IECard/IDataConfig'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IECard/Data'
-import IocContainer from 'Core/IocContainer';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 import { Input, Tag, Button } from 'antd';
 
@@ -82,4 +81,4 @@ DataConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(IDataConfig, DataConfig);
+export default (register) => register(IDataConfig, DataConfig);

@@ -1,7 +1,6 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/Container/IComponent'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/Container//Setting'
-import IocContainer from 'Core/IocContainer';
 
 import './Container.css'
 
@@ -30,4 +29,4 @@ class Container extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, Container);
+export default (register) => register(IComponent, Container);

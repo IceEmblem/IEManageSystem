@@ -2,12 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
-import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
-import './ComponentContainerBox.css'
-
-class BaseComponentContainer extends React.Component {
+class ComponentContainerBox extends React.Component {
     constructor(props) {
         super(props);
 
@@ -66,6 +63,7 @@ class BaseComponentContainer extends React.Component {
                 sign={sign}
                 pageId={this.props.pageId}
                 pageDataId={this.props.pageDataId}
+                ComponentContainerBoxShow={this.props.ComponentContainerBoxShow}
 
                 style={this.props.style}
                 className={this.props.className}
@@ -76,21 +74,20 @@ class BaseComponentContainer extends React.Component {
         );
     }
 
-    getTools() {
-        return undefined;
-    }
-
-    // 各自容器可实现自己需要扩展的props
-    propsEX() {
-        return {};
-    }
-
     render() {
         return (
-            <div
+            <this.props.ComponentContainerBoxShow
                 style={{ ...this.getStyle(), ...this.props.style(this.props.pageComponent) }}
-                className={`parentcomponent ${this.getClassName()} ${this.props.className(this.props.pageComponent)}`}
-                {...this.props.propsEX(this.props.pageComponent)}
+                className={`${this.getClassName()} ${this.props.className(this.props.pageComponent)}`}
+                propsEX={this.props.propsEX(this.props.pageComponent)}
+                ToolBtn={
+                    this.props.ToolBtn &&
+                    <this.props.ToolBtn
+                        sign={this.props.sign}
+                        pageId={this.props.pageId}
+                        pageDataId={this.props.pageDataId}
+                    />
+                }
             >
                 {
                     this.componentDescribe.createComponent(
@@ -99,24 +96,17 @@ class BaseComponentContainer extends React.Component {
                         this.props.sign,
                         this.createChildComponent())
                 }
-                {
-                    this.props.ToolBtn &&
-                    <this.props.ToolBtn
-                        sign={this.props.sign}
-                        pageId={this.props.pageId}
-                        pageDataId={this.props.pageDataId}
-                    />
-                }
-            </div>
+            </this.props.ComponentContainerBoxShow>
         );
     }
 }
 
-BaseComponentContainer.propTypes = {
+ComponentContainerBox.propTypes = {
     // 如下 3 个属性由父组件传入
     pageId: PropTypes.number.isRequired,
     pageDataId: PropTypes.number,
     sign: PropTypes.string.isRequired,
+    ComponentContainerBoxShow: PropTypes.func.isRequired,
 
     // 如下属性为父组件传入，为可选熟悉
     style: PropTypes.func,
@@ -128,10 +118,10 @@ BaseComponentContainer.propTypes = {
     pageComponent: PropTypes.object.isRequired,
 }
 
-BaseComponentContainer.defaultProps = {
-    style: (pageComponent)=>({}),
-    className: (pageComponent)=>({}),
-    propsEX: (pageComponent)=>({}),
+ComponentContainerBox.defaultProps = {
+    style: (pageComponent) => ({}),
+    className: (pageComponent) => "",
+    propsEX: (pageComponent) => ({}),
 };
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -150,6 +140,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const Contain = CmsRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps
-)(BaseComponentContainer)
+)(ComponentContainerBox)
 
 export default Contain;

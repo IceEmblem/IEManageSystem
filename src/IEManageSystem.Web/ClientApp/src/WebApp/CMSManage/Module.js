@@ -9,6 +9,7 @@ import CoreModule from 'Core/Module';
 import LayoutModule from 'Layout/Module';
 import PageProvider from 'Core/Page/PageProvider'
 import Page from 'Core/Page/Page'
+import IocContainer from 'Core/IocContainer'
 
 // BaseCmsManage 模块依赖
 import BaseCmsManageModule from 'BaseCMSManage/Module';
@@ -17,7 +18,9 @@ import BaseCmsManageModule from 'BaseCMSManage/Module';
 import Home from './Home'
 import SearchBoxTool from './SearchBoxTool'
 import NavToolProvider from 'Layout/NavTools/NavToolProvider'
-import './Component/Components/RegisterTemplateParts'
+import RegisterTemplateParts from './Component/Components/RegisterTemplateParts'
+
+import RNHome from 'RNCMS/Home'
 
 import {
     SnippetsOutlined,
@@ -37,6 +40,7 @@ const CMSManage = React.lazy(() => import('./CMSManage'));
 
 export default class Module extends BaseModule {
     initialize() {
+        // 向 Layout 注册菜单
         MenuProvider.registerMenu(
             {
                 id: "CMSManage",
@@ -114,9 +118,17 @@ export default class Module extends BaseModule {
             CMSManage,
             3
         );
+        // 向 Layout 注册工具
         NavToolProvider.registerToolOfLeft(1, <SearchBoxTool />);
+        
+        // 向依赖注入容器注册组件的各个部件
+        RegisterTemplateParts.forEach(item => {
+            item(IocContainer.registerSingleIntances)
+        })
 
+        // 注册页面
         PageProvider.register(new Page("Home", "/", Home));
+        PageProvider.register(new Page("Home", "/RNHome", RNHome));
         PageProvider.register(new Page("PageEdit", "/ManageHome/CMSManage/PageEdit/:pageName", PageEdit));
         PageProvider.register(new Page("PostEdit", "/ManageHome/CMSManage/PostEdit/:pageName/:pageDataName?", PostEdit));
         PageProvider.register(new Page("TemplatePageShow", "/ManageHome/CMSManage/TemplatePageShow/:templateName/:templatePageName", TemplatePageShow));

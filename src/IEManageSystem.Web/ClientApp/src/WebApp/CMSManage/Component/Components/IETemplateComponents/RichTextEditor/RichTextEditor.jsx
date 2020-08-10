@@ -1,6 +1,5 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/RichTextEditor/IComponent'
-import IocContainer from 'Core/IocContainer';
 import './RichTextEditor.css'
 
 class RichTextEditor extends IComponent {
@@ -23,4 +22,4 @@ RichTextEditor.defaultProps = {
 
 };
 
-IocContainer.registerSingleIntances(IComponent, RichTextEditor);
+export default (register) => register(IComponent, RichTextEditor);

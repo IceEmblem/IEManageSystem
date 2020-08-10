@@ -1,7 +1,6 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostList/IComponent'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPostList/Setting'
-import IocContainer from 'Core/IocContainer';
 import { Link } from 'react-router-dom'
 import { List, Card, Pagination, Button } from 'antd';
 import defaultImg from 'images/default_post_img.jpg'
@@ -68,4 +67,4 @@ class IEPostList extends IComponent {
     }
 }
 
-IocContainer.registerSingleIntances(IComponent, IEPostList);
+export default (register) => register(IComponent, IEPostList);

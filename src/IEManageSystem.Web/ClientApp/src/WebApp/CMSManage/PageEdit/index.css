@@ -1,7 +1,7 @@
 
 
 .pageedit-page-container-btns {
-    position: absolute !important;
+    position: fixed !important;
     display: flex;
     justify-content: flex-end;
     right: 5rem;

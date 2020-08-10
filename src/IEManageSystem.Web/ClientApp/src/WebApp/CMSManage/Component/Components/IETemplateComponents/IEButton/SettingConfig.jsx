@@ -4,9 +4,8 @@ import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IEButt
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEButton/Setting'
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { Input, Tag, Radio } from 'antd';
-import IocContainer from 'Core/IocContainer';
 
-export default class SettingConfig extends ISettingConfig {
+class SettingConfig extends ISettingConfig {
     buttonSetting = null;
 
     constructor(props) {
@@ -91,7 +90,7 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-IocContainer.registerSingleIntances(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("BtnSetting", "按钮设置",
+export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("BtnSetting", "按钮设置",
 (pageComponentSetting, setPageComponentSetting) => {
     return <SettingConfig
         data={pageComponentSetting}

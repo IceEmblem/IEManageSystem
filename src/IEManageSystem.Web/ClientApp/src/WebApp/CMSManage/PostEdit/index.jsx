@@ -6,7 +6,8 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import './index.css'
 
 import { pageFetch, pageDataFetch, componentDataUpdateFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
-import ComponentContainerBox from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBox'
+import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
+import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 
 import { Button } from 'antd';
 import { CloudUploadOutlined, UndoOutlined } from '@ant-design/icons'
@@ -59,7 +60,7 @@ class ComponentData extends React.Component {
                                     sign={sign}
                                     pageId={this.props.pageId}
                                     pageDataId={this.props.pageDataId}
-
+                                    ComponentContainerBoxShow={ComponentContainerBoxShow}
                                     ToolBtn={ToolBtns}
                                 >
                                 </ComponentContainerBox>)

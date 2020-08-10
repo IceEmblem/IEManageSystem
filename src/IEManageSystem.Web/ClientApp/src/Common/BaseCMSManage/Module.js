@@ -14,6 +14,9 @@ export default class Module extends BaseModule {
     initialize() {
         IERedux.setReducer(reducer);
         RootRedux.register(IERedux);
+    }
+
+    postInitialize(){
         ComponentFactory.init();
     }
 }
