@@ -6,6 +6,8 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { setPage, RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
 import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
+import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
+
 import Page from '../Home/Page'
 import IETool from 'Core/ToolLibrary/IETool'
 
@@ -37,6 +39,7 @@ class TemplatePageShow extends React.Component {
                             sign={sign}
                             pageId={pageId}
                             pageDataId={undefined}
+                            os={this.props.rootPageComponent.os}
                             ComponentContainerBoxShow={ComponentContainerBoxShow}
                         >
                         </ComponentContainerBox>)
@@ -56,7 +59,7 @@ const mapStateToProps = (state, ownProps) => {
     // 获取根组件
     let rootPageComponent = undefined;
     if (state.pageComponents[pageId]) {
-        rootPageComponent = state.pageComponents[pageId][RootComponentSign];
+        rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Web][RootComponentSign];
     }
 
     return {

@@ -24,7 +24,7 @@ const delCookie = (name) => {
     return new Promise(function(resolve, reject){
         var exp = new Date();
         exp.setTime(exp.getTime() - 1);
-        var cval = this.getCookie(name);
+        var cval = getCookie(name);
         if (cval != null) {
             document.cookie = name + "=" + cval + ";expires=" + exp.toUTCString();
         }

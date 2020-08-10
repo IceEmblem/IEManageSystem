@@ -22,8 +22,8 @@ class SignSquareFrame extends React.Component {
 
         let left = this.props.targetElement.offsetLeft;
         let top = this.props.targetElement.offsetTop;
-        let width = this.props.targetElement.clientWidth;
-        let height = this.props.targetElement.clientHeight;
+        let width = this.props.targetElement.clientWidth - 2;
+        let height = this.props.targetElement.clientHeight - 2;
 
         return <div>
             <span style={{ ...{ left: left, top: top, width: width }, ...style }}></span>
@@ -40,7 +40,7 @@ class CurrentToolBtns extends React.Component {
     }
 
     render() {
-        let { selectedPageComponents, pageId, pageDataId, addChildComponent } = this.props;
+        let { selectedPageComponents, pageId, pageDataId, addChildComponent, os } = this.props;
 
         if (selectedPageComponents.length == 0) {
             return <></>
@@ -61,6 +61,7 @@ class CurrentToolBtns extends React.Component {
                                     sign={item.pageComponent.sign}
                                     pageId={pageId}
                                     pageDataId={pageDataId}
+                                    os={os}
                                     addChildComponent={addChildComponent}
                                     style={{opacity: 1, marginBottom: "5px"}}
                                 />
@@ -94,11 +95,12 @@ class PageEditCompontContainer extends React.Component {
     }
 
     // 工具按钮
-    Tools({ sign, pageId, pageDataId }) {
+    Tools({ sign, pageId, pageDataId, pageComponent }) {
         return <ToolBtns
             sign={sign}
             pageId={pageId}
             pageDataId={pageDataId}
+            os={pageComponent.os}
             addChildComponent={this.props.addChildComponent}
         />;
     }
@@ -151,6 +153,7 @@ class PageEditCompontContainer extends React.Component {
                                         sign={sign}
                                         pageId={this.props.pageId}
                                         pageDataId={this.props.pageDataId}
+                                        os={this.props.rootPageComponent.os}
                                         ComponentContainerBoxShow={ComponentContainerBoxShow}
 
                                         style={this.getStyle}
@@ -175,6 +178,7 @@ class PageEditCompontContainer extends React.Component {
                     pageId={this.props.pageId}
                     pageDataId={this.props.pageDataId}
                     addChildComponent={this.props.addChildComponent}
+                    os={this.props.rootPageComponent.os}
                     selectedPageComponents={this.state.selectedPageComponents}
                 />
             </div>

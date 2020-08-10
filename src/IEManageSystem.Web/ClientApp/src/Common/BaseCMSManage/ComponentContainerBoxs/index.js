@@ -63,6 +63,7 @@ class ComponentContainerBox extends React.Component {
                 sign={sign}
                 pageId={this.props.pageId}
                 pageDataId={this.props.pageDataId}
+                os={this.props.os}
                 ComponentContainerBoxShow={this.props.ComponentContainerBoxShow}
 
                 style={this.props.style}
@@ -86,12 +87,14 @@ class ComponentContainerBox extends React.Component {
                         sign={this.props.sign}
                         pageId={this.props.pageId}
                         pageDataId={this.props.pageDataId}
+                        pageComponent={this.props.pageComponent}
                     />
                 }
             >
                 {
                     this.componentDescribe.createComponent(
                         this.props.pageId,
+                        this.props.os,
                         this.props.pageDataId,
                         this.props.sign,
                         this.createChildComponent())
@@ -102,10 +105,11 @@ class ComponentContainerBox extends React.Component {
 }
 
 ComponentContainerBox.propTypes = {
-    // 如下 3 个属性由父组件传入
+    // 如下属性由父组件传入
     pageId: PropTypes.number.isRequired,
     pageDataId: PropTypes.number,
     sign: PropTypes.string.isRequired,
+    os: PropTypes.string.isRequired,
     ComponentContainerBoxShow: PropTypes.func.isRequired,
 
     // 如下属性为父组件传入，为可选熟悉
@@ -125,7 +129,7 @@ ComponentContainerBox.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.sign];
+    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
 
     return {
         pageComponent: pageComponent,

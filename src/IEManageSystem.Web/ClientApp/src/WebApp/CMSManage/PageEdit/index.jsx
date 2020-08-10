@@ -13,6 +13,7 @@ import {
     AddComponentAction,
     RootComponentSign,
 } from 'BaseCMSManage/IEReduxs/Actions'
+import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import BtnLists from './BtnLists'
 import ComponentListBox from "./ComponentListBox"
@@ -43,10 +44,13 @@ class PageContainer extends React.Component {
             return;
         }
 
+        let pageComponents = [];
+        Object.values(this.props.pageComponents).forEach(osComponents=>pageComponents = pageComponents.concat(Object.values(osComponents)));
+
         let data = JSON.stringify({
             page: this.props.page,
-            pageComponents: this.props.pageComponents,
-            defaultComponentDatas: this.props.defaultComponentDatas
+            pageComponents: pageComponents,
+            defaultComponentDatas: Object.values(this.props.defaultComponentDatas)
         })
 
         var blob = new Blob([data], { type: 'text/json' }),
@@ -73,12 +77,11 @@ class PageContainer extends React.Component {
         }
 
         let pageComponent = selectedComponentDescribe.createPageComponent(this.state.curParentComponentSign);
-        let isAddDefaultComponentData = selectedComponentDescribe.isExistComponentData();
 
         this.props.addComponent(new AddComponentAction(
             this.props.page.id,
-            pageComponent,
-            isAddDefaultComponentData
+            this.props.rootPageComponent.os,
+            pageComponent
         ));
     }
 
@@ -140,7 +143,7 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     // 获取根组件
     let rootPageComponent = undefined;
     if (state.pageComponents[pageId]) {
-        rootPageComponent = state.pageComponents[pageId][RootComponentSign];
+        rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Web][RootComponentSign];
     }
 
     return {

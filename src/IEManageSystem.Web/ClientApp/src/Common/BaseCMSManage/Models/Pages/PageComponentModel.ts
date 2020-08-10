@@ -2,6 +2,11 @@ import PageComponentBaseSettingModel from "./PageComponentBaseSettingModel";
 import PageComponentSettingModel from "./PageComponentSettingModel";
 import PageLeafSettingModel from "./PageLeafSettingModel";
 
+export const PageComponentOSType = {
+    Web: "Web",
+    Native: "Native"
+}
+
 export default class PageComponentModel {
     public id: number;
     public name: string;

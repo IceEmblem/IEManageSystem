@@ -79,11 +79,12 @@ export default class ComponentDescribe {
     }
 
     // 生成 React 组件
-    createComponent(pageId, pageDataId, sign, childs) {
+    createComponent(pageId, os, pageDataId, sign, childs) {
         let ComponentContainer = this.componentObject.getComponentContainer();
 
         return <ComponentContainer
             pageId={pageId}
+            os={os}
             pageDataId={pageDataId}
             sign={sign}
         >

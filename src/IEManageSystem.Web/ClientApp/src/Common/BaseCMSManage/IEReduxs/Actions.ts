@@ -2,7 +2,7 @@ import { createIEThunkAction } from 'Core/IEReduxs/Actions'
 import { ComponentDataUpdateAction } from './ContentComponentDatas/Action';
 import { DefaultComponentDataUpdateAction } from './DefaultComponentDatas/Action';
 import {
-  AddComponentAction, 
+  AddComponentAction,
   RemoveComponentAction,
   EditComponentAction,
   RootComponentSign
@@ -15,7 +15,7 @@ import {
 export {
   ComponentDataUpdateAction,
   DefaultComponentDataUpdateAction,
-  AddComponentAction, 
+  AddComponentAction,
   RemoveComponentAction,
   EditComponentAction,
   RootComponentSign,
@@ -61,10 +61,17 @@ export function setPage(page: any, pageComponents: Array<any>, defaultComponentD
 // 页面组件更新请求
 export const PageComponentUpdateReceive = "PageComponentUpdateReceive"
 export function pageComponentUpdateFetch(name: string, components: object, defaultComponentDatas: object) {
+  // 清理失效的默认组件数据
+  let fetchPageComponents = [];
+  Object.values(components).forEach(osComponents => {
+    fetchPageComponents = fetchPageComponents.concat(Object.values(osComponents))
+  });
+  let fetchDefaultComponentDatas = Object.values(defaultComponentDatas).filter(item => fetchPageComponents.some(e => e.sign == item.sign) && item.singleDatas.length > 0);
+
   let postData = {
     name: name,
-    pageComponents: Object.values(components),
-    defaultComponentDatas: Object.values(defaultComponentDatas)
+    pageComponents: fetchPageComponents,
+    defaultComponentDatas: fetchDefaultComponentDatas
   };
 
   return createIEThunkAction(

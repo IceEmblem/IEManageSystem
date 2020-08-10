@@ -6,7 +6,7 @@ import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
 const pageDataModel = PageDataModel.CreatePageDataModel();
 
 export const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.sign];
+    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
 
     return {
         pageComponent: pageComponent,

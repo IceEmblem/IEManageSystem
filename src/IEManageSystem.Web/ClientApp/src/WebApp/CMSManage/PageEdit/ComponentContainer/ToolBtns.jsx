@@ -45,7 +45,9 @@ class ToolBtns extends React.Component {
                 <PageEditFrame
                     componentDescribe={this.componentDescribe}
                     pageComponent={this.props.pageComponent}
-                    editComponent={(pageComponent) => this.props.editComponent(new EditComponentAction(this.props.pageId, this.props.sign, pageComponent))}
+                    editComponent={(pageComponent) => {
+                        this.props.editComponent(new EditComponentAction(this.props.pageId, this.props.pageComponent.os, this.props.sign, pageComponent))
+                    }}
                     show={this.state.openEdit}
                     close={() => { this.setState({ openEdit: false }) }}
                 ></PageEditFrame>
@@ -53,22 +55,24 @@ class ToolBtns extends React.Component {
                     title={`删除 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`}
                     overlayStyle={{ zIndex: 10000 }}
                 >
-                    <Button type="primary" shape="round" danger icon={<DeleteOutlined />}
-                        onClick={() => { this.props.removeComponent(new RemoveComponentAction(this.props.pageId, this.props.sign)) }}
+                    <Button size='small' type="primary" shape="round" danger icon={<DeleteOutlined />}
+                        onClick={() => { 
+                            this.props.removeComponent(new RemoveComponentAction(this.props.pageId, this.props.pageComponent.os, this.props.sign)) 
+                        }}
                     />
                 </Tooltip>
                 <Tooltip
                     title={`编辑 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`}
                     overlayStyle={{ zIndex: 10000 }}
                 >
-                    <Button type="primary" shape="round" icon={<EditOutlined />}
+                    <Button size='small' type="primary" shape="round" icon={<EditOutlined />}
                         onClick={() => { this.setState({ openEdit: true }) }}
                     />
                 </Tooltip>
                 {
                     this.componentDescribe.isExistChildComponent() &&
                     <Tooltip title={`添加 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`} overlayStyle={{ zIndex: 10000 }}>
-                        <Button type="default" shape="round" icon={<AppstoreAddOutlined />}
+                        <Button size='small' type="default" shape="round" icon={<AppstoreAddOutlined />}
                             onClick={() => { this.props.addChildComponent(this.props.sign) }}
                         />
                     </Tooltip>
@@ -77,7 +81,7 @@ class ToolBtns extends React.Component {
                     this.componentDescribe.isExistComponentData() &&
                     <>
                         <Tooltip title={`编辑默认数据 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`} overlayStyle={{ zIndex: 10000 }}>
-                            <Button type="primary" shape="round" icon={<FormOutlined />}
+                            <Button size='small' type="primary" shape="round" icon={<FormOutlined />}
                                 onClick={() => { this.setState({ showPostEdit: true }) }}
                             />
                         </Tooltip>
@@ -116,7 +120,7 @@ ToolBtns.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.sign];
+    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
     let defaultComponentData = state.defaultComponentDatas[ownProps.pageId][ownProps.sign];
 
     return {

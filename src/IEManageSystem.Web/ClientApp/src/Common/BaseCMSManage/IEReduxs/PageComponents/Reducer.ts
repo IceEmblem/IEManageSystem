@@ -9,7 +9,7 @@ import {
 } from './Action';
 import { PageReceive } from '../Actions'
 import CreatePageComponentService from '../../Models/Pages/CreatePageComponentService'
-import PageComponentModel from '../../Models/Pages/PageComponentModel'
+import PageComponentModel, {PageComponentOSType} from '../../Models/Pages/PageComponentModel'
 import PageComponentSettingModel from '../../Models/Pages/PageComponentSettingModel'
 import SingleDataModel from '../../Models/SingleDataModel'
 
@@ -78,7 +78,7 @@ function setChildComponentSigns(pageComponents: object, pageComponent: any): any
 // 添加组件 case reducer
 function addComponent(state: object, action: AddComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId] };
+    let pageComponents = { ...state[action.pageId][action.os] };
     if (pageComponents[action.pageComponent.sign]) {
         throw new Error("组件标识已存在");
     }
@@ -94,6 +94,7 @@ function addComponent(state: object, action: AddComponentAction): object {
 
     // 向页面数组中添加组件
     pageComponents[action.pageComponent.sign] = action.pageComponent;
+    pageComponents[action.pageComponent.sign].os = action.os;
     pageComponents[action.pageComponent.sign].pageComponentBaseSetting.sortIndex = sortIndex;
     pageComponents[action.pageComponent.sign] = setChildComponentSigns(pageComponents, pageComponents[action.pageComponent.sign]);
     setPageComponentModel(pageComponents[action.pageComponent.sign]);
@@ -103,7 +104,7 @@ function addComponent(state: object, action: AddComponentAction): object {
     setPageComponentModel(pageComponents[action.pageComponent.parentSign]);
 
     // 更新页面组件数组
-    state[action.pageId] = pageComponents;
+    state[action.pageId][action.os] = pageComponents;
 
     return state;
 }
@@ -111,7 +112,7 @@ function addComponent(state: object, action: AddComponentAction): object {
 // 移除组件 case reducer
 function removeComponent(state: object, action: RemoveComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId] };
+    let pageComponents = { ...state[action.pageId][action.os] };
 
     let parentSign = pageComponents[action.pageComponentSign].parentSign;
 
@@ -123,7 +124,7 @@ function removeComponent(state: object, action: RemoveComponentAction): object {
     pageComponents[parentSign] = setChildComponentSigns(pageComponents, pageComponents[parentSign]);
     setPageComponentModel(pageComponents[parentSign]);
 
-    state[action.pageId] = pageComponents;
+    state[action.pageId][action.os] = pageComponents;
 
     return state;
 }
@@ -131,7 +132,7 @@ function removeComponent(state: object, action: RemoveComponentAction): object {
 // 编辑组件 case reducer
 function editComponent(state: object, action: EditComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId] };
+    let pageComponents = { ...state[action.pageId][action.os] };
 
     // 删除原组件
     let parentSign = pageComponents[action.pageComponentSign].parentSign;
@@ -149,16 +150,14 @@ function editComponent(state: object, action: EditComponentAction): object {
     pageComponents[parentSign] = setChildComponentSigns(pageComponents, pageComponents[parentSign]);
     setPageComponentModel(pageComponents[parentSign]);
 
-    state[action.pageId] = pageComponents;
+    state[action.pageId][action.os] = pageComponents;
 
     return state;
 }
 
-// 页面接收 case reducer
-function pageReceive(state: object, action): object {
+function pageReceiveHandle(receivePageComponents){
     // 页面组件列表
     let pageComponents = {};
-    let receivePageComponents = action.data.pageComponents;
 
     // 如果不存在根组件，则创建一个根组件
     if (!receivePageComponents.some(item => item.sign == RootComponentSign)) {
@@ -187,8 +186,31 @@ function pageReceive(state: object, action): object {
         setPageComponentModel(pageComponents[key]);
     }
 
+    return pageComponents;
+}
+
+// 页面接收 case reducer
+function pageReceive(state: object, action): object {
+    // 页面组件列表
+    let receivePageComponents = action.data.pageComponents;
+
+    // 将不具有平台标识的组件设置为 Web 组件
+    action.data.pageComponents.forEach(item=>{
+        if(!item.os){
+            item.os = PageComponentOSType.Web;
+        }
+    })
+
+    let webComponents = pageReceiveHandle(receivePageComponents.filter(item=>item.os == PageComponentOSType.Web));
+    webComponents[RootComponentSign].os = PageComponentOSType.Web;
+    let nativeComponents = pageReceiveHandle(receivePageComponents.filter(item=>item.os == PageComponentOSType.Native));
+    nativeComponents[RootComponentSign].os = PageComponentOSType.Native;
+
     let newState = { ...state };
-    newState[action.data.page.id] = pageComponents;
+    newState[action.data.page.id] = {
+        Web: webComponents,
+        Native: nativeComponents
+    };
 
     return newState;
 }

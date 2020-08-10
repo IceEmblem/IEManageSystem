@@ -12,8 +12,8 @@ export class AddComponentAction extends ComponentAction {
 
   constructor(
     public pageId: number,
-    public pageComponent: any,
-    public isAddDefaultComponentData: string) {
+    public os: string,
+    public pageComponent: any) {
     super();
   }
 }
@@ -25,6 +25,7 @@ export class RemoveComponentAction extends ComponentAction {
 
   constructor(
     public pageId: number,
+    public os: string,
     public pageComponentSign: string) {
     super();
   }
@@ -35,25 +36,7 @@ export const PageEditComponent = "PageEditComponent"
 export class EditComponentAction extends ComponentAction {
   type = PageEditComponent;
 
-  constructor(public pageId: number, public pageComponentSign: string, public pageComponent: any) {
+  constructor(public pageId: number, public os: string, public pageComponentSign: string, public pageComponent: any) {
     super();
   }
 }
-
-// export const SnapshotOfComponent = "SnapshotOfComponent"
-// export class snapshotOfComponent extends ComponentAction {
-//   type = SnapshotOfComponent;
-
-//   constructor(public pageId: number, public pageComponentSign: string) {
-//     super();
-//   }
-// }
-
-// export const ResumeSnapshotOfComponent = "ResumeSnapshotOfComponent";
-// export class resumeSnapshotOfComponent extends ComponentAction {
-//   type = ResumeSnapshotOfComponent;
-
-//   constructor(public pageId: number, public pageComponentSign: string) {
-//     super();
-//   }
-// }

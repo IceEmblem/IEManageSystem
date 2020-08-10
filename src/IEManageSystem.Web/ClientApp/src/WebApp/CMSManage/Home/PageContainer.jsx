@@ -7,6 +7,7 @@ import { pageFetch, pageDataFetch, RootComponentSign, } from 'BaseCMSManage/IERe
 import Page from './Page'
 import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
+import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -62,6 +63,7 @@ class PageContainer extends React.Component {
                             sign={sign}
                             pageId={this.props.pageId}
                             pageDataId={this.props.pageDataId}
+                            os={this.props.rootPageComponent.Web}
                             ComponentContainerBoxShow={ComponentContainerBoxShow}
                         >
                         </ComponentContainerBox>)
@@ -100,7 +102,7 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     // 获取根组件
     let rootPageComponent = undefined;
     if (state.pageComponents[pageId]) {
-        rootPageComponent = state.pageComponents[pageId][RootComponentSign];
+        rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Web][RootComponentSign];
     }
 
     // 获取文章

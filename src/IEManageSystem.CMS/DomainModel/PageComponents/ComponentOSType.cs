@@ -31,7 +31,7 @@ namespace IEManageSystem.CMS.DomainModel.PageComponents
         public static ComponentOSType ReactNativeComponent => new ComponentOSType("Native");
 
         public static ComponentOSType CreateOSType(string type) {
-            if (type == WebComponentType) {
+            if (type == WebComponentType || string.IsNullOrEmpty(type)) {
                 return WebComponent;
             }
 
