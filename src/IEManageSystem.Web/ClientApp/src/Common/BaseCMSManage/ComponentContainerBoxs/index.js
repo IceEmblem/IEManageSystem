@@ -59,7 +59,7 @@ class ComponentContainerBox extends React.Component {
     createChildComponent() {
         return this.props.pageComponent.pageComponentSigns.map(sign => (
             <Contain
-                key={sign}
+                key={sign + this.props.pageComponent.os}
                 sign={sign}
                 pageId={this.props.pageId}
                 pageDataId={this.props.pageDataId}

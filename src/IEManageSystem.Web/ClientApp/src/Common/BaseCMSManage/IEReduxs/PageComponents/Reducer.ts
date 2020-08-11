@@ -6,12 +6,15 @@ import {
     RemoveComponentAction,
     EditComponentAction,
     RootComponentSign,
+    CopyComponent,
+    CopyComponentAction,
 } from './Action';
 import { PageReceive } from '../Actions'
 import CreatePageComponentService from '../../Models/Pages/CreatePageComponentService'
-import PageComponentModel, {PageComponentOSType} from '../../Models/Pages/PageComponentModel'
+import PageComponentModel, { PageComponentOSType } from '../../Models/Pages/PageComponentModel'
 import PageComponentSettingModel from '../../Models/Pages/PageComponentSettingModel'
 import SingleDataModel from '../../Models/SingleDataModel'
+import IETool from 'Core/ToolLibrary/IETool'
 
 function setPageComponentModel(pageComponentData: any) {
     pageComponentData.__proto__ = PageComponentModel.prototype;
@@ -155,7 +158,22 @@ function editComponent(state: object, action: EditComponentAction): object {
     return state;
 }
 
-function pageReceiveHandle(receivePageComponents){
+// 拷贝数据 case reducer
+function copyComponent(state: object, action: CopyComponentAction): object {
+    // 要操作的页面
+    let page = { ...state[action.pageId] };
+
+    page[action.distOS] = IETool.deepCopy(page[action.sourceOS]);
+    Object.values(page[action.distOS]).forEach((item: any)=>{
+        item.os = action.distOS;
+    });
+
+    state[action.pageId] = page;
+
+    return state;
+}
+
+function pageReceiveHandle(receivePageComponents) {
     // 页面组件列表
     let pageComponents = {};
 
@@ -195,15 +213,15 @@ function pageReceive(state: object, action): object {
     let receivePageComponents = action.data.pageComponents;
 
     // 将不具有平台标识的组件设置为 Web 组件
-    action.data.pageComponents.forEach(item=>{
-        if(!item.os){
+    action.data.pageComponents.forEach(item => {
+        if (!item.os) {
             item.os = PageComponentOSType.Web;
         }
     })
 
-    let webComponents = pageReceiveHandle(receivePageComponents.filter(item=>item.os == PageComponentOSType.Web));
+    let webComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Web));
     webComponents[RootComponentSign].os = PageComponentOSType.Web;
-    let nativeComponents = pageReceiveHandle(receivePageComponents.filter(item=>item.os == PageComponentOSType.Native));
+    let nativeComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Native));
     nativeComponents[RootComponentSign].os = PageComponentOSType.Native;
 
     let newState = { ...state };
@@ -229,6 +247,11 @@ export default function reducer(state = {}, action) {
     // 编辑组件
     if (action.type == PageEditComponent) {
         return editComponent(state, action);
+    }
+
+    // 拷贝数据
+    if (action.type == CopyComponent) {
+        return copyComponent(state, action);
     }
 
     // 页面接收动作

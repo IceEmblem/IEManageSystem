@@ -40,3 +40,13 @@ export class EditComponentAction extends ComponentAction {
     super();
   }
 }
+
+// 从一个平台拷贝组件到另一个平台
+export const CopyComponent = "CopyComponent"
+export class CopyComponentAction extends ComponentAction {
+  type = CopyComponent;
+
+  constructor(public pageId: number, public distOS: string, public sourceOS) {
+    super();
+  }
+}

@@ -1,16 +1,17 @@
 import React from 'react';
 import ListBtn from 'Common/ListBtn'
 import PropTypes from 'prop-types'
-
+import { Link } from 'react-router-dom'
 import { Animate } from 'react-move'
-import { easeExpOut, easeQuadInOut, easeCubic, easeCubicInOut } from 'd3-ease'
+import { easeCubicInOut } from 'd3-ease'
 
-import { Button, Popover, Input, Tag, Select } from 'antd';
-import { PlusCircleOutlined, InfoCircleOutlined, SyncOutlined, SaveOutlined, VerticalAlignBottomOutlined } from "@ant-design/icons"
+import { Button, Popover, Input, Tag, Select, Tooltip } from 'antd';
+import { PlusCircleOutlined, InfoCircleOutlined, SyncOutlined, SaveOutlined, VerticalAlignBottomOutlined, CopyOutlined } from "@ant-design/icons"
 
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import { setPage } from 'BaseCMSManage/IEReduxs/Actions'
+import { setPage, CopyComponentAction } from 'BaseCMSManage/IEReduxs/Actions'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
+import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import "./BtnLists.css";
 
@@ -25,7 +26,7 @@ const Layout = (props) => {
                 placeholder="选择页面"
                 optionFilterProp="children"
                 onChange={props.onChange}
-                dropdownStyle={{zIndex: 9999}}
+                dropdownStyle={{ zIndex: 9999 }}
             >
                 {props.pages.map(item => (<Option value={item.name}>{item.displayName}</Option>))}
             </Select>
@@ -57,6 +58,27 @@ const PageInfo = (props) => (<div className="pageedit-page-container-header-info
             disabled={true}
             suffix={<Tag color="#55acee">页面描述</Tag>}
         />
+    </div>
+</div>)
+
+const OSType = (props) => (<div>
+    <div>
+        <Link className="ant-btn w-75 mb-1 mr-1" to="/ManageHome/CMSManage/PageEdit/Home/Web" >浏览器</Link>
+        <Tooltip title="导入浏览器组件">
+            <Button 
+                icon={<CopyOutlined />}
+                onClick={props.importWebComponent}
+            ></Button>
+        </Tooltip>
+    </div>
+    <div>
+        <Link className="ant-btn ant-btn-primary w-75 mr-1" to="/ManageHome/CMSManage/PageEdit/Home/Native" >移动App</Link>
+        <Tooltip title="导入移动App组件">
+            <Button 
+                icon={<CopyOutlined />}
+                onClick={props.importNativeComponent}
+            ></Button>
+        </Tooltip>
     </div>
 </div>)
 
@@ -151,6 +173,29 @@ class BtnLists extends React.Component {
                                             this.props.exportPage();
                                         }}
                                     >导出页面</Button>
+                                    <Popover
+                                        content={<OSType 
+                                            importWebComponent={()=>{
+                                                if(this.props.os == PageComponentOSType.Web){
+                                                    return;
+                                                }
+                                                this.props.copyComponent(this.props.os, PageComponentOSType.Web)
+                                            }}
+                                            importNativeComponent={()=>{
+                                                if(this.props.os == PageComponentOSType.Native){
+                                                    return;
+                                                }
+                                                this.props.copyComponent(this.props.os, PageComponentOSType.Native)
+                                            }}
+                                        />}
+                                        title="平台信息"
+                                        trigger="click"
+                                    >
+                                        <Button
+                                            icon={<InfoCircleOutlined />}
+                                            className="bg-dark border-dark text-white"
+                                        >平台选择</Button>
+                                    </Popover>
                                     <Button
                                         type="primary"
                                         icon={<SaveOutlined />}
@@ -178,10 +223,13 @@ class BtnLists extends React.Component {
 
 BtnLists.propTypes = {
     pageId: PropTypes.string.isRequired,
+    os: PropTypes.string.isRequired,
 
     addComponent: PropTypes.func.isRequired,
     submitPage: PropTypes.func.isRequired,
-    exportPage: PropTypes.func.isRequired
+    exportPage: PropTypes.func.isRequired,
+    setPage: PropTypes.func.isRequired,
+    copyComponent: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -194,6 +242,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         setPage: (page, pageComponents, defaultComponentDatas) => {
             dispatch(setPage(page, pageComponents, defaultComponentDatas));
+        },
+        copyComponent: (distOS, sourceOS) => {
+            dispatch(new CopyComponentAction(ownProps.pageId, distOS, sourceOS))
         }
     }
 }

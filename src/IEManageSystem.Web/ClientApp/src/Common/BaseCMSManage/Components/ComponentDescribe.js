@@ -82,6 +82,10 @@ export default class ComponentDescribe {
     createComponent(pageId, os, pageDataId, sign, childs) {
         let ComponentContainer = this.componentObject.getComponentContainer();
 
+        if(!ComponentContainer){
+            return "该组件不适用于当前平台";
+        }
+
         return <ComponentContainer
             pageId={pageId}
             os={os}

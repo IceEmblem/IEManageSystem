@@ -7,6 +7,7 @@ import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBox
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import ToolBtns from './ToolBtns';
 import Page from 'CMSManage/Home/Page'
+import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 // 标记框，用于标记当前活跃的组件位置
 class SignSquareFrame extends React.Component {
@@ -48,7 +49,7 @@ class CurrentToolBtns extends React.Component {
 
         return (
             <div>
-                <span style={{ right: 60, bottom: 100, position: "fixed" }} >
+                <span style={{ right: 70, bottom: 100, position: "fixed" }} >
                     {
                         selectedPageComponents.map(item => (
                             <div
@@ -130,6 +131,11 @@ class PageEditCompontContainer extends React.Component {
     }
 
     render() {
+        let style = {};
+        if(this.props.rootPageComponent.os == PageComponentOSType.Native){
+            style.width = "640px"
+            style.margin = "auto"
+        }
         return (
             <div
                 className="w-100 h-100"
@@ -144,12 +150,12 @@ class PageEditCompontContainer extends React.Component {
                         return false;
                     }}
                 >
-                    <Page>
+                    <Page style={style}>
                         {
                             this.props.rootPageComponent.pageComponentSigns.map(sign => (
                                 <>
                                     <ComponentContainerBox
-                                        key={sign}
+                                        key={sign + this.props.rootPageComponent.os}
                                         sign={sign}
                                         pageId={this.props.pageId}
                                         pageDataId={this.props.pageDataId}

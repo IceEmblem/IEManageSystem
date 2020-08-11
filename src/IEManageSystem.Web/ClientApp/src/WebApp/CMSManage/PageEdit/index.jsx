@@ -14,6 +14,7 @@ import {
     RootComponentSign,
 } from 'BaseCMSManage/IEReduxs/Actions'
 import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import RegisterTemplateManager from 'CMSManage/Component/Components/RegisterTemplateManager'
 
 import BtnLists from './BtnLists'
 import ComponentListBox from "./ComponentListBox"
@@ -104,6 +105,7 @@ class PageContainer extends React.Component {
                     <BtnLists
                         addComponent={() => { this.setState({ curParentComponentSign: RootComponentSign, showComponentListBox: true }) }}
                         pageId={this.props.pageId}
+                        os={this.props.rootPageComponent.os}
                         submitPage={this.submitPage}
                         exportPage={this.exportPage}
                     />
@@ -132,6 +134,8 @@ PageContainer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     let pageName = ownProps.match.params.pageName;
+    let os = ownProps.match.params.os || PageComponentOSType.Web;
+    RegisterTemplateManager.applyOSComponents(os);
 
     // pageName 即可能是 id, 也肯是 name
     let pageId = parseInt(pageName);
@@ -143,7 +147,7 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     // 获取根组件
     let rootPageComponent = undefined;
     if (state.pageComponents[pageId]) {
-        rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Web][RootComponentSign];
+        rootPageComponent = state.pageComponents[pageId][os][RootComponentSign];
     }
 
     return {

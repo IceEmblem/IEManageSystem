@@ -63,7 +63,7 @@ class PageContainer extends React.Component {
                             sign={sign}
                             pageId={this.props.pageId}
                             pageDataId={this.props.pageDataId}
-                            os={this.props.rootPageComponent.Web}
+                            os={this.props.rootPageComponent.os}
                             ComponentContainerBoxShow={ComponentContainerBoxShow}
                         >
                         </ComponentContainerBox>)

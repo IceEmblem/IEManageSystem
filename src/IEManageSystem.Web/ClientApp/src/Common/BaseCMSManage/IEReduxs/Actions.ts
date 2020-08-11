@@ -5,6 +5,7 @@ import {
   AddComponentAction,
   RemoveComponentAction,
   EditComponentAction,
+  CopyComponentAction,
   RootComponentSign
 } from './PageComponents/Action';
 import {
@@ -18,6 +19,7 @@ export {
   AddComponentAction,
   RemoveComponentAction,
   EditComponentAction,
+  CopyComponentAction,
   RootComponentSign,
   menuFetch,
   UpdateMenuAction

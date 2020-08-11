@@ -29,6 +29,13 @@ class ComponentFactory {
         })
     }
 
+    reLoad(){
+        this.TemplateList = [];
+        this.ComponentDescribes = [];
+        this.ComponentDescribeMaps = new Map();
+        this.init();
+    }
+
     getComponentDescribes() {
         return [...this.ComponentDescribes];
     }

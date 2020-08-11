@@ -19,6 +19,10 @@ export default class BaseComponentObject {
             return this.ComponentContainerIntance;
         }
 
+        if(!this.Component){
+            return undefined;
+        }
+
         this.ComponentContainerIntance = ReduxComponentContainer(this.Component);
         return this.ComponentContainerIntance;
     }

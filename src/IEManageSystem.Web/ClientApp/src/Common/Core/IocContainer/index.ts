@@ -18,23 +18,42 @@ class IocContainer {
     }
 
     registerSingle(keyType: any, valueBuilder: ()=>any){
+        let old = this.keyTypeToSigns.find(item => item.keyType == keyType);
+        if(old) {
+            this.singles[old.sign] = valueBuilder;
+            return;
+        }
+
         let sign = IETool.guid();
         this.singles[sign] = valueBuilder;
         this.keyTypeToSigns.push({keyType, sign});
     }
 
     registerSingleIntances(keyType: any, value: any){
+        let old = this.keyTypeToSigns.find(item => item.keyType == keyType);
+        if(old) {
+            this.intances[old.sign] = value;
+            return;
+        }
+
         let sign = IETool.guid();
         this.intances[sign] = value;
         this.keyTypeToSigns.push({keyType, sign});
     }
 
     registerTransient(keyType: any, valueBuilder: ()=>any){
+        let old = this.keyTypeToSigns.find(item => item.keyType == keyType);
+        if(old) {
+            this.transients[old.sign] = valueBuilder;
+            return;
+        }
+
         let sign = IETool.guid();
         this.transients[sign] = valueBuilder;
         this.keyTypeToSigns.push({keyType, sign});
     }
 
+    // 获取服务
     getService(keyType: any){
         let keyTypeToSign = this.keyTypeToSigns.find(item => item.keyType === keyType);
         if(!keyTypeToSign){
