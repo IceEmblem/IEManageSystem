@@ -1,5 +1,8 @@
-import {componentType} from './ComponentDescribe'
+import React from 'react'
+import ComponentDescribe, {componentType} from './ComponentDescribe'
 import TemplateList from './TemplateList'
+import IocContainer from 'Core/IocContainer'
+
 
 export const componentTypes = [
     { name: componentType.container, text: "容器组件", icon: "oi-box" },
@@ -10,6 +13,8 @@ export const componentTypes = [
     { name: componentType.graph, text: "图表组件", icon: "oi-graph" },
     { name: componentType.other, text: "其他组件", icon: "oi-puzzle-piece" }
 ];
+
+export class IInvalidOSComponent extends React.Component {}
 
 class ComponentFactory {
     TemplateList = [];
@@ -27,6 +32,8 @@ class ComponentFactory {
         this.ComponentDescribes.forEach(item => { 
             this.ComponentDescribeMaps[item.name] = item;
         })
+
+        ComponentDescribe.setInvalidOSComponent(IocContainer.getService(IInvalidOSComponent));
     }
 
     reLoad(){

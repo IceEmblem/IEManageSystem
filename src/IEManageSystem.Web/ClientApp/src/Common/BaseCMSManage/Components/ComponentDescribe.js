@@ -16,8 +16,14 @@ export const componentType = {
     other: "other"
 }
 
+var InvalidOSComponent = undefined;
+
 // 组件描述，每个自定义的组件都应该以组件描述的形式导出
 export default class ComponentDescribe {
+    static setInvalidOSComponent(component){
+        InvalidOSComponent = component;
+    }
+
     constructor(name, componentObject, type = componentType.other, displayName = null) {
         if (!name) {
             throw new Error("name 是必须的");
@@ -83,7 +89,7 @@ export default class ComponentDescribe {
         let ComponentContainer = this.componentObject.getComponentContainer();
 
         if(!ComponentContainer){
-            return "该组件不适用于当前平台";
+            return InvalidOSComponent;
         }
 
         return <ComponentContainer

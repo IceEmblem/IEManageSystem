@@ -134,7 +134,6 @@ class PageEditCompontContainer extends React.Component {
         let style = {};
         if(this.props.rootPageComponent.os == PageComponentOSType.Native){
             style.width = "640px"
-            style.margin = "auto"
         }
         return (
             <div

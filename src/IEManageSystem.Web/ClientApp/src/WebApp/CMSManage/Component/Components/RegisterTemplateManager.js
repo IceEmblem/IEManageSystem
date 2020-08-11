@@ -1,9 +1,13 @@
+import React from 'react'
 import WebRegisterTemplateParts from './RegisterTemplateParts'
-import NativeRegisterTemplateParts from 'RNCMS/Component/Components/RegisterTemplateParts'
 import IocContainer from 'Core/IocContainer'
 import {BaseComponent} from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
-import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
+import ComponentFactory, {IInvalidOSComponent} from 'BaseCMSManage/Components/ComponentFactory'
+import WebInvalidOSComponent from './InvalidOSComponent'
+
+import NativeRegisterTemplateParts from 'RNCMS/Component/Components/RegisterTemplateParts'
+import RNInvalidOSComponent from 'RNCMS/Component/Components/InvalidOSComponent'
 
 
 class RegisterTemplateManager {
@@ -40,19 +44,20 @@ class RegisterTemplateManager {
                 }
                 else{
                     this.toolsComponents.push({type, single});
+                    IocContainer.registerSingleIntances(type, single);
                 }
-                IocContainer.registerSingleIntances(type, single);
             })
         })
-        this.curOS = PageComponentOSType.Web;
 
         NativeRegisterTemplateParts.forEach(item => {
             item((type, single)=>{
-                if(type instanceof BaseComponent){
+                if(this.isInstanceofBaseComponent(type)){
                     this.nativeComponents.push({type, single});
                 }
             })
         })
+
+        this.applyWebComponents();
     }
 
     applyOSComponents(os) {
@@ -82,6 +87,7 @@ class RegisterTemplateManager {
         });
         this.curOS = PageComponentOSType.Web;
 
+        IocContainer.registerSingleIntances(IInvalidOSComponent, <WebInvalidOSComponent />);
         ComponentFactory.reLoad();
     }
 
@@ -94,6 +100,7 @@ class RegisterTemplateManager {
         })
         this.curOS = PageComponentOSType.Native;
 
+        IocContainer.registerSingleIntances(IInvalidOSComponent, <RNInvalidOSComponent />);
         ComponentFactory.reLoad();
     }
 }
