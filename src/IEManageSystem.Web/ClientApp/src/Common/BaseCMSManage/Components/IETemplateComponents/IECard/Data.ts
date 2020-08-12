@@ -36,7 +36,7 @@ export default class Data {
     }
 
     get link(){
-        return this.data.getDefauleData().field4 || "javascript:void(0)";
+        return this.data.getDefauleData().field4 || "/";
     }
 
     set link(val){

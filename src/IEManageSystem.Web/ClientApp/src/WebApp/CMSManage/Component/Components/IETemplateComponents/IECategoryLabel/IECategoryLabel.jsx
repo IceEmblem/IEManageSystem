@@ -76,7 +76,6 @@ class IECategoryLabel extends IComponent {
         return (
             <Link to={this.createUrl(singleData.tagName)} className={`ant-btn mr-1 ml-1 ant-btn-dashed mb-1`}
                 style={style}
-                onClick={this.props.pageFreshen}
             >
                 {singleData.displayName}
             </Link>
@@ -93,7 +92,7 @@ class IECategoryLabel extends IComponent {
 
         return (
             <div className="d-flex flex-wrap">
-                <Link to={this.createUrl("")} className="ant-btn mr-1 ml-1 ant-btn-dashed" onClick={this.props.pageFreshen}
+                <Link to={this.createUrl("")} className="ant-btn mr-1 ml-1 ant-btn-dashed"
                     style={style}
                 > 全部 </Link>
                 {setting.getSettings().map(item => this.createItem(item))}

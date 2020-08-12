@@ -20,7 +20,7 @@ export default class IEButtonSetting {
     }
 
     get url(){
-        return this.setting.getDefauleData().field2 || "javescript:void(0)";
+        return this.setting.getDefauleData().field2;
     }
 
     set url(val){

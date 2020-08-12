@@ -67,11 +67,13 @@ class RegisterTemplateManager {
 
         if(os == PageComponentOSType.Web){
             this.applyWebComponents();
+            ComponentFactory.reLoad()
             return;
         }
 
         if(os == PageComponentOSType.Native){
             this.applyNativeComponents();
+            ComponentFactory.reLoad()
             return;
         }
 
@@ -88,7 +90,6 @@ class RegisterTemplateManager {
         this.curOS = PageComponentOSType.Web;
 
         IocContainer.registerSingleIntances(IInvalidOSComponent, <WebInvalidOSComponent />);
-        ComponentFactory.reLoad();
     }
 
     applyNativeComponents(){
@@ -101,7 +102,6 @@ class RegisterTemplateManager {
         this.curOS = PageComponentOSType.Native;
 
         IocContainer.registerSingleIntances(IInvalidOSComponent, <RNInvalidOSComponent />);
-        ComponentFactory.reLoad();
     }
 }
 

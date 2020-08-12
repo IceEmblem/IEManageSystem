@@ -23,7 +23,7 @@ class BasePageLeafComponent extends BaseComponent {
             orderby: this.props.pageComponent.pageLeafSetting.orderby,
             pageDatas: [],
             resourceNum: 0,
-            curtag: this.getQueryVariable("tag"),
+            curtag: this.props.curtag,
             invalid: false,
         }
 
@@ -41,7 +41,7 @@ class BasePageLeafComponent extends BaseComponent {
             top: nextprops.pageComponent.pageLeafSetting.top,
             searchKey: nextprops.pageComponent.pageLeafSetting.searchKey,
             orderby: nextprops.pageComponent.pageLeafSetting.orderby,
-            curtag: this.getQueryVariable("tag")
+            curtag: nextprops.curtag
         })
     }
 
@@ -69,20 +69,10 @@ class BasePageLeafComponent extends BaseComponent {
         return `/Page/${pageData.pageId}/${pageData.name}`
     }
 
-    getQueryVariable(variable) {
-        var query = window.location.search.substring(1);
-        var vars = query.split("&");
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split("=");
-            if (pair[0] == variable) { return pair[1]; }
-        }
-        return "";
-    }
-
     getPageDateFetchs() {
         let tags;
         try{
-            let tagstr = this.getQueryVariable("tag");
+            let tagstr = this.props.curtag;
             tags = JSON.parse(decodeURI(tagstr));
         }
         catch(ex){

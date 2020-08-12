@@ -88,7 +88,7 @@ function addComponent(state: object, action: AddComponentAction): object {
 
     // 组件的索引为当前子元素的最大索引 + 1
     let sortIndex = 0;
-    let sortIndexs = Object.values(getChildComponents(pageComponents, action.pageComponent.parentSign)).map<number>(e => e.sortIndex);
+    let sortIndexs = Object.values(getChildComponents(pageComponents, action.pageComponent.parentSign)).map<number>(e => e.pageComponentBaseSetting.sortIndex);
     if (sortIndexs.length > 0) {
         sortIndex = Math.max(
             ...sortIndexs

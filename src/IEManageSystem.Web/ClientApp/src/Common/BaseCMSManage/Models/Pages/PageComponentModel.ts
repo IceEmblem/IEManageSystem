@@ -34,4 +34,14 @@ export default class PageComponentModel {
 
         return pageComponentSettingModel;
     }
+
+    replacePageComponentSetting(name: string, setting: PageComponentSettingModel){
+        let findIndex = this.pageComponentSettings.findIndex(item=>item.name == name);
+        if(findIndex < 0){
+            this.pageComponentSettings.push(setting);
+            return;
+        }
+
+        this.pageComponentSettings.splice(findIndex, 1, setting);
+    }
 }

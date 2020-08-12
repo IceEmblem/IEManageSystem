@@ -120,11 +120,9 @@ ToolBtns.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
     let defaultComponentData = state.defaultComponentDatas[ownProps.pageId][ownProps.sign];
 
     return {
-        pageComponent: pageComponent,
         defaultComponentData: defaultComponentData,
     }
 }

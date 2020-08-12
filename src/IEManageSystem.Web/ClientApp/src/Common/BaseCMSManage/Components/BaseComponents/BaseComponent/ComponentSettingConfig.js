@@ -19,14 +19,11 @@ export default class ComponentSettingConfig {
     static BuildPageComponentSettingConfig(name, displayName, settingComponentBuilder){
         return new ComponentSettingConfig(name, displayName, settingComponentBuilder, 
             (pageComponent, name)=>{ 
-                let pageComponentSetting = pageComponent.pageComponentSettings.find(item => item.name == name);
-
                 // 组件设置数据
-                return pageComponentSetting;
+                return pageComponent.getOrCreatePageComponentSetting(name);
             },
-            (pageComponent, name, setting)=>{ 
-                let pageComponentSetting = pageComponent.pageComponentSettings.find(item => item.name == name);
-                pageComponentSetting.singleDatas = setting.singleDatas;
+            (pageComponent, name, setting)=>{
+                pageComponent.replacePageComponentSetting(name, setting)
             });
     }
 
@@ -54,7 +51,9 @@ export default class ComponentSettingConfig {
     // 在 setting 更新时，会调用 pageComponentUpdate，提醒调用方
     bulidConfigComponent(pageComponent, pageComponentUpdate){
         return this.settingComponentBuilder(
-            this.getSettingForPageComponent(pageComponent), 
+            // 获取配置
+            this.getSettingForPageComponent(pageComponent),
+            // 设置配置 
             (setting)=>{
                 this.setSettingOfPageComponent(pageComponent, setting);
                 pageComponentUpdate(pageComponent);

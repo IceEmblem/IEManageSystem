@@ -18,11 +18,11 @@ class ToolBtns extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.componentDescribe = ComponentFactory.getComponentDescribeForName(this.props.pageComponent.name);
     }
 
     render() {
+        
         if(!this.componentDescribe.isExistComponentData()){
             return <div></div>;
         }
@@ -68,7 +68,6 @@ ToolBtns.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     // 新增属性 parentSign
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.sign];
     let defaultComponentData = state.defaultComponentDatas[ownProps.pageId][ownProps.sign];
     let contentComponentData = undefined;
     if (state.contentComponentDatas[ownProps.pageDataId]) {
@@ -76,7 +75,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     }
 
     return {
-        pageComponent: pageComponent,
         defaultComponentData: defaultComponentData,
         contentComponentData: contentComponentData,
     }

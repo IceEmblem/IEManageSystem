@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
+    "@ant-design/react-native": "^3.2.0",
     "@antv/data-set": "^0.11.4",
     "@antv/g2plot": "^1.1.2",
     "@babel/core": "7.9.0",
@@ -22,6 +23,7 @@
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.1.0",
+    "babel-plugin-import": "^1.13.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-named-asset-import": "^0.3.6",
     "babel-preset-react-app": "^9.1.2",
@@ -174,9 +176,24 @@
   },
   "babel": {
     "presets": [
+      "react-app",
       "module:metro-react-native-babel-preset"
     ],
     "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "@ant-design/react-native"
+        }
+      ],
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "libraryDirectory": "lib"
+        },
+        "antd"
+      ],
       [
         "module-resolver",
         {

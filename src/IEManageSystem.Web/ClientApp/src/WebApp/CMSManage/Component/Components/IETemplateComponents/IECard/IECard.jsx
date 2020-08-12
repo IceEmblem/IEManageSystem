@@ -1,28 +1,28 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECard/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IECard/Data'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECard/Setting'
 import { Card } from 'antd';
 const { Meta } = Card;
 
 class IECard extends IComponent {
     constructor(props) {
         super(props);
-
-        this.data = new Data(this.props.componentData);
     }
 
     render() {
-        this.data.setData(this.props.componentData);
+        let setting = new Setting(this.getSetting("DefaultSetting"));
+        let data = new Data(this.props.componentData);
 
         return (
-            <a href={this.data.link}>
+            <a href={data.link}>
                 <Card
                     hoverable
-                    cover={<img alt="未找到图片" src={this.data.imgUrl} />}
+                    cover={<img alt="未找到图片" src={data.imgUrl} width={setting.width} height={setting.height} />}
                 >
                     <Meta
-                        title={this.data.title}
-                        description={this.data.content} />
+                        title={data.title}
+                        description={data.content} />
                 </Card>
             </a>);
     }

@@ -26,7 +26,7 @@ class EditFrame extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({componentData: IETool.deepCopy(nextProps.componentData)});
+        this.setState({ componentData: IETool.deepCopy(nextProps.componentData) });
     }
 
     submit() {
@@ -58,11 +58,14 @@ class EditFrame extends React.Component {
                         selectIndex={this.selectIndex}
                         selectOnclick={() => { }}
                     >
-                        <this.props.componentDescribe.componentObject.ComponentDataConfig
-                            data={this.state.componentData}
-                            setData={(value) => this.setState({ componentData: value })}
-                            pageComponentSettings={this.props.pageComponent.pageComponentSettings}
-                        />
+                        {
+                            this.props.componentDescribe.componentObject.ComponentDataConfig &&
+                            <this.props.componentDescribe.componentObject.ComponentDataConfig
+                                data={this.state.componentData}
+                                setData={(value) => this.setState({ componentData: value })}
+                                pageComponentSettings={this.props.pageComponent.pageComponentSettings}
+                            />
+                        }
                     </Tab>
                 </div>
             </Modal>

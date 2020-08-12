@@ -91,6 +91,7 @@ PageContainer.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     let pageName = ownProps.match.params.pageName || "Home";
+    let pageDataName = ownProps.match.params.pageDataName;
 
     // pageName 即可能是 id, 也肯是 name
     let pageId = parseInt(pageName);
@@ -106,13 +107,13 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     }
 
     // 获取文章
-    let postId = state.pageDataNameToIds[ownProps.pageDataName];
+    let postId = state.pageDataNameToIds[pageDataName];
 
     return {
         pageId: pageId,
         pageDataId: postId,
         pageName: pageName,
-        pageDataName: ownProps.match.params.pageDataName,
+        pageDataName: pageDataName,
         page: state.pages[pageId],
         pageData: state.pageDatas[postId],
         rootPageComponent: rootPageComponent,

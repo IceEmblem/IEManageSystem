@@ -62,7 +62,7 @@ class CurrentToolBtns extends React.Component {
                                     sign={item.pageComponent.sign}
                                     pageId={pageId}
                                     pageDataId={pageDataId}
-                                    os={os}
+                                    pageComponent={item.pageComponent}
                                     addChildComponent={addChildComponent}
                                     style={{opacity: 1, marginBottom: "5px"}}
                                 />
@@ -101,7 +101,7 @@ class PageEditCompontContainer extends React.Component {
             sign={sign}
             pageId={pageId}
             pageDataId={pageDataId}
-            os={pageComponent.os}
+            pageComponent={pageComponent}
             addChildComponent={this.props.addChildComponent}
         />;
     }
@@ -133,7 +133,8 @@ class PageEditCompontContainer extends React.Component {
     render() {
         let style = {};
         if(this.props.rootPageComponent.os == PageComponentOSType.Native){
-            style.width = "640px"
+            style.width = "480px"
+            style.margin = "auto"
         }
         return (
             <div
