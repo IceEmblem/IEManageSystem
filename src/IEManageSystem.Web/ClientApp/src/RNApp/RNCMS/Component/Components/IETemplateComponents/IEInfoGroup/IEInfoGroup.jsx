@@ -1,14 +1,17 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/IComponent'
-import { List } from 'antd'
+import { List } from '@ant-design/react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Setting'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Data'
 
 class IEInfoGroup extends IComponent {
     createItem(settingField, dataField, color) {
-        return <List.Item style={{ color: color }} className="mb-0 pt-2 pb-2" >
-            <span>{settingField}</span>
-            <span>{dataField}</span>
+        return <List.Item>
+            <View style={{ color: color, flexDirection: 'row' }}>
+                <Text style={styles.text}>{settingField}</Text>
+                <Text style={styles.text}>{dataField}</Text>
+            </View>
         </List.Item>
     }
 
@@ -29,13 +32,20 @@ class IEInfoGroup extends IComponent {
             itemDatas.push({ settingField: setting.field5, dataField: data.field5 });
 
         return <List
+            style={{borderColor: '#0004', borderStyle: 'solid', borderWidth: setting.bordered ? "1px" : "0px"}}
             bordered={setting.bordered}
             grid={{ column: setting.col }}
-            header={setting.title ? <div style={{ color: setting.color }}>{setting.title}</div> : ""}
-            dataSource={itemDatas}
-            renderItem={item => this.createItem(item.settingField, item.dataField, setting.color)}
-        />
+            renderHeader={setting.title}
+        >
+            {itemDatas.map(item => this.createItem(item.settingField, item.dataField, setting.color))}
+        </List>
     }
 }
+
+const styles = StyleSheet.create({
+    text: {
+        color: 'inherit'
+    }
+})
 
 export default (register) => register(IComponent, IEInfoGroup);

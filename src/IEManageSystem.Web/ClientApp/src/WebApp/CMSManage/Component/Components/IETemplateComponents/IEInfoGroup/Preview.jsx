@@ -3,7 +3,7 @@ import IPreview from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/
 
 class Preview extends IPreview{
     render(){
-        return <div></div>
+        return <div>IE-信息组</div>
     }
 }
 
