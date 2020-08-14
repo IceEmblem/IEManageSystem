@@ -26,4 +26,12 @@ export default class Data {
     set text(val){
         this.data.getDefauleData().field2 = val;
     }
+
+    get imgHeigth(){
+        return this.data.getDefauleData().field3;
+    }
+
+    set imgHeigth(val){
+        this.data.getDefauleData().field3 = val;
+    }
 }

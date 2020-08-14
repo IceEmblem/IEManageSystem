@@ -15,7 +15,7 @@ namespace IEManageSystem.CMS.DomainModel.Pictures
 
         static PictureManager()
         {
-            PictureDirPath = AppConfigurations.RootPath + "\\Picture";
+            PictureDirPath = AppConfigurations.RootPath + "/Picture";
 
             if (!Directory.Exists(PictureDirPath))
             {

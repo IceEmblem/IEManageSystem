@@ -1,12 +1,12 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/Data'
-import { Drawer, Typography } from 'antd';
-
-const { Title } = Typography;
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/Setting'
+import { Drawer } from '@ant-design/react-native';
+import { Text, View, TouchableHighlight, Image, StyleSheet } from 'react-native'
 
 class IEDrawer extends IComponent {
-    state={
+    state = {
         visible: false
     }
 
@@ -18,32 +18,48 @@ class IEDrawer extends IComponent {
 
     render() {
         this.data.setData(this.props.componentData);
+        let setting = new Setting(this.getSetting("DefaultSetting"));
 
         return (
-            <div className="ie-drawer"
-                onMouseOver={() => this.setState({ visible: true })}
-                onMouseOut={() => this.setState({ visible: false })}
+            <Drawer
+                sidebar={
+                    <View style={styles.sidebar}>
+                        <Text style={styles.title}>{this.data.title}</Text>
+                        <Text style={styles.content}>{this.data.content}</Text>
+                    </View>
+                }
+                position="left"
+                open={false}
+                drawerWidth={setting.boxWidth}
+                drawerRef={el => (this.drawer = el)}
+                drawerBackgroundColor="#ccc8"
             >
-                <img style={{ width: "100%" }} src={this.data.imgUrl} alt={this.data.title} ></img>
-                <Drawer
-                    placement="bottom"
-                    closable={false}
-                    onClose={this.onClose}
-                    visible={this.state.visible}
-                    getContainer={false}
-                    mask={false}
-                    style={{ position: 'absolute' }}
-                    height="110px"
-                    bodyStyle={{ padding: "10px 24px", textAlign: "left" }}
+                <TouchableHighlight
+                    onPress={() => this.drawer && this.drawer.openDrawer()}
+                    activeOpacity={0.1}
                 >
-                    <div>
-                        <Title className="m-0 text-white" level={4}>{this.data.title}</Title>
-                        <p className="m-0 text-white">{this.data.content}</p>
-                    </div>
-                </Drawer>
-            </div>
+                    <Image source={this.data.imgUrl} style={{ height: setting.imgHeight }} />
+                </TouchableHighlight>
+            </Drawer>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    sidebar: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexGrow: 1
+    },  
+    title: {
+        color: "#fff",
+        fontSize: "18px",
+        fontWeight: 600,
+        marginBottom: "10px"
+    },
+    content: {
+        color: "#fff"
+    }
+});
 
 export default (register) => register(IComponent, IEDrawer);

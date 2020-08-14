@@ -51,6 +51,16 @@ class DataConfig extends IDataConfig {
                 }}
                 suffix={<Tag color="#55acee">描述文本</Tag>}
             />
+            <Input
+                placeholder="示例：300px"
+                className="mb-3"
+                value={this.data.imgHeigth}
+                onChange={(e) => {
+                    this.data.imgHeigth = e.currentTarget.value;
+                    this.props.setData(this.data.data);
+                }}
+                suffix={<Tag color="#55acee">图片高度</Tag>}
+            />
         </div>)
     }
 }

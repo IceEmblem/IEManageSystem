@@ -2,6 +2,7 @@ import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/IComponent'
 import "./IEDrawer.css";
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/Data'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEDrawer/Setting'
 import { Drawer, Typography } from 'antd';
 
 const { Title } = Typography;
@@ -19,13 +20,14 @@ class IEDrawer extends IComponent {
 
     render() {
         this.data.setData(this.props.componentData);
+        let setting = new Setting(this.getSetting("DefaultSetting"));
 
         return (
             <div className="ie-drawer"
                 onMouseOver={() => this.setState({ visible: true })}
                 onMouseOut={() => this.setState({ visible: false })}
             >
-                <img style={{ width: "100%" }} src={this.data.imgUrl} alt={this.data.title} ></img>
+                <img style={{ width: "100%" }} height={setting.imgHeight} src={this.data.imgUrl} alt={this.data.title} ></img>
                 <Drawer
                     placement="bottom"
                     closable={false}
@@ -34,7 +36,7 @@ class IEDrawer extends IComponent {
                     getContainer={false}
                     mask={false}
                     style={{ position: 'absolute' }}
-                    height="110px"
+                    height={setting.boxWidth}
                     bodyStyle={{ padding: "10px 24px", textAlign: "left" }}
                 >
                     <div>
