@@ -19,8 +19,6 @@ import SearchBoxTool from './SearchBoxTool'
 import NavToolProvider from 'Layout/NavTools/NavToolProvider'
 import RegisterTemplateManager from './Component/Components/RegisterTemplateManager'
 
-import RNHome from 'RNCMS/Home'
-
 import {
     SnippetsOutlined,
     OrderedListOutlined,
@@ -125,7 +123,6 @@ export default class Module extends BaseModule {
 
         // 注册页面
         PageProvider.register(new Page("Home", "/", Home));
-        PageProvider.register(new Page("Home", "/RNHome", RNHome));
         PageProvider.register(new Page("PageEdit", "/ManageHome/CMSManage/PageEdit/:pageName/:os?", PageEdit));
         PageProvider.register(new Page("PostEdit", "/ManageHome/CMSManage/PostEdit/:pageName/:pageDataName?", PostEdit));
         PageProvider.register(new Page("TemplatePageShow", "/ManageHome/CMSManage/TemplatePageShow/:templateName/:templatePageName", TemplatePageShow));

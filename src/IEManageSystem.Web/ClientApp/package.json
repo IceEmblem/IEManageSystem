@@ -70,6 +70,7 @@
     "react-move": "^5.2.1",
     "react-native": "0.62.2",
     "react-native-web": "^0.13.5",
+    "react-native-webview": "^10.4.1",
     "react-redux": "^7.0.2",
     "react-router-dom": "^5.2.0",
     "react-router-native": "^5.2.0",
@@ -172,44 +173,6 @@
     "watchPlugins": [
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app",
-      "module:metro-react-native-babel-preset"
-    ],
-    "plugins": [
-      [
-        "import",
-        {
-          "libraryName": "@ant-design/react-native"
-        }
-      ],
-      [
-        "import",
-        {
-          "libraryName": "antd",
-          "libraryDirectory": "lib"
-        },
-        "antd"
-      ],
-      [
-        "module-resolver",
-        {
-          "root": [
-            "src/Common",
-            "src/RNApp",
-            "src/WebApp"
-          ],
-          "extensions": [
-            ".js",
-            ".jsx",
-            ".ts",
-            ".tsx"
-          ]
-        }
-      ]
     ]
   }
 }

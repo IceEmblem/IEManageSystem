@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IELine/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELine/Setting'
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
-import { Input, Tag, Radio, Card } from 'antd';
+import { Input, Tag, Radio, Card, Tabs } from 'antd';
+
+const { TabPane } = Tabs;
 
 class SettingConfig extends ISettingConfig {
     render() {
@@ -33,20 +35,36 @@ class SettingConfig extends ISettingConfig {
                 />
             </div>
             <div className="mb-3">
-                <span>图表类型：</span>
-                <Radio.Group
-                    value={setting.type}
+                <Input
+                    placeholder="示例：X 轴别名"
+                    value={setting.xAlias}
                     onChange={(e) => {
-                        setting.type = e.target.value;
+                        setting.xAlias = e.currentTarget.value;
                         this.props.setData(setting.setting);
                     }}
-                >
-                    <Radio value="zx">折线图</Radio>
-                    <Radio value="zz">柱状图</Radio>
-                    <Radio value="tx">条形图</Radio>
-                </Radio.Group>
+                    suffix={<Tag color="#55acee">X 轴别名</Tag>}
+                />
             </div>
             <div className="mb-3">
+                <Input
+                    placeholder="示例：Y 轴别名"
+                    value={setting.yAlias}
+                    onChange={(e) => {
+                        setting.yAlias = e.currentTarget.value;
+                        this.props.setData(setting.setting);
+                    }}
+                    suffix={<Tag color="#55acee">Y 轴别名</Tag>}
+                />
+            </div>
+            <Tabs 
+                className="mb-3"
+                defaultActiveKey={setting.type}
+                onChange={(key) => {
+                    setting.type = key;
+                    this.props.setData(setting.setting);
+                }}
+            >
+                <TabPane tab="折线图" key="zx">
                 <Card title="折线图配置">
                     <div className="mb-3">
                         <span>形状：</span>
@@ -64,8 +82,8 @@ class SettingConfig extends ISettingConfig {
 
                     </div>
                 </Card>
-            </div>
-            <div className="mb-3">
+                </TabPane>
+                <TabPane tab="柱状图" key="zz">
                 <Card title="柱状图配置">
                     <div className="mb-3">
                         <span>形状：</span>
@@ -96,8 +114,8 @@ class SettingConfig extends ISettingConfig {
                         </Radio.Group>
                     </div>
                 </Card>
-            </div>
-            <div className="mb-3">
+                </TabPane>
+                <TabPane tab="条形图" key="tx">
                 <Card title="条形图配置">
                     <div className="mb-3">
                         <span>形状：</span>
@@ -115,7 +133,8 @@ class SettingConfig extends ISettingConfig {
                         </Radio.Group>
                     </div>
                 </Card>
-            </div>
+                </TabPane>
+            </Tabs>
         </div>)
     }
 }

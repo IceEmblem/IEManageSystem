@@ -331,6 +331,7 @@ module.exports = function(webpackEnv) {
         // 将 react-native 的组件替换掉，以便 react-native 在 web 展示
         'react-native$': 'react-native-web',
         'react-router-native$': 'react-router-dom',
+        'react-native-webview$': 'src/WebApp/IEWebView',
         // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',
@@ -404,7 +405,10 @@ module.exports = function(webpackEnv) {
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: paths.appSrc,
+              include: [
+                paths.appSrc,
+                path.resolve('node_modules/react-native-webview/')
+              ],
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(

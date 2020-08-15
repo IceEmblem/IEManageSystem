@@ -60,6 +60,21 @@ export default class Setting {
         return this.type == "tx";
     }
 
+    get xAlias() {
+        return this.setting.getDefauleData().field4;
+    }
+
+    set xAlias(val) {
+        this.setting.getDefauleData().field4 = val;
+    }
+
+    get yAlias() {
+        return this.setting.getDefauleData().field5;
+    }
+
+    set yAlias(val) {
+        this.setting.getDefauleData().field5 = val;
+    }
 
     /// 折线图配置
     get lineShape() {
