@@ -63,7 +63,7 @@ const PageInfo = (props) => (<div className="pageedit-page-container-header-info
 
 const OSType = (props) => (<div>
     <div>
-        <Link className="ant-btn w-75 mb-1 mr-1" to="/ManageHome/CMSManage/PageEdit/Home/Web" >浏览器</Link>
+        <Link className="ant-btn w-75 mb-1 mr-1" to={`/ManageHome/CMSManage/PageEdit/${props.page.name}/Web`} >浏览器</Link>
         <Tooltip title="导入浏览器组件">
             <Button 
                 icon={<CopyOutlined />}
@@ -72,7 +72,7 @@ const OSType = (props) => (<div>
         </Tooltip>
     </div>
     <div>
-        <Link className="ant-btn ant-btn-primary w-75 mr-1" to="/ManageHome/CMSManage/PageEdit/Home/Native" >移动App</Link>
+        <Link className="ant-btn ant-btn-primary w-75 mr-1" to={`/ManageHome/CMSManage/PageEdit/${props.page.name}/Native`} >移动App</Link>
         <Tooltip title="导入移动App组件">
             <Button 
                 icon={<CopyOutlined />}
@@ -175,6 +175,7 @@ class BtnLists extends React.Component {
                                     >导出页面</Button>
                                     <Popover
                                         content={<OSType 
+                                            page={this.props.page}
                                             importWebComponent={()=>{
                                                 if(this.props.os == PageComponentOSType.Web){
                                                     return;
@@ -225,6 +226,7 @@ BtnLists.propTypes = {
     pageId: PropTypes.string.isRequired,
     os: PropTypes.string.isRequired,
 
+    page: PropTypes.object.isRequired,
     addComponent: PropTypes.func.isRequired,
     submitPage: PropTypes.func.isRequired,
     exportPage: PropTypes.func.isRequired,

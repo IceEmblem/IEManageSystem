@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Link } from 'react-router-native'
 import WebView from 'react-native-webview'
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const html = `
 <div id="canvas" style=""></div>
@@ -34,9 +35,16 @@ const html = `
 export default class Home extends Component {
   render() {
     return (
-      <WebView
-        source={{html: html}}
-      />
+      <View>
+        <View style={{height: 300}}>
+          <WebView
+            source={{ html: html }}
+          />
+        </View>
+        <View>
+          <Icon name="github" size={30} color="#900" />
+        </View>
+      </View>
     );
   }
 }

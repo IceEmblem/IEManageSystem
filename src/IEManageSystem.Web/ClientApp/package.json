@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
-    "@ant-design/react-native": "^3.2.0",
+    "@ant-design/react-native": "^3.3.0",
     "@antv/data-set": "^0.11.4",
     "@antv/g2plot": "^1.1.2",
     "@babel/core": "7.9.0",
@@ -69,6 +69,7 @@
     "react-dom": "^16.13.1",
     "react-move": "^5.2.1",
     "react-native": "0.62.2",
+    "react-native-vector-icons": "^7.0.0",
     "react-native-web": "^0.13.5",
     "react-native-webview": "^10.4.1",
     "react-redux": "^7.0.2",

@@ -3,7 +3,7 @@ import IPreview from 'BaseCMSManage/Components/IETemplateComponents/IELogo/IPrev
 
 class Preview extends IPreview{
     render(){
-        return <div></div>
+        return <div>IE-Logo</div>
     }
 }
 
