@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { Link } from 'react-router-native'
 import WebView from 'react-native-webview'
 import Icon from 'react-native-vector-icons/AntDesign';
+import HTMLView from 'react-native-htmlview';
 
 const html = `
 <div id="canvas" style=""></div>
@@ -34,9 +35,11 @@ const html = `
 
 export default class Home extends Component {
   render() {
+    const htmlContent = `<p><a href="http://jsdf.co">&hearts; nice job!</a></p>`;
+
     return (
       <View>
-        <View style={{height: 300}}>
+        <View style={{ height: 300 }}>
           <WebView
             source={{ html: html }}
           />
@@ -44,6 +47,9 @@ export default class Home extends Component {
         <View>
           <Icon name="github" size={30} color="#900" />
         </View>
+        <HTMLView
+          value={htmlContent}
+        />
       </View>
     );
   }

@@ -23,7 +23,6 @@ import IELine from "./IELine"
 import IELink from "./IELink"
 import IELogo from "./IELogo"
 import IEMenu from "./IEMenu"
-import IEPageSetting from "./IEPageSetting"
 import IEPostContent from "./IEPostContent"
 import IEPostDescribe from "./IEPostDescribe"
 import IEPostList from "./IEPostList"
@@ -46,7 +45,7 @@ template.templatePages.push(new TemplatePage(PostList));
 template.templatePages.push(new TemplatePage(Post));
 template.templatePages.push(new TemplatePage(Chart));
 template.componentBuilders = [
-    Container, IEBottomNav, IEButton, IECalendar, IECard, IECarousel, IECategoryLabel, IEComment, IEDrawer, IEImg, IEInfoGroup, IELine, IELink, IELogo, IEMenu, IEPageSetting, IEPostContent, IEPostDescribe, IEPostList, IEPostTitle, IERankingList, IERate, IESearch, IESelect, NotFind, RichTextEditor, Text
+    Container, IEBottomNav, IEButton, IECalendar, IECard, IECarousel, IECategoryLabel, IEComment, IEDrawer, IEImg, IEInfoGroup, IELine, IELink, IELogo, IEMenu, IEPostContent, IEPostDescribe, IEPostList, IEPostTitle, IERankingList, IERate, IESearch, IESelect, NotFind, RichTextEditor, Text
 ]
 
 export default template;

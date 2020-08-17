@@ -14,15 +14,12 @@ import IELine from "./IELine"
 import IELink from "./IELink"
 import IELogo from "./IELogo"
 import IEMenu from "./IEMenu"
-import IEPageSetting from "./IEPageSetting"
 import IEPostContent from "./IEPostContent"
 import IEPostDescribe from "./IEPostDescribe"
 import IEPostList from "./IEPostList"
 import IEPostTitle from "./IEPostTitle"
 import IERankingList from "./IERankingList"
-import IERate from "./IERate"
 import IESearch from "./IESearch"
-import IESelect from "./IESelect"
 import NotFind from "./NotFind"
 import RichTextEditor from "./RichTextEditor"
 import Text from "./Text"
@@ -43,15 +40,12 @@ export default (register) => {
     IELink(register)
     IELogo(register)
     IEMenu(register)
-    IEPageSetting(register)
     IEPostContent(register)
     IEPostDescribe(register)
     IEPostList(register)
     IEPostTitle(register)
     IERankingList(register)
-    IERate(register)
     IESearch(register)
-    IESelect(register)
     NotFind(register)
     RichTextEditor(register)
     Text(register)

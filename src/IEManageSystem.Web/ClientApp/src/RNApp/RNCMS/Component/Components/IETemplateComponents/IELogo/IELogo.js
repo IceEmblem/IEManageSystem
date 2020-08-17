@@ -5,6 +5,9 @@ import RootRedux from 'Core/IEReduxs/RootRedux'
 import SiteSettingManager from 'Core/SiteSettings/SiteSettingManager'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IELogo/IComponent'
 
+import { Text, View, Image } from 'react-native'
+import { Link } from 'react-router-native'
+
 class IELogo extends IComponent {
     constructor(props) {
         super(props);
@@ -12,14 +15,20 @@ class IELogo extends IComponent {
 
     render() {
         let siteSettingManager = new SiteSettingManager(this.props.siteSettings);
+
         return (
-            <h1 className="ie-logo m-0">
-                <a href="/">
-                    <img alt="logo" src={LogoImg} />
-                    {siteSettingManager.getSiteName()}
-                </a>
-            </h1>
-        );
+            <Link 
+                to='/'
+                component={
+                    (props)=>(
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Image source={LogoImg} style={{width: 35, height: 35}} />
+                            <Text style={{fontSize: "18px", marginLeft: '10px', fontWeight: 600}}>{siteSettingManager.getSiteName()}</Text>
+                        </View>
+                    )
+                }
+            />
+        )
     }
 }
 

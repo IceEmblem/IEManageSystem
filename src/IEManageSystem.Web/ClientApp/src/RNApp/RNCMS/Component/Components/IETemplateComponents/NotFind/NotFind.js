@@ -1,9 +1,10 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/NotFind/IComponent'
+import { Text } from 'react-native'
 
 class NotFind extends IComponent{
     render() {
-        return <div>组件已失效</div>;
+        return <Text>组件已失效</Text>;
     }
 }
 

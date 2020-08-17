@@ -14,7 +14,6 @@ import IELine from "./IELine"
 import IELink from "./IELink"
 import IELogo from "./IELogo"
 import IEMenu from "./IEMenu"
-import IEPageSetting from "./IEPageSetting"
 import IEPostContent from "./IEPostContent"
 import IEPostDescribe from "./IEPostDescribe"
 import IEPostList from "./IEPostList"
@@ -43,7 +42,6 @@ export default (register) => {
     IELink(register)
     IELogo(register)
     IEMenu(register)
-    IEPageSetting(register)
     IEPostContent(register)
     IEPostDescribe(register)
     IEPostList(register)

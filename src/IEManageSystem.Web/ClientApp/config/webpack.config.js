@@ -330,7 +330,8 @@ module.exports = function(webpackEnv) {
       alias: {
         // 将 react-native 的组件替换掉，以便 react-native 在 web 展示
         'react-native$': 'react-native-web',
-        'react-native-webview$': 'src/WebApp/IEWebView',
+        'react-native-webview$': 'src/WebApp/Adapters/WebView',
+        'react-native-htmlview$': 'src/WebApp/Adapters/HtmlView',
         // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',
@@ -408,7 +409,8 @@ module.exports = function(webpackEnv) {
                 paths.appSrc,
                 path.resolve('node_modules/react-native-webview/'),
                 path.resolve('node_modules/react-router-native/'),
-                path.resolve('node_modules/react-native-vector-icons/')
+                path.resolve('node_modules/react-native-vector-icons/'),
+                path.resolve('node_modules/react-native-htmlview/')
               ],
               loader: require.resolve('babel-loader'),
               options: {

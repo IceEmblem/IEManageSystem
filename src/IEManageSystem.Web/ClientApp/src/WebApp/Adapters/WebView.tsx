@@ -1,6 +1,6 @@
 import React from 'react'
-import { WebViewProps } from 'react-native-webview/index'
-export { FileDownload, WebViewMessageEvent, WebViewNavigation, WebViewProps } from 'react-native-webview/index'
+import { WebViewProps } from 'react-native-webview'
+export { FileDownload, WebViewMessageEvent, WebViewNavigation, WebViewProps } from 'react-native-webview'
 
 class IEWebView extends React.Component<WebViewProps>{
     render() {
