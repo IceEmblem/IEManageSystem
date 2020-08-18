@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
         padding: "10px"
     },
     itemTitle: {
-        fontSize: "16px",
-        fontWeight: 600
+        fontSize: 16,
+        fontWeight: "600"
     },
     itemDescribe: {
         marginTop: '10px'
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     },
     pageBtn:{
         margin:'5px',
-        fontSize: "16px",
+        fontSize: 16,
         paddingTop: '15px',
         paddingBottom: '15px',
         paddingLeft: '25px',

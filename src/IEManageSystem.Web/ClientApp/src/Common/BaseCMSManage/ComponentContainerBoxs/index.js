@@ -14,7 +14,7 @@ class ComponentContainerBox extends React.Component {
     getStyle() {
         let style =
         {
-            padding: "0rem"
+            padding: 0
         }
 
         style.width = "100%";

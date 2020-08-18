@@ -15,51 +15,51 @@ class IEText extends IComponent {
         let data  = new Data(this.props.componentData);
 
         let style = { color: setting.fontColor }
-        let smallStyle = { color: setting.fontColor, marginLeft: '10px' }
+        let smallStyle = { color: setting.fontColor, marginLeft: 10 }
 
         if (setting.textType == "h1") {
-            style.fontSize = '27px';
-            style.fontWeight = '600'
+            style.fontSize = 27;
 
-            smallStyle.fontSize = '19px';
+            smallStyle.fontSize = 19;
         }
         else if (setting.textType == "h2") {
-            style.fontSize = '24px';
-            style.fontWeight = '600';
+            style.fontSize = 24;
 
-            smallStyle.fontSize = '17px';
+            smallStyle.fontSize = 17;
         }
         else if (setting.textType == "h3") {
-            style.fontSize = '21px';
-            style.fontWeight = '600'
+            style.fontSize = 21;
 
-            smallStyle.fontSize = '14px';
+            smallStyle.fontSize = 14;
         }
         else if (setting.textType == "h4") {
-            style.fontSize = '18px';
-            style.fontWeight = '600'
+            style.fontSize = 18;
 
-            smallStyle.fontSize = '11px';
+            smallStyle.fontSize = 11;
         }
         else {
-            smallStyle.fontSize = '8px';
+            smallStyle.fontSize = 8;
         }
 
         return (
             <View style={styles.view}>
-                <Text style={style}>{data.text}</Text>
-                <Text style={smallStyle}>{data.smallText}</Text>
+                <Text style={StyleSheet.compose(styles.text, style)}>{data.text}</Text>
+                <Text style={StyleSheet.compose(styles.textSmall, smallStyle)}>{data.smallText}</Text>
             </View>
         )
-
-        return 
     }
 }
 
 const styles = StyleSheet.create({
     view: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+    },
+    text: {
+        fontWeight: '600'
+    },
+    textSmall: {
+        marginLeft: 10
     }
 });
 

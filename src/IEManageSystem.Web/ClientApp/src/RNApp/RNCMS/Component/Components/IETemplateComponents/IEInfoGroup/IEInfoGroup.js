@@ -9,8 +9,8 @@ class IEInfoGroup extends IComponent {
     createItem(settingField, dataField, color) {
         return <List.Item>
             <View style={{ color: color, flexDirection: 'row' }}>
-                <Text style={styles.text}>{settingField}</Text>
-                <Text style={styles.text}>{dataField}</Text>
+                <Text style={{color: 'inherit'}}>{settingField}</Text>
+                <Text style={{color: 'inherit'}}>{dataField}</Text>
             </View>
         </List.Item>
     }
@@ -41,11 +41,5 @@ class IEInfoGroup extends IComponent {
         </List>
     }
 }
-
-const styles = StyleSheet.create({
-    text: {
-        color: 'inherit'
-    }
-})
 
 export default (register) => register(IComponent, IEInfoGroup);

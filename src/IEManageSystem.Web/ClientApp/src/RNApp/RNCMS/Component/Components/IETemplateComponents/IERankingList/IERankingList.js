@@ -29,7 +29,7 @@ class IERankingList extends IComponent {
                             <Link 
                                 to={this.createUrl(item)} 
                                 component={
-                                    (props)=><Text style={styles.lineText}>{item.title}</Text>
+                                    (props)=><Text style={{color: 'inherit'}}>{item.title}</Text>
                                 }
                             />
                         </View>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
     Icon: {
         backgroundColor: '#db3964',
-        borderRadius: '50%',
+        borderRadius: 15,
         width: "30px",
         height: "30px",
         justifyContent: 'center',
@@ -73,15 +73,12 @@ const styles = StyleSheet.create({
     },
     firstIcon: {
         backgroundColor: '#FFD700',
-        borderRadius: '50%',
+        borderRadius: 15,
         width: "30px",
         height: "30px",
         justifyContent: 'center',
         alignItems: 'center',
     },
-    lineText: {
-        color: 'inherit'
-    }
 })
 
 export default (register) => register(IComponent, IERankingList);

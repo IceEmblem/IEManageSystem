@@ -1,32 +1,7 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEComment/IComponent'
-import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import { StyleSheet, View, Text, Image } from 'react-native'
 import defaultAvatar from 'images/default_avatar.png'
-
-const { TextArea } = Input;
-
-const CommentList = ({ comments }) => (
-    <List
-        dataSource={comments}
-        header={`${comments.length} 条评论`}
-        itemLayout="horizontal"
-        renderItem={props => <Comment {...props} />}
-    />
-);
-
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
-    <>
-        <Form.Item>
-            <TextArea rows={4} onChange={onChange} value={value} />
-        </Form.Item>
-        <Form.Item>
-            <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
-                Add Comment
-            </Button>
-        </Form.Item>
-    </>
-);
 
 class IEComment extends IComponent {
     state = {

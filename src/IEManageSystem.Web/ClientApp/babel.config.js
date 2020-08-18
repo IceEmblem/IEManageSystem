@@ -24,7 +24,8 @@ module.exports = {
                 "root": [
                     "src/Common",
                     "src/RNApp",
-                    "src/WebApp"
+                    "src/WebApp",
+                    "src/Assets"
                 ],
                 "extensions": [
                     ".js",
