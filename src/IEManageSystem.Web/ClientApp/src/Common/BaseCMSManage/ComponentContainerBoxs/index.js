@@ -10,6 +10,7 @@ class ComponentContainerBox extends React.Component {
 
         this.componentDescribe = ComponentFactory.getComponentDescribeForName(this.props.pageComponent.name);
     }
+    
 
     getStyle() {
         let style =
@@ -22,7 +23,13 @@ class ComponentContainerBox extends React.Component {
         style = { ...style, ...this.componentDescribe.defauleStyle }
 
         if (this.props.pageComponent.pageComponentBaseSetting.width) {
-            style.width = this.props.pageComponent.pageComponentBaseSetting.width;
+            let intWidth = new Number(this.props.pageComponent.pageComponentBaseSetting.width)
+            if (!isNaN(intWidth)) {
+                style.width = intWidth.valueOf();
+            }
+            else{
+                style.width = this.props.pageComponent.pageComponentBaseSetting.width;
+            }
         }
 
         if (this.props.pageComponent.pageComponentBaseSetting.backgroundImage) {

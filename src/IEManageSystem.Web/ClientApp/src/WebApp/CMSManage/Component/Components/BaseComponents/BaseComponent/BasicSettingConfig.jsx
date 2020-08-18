@@ -18,7 +18,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
         return (
             <div className="d-flex flex-md-wrap">
                 <div className="col-md-6 float-left">
-                    <label>请输入宽度（例如：50%）：</label>
+                    <label>请输入宽度（Web端：50, 50%, 50px, 50rem | App端：50, 50%）</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="宽度"

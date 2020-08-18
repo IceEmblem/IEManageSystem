@@ -33,7 +33,7 @@ class ComponentFactory {
             this.ComponentDescribeMaps[item.name] = item;
         })
 
-        ComponentDescribe.setInvalidOSComponent(IocContainer.getService(IInvalidOSComponent));
+        ComponentDescribe.setInvalidOSComponentType(IocContainer.getService(IInvalidOSComponent));
     }
 
     reLoad(){

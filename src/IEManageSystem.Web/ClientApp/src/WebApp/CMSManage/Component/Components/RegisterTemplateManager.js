@@ -3,12 +3,11 @@ import WebRegisterTemplateParts from './RegisterTemplateParts'
 import IocContainer from 'Core/IocContainer'
 import {BaseComponent} from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
-import ComponentFactory, {IInvalidOSComponent} from 'BaseCMSManage/Components/ComponentFactory'
+import ComponentFactory, {IInvalidOSComponent, IComponentErrorBoundary} from 'BaseCMSManage/Components/ComponentFactory'
 import WebInvalidOSComponent from './InvalidOSComponent'
 
 import NativeRegisterTemplateParts from 'RNCMS/Component/Components/RegisterTemplateParts'
 import RNInvalidOSComponent from 'RNCMS/Component/Components/InvalidOSComponent'
-
 
 class RegisterTemplateManager {
     // 目前只有 web端 有工具组件
@@ -89,7 +88,7 @@ class RegisterTemplateManager {
         });
         this.curOS = PageComponentOSType.Web;
 
-        IocContainer.registerSingleIntances(IInvalidOSComponent, <WebInvalidOSComponent />);
+        IocContainer.registerSingleIntances(IInvalidOSComponent, WebInvalidOSComponent);
     }
 
     applyNativeComponents(){
@@ -101,7 +100,7 @@ class RegisterTemplateManager {
         })
         this.curOS = PageComponentOSType.Native;
 
-        IocContainer.registerSingleIntances(IInvalidOSComponent, <RNInvalidOSComponent />);
+        IocContainer.registerSingleIntances(IInvalidOSComponent, RNInvalidOSComponent);
     }
 }
 

@@ -1,5 +1,7 @@
 import RegisterTemplateParts from './RegisterTemplateParts'
 import IocContainer from 'Core/IocContainer'
+import {IInvalidOSComponent} from 'BaseCMSManage/Components/ComponentFactory'
+import InvalidOSComponent from './InvalidOSComponent'
 
 class RegisterTemplateManager {
     init(){
@@ -8,6 +10,8 @@ class RegisterTemplateManager {
                 IocContainer.registerSingleIntances(type, single);
             })
         })
+
+        IocContainer.registerSingleIntances(IInvalidOSComponent, InvalidOSComponent);
     }
 }
 
