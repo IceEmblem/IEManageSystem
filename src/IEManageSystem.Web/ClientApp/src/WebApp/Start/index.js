@@ -14,11 +14,10 @@ import PageProvider from 'Core/Page/PageProvider'
 import Error from './Parts/Error';
 import Loading from './Parts/Loading'
 
-import 'bootstrapcss'
 import 'antd/dist/antd.css';
-import 'bootstrapcssicon';
-import 'commoncss';
-import 'ielib';
+import 'css/bootstrap.min.css'
+import 'css/open-iconic-bootstrap.min.css';
+import 'css/common.css';
 
 import './index.css';
 

@@ -1,7 +1,8 @@
 {
   "name": "iemanagesystem",
-  "version": "0.1.0",
   "private": true,
+  "workspaces": ["src/Common/*", "src/RNApp/*", "src/WebApp/*"],
+  "version": "0.1.0",
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "@ant-design/react-native": "^3.3.0",
@@ -98,13 +99,13 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "start:server": "cross-env REACT_APP_SERVER=true node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "cross-env OS=web node scripts/start.js",
+    "start:server": "cross-env OS=web REACT_APP_SERVER=true node scripts/start.js",
+    "build": "cross-env OS=web node scripts/build.js",
     "test": "node scripts/test.js",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "reactnative:start": "react-native start",
+    "android": "cross-env OS=android react-native run-android",
+    "ios": "cross-env OS=ios react-native run-ios",
+    "reactnative:start": "cross-env OS=android react-native start",
     "jest": "jest"
   },
   "eslintConfig": {
