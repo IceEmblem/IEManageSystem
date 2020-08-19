@@ -1,7 +1,7 @@
-if(process.env.OS == 'web'){
+if(process.env.IEOS == 'web'){
     presets = ["react-app", "module:metro-react-native-babel-preset"]
 }
-else if(process.env.OS == 'android' || process.env.OS == 'ios'){
+else if(process.env.IEOS == 'android' || process.env.IEOS == 'ios'){
     presets = ["module:metro-react-native-babel-preset"]
 }
 

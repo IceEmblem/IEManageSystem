@@ -80,16 +80,18 @@
     "webpack": "4.42.0",
     "webpack-dev-server": "3.10.3",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1"
+    "workbox-webpack-plugin": "4.3.1",
+
+    "react-native-vector-icons": "^7.0.0"
   },
   "scripts": {
-    "start": "cross-env OS=web node scripts/start.js",
-    "start:server": "cross-env OS=web REACT_APP_SERVER=true node scripts/start.js",
-    "build": "cross-env OS=web node scripts/build.js",
+    "start": "cross-env IEOS=web node scripts/start.js",
+    "start:server": "cross-env IEOS=web REACT_APP_SERVER=true node scripts/start.js",
+    "build": "cross-env IEOS=web node scripts/build.js",
     "test": "node scripts/test.js",
-    "android": "cross-env OS=android react-native run-android",
-    "ios": "cross-env OS=ios react-native run-ios",
-    "reactnative:start": "cross-env OS=android react-native start",
+    "android": "cross-env IEOS=android react-native run-android",
+    "ios": "cross-env IEOS=ios react-native run-ios",
+    "reactnative:start": "cross-env IEOS=android react-native start",
     "jest": "jest"
   },
   "eslintConfig": {
