@@ -1,7 +1,9 @@
 {
     "name": "RNStart",
     "version": "1.0.0",
-  
     "dependencies": {
+        "@ant-design/react-native": "^3.3.0",
+        "react-native-vector-icons": "^7.0.0",
+        "react-router-native": "^5.2.0"
     }
 }
