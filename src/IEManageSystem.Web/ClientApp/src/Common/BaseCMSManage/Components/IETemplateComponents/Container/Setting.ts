@@ -12,7 +12,7 @@ export default class Setting {
     }
 
     get direction(){
-        return this.setting.getDefauleData().field1;
+        return this.setting.getDefauleData().field1 || 'row';
     }
 
     set direction(val){
@@ -20,7 +20,7 @@ export default class Setting {
     }
 
     get justifyContent(){
-        return this.setting.getDefauleData().field2;
+        return this.setting.getDefauleData().field2 || 'flex-start';
     }
 
     set justifyContent(val){
@@ -28,7 +28,7 @@ export default class Setting {
     }
 
     get alignItems(){
-        return this.setting.getDefauleData().field3;
+        return this.setting.getDefauleData().field3 || 'flex-start';
     }
 
     set alignItems(val){
@@ -44,7 +44,7 @@ export default class Setting {
     }
 
     get alignContent(){
-        return this.setting.getDefauleData().field5;
+        return this.setting.getDefauleData().field5 || 'flex-start';
     }
 
     set alignContent(val){

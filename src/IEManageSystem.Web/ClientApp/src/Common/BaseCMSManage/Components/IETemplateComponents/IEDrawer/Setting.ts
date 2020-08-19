@@ -20,7 +20,7 @@ export default class Setting {
     }
 
     get boxWidth(){
-        return this.setting.getDefauleData().field2 || 200;
+        return this.setting.getDefauleData().field2 || '200';
     }
 
     set boxWidth(val){

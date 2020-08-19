@@ -13,13 +13,16 @@ class Container extends IComponent {
 
         return (
             <View
-                style={{
-                    flexDirection: setting.direction,
-                    justifyContent: setting.justifyContent,
-                    alignItems: setting.alignItems,
-                    alignContent: setting.alignContent,
-                    flexWrap: setting.wrap
-                }}
+                style={[
+                    this.baseStyle,
+                    {
+                        flexDirection: setting.direction,
+                        justifyContent: setting.justifyContent,
+                        alignItems: setting.alignItems,
+                        alignContent: setting.alignContent,
+                        flexWrap: setting.wrap,
+                    }
+                ]}
             >
                 {this.props.children}
             </View>);

@@ -15,6 +15,7 @@ import PageComponentModel, { PageComponentOSType } from '../../Models/Pages/Page
 import PageComponentSettingModel from '../../Models/Pages/PageComponentSettingModel'
 import SingleDataModel from '../../Models/SingleDataModel'
 import IETool from 'Core/ToolLibrary/IETool'
+import SpecsChecker from './Specs/SpecsChecker'
 
 function setPageComponentModel(pageComponentData: any) {
     pageComponentData.__proto__ = PageComponentModel.prototype;
@@ -102,6 +103,12 @@ function addComponent(state: object, action: AddComponentAction): object {
     pageComponents[action.pageComponent.sign] = setChildComponentSigns(pageComponents, pageComponents[action.pageComponent.sign]);
     setPageComponentModel(pageComponents[action.pageComponent.sign]);
 
+    // 检查是否满足规格
+    let specResult = SpecsChecker.isSuitAllSpecs(pageComponents[action.pageComponent.sign]);
+    if (specResult.isPass == false) {
+        throw new Error(specResult.message);
+    }
+
     // 更新父元素的子元素数组
     pageComponents[action.pageComponent.parentSign] = setChildComponentSigns(pageComponents, pageComponents[action.pageComponent.parentSign]);
     setPageComponentModel(pageComponents[action.pageComponent.parentSign]);
@@ -149,6 +156,12 @@ function editComponent(state: object, action: EditComponentAction): object {
     pageComponents[action.pageComponent.sign] = action.pageComponent;
     setPageComponentModel(pageComponents[action.pageComponent.sign]);
 
+    // 检查是否满足规格
+    let specResult = SpecsChecker.isSuitAllSpecs(pageComponents[action.pageComponent.sign]);
+    if (specResult.isPass == false) {
+        throw new Error(specResult.message);
+    }
+
     // 更新父组件的子组件列表
     pageComponents[parentSign] = setChildComponentSigns(pageComponents, pageComponents[parentSign]);
     setPageComponentModel(pageComponents[parentSign]);
@@ -164,7 +177,7 @@ function copyComponent(state: object, action: CopyComponentAction): object {
     let page = { ...state[action.pageId] };
 
     page[action.distOS] = IETool.deepCopy(page[action.sourceOS]);
-    Object.values(page[action.distOS]).forEach((item: any)=>{
+    Object.values(page[action.distOS]).forEach((item: any) => {
         item.os = action.distOS;
     });
 

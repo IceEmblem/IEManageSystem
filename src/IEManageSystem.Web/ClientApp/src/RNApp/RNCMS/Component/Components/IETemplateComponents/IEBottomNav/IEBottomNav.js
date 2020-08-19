@@ -15,7 +15,7 @@ class IEBottomNav extends IComponent {
 
         return (
             <View style={styles.iebottomnav}>
-                <Text style={{...style, ...{marginRight: "10px"}}}>
+                <Text style={{...style, ...{marginRight: 10}}}>
                     {setting.copyright}
                 </Text>
                 <Text style={style}>
@@ -29,7 +29,10 @@ class IEBottomNav extends IComponent {
 const styles = StyleSheet.create({
     iebottomnav: {
         width: "100%",
-        padding: ".5rem 1rem",
+        paddingTop: 8,
+        paddingBottom: 8,
+        paddingLeft: 16,
+        paddingRight: 16,
         flexDirection: 'row',
         justifyContent: 'center',
     }

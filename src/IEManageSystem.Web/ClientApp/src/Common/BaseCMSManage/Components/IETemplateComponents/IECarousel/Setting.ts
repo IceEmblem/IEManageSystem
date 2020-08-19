@@ -20,7 +20,7 @@ export default class Setting {
     }
 
     get height(){
-        return this.setting.getDefauleData().field2 || "15rem";
+        return this.setting.getDefauleData().field2 || "300";
     }
 
     set height(val){

@@ -31,27 +31,45 @@ class ComponentContainerBox extends React.Component {
                 style.width = this.props.pageComponent.pageComponentBaseSetting.width;
             }
         }
+        
+        if (this.props.pageComponent.pageComponentBaseSetting.height) {
+            let intheight = new Number(this.props.pageComponent.pageComponentBaseSetting.height)
+            if (!isNaN(intheight)) {
+                style.height = intheight.valueOf();
+            }
+            else{
+                style.height = this.props.pageComponent.pageComponentBaseSetting.height;
+            }
+        }
+
+        if (this.props.pageComponent.pageComponentBaseSetting.padding) {
+            let num = new Number(this.props.pageComponent.pageComponentBaseSetting.padding)
+            if (!isNaN(num)) {
+                style.padding = num.valueOf();
+            }
+            else{
+                style.padding = this.props.pageComponent.pageComponentBaseSetting.padding;
+            }
+        }
+
+        if (this.props.pageComponent.pageComponentBaseSetting.margin) {
+            let num = new Number(this.props.pageComponent.pageComponentBaseSetting.margin)
+            if (!isNaN(num)) {
+                style.margin = num.valueOf();
+            }
+            else{
+                style.margin = this.props.pageComponent.pageComponentBaseSetting.margin;
+            }
+        }
+
+        if (this.props.pageComponent.pageComponentBaseSetting.backgroundColor) {
+            style.backgroundColor = this.props.pageComponent.pageComponentBaseSetting.backgroundColor;
+        }
 
         if (this.props.pageComponent.pageComponentBaseSetting.backgroundImage) {
             style.backgroundImage = `url(${this.props.pageComponent.pageComponentBaseSetting.backgroundImage})`;
             style.backgroundRepeat = "no-repeat"
             style.backgroundSize = "100% auto";
-        }
-
-        if (this.props.pageComponent.pageComponentBaseSetting.height) {
-            style.height = this.props.pageComponent.pageComponentBaseSetting.height;
-        }
-
-        if (this.props.pageComponent.pageComponentBaseSetting.padding) {
-            style.padding = this.props.pageComponent.pageComponentBaseSetting.padding;
-        }
-
-        if (this.props.pageComponent.pageComponentBaseSetting.margin) {
-            style.margin = this.props.pageComponent.pageComponentBaseSetting.margin;
-        }
-
-        if (this.props.pageComponent.pageComponentBaseSetting.backgroundColor) {
-            style.backgroundColor = this.props.pageComponent.pageComponentBaseSetting.backgroundColor;
         }
 
         return style;

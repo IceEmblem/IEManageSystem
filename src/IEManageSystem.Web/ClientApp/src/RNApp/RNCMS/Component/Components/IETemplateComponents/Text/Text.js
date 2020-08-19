@@ -42,7 +42,7 @@ class IEText extends IComponent {
         }
 
         return (
-            <View style={styles.view}>
+            <View style={[this.baseStyle, styles.view]}>
                 <Text style={StyleSheet.compose(styles.text, style)}>{data.text}</Text>
                 <Text style={StyleSheet.compose(styles.textSmall, smallStyle)}>{data.smallText}</Text>
             </View>
@@ -56,10 +56,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        fontWeight: '600'
+        fontWeight: '600',
+        flexShrink: 1,
     },
     textSmall: {
-        marginLeft: 10
+        marginLeft: 10,
+        flexShrink: 1,
     }
 });
 

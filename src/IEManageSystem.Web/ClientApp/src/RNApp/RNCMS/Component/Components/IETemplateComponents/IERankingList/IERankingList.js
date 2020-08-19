@@ -11,7 +11,7 @@ class IERankingList extends IComponent {
     }
 
     // 忽略父元素的刷新
-    componentWillReceiveProps(nextprops){
+    componentWillReceiveProps(nextprops) {
     }
 
     render() {
@@ -19,24 +19,23 @@ class IERankingList extends IComponent {
         return (
             <View>
                 {this.state.pageDatas.map((item, index) => (
-                    <View 
+                    <View
                         style={
-                            index == 0 ? styles.firstLine : 
-                            styles.line
+                            index == 0 ? styles.firstLine :
+                                styles.line
                         }
                     >
                         <View>
-                            <Link 
-                                to={this.createUrl(item)} 
-                                component={
-                                    (props)=><Text style={{color: 'inherit'}}>{item.title}</Text>
-                                }
-                            />
+                            <Link
+                                to={this.createUrl(item)}
+                            >
+                                <Text>{item.title}</Text>
+                            </Link>
                         </View>
-                        <View 
+                        <View
                             style={
                                 index == 0 ? styles.firstIcon :
-                                styles.Icon
+                                    styles.Icon
                             }
                         >
                             <Icon name='Trophy' color='#fff' />

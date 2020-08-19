@@ -15,28 +15,38 @@ class IECard extends IComponent {
         let setting = new Setting(this.getSetting("DefaultSetting"));
         let data = new Data(this.props.componentData);
 
+        let height = new Number(setting.height).valueOf();
+        if (isNaN(height)) {
+            height = 0;
+        }
+
         return (
-            <Link to={data.link}>
-                <Card>
-                    <Card.Header
-                        style={{ padding: 0, margin: 0 }}
-                        thumbStyle={{ width: setting.width, height: setting.height }}
-                        thumb={data.imgUrl}
-                    />
-                    <Card.Body>
-                        <View style={{padding: "10px"}}>
-                            <Text style={{
-                                fontSize: 18,
-                                color: "rgba(0, 0, 0, 0.85)",
-                                fontWeight: 600,
-                                marginBottom: "8px"
-                            }}
-                            >{data.title}</Text>
-                            <Text>{data.content}</Text>
-                        </View>
-                    </Card.Body>
-                </Card>
-            </Link>);
+            <View style={[this.baseStyle]}>
+                <Link
+                    to={data.link}
+                >
+                    <Card>
+                        <Card.Header
+                            style={{ padding: 0, margin: 0 }}
+                            thumbStyle={{ width: '100%', height: height }}
+                            thumb={data.imgUrl}
+                        />
+                        <Card.Body>
+                            <View style={{ padding: 10 }}>
+                                <Text style={{
+                                    fontSize: 18,
+                                    color: "rgba(0, 0, 0, 0.85)",
+                                    fontWeight: '600',
+                                    marginBottom: 8
+                                }}
+                                >{data.title}</Text>
+                                <Text>{data.content}</Text>
+                            </View>
+                        </Card.Body>
+                    </Card>
+                </Link>
+            </View>
+        );
     }
 }
 

@@ -7,10 +7,34 @@ import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBox
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import ToolBtns from './ToolBtns';
 import Page from 'CMSManage/Home/Page'
-import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 // 标记框，用于标记当前活跃的组件位置
 class SignSquareFrame extends React.Component {
+    getElementLeft(element) {
+        var actualLeft = element.offsetLeft;
+        var current = element.offsetParent;
+
+        while (current !== null) {
+            actualLeft += current.offsetLeft;
+            current = current.offsetParent;
+        }
+
+        return actualLeft;
+    }
+
+    getElementTop(element) {
+        var actualTop = element.offsetTop;
+        var current = element.offsetParent;
+
+        while (current !== null) {
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+
+        return actualTop;
+    }
+
     render() {
         if (!this.props.targetElement) {
             return <div></div>
@@ -21,8 +45,8 @@ class SignSquareFrame extends React.Component {
             border: `1px solid ${this.props.color}`,
         }
 
-        let left = this.props.targetElement.offsetLeft;
-        let top = this.props.targetElement.offsetTop;
+        let left = this.getElementLeft(this.props.targetElement);
+        let top = this.getElementTop(this.props.targetElement);
         let width = this.props.targetElement.clientWidth - 2;
         let height = this.props.targetElement.clientHeight - 2;
 
@@ -64,7 +88,7 @@ class CurrentToolBtns extends React.Component {
                                     pageDataId={pageDataId}
                                     pageComponent={item.pageComponent}
                                     addChildComponent={addChildComponent}
-                                    style={{opacity: 1, marginBottom: "5px"}}
+                                    style={{ opacity: 1, marginBottom: "5px" }}
                                 />
                             </div>
                         ))
@@ -84,7 +108,9 @@ class PageEditCompontContainer extends React.Component {
         selectedPageComponents: [],
     }
 
-    selectedPageComponents = []
+    selectedPageComponents = [];
+
+    lastSelectedPageComponentSign = null;
 
     constructor(props) {
         super(props);
@@ -132,7 +158,7 @@ class PageEditCompontContainer extends React.Component {
 
     render() {
         let style = {};
-        if(this.props.rootPageComponent.os == PageComponentOSType.Native){
+        if (this.props.rootPageComponent.os == PageComponentOSType.Native) {
             style.width = "480px"
             style.margin = "auto"
         }
@@ -144,9 +170,20 @@ class PageEditCompontContainer extends React.Component {
                 <div
                     className="w-100 h-100"
                     onClick={(e) => {
-                        this.setState({ selectedPageComponents: this.selectedPageComponents });
-                        this.selectedPageComponents = [];
                         e.stopPropagation();
+                        if(this.selectedPageComponents.length == 0){
+                            return false;
+                        }
+
+                        if(this.lastSelectedPageComponentSign == this.selectedPageComponents[0].pageComponent.sign){
+                            this.selectedPageComponents = [];
+                            return false;
+                        }
+                        
+                        this.setState({ selectedPageComponents: this.selectedPageComponents });
+                        this.lastSelectedPageComponentSign = this.selectedPageComponents[0].pageComponent.sign;
+                        this.selectedPageComponents = [];
+                        
                         return false;
                     }}
                 >

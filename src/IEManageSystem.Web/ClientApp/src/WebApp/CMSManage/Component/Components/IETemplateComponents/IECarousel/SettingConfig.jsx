@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Setting'
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
-import { Input, Tag } from 'antd';
+import { Input, Tag, InputNumber } from 'antd';
 
 class SettingConfig extends ISettingConfig {
     render() {
@@ -20,26 +20,28 @@ class SettingConfig extends ISettingConfig {
                 }}
                 suffix={<Tag color="#55acee">字体颜色</Tag>}
             />
-            <Input
-                placeholder="示例：9rem"
-                className="mb-3"
-                value={setting.height}
-                onChange={(e) => {
-                    setting.height = e.currentTarget.value;
-                    this.props.setData(setting.setting);
-                }}
-                suffix={<Tag color="#55acee">幻灯片高度</Tag>}
-            />
-            <Input
-                placeholder="示例：35%"
-                className="mb-3"
-                value={setting.width}
-                onChange={(e) => {
-                    setting.width = e.currentTarget.value;
-                    this.props.setData(setting.setting);
-                }}
-                suffix={<Tag color="#55acee">内容宽度</Tag>}
-            />
+            <div className="mb-3">
+                <Tag color="#55acee">幻灯片高度</Tag>
+                <InputNumber
+                    placeholder="示例：300"
+                    value={setting.height}
+                    onChange={(value) => {
+                        setting.height = value;
+                        this.props.setData(setting.setting);
+                    }}
+                />
+            </div>
+            <div className="mb-3">
+                <Tag color="#55acee">内容区域宽度</Tag>
+                <InputNumber
+                    placeholder="示例：300"
+                    value={setting.width}
+                    onChange={(value) => {
+                        setting.width = value;
+                        this.props.setData(setting.setting);
+                    }}
+                />
+            </div>
         </div>)
     }
 }
@@ -51,10 +53,10 @@ SettingConfig.propType = {
 }
 
 export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "幻灯片设置",
-(pageComponentSetting, setPageComponentSetting) => {
-    return <SettingConfig
-        data={pageComponentSetting}
-        setData={setPageComponentSetting}
-    />;
-}
+    (pageComponentSetting, setPageComponentSetting) => {
+        return <SettingConfig
+            data={pageComponentSetting}
+            setData={setPageComponentSetting}
+        />;
+    }
 ));

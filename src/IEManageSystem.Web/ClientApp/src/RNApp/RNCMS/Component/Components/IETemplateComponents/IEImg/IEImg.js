@@ -7,9 +7,14 @@ class IEImg extends IComponent {
     render() {
         let data = new Data(this.props.componentData);
 
-        return <View>
-            <Image source={data.imgUrl} style={{height: data.imgHeigth}} />
-            <Text style={{textAlign: "center", lineHeight: '40px'}}>{data.text}</Text>
+        let height = new Number(data.imgHeigth).valueOf();
+        if(isNaN(height)){
+            height = 0;
+        }
+
+        return <View style={[this.baseStyle]}>
+            <Image source={{uri: data.imgUrl}} style={{height: height}} />
+            <Text style={{textAlign: "center", lineHeight: 40}}>{data.text}</Text>
         </View>
     }
 }

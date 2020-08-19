@@ -96,7 +96,7 @@ class SettingConfig extends ISettingConfig {
                     <Radio value="flex-end">尾部</Radio>
                     <Radio value="center">中间</Radio>
                     <Radio value="space-around">对称</Radio>
-                    <Radio value="space-stretch">对称（子元素等高）</Radio>
+                    <Radio value="stretch">对称（子元素等高）</Radio>
                 </Radio.Group>
             </div>
         </div>)

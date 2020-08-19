@@ -18,7 +18,7 @@ class IECard extends IComponent {
             <a href={data.link}>
                 <Card
                     hoverable
-                    cover={<img alt="未找到图片" src={data.imgUrl} width={setting.width} height={setting.height} />}
+                    cover={<img alt="未找到图片" src={data.imgUrl} height={setting.height} />}
                 >
                     <Meta
                         title={data.title}

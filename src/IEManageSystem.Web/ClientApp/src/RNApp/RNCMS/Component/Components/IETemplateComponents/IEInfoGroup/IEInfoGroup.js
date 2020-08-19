@@ -9,8 +9,8 @@ class IEInfoGroup extends IComponent {
     createItem(settingField, dataField, color) {
         return <List.Item>
             <View style={{ color: color, flexDirection: 'row' }}>
-                <Text style={{color: 'inherit'}}>{settingField}</Text>
-                <Text style={{color: 'inherit'}}>{dataField}</Text>
+                <Text style={{color: color}}>{settingField}</Text>
+                <Text style={{color: color}}>{dataField}</Text>
             </View>
         </List.Item>
     }
@@ -32,7 +32,7 @@ class IEInfoGroup extends IComponent {
             itemDatas.push({ settingField: setting.field5, dataField: data.field5 });
 
         return <List
-            style={{borderColor: '#0004', borderStyle: 'solid', borderWidth: setting.bordered ? "1px" : "0px"}}
+            style={[this.baseStyle, {borderColor: '#0004', borderStyle: 'solid', borderWidth: setting.bordered ? 1 : 0}]}
             bordered={setting.bordered}
             grid={{ column: setting.col }}
             renderHeader={setting.title}

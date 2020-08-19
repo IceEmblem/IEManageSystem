@@ -7,7 +7,7 @@ import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLab
 class IECategoryLabel extends IComponent {
 
     curSelectOtherTags = [];
-    curSelectTagName = "";
+    curSelectTagName = undefined;
     curSearchPrefix = "";
 
     constructor(props) {
@@ -68,14 +68,18 @@ class IECategoryLabel extends IComponent {
         return this.props.history.location.pathname + search;
     }
 
-    getLinkStyle(tagName){
+    getLinkStyle(tagName) {
         let style = {
-            lineHeight: "30px",
-            padding: "4px 15px",
-            margin: "0px 5px"
+            lineHeight: 30,
+            paddingTop: 4,
+            paddingBottom: 4,
+            paddingLeft: 15,
+            paddingRight: 15,
+            marginLeft: 5,
+            marginRight: 5,
         };
 
-        if (tagName == this.curSelectTagName) {
+        if(this.curSelectTagName == tagName){
             style.backgroundColor = "#309bff";
             style.color = "#fff";
         }
@@ -87,9 +91,8 @@ class IECategoryLabel extends IComponent {
         return (
             <Link
                 to={this.createUrl(singleData.tagName)}
-                style={this.getLinkStyle(singleData.tagName)}
             >
-                <Text style={{color: 'inherit'}}>{singleData.displayName}</Text>
+                <Text style={[this.getLinkStyle(singleData.tagName)]}>{singleData.displayName}</Text>
             </Link>
         );
     }
@@ -98,12 +101,11 @@ class IECategoryLabel extends IComponent {
         let setting = new Setting(this.getPageComponentSetting());
 
         return (
-            <View style={styles.view}>
-                <Link 
+            <View style={[this.baseStyle, styles.view]}>
+                <Link
                     to={this.createUrl("")}
-                    style={this.getLinkStyle()}
                 >
-                    <Text style={{color: 'inherit'}}>全部</Text>
+                    <Text style={[this.getLinkStyle()]}>全部</Text>
                 </Link>
                 {setting.getSettings().map(item => this.createItem(item))}
             </View>

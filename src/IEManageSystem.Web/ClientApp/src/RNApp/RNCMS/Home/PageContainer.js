@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'; 
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
@@ -51,7 +51,7 @@ class PageContainer extends Component {
     }
 
     return (
-      <View>
+      <ScrollView>
         {
           this.props.rootPageComponent.pageComponentSigns.map(sign =>
             <ComponentContainerBox
@@ -64,7 +64,7 @@ class PageContainer extends Component {
             >
             </ComponentContainerBox>)
         }
-      </View>
+      </ScrollView>
     )
   }
 }

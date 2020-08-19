@@ -39,7 +39,7 @@
     width: 0px;
     position: relative;
     display: flex;
-    align-items: start;
+    overflow: visible;
     opacity: 0.1;
     transition: 0.5s;
     -webkit-transition: 0.5s;

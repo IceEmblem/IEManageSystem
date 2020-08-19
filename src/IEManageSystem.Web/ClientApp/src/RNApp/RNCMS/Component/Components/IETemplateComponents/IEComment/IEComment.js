@@ -25,9 +25,9 @@ class IEComment extends IComponent {
                     <Image
                         source={comment.avatar}
                         style={{
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "50% 50%"
+                            width: 40,
+                            height: 40,
+                            borderRadius: 20
                         }}
                     />
                 </View>
@@ -61,7 +61,7 @@ class IEComment extends IComponent {
         ]
 
         return (
-            <View>
+            <View style={[this.baseStyle]}>
                 <Text style={styles.header}>{`${comments.length} 条评论`}</Text>
                 {comments.map(item => this.createItem(item))}
             </View>
@@ -80,7 +80,7 @@ let styles = StyleSheet.create({
         color: '#000A',
     },
     item: {
-        minHeight: "100px", 
+        minHeight: 100, 
         flexDirection: 'row',
         marginBottom: 10,
     },

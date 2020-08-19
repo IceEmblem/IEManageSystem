@@ -20,27 +20,39 @@ class IEDrawer extends IComponent {
         this.data.setData(this.props.componentData);
         let setting = new Setting(this.getSetting("DefaultSetting"));
 
+        let height = new Number(setting.imgHeight).valueOf();
+        if (isNaN(height)) {
+            height = 300;
+        }
+
+        let boxWidth = new Number(setting.boxWidth).valueOf()
+        if (isNaN(boxWidth)) {
+            boxWidth = 200;
+        }
+
         return (
-            <Drawer
-                sidebar={
-                    <View style={styles.sidebar}>
-                        <Text style={styles.title}>{this.data.title}</Text>
-                        <Text style={styles.content}>{this.data.content}</Text>
-                    </View>
-                }
-                position="left"
-                open={false}
-                drawerWidth={setting.boxWidth}
-                drawerRef={el => (this.drawer = el)}
-                drawerBackgroundColor="#ccc8"
-            >
-                <TouchableHighlight
-                    onPress={() => this.drawer && this.drawer.openDrawer()}
-                    activeOpacity={0.1}
+            <View style={[this.baseStyle]}>
+                <Drawer
+                    sidebar={
+                        <View style={styles.sidebar}>
+                            <Text style={styles.title}>{this.data.title}</Text>
+                            <Text style={styles.content}>{this.data.content}</Text>
+                        </View>
+                    }
+                    position="left"
+                    open={true}
+                    drawerWidth={boxWidth}
+                    drawerRef={el => (this.drawer = el)}
+                    drawerBackgroundColor="#ccc8"
                 >
-                    <Image source={this.data.imgUrl} style={{ height: setting.imgHeight }} />
-                </TouchableHighlight>
-            </Drawer>
+                    <TouchableHighlight
+                        onPress={() => this.drawer && this.drawer.openDrawer()}
+                        activeOpacity={0.1}
+                    >
+                        <Image source={{ uri: this.data.imgUrl }} style={{ height: height }} />
+                    </TouchableHighlight>
+                </Drawer>
+            </View>
         );
     }
 }
@@ -50,12 +62,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexGrow: 1
-    },  
+    },
     title: {
         color: "#fff",
         fontSize: 18,
         fontWeight: "600",
-        marginBottom: "10px"
+        marginBottom: 10
     },
     content: {
         color: "#fff"

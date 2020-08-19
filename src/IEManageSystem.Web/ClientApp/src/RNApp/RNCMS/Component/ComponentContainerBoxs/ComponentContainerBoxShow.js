@@ -33,17 +33,8 @@ export default class extends React.Component {
             return this.errorShow();
         }
 
-        let style = undefined;
-        try{
-            style = StyleSheet.create({container: this.props.style});
-        }
-        catch(ex){
-            this.setState({error: ex})
-            return this.errorShow();
-        }
-
         return <View
-            style={style.container}
+            style={[styles.container, this.props.style]}
             {...this.props.propsEX}
         >
             {this.props.children}
@@ -51,3 +42,12 @@ export default class extends React.Component {
         </View>
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        flexWrap: 'nowrap'
+    }
+})

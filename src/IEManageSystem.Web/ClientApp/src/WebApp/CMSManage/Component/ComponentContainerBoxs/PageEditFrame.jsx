@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Tab from 'Common/Tab/Tab.jsx'
 
-import { Modal, notification } from 'antd';
+import { Modal, notification, message } from 'antd';
 import IETool from 'Core/ToolLibrary/IETool'
 
 class EditFrame extends React.Component {
@@ -28,7 +28,7 @@ class EditFrame extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({pageComponent: IETool.deepCopy(nextProps.pageComponent)});
+        this.setState({ pageComponent: IETool.deepCopy(nextProps.pageComponent) });
     }
 
     // 生成选项卡列表
@@ -57,15 +57,15 @@ class EditFrame extends React.Component {
     submit() {
         try {
             this.props.editComponent(this.state.pageComponent);
+            this.props.close();
         }
         catch (e) {
-            notification.error({
-                message: '提交失败',
-                description: e.message,
+            Modal.error({
+                title: '提交失败',
+                content: e.message,
+                zIndex: 9999
             });
         }
-
-        this.props.close();
     }
 
     // 获取当前要显示的内容

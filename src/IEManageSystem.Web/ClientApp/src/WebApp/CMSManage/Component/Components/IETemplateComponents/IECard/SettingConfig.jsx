@@ -10,8 +10,9 @@ class SettingConfig extends ISettingConfig {
         let setting = new Setting(this.props.data);
 
         return (<div>
+            <div>图片高度（Web端：30, 30px, 30rem ... | App端：30）</div>
             <Input
-                placeholder="示例：300px"
+                placeholder="示例：300"
                 className="mb-3"
                 value={setting.height}
                 onChange={(e) => {
@@ -19,16 +20,6 @@ class SettingConfig extends ISettingConfig {
                     this.props.setData(setting.setting);
                 }}
                 suffix={<Tag color="#55acee">图片高度</Tag>}
-            />
-            <Input
-                placeholder="示例：100%"
-                className="mb-3"
-                value={setting.width}
-                onChange={(e) => {
-                    setting.width = e.currentTarget.value;
-                    this.props.setData(setting.setting);
-                }}
-                suffix={<Tag color="#55acee">图片宽度</Tag>}
             />
         </div>)
     }

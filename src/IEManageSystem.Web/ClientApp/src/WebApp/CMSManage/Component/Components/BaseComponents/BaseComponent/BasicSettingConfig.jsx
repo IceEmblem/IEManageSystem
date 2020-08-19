@@ -18,7 +18,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
         return (
             <div className="d-flex flex-md-wrap">
                 <div className="col-md-6 float-left">
-                    <label>请输入宽度（Web端：50, 50%, 50px, 50rem | App端：50, 50%）</label>
+                    <label>宽度（Web端：50, 50%, 50px, 50rem | App端：50, 50%）</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="宽度"
@@ -34,7 +34,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
-                    <label>请输入组件高度（例：9rem）：</label>
+                    <label>高度（Web端：50, 50%, 50px, 50rem | App端：50, 50%）</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="组件高度"
@@ -50,7 +50,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
-                    <label>请输入内边距（例：0.3rem 或 0rem 0.3rem）：</label>
+                    <label>内边距（Web端：50, 50px, 50px 10px, ... | App端：50）</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="内边距"
@@ -66,7 +66,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
-                    <label>请输入外边距（例：0.3rem 或 0rem 0.3rem）：</label>
+                    <label>外边距（Web端：50, 50px, 50px 10px, ... | App端：50）</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="外边距"
@@ -82,7 +82,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
-                    <label>请输入背景颜色（例：#ffffff）：</label>
+                    <label>背景颜色（例：#ffffff）</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="背景颜色"
@@ -98,7 +98,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     </div>
                 </div>
                 <div className="col-md-6 float-left">
-                    <label>请输入选择背景图片：</label>
+                    <label>背景图片</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="背景图片"
@@ -122,7 +122,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     />
                 </div>
                 <div className="col-md-6 float-left">
-                    <label>请输入class：</label>
+                    <label>样式class（App 没有class）</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="样式类"

@@ -52,7 +52,7 @@ class DataConfig extends IDataConfig {
                 suffix={<Tag color="#55acee">描述文本</Tag>}
             />
             <Input
-                placeholder="示例：300px"
+                placeholder="示例：web端 300px, 30rem ... | App端 300"
                 className="mb-3"
                 value={this.data.imgHeigth}
                 onChange={(e) => {

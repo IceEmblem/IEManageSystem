@@ -5,6 +5,7 @@ import Data from 'BaseCMSManage/Components/IETemplateComponents/IELine/Data'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELine/Setting'
 
 import WebView from 'react-native-webview'
+import { View } from 'react-native'
 
 class IELine extends IComponent {
     constructor(props) {
@@ -108,7 +109,6 @@ class IELine extends IComponent {
 
         return (<WebView 
             source={{ html: this.createHtml(chartData, setting) }}
-            style={{marginTop: 20}}
         />);
     }
 }

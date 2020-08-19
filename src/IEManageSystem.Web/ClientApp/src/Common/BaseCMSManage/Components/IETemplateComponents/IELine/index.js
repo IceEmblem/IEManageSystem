@@ -19,7 +19,7 @@ class ComponentObject extends BaseComponentObject {
 const componentDescribeBuilder = () => {
     let componentDescribe = new ComponentDescribe("IELine", new ComponentObject(), componentType.graph, "IE-折线|柱状|条形");
     componentDescribe.defauleStyle = {
-        height: "400px"
+        height: 400
     }
     return componentDescribe;
 }
