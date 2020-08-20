@@ -11,7 +11,7 @@ class IEWebView extends React.Component<WebViewProps>{
 
         return (
             <iframe 
-                style={{border:0, width:"100%"}}
+                style={{border:0, width:"100%", height: '100%'}}
                 srcDoc={html}
                 marginHeight={0}
                 marginWidth={0}

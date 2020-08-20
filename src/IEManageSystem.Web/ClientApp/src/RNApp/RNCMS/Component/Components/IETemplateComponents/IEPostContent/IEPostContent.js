@@ -1,7 +1,8 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostContent/IComponent'
-import { StyleSheet } from 'react-native'
-import HTMLView from 'react-native-htmlview';
+import { StyleSheet, View } from 'react-native'
+import WebView from 'react-native-webview'
+
 
 class IEPostContent extends IComponent {
     constructor(props) {
@@ -22,14 +23,21 @@ class IEPostContent extends IComponent {
         </div>
         `;
 
-        return (<HTMLView
-            value={text}
-            stylesheet={styles}
-        />);
+        return (
+            <View style={[this.baseStyle, styles.view]}>
+                <WebView
+                    source={{ html: text }}
+                />
+            </View>
+        );
     }
 }
 
 const styles = StyleSheet.create({
+    view: {
+        height: '100%',
+        justifyContent: 'center'
+    }
 });
 
 IEPostContent.defaultProps = {

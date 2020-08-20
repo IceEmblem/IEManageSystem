@@ -20,7 +20,7 @@ export default class Setting {
     }
 
     get url(){
-        return this.setting.getDefauleData().field2 || "javascript:void(0)";
+        return this.setting.getDefauleData().field2 || "/";
     }
 
     set url(val){

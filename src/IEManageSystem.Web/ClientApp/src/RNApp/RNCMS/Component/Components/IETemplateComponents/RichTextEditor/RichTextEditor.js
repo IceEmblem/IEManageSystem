@@ -1,6 +1,7 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/RichTextEditor/IComponent'
-import HTMLView from 'react-native-htmlview';
+import WebView from 'react-native-webview'
+import { View } from 'react-native'
 
 class RichTextEditor extends IComponent {
     constructor(props) {
@@ -12,8 +13,8 @@ class RichTextEditor extends IComponent {
     }
 
     render() {
-        let text = this.props.componentData.getDefauleData().field1 || 
-        `
+        let text = this.props.componentData.getDefauleData().field1 ||
+            `
         <div style="display: table; width: 100%;">
             <div style="display: table-cell;width: 100%;vertical-align: top;">
                 <h3 style="width: 38%;height: 16px;margin-top: 16px;background: #f2f2f2;"></h3>
@@ -26,9 +27,11 @@ class RichTextEditor extends IComponent {
         </div>
         `;
 
-        return (<HTMLView
-            value={text}
-        />);
+        return (<View style={[this.baseStyle]}>
+            <WebView
+                source={{ html: text }}
+            />
+        </View>);
     }
 }
 

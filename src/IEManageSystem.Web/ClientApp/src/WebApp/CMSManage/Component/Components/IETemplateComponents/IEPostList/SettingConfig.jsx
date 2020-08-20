@@ -31,7 +31,7 @@ class SettingConfig extends ISettingConfig {
                 />
             </div>
             <Input
-                placeholder="图片高度（示例：5rem）"
+                placeholder="图片高度（示例：web端 300px, 30rem | App端 300）"
                 className="mb-3"
                 value={this.setting.heigth}
                 onChange={(e) => {

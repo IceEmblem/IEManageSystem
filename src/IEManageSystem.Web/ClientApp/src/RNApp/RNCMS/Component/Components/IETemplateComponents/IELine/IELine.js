@@ -12,7 +12,7 @@ class IELine extends IComponent {
         super(props);
     }
 
-    createHtml(chartData, setting){
+    createHtml(chartData, setting) {
         return `
         <div id="canvas" style=""></div>
         <script src="https://unpkg.com/@antv/g2plot@latest/dist/g2plot.js"></script>
@@ -107,9 +107,13 @@ class IELine extends IComponent {
 
         const chartData = data.getDatas().map(item => ({ x: item.x, line: item.line, y: Number(item.y) }))
 
-        return (<WebView 
-            source={{ html: this.createHtml(chartData, setting) }}
-        />);
+        return (
+            <View style={[this.baseStyle, {height: '100%'}]}>
+                <WebView
+                    source={{ html: this.createHtml(chartData, setting) }}
+                />
+            </View>
+        );
     }
 }
 

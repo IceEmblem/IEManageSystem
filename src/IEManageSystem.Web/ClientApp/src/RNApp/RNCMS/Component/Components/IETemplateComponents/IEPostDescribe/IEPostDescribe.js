@@ -6,7 +6,7 @@ class IEPostDescribe extends IComponent {
     render() {
         let title = this.props.pageData.describe || "这里是文章的简短描述";
 
-        return (<Text>{title}</Text>);
+        return (<Text style={[this.baseStyle]}>{title}</Text>);
     }
 }
 

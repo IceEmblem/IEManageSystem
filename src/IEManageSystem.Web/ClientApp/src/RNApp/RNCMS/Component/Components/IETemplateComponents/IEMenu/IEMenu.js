@@ -55,7 +55,7 @@ class IEMenu extends IComponent {
 
     render() {
         return (
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={[this.baseStyle, { flexDirection: 'row', justifyContent: 'space-between' }]}>
                 {this.createMenus()}
             </View>
         )

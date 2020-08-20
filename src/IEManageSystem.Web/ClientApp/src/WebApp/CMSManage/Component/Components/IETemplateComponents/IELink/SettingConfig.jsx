@@ -77,16 +77,19 @@ class SettingConfig extends ISettingConfig {
                 }}
                 suffix={<Tag color="#55acee">链接 Url</Tag>}
             />
-            <Input
-                placeholder="示例：16px"
-                className="mb-3"
-                value={this.setting.fontSize}
-                onChange={(e) => {
-                    this.setting.fontSize = e.currentTarget.value;
-                    this.props.setData(this.setting.setting);
-                }}
-                suffix={<Tag color="#55acee">字体大小</Tag>}
-            />
+            <div>
+                <div>字体大小（Web端：16px，1rem ... | App端：16）</div>
+                <Input
+                    placeholder="示例：16"
+                    className="mb-3"
+                    value={this.setting.fontSize}
+                    onChange={(e) => {
+                        this.setting.fontSize = e.currentTarget.value;
+                        this.props.setData(this.setting.setting);
+                    }}
+                    suffix={<Tag color="#55acee">字体大小</Tag>}
+                />
+            </div>
             <Input
                 placeholder="示例：#ffffff"
                 className="mb-3"
@@ -155,10 +158,10 @@ SettingConfig.propType = {
 }
 
 export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "链接设置",
-(pageComponentSetting, setPageComponentSetting) => {
-    return <SettingConfig
-        data={pageComponentSetting}
-        setData={setPageComponentSetting}
-    />;
-}
+    (pageComponentSetting, setPageComponentSetting) => {
+        return <SettingConfig
+            data={pageComponentSetting}
+            setData={setPageComponentSetting}
+        />;
+    }
 ));

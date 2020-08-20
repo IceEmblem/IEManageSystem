@@ -17,17 +17,16 @@ class IELogo extends IComponent {
         let siteSettingManager = new SiteSettingManager(this.props.siteSettings);
 
         return (
-            <Link 
-                to='/'
-                component={
-                    (props)=>(
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Image source={LogoImg} style={{width: 35, height: 35}} />
-                            <Text style={{fontSize: "18px", marginLeft: '10px', fontWeight: 600}}>{siteSettingManager.getSiteName()}</Text>
-                        </View>
-                    )
-                }
-            />
+            <View style={[this.baseStyle]}>
+                <Link
+                    to='/'
+                >
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Image source={LogoImg} style={{ width: 35, height: 35 }} />
+                        <Text style={{ fontSize: 18, marginLeft: 10, fontWeight: '600' }}>{siteSettingManager.getSiteName()}</Text>
+                    </View>
+                </Link>
+            </View>
         )
     }
 }

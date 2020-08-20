@@ -17,7 +17,7 @@ class IERankingList extends IComponent {
     render() {
 
         return (
-            <View>
+            <View style={[this.baseStyle]}>
                 {this.state.pageDatas.map((item, index) => (
                     <View
                         style={
@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: "15px"
+        padding: 15
     },
     Icon: {
         backgroundColor: '#db3964',
         borderRadius: 15,
-        width: "30px",
-        height: "30px",
+        width: 30,
+        height: 30,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -66,15 +66,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: "15px",
+        padding: 15,
         backgroundColor: "#40a9ff",
         color: '#fff'
     },
     firstIcon: {
         backgroundColor: '#FFD700',
         borderRadius: 15,
-        width: "30px",
-        height: "30px",
+        width: 30,
+        height: 30,
         justifyContent: 'center',
         alignItems: 'center',
     },

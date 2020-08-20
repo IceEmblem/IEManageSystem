@@ -13,8 +13,25 @@ class IEPostList extends IComponent {
     }
 
     createItem(post, setting) {
-        let width = 100 / setting.col;
-        return <View style={{ width: `${width}%`, paddingLeft: "5px", paddingRight: "5px", marginBottom: '10px' }}>
+        let width = 100;
+        if(setting.col > 0){
+            width = 100 / setting.col;
+        }
+
+        let heigth = new Number(setting.heigth).valueOf();
+        if(isNaN(heigth)){
+            heigth = 200
+        }
+
+        let source
+        if(post.imageList.length > 0 && post.imageList[0]){
+            source = {uri: post.imageList[0]}
+        }
+        else{
+            source = defaultImg;
+        }
+
+        return <View style={{ width: `${width}%`, paddingLeft: 5, paddingRight: 5, marginBottom: 10 }}>
             <Card>
                 <Card.Body style={{ padding: 0 }}>
                     <Link
@@ -24,8 +41,8 @@ class IEPostList extends IComponent {
                                 {
                                     setting.isShowImg == "true" ?
                                         < Image
-                                            style={{ height: setting.heigth, width: "100%" }}
-                                            source={post.imageList.length > 0 && post.imageList[0] ? post.imageList[0] : defaultImg}
+                                            style={{ height: heigth, width: "100%" }}
+                                            source={source}
                                         /> :
                                         <Text></Text>
                                 }
@@ -58,7 +75,7 @@ class IEPostList extends IComponent {
         let setting = new Setting(this.getSetting("DefaultSetting"));
 
         return (
-            <View>
+            <View style={[this.baseStyle]}>
                 <View style={styles.sortView}>
                     <Text>排序：</Text>
                     <Button style={styles.sortBtn} type="ghost" size='small' onPress={() => { this.setState({ orderby: "Date" }) }}>发表时间</Button>
@@ -87,27 +104,27 @@ const styles = StyleSheet.create({
     sortView: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: '10px'
+        marginBottom: 10
     },
     sortBtn: {
-        marginRight: '10px'
+        marginRight: 10
     },
     list: {
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
     itemTextArea: {
-        padding: "10px"
+        padding: 10
     },
     itemTitle: {
         fontSize: 16,
         fontWeight: "600"
     },
     itemDescribe: {
-        marginTop: '10px'
+        marginTop: 10
     },
     itemMeta: {
-        marginTop: '10px',
+        marginTop: 10,
     },
     itemMetaText: {
         color: '#0008'
@@ -117,16 +134,17 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     pageBtnText: {
-        marginLeft: '10px',
-        marginRight: '10px',
+        marginLeft: 10,
+        marginRight: 10,
     },
     pageBtn:{
-        margin:'5px',
+        margin:5,
         fontSize: 16,
-        paddingTop: '15px',
-        paddingBottom: '15px',
-        paddingLeft: '25px',
-        paddingRight: '25px'
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 25,
+        paddingRight: 25,
+        color: '#fff'
     }
 })
 
