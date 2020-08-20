@@ -1,6 +1,6 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEMenu/IComponent'
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 import { withRouter } from 'react-router-native'
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -39,7 +39,10 @@ class IEMenu extends IComponent {
                             color="#000A"
                             style={{ justifyContent: 'center' }}
                             backgroundColor="#fff"
-                            onPress={() => { this.props.history.push(menuItems[item].createUrl()); }}
+                            onPress={() => {
+                                this.props.history.push(menuItems[item].createUrl());
+                                console.log(menuItems[item].createUrl())
+                            }}
                         >
                             <Text>
                                 {menuItems[item].displayName}

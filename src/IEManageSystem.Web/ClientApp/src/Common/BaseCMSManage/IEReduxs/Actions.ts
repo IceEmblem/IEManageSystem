@@ -49,13 +49,15 @@ export function pageFetch(name: string) {
 }
 
 // 该动作模拟页面接收动作
-export function setPage(page: any, pageComponents: Array<any>, defaultComponentDatas: Array<any>) {
+export const SetPage = 'SetPage'
+export function setPage(page: any, pageComponents: Array<any>, defaultComponentDatas: Array<any>, os: string) {
   return {
-    type: PageReceive,
+    type: SetPage,
     data: {
       page,
       pageComponents,
-      defaultComponentDatas
+      defaultComponentDatas,
+      os
     }
   }
 }

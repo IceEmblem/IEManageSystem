@@ -9,7 +9,7 @@ import {
     CopyComponent,
     CopyComponentAction,
 } from './Action';
-import { PageReceive } from '../Actions'
+import { PageReceive, SetPage } from '../Actions'
 import CreatePageComponentService from '../../Models/Pages/CreatePageComponentService'
 import PageComponentModel, { PageComponentOSType } from '../../Models/Pages/PageComponentModel'
 import PageComponentSettingModel from '../../Models/Pages/PageComponentSettingModel'
@@ -254,6 +254,28 @@ function pageReceive(state: object, action): object {
     return newState;
 }
 
+// 设置页面 case reducer
+function setPage(state: object, action){
+    // 如果不指定平台，则执行逻辑与界面接收相同
+    if(!action.data.os){
+        return pageReceive(state, action);
+    }
+
+    let newPage = {...state[action.data.page.id]}
+
+    // 否则只更新对应的平台
+    let pages = pageReceive(state, action);
+    if(action.data.os == PageComponentOSType.Web){
+        newPage.Web = pages[action.data.page.id].Web
+    }
+    else{
+        newPage.Native = pages[action.data.page.id].Native
+    }
+
+    state[action.data.page.id] = newPage;
+    return state;
+}
+
 export default function reducer(state = {}, action) {
     // 添加组件
     if (action.type == PageAddComponent) {
@@ -278,6 +300,10 @@ export default function reducer(state = {}, action) {
     // 页面接收动作
     if (action.type == PageReceive) {
         return pageReceive(state, action);
+    }
+
+    if(action.type == SetPage){
+        return setPage(state, action);
     }
 
     return state;

@@ -15,8 +15,8 @@ class IELink extends IComponent {
         let setting = new Setting(this.getSetting("Setting"));
 
         let fontsize = new Number(setting.fontSize).valueOf();
-        if (isNaN(fontsize)) {
-            fontsize = 12;
+        if (isNaN(fontsize) || fontsize == 0) {
+            fontsize = 14;
         }
 
         let icon = undefined;
