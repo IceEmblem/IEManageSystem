@@ -36,6 +36,7 @@ class IEMenu extends IComponent {
                         <Icon.Button
                             key={menuItems[item].name}
                             name={icon}
+                            color="#000A"
                             style={{ justifyContent: 'center' }}
                             backgroundColor="#fff"
                             onPress={() => { this.props.history.push(menuItems[item].createUrl()); }}
@@ -55,7 +56,7 @@ class IEMenu extends IComponent {
 
     render() {
         return (
-            <View style={[this.baseStyle, { flexDirection: 'row', justifyContent: 'space-between' }]}>
+            <View style={[this.baseStyle, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
                 {this.createMenus()}
             </View>
         )

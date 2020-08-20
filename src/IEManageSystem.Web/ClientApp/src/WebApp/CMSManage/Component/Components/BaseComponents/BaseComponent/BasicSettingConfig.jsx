@@ -2,7 +2,8 @@ import React from 'react';
 import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox';
 import IocContainer from 'Core/IocContainer';
-import {IBasicSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
+import { IBasicSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
+import { RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
 
 import { Input, Tag, InputNumber, Button } from 'antd';
 
@@ -153,7 +154,23 @@ class BasicSettingConfig extends IBasicSettingConfig {
                         />
                     </div>
                 </div>
-                <div className="col-md-12 float-left">
+                <div className="col-md-6 float-left">
+                    <label>父组件标识 <small style={{ color: "#0005" }}>如果想把组件放在在根下面，请填写 {RootComponentSign}</small> ：</label>
+                    <div className="input-group mb-3">
+                        <Input
+                            placeholder="父组件标识"
+                            value={this.props.data.parentSign}
+                            onChange={
+                                (event) => {
+                                    this.props.data.parentSign = event.target.value;
+                                    this.props.setData(this.props.data)
+                                }
+                            }
+                            suffix={<Tag color="#55acee">父组件标识</Tag>}
+                        />
+                    </div>
+                </div>
+                <div className="col-md-6 float-left">
                     <label>组件标识 <small style={{ color: "#0005" }}>不要随意改动组件标识，否则无法展示组件数据</small> ：</label>
                     <div className="input-group mb-3">
                         <Input

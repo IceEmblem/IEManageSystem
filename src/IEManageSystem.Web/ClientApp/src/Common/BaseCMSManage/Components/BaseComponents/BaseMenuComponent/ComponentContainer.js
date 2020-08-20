@@ -11,6 +11,7 @@ const defaultMenuData = function(){
     root.menuType = "CompositeMenu";
     root.addChildMenu({
         "id": 0,
+        icon: 'home',
         "name": "home",
         "displayName": "首页",
         "menuType": "LeafMenu",

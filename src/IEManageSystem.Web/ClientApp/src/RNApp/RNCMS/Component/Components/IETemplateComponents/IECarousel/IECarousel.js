@@ -35,6 +35,7 @@ class IECarousel extends IComponent {
                     style={{
                         flexDirection: 'row',
                         justifyContent: 'center',
+                        backgroundColor: setting.shade
                     }}
                 >
                     <View

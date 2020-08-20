@@ -144,9 +144,13 @@ function editComponent(state: object, action: EditComponentAction): object {
     // 页面组件列表
     let pageComponents = { ...state[action.pageId][action.os] };
 
-    // 删除原组件
     let parentSign = pageComponents[action.pageComponentSign].parentSign;
+    // 删除原组件
     delete pageComponents[action.pageComponentSign];
+
+    // 更新原父组件的引用
+    pageComponents[parentSign] = setChildComponentSigns(pageComponents, pageComponents[parentSign]);
+    setPageComponentModel(pageComponents[parentSign]);
 
     if (pageComponents[action.pageComponent.sign]) {
         throw new Error("组件标识已存在");
@@ -162,9 +166,13 @@ function editComponent(state: object, action: EditComponentAction): object {
         throw new Error(specResult.message);
     }
 
-    // 更新父组件的子组件列表
-    pageComponents[parentSign] = setChildComponentSigns(pageComponents, pageComponents[parentSign]);
-    setPageComponentModel(pageComponents[parentSign]);
+    // 更新新父组件的子组件列表
+    let newParentSign = pageComponents[action.pageComponent.sign].parentSign;
+    if(!pageComponents[newParentSign]){
+        throw new Error("父组件标识无效，请检查父组件标识");
+    }
+    pageComponents[newParentSign] = setChildComponentSigns(pageComponents, pageComponents[newParentSign]);
+    setPageComponentModel(pageComponents[newParentSign]);
 
     state[action.pageId][action.os] = pageComponents;
 

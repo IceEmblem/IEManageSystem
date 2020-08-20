@@ -42,6 +42,17 @@ class SettingConfig extends ISettingConfig {
                     }}
                 />
             </div>
+            <div className="mb-3">
+                <Tag color="#55acee">遮罩颜色</Tag>
+                <Input
+                    placeholder="示例：#0004"
+                    value={setting.shade}e
+                    onChange={(e) => {
+                        setting.shade = e.target.value;
+                        this.props.setData(setting.setting);
+                    }}
+                />
+            </div>
         </div>)
     }
 }

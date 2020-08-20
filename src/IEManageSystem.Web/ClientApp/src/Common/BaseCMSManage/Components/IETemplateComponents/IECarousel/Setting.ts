@@ -34,4 +34,13 @@ export default class Setting {
     set width(val){
         this.setting.getDefauleData().field3 = val;
     }
+
+    // 遮罩颜色
+    get shade(){
+        return this.setting.getDefauleData().field4 || "#0000";
+    }
+
+    set shade(val){
+        this.setting.getDefauleData().field4 = val;
+    }
 }
