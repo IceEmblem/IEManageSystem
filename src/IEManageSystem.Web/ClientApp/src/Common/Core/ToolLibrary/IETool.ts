@@ -18,6 +18,10 @@ export default class IETool {
             return false;
         }
 
+        IETool.fileToBase64String(file, setBase64StringFun)
+    }
+
+    static fileToBase64String(file: any, setBase64StringFun: (base64: string) => void) {
         var reader = new FileReader();
         reader.onload = function (e: any) {
             setBase64StringFun(e.target.result);

@@ -14,20 +14,20 @@ class IEPostList extends IComponent {
 
     createItem(post, setting) {
         let width = 100;
-        if(setting.col > 0){
+        if (setting.col > 0) {
             width = 100 / setting.col;
         }
 
         let heigth = new Number(setting.heigth).valueOf();
-        if(isNaN(heigth)){
+        if (isNaN(heigth)) {
             heigth = 200
         }
 
         let source
-        if(post.imageList.length > 0 && post.imageList[0]){
-            source = {uri: post.imageList[0]}
+        if (post.imageList.length > 0 && post.imageList[0]) {
+            source = { uri: post.imageList[0] }
         }
-        else{
+        else {
             source = defaultImg;
         }
 
@@ -36,31 +36,27 @@ class IEPostList extends IComponent {
                 <Card.Body style={{ padding: 0 }}>
                     <Link
                         to={this.createUrl(post)}
-                        component={
-                            (props) => <View>
-                                {
-                                    setting.isShowImg == "true" ?
-                                        < Image
-                                            style={{ height: heigth, width: "100%" }}
-                                            source={source}
-                                        /> :
-                                        <Text></Text>
-                                }
-                            </View>
-                        }
-                    />
+                    >
+                        <View>
+                            {
+                                setting.isShowImg == "true" ?
+                                    < Image
+                                        style={{ height: heigth, width: "100%" }}
+                                        source={source}
+                                    /> :
+                                    <Text></Text>
+                            }
+                        </View>
+                    </Link>
                     <View style={styles.itemTextArea}>
                         <Link
                             to={this.createUrl(post)}
-                            component={
-                                (props) => (
-                                    <View>
-                                        <Text style={styles.itemTitle}>{post.title}</Text>
-                                        <Text style={styles.itemDescribe}>{post.describe || "暂无简介"}</Text>
-                                    </View>
-                                )
-                            }
-                        />
+                        >
+                            <View>
+                                <Text style={styles.itemTitle}>{post.title}</Text>
+                                <Text style={styles.itemDescribe}>{post.describe || "暂无简介"}</Text>
+                            </View>
+                        </Link>
                         <View style={styles.itemMeta}>
                             <Text style={styles.itemMetaText}>{`评分：${post.score} | 点击量：${post.click}`}</Text>
                             <Text style={{ textAlign: 'right' }}>{new Date(post.creationTime).toLocaleDateString()}</Text>
@@ -86,9 +82,9 @@ class IEPostList extends IComponent {
                     {this.state.pageDatas.map(item => this.createItem(item, setting))}
                 </View>
                 <View style={styles.pageBtnView}>
-                    <Button size='small' type="primary" style={styles.pageBtn} disabled={this.state.pageIndex <= 1} onPress={()=>this.setState({ pageIndex: this.state.pageIndex - 1 })}>上一页</Button>
+                    <Button size='small' type="primary" style={styles.pageBtn} disabled={this.state.pageIndex <= 1} onPress={() => this.setState({ pageIndex: this.state.pageIndex - 1 })}>上一页</Button>
                     <Text style={styles.pageBtnText}>{`第 ${this.state.pageIndex} 页`}</Text>
-                    <Button size='small' type='primary' style={styles.pageBtn} disabled={this.state.pageDatas.length < this.state.pageSize} onPress={()=>this.setState({ pageIndex: this.state.pageIndex + 1 })}>下一页</Button>
+                    <Button size='small' type='primary' style={styles.pageBtn} disabled={this.state.pageDatas.length < this.state.pageSize} onPress={() => this.setState({ pageIndex: this.state.pageIndex + 1 })}>下一页</Button>
                 </View>
             </View>
         )
@@ -137,8 +133,8 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
     },
-    pageBtn:{
-        margin:5,
+    pageBtn: {
+        margin: 5,
         fontSize: 16,
         paddingTop: 15,
         paddingBottom: 15,

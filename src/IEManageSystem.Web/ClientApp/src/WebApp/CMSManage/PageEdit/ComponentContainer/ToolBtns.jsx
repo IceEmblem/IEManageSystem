@@ -101,9 +101,10 @@ class ToolBtns extends React.Component {
 }
 
 ToolBtns.propTypes = {
-    // 如下 3 个属性由父组件传入
+    // 如下属性由父组件传入
     pageId: PropTypes.number.isRequired,
     pageDataId: PropTypes.number,
+    os: PropTypes.string.isRequired,
     sign: PropTypes.string.isRequired,
     addChildComponent: PropTypes.func.isRequired,
     style: PropTypes.object,
@@ -118,12 +119,10 @@ ToolBtns.propTypes = {
     editDefaultComponentData: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    // 新增属性 parentSign
-    let defaultComponentData = state.defaultComponentDatas[ownProps.pageId][ownProps.sign];
-
+const mapStateToProps = (state, ownProps) => {
     return {
-        defaultComponentData: defaultComponentData,
+        pageComponent: state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign],
+        defaultComponentData: state.defaultComponentDatas[ownProps.pageId][ownProps.sign],
     }
 }
 

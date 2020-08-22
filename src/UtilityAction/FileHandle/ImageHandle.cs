@@ -23,7 +23,7 @@ namespace UtilityAction.FileHandle
                 if (filepath != null) Directory.CreateDirectory(filepath);
             }
 
-            var match = Regex.Match(image, "data:image/png;base64,([\\w\\W]*)$");
+            var match = Regex.Match(image, "data:image/[a-zA-Z]*?;base64,([\\w\\W]*)$");
             if (match.Success)
             {
                 image = match.Groups[1].Value;

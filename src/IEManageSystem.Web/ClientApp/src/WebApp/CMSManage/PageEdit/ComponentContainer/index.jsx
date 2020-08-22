@@ -83,10 +83,10 @@ class CurrentToolBtns extends React.Component {
                             >
                                 <ToolBtns
                                     key={item.pageComponent.sign}
+                                    os={item.pageComponent.os}
                                     sign={item.pageComponent.sign}
                                     pageId={pageId}
                                     pageDataId={pageDataId}
-                                    pageComponent={item.pageComponent}
                                     addChildComponent={addChildComponent}
                                     style={{ opacity: 1, marginBottom: "5px" }}
                                 />
@@ -125,6 +125,7 @@ class PageEditCompontContainer extends React.Component {
     Tools({ sign, pageId, pageDataId, pageComponent }) {
         return <ToolBtns
             sign={sign}
+            os={pageComponent.os}
             pageId={pageId}
             pageDataId={pageDataId}
             pageComponent={pageComponent}

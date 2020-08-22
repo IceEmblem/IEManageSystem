@@ -45,20 +45,12 @@ class IEComment extends IComponent {
     }
 
     render() {
-        let comments = [
-            {
-                author: "打不死的",
-                avatar: defaultAvatar,
-                content: "这是又是一条测试评论。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。",
-                datetime: "2020-8-12 12:00:03",
-            },
-            {
-                author: "打不死的",
-                avatar: defaultAvatar,
-                content: "这是又是一条测试评论。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。",
-                datetime: "2020-8-12 12:00:03",
-            }
-        ]
+        let comments = this.props.componentData.getSingleDatas("commentData").map(item => ({
+            author: item.field2,
+            avatar: item.field3 || defaultAvatar,
+            content: <p>{item.field4}</p>,
+            datetime: item.field5,
+        }));
 
         return (
             <View style={[this.baseStyle]}>
