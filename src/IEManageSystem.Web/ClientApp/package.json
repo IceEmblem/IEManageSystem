@@ -95,6 +95,7 @@
     "build": "cross-env IEOS=web node scripts/build.js",
     "test": "node scripts/test.js",
     "android": "cross-env IEOS=android react-native run-android",
+    "android:releaseTest": "cross-env IEOS=android react-native run-android --variant=release",
     "ios": "cross-env IEOS=ios react-native run-ios",
     "reactnative:start": "cross-env IEOS=android react-native start",
     "jest": "jest"
