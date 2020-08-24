@@ -1,10 +1,15 @@
 {
   "name": "iemanagesystem",
   "private": true,
-  "workspaces": ["src/Common/*", "src/RNApp/*", "src/WebApp/*"],
+  "workspaces": [
+    "src/Common/*",
+    "src/RNApp/*",
+    "src/WebApp/*"
+  ],
   "version": "0.1.0",
   "dependencies": {
     "@babel/core": "7.9.0",
+    "@react-native-community/eslint-config": "0.0.5",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -45,6 +50,7 @@
     "jest-environment-jsdom-fourteen": "1.0.1",
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
+    "metro-react-native-babel-preset": "0.58.0",
     "mini-css-extract-plugin": "0.9.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
@@ -57,6 +63,10 @@
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^10.2.1",
     "react-move": "^5.2.1",
+    "react-native": "0.62.2",
+    "react-native-fs": "^2.16.6",
+    "react-native-vector-icons": "^7.0.0",
+    "react-native-webview": "^10.4.1",
     "react-redux": "^7.0.2",
     "react-test-renderer": "^16.13.1",
     "reactstrap": "^8.4.1",
@@ -74,16 +84,10 @@
     "ts-pnp": "1.1.6",
     "typescript": "3.2.1",
     "url-loader": "2.3.0",
-    "@react-native-community/eslint-config": "0.0.5",
-    "metro-react-native-babel-preset": "0.58.0",
-    "react-native": "0.62.2",
     "webpack": "4.42.0",
     "webpack-dev-server": "3.10.3",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1",
-
-    "react-native-vector-icons": "^7.0.0",
-    "react-native-webview": "^10.4.1"
+    "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
     "start": "cross-env IEOS=web node scripts/start.js",
