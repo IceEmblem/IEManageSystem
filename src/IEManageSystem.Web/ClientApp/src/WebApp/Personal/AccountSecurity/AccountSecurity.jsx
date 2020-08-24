@@ -56,7 +56,7 @@ class AccountSecurity extends React.Component {
         }
 
         let birthDate = props.userInfoData.user.birthDate != null ?
-            (new Date(props.userInfoData.user.birthDate)).Format("yyyy-MM-dd") :
+            (new Date(props.userInfoData.user.birthDate)).toDateString() :
             "";
 
         Object.assign(this.state, {

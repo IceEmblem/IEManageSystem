@@ -13,7 +13,7 @@ namespace IEManageSystem.Configures.CMS
         public void Configure(EntityTypeBuilder<PageComponentBase> builder)
         {
             builder.HasIndex(e => e.Sign);
-            builder.OwnsOne(e => e.ComponentOSType).Property(e=>e.OS).HasDefaultValue("Web");
+            builder.OwnsOne(e => e.ComponentOSType);
             builder.OwnsOne(e => e.PageComponentBaseSetting);
             builder.HasOne(e => e.Page).WithMany().IsRequired();
         }
