@@ -13,6 +13,10 @@ import { setPage, CopyComponentAction } from 'BaseCMSManage/IEReduxs/Actions'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
+import {
+    pageComponentUpdateFetch,
+} from 'BaseCMSManage/IEReduxs/Actions'
+
 import "./BtnLists.css";
 
 const { Option } = Select;
@@ -169,7 +173,6 @@ class BtnLists extends React.Component {
                                         icon={<SyncOutlined />}
                                         className="bg-warning border-warning text-white"
                                         onClick={() => {
-                                            this.setState({});
                                             this.props.exportPage();
                                         }}
                                     >导出页面</Button>
@@ -201,8 +204,7 @@ class BtnLists extends React.Component {
                                         type="primary"
                                         icon={<SaveOutlined />}
                                         onClick={() => {
-                                            this.setState({});
-                                            this.props.submitPage();
+                                            this.props.pageComponentUpdateFetch();
                                         }}
                                     >提交页面</Button>
                                 </div>
@@ -228,7 +230,7 @@ BtnLists.propTypes = {
 
     page: PropTypes.object.isRequired,
     addComponent: PropTypes.func.isRequired,
-    submitPage: PropTypes.func.isRequired,
+    pageComponentUpdateFetch: PropTypes.func.isRequired,
     exportPage: PropTypes.func.isRequired,
     setPage: PropTypes.func.isRequired,
     copyComponent: PropTypes.func.isRequired,
@@ -237,6 +239,8 @@ BtnLists.propTypes = {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
         page: state.pages[ownProps.pageId],
+        pageComponents: state.pageComponents[ownProps.pageId],
+        defaultComponentDatas: state.defaultComponentDatas[ownProps.pageId],
     }
 }
 
@@ -247,13 +251,52 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         copyComponent: (distOS, sourceOS) => {
             dispatch(new CopyComponentAction(ownProps.pageId, distOS, sourceOS))
-        }
+        },
+        pageComponentUpdateFetch: (name, components, defaultComponentDatas) => {
+            dispatch(pageComponentUpdateFetch(name, components, defaultComponentDatas));
+        },
+    }
+}
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    return {
+        page: stateProps.page,
+        ...ownProps,
+        setPage: dispatchProps.setPage,
+        copyComponent: dispatchProps.copyComponent,
+        pageComponentUpdateFetch: ()=>{
+            dispatchProps.pageComponentUpdateFetch(stateProps.page.name, stateProps.pageComponents, stateProps.defaultComponentDatas)
+        },
+        exportPage: () => {
+            if (!stateProps.page) {
+                return;
+            }
+    
+            let pageComponents = [];
+            Object.values(stateProps.pageComponents).forEach(osComponents => pageComponents = pageComponents.concat(Object.values(osComponents)));
+    
+            let data = JSON.stringify({
+                page: stateProps.page,
+                pageComponents: pageComponents,
+                defaultComponentDatas: Object.values(stateProps.defaultComponentDatas)
+            })
+    
+            var blob = new Blob([data], { type: 'text/json' }),
+                e = document.createEvent('MouseEvents'),
+                a = document.createElement('a')
+            a.download = 'page.json'
+            a.href = window.URL.createObjectURL(blob)
+            a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
+            e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+            a.dispatchEvent(e)
+        },
     }
 }
 
 const Contain = CmsRedux.connect(
     mapStateToProps, // 关于state
-    mapDispatchToProps
+    mapDispatchToProps,
+    mergeProps
 )(BtnLists)
 
 export default Contain;

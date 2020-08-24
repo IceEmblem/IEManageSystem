@@ -1,4 +1,12 @@
 .PageContainer-btnlists{
+    position: fixed !important;
+    display: flex;
+    justify-content: flex-end;
+    right: 5rem;
+    bottom: 4rem;
+    width: 0rem !important;
+    opacity: 0.9;
+    z-index: 9999;
 }
 
 .PageContainer-btnlists-bnts{

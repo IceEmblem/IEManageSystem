@@ -8,12 +8,11 @@ import './index.css'
 import PageEditCompontContainer from './ComponentContainer'
 
 import {
-    pageComponentUpdateFetch,
     pageFetch,
     AddComponentAction,
     RootComponentSign,
 } from 'BaseCMSManage/IEReduxs/Actions'
-import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import RegisterTemplateManager from 'CMSManage/Component/Components/RegisterTemplateManager'
 
 import BtnLists from './BtnLists'
@@ -29,8 +28,6 @@ class PageContainer extends React.Component {
             showComponentListBox: false,
         }
 
-        this.exportPage = this.exportPage.bind(this);
-        this.submitPage = this.submitPage.bind(this);
         this.addComponent = this.addComponent.bind(this);
     }
 
@@ -38,38 +35,6 @@ class PageContainer extends React.Component {
         if (!this.props.page) {
             this.props.pageFetch(this.props.pageName)
         }
-    }
-
-    exportPage() {
-        if (!this.props.page) {
-            return;
-        }
-
-        let pageComponents = [];
-        Object.values(this.props.pageComponents).forEach(osComponents=>pageComponents = pageComponents.concat(Object.values(osComponents)));
-
-        let data = JSON.stringify({
-            page: this.props.page,
-            pageComponents: pageComponents,
-            defaultComponentDatas: Object.values(this.props.defaultComponentDatas)
-        })
-
-        var blob = new Blob([data], { type: 'text/json' }),
-            e = document.createEvent('MouseEvents'),
-            a = document.createElement('a')
-        a.download = 'page.json'
-        a.href = window.URL.createObjectURL(blob)
-        a.dataset.downloadurl = ['text/json', a.download, a.href].join(':')
-        e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
-        a.dispatchEvent(e)
-    }
-
-    submitPage() {
-        this.props.pageComponentUpdateFetch(
-            this.props.pageName,
-            this.props.pageComponents,
-            this.props.defaultComponentDatas
-        );
     }
 
     addComponent(selectedComponentDescribe) {
@@ -101,15 +66,11 @@ class PageContainer extends React.Component {
                         this.setState({ curParentComponentSign: curParentComponentSign, showComponentListBox: true });
                     }}
                 />
-                <div className="col-md-12 padding-0 pageedit-page-container-btns">
-                    <BtnLists
-                        addComponent={() => { this.setState({ curParentComponentSign: RootComponentSign, showComponentListBox: true }) }}
-                        pageId={this.props.pageId}
-                        os={this.props.rootPageComponent.os}
-                        submitPage={this.submitPage}
-                        exportPage={this.exportPage}
-                    />
-                </div>
+                <BtnLists
+                    addComponent={() => { this.setState({ curParentComponentSign: RootComponentSign, showComponentListBox: true }) }}
+                    pageId={this.props.pageId}
+                    os={this.props.rootPageComponent.os}
+                />
                 <ComponentListBox
                     show={this.state.showComponentListBox}
                     close={() => { this.setState({ showComponentListBox: false }) }}
@@ -125,10 +86,7 @@ PageContainer.propTypes = {
     pageId: PropTypes.number,
     page: PropTypes.object,
     rootPageComponent: PropTypes.object,
-    pageComponents: PropTypes.object,
-    defaultComponentDatas: PropTypes.object,
     addComponent: PropTypes.func.isRequired,
-    pageComponentUpdateFetch: PropTypes.func.isRequired,
     pageFetch: PropTypes.func.isRequired,
 }
 
@@ -155,8 +113,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
         pageId: pageId,
         page: state.pages[pageId],
         rootPageComponent: rootPageComponent,
-        pageComponents: state.pageComponents[pageId],
-        defaultComponentDatas: state.defaultComponentDatas[pageId],
     }
 }
 
@@ -164,9 +120,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         addComponent: (addComponentAction) => {
             dispatch(addComponentAction);
-        },
-        pageComponentUpdateFetch: (name, components, defaultComponentDatas) => {
-            dispatch(pageComponentUpdateFetch(name, components, defaultComponentDatas));
         },
         pageFetch: (name) => {
             return dispatch(pageFetch(name));
