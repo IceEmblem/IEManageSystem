@@ -1,28 +1,9 @@
-.parentcomponent .parentcomponent-btns {
-    z-index: 990;
-}
-
-.parentcomponent .parentcomponent .parentcomponent-btns {
-    z-index: 991;
-}
-
-.parentcomponent .parentcomponent .parentcomponent .parentcomponent-btns {
-    z-index: 992;
-}
-
-.parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent-btns {
-    z-index: 993;
-}
-
-.parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent .parentcomponent-btns {
-    z-index: 994;
-}
-
 .parentcomponent:hover>.parentcomponent-btns>button {
     opacity: 1;
 }
 
 .parentcomponent-btns {
+    z-index: 999;
     width: 0px;
     left: -3rem;
     position: relative;

@@ -2,10 +2,11 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    flex-direction: row;
+    flex-direction: row-reverse;
     flex-wrap: nowrap;
 }
 
-.cms-componentcontainerboxshow>*:first-child{
+/* 前面的元素是工具按钮，最后一个元素是组件 */
+.cms-componentcontainerboxshow>*:last-child{
     width: 100%;
 }

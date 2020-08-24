@@ -73,7 +73,7 @@ class CurrentToolBtns extends React.Component {
 
         return (
             <div>
-                <span style={{ right: 70, bottom: 100, position: "fixed" }} >
+                <span style={{ right: 80, bottom: 100, position: "fixed" }} >
                     {
                         selectedPageComponents.map(item => (
                             <div
@@ -154,7 +154,7 @@ class PageEditCompontContainer extends React.Component {
 
     // 扩展class
     getClassName(pageComponent) {
-        return "editableparentcom";
+        return "pageedit-componentcontainer";
     }
 
     render() {

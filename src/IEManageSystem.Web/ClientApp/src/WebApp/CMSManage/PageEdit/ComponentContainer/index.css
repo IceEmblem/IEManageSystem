@@ -1,61 +1,40 @@
-.editableparentcom .editableparentcom-btns {
-    z-index: 9990;
-}
-
-.editableparentcom .editableparentcom .editableparentcom-btns {
-    z-index: 9991;
-}
-
-.editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
-    z-index: 9992;
-}
-
-.editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
-    z-index: 9993;
-}
-
-.editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
-    z-index: 9994;
-}
-
-.editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
-    z-index: 9995;
-}
-
-.editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom .editableparentcom-btns {
-    z-index: 9996;
-}
-
-.editableparentcom:hover>.editableparentcom-btns {
+.pageedit-componentcontainer:hover>.pageedit-componentcontainer-btns {
     opacity: 1;
 }
 
-.editableparentcom:hover{
+/* react-native-web */
+.css-view-1dbjc4n{
+    z-index: auto;
+}
+
+.pageedit-componentcontainer:hover{
     background-color: #1890ff20;
     /* background-color: #1890ff20 !important; */
 }
 
-.editableparentcom-btns {
-    width: 0px;
-    position: relative;
+.pageedit-componentcontainer>.pageedit-componentcontainer-btns{
+    position: absolute;
+}
+
+.pageedit-componentcontainer-btns {
+    z-index: 999;
     display: flex;
-    overflow: visible;
     opacity: 0.1;
     transition: 0.5s;
     -webkit-transition: 0.5s;
 }
 
-.editableparentcom-btns>button {
+.pageedit-componentcontainer-btns>button {
     margin: 0px 0px 0px 5px;
 }
 
-.editableparentcom-btns-transform {
-    transform-origin:0% 50%;
+.pageedit-componentcontainer-btns-transform {
+    transform-origin:50% 50%;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
 }
 
-.editableparentcom-btns-transform>button{
+.pageedit-componentcontainer-btns-transform>button{
     transform-origin:50% 50%;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */

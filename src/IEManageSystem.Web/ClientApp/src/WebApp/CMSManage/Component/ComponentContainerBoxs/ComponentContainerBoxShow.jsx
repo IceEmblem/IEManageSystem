@@ -39,8 +39,8 @@ export default class extends React.Component {
                 className={`cms-componentcontainerboxshow ${this.props.className}`}
                 {...this.props.propsEX}
             >
-                {this.props.children}
                 {this.props.ToolBtn}
+                {this.props.children}
             </div>
         )
     }

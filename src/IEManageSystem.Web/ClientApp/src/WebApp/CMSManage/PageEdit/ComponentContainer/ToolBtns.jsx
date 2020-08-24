@@ -16,6 +16,19 @@ import PostEditFrame from 'CMSManage/Component/ComponentContainerBoxs/PostEditFr
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
 
+const Btn = (props) => (
+    <Tooltip
+        title={props.title}
+    >
+        <Button size='small' shape="round" 
+            type={props.type} 
+            icon={props.icon}
+            danger={props.danger}
+            onClick={props.onClick}
+        />
+    </Tooltip>
+);
+
 class ToolBtns extends React.Component {
     state = {
         openEdit: false,
@@ -38,8 +51,8 @@ class ToolBtns extends React.Component {
         }
 
         return (
-            <div 
-                className={`editableparentcom-btns editableparentcom-btns-transform`} 
+            <div
+                className={`pageedit-componentcontainer-btns pageedit-componentcontainer-btns-transform`}
                 style={this.props.style}
             >
                 <PageEditFrame
@@ -51,40 +64,39 @@ class ToolBtns extends React.Component {
                     show={this.state.openEdit}
                     close={() => { this.setState({ openEdit: false }) }}
                 ></PageEditFrame>
-                <Tooltip
+                <Btn
                     title={`删除 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`}
-                    overlayStyle={{ zIndex: 10000 }}
-                >
-                    <Button size='small' type="primary" shape="round" danger icon={<DeleteOutlined />}
-                        onClick={() => { 
-                            this.props.removeComponent(new RemoveComponentAction(this.props.pageId, this.props.pageComponent.os, this.props.sign)) 
-                        }}
-                    />
-                </Tooltip>
-                <Tooltip
+                    type={"primary"}
+                    icon={<DeleteOutlined />}
+                    danger
+                    onClick={() => {
+                        this.props.removeComponent(new RemoveComponentAction(this.props.pageId, this.props.pageComponent.os, this.props.sign))
+                    }}
+                />
+                <Btn
                     title={`编辑 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`}
-                    overlayStyle={{ zIndex: 10000 }}
-                >
-                    <Button size='small' type="primary" shape="round" icon={<EditOutlined />}
-                        onClick={() => { this.setState({ openEdit: true }) }}
-                    />
-                </Tooltip>
+                    type={"primary"}
+                    icon={<EditOutlined />}
+                    onClick={() => { this.setState({ openEdit: true }) }}
+                />
                 {
                     this.componentDescribe.isExistChildComponent() &&
-                    <Tooltip title={`添加 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`} overlayStyle={{ zIndex: 10000 }}>
-                        <Button size='small' type="default" shape="round" icon={<AppstoreAddOutlined />}
-                            onClick={() => { this.props.addChildComponent(this.props.sign) }}
-                        />
-                    </Tooltip>
+                    <Btn
+                        title={`添加 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`}
+                        type={"default"}
+                        icon={<AppstoreAddOutlined />}
+                        onClick={() => { this.props.addChildComponent(this.props.sign) }}
+                    />
                 }
                 {
                     this.componentDescribe.isExistComponentData() &&
                     <>
-                        <Tooltip title={`编辑默认数据 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`} overlayStyle={{ zIndex: 10000 }}>
-                            <Button size='small' type="primary" shape="round" icon={<FormOutlined />}
-                                onClick={() => { this.setState({ showPostEdit: true }) }}
-                            />
-                        </Tooltip>
+                        <Btn
+                            title={`编辑默认数据 ${this.componentDescribe.displayName}，组件标识：${this.props.sign}`}
+                            type={"primary"}
+                            icon={<FormOutlined />}
+                            onClick={() => { this.setState({ showPostEdit: true }) }}
+                        />
                         <PostEditFrame
                             key={"PostEditFrame"}
                             show={this.state.showPostEdit}
