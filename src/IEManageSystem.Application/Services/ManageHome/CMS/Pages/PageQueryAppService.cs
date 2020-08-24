@@ -2,6 +2,7 @@
 using Abp.UI;
 using AutoMapper.QueryableExtensions;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
@@ -24,9 +25,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         private PageDataManager _pageDataManager { get; set; }
 
-        private IEfRepository<ContentComponentData, int> _componentDataRepository { get; set; }
+        private ComponentDataManager _componentDataManager { get; }
 
-        private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; set; }
+        private PageComponentManager _pageComponentManager { get; set; }
 
         private IPageRepository _repository => _pageManager.PageRepository;
 
@@ -34,8 +35,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             IObjectMapper objectMapper,
             PageManager pageManager,
             PageDataManager pageDataManager,
-            IEfRepository<ContentComponentData, int> componentDataRepository,
-            IEfRepository<DefaultComponentData, int> defaultDataRepository
+            ComponentDataManager componentDataManager,
+            PageComponentManager pageComponentManager
             )
         {
             _objectMapper = objectMapper;
@@ -44,9 +45,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
             _pageDataManager = pageDataManager;
 
-            _componentDataRepository = componentDataRepository;
+            _componentDataManager = componentDataManager;
 
-            _defaultDataRepository = defaultDataRepository;
+            _pageComponentManager = pageComponentManager;
         }
 
         public GetPagesOutput GetPages(GetPagesInput input)
@@ -112,13 +113,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 return new GetPageOutput() { Page = null, DefaultComponentDatas = new List<ComponentDataDto>() };
             }
 
-            Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
-                e=>e.SingleDatas
+            return new GetPageOutput() { 
+                Page = CreatePageDtos(page), 
+                DefaultComponentDatas = _objectMapper.Map<List<ComponentDataDto>>(_componentDataManager.GetDefaultComponentsForCache(page.Name)),
+                PageComponents = _pageComponentManager.GetPageComponentsForCache(page.Name).Select(item => CreatePageComponentDto(item)).ToList()
             };
-            var defaultComponentDatas = _defaultDataRepository.GetAllIncluding(propertySelectors).Where(e=>e.PageId == page.Id).ToList();
-
-            return new GetPageOutput() { Page = CreatePageDtos(page), 
-                DefaultComponentDatas = _objectMapper.Map<List<ComponentDataDto>>(defaultComponentDatas) };
         }
 
         private PageDto CreatePageDtos(PageBase page)
@@ -144,18 +143,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                         : null;
             }
 
-            if (page.PageComponents == null) {
-                return pageDto;
-            }
-
-            List<PageComponentDto> pageComponents = new List<PageComponentDto>();
-            foreach (var pageComponent in page.PageComponents) 
-            {
-                pageComponents.Add(CreatePageComponentDto(pageComponent));
-            }
-
-            pageDto.PageComponents = pageComponents;
-
             return pageDto;
         }
 
@@ -167,6 +154,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             dto.Name = component.Name;
             dto.Sign = component.Sign;
             dto.ParentSign = component.ParentSign;
+            dto.OS = component.ComponentOSType.OS;
             dto.PageComponentBaseSetting = _objectMapper.Map<PageComponentBaseSettingDto>(component.PageComponentBaseSetting);
             dto.PageComponentSettings = new List<PageComponentSettingDto>();
 

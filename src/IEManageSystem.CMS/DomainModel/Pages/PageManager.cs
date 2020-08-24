@@ -1,6 +1,7 @@
 ﻿using Abp.Dependency;
 using Abp.UI;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.Repositorys;
 using IEManageSystem.Entitys.Authorization.Permissions;
@@ -19,21 +20,18 @@ namespace IEManageSystem.CMS.DomainModel.Pages
     {
         public const string HomeName = "home";
 
-        private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; set; }
+        private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; }
 
-        private IIEMemoryCache _cache { get; set; }
-
-        private PageDataManager _pageDataManager { get; set; }
+        private IIEMemoryCache _cache { get; }
 
         public PageManager(IPageRepository pageRepository,
             IEfRepository<DefaultComponentData, int> defaultDataRepository,
-            PageDataManager pageDataManager,
-            IIEMemoryCache cache
+            IIEMemoryCache cache,
+            PageComponentManager pageComponentManager
             )
         {
             PageRepository = pageRepository;
             _defaultDataRepository = defaultDataRepository;
-            _pageDataManager = pageDataManager;
             _cache = cache;
         }
 
@@ -206,55 +204,18 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             SetPageInvalidForCache(page.Name);
         }
 
-        public void DeletePage(string name)
+        public void DeletePage(PageBase page)
         {
-            if (name.ToLower() == HomeName)
+            if (page.Name.ToLower() == HomeName)
             {
                 throw new UserFriendlyException("不能删除主页");
             }
 
-            var page = PageRepository.GetPageOfAllIncludes(name);
-
-            // 删除所有文章
-            _pageDataManager.DeletePagePosts(page.Name);
-
-            // 删除默认数据
-            Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
-                e=>e.SingleDatas
-            };
-            var oldDatas = _defaultDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageId == page.Id).ToList();
-            oldDatas.ForEach(item => {
-                _defaultDataRepository.Delete(item);
-            });
+            // 加载 page 聚会所有实体
+            PageRepository.GetPageOfAllIncludes(page.Name);
 
             // 删除页面
             PageRepository.Delete(page);
-
-            SetPageInvalidForCache(page.Name);
-        }
-
-        public void UpdatePageComponentsAndDefaultComponentData(string name, List<PageComponentBase> pageComponents, List<DefaultComponentData> defaultComponentDatas)
-        {
-            var page = PageRepository.GetPageOfAllIncludes(name);
-            page.PageComponents = new List<PageComponentBase>();
-
-            foreach (var item in pageComponents) {
-                page.PageComponents.Add(item);
-            }
-
-            Expression<Func<DefaultComponentData, object>>[] propertySelectors = {
-                e=>e.SingleDatas
-            };
-            var oldDatas = _defaultDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageId == page.Id).ToList();
-            oldDatas.ForEach(item=> {
-                _defaultDataRepository.Delete(item);
-            });
-
-            defaultComponentDatas.ForEach(item =>
-            {
-                item.Page = page;
-                _defaultDataRepository.Insert(item);
-            });
 
             SetPageInvalidForCache(page.Name);
         }

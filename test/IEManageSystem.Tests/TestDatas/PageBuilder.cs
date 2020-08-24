@@ -1,4 +1,5 @@
 ﻿using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.EntityFrameworkCore;
@@ -29,27 +30,6 @@ namespace IEManageSystem.Tests.TestDatas
             {
                 DisplayName = "测试内容页",
                 Description = "用于测试的数据",
-                PageComponents = new List<PageComponentBase>() {
-                    new LeafComponent("ComponentName1"){
-                        Sign = "ContentPage1_Component1Sign",
-                        PageComponentBaseSetting = new PageComponentBaseSetting(1, "12", "27rem", null, null, null, null, null),
-                        PageComponentSettings = new List<PageComponentSetting>(){
-                            new PageComponentSetting(){
-                                Name = "ContentPage1_Component1_PageComponentSetting1Name",
-                                SingleDatas = new List<SingleSettingData>(){
-                                    new SingleSettingData(){ Name = "ContentPage1_Component1_PageComponentSetting1_SingleSettingData1Name" },
-                                    new SingleSettingData(){ Name = "ContentPage1_Component1_PageComponentSetting1_SingleSettingData2Name" }
-                                }
-                            }
-                        }
-                    },
-                    new CompositeComponent("ComponentName2"){ 
-                        Sign = "ContentPage1_Component2Sign"
-                    },
-                    new PageLeafComponent("ComponentName3"){ 
-                        Sign = "ContentPage1_Component3Sign"
-                    }
-                },
                 ContentPagePermissionCollection = new ContentPagePermissionCollection() { 
                     IsEnableQueryPermission = true,
                     ContentPagePermissions = new List<ContentPagePermission>() {
@@ -77,14 +57,6 @@ namespace IEManageSystem.Tests.TestDatas
             {
                 DisplayName = "测试内容页",
                 Description = "用于测试的数据",
-                PageComponents = new List<PageComponentBase>() {
-                    new LeafComponent("ComponentName1"){
-                        Sign = "StaticPage1_PageComponentBase1Sign",
-                    },
-                    new LeafComponent("ComponentName1"){
-                        Sign = "StaticPage1_PageComponentBase2Sign",
-                    }
-                }
             };
 
             _context.Pages.Add(staticPage);

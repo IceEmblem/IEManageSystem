@@ -2,9 +2,17 @@ IEManageSystem
 =============
 #### 项目介绍：
 ##### 鼠标点击生成页面
-> IEManageSystem 是一个CMS管理系统，使用单页模式，通过`鼠标点击生成页面`<br>
-> 与国内的一些CMS不同，想开发其CMS，需要学习其标志语法，这会增加开发人员的负担，而对于不会编程的人员，也无法自定义自己的页面<br>
-> 而开发IE组件，你只需要了解IE组件的设计和React即可<br>
+> IEManageSystem 是一个CMS管理系统，完成前后端分离，通过`鼠标点击生成页面`<br>
+> IEManageSystem 目前有 Web端 和 安卓App端（是的App，不是浏览器），为了方便用户编辑，IEManageSystem 允许在浏览器对 App 进行编辑<br>
+> 目前 App 端刚集成，样式比较丑（当然，Web 端样式也一样丑），不可否认，麻雀虽丑，五脏俱全<br>
+> 目前项目还属于开发阶段，bug 什么的一定会有的<br>
+
+##### 相对于其他CMS的优点
+> 具有 Web端 和 安卓App端，后面会集成 苹果App端，但你的文章只需发表一次即可<br>
+> 页面编辑灵活，想编辑哪个就编辑哪个，后面会增加拖拽功能<br>
+> 组件具有灵活的配置和数据，包括图表等需要复杂配置和数据，IEManageSystem 都可以完成，添加图表展示只不过是点击页面而已<br>
+> IEManageSystem 允许每个组件都有自己的可执行逻辑，可执行逻辑会在服务器进行动态编译，完成一个业务逻辑不是问题<br>
+> 对于组件开发者而言，你不需要学习任何新的语法，你只需要了解IE组件的设计和React即可编辑出灵活的组件<br>
 <br>
 
 ##### 源码与功能
@@ -28,50 +36,36 @@ IEManageSystem
 #### 技术使用：
 > 冰纹后台管理系统 领域驱动设计实践，前后端分离，JwtBearer认证<br>
 前端：<br>
-> ReactJs，redux，TypeScript，Css3，BootStrap4，ES6语法，ant<br>
+> ReactJs，ReactRedux，ReactRouter，ReactNative，TypeScript，Css3，BootStrap4，ES6，ant<br>
 后端：<br>
 > asp.net core，abp框架，ORM框架Ef<br>
 <br>
 
-#### 数据库：
-> 程序包管理器控制台运行如下命令：<br>
->> 默认项目选择：IEManageSystem.EntityFramewordCore<br>
->> 执行：Add-Migration Init<br>
->> 执行：Update-Database<br>
+#### 如何运行项目：
+##### 运行后端
+> vs2019 打开项目<br>
+> 直接启动项目即可，不推荐从 IIS Express 启动<br>
 <br>
 
-#### 前端的组件开发
-一个简单的组件代码：<br>
-```javascript
-import React from 'react'
-import BaseComponentObject from '../BaseStaticComponent';
-import ComponentDescribe, {componentType} from '../ComponentDescribe'
-
-// 组件对象
-class ComponentObject extends BaseComponentObject {
-    // 组件
-    Component(props) {
-        return <div>我的第一个组件</div>;
-    }
-    // 预览框显示的内容
-    Preview() {
-        return <p>我的组件:)</p>;
-    }
-}
-
-// 生成一个组件描述
-let componentDescribe = new ComponentDescribe(
-    "MyComponent",              // 组件的名称
-    new ComponentObject(),      // 组件对象实例
-    componentType.other);       // 组件的分类
-// 导出组件描述
-export default componentDescribe;
-```
+##### 运行前端
+> 进入前端目录 \src\IEManageSystem.Web\ClientApp<br>
+> cmd 下执行 yarn install 命令等待包安卓完成（是 yarn，不是 npm）<br>
+> cmd 下执行 yarn run start:server 基于服务器启动（即服务器必须要先运行）<br>
 <br>
+
+##### 初始化站点
+如果第一次运行需要初始化站点 <br>
+> 访问 /Init 页面，根据指示完成站点初始化 <br>
+<br>
+
+##### 运行安卓App
+前提：需要安卓安卓运行环境，如果不熟悉，请查阅 https://blog.csdn.net/dabusidede/article/details/107955721 <br>
+> 在运行前需要先更改 android\app\src\main\assets 下的 config.json 中的 baseUrl 中的 ip 为你的 ip地址（本来想使用 10.0.2.2 地址，但怎么试都不成功）<br>
+> cmd 下运行 yarn android 命令<br>
 <br>
 
 #### 加入项目：
-> 项目目前由我一人开发，好累呀 >_<||
->> 如果想加入的话，都可以联系我邮箱：<br>
->> 1373611035@qq.com<br>
+项目目前由我一人开发，好累呀 >_<|| <br>
+> 如果想加入的话，都可以联系我邮箱：<br>
+> 1373611035@qq.com<br>
 <br>

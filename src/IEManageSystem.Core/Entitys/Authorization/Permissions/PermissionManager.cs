@@ -90,7 +90,7 @@ namespace IEManageSystem.Entitys.Authorization.Permissions
 
             if (permission.Name == Permission.UserPermissionName)
             {
-                throw new UserFriendlyException($"无法用户权限");
+                throw new UserFriendlyException($"无法删除用户权限");
             }
 
             PermissionRepository.Delete(permission);

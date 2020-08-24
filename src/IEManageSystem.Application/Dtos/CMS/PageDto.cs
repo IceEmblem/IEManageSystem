@@ -24,8 +24,6 @@ namespace IEManageSystem.Dtos.CMS
 
         public ContentPagePeimissionCollectionDto ContentPagePeimissionCollection { get; set; }
 
-        public IEnumerable<PageComponentDto> PageComponents { get; set; }
-
         public void SetStaticPage() => PageType = "StaticPage";
 
         public bool IsStaticPage() => PageType == "StaticPage";

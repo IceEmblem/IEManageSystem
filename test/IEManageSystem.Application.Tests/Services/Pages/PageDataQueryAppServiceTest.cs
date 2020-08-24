@@ -18,6 +18,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             _appService = LocalIocManager.Resolve<IPageDataQueryAppService>();
 
             UsingDbContext(context => new PageBuilder(context).Build());
+            UsingDbContext(context => new PageComponentBuilder(context).Build());
             UsingDbContext(context => new PageDataBuilder(context).Build());
         }
 

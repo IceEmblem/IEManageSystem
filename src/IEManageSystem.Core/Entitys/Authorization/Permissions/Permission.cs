@@ -21,17 +21,23 @@ namespace IEManageSystem.Entitys.Authorization.Permissions
 
         public static Permission UserPermission => new Permission(UserPermissionName) { DisplayName = "用户权限", Describe = "普通用户权限" };
 
-        protected Permission() {
-        }
-
-        public Permission(string name) {
-            Name = name;
-        }
-
         public string Name { get; protected set; }
 
         public string DisplayName { get; set; }
 
         public string Describe { get; set; }
+
+        protected Permission()
+        {
+        }
+
+        public Permission(string name)
+        {
+            Name = name;
+        }
+
+        public bool IsSuperPermission() {
+            return Name == SuperPermissionName;
+        }
     }
 }

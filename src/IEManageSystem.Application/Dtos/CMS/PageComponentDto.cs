@@ -25,7 +25,12 @@ namespace IEManageSystem.Dtos.CMS
         public List<PageComponentSettingDto> PageComponentSettings { get; set; }
 
         /// <summary>
-        /// CompositeComponent, LeafComponent, PageLeafComponent, MenuComponent
+        /// 组件的平台 
+        /// </summary>
+        public string OS { get; set; }
+
+        /// <summary>
+        /// 组件类型 CompositeComponent, LeafComponent, PageLeafComponent, MenuComponent
         /// </summary>
         public string ComponentType { get; set; }
 

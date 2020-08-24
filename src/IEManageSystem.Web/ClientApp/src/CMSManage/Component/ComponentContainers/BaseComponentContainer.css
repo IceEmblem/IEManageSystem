@@ -1,9 +1,0 @@
-.parentcomponent {
-    padding: 0rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.parentcomponent>*:first-child {
-    width: 100%;
-}

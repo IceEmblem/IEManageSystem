@@ -12,6 +12,7 @@ using IEManageSystem.Dtos.CMS;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using Microsoft.EntityFrameworkCore;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 
 namespace IEManageSystem.Application.Tests.Services.Pages
 {
@@ -28,6 +29,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             UsingDbContext(context => context.Database.EnsureCreated());
             UsingDbContext(context => new PermissionBuilder(context).Build());
             UsingDbContext(context => new PageBuilder(context).Build());
+            UsingDbContext(context => new PageComponentBuilder(context).Build());
             UsingDbContext(context => new PageDataBuilder(context).Build());
         }
 
@@ -148,6 +150,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
                     new Dtos.CMS.PageComponentDto(){
                         Name = "UpdatePageComponent_BaseTest_ComponentName",
                         Sign = "UpdatePageComponent_BaseTest_PageComponentSign",
+                        OS = "Web",
                         PageComponentBaseSetting = new PageComponentBaseSettingDto(){ 
                             Width = "12",
                         },

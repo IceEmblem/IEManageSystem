@@ -11,6 +11,7 @@ using IEManageSystem.Entitys.Authorization.Users;
 using Abp.UI;
 using Abp.Authorization;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 
 namespace IEManageSystem.CommonInfrastructure.CMS
 {

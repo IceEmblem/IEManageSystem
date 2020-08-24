@@ -1,4 +1,5 @@
-﻿using IEManageSystem.CMS.DomainModel.Pages;
+﻿using IEManageSystem.CMS.DomainModel.PageComponents;
+using IEManageSystem.CMS.DomainModel.Pages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -12,7 +13,9 @@ namespace IEManageSystem.Configures.CMS
         public void Configure(EntityTypeBuilder<PageComponentBase> builder)
         {
             builder.HasIndex(e => e.Sign);
+            builder.OwnsOne(e => e.ComponentOSType);
             builder.OwnsOne(e => e.PageComponentBaseSetting);
+            builder.HasOne(e => e.Page).WithMany().IsRequired();
         }
     }
 }

@@ -1,0 +1,42 @@
+.antlayout{
+  height: 100vh;
+}
+
+/* .antlayout .ant-layout-sider-children{
+    display: flex;
+    flex-direction: column;
+}
+
+.antlayout .ant-layout-sider-children>*:first-child{
+    flex-shrink: 0;
+}
+
+.antlayout .ant-layout-sider-children>*:nth-child(2){
+    flex-shrink: 1;
+    flex-grow: 1;
+} */
+
+.antlayout .trigger {
+    font-size: 18px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .antlayout .trigger:hover {
+    color: #1890ff;
+  }
+  
+  .antlayout .antlogo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
+
+  .antlayout .antlogo .logowith{
+    width: 40px;
+  }
+  
+  .antlayout .site-layout .site-layout-background {
+    background: #fff;
+  }

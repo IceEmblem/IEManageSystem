@@ -1,4 +1,5 @@
-﻿using IEManageSystem.CMS.DomainModel.Pages;
+﻿using IEManageSystem.CMS.DomainModel.PageComponents;
+using IEManageSystem.CMS.DomainModel.Pages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

@@ -1,0 +1,95 @@
+import React from 'react'
+import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory';
+import Resource from 'Common/Resource/Resource.jsx';
+import { ResourceDescribeValueType } from 'Common/ResourceForm/ResourceDescribeValueType'
+import { ieReduxFetch } from 'Core/IEReduxFetch';
+
+import { Button } from 'antd'
+
+export default class LogicManage extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            // 以注册的逻辑
+            logics: []
+        }
+
+        this.freshenResources = this.freshenResources.bind(this);
+
+        // 存在逻辑代码的组件
+        this.existLogicCodeComponentDescribes = ComponentFactory.getComponentDescribes()
+            .filter(e =>
+                e.logicCode &&
+                e.logicCode.trim() != "");
+
+        // 注册按钮组件
+        this.registerBtn = (props) => (
+            <Button 
+                type='primary'
+                size='small'
+                onClick={() => {
+                    let postData = {
+                        name: props.resource.name,
+                        code: props.resource.code
+                    };
+
+                    ieReduxFetch("/api/Logic/RegisterLogic", postData)
+                        .then(value => {
+                            this.freshenResources();
+                        });
+                }}
+            >
+                <span className="oi oi-pencil" title="icon name" aria-hidden="true"></span>
+                {props.resource.isRegister ? " 重新注册" : " 注册逻辑"}
+            </Button>);
+    }
+
+    getDescribes() {
+        return [
+            { name: "name", text: "代码名称", isId: true, isName: true, isShowOnList: true },
+            { name: "code", text: "代码", isShowOnList: false },
+            {
+                name: "isRegister", text: "是否已注册", isShowOnList: true,
+                valueType: ResourceDescribeValueType.radio,
+                valueTexts: [{ value: true, text: "已注册" }, { value: false, text: "未注册" }],
+                isEditCanEdit: false
+            }
+        ];
+    }
+
+    freshenResources(pageIndex, pageSize, searchKey) {
+        let postData = {
+        };
+
+        ieReduxFetch("/api/Logic/GetLogics", postData)
+            .then(value => {
+                let logics = [];
+                for (let item in this.existLogicCodeComponentDescribes) {
+                    logics.push({
+                        name: this.existLogicCodeComponentDescribes[item].name,
+                        code: this.existLogicCodeComponentDescribes[item].logicCode,
+                        isRegister: value.logics.some(e => e.name == this.existLogicCodeComponentDescribes[item].name)
+                    });
+                }
+
+                this.setState({ logics: logics });
+            });
+    }
+
+    render() {
+        return (<div className="col-md-12 bg-white pt-3 pb-3">
+            <Resource
+                title="逻辑代码管理"
+                describes={this.getDescribes()}
+                resources={this.state.logics}	// ++
+                freshenResources={this.freshenResources}
+                customizeOperateBtns={[this.registerBtn]}
+                hideAdd={true}
+                hideEdit={true}
+                hideDelete={true}
+                hidePadding={true}
+            />
+        </div>);
+    }
+}

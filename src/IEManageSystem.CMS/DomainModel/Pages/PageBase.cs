@@ -15,17 +15,11 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             Name = name;
         }
 
-        public PageComponentBase GetPageComponentForSign(string sign) {
-            return PageComponents.FirstOrDefault(e => e.Sign == sign);
-        }
-
         [Required]
         public string Name { get; protected set; }
 
         public string DisplayName { get; set; }
 
         public string Description { get; set; }
-
-        public ICollection<PageComponentBase> PageComponents { get; set; }
     }
 }

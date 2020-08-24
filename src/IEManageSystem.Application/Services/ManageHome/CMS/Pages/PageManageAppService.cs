@@ -10,6 +10,7 @@ using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.Attributes;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
@@ -24,16 +25,31 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
     {
         private readonly IObjectMapper _objectMapper;
 
-        private PageManager _pageManager { get; set; }
+        private PageManager _pageManager { get; }
+
+        private PageComponentManager _pageComponentManager { get; }
+
+        private ComponentDataManager _componentDataManager { get; }
+
+        private PageDataManager _pageDataManager { get; }
 
         public PageManageAppService(
             PageManager pageManager,
-            IObjectMapper objectMapper
+            IObjectMapper objectMapper,
+            PageComponentManager pageComponentManager,
+            ComponentDataManager componentDataManager,
+            PageDataManager pageDataManager
             )
         {
             _pageManager = pageManager;
 
             _objectMapper = objectMapper;
+
+            _pageComponentManager = pageComponentManager;
+
+            _componentDataManager = componentDataManager;
+
+            _pageDataManager = pageDataManager;
         }
 
         public AddPageOutput AddPage(AddPageInput input)
@@ -96,7 +112,24 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public DeletePageOutput DeletePage(DeletePageInput input)
         {
-            _pageManager.DeletePage(input.Name);
+            var page = _pageManager.PageRepository.FirstOrDefault(e=>e.Name == input.Name);
+
+            if (page == null)
+            {
+                throw new UserFriendlyException("未找到页面");
+            }
+
+            // 删除页面
+            _pageManager.DeletePage(page);
+
+            // 删除所有文章
+            _pageDataManager.DeletePagePosts(page);
+
+            // 删除组件
+            _pageComponentManager.DeletePageComponents(page);
+
+            // 删除默认数据
+            _componentDataManager.DeleteDefaultComponentData(page);
 
             return new DeletePageOutput();
         }
@@ -120,7 +153,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 defaultComponentDatas.Add(defaultComponentData);
             });
 
-            _pageManager.UpdatePageComponentsAndDefaultComponentData(input.Name, pageComponents, defaultComponentDatas);
+            var page = _pageManager.PageRepository.FirstOrDefault(e => e.Name == input.Name);
+
+            _pageComponentManager.UpdatePageComponents(page, pageComponents);
+
+            _componentDataManager.UpdateDefaultComponentData(page, defaultComponentDatas);
 
             return new UpdatePageComponentOutput();
         }
@@ -150,6 +187,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 pageComponent = new LeafComponent(dto.Name);
             }
 
+            pageComponent.ComponentOSType = ComponentOSType.CreateOSType(dto.OS);
             pageComponent.Sign = dto.Sign;
             pageComponent.ParentSign = dto.ParentSign;
             pageComponent.PageComponentBaseSetting = new PageComponentBaseSetting(
