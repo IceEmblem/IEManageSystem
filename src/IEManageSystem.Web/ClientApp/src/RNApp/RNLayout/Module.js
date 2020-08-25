@@ -7,13 +7,12 @@ import Page from 'Core/Page/Page'
 
 import BaseLayoutModule from 'BaseLayout/Module'
 
-// 动态加载
-const ManageHome = React.lazy(() => import('./ManageHome'));
+import LayoutComponent from './Layout'
 
 export default class Module extends BaseModule
 {
     initialize(){
-        PageProvider.register(new Page("AntManageHome", "/ManageHome", ManageHome));
+        PageProvider.register(new Page("RNLayout", "/", LayoutComponent));
     }
 }
 

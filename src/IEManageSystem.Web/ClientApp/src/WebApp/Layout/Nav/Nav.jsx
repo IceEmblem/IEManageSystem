@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BankOutlined } from '@ant-design/icons';
-import NavToolProvider from '../NavTools/NavToolProvider'
+import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
 
 import './Nav.css';
 

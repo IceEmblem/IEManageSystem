@@ -1,14 +1,14 @@
 import React from 'react'
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
-import MenuProvider from 'Layout/Menu/MenuProvider'
+import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import CoreModule from 'Core/Module';
-import LayoutModule from 'Layout/Module';
+import BaseLayoutModule from 'BaseLayout/Module';
 import IERedux from './IEReduxs/PersonalRedux'
 import {reducer} from './IEReduxs/Reducers'
 import RootRedux from 'Core/IEReduxs/RootRedux'
 import UserTagNavTools from './UserTagNavTools'
-import NavToolProvider from 'Layout/NavTools/NavToolProvider'
+import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
 
 import {
     UserOutlined,
@@ -57,5 +57,5 @@ export default class Module extends BaseModule
 
 new ModuleFactory().register(Module, [
     CoreModule,
-    LayoutModule
+    BaseLayoutModule
 ]);

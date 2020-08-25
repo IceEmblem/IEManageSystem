@@ -5,8 +5,8 @@ import { withRouter } from "react-router-dom";
 
 import './SideNav.css'
 
-import LayoutRedux from 'Layout/IEReduxs/LayoutRedux';
-import { createTopLevelMenusFetch } from 'Layout/IEReduxs/Actions'
+import LayoutRedux from 'BaseLayout/IEReduxs/LayoutRedux';
+import { createTopLevelMenusFetch } from 'BaseLayout/IEReduxs/Actions'
 
 class SideNav extends React.Component {
     // props.selectTopMenu
@@ -25,7 +25,6 @@ class SideNav extends React.Component {
                 mainMenu={this.props.rootMenu}
                 sideMenuSelect={(menuItem) => {
                     this.props.history.push(menuItem.url);
-                    // this.props.sideMenuSelect(menuItem);
                 }}
             />
         );
@@ -34,9 +33,6 @@ class SideNav extends React.Component {
 
 SideNav.propTypes = {
     rootMenu: PropsTypes.object.isRequired,
-    // selectTopMenu: PropsTypes.object,
-    // selectedSideMenu: PropsTypes.object,
-    // sideMenuSelect: PropsTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -47,8 +43,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
     return {
         rootMenu: rootMenu,
-        // selectTopMenu: state.selectedTopMenu,
-        // selectedSideMenu: state.selectedSideMenu
     }
 }
 

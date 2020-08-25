@@ -3,10 +3,10 @@ import React from 'react'
 // 核心模块依赖
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
-import MenuProvider from 'Layout/Menu/MenuProvider'
+import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 import CoreModule from 'Core/Module';
-import LayoutModule from 'Layout/Module';
+import BaseLayoutModule from 'BaseLayout/Module';
 import PageProvider from 'Core/Page/PageProvider'
 import Page from 'Core/Page/Page'
 
@@ -16,7 +16,7 @@ import BaseCmsManageModule from 'BaseCMSManage/Module';
 // 初始化时加载
 import Home from './Home'
 import SearchBoxTool from './SearchBoxTool'
-import NavToolProvider from 'Layout/NavTools/NavToolProvider'
+import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
 import RegisterTemplateManager from './Component/Components/RegisterTemplateManager'
 
 import {
@@ -132,5 +132,5 @@ export default class Module extends BaseModule {
 new ModuleFactory().register(Module, [
     CoreModule,
     BaseCmsManageModule,
-    LayoutModule
+    BaseLayoutModule
 ]);

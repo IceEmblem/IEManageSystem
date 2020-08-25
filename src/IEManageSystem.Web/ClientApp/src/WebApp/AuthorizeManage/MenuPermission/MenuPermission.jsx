@@ -4,7 +4,7 @@ import Tab from 'Common/Tab/Tab.jsx';
 
 import "./MenuPermission.css";
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import LayoutRedux from 'Layout/IEReduxs/LayoutRedux'
+import LayoutRedux from 'BaseLayout/IEReduxs/LayoutRedux'
 
 import IESideNav from 'Common/IESideNav';
 
