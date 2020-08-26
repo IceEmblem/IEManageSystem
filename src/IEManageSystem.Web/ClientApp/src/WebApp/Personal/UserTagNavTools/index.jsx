@@ -1,5 +1,5 @@
 import React from 'react'
-import IERedux from '../IEReduxs/PersonalRedux'
+import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
 
 import { Tag, Badge } from 'antd';
 import { UserOutlined, MessageOutlined, GithubOutlined } from '@ant-design/icons';

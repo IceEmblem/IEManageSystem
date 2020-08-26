@@ -1,12 +1,12 @@
 export default class IETool {
     //读取cookies 
-    static getCookie : (name: string) => string;
+    static getCookie : (name: string) => Promise<string>;
 
     //写cookies  
-    static setCookie : (name: string, value: string, expiredays: number, path: string) => void;
+    static setCookie : (name: string, value: string, expiredays: number, path: string) => Promise<void>;
 
     //删除cookies
-    static delCookie : (name: string) => void;
+    static delCookie : (name: string) => Promise<void>;
 
     // 图片转base64编码
     // file: event.target.files[0];

@@ -1,13 +1,20 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, } from 'react-native'
 import { Switch, Route, withRouter } from 'react-router-native'
 import { Container, Header, Content, Footer, FooterTab, Button, Left, Right, Body, Icon } from 'native-base';
 import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
 
 class Layout extends React.Component {
-    constructor(props) {
+    state={activeIndex: 0}
+
+    constructor(props){
         super(props);
+
+        this.navMenuComponents = MenuProvider.getNavMenuComponents();
+        this.navMenuComponentsForSort = [...this.navMenuComponents].sort((l, r)=>{
+            return l.baseUrl < r.baseUrl;
+        })
     }
 
     render() {
@@ -32,21 +39,23 @@ class Layout extends React.Component {
                 </Header>
                 <Content>
                     <Switch>
-                        {MenuProvider.getNavMenuComponents().map(
+                        {this.navMenuComponentsForSort.map(
                             (item, index) => <Route key={index} path={item.baseUrl} component={item.component} />)}
                     </Switch>
                 </Content>
                 <Footer>
                     <FooterTab>
-                        {MenuProvider.getNavMenuComponents().map(
-                            (item, index) => <Button active
+                        {this.navMenuComponents.map(
+                            (item, index) => <Button
+                                active={index == this.state.activeIndex}
                                 onPress={
                                     () => {
+                                        this.setState({activeIndex: index})
                                         this.props.history.push(item.menu.url);
                                     }
                                 }
                             >
-                                <Icon name={item.menu.icon} />
+                                <Icon name={item.menu.icon} type='AntDesign' />
                             </Button>)}
                     </FooterTab>
                 </Footer>

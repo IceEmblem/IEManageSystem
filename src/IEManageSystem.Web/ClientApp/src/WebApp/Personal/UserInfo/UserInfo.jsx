@@ -1,8 +1,8 @@
 import React from 'react';
 import './UserInfo.css';
 import imgAvatar from 'images/default_avatar.png';
-import { getUserInfoFetch, setUserInfoFetch } from '../IEReduxs/Actions'
-import IERedux from '../IEReduxs/PersonalRedux'
+import { getUserInfoFetch, setUserInfoFetch } from 'BasePerson/IEReduxs/Actions'
+import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
 import IETool from 'Core/ToolLibrary/IETool'
 
 import { Radio, Card, Upload, Input, Tooltip, Button, Skeleton, Tag, Calendar } from 'antd';

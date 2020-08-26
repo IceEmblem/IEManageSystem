@@ -1,12 +1,12 @@
 ﻿import React from 'react';
-import UserInfoCss from './AccountSecurity.css';
+import './AccountSecurity.css';
 import imgAvatar from 'images/default_avatar.png';
-import { getUserInfoFetch, setUserInfoFetch, setSafetyProblemFetch, setPassageFetch } from '../IEReduxs/Actions'
+import { getUserInfoFetch, setUserInfoFetch, setSafetyProblemFetch, setPassageFetch } from 'BasePerson/IEReduxs/Actions'
 
 import { Radio, Card, Upload, Input, Tooltip, Button, Tag, Modal } from 'antd';
 import { UploadOutlined, UserOutlined, InfoCircleOutlined, EditOutlined, ReloadOutlined, SmileOutlined } from '@ant-design/icons';
 
-import IERedux from '../IEReduxs/PersonalRedux'
+import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
 
 const { Meta } = Card;
 

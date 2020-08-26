@@ -2,7 +2,8 @@
 
 import BaseCMSManage from "BaseCMSManage/Module.js";
 import BaseLayout from "BaseLayout/Module.js";
+import BasePerson from "BasePerson/Module.js";
 import Core from "Core/Module.js";
 
-const moduleList = [BaseCMSManage,BaseLayout,Core,];
+const moduleList = [BaseCMSManage,BaseLayout,BasePerson,Core,];
 export default moduleList;
