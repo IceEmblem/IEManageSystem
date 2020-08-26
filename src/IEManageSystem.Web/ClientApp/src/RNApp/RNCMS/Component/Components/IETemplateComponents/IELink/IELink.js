@@ -1,8 +1,9 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IELink/IComponent'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { Link } from 'react-router-native'
-import { Text, View } from 'react-native'
+import { Link, withRouter } from 'react-router-native'
+import { View, StyleSheet } from 'react-native'
+import { Button, Text } from 'native-base'
 
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELink/Setting'
 
@@ -54,17 +55,23 @@ class IELink extends IComponent {
         else if ("ZoomInOutlined" == setting.icon) icon = <Icon size={fontsize} color={setting.fontColor} name='zoom-in' />;
 
         return (
-            <View style={[this.baseStyle]}>
-                <Link to={setting.url}
-                >
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        {icon}
-                        <Text style={{ marginLeft: 5, fontSize: fontsize, color: setting.fontColor }}>{setting.text}</Text>
-                    </View>
-                </Link>
-            </View>
-        )
+            <Button transparent style={[this.baseStyle, styles.btn]}
+                onPress={() => {
+                    this.props.history.push(setting.url);
+                }}
+            >
+                {icon}
+                <Text style={{ marginLeft: 5, fontSize: fontsize, color: setting.fontColor }}>{setting.text}</Text>
+            </Button>
+        );
     }
 }
 
-export default (register) => register(IComponent, IELink);
+const styles = StyleSheet.create({
+    btn: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    }
+})
+
+export default (register) => register(IComponent, withRouter(IELink));

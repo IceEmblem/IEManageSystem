@@ -1,7 +1,8 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEImg/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEImg/Data'
-import { View, Text, Image } from 'react-native'
+import { View, Image } from 'react-native'
+import { Text } from 'native-base'
 
 class IEImg extends IComponent {
     render() {

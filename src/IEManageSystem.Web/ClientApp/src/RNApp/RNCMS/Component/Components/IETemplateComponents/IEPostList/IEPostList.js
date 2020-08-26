@@ -3,9 +3,10 @@ import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostList
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEPostList/Setting'
 
 import defaultImg from 'images/default_post_img.jpg'
-import { Link } from 'react-router-native'
-import { Card, Button, Pagination } from '@ant-design/react-native'
-import { StyleSheet, Image, View, Text } from 'react-native'
+import { Link, withRouter } from 'react-router-native'
+import { StyleSheet, Image, View } from 'react-native'
+
+import { Button, Text, Card, CardItem } from 'native-base'
 
 class IEPostList extends IComponent {
     constructor(props) {
@@ -19,7 +20,7 @@ class IEPostList extends IComponent {
         }
 
         let heigth = new Number(setting.heigth).valueOf();
-        if (isNaN(heigth)) {
+        if (isNaN(heigth) || heigth == 0) {
             heigth = 200
         }
 
@@ -33,36 +34,34 @@ class IEPostList extends IComponent {
 
         return <View style={{ width: `${width}%`, paddingLeft: 5, paddingRight: 5, marginBottom: 10 }}>
             <Card>
-                <Card.Body style={{ padding: 0 }}>
-                    <Link
-                        to={this.createUrl(post)}
+                {
+                    setting.isShowImg == "true" &&
+                    <CardItem button cardBody
+                        onPress={() => {
+                            this.props.history.push(this.createUrl(post));
+                        }}
                     >
-                        <View>
-                            {
-                                setting.isShowImg == "true" ?
-                                    < Image
-                                        style={{ height: heigth, width: "100%" }}
-                                        source={source}
-                                    /> :
-                                    <Text></Text>
-                            }
-                        </View>
-                    </Link>
-                    <View style={styles.itemTextArea}>
-                        <Link
-                            to={this.createUrl(post)}
-                        >
-                            <View>
-                                <Text style={styles.itemTitle}>{post.title}</Text>
-                                <Text style={styles.itemDescribe}>{post.describe || "暂无简介"}</Text>
-                            </View>
-                        </Link>
-                        <View style={styles.itemMeta}>
-                            <Text style={styles.itemMetaText}>{`评分：${post.score} | 点击量：${post.click}`}</Text>
-                            <Text style={{ textAlign: 'right' }}>{new Date(post.creationTime).toLocaleDateString()}</Text>
-                        </View>
+                        <Image
+                            style={{ height: heigth, width: "100%" }}
+                            source={defaultImg}
+                        />
+                    </CardItem>
+                }
+
+                <CardItem button style={styles.itemTextArea}
+                    onPress={() => {
+                        this.props.history.push(this.createUrl(post));
+                    }}
+                >
+                    <View>
+                        <Text style={styles.itemTitle}>{post.title}</Text>
+                        <Text style={styles.itemDescribe}>{post.describe || "暂无简介"}</Text>
                     </View>
-                </Card.Body>
+                </CardItem>
+                <CardItem style={styles.itemMeta}>
+                    <Text style={styles.itemMetaText}>{`评分：${post.score} | 点击量：${post.click}`}</Text>
+                    <Text style={[styles.itemMetaText, { textAlign: 'right' }]}>{new Date(post.creationTime).toLocaleDateString()}</Text>
+                </CardItem>
             </Card>
         </View>
     }
@@ -74,17 +73,27 @@ class IEPostList extends IComponent {
             <View style={[this.baseStyle]}>
                 <View style={styles.sortView}>
                     <Text>排序：</Text>
-                    <Button style={styles.sortBtn} type="ghost" size='small' onPress={() => { this.setState({ orderby: "Date" }) }}>发表时间</Button>
-                    <Button style={styles.sortBtn} type="ghost" size='small' onPress={() => { this.setState({ orderby: "Click" }) }}>点击量</Button>
-                    <Button style={styles.sortBtn} type="ghost" size='small' onPress={() => { this.setState({ orderby: "Score" }) }}>评分</Button>
+                    <Button small style={styles.sortBtn} onPress={() => { this.setState({ orderby: "Date" }) }}>
+                        <Text>发表时间</Text>
+                    </Button>
+                    <Button small style={styles.sortBtn} onPress={() => { this.setState({ orderby: "Click" }) }}>
+                        <Text>点击量</Text>
+                    </Button>
+                    <Button small style={styles.sortBtn} onPress={() => { this.setState({ orderby: "Score" }) }}>
+                        <Text>评分</Text>
+                    </Button>
                 </View>
                 <View style={styles.list}>
                     {this.state.pageDatas.map(item => this.createItem(item, setting))}
                 </View>
                 <View style={styles.pageBtnView}>
-                    <Button size='small' type="primary" style={styles.pageBtn} disabled={this.state.pageIndex <= 1} onPress={() => this.setState({ pageIndex: this.state.pageIndex - 1 })}>上一页</Button>
+                    <Button small style={styles.pageBtn} disabled={this.state.pageIndex <= 1} onPress={() => this.setState({ pageIndex: this.state.pageIndex - 1 })}>
+                        <Text>上一页</Text>
+                    </Button>
                     <Text style={styles.pageBtnText}>{`第 ${this.state.pageIndex} 页`}</Text>
-                    <Button size='small' type='primary' style={styles.pageBtn} disabled={this.state.pageDatas.length < this.state.pageSize} onPress={() => this.setState({ pageIndex: this.state.pageIndex + 1 })}>下一页</Button>
+                    <Button small style={styles.pageBtn} disabled={this.state.pageDatas.length < this.state.pageSize} onPress={() => this.setState({ pageIndex: this.state.pageIndex + 1 })}>
+                        <Text>下一页</Text>
+                    </Button>
                 </View>
             </View>
         )
@@ -109,21 +118,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
-    itemTextArea: {
-        padding: 10
-    },
     itemTitle: {
         fontSize: 16,
         fontWeight: "600"
     },
     itemDescribe: {
-        marginTop: 10
+        marginTop: 10,
+        fontWeight: '500',
+        fontSize: 14
     },
     itemMeta: {
-        marginTop: 10,
+        flexWrap: 'wrap',
+        justifyContent: 'space-between'
     },
     itemMetaText: {
-        color: '#0008'
+        color: '#0008',
+        fontSize: 12
     },
     pageBtnView: {
         flexDirection: 'row',
@@ -134,14 +144,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     pageBtn: {
-        margin: 5,
-        fontSize: 16,
-        paddingTop: 15,
-        paddingBottom: 15,
-        paddingLeft: 25,
-        paddingRight: 25,
-        color: '#fff'
     }
 })
 
-export default (register) => register(IComponent, IEPostList);
+export default (register) => register(IComponent, withRouter(IEPostList));

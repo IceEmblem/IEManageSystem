@@ -1,18 +1,17 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/IComponent'
-import { List } from '@ant-design/react-native'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Setting'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEInfoGroup/Data'
 
+import { List, ListItem, Text, Icon, H3 } from 'native-base'
+
 class IEInfoGroup extends IComponent {
     createItem(settingField, dataField, color) {
-        return <List.Item>
-            <View style={{ color: color, flexDirection: 'row' }}>
-                <Text style={{color: color}}>{settingField}</Text>
-                <Text style={{color: color}}>{dataField}</Text>
-            </View>
-        </List.Item>
+        return <ListItem>
+            <Text style={{ color: color }}>{settingField}</Text>
+            <Text style={{ color: color }}>{dataField}</Text>
+        </ListItem>
     }
 
     render() {
@@ -31,15 +30,29 @@ class IEInfoGroup extends IComponent {
         if (setting.field5)
             itemDatas.push({ settingField: setting.field5, dataField: data.field5 });
 
-        return <List
-            style={[this.baseStyle, {borderColor: '#0004', borderStyle: 'solid', borderWidth: setting.bordered ? 1 : 0}]}
-            bordered={setting.bordered}
-            grid={{ column: setting.col }}
-            renderHeader={setting.title}
-        >
-            {itemDatas.map(item => this.createItem(item.settingField, item.dataField, setting.color))}
-        </List>
+        return <View style={this.baseStyle}>
+            {
+                setting.title && 
+                <H3 style={styles.itemHeader}>{setting.title}</H3>
+            }
+            <List
+                style={[{ borderColor: '#0004', borderStyle: 'solid', borderWidth: setting.bordered ? 1 : 0 }]}
+            >
+                {itemDatas.map(item => this.createItem(item.settingField, item.dataField, setting.color))}
+            </List>
+        </View>
     }
 }
+
+const styles = StyleSheet.create({
+    itemHeader: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#0004'
+    },
+});
+
+
 
 export default (register) => register(IComponent, IEInfoGroup);

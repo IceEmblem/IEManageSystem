@@ -4,6 +4,8 @@ import { Link, withRouter } from 'react-router-native'
 import { StyleSheet, View, Text } from 'react-native'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECategoryLabel/Setting'
 
+import { Button, Item } from 'native-base'
+
 class IECategoryLabel extends IComponent {
 
     curSelectOtherTags = [];
@@ -89,11 +91,17 @@ class IECategoryLabel extends IComponent {
 
     createItem(singleData) {
         return (
-            <Link
-                to={this.createUrl(singleData.tagName)}
+            <Button
+                small
+                style={styles.button}
+                info={this.curSelectTagName == singleData.tagName}
+                transparent={this.curSelectTagName != singleData.tagName}
+                onPress={()=>{
+                    this.props.history.push(this.createUrl(singleData.tagName));
+                }}
             >
-                <Text style={[this.getLinkStyle(singleData.tagName)]}>{singleData.displayName}</Text>
-            </Link>
+                <Text style={{color: this.curSelectTagName == singleData.tagName ? '#fff' : '#000A'}}>{singleData.displayName}</Text>
+            </Button>
         );
     }
 
@@ -102,11 +110,7 @@ class IECategoryLabel extends IComponent {
 
         return (
             <View style={[this.baseStyle, styles.view]}>
-                <Link
-                    to={this.createUrl("")}
-                >
-                    <Text style={[this.getLinkStyle()]}>全部</Text>
-                </Link>
+                {this.createItem({tagName: undefined, displayName: '全部'})}
                 {setting.getSettings().map(item => this.createItem(item))}
             </View>
         );
@@ -115,8 +119,12 @@ class IECategoryLabel extends IComponent {
 
 const styles = StyleSheet.create({
     view: {
-        flexDirection: 'row'
-    }
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    button: {
+        padding: 10,
+    },
 })
 
 IECategoryLabel.defaultProps = {

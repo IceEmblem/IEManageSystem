@@ -35,7 +35,6 @@ class IEPostContent extends IComponent {
 
 const styles = StyleSheet.create({
     view: {
-        height: '100%',
         justifyContent: 'center'
     }
 });

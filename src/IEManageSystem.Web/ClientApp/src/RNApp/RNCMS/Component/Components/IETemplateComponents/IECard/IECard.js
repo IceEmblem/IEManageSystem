@@ -1,10 +1,12 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Image } from 'react-native'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECard/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IECard/Data'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECard/Setting'
-import { Card } from '@ant-design/react-native';
-import { Link } from 'react-router-native'
+import { Link, withRouter } from 'react-router-native'
+
+import defaultAvatar from 'images/default_avatar.png'
+import { Card, CardItem, Text, H3 } from 'native-base'
 
 class IECard extends IComponent {
     constructor(props) {
@@ -20,34 +22,37 @@ class IECard extends IComponent {
             height = 0;
         }
 
+        let source;
+        if (data.imgUrl) {
+            source = { uri: data.imgUrl }
+        }
+        else {
+            source = defaultAvatar;
+        }
+
         return (
             <View style={[this.baseStyle]}>
-                <Link
-                    to={data.link}
-                >
-                    <Card>
-                        <Card.Header
-                            style={{ padding: 0, margin: 0 }}
-                            thumbStyle={{ width: '100%', height: height }}
-                            thumb={data.imgUrl}
+                <Card>
+                    <CardItem button cardBody
+                        onPress={() => {
+                            this.props.history.push(data.link);
+                        }}
+                    >
+                        <Image
+                            style={{ width: '100%', height: height }}
+                            source={source}
                         />
-                        <Card.Body>
-                            <View style={{ padding: 10 }}>
-                                <Text style={{
-                                    fontSize: 18,
-                                    color: "rgba(0, 0, 0, 0.85)",
-                                    fontWeight: '600',
-                                    marginBottom: 8
-                                }}
-                                >{data.title}</Text>
-                                <Text>{data.content}</Text>
-                            </View>
-                        </Card.Body>
-                    </Card>
-                </Link>
+                    </CardItem>
+                    <CardItem>
+                        <H3>{data.title}</H3>
+                    </CardItem>
+                    <CardItem>
+                        <Text>{data.content}</Text>
+                    </CardItem>
+                </Card>
             </View>
         );
     }
 }
 
-export default (register) => register(IComponent, IECard);
+export default (register) => register(IComponent, withRouter(IECard));

@@ -1,8 +1,8 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEMenu/IComponent'
-import { View, Text, Button } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { withRouter } from 'react-router-native'
-import Icon from 'react-native-vector-icons/AntDesign';
+import { Button, Icon, Text } from 'native-base'
 
 class IEMenu extends IComponent {
     constructor(props) {
@@ -32,23 +32,21 @@ class IEMenu extends IComponent {
             }
             else {
                 let menu =
-                    <View style={{ flexGrow: 1 }}>
-                        <Icon.Button
-                            key={menuItems[item].name}
-                            name={icon}
-                            color="#000A"
-                            style={{ justifyContent: 'center' }}
-                            backgroundColor="#fff"
-                            onPress={() => {
-                                this.props.history.push(menuItems[item].createUrl());
-                                console.log(menuItems[item].createUrl())
-                            }}
-                        >
-                            <Text>
-                                {menuItems[item].displayName}
-                            </Text>
-                        </Icon.Button>
-                    </View>
+                    <Button
+                        small
+                        full
+                        style={styles.button}
+                        key={menuItems[item].name}
+                        onPress={() => {
+                            this.props.history.push(menuItems[item].createUrl());
+                            console.log(menuItems[item].createUrl())
+                        }}
+                    >
+                        {icon && <Icon name={icon}></Icon>}
+                        <Text>
+                            {menuItems[item].displayName}
+                        </Text>
+                    </Button>
 
                 lis.push(menu);
             }
@@ -59,11 +57,17 @@ class IEMenu extends IComponent {
 
     render() {
         return (
-            <View style={[this.baseStyle, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
+            <View style={[this.baseStyle, { flexDirection: 'row' }]}>
                 {this.createMenus()}
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    button:{
+        flexGrow: 1
+    }
+})
 
 export default (register) => register(IComponent, withRouter(IEMenu));

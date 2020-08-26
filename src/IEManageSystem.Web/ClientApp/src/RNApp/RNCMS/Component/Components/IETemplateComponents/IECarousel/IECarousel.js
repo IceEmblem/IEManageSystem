@@ -6,6 +6,9 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { Carousel } from '@ant-design/react-native';
 import defaultImg from 'images/nofind.jpg'
 
+import StyleCheck from 'RNCMS/StyleCheck'
+import { DeckSwiper } from 'native-base'
+
 // 走马灯
 class IECarousel extends IComponent {
     constructor(props) {
@@ -13,35 +16,25 @@ class IECarousel extends IComponent {
     }
 
     createItem(singleData, setting) {
-        let height = new Number(setting.height).valueOf();
-        if(isNaN(height)){
-            height = 300;
-        }
-
-        let width = new Number(setting.width).valueOf();
-        if(isNaN(width)){
-            width = 300;
-        }
-
-        let source = singleData.img ? {uri: singleData.img} : defaultImg
+        let source = singleData.img ? { uri: singleData.img } : defaultImg
 
         return (
             <View>
-                <Image 
+                <Image
                     source={source}
-                    style={{width: '100%', height: height, position: 'absolute'}}
+                    style={{ width: '100%', height: setting.height, position: 'absolute' }}
                 />
                 <View
                     style={{
                         flexDirection: 'row',
                         justifyContent: 'center',
-                        backgroundColor: setting.shade
+                        backgroundColor: setting.backgroundColor
                     }}
                 >
                     <View
-                        style={{ 
-                            height: height, 
-                            width: width,
+                        style={{
+                            height: setting.height,
+                            width: setting.width,
                             justifyContent: 'center',
                             alignItems: 'center',
                             paddingBottom: 30
@@ -59,10 +52,29 @@ class IECarousel extends IComponent {
         let data = new Data(this.props.componentData);
         let setting = new Setting(this.getSetting("DefaultSetting"));
 
+        let style = StyleCheck.handle({
+            height: setting.height,
+            width: setting.width,
+            backgroundColor: setting.shade,
+        });
+
+        if (!style.height) {
+            style.height = 300;
+        }
+
+        if (!style.width) {
+            style.width = 300;
+        }
+
         return (
-            <Carousel style={[this.baseStyle]} autoplay>
-                {data.getDatas().map(item => this.createItem(item, setting))}
-            </Carousel >
+            <View style={[this.baseStyle, {height: style.height}]}>
+                <DeckSwiper
+                    dataSource={data.getDatas()}
+                    renderItem={item=>{
+                        return this.createItem(item, style)
+                    }}
+                />
+            </View>
         );
     }
 }

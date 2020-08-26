@@ -1,8 +1,8 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IERankingList/IComponent'
-import { Link } from 'react-router-native'
-import { View, Text, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/AntDesign'
+import { Link, withRouter } from 'react-router-native'
+import { View, StyleSheet } from 'react-native'
+import { List, ListItem, Text, Icon } from 'native-base'
 
 // 排行组件
 class IERankingList extends IComponent {
@@ -17,32 +17,32 @@ class IERankingList extends IComponent {
     render() {
 
         return (
-            <View style={[this.baseStyle]}>
+            <List style={[this.baseStyle]}>
                 {this.state.pageDatas.map((item, index) => (
-                    <View
+                    <ListItem
                         style={
                             index == 0 ? styles.firstLine :
                                 styles.line
                         }
+                        onPress={() => {
+                            this.props.history.push(this.createUrl(item));
+                        }}
                     >
-                        <View>
-                            <Link
-                                to={this.createUrl(item)}
-                            >
-                                <Text>{item.title}</Text>
-                            </Link>
-                        </View>
                         <View
                             style={
                                 index == 0 ? styles.firstIcon :
                                     styles.Icon
                             }
                         >
-                            <Icon name='Trophy' color='#fff' />
+                            <Icon name='rocket1' color='#fff' type='AntDesign' />
                         </View>
-                    </View>
+                        <View style={styles.itemRight}>
+                            <Text>{item.title}</Text>
+                            <Icon name='right' color='#fff' type='AntDesign' />
+                        </View>
+                    </ListItem>
                 ))}
-            </View>
+            </List>
         )
     }
 }
@@ -78,6 +78,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    itemRight:{
+        flexGrow: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 15,
+    }
 })
 
-export default (register) => register(IComponent, IERankingList);
+export default (register) => register(IComponent, withRouter(IERankingList));
