@@ -1,4 +1,5 @@
 import IEToken from '../IEToken'
+import Weburl from '../Weburl'
 
 export interface FetchAction {
   // 动作类型
@@ -66,7 +67,6 @@ function receivePack(actionType:string, data: any) : FetchAction
 
 // 发生请求标识，每发生一个请求，会增加 1
 var fecthSign = 0;
-var baseUrl = ""
 // 生成ieThunkAcion，如果请求成功，会分发receiveActionFun生成的动作
 export function createIEThunkAction(url:string, postData:any, actionType:string) {
   return async function (dispatch:any) {
@@ -84,10 +84,7 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
       headers.Authorization = "Bearer " + token;
     }
 
-    let fullUrl = url;
-    if(!fullUrl.startsWith("http")){
-      fullUrl = baseUrl + url;
-    }
+    let fullUrl = Weburl.handleWeburl(url);
 
     return await fetch(fullUrl, {
       method: 'post',
@@ -136,9 +133,6 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
       }
     )
   }
-}
-export function setBaseUrl(url) {
-  baseUrl = url;
 }
 
 export const GetSiteSettingsReceive = "GetSiteSettingsReceive";

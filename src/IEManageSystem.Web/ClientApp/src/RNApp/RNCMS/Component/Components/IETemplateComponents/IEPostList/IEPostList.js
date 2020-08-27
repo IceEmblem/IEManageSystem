@@ -53,15 +53,18 @@ class IEPostList extends IComponent {
                         this.props.history.push(this.createUrl(post));
                     }}
                 >
-                    <View>
-                        <Text style={styles.itemTitle}>{post.title}</Text>
-                        <Text style={styles.itemDescribe}>{post.describe || "暂无简介"}</Text>
+                    <View style={{width: '100%'}}>
+                        <View>
+                            <Text style={styles.itemTitle}>{post.title}</Text>
+                            <Text style={styles.itemDescribe}>{post.describe || "暂无简介"}</Text>
+                        </View>
+                        <View style={styles.itemMeta}>
+                            <Text style={styles.itemMetaText}>{`评分：${post.score} | 点击量：${post.click}`}</Text>
+                            <Text style={[styles.itemMetaText, { textAlign: 'right' }]}>{new Date(post.creationTime).toLocaleDateString()}</Text>
+                        </View>
                     </View>
                 </CardItem>
-                <CardItem style={styles.itemMeta}>
-                    <Text style={styles.itemMetaText}>{`评分：${post.score} | 点击量：${post.click}`}</Text>
-                    <Text style={[styles.itemMetaText, { textAlign: 'right' }]}>{new Date(post.creationTime).toLocaleDateString()}</Text>
-                </CardItem>
+
             </Card>
         </View>
     }
@@ -127,9 +130,12 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 14
     },
+    itemTextArea: {},
     itemMeta: {
+        flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginTop: 10
     },
     itemMetaText: {
         color: '#0008',

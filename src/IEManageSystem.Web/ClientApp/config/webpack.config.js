@@ -88,6 +88,10 @@ const pathMap = require('./pathmap.json');
 
 // 要编译的 node_modules 路径
 const includeModuless = [
+  path.resolve('node_modules/@codler/react-native-keyboard-aware-scroll-view/'),
+  path.resolve('node_modules/native-base-shoutem-theme/'),
+  path.resolve('node_modules/react-native-drawer/'),
+  path.resolve('node_modules/react-native-easy-grid/'),
   path.resolve('node_modules/react-native-webview/'),
   path.resolve('node_modules/react-router-native/'),
   path.resolve('node_modules/react-native-vector-icons/'),

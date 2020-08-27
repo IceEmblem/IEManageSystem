@@ -1,12 +1,42 @@
 import React from 'react'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEPostContent/IComponent'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import WebView from 'react-native-webview'
 
-
 class IEPostContent extends IComponent {
+    state = {
+        height: undefined
+    }
+
     constructor(props) {
         super(props);
+    }
+
+    handleHtml(html) {
+        return `
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+                html,
+                body {
+                    font-size: 14px;
+                }
+            </style>
+        </head>
+        <body>
+            <div id="__WebView__">
+                ${html}
+            </div>
+            <script>
+                window.onload = function () { 
+                    window.ReactNativeWebView.postMessage(document.getElementById("__WebView__").offsetHeight)
+                }
+            </script>
+        </body>
+        </html>
+        `
     }
 
     render() {
@@ -24,9 +54,19 @@ class IEPostContent extends IComponent {
         `;
 
         return (
-            <View style={[this.baseStyle, styles.view]}>
+            <View style={[this.baseStyle, styles.view, { height: this.state.height }]}>
                 <WebView
-                    source={{ html: text }}
+                    source={{ html: this.handleHtml(text) }}
+                    onMessage={(msg) => {
+                        if (msg.nativeEvent.data !== undefined && msg.nativeEvent.data !== null) {
+                            let height = parseInt(msg.nativeEvent.data);
+                            if(!isNaN(height)){
+                                this.setState({
+                                    height: height
+                                })
+                            }
+                        }
+                    }}
                 />
             </View>
         );

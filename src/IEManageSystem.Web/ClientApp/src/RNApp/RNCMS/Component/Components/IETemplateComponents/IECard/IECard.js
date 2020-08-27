@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image } from 'react-native'
+import { View, Image, StyleSheet } from 'react-native'
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECard/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IECard/Data'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECard/Setting'
@@ -43,16 +43,24 @@ class IECard extends IComponent {
                             source={source}
                         />
                     </CardItem>
-                    <CardItem>
-                        <H3>{data.title}</H3>
-                    </CardItem>
-                    <CardItem>
-                        <Text>{data.content}</Text>
+                    <CardItem style={styles.textArea}>
+                        <Text>{data.title}</Text>
+                        <Text style={styles.content}>{data.content}</Text>
                     </CardItem>
                 </Card>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    textArea:{
+        flexDirection: 'column'
+    },
+    content:{
+        color: '#0008',
+        marginTop: 10
+    }
+})
 
 export default (register) => register(IComponent, withRouter(IECard));

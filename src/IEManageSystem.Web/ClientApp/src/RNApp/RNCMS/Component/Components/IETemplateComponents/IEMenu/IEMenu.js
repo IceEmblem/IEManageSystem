@@ -57,7 +57,7 @@ class IEMenu extends IComponent {
 
     render() {
         return (
-            <View style={[this.baseStyle, { flexDirection: 'row' }]}>
+            <View style={[this.baseStyle, { flexDirection: 'row', backgroundColor: '#0008' }]}>
                 {this.createMenus()}
             </View>
         )

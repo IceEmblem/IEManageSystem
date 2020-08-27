@@ -34,4 +34,12 @@ export default class Data {
     set imgHeigth(val){
         this.data.getDefauleData().field3 = val;
     }
+
+    get linkUrl(){
+        return this.data.getDefauleData().field4 || "";
+    }
+
+    set linkUrl(val){
+        this.data.getDefauleData().field4 = val;
+    }
 }

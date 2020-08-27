@@ -2,7 +2,7 @@ import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IELink/IComponent'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { Link, withRouter } from 'react-router-native'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableHighlight } from 'react-native'
 import { Button, Text } from 'native-base'
 
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELink/Setting'
@@ -55,22 +55,26 @@ class IELink extends IComponent {
         else if ("ZoomInOutlined" == setting.icon) icon = <Icon size={fontsize} color={setting.fontColor} name='zoom-in' />;
 
         return (
-            <Button transparent style={[this.baseStyle, styles.btn]}
+            <TouchableHighlight style={[this.baseStyle, styles.btn]}
                 onPress={() => {
                     this.props.history.push(setting.url);
                 }}
+                underlayColor='#0004'
             >
-                {icon}
-                <Text style={{ marginLeft: 5, fontSize: fontsize, color: setting.fontColor }}>{setting.text}</Text>
-            </Button>
+                <View style={styles.view}>
+                    {icon}
+                    <Text style={{ marginLeft: 5, fontSize: fontsize, color: setting.fontColor }}>{setting.text}</Text>
+                </View>
+            </TouchableHighlight>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    btn: {
+    view:{
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center',
     }
 })
 

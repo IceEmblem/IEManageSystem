@@ -3,11 +3,12 @@ import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IECarousel
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Data'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Setting'
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { Carousel } from '@ant-design/react-native';
 import defaultImg from 'images/nofind.jpg'
 
 import StyleCheck from 'RNCMS/StyleCheck'
 import { DeckSwiper } from 'native-base'
+
+import Weburl from 'Core/Weburl'
 
 // 走马灯
 class IECarousel extends IComponent {
@@ -16,7 +17,7 @@ class IECarousel extends IComponent {
     }
 
     createItem(singleData, setting) {
-        let source = singleData.img ? { uri: singleData.img } : defaultImg
+        let source = singleData.img ? { uri: Weburl.handleWeburl(singleData.img) } : defaultImg
 
         return (
             <View>
@@ -56,6 +57,7 @@ class IECarousel extends IComponent {
             height: setting.height,
             width: setting.width,
             backgroundColor: setting.shade,
+            fontColor: setting.fontColor
         });
 
         if (!style.height) {

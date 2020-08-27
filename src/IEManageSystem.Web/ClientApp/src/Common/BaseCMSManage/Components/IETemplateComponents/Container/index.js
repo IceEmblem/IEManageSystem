@@ -14,5 +14,9 @@ class ComponentObject extends BaseComponentObject {
     Preview=IocContainer.getService(IPreview);
 }
 
-const componentDescribeBuilder = () => new ComponentDescribe("Container", new ComponentObject(), componentType.container, "组件容器");
+const componentDescribeBuilder = () => {
+    let componentDescribe = new ComponentDescribe("Container", new ComponentObject(), componentType.container, "组件容器");
+
+    return componentDescribe;
+}
 export default componentDescribeBuilder;

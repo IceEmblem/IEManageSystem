@@ -33,7 +33,7 @@ class IEInfoGroup extends IComponent {
         return <View style={this.baseStyle}>
             {
                 setting.title && 
-                <H3 style={styles.itemHeader}>{setting.title}</H3>
+                <Text style={[styles.itemHeader, {color: setting.color}]}>{setting.title}</Text>
             }
             <List
                 style={[{ borderColor: '#0004', borderStyle: 'solid', borderWidth: setting.bordered ? 1 : 0 }]}

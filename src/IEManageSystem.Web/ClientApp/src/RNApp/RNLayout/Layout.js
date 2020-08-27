@@ -13,7 +13,7 @@ class Layout extends React.Component {
 
         this.navMenuComponents = MenuProvider.getNavMenuComponents();
         this.navMenuComponentsForSort = [...this.navMenuComponents].sort((l, r)=>{
-            return l.baseUrl < r.baseUrl;
+            return l.baseUrl < r.baseUrl ? 1 : -1;
         })
     }
 

@@ -5,6 +5,7 @@ import Data from 'BaseCMSManage/Components/IETemplateComponents/IEImg/Data'
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
 import { Input, Tag, Button } from 'antd';
 
+
 class DataConfig extends IDataConfig {
     data = null;
 
@@ -60,6 +61,16 @@ class DataConfig extends IDataConfig {
                     this.props.setData(this.data.data);
                 }}
                 suffix={<Tag color="#55acee">图片高度</Tag>}
+            />
+            <Input
+                placeholder="示例：/PostList"
+                className="mb-3"
+                value={this.data.linkUrl}
+                onChange={(e) => {
+                    this.data.linkUrl = e.currentTarget.value;
+                    this.props.setData(this.data.data);
+                }}
+                suffix={<Tag color="#55acee">链接 Url</Tag>}
             />
         </div>)
     }

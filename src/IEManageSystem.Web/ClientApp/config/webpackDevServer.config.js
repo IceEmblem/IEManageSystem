@@ -110,7 +110,7 @@ module.exports = function (proxy, allowedHost) {
 
         app.use(
           serverProxy(
-            '/api/', {
+            ['/api/', '/Picture/', '/Sonarqube/'], {
             target: 'http://localhost:5000/',
             changeOrigin: true
           }

@@ -5,8 +5,7 @@ import RNFS from 'react-native-fs';
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import CoreModule from 'Core/Module';
-import { setBaseUrl } from 'Core/IEReduxs/Actions'
-import { baseUrl } from '../../../app.json'
+import Weburl from 'Core/Weburl'
 import IETool from 'Core/ToolLibrary/IETool'
 
 import ModuleList from '../ModuleList'
@@ -27,7 +26,7 @@ export default class Module extends BaseModule {
     initialize() {
         RNFS.readFileAssets('config.json').then((result) => {
             let config = JSON.parse(result);
-            setBaseUrl(config.baseUrl);
+            Weburl.setBaseUrl(config.baseUrl)
         })
 
         IETool.getCookie = getCookie;

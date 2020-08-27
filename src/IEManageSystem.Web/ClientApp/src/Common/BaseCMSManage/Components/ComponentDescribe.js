@@ -38,7 +38,7 @@ export default class ComponentDescribe {
         this.componentType = type;
         this.displayName = displayName || name;
         this.logicCode = undefined;
-        this.defauleStyle = {};
+        this.defauleStyle = { minHeight: 20 };
     }
 
     createPageComponent(parentSign) {
