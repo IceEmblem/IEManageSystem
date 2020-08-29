@@ -1,5 +1,5 @@
 class CreatePageComponentService{
-    private createComponent(sign:string, name:string, componentType:string)
+    private createComponent(sign:string, name:string, componentTypes:number)
     {
         return {
             id: 0,
@@ -25,29 +25,9 @@ class CreatePageComponentService{
                 searchKey: "",
             },
             menuName: null,
-            componentType: componentType,
+            componentTypes: componentTypes,
             pageComponentSettings: []
         };
-    }
-
-    createCompositeComponent(sign:string, name:string)
-    {
-        return this.createComponent(sign, name, "CompositeComponent")
-    }
-
-    createLeafComponent(sign:string, name:string)
-    {
-        return this.createComponent(sign, name, "LeafComponent")
-    }
-
-    createPageLeafComponent(sign:string, name:string)
-    {
-        return this.createComponent(sign, name, "PageLeafComponent")
-    }
-
-    createMenuComponent(sign:string, name:string)
-    {
-        return this.createComponent(sign, name, "MenuComponent")
     }
 }
 

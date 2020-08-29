@@ -30,6 +30,6 @@ namespace IEManageSystem.CommonInfrastructure.CMS
             return contentComponentData;
         }
 
-        public abstract void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request);
+        public abstract void Exec(ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request);
     }
 }

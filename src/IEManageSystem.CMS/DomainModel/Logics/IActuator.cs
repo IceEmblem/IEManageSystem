@@ -11,6 +11,6 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 {
     public interface IActuator
     {
-        void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request);
+        void Exec(ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request);
     }
 }

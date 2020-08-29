@@ -43,11 +43,7 @@ namespace IEManageSystem.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new StaticPageConfigure());
             modelBuilder.ApplyConfiguration(new ContentPageConfigure());
             modelBuilder.ApplyConfiguration(new ContentPagePeimissionCollectionConfigure());
-            modelBuilder.ApplyConfiguration(new PageComponentBaseConfigure());
-            modelBuilder.ApplyConfiguration(new CompositeComponentConfigure());
-            modelBuilder.ApplyConfiguration(new LeafComponentConfigure());
-            modelBuilder.ApplyConfiguration(new MenuComponentConfigure());
-            modelBuilder.ApplyConfiguration(new PageLeafComponentConfigure());
+            modelBuilder.ApplyConfiguration(new PageComponentConfigure());
 
             modelBuilder.ApplyConfiguration(new PageDataConfigure());
 
@@ -78,7 +74,7 @@ namespace IEManageSystem.EntityFrameworkCore
 
         public DbSet<ContentPage> ContentPages { get; set; }
 
-        public DbSet<PageComponentBase> PageComponents { get; set; }
+        public DbSet<PageComponent> PageComponents { get; set; }
 
         public DbSet<MenuBase> Menus { get; set; }
 

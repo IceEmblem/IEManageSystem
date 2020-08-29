@@ -155,8 +155,8 @@ public class {CreateActuatorClassName(name)} : BaseActuator {{
 
                 MethodInfo mInfo = type.GetMethod("Exec");
 
-                Action<ContentComponentData, PageComponentBase, PageData, PageBase, User, string> action =
-                    (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request) =>
+                Action<ContentComponentData, PageComponent, PageData, PageBase, User, string> action =
+                    (ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request) =>
                     {
                         mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, page, user, request });
                     };

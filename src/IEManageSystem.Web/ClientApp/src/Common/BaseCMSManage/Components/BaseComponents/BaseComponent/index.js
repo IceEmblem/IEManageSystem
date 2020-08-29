@@ -1,15 +1,14 @@
 import BaseComponent, { BaseComponentProps } from './BaseComponent';
 import BaseConfig from './BaseConfig';
 import ComponentSettingConfig from './ComponentSettingConfig';
-import ReduxComponentContainer from './ComponentContainer';
-import IocContainer from 'Core/IocContainer';
-import IBasicSettingConfig from './IBasicSettingConfig'
+import BasicComponentSettingConfig from './BasicComponentSettingConfig'
 
 // 组件对象
 export default class BaseComponentObject {
     constructor() {
         this.ComponentSettingConfigs = [];
-        this.BasicSettingConfig = IocContainer.getService(IBasicSettingConfig);
+        this.ComponentDataConfig = undefined;
+        this.BasicComponentSettingConfig = new BasicComponentSettingConfig();
         this.Component = undefined;
         this.Preview = undefined;
     }
@@ -23,11 +22,21 @@ export default class BaseComponentObject {
             return undefined;
         }
 
-        this.ComponentContainerIntance = ReduxComponentContainer(this.Component);
+        let component = this.Component;
+        this.ComponentSettingConfigs.forEach(item => {
+            if(item.ComponentContainer){
+                component = item.ComponentContainer(component);
+            }
+        });
+
+        if(this.ComponentDataConfig){
+            component = this.ComponentDataConfig.ComponentContainer(component);
+        }
+
+        component = this.BasicComponentSettingConfig.ComponentContainer(component);
+
+        this.ComponentContainerIntance = component;
         return this.ComponentContainerIntance;
-    }
-    getComponentSettingConfigs(){
-        return [this.BasicSettingConfig, ...this.ComponentSettingConfigs]
     }
 }
 

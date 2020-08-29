@@ -10,15 +10,15 @@ using System.Text;
 
 namespace IEManageSystem.Repositorys.CMSRepositorys
 {
-    public class PageComponentRepository : EfRepository<PageComponentBase, int>, IPageComponentRepository
+    public class PageComponentRepository : EfRepository<PageComponent, int>, IPageComponentRepository
     {
         public PageComponentRepository(IDbContextProvider<IEManageSystemDbContext> dbContextProvider) : base(dbContextProvider)
         {
         }
 
-        public IQueryable<PageComponentBase> GetPageComponentOfAllIncludesForPageName(string pageName)
+        public IQueryable<PageComponent> GetPageComponentOfAllIncludesForPageName(string pageName)
         {
-            return Context.Set<PageComponentBase>().Include(e => e.PageComponentSettings).ThenInclude(e => e.SingleDatas).Where(e => e.Page.Name == pageName);
+            return Context.Set<PageComponent>().Include(e => e.PageComponentSettings).ThenInclude(e => e.SingleDatas).Where(e => e.Page.Name == pageName);
         }
     }
 }

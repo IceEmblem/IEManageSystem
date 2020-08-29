@@ -1,6 +1,5 @@
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
-import * as BaseComponentContainer from '../BaseComponent/ComponentContainer'
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     let defaultComponentData = state.defaultComponentDatas[ownProps.pageId][ownProps.sign];
@@ -11,15 +10,18 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     }
 
     return {
-        ...BaseComponentContainer.mapStateToProps(state, ownProps),
         componentData: contentComponentData || defaultComponentData || ComponentDataModel.CreateDefaultComponentData(ownProps.sign)
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
     }
 }
 
 const Contain = CmsRedux.connect(
     mapStateToProps, // 关于state
-    BaseComponentContainer.mapDispatchToProps,
-    BaseComponentContainer.mergeProps
+    mapDispatchToProps,
 )
 
 export default Contain;

@@ -40,7 +40,7 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             _logicAppService.RegisterLogic(new IEManageSystem.Services.ManageHome.CMS.Logics.Dto.RegisterLogicInput() { 
                 Name = "LogicTest1",
                 Code = @"
-                    public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+                    public override void Exec(ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request)
                     {
                         componentData.SingleDatas.ElementAt(0).Field1 = ""1"";
                     }
@@ -65,7 +65,7 @@ namespace IEManageSystem.Application.Tests.Services.Logics
                 {
                     Name = "RegisterFailTest",
                     Code = @"
-                    public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+                    public override void Exec(ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request)
                     {
                         componentData.Field1 = ""1"";$$$$$$$$$$$$$$$$$$$$$$$$
                     }
@@ -91,7 +91,7 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
 
             string code = @"
-                    public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+                    public override void Exec(ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request)
                     {
                         componentData.SingleDatas.ElementAt(0).Field1 = ""100000099"";
                     }

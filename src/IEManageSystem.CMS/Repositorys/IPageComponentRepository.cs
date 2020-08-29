@@ -7,8 +7,8 @@ using System.Text;
 
 namespace IEManageSystem.CMS.Repositorys
 {
-    public interface IPageComponentRepository : IEfRepository<PageComponentBase, int>
+    public interface IPageComponentRepository : IEfRepository<PageComponent, int>
     {
-        IQueryable<PageComponentBase> GetPageComponentOfAllIncludesForPageName(string pageName);
+        IQueryable<PageComponent> GetPageComponentOfAllIncludesForPageName(string pageName);
     }
 }

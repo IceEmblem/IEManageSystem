@@ -131,7 +131,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             dbContext.SaveChanges();
 
             // 聚合根下的所有实体应该删除
-            Assert.True(!dbContext.Set<PageComponentBase>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
+            Assert.True(!dbContext.Set<PageComponent>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
             Assert.True(!dbContext.Set<PageComponentSetting>().Any(e => e.Name == "ContentPage1_Component1_PageComponentSetting1Name"));
             Assert.True(!dbContext.Set<SingleSettingData>().Any(e => e.Name == "ContentPage1_Component1_PageComponentSetting1_SingleSettingData1Name"));
 
@@ -180,12 +180,12 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             dbContext.SaveChanges();
 
             // 删除原先的组件
-            Assert.True(!dbContext.Set<PageComponentBase>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
+            Assert.True(!dbContext.Set<PageComponent>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
             Assert.True(!dbContext.Set<PageComponentSetting>().Any(e => e.Name == "ContentPage1_Component1_PageComponentSetting1Name"));
             Assert.True(!dbContext.Set<SingleSettingData>().Any(e => e.Name == "ContentPage1_Component1_PageComponentSetting1_SingleSettingData1Name"));
 
             // 使用新的组件
-            Assert.True(dbContext.Set<PageComponentBase>().Any(e => e.Sign == "UpdatePageComponent_BaseTest_PageComponentSign"));
+            Assert.True(dbContext.Set<PageComponent>().Any(e => e.Sign == "UpdatePageComponent_BaseTest_PageComponentSign"));
             Assert.True(dbContext.Set<PageComponentSetting>().Any(e => e.Name == "UpdatePageComponent_BaseTest_PageComponentSettingName"));
             Assert.True(dbContext.Set<SingleSettingData>().Any(e => e.Name == "UpdatePageComponent_BaseTest_PageComponentSetting_SingleSettingDataName"));
 

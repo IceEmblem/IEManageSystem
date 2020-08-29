@@ -13,7 +13,7 @@ export default class PageComponentModel {
     public sign: string;
     public parentSign: string | null;
     public menuName: string | null;
-    public componentType: string;
+    public componentTypes: number;
     public os: string;
     public pageComponentBaseSetting: PageComponentBaseSettingModel;
     public pageLeafSetting: PageLeafSettingModel;

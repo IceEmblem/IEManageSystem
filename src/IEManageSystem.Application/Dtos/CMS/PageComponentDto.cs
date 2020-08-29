@@ -1,16 +1,19 @@
 ﻿using Abp.AutoMapper;
+using IEManageSystem.CMS.DomainModel.PageComponents;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace IEManageSystem.Dtos.CMS
 {
-    //[AutoMap()]
+    [AutoMap(typeof(PageComponent))]
     public class PageComponentDto
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public int ComponentTypes { get; set; }
 
         public string Sign { get; set; }
 
@@ -28,22 +31,5 @@ namespace IEManageSystem.Dtos.CMS
         /// 组件的平台 
         /// </summary>
         public string OS { get; set; }
-
-        /// <summary>
-        /// 组件类型 CompositeComponent, LeafComponent, PageLeafComponent, MenuComponent
-        /// </summary>
-        public string ComponentType { get; set; }
-
-        public void SetCompositeComponentType() => ComponentType = "CompositeComponent";
-        public bool IsCompositeComponentType() => ComponentType == "CompositeComponent";
-
-        public void SetLeafComponentType() => ComponentType = "LeafComponent";
-        public bool IsLeafComponentType() => ComponentType == "LeafComponent";
-
-        public void SetPageLeafComponentType() => ComponentType = "PageLeafComponent";
-        public bool IsPageLeafComponentType() => ComponentType == "PageLeafComponent";
-
-        public void SetMenuComponentType() => ComponentType = "MenuComponent";
-        public bool IsMenuComponentType() => ComponentType == "MenuComponent";
     }
 }

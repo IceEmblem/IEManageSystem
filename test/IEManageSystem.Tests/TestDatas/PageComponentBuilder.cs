@@ -22,9 +22,10 @@ namespace IEManageSystem.Tests.TestDatas
         public void Build()
         {
             var contentPage1 = _context.Pages.FirstOrDefault(e=>e.Name == "ContentPage1Name");
-            _context.PageComponents.AddRange(new List<PageComponentBase>() {
-                    new LeafComponent("ComponentName1"){
+            _context.PageComponents.AddRange(new List<PageComponent>() {
+                    new PageComponent("ComponentName1"){
                         Sign = "ContentPage1_Component1Sign",
+                        ComponentTypes = 0,
                         PageComponentBaseSetting = new PageComponentBaseSetting(1, "12", "27rem", null, null, null, null, null),
                         ComponentOSType = ComponentOSType.WebComponent,
                         PageComponentSettings = new List<PageComponentSetting>(){
@@ -38,13 +39,15 @@ namespace IEManageSystem.Tests.TestDatas
                         },
                         Page = contentPage1
                     },
-                    new CompositeComponent("ComponentName2"){
+                    new PageComponent("ComponentName2"){
                         Sign = "ContentPage1_Component2Sign",
+                        ComponentTypes = 0,
                         Page = contentPage1,
                         ComponentOSType = ComponentOSType.WebComponent,
                     },
-                    new PageLeafComponent("ComponentName3"){
+                    new PageComponent("ComponentName3"){
                         Sign = "ContentPage1_Component3Sign",
+                        ComponentTypes = 0,
                         Page = contentPage1,
                         ComponentOSType = ComponentOSType.WebComponent,
                     }
@@ -52,13 +55,13 @@ namespace IEManageSystem.Tests.TestDatas
 
 
             var staticPage = _context.Pages.FirstOrDefault(e => e.Name == "StaticPageName");
-            _context.PageComponents.AddRange(new List<PageComponentBase>() {
-                    new LeafComponent("ComponentName1"){
+            _context.PageComponents.AddRange(new List<PageComponent>() {
+                    new PageComponent("ComponentName1"){
                         Sign = "StaticPage1_PageComponentBase1Sign",
                         Page = staticPage,
                         ComponentOSType = ComponentOSType.WebComponent,
                     },
-                    new LeafComponent("ComponentName1"){
+                    new PageComponent("ComponentName1"){
                         Sign = "StaticPage1_PageComponentBase2Sign",
                         Page = staticPage,
                         ComponentOSType = ComponentOSType.WebComponent,

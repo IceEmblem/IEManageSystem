@@ -22,7 +22,7 @@ namespace IEManageSystem.CommonInfrastructure.CMS
     {
         private static string _commentName { get; } = "commentData";
 
-        public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+        public override void Exec(ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request)
         {
             if (user == null) {
                 throw new AbpAuthorizationException("未登录，请先登录");

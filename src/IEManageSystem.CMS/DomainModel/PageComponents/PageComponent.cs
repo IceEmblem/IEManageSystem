@@ -7,17 +7,23 @@ using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.PageComponents
 {
-    public abstract class PageComponentBase:Entity
+    public class PageComponent:Entity
     {
-        public PageComponentBase(string name) {
+        public PageComponent(string name) {
             Name = name;
         }
 
         public string Name { get; protected set; }
 
+        public int ComponentTypes { get; set; }
+
         public string Sign { get; set; }
 
         public string ParentSign { get; set; }
+
+        public string MenuName { get; set; }
+
+        public PageLeafSetting PageLeafSetting { get; set; }
 
         public ComponentOSType ComponentOSType { get; set; }
 

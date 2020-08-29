@@ -1,11 +1,90 @@
+import React from 'react'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import * as BaseComponentContainer from '../BaseComponent/ComponentContainer'
+import { withRouter } from 'react-router'
+import { ieReduxFetch } from "Core/IEReduxFetch"
+import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
+import TagModel from 'BaseCMSManage/Models/PageDatas/TagModel'
+
+class PostListContain extends React.Component {
+    state = {
+        posts: [],
+        resourceNum: 0,
+        postData: {
+            pageName: this.props.pageComponent.pageLeafSetting.pageName,
+            pageSize: this.props.pageComponent.pageLeafSetting.pageSize,
+            top: this.props.pageComponent.pageLeafSetting.top,
+            searchKey: this.props.pageComponent.pageLeafSetting.searchKey,
+            orderby: this.props.pageComponent.pageLeafSetting.orderby,
+            pageIndex: 1,
+        }
+    }
+
+    componentDidMount() {
+        this.getPageDateFetchs();
+    }
+
+    componentWillReceiveProps(nextprops) {
+        if (nextprops.curtag != this.props.curtag ||
+            nextprops.searchKey != this.props.searchKey) {
+            this.getPageDateFetchs();
+        }
+    }
+
+    createUrl(pageData) {
+        return `/Page/${pageData.pageId}/${pageData.name}`
+    }
+
+    getPostFetchs(postData) {
+        let tags;
+        try {
+            let tagstr = this.props.curtag;
+            tags = JSON.parse(decodeURI(tagstr));
+        }
+        catch (ex) {
+            tags = []
+        }
+
+        return ieReduxFetch("/api/PageDataQuery/GetPageDatas", {
+            ...postData,
+            tags,
+            searchKey: this.props.searchKey || this.state.searchKey
+        }).then(value => {
+            value.pageDatas.forEach(pageData => {
+                pageData.__proto__ = PageDataModel.prototype;
+                pageData.tags.forEach(tag => {
+                    tag.__proto__ = TagModel.prototype;
+                })
+            })
+
+            this.setState({ 
+                posts: value.pageDatas, 
+                resourceNum: value.resourceNum,
+                postData: {
+                    ...this.state.postData,
+                    ...postData
+                }
+            });
+        });
+    }
+
+    render() {
+        let { _postListComponent: Component, ...props } = this.props
+        return <Component
+            {...props}
+            createUrl={this.createUrl}
+            getPostFetchs={this.getPostFetchs}
+            posts={this.state.posts}
+            resourceNum={this.state.resourceNum}
+            postData={this.state.postData}
+        />
+    }
+}
 
 var queryRegex = /^\?/;
 
 const getQueryVariable = (variable, search) => {
     let query = search.replace(queryRegex, "");
-    
+
     var vars = query.split("&");
     for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
@@ -18,15 +97,17 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     let curtag = getQueryVariable("tag", ownProps.location.search);
 
     return {
-        ...{curtag},
-        ...BaseComponentContainer.mapStateToProps(state, ownProps),
+        curtag
     }
 }
 
-const Contain = CmsRedux.connect(
+const Contain = withRouter(CmsRedux.connect(
     mapStateToProps, // 关于state
-    BaseComponentContainer.mapDispatchToProps,
-    BaseComponentContainer.mergeProps
-)
+)(PostListContain))
 
-export default Contain;
+export default (component) => (props) => {
+    return <Contain
+        _postListComponent={component}
+        {...props}
+    />
+}

@@ -32,9 +32,9 @@ namespace IEManageSystem.CMS.DomainModel.PageComponents
         /// </summary>
         /// <param name="pageName"></param>
         /// <returns></returns>
-        public List<PageComponentBase> GetPageComponentsForCache(string pageName)
+        public List<PageComponent> GetPageComponentsForCache(string pageName)
         {
-            return _cache.GetOrCreate<List<PageComponentBase>>(GetCacheName(pageName), cacheEntity => {
+            return _cache.GetOrCreate<List<PageComponent>>(GetCacheName(pageName), cacheEntity => {
 
                 cacheEntity.SlidingExpiration = TimeSpan.FromHours(1);
 
@@ -59,7 +59,7 @@ namespace IEManageSystem.CMS.DomainModel.PageComponents
             _cache.Remove(GetCacheName(pageName));
         }
 
-        public void UpdatePageComponents(PageBase page, List<PageComponentBase> pageComponents) 
+        public void UpdatePageComponents(PageBase page, List<PageComponent> pageComponents) 
         {
             var oldPageComponents = PageComponentRepository.GetPageComponentOfAllIncludesForPageName(page.Name).ToList();
             oldPageComponents.ForEach(item => {

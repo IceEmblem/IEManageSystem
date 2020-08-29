@@ -113,10 +113,10 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 return new GetPageOutput() { Page = null, DefaultComponentDatas = new List<ComponentDataDto>() };
             }
 
-            return new GetPageOutput() { 
-                Page = CreatePageDtos(page), 
+            return new GetPageOutput() {
+                Page = CreatePageDtos(page),
                 DefaultComponentDatas = _objectMapper.Map<List<ComponentDataDto>>(_componentDataManager.GetDefaultComponentsForCache(page.Name)),
-                PageComponents = _pageComponentManager.GetPageComponentsForCache(page.Name).Select(item => CreatePageComponentDto(item)).ToList()
+                PageComponents = _objectMapper.Map<List<PageComponentDto>>(_pageComponentManager.GetPageComponentsForCache(page.Name).ToList())
             };
         }
 
@@ -146,11 +146,14 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             return pageDto;
         }
 
-        private PageComponentDto CreatePageComponentDto(PageComponentBase component)
+        private PageComponentDto CreatePageComponentDto(PageComponent component)
         {
             PageComponentDto dto = new PageComponentDto();
 
             dto.Id = component.Id;
+            dto.ComponentTypes = component.ComponentTypes;
+            dto.MenuName = component.MenuName;
+            dto.PageLeafSetting = _objectMapper.Map<PageLeafSettingDto>(component.PageLeafSetting);
             dto.Name = component.Name;
             dto.Sign = component.Sign;
             dto.ParentSign = component.ParentSign;
@@ -167,28 +170,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 };
 
                 dto.PageComponentSettings.Add(pageComponentSetting);
-            }
-
-            if (component is CompositeComponent)
-            {
-                dto.SetCompositeComponentType();
-            }
-            else if (component is PageLeafComponent)
-            {
-                var pageLeafComponent = (PageLeafComponent)component;
-                dto.PageLeafSetting = _objectMapper.Map<PageLeafSettingDto>(pageLeafComponent.PageLeafSetting);
-
-                dto.SetPageLeafComponentType();
-            }
-            else if (component is MenuComponent) 
-            {
-                dto.MenuName = ((MenuComponent)component).MenuName;
-
-                dto.SetMenuComponentType();
-            }
-            else
-            {
-                dto.SetLeafComponentType();
             }
 
             return dto;

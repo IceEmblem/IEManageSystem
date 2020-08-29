@@ -136,7 +136,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public UpdatePageComponentOutput UpdatePageComponent(UpdatePageComponentInput input)
         {
-            List<PageComponentBase> pageComponents = new List<PageComponentBase>();
+            List<PageComponent> pageComponents = new List<PageComponent>();
             foreach (var item in input.PageComponents) {
                 pageComponents.Add(CreatePageComponent(item));
             }
@@ -162,31 +162,13 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             return new UpdatePageComponentOutput();
         }
 
-        private PageComponentBase CreatePageComponent(PageComponentDto dto)
+        private PageComponent CreatePageComponent(PageComponentDto dto)
         {
-            PageComponentBase pageComponent = null;
+            PageComponent pageComponent = new PageComponent(dto.Name);
 
-            if (dto.IsCompositeComponentType())
-            {
-                pageComponent = new CompositeComponent(dto.Name);
-            }
-            else if (dto.IsPageLeafComponentType())
-            {
-                pageComponent = new PageLeafComponent(dto.Name) {
-                    PageLeafSetting = _objectMapper.Map<PageLeafSetting>(dto.PageLeafSetting)
-                };
-            }
-            else if (dto.IsMenuComponentType()) 
-            {
-                pageComponent = new MenuComponent(dto.Name) { 
-                    MenuName = dto.MenuName
-                };
-            }
-            else
-            {
-                pageComponent = new LeafComponent(dto.Name);
-            }
-
+            pageComponent.MenuName = dto.MenuName;
+            pageComponent.ComponentTypes = dto.ComponentTypes;
+            pageComponent.PageLeafSetting = _objectMapper.Map<PageLeafSetting>(dto.PageLeafSetting);
             pageComponent.ComponentOSType = ComponentOSType.CreateOSType(dto.OS);
             pageComponent.Sign = dto.Sign;
             pageComponent.ParentSign = dto.ParentSign;

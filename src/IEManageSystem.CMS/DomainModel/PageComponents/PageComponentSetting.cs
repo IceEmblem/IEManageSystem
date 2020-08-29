@@ -14,7 +14,7 @@ namespace IEManageSystem.CMS.DomainModel.PageComponents
 
         public ICollection<SingleSettingData> SingleDatas { get; set; }
 
-        public PageComponentBase PageComponent { get; set; }
+        public PageComponent PageComponent { get; set; }
 
         [ForeignKey("PageComponent")]
         public int PageComponentId { get; set; }
