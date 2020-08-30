@@ -1,5 +1,5 @@
-import PageComponentSettingModel from '../../../../Models/Pages/PageComponentSettingModel'
-import SingleDataModel from '../../../../Models/SingleDataModel'
+import PageComponentSettingModel from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
+import SingleDataModel from 'BaseCMSManage/Models/SingleDataModel'
 
 class SingleData {
     private _componentSignData : SingleDataModel;

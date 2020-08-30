@@ -1,11 +1,13 @@
-import BaseComponentObject from '../../BaseComponents/BaseContentLeafComponent';
+import BaseComponentObject from '../../BaseComponents/BaseComponent';
 import ComponentDescribe, { componentType } from '../../ComponentDescribe'
+import ComponentDataConfig from '../../BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
 
 import IocContainer from 'Core/IocContainer';
 import IComponent from './IComponent'
 import IPreview from './IPreview'
 
 class ComponentObject extends BaseComponentObject {
+    ComponentDataConfig = new ComponentDataConfig(undefined);
     Component = IocContainer.getService(IComponent)
     Preview = IocContainer.getService(IPreview)
 }

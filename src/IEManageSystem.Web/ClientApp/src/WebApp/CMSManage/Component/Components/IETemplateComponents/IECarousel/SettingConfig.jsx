@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECarousel/Setting'
-import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { Input, Tag, InputNumber } from 'antd';
 
 class SettingConfig extends ISettingConfig {
@@ -63,11 +62,4 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "幻灯片设置",
-    (pageComponentSetting, setPageComponentSetting) => {
-        return <SettingConfig
-            data={pageComponentSetting}
-            setData={setPageComponentSetting}
-        />;
-    }
-));
+export default (register) => register(ISettingConfig, SettingConfig);

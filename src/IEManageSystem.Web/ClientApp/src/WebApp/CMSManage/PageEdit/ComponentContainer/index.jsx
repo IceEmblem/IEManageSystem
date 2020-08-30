@@ -65,7 +65,7 @@ class CurrentToolBtns extends React.Component {
     }
 
     render() {
-        let { selectedPageComponents, pageId, pageDataId, addChildComponent, os } = this.props;
+        let { selectedPageComponents, pageId, pageDataId, os } = this.props;
 
         if (selectedPageComponents.length == 0) {
             return <></>
@@ -73,7 +73,7 @@ class CurrentToolBtns extends React.Component {
 
         return (
             <div>
-                <span style={{ right: 80, bottom: 100, position: "fixed" }} >
+                <span style={{ right: 80, bottom: 120, position: "fixed" }} >
                     {
                         selectedPageComponents.map(item => (
                             <div
@@ -87,8 +87,8 @@ class CurrentToolBtns extends React.Component {
                                     sign={item.pageComponent.sign}
                                     pageId={pageId}
                                     pageDataId={pageDataId}
-                                    addChildComponent={addChildComponent}
                                     style={{ opacity: 1, marginBottom: "5px" }}
+                                    placement={'left'}
                                 />
                             </div>
                         ))
@@ -128,8 +128,6 @@ class PageEditCompontContainer extends React.Component {
             os={pageComponent.os}
             pageId={pageId}
             pageDataId={pageDataId}
-            pageComponent={pageComponent}
-            addChildComponent={this.props.addChildComponent}
         />;
     }
 
@@ -221,7 +219,6 @@ class PageEditCompontContainer extends React.Component {
                 <CurrentToolBtns
                     pageId={this.props.pageId}
                     pageDataId={this.props.pageDataId}
-                    addChildComponent={this.props.addChildComponent}
                     os={this.props.rootPageComponent.os}
                     selectedPageComponents={this.state.selectedPageComponents}
                 />
@@ -235,7 +232,6 @@ PageEditCompontContainer.propTypes = {
     pageId: PropTypes.number.isRequired,
     pageDataId: PropTypes.number,
     rootPageComponent: PropTypes.object.isRequired,
-    addChildComponent: PropTypes.func.isRequired,
 }
 
 export default PageEditCompontContainer;

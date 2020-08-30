@@ -1,7 +1,9 @@
 import BaseComponent, { BaseComponentProps } from './BaseComponent';
-import BaseConfig from './BaseConfig';
-import ComponentSettingConfig from './ComponentSettingConfig';
-import BasicComponentSettingConfig from './BasicComponentSettingConfig'
+import BaseComponentSettingConfig, {IComponentSettingConfigBtnComponent} from './BaseComponentSettingConfig'
+import DeleteConfig, {IDeleteConfigBtnComponent} from './DeleteConfig'
+import BaseConfig from './BaseConfig'
+import BasicComponentSettingConfig, {IBasicSettingConfig} from './BasicComponentSettingConfig'
+import ComponentSettingConfig from './ComponentSettingConfig'
 
 // 组件对象
 export default class BaseComponentObject {
@@ -9,6 +11,7 @@ export default class BaseComponentObject {
         this.ComponentSettingConfigs = [];
         this.ComponentDataConfig = undefined;
         this.BasicComponentSettingConfig = new BasicComponentSettingConfig();
+        this.DeleteConfig = new DeleteConfig();
         this.Component = undefined;
         this.Preview = undefined;
     }
@@ -43,6 +46,10 @@ export default class BaseComponentObject {
 export { 
     BaseConfig, 
     ComponentSettingConfig,
+    BaseComponentSettingConfig,
+    IComponentSettingConfigBtnComponent,
+    DeleteConfig,
+    IDeleteConfigBtnComponent,
     BaseComponent, 
     BaseComponentProps,
     IBasicSettingConfig,

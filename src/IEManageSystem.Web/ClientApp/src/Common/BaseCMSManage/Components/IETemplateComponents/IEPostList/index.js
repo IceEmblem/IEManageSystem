@@ -1,4 +1,5 @@
-import BaseComponentObject from '../../BaseComponents/BasePageLeafComponent';
+import BaseComponentObject, {ComponentSettingConfig} from '../../BaseComponents/BaseComponent';
+import PageLeafComponentSettingConfig from '../../BaseComponents/BasePageLeafComponent/PageLeafComponentSettingConfig'
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
 import IocContainer from 'Core/IocContainer';
@@ -8,7 +9,8 @@ import ISettingConfig from './ISettingConfig'
 
 class ComponentObject extends BaseComponentObject{
     ComponentSettingConfigs = [
-        IocContainer.getService(ISettingConfig)
+        new PageLeafComponentSettingConfig(),
+        new ComponentSettingConfig("DefaultSetting", "组件设置", IocContainer.getService(ISettingConfig))
     ];
     Component=IocContainer.getService(IComponent)
     Preview=IocContainer.getService(IPreview)

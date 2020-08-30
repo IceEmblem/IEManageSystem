@@ -1,3 +1,4 @@
+import React from 'react'
 import BaseComponentSettingConfig from './BaseComponentSettingConfig' 
 
 export default class ComponentSettingConfig extends BaseComponentSettingConfig {
@@ -6,6 +7,8 @@ export default class ComponentSettingConfig extends BaseComponentSettingConfig {
         displayName, 
         ConfigComponent)
     {
+        super();
+        
         this.name = name;
         this.displayName = displayName;
         this.ConfigComponent = (props) => {
@@ -15,7 +18,8 @@ export default class ComponentSettingConfig extends BaseComponentSettingConfig {
                 {...other}
                 data={pageComponent.getOrCreatePageComponentSetting(this.name)}
                 setData={(data)=>{
-                    pageComponent.replacePageComponentSetting(this.name, data)
+                    pageComponent.replacePageComponentSetting(this.name, data);
+                    setData(pageComponent);
                 }}
             />
         }

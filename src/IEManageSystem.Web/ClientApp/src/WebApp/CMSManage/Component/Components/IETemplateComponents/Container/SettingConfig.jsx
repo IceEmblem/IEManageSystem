@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/Container/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/Container/Setting'
-import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 
 import { Tag, Radio } from 'antd';
 
@@ -109,11 +108,4 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("FlexSetting", "内容对齐设置",
-    (pageComponentSetting, setPageComponentSetting) => {
-        return <SettingConfig
-            data={pageComponentSetting}
-            setData={setPageComponentSetting}
-        />;
-    }
-));
+export default (register) => register(ISettingConfig, SettingConfig);

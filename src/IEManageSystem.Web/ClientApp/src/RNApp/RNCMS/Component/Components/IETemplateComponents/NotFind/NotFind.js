@@ -4,7 +4,7 @@ import { Text } from 'react-native'
 
 class NotFind extends IComponent{
     render() {
-        return <Text style={[this.baseStyle]}>组件已失效</Text>;
+        return <Text style={[this.baseStyle]}>未找到组件，请确保组件存在</Text>;
     }
 }
 

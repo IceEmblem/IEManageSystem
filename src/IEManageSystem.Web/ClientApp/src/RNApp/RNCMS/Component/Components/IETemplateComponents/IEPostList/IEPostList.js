@@ -76,25 +76,25 @@ class IEPostList extends IComponent {
             <View style={[this.baseStyle]}>
                 <View style={styles.sortView}>
                     <Text>排序：</Text>
-                    <Button small style={styles.sortBtn} onPress={() => { this.setState({ orderby: "Date" }) }}>
+                    <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({...this.props.postData, orderby: "Date"}) }}>
                         <Text>发表时间</Text>
                     </Button>
-                    <Button small style={styles.sortBtn} onPress={() => { this.setState({ orderby: "Click" }) }}>
+                    <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({...this.props.postData, orderby: "Click"}) }}>
                         <Text>点击量</Text>
                     </Button>
-                    <Button small style={styles.sortBtn} onPress={() => { this.setState({ orderby: "Score" }) }}>
+                    <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({...this.props.postData, orderby: "Score"}) }}>
                         <Text>评分</Text>
                     </Button>
                 </View>
                 <View style={styles.list}>
-                    {this.state.pageDatas.map(item => this.createItem(item, setting))}
+                    {this.props.posts.map(item => this.createItem(item, setting))}
                 </View>
                 <View style={styles.pageBtnView}>
-                    <Button small style={styles.pageBtn} disabled={this.state.pageIndex <= 1} onPress={() => this.setState({ pageIndex: this.state.pageIndex - 1 })}>
+                    <Button small style={styles.pageBtn} disabled={this.props.postData.pageIndex <= 1} onPress={() => this.props.getPostFetchs({...this.props.postData, pageIndex: this.props.postData.pageIndex - 1})}>
                         <Text>上一页</Text>
                     </Button>
-                    <Text style={styles.pageBtnText}>{`第 ${this.state.pageIndex} 页`}</Text>
-                    <Button small style={styles.pageBtn} disabled={this.state.pageDatas.length < this.state.pageSize} onPress={() => this.setState({ pageIndex: this.state.pageIndex + 1 })}>
+                    <Text style={styles.pageBtnText}>{`第 ${this.props.postData.pageIndex} 页`}</Text>
+                    <Button small style={styles.pageBtn} disabled={this.props.posts.length < this.props.postData.pageSize} onPress={() => this.props.getPostFetchs({...this.props.postData, pageIndex: this.props.postData.pageIndex + 1})}>
                         <Text>下一页</Text>
                     </Button>
                 </View>

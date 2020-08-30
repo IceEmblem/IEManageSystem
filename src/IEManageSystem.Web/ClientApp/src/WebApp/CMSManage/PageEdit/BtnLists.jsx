@@ -9,17 +9,27 @@ import { Button, Popover, Input, Tag, Select, Tooltip } from 'antd';
 import { PlusCircleOutlined, InfoCircleOutlined, SyncOutlined, SaveOutlined, VerticalAlignBottomOutlined, CopyOutlined } from "@ant-design/icons"
 
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import { setPage, CopyComponentAction } from 'BaseCMSManage/IEReduxs/Actions'
+import { setPage, CopyComponentAction, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import {
     pageComponentUpdateFetch,
 } from 'BaseCMSManage/IEReduxs/Actions'
+import { IContainerConfigBtnComponent } from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
+import IocContainer from 'Core/IocContainer'
 
 import "./BtnLists.css";
 
 const { Option } = Select;
+
+const AddComponentBtn = (props) => {
+    return <Button
+        icon={<PlusCircleOutlined />}
+        className="bg-success border-success text-white"
+        onClick={props.onClick}
+    >添加组件</Button>
+}
 
 const Layout = (props) => {
     return (
@@ -69,7 +79,7 @@ const OSType = (props) => (<div>
     <div>
         <Link className="ant-btn w-75 mb-1 mr-1" to={`/ManageHome/CMSManage/PageEdit/${props.page.name}/Web`} >浏览器</Link>
         <Tooltip title="导入浏览器组件">
-            <Button 
+            <Button
                 icon={<CopyOutlined />}
                 onClick={props.importWebComponent}
             ></Button>
@@ -78,7 +88,7 @@ const OSType = (props) => (<div>
     <div>
         <Link className="ant-btn ant-btn-primary w-75 mr-1" to={`/ManageHome/CMSManage/PageEdit/${props.page.name}/Native`} >移动App</Link>
         <Tooltip title="导入移动App组件">
-            <Button 
+            <Button
                 icon={<CopyOutlined />}
                 onClick={props.importNativeComponent}
             ></Button>
@@ -96,6 +106,7 @@ class BtnLists extends React.Component {
         }
 
         this.selectPageLayout = this.selectPageLayout.bind(this);
+        this.ContainerConfigBtnComponent = IocContainer.getService(IContainerConfigBtnComponent);
     }
 
     componentDidMount() {
@@ -143,14 +154,13 @@ class BtnLists extends React.Component {
                             const { x } = state
                             return (
                                 <div className="d-flex justify-content-end overflow-hidden-x" style={{ width: `${x}%` }}>
-                                    <Button
-                                        icon={<PlusCircleOutlined />}
-                                        className="bg-success border-success text-white"
-                                        onClick={() => {
-                                            this.setState({});
-                                            this.props.addComponent();
-                                        }}
-                                    >添加组件</Button>
+                                    <this.ContainerConfigBtnComponent
+                                        pageId={this.props.pageId}
+                                        pageDataId={undefined}
+                                        os={this.props.os}
+                                        sign={RootComponentSign}
+                                        btnComponent={AddComponentBtn}
+                                    />
                                     <Popover
                                         content={<Layout
                                             pages={this.state.pages}
@@ -177,16 +187,16 @@ class BtnLists extends React.Component {
                                         }}
                                     >导出页面</Button>
                                     <Popover
-                                        content={<OSType 
+                                        content={<OSType
                                             page={this.props.page}
-                                            importWebComponent={()=>{
-                                                if(this.props.os == PageComponentOSType.Web){
+                                            importWebComponent={() => {
+                                                if (this.props.os == PageComponentOSType.Web) {
                                                     return;
                                                 }
                                                 this.props.copyComponent(this.props.os, PageComponentOSType.Web)
                                             }}
-                                            importNativeComponent={()=>{
-                                                if(this.props.os == PageComponentOSType.Native){
+                                            importNativeComponent={() => {
+                                                if (this.props.os == PageComponentOSType.Native) {
                                                     return;
                                                 }
                                                 this.props.copyComponent(this.props.os, PageComponentOSType.Native)
@@ -264,23 +274,23 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         ...ownProps,
         setPage: dispatchProps.setPage,
         copyComponent: dispatchProps.copyComponent,
-        pageComponentUpdateFetch: ()=>{
+        pageComponentUpdateFetch: () => {
             dispatchProps.pageComponentUpdateFetch(stateProps.page.name, stateProps.pageComponents, stateProps.defaultComponentDatas)
         },
         exportPage: () => {
             if (!stateProps.page) {
                 return;
             }
-    
+
             let pageComponents = [];
             Object.values(stateProps.pageComponents).forEach(osComponents => pageComponents = pageComponents.concat(Object.values(osComponents)));
-    
+
             let data = JSON.stringify({
                 page: stateProps.page,
                 pageComponents: pageComponents,
                 defaultComponentDatas: Object.values(stateProps.defaultComponentDatas)
             })
-    
+
             var blob = new Blob([data], { type: 'text/json' }),
                 e = document.createEvent('MouseEvents'),
                 a = document.createElement('a')

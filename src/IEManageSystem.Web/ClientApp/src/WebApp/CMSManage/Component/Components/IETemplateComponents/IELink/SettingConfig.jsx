@@ -38,7 +38,6 @@ import {
     ZoomInOutlined,
     ZoomOutOutlined,
 } from '@ant-design/icons';
-import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 
 class SettingConfig extends ISettingConfig {
     state = {
@@ -157,11 +156,4 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "链接设置",
-    (pageComponentSetting, setPageComponentSetting) => {
-        return <SettingConfig
-            data={pageComponentSetting}
-            setData={setPageComponentSetting}
-        />;
-    }
-));
+export default (register) => register(ISettingConfig, SettingConfig);

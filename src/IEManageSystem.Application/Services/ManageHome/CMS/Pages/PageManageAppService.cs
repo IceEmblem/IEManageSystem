@@ -167,7 +167,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             PageComponent pageComponent = new PageComponent(dto.Name);
 
             pageComponent.MenuName = dto.MenuName;
-            pageComponent.ComponentTypes = dto.ComponentTypes;
             pageComponent.PageLeafSetting = _objectMapper.Map<PageLeafSetting>(dto.PageLeafSetting);
             pageComponent.ComponentOSType = ComponentOSType.CreateOSType(dto.OS);
             pageComponent.Sign = dto.Sign;

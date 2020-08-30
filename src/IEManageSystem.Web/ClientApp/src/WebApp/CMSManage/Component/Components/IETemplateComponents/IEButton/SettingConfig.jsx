@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IEButton/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEButton/Setting'
-import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { Input, Tag, Radio } from 'antd';
 
 class SettingConfig extends ISettingConfig {
@@ -90,11 +89,4 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("BtnSetting", "按钮设置",
-(pageComponentSetting, setPageComponentSetting) => {
-    return <SettingConfig
-        data={pageComponentSetting}
-        setData={setPageComponentSetting}
-    />;
-}
-));
+export default (register) => register(ISettingConfig, SettingConfig);

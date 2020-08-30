@@ -9,14 +9,12 @@ import PageEditCompontContainer from './ComponentContainer'
 
 import {
     pageFetch,
-    AddComponentAction,
     RootComponentSign,
 } from 'BaseCMSManage/IEReduxs/Actions'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import RegisterTemplateManager from 'CMSManage/Component/Components/RegisterTemplateManager'
 
 import BtnLists from './BtnLists'
-import ComponentListBox from "./ComponentListBox"
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -27,28 +25,12 @@ class PageContainer extends React.Component {
             curParentComponentSign: undefined,
             showComponentListBox: false,
         }
-
-        this.addComponent = this.addComponent.bind(this);
     }
 
     componentDidMount() {
         if (!this.props.page) {
             this.props.pageFetch(this.props.pageName)
         }
-    }
-
-    addComponent(selectedComponentDescribe) {
-        if (!selectedComponentDescribe) {
-            return;
-        }
-
-        let pageComponent = selectedComponentDescribe.createPageComponent(this.state.curParentComponentSign);
-
-        this.props.addComponent(new AddComponentAction(
-            this.props.page.id,
-            this.props.rootPageComponent.os,
-            pageComponent
-        ));
     }
 
     render() {
@@ -62,19 +44,10 @@ class PageContainer extends React.Component {
                     pageId={this.props.pageId}
                     pageDataId={this.props.pageDataId}
                     rootPageComponent={this.props.rootPageComponent}
-                    addChildComponent={(curParentComponentSign) => {
-                        this.setState({ curParentComponentSign: curParentComponentSign, showComponentListBox: true });
-                    }}
                 />
                 <BtnLists
-                    addComponent={() => { this.setState({ curParentComponentSign: RootComponentSign, showComponentListBox: true }) }}
                     pageId={this.props.pageId}
                     os={this.props.rootPageComponent.os}
-                />
-                <ComponentListBox
-                    show={this.state.showComponentListBox}
-                    close={() => { this.setState({ showComponentListBox: false }) }}
-                    addComponent={this.addComponent}
                 />
             </div>
         );
@@ -86,7 +59,6 @@ PageContainer.propTypes = {
     pageId: PropTypes.number,
     page: PropTypes.object,
     rootPageComponent: PropTypes.object,
-    addComponent: PropTypes.func.isRequired,
     pageFetch: PropTypes.func.isRequired,
 }
 
@@ -118,9 +90,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        addComponent: (addComponentAction) => {
-            dispatch(addComponentAction);
-        },
         pageFetch: (name) => {
             return dispatch(pageFetch(name));
         }

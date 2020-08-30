@@ -1,4 +1,5 @@
-import BaseComponentObject from '../../BaseComponents/BaseContainerComponent'
+import BaseComponentObject, {ComponentSettingConfig} from '../../BaseComponents/BaseComponent'
+import ContainerConfig from  '../../BaseComponents/BaseContainerComponent/ContainerConfig'
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
 import IocContainer from 'Core/IocContainer';
@@ -8,7 +9,8 @@ import IPreview from './IPreview'
 
 class ComponentObject extends BaseComponentObject {
     ComponentSettingConfigs = [
-        IocContainer.getService(ISettingConfig)
+        new ContainerConfig(),
+        new ComponentSettingConfig("FlexSetting", "内容对齐设置", IocContainer.getService(ISettingConfig)),
     ];
     Component=IocContainer.getService(IComponent);
     Preview=IocContainer.getService(IPreview);

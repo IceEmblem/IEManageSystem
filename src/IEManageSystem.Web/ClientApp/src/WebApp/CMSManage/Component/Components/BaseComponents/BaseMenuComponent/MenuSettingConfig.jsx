@@ -1,6 +1,5 @@
 import React from 'react';
-import {ComponentSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
-import {IMenuSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseMenuComponent';
+import {IMenuSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseMenuComponent/MenuComponentSettingConfig';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 import IocContainer from 'Core/IocContainer';
 
@@ -36,14 +35,15 @@ class MenuSettingConfig extends IMenuSettingConfig {
         }
 
         return (
-            <div className="col-md-12 float-left">
+            <div className="col-md-12">
                 <label htmlFor="sel1">指定菜单:</label>
                 <Select
                     showSearch
                     onChange={(value) => {
-                        this.props.setData(value);
+                        this.props.data.menuName = value;
+                        this.props.setData(this.props.data);
                     }}
-                    value={this.props.data}
+                    value={this.props.data.menuName}
                     className="w-100"
                     dropdownStyle={{zIndex:10000}}
                 >
@@ -54,15 +54,4 @@ class MenuSettingConfig extends IMenuSettingConfig {
     }
 }
 
-const buildMenuSettingConfig = function(){
-    return ComponentSettingConfig.BuildMenuComponentSettingConfig("ieMenuSetting", "菜单配置",
-        (pageComponentSetting, setPageComponentSetting) => {
-            return <MenuSettingConfig
-                data={pageComponentSetting}
-                setData={setPageComponentSetting}
-            />;
-        }
-    );
-}
-
-IocContainer.registerTransient(IMenuSettingConfig, buildMenuSettingConfig);
+IocContainer.registerSingleIntances(IMenuSettingConfig, MenuSettingConfig);

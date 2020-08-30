@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNav/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEBottomNav/Setting'
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox'
-import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { Input, Tag, Button } from 'antd';
 
 class SettingConfig extends ISettingConfig {
@@ -91,11 +90,4 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("Setting", "文本设置",
-(pageComponentSetting, setPageComponentSetting) => {
-    return <SettingConfig
-        data={pageComponentSetting}
-        setData={setPageComponentSetting}
-    />;
-}
-));
+export default (register) => register(ISettingConfig, SettingConfig);

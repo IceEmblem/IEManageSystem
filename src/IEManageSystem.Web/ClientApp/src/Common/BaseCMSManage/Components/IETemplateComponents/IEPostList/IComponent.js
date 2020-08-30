@@ -1,3 +1,3 @@
-import { BasePageLeafComponent } from '../../BaseComponents/BasePageLeafComponent'
+import { BaseComponent } from '../../BaseComponents/BaseComponent'
 
-export default class extends BasePageLeafComponent{}
+export default class extends BaseComponent{}

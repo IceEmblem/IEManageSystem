@@ -15,8 +15,6 @@ namespace IEManageSystem.CMS.DomainModel.PageComponents
 
         public string Name { get; protected set; }
 
-        public int ComponentTypes { get; set; }
-
         public string Sign { get; set; }
 
         public string ParentSign { get; set; }

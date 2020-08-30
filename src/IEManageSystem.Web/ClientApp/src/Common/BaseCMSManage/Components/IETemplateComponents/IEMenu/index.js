@@ -1,4 +1,5 @@
-import BaseComponentObject from '../../BaseComponents/BaseMenuComponent';
+import BaseComponentObject from '../../BaseComponents/BaseComponent';
+import MenuComponentSettingConfig from '../../BaseComponents/BaseMenuComponent/MenuComponentSettingConfig'
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
 import IocContainer from 'Core/IocContainer';
@@ -6,6 +7,9 @@ import IComponent from './IComponent'
 import IPreview from './IPreview'
 
 class ComponentObject extends BaseComponentObject{
+    ComponentSettingConfigs = [
+        new MenuComponentSettingConfig()
+    ]
     Component=IocContainer.getService(IComponent)
     Preview=IocContainer.getService(IPreview)
 }

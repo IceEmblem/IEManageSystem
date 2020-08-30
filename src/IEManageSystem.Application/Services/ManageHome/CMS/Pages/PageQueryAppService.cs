@@ -116,7 +116,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             return new GetPageOutput() {
                 Page = CreatePageDtos(page),
                 DefaultComponentDatas = _objectMapper.Map<List<ComponentDataDto>>(_componentDataManager.GetDefaultComponentsForCache(page.Name)),
-                PageComponents = _objectMapper.Map<List<PageComponentDto>>(_pageComponentManager.GetPageComponentsForCache(page.Name).ToList())
+                PageComponents = _pageComponentManager.GetPageComponentsForCache(page.Name).Select(item=>CreatePageComponentDto(item)).ToList()
             };
         }
 
@@ -151,7 +151,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             PageComponentDto dto = new PageComponentDto();
 
             dto.Id = component.Id;
-            dto.ComponentTypes = component.ComponentTypes;
             dto.MenuName = component.MenuName;
             dto.PageLeafSetting = _objectMapper.Map<PageLeafSettingDto>(component.PageLeafSetting);
             dto.Name = component.Name;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox';
 import IocContainer from 'Core/IocContainer';
 import { IBasicSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
@@ -191,15 +190,4 @@ class BasicSettingConfig extends IBasicSettingConfig {
     }
 }
 
-const buildBasicSettingConfig = function () {
-    return ComponentSettingConfig.BuildBasicComponentSettingConfig("ieBaiscSetting", "基本设置",
-        (pageComponentSetting, setPageComponentSetting) => {
-            return <BasicSettingConfig
-                data={pageComponentSetting}
-                setData={setPageComponentSetting}
-            />;
-        }
-    );
-}
-
-IocContainer.registerTransient(IBasicSettingConfig, buildBasicSettingConfig);
+IocContainer.registerSingleIntances(IBasicSettingConfig, BasicSettingConfig);

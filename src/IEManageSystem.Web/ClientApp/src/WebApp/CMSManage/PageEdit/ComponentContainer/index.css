@@ -24,17 +24,11 @@
     -webkit-transition: 0.5s;
 }
 
-.pageedit-componentcontainer-btns>button {
+.pageedit-componentcontainer-btns-popover button {
     margin: 0px 0px 0px 5px;
 }
 
 .pageedit-componentcontainer-btns-transform {
-    transform-origin:50% 50%;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
-}
-
-.pageedit-componentcontainer-btns-transform>button{
     transform-origin:50% 50%;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */

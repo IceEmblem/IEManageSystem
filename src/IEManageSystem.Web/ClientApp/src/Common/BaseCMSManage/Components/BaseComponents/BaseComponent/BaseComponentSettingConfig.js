@@ -1,25 +1,28 @@
+import React from 'react'
 import IEditConfig from './IEditConfig'
 import IocContainer from 'Core/IocContainer'
 
-export class IComponentSettingConfigBtnComponent {}
+export class IComponentSettingConfigBtnComponent extends React.Component {}
 
 export default class BaseComponentSettingConfig extends IEditConfig{
-    name = undefined;
-    displayName = undefined;
-    ConfigComponent = undefined;
-
     constructor(name, displayName, ConfigComponent){
+        super();
         this.name = name;
         this.displayName = displayName;
         this.ConfigComponent = ConfigComponent;
     }
 
-    bulidConfigBtnComponent(pageComponent){
+    bulidConfigBtnComponent(pageId, pageDataId, os, sign){
         let Component = IocContainer.getService(IComponentSettingConfigBtnComponent);
 
-        return <Component 
-            pageComponent={pageComponent}
+        return <Component
+            pageId={pageId}
+            pageDataId={pageDataId}
+            os={os}
+            sign={sign}
             ConfigComponent={this.ConfigComponent}
+
+            displayName={this.displayName}
         />
     }
 }

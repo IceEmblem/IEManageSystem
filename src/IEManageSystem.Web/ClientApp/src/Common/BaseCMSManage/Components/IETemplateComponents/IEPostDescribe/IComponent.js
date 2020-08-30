@@ -1,3 +1,3 @@
-import { BaseStaticComponent } from '../../BaseComponents/BaseStaticComponent'
+import { BaseComponent } from '../../BaseComponents/BaseComponent'
 
-export default class extends BaseStaticComponent{}
+export default class extends BaseComponent{}

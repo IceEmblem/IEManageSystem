@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IELine/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IELine/Setting'
-import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { Input, Tag, Radio, Card, Tabs } from 'antd';
 
 const { TabPane } = Tabs;
@@ -145,11 +144,4 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "图表设置",
-    (pageComponentSetting, setPageComponentSetting) => {
-        return <SettingConfig
-            data={pageComponentSetting}
-            setData={setPageComponentSetting}
-        />;
-    }
-));
+export default (register) => register(ISettingConfig, SettingConfig);

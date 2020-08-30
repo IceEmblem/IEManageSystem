@@ -20,13 +20,13 @@ class PostListContain extends React.Component {
     }
 
     componentDidMount() {
-        this.getPageDateFetchs();
+        this.getPostFetchs(this.state.postData);
     }
 
     componentWillReceiveProps(nextprops) {
         if (nextprops.curtag != this.props.curtag ||
             nextprops.searchKey != this.props.searchKey) {
-            this.getPageDateFetchs();
+            this.getPostFetchs(this.state.postData);
         }
     }
 
@@ -101,8 +101,13 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     }
 }
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {}
+}
+
 const Contain = withRouter(CmsRedux.connect(
-    mapStateToProps, // 关于state
+    mapStateToProps,
+    mapDispatchToProps
 )(PostListContain))
 
 export default (component) => (props) => {

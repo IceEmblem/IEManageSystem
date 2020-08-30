@@ -3,7 +3,7 @@ import IComponent from 'BaseCMSManage/Components/IETemplateComponents/NotFind/IC
 
 class NotFind extends IComponent{
     render() {
-        return <div>组件已失效</div>;
+        return <div>未找到组件，请确保组件存在</div>;
     }
 }
 

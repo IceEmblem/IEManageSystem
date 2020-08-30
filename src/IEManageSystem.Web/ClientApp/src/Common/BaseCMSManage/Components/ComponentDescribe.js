@@ -1,9 +1,4 @@
 import React from 'react'
-import ContainerComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent'
-import PageLeafComponentObject from 'BaseCMSManage/Components/BaseComponents/BasePageLeafComponent'
-import BaseLeafComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseLeafComponent'
-import BaseMenuComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseMenuComponent'
-import BaseContentLeafComponent from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent'
 import CreatePageComponentService from 'BaseCMSManage/Models/Pages/CreatePageComponentService'
 
 export const componentType = {
@@ -41,47 +36,14 @@ export default class ComponentDescribe {
         this.defauleStyle = { minHeight: 20 };
     }
 
-    createPageComponent(parentSign) {
+    createPageComponent(parentSign, os) {
         var timetamp = new Date().getTime();
 
-        let pageComponent;
-        if (this.componentObject instanceof ContainerComponentObject) {
-            pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.name)
-        }
-        else if (this.componentObject instanceof PageLeafComponentObject) {
-            pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.name)
-        }
-        else if ((this.componentObject instanceof BaseLeafComponentObject)) {
-            pageComponent = CreatePageComponentService.createLeafComponent(timetamp, this.name)
-        }
-        else if ((this.componentObject instanceof BaseMenuComponentObject)) {
-            pageComponent = CreatePageComponentService.createMenuComponent(timetamp, this.name)
-        }
-        else {
-            throw new Error("无法识别的组件类型");
-        }
+        let pageComponent = CreatePageComponentService.createComponent(timetamp, this.name, os);
 
         pageComponent.parentSign = parentSign;
 
-        this.componentObject.ComponentSettingConfigs.forEach(element => {
-            pageComponent.pageComponentSettings.push(
-                { id: 0, name: element.name, displayName: element.displayName, singleDatas: [] }
-            );
-        });
-
         return pageComponent;
-    }
-
-    isExistComponentData() {
-        if (this.componentObject instanceof BaseContentLeafComponent) {
-            return true;
-        }
-
-        return false;
-    }
-
-    isExistChildComponent() {
-        return (this.componentObject instanceof ContainerComponentObject);
     }
 
     // 生成 React 组件

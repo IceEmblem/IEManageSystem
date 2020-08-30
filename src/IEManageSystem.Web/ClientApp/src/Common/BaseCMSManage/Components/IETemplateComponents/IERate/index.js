@@ -1,4 +1,4 @@
-import BaseComponentObject from '../../BaseComponents/BaseStaticComponent';
+import BaseComponentObject from '../../BaseComponents/BaseComponent';
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
 import IocContainer from 'Core/IocContainer';

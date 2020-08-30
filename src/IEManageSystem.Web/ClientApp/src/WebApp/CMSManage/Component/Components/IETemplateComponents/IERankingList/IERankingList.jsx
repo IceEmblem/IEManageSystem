@@ -16,10 +16,10 @@ class IERankingList extends IComponent {
     render() {
         return (
             <div className="IERankingList">
-                {this.state.pageDatas.map(item => (
+                {this.props.posts.map(item => (
                     <div className="IERankingList-item">
                         <div className="flex-grow-1">
-                            <Link to={this.createUrl(item)}>{item.title}</Link>
+                            <Link to={this.props.createUrl(item)}>{item.title}</Link>
                         </div>
                         <div className="IERankingList-item-icon">
                             <TrophyFilled />

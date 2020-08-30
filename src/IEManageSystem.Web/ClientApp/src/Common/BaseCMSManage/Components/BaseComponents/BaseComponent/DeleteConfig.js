@@ -1,12 +1,12 @@
 import React from 'react'
-import IEditConfig from '../BaseComponent/IEditConfig'
+import IEditConfig from './IEditConfig'
 import IocContainer from 'Core/IocContainer'
 
-export class IContainerConfigBtnComponent extends React.Component {}
+export class IDeleteConfigBtnComponent extends React.Component {}
 
-export default class ContainerConfig extends IEditConfig{
+export default class DeleteConfig extends IEditConfig{
     bulidConfigBtnComponent(pageId, pageDataId, os, sign){
-        let Component = IocContainer.getService(IContainerConfigBtnComponent);
+        let Component = IocContainer.getService(IDeleteConfigBtnComponent);
 
         return <Component
             pageId={pageId}

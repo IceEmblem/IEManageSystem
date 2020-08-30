@@ -1,14 +1,14 @@
-import IComponentSettingConfig from '../BaseComponent/IComponentSettingConfig'
+import {BaseComponentSettingConfig} from '../BaseComponent'
 import IocContainer from 'Core/IocContainer'
 import ComponentContainer from './ComponentContainer'
 import {BaseConfig} from '../BaseComponent'
 
-export class IPageLeftSettingConfig extends BaseConfig{
+export class IPageLeafSettingConfig extends BaseConfig{
 }
 
-export default class extends IComponentSettingConfig{
+export default class extends BaseComponentSettingConfig{
     name = 'iePageLeafSetting';
     displayName = '文章配置';
-    ConfigComponent = IocContainer.getService(IPageLeftSettingConfig);
+    ConfigComponent = IocContainer.getService(IPageLeafSettingConfig);
     ComponentContainer = ComponentContainer;
 }

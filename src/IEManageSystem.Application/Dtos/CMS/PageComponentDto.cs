@@ -13,8 +13,6 @@ namespace IEManageSystem.Dtos.CMS
 
         public string Name { get; set; }
 
-        public int ComponentTypes { get; set; }
-
         public string Sign { get; set; }
 
         public string ParentSign { get; set; }

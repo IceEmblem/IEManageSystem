@@ -200,7 +200,7 @@ function pageReceiveHandle(receivePageComponents) {
 
     // 如果不存在根组件，则创建一个根组件
     if (!receivePageComponents.some(item => item.sign == RootComponentSign)) {
-        pageComponents[RootComponentSign] = CreatePageComponentService.createCompositeComponent(RootComponentSign, "");
+        pageComponents[RootComponentSign] = CreatePageComponentService.createComponent(RootComponentSign, "");
         // 将不存在父元素的组件指定到根组件
         receivePageComponents.forEach(element => {
             if (!element.parentSign) {

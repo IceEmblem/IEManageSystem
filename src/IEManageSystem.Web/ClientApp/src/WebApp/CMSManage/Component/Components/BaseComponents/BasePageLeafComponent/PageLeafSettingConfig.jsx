@@ -1,8 +1,7 @@
 import React from 'react';
-import {ComponentSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 import IocContainer from 'Core/IocContainer';
-import {IPageLeafSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BasePageLeafComponent'
+import {IPageLeafSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BasePageLeafComponent/PageLeafComponentSettingConfig'
 
 import { Select, Input, InputNumber, Tag } from 'antd';
 
@@ -35,12 +34,12 @@ class PageLeafSettingConfig extends IPageLeafSettingConfig {
                     <div className="input-group mb-3">
                         <Select
                             showSearch
+                            value={this.props.data.pageLeafSetting.pageName}
                             onChange={(value) => {
-                                this.props.data.pageName = value;
+                                this.props.data.pageLeafSetting.pageName = value;
                                 this.props.setData(this.props.data)
                                 this.setState({});
                             }}
-                            value={this.props.data.pageName}
                             className="w-100"
                             dropdownStyle={{ zIndex: 10000 }}
                         >
@@ -54,10 +53,10 @@ class PageLeafSettingConfig extends IPageLeafSettingConfig {
                     <div className="input-group mb-3">
                         <InputNumber
                             placeholder="页大小"
-                            value={this.props.data.pageSize}
+                            value={this.props.data.pageLeafSetting.pageSize}
                             onChange={
                                 (value) => {
-                                    this.props.data.pageSize = value || 0;
+                                    this.props.data.pageLeafSetting.pageSize = value || 0;
                                     this.props.setData(this.props.data)
                                 }
                             }
@@ -70,10 +69,10 @@ class PageLeafSettingConfig extends IPageLeafSettingConfig {
                     <div className="input-group mb-3">
                         <Input
                             placeholder="搜索关键字"
-                            value={this.props.data.searchKey}
+                            value={this.props.data.pageLeafSetting.searchKey}
                             onChange={
                                 (event) => {
-                                    this.props.data.searchKey = event.target.value;
+                                    this.props.data.pageLeafSetting.searchKey = event.target.value;
                                     this.props.setData(this.props.data)
                                 }
                             }
@@ -86,10 +85,10 @@ class PageLeafSettingConfig extends IPageLeafSettingConfig {
                     <div className="input-group mb-3">
                         <InputNumber
                             placeholder="过滤数"
-                            value={this.props.data.top}
+                            value={this.props.data.pageLeafSetting.top}
                             onChange={
                                 (value) => {
-                                    this.props.data.top = value || 0;
+                                    this.props.data.pageLeafSetting.top = value || 0;
                                     this.props.setData(this.props.data)
                                 }
                             }
@@ -102,12 +101,11 @@ class PageLeafSettingConfig extends IPageLeafSettingConfig {
                     <div className="input-group mb-3">
                         <Select
                             showSearch
+                            value={this.props.data.pageLeafSetting.orderby}
                             onChange={(value) => {
-                                this.props.data.orderby = value;
+                                this.props.data.pageLeafSetting.orderby = value;
                                 this.props.setData(this.props.data)
-                                this.setState({});
                             }}
-                            value={this.props.data.orderby}
                             className="w-100"
                             dropdownStyle={{ zIndex: 10000 }}
                         >
@@ -122,15 +120,4 @@ class PageLeafSettingConfig extends IPageLeafSettingConfig {
     }
 }
 
-const buildPageLeafSettingConfig = function(){
-    return ComponentSettingConfig.BuildPageLeafComponentSettingConfig("iePageLeafSetting", "文章配置",
-        (pageComponentSetting, setPageComponentSetting) => {
-            return <PageLeafSettingConfig
-                data={pageComponentSetting}
-                setData={setPageComponentSetting}
-            />;
-        }
-    );
-}
-
-IocContainer.registerTransient(IPageLeafSettingConfig, buildPageLeafSettingConfig);
+IocContainer.registerSingleIntances(IPageLeafSettingConfig, PageLeafSettingConfig);

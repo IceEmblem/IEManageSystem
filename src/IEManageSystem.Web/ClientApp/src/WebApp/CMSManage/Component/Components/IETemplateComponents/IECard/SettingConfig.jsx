@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ISettingConfig from 'BaseCMSManage/Components/IETemplateComponents/IECard/ISettingConfig'
 import Setting from 'BaseCMSManage/Components/IETemplateComponents/IECard/Setting'
-import { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import { Input, Tag } from 'antd';
 
 class SettingConfig extends ISettingConfig {
@@ -31,11 +30,4 @@ SettingConfig.propType = {
     setData: PropTypes.func.isRequired,
 }
 
-export default (register) => register(ISettingConfig, ComponentSettingConfig.BuildPageComponentSettingConfig("DefaultSetting", "图片设置",
-(pageComponentSetting, setPageComponentSetting) => {
-    return <SettingConfig
-        data={pageComponentSetting}
-        setData={setPageComponentSetting}
-    />;
-}
-));
+export default (register) => register(ISettingConfig, SettingConfig);

@@ -1,3 +1,3 @@
-import { BaseMenuComponent } from '../../BaseComponents/BaseMenuComponent'
+import { BaseComponent } from '../../BaseComponents/BaseComponent'
 
-export default class extends BaseMenuComponent{}
+export default class extends BaseComponent{}

@@ -10,22 +10,18 @@ class IERankingList extends IComponent {
         super(props);
     }
 
-    // 忽略父元素的刷新
-    componentWillReceiveProps(nextprops) {
-    }
-
     render() {
 
         return (
             <List style={[this.baseStyle]}>
-                {this.state.pageDatas.map((item, index) => (
+                {this.props.posts.map((item, index) => (
                     <ListItem
                         style={
                             index == 0 ? styles.firstLine :
                                 styles.line
                         }
                         onPress={() => {
-                            this.props.history.push(this.createUrl(item));
+                            this.props.history.push(this.props.createUrl(item));
                         }}
                     >
                         <View

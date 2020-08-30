@@ -1,12 +1,12 @@
 class CreatePageComponentService{
-    private createComponent(sign:string, name:string, componentTypes:number)
+    createComponent(sign:string, name:string, os: string)
     {
         return {
             id: 0,
             sign: sign,
             name: name,
             parentSign: null,
-            os: null,
+            os: os,
             pageComponentBaseSetting: {
                 id: 0,
                 sortIndex: 0,
@@ -25,7 +25,7 @@ class CreatePageComponentService{
                 searchKey: "",
             },
             menuName: null,
-            componentTypes: componentTypes,
+            componentTypes: 0,
             pageComponentSettings: []
         };
     }

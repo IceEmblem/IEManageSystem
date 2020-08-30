@@ -1,4 +1,4 @@
-import BaseComponentObject from '../../BaseComponents/BaseStaticComponent';
+import BaseComponentObject, {ComponentSettingConfig} from '../../BaseComponents/BaseComponent';
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
 import IocContainer from 'Core/IocContainer';
@@ -8,7 +8,7 @@ import IPreview from './IPreview'
 
 class ComponentObject extends BaseComponentObject {
     ComponentSettingConfigs = [
-        IocContainer.getService(ISettingConfig)
+        new ComponentSettingConfig("BtnSetting", "按钮设置", IocContainer.getService(ISettingConfig))
     ];
     Component=IocContainer.getService(IComponent);
     Preview=IocContainer.getService(IPreview);
