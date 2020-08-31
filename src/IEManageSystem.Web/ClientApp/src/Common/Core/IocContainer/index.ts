@@ -1,15 +1,11 @@
 
-import IETool from '../ToolLibrary/IETool'
-
-// 目前 IocContainer 无法支持 map 类型，性能较差
+// 为了提供性能，IocContainer 要求每个 keyType 必须提供一个 静态属性 iocKey
 // 当前 IocContainer 不支持依赖关联
 class IocContainer {
     intances: Map<string, any> = new Map<string, any>();
     
     singles: Map<string, ()=>any> = new Map<string, ()=>any>();
     transients: Map<string, ()=>any> = new Map<string, ()=>any>();
-
-    keyTypeToSigns = [];
 
     constructor(){
         this.registerSingle = this.registerSingle.bind(this);
@@ -18,62 +14,43 @@ class IocContainer {
     }
 
     registerSingle(keyType: any, valueBuilder: ()=>any){
-        let old = this.keyTypeToSigns.find(item => item.keyType == keyType);
-        if(old) {
-            this.singles[old.sign] = valueBuilder;
-            return;
+        if(!keyType.iocKey){
+            throw new Error(`IocContainer 注册失败，类型 ${keyType} 没有提供静态属性 iocKey`)
         }
 
-        let sign = IETool.guid();
-        this.singles[sign] = valueBuilder;
-        this.keyTypeToSigns.push({keyType, sign});
+        this.singles[keyType.iocKey] = valueBuilder;
     }
 
     registerSingleIntances(keyType: any, value: any){
-        let old = this.keyTypeToSigns.find(item => item.keyType == keyType);
-        if(old) {
-            this.intances[old.sign] = value;
-            return;
+        if(!keyType.iocKey){
+            throw new Error(`IocContainer 注册失败，类型 ${keyType} 没有提供静态属性 iocKey`)
         }
 
-        let sign = IETool.guid();
-        this.intances[sign] = value;
-        this.keyTypeToSigns.push({keyType, sign});
+        this.intances[keyType.iocKey] = value;
     }
 
     registerTransient(keyType: any, valueBuilder: ()=>any){
-        let old = this.keyTypeToSigns.find(item => item.keyType == keyType);
-        if(old) {
-            this.transients[old.sign] = valueBuilder;
-            return;
+        if(!keyType.iocKey){
+            throw new Error(`IocContainer 注册失败，类型 ${keyType} 没有提供静态属性 iocKey`)
         }
 
-        let sign = IETool.guid();
-        this.transients[sign] = valueBuilder;
-        this.keyTypeToSigns.push({keyType, sign});
+        this.transients[keyType.iocKey] = valueBuilder;
     }
 
     // 获取服务
     getService(keyType: any){
-        let keyTypeToSign = this.keyTypeToSigns.find(item => item.keyType === keyType);
-        if(!keyTypeToSign){
-            return null;
-        }
-
-        let sign = keyTypeToSign.sign;
-
-        let intance = this.intances[sign];
+        let intance = this.intances[keyType.iocKey];
         if(intance){
             return intance;
         }
 
-        let singleBuilder = this.singles[sign];
+        let singleBuilder = this.singles[keyType.iocKey];
         if(singleBuilder){
-            this.intances[sign] = singleBuilder();
-            return this.intances[sign];
+            this.intances[keyType.iocKey] = singleBuilder();
+            return this.intances[keyType.iocKey];
         }
 
-        let transientBuilder = this.transients[sign];
+        let transientBuilder = this.transients[keyType.iocKey];
         if(transientBuilder){
             return transientBuilder();
         }

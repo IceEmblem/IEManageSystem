@@ -15,6 +15,7 @@ export const componentTypes = [
 ];
 
 export class IInvalidOSComponent extends React.Component {}
+IInvalidOSComponent.iocKey = Symbol()
 
 class ComponentFactory {
     TemplateList = [];

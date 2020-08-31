@@ -5,6 +5,7 @@ import {BaseConfig} from '../BaseComponent'
 
 export class IMenuSettingConfig extends BaseConfig{
 }
+IMenuSettingConfig.iocKey = Symbol()
 
 export default class extends BaseComponentSettingConfig{
     name = 'ieMenuSetting';

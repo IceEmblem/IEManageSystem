@@ -5,6 +5,7 @@ import ComponentContainer from './ComponentContainer'
 
 export class IBasicSettingConfig extends BaseConfig{
 }
+IBasicSettingConfig.iocKey = Symbol()
 
 export default class BasicComponentSettingConfig extends BaseComponentSettingConfig {
     ComponentContainer = ComponentContainer;

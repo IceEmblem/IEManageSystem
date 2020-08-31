@@ -4,6 +4,7 @@ import IocContainer from 'Core/IocContainer'
 import ComponentContainer from './ComponentContainer'
 
 export class IComponentDataConfigBtnComponent extends React.Component { }
+IComponentDataConfigBtnComponent.iocKey = Symbol()
 
 export default class ComponentDataConfig extends IEditConfig {
     ConfigComponent = undefined;

@@ -5,6 +5,7 @@ import {BaseConfig} from '../BaseComponent'
 
 export class IPageLeafSettingConfig extends BaseConfig{
 }
+IPageLeafSettingConfig.iocKey = Symbol()
 
 export default class extends BaseComponentSettingConfig{
     name = 'iePageLeafSetting';
