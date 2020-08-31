@@ -11,7 +11,21 @@ import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel
 import Page from '../Home/Page'
 import IETool from 'Core/ToolLibrary/IETool'
 
+import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
+import IocContainer from 'Core/IocContainer'
+
 const pageId = 999999;
+
+class TemplateComponentContainerBoxShow extends React.Component {
+    render() {
+        return <ComponentContainerBoxShow
+            style={this.props.style}
+            className={this.props.className}
+        >
+            {this.props.children}
+        </ComponentContainerBoxShow>
+    }
+}
 
 class TemplatePageShow extends React.Component {
     constructor(props) {
@@ -19,6 +33,10 @@ class TemplatePageShow extends React.Component {
 
         this.template = ComponentFactory.TemplateList.find(e => e.name == props.match.params.templateName);
         this.templatePage = IETool.deepCopy(this.template.templatePages.find(item => item.page.name == props.match.params.templatePageName));
+    }
+
+    componentWillMount(){
+        IocContainer.registerSingleIntances(IComponentContainerBoxShow, TemplateComponentContainerBoxShow)
     }
 
     componentDidMount(){
@@ -40,7 +58,6 @@ class TemplatePageShow extends React.Component {
                             pageId={pageId}
                             pageDataId={undefined}
                             os={this.props.rootPageComponent.os}
-                            ComponentContainerBoxShow={ComponentContainerBoxShow}
                         >
                         </ComponentContainerBox>)
                 }
