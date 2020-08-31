@@ -10,7 +10,7 @@
 }
 
 .parentcomponent-btns>button {
-    opacity: 0.2;
+    opacity: 0.8;
     transition: 0.5s;
     -webkit-transition: 0.5s;
 }

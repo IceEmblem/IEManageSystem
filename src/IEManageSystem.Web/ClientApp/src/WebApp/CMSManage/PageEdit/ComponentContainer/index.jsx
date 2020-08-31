@@ -8,6 +8,8 @@ import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import ToolBtns from './ToolBtns';
 import Page from 'CMSManage/Home/Page'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
+import IocContainer from 'Core/IocContainer'
 
 // 标记框，用于标记当前活跃的组件位置
 class SignSquareFrame extends React.Component {
@@ -103,39 +105,13 @@ class CurrentToolBtns extends React.Component {
     }
 }
 
-class PageEditCompontContainer extends React.Component {
-    state = {
-        selectedPageComponents: [],
-    }
-
-    selectedPageComponents = [];
-
-    lastSelectedPageComponentSign = null;
-
-    constructor(props) {
-        super(props);
-
-        this.Tools = this.Tools.bind(this);
-        this.propsEX = this.propsEX.bind(this);
-        this.getStyle = this.getStyle.bind(this);
-        this.getClassName = this.getClassName.bind(this);
-    }
-
-    // 工具按钮
-    Tools({ sign, pageId, pageDataId, pageComponent }) {
-        return <ToolBtns
-            sign={sign}
-            os={pageComponent.os}
-            pageId={pageId}
-            pageDataId={pageDataId}
-        />;
-    }
-
+var selectedPageComponents = [];
+class EditComponentContainerBoxShow extends React.Component {
     // 扩展熟悉
     propsEX(pageComponent) {
         return {
             onClick: (e) => {
-                this.selectedPageComponents.push({
+                selectedPageComponents.push({
                     targetElement: e.currentTarget,
                     pageComponent: pageComponent,
                 });
@@ -143,16 +119,38 @@ class PageEditCompontContainer extends React.Component {
         }
     }
 
-    // 扩展样式
-    getStyle(pageComponent) {
-        return pageComponent.sign == this.props.activePageComponentSign ?
-            { backgroundColor: "#1890ff20", }
-            : {}
+    render() {
+        return <ComponentContainerBoxShow
+            style={{ ...this.props.style }}
+            className={`${this.props.className} pageedit-componentcontainer`}
+            propsEX={this.propsEX(this.props.pageComponent)}
+            ToolBtn={
+                <ToolBtns
+                    sign={this.props.sign}
+                    pageId={this.props.pageId}
+                    pageDataId={this.props.pageDataId}
+                    os={this.props.os}
+                />
+            }
+        >
+            {this.props.children}
+        </ComponentContainerBoxShow>
+    }
+}
+
+class PageEditCompontContainer extends React.Component {
+    state = {
+        selectedPageComponents: [],
     }
 
-    // 扩展class
-    getClassName(pageComponent) {
-        return "pageedit-componentcontainer";
+    lastSelectedPageComponentSign = null;
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillMount(){
+        IocContainer.registerSingleIntances(IComponentContainerBoxShow, EditComponentContainerBoxShow)
     }
 
     render() {
@@ -170,19 +168,19 @@ class PageEditCompontContainer extends React.Component {
                     className="w-100 h-100"
                     onClick={(e) => {
                         e.stopPropagation();
-                        if(this.selectedPageComponents.length == 0){
+                        if (selectedPageComponents.length == 0) {
                             return false;
                         }
 
-                        if(this.lastSelectedPageComponentSign == this.selectedPageComponents[0].pageComponent.sign){
-                            this.selectedPageComponents = [];
+                        if (this.lastSelectedPageComponentSign == selectedPageComponents[0].pageComponent.sign) {
+                            selectedPageComponents = [];
                             return false;
                         }
-                        
-                        this.setState({ selectedPageComponents: this.selectedPageComponents });
-                        this.lastSelectedPageComponentSign = this.selectedPageComponents[0].pageComponent.sign;
-                        this.selectedPageComponents = [];
-                        
+
+                        this.setState({ selectedPageComponents: selectedPageComponents });
+                        this.lastSelectedPageComponentSign = selectedPageComponents[0].pageComponent.sign;
+                        selectedPageComponents = [];
+
                         return false;
                     }}
                 >
@@ -196,12 +194,6 @@ class PageEditCompontContainer extends React.Component {
                                         pageId={this.props.pageId}
                                         pageDataId={this.props.pageDataId}
                                         os={this.props.rootPageComponent.os}
-                                        ComponentContainerBoxShow={ComponentContainerBoxShow}
-
-                                        style={this.getStyle}
-                                        className={this.getClassName}
-                                        propsEX={this.propsEX}
-                                        ToolBtn={this.Tools}
                                     >
                                     </ComponentContainerBox>
                                 </>

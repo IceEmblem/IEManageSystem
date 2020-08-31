@@ -3,14 +3,19 @@ import PropTypes from 'prop-types'
 
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
+import IocContainer from 'Core/IocContainer'
+
+export class IComponentContainerBoxShow extends React.Component { }
+IComponentContainerBoxShow.iocKey = Symbol()
 
 class ComponentContainerBox extends React.Component {
     constructor(props) {
         super(props);
 
         this.componentDescribe = ComponentFactory.getComponentDescribeForName(this.props.pageComponent.name);
+        this.ComponentContainerBoxShow = IocContainer.getService(IComponentContainerBoxShow);
     }
-    
+
 
     getStyle() {
         let style =
@@ -27,17 +32,17 @@ class ComponentContainerBox extends React.Component {
             if (!isNaN(intWidth)) {
                 style.width = intWidth.valueOf();
             }
-            else{
+            else {
                 style.width = this.props.pageComponent.pageComponentBaseSetting.width;
             }
         }
-        
+
         if (this.props.pageComponent.pageComponentBaseSetting.height) {
             let intheight = new Number(this.props.pageComponent.pageComponentBaseSetting.height)
             if (!isNaN(intheight)) {
                 style.height = intheight.valueOf();
             }
-            else{
+            else {
                 style.height = this.props.pageComponent.pageComponentBaseSetting.height;
             }
         }
@@ -47,7 +52,7 @@ class ComponentContainerBox extends React.Component {
             if (!isNaN(num)) {
                 style.padding = num.valueOf();
             }
-            else{
+            else {
                 style.padding = this.props.pageComponent.pageComponentBaseSetting.padding;
             }
         }
@@ -57,7 +62,7 @@ class ComponentContainerBox extends React.Component {
             if (!isNaN(num)) {
                 style.margin = num.valueOf();
             }
-            else{
+            else {
                 style.margin = this.props.pageComponent.pageComponentBaseSetting.margin;
             }
         }
@@ -81,50 +86,26 @@ class ComponentContainerBox extends React.Component {
         return className;
     }
 
-    createChildComponent() {
-        return this.props.pageComponent.pageComponentSigns.map(sign => (
-            <Contain
-                key={sign + this.props.pageComponent.os}
-                sign={sign}
+    render() {
+        return (
+            <this.ComponentContainerBoxShow
+                sign={this.props.sign}
                 pageId={this.props.pageId}
                 pageDataId={this.props.pageDataId}
                 os={this.props.os}
-                ComponentContainerBoxShow={this.props.ComponentContainerBoxShow}
+                pageComponent={this.props.pageComponent}
 
-                style={this.props.style}
-                className={this.props.className}
-                propsEX={this.props.propsEX}
-                ToolBtn={this.props.ToolBtn}
-            >
-            </Contain>)
-        );
-    }
-
-    render() {
-        return (
-            <this.props.ComponentContainerBoxShow
-                style={{ ...this.getStyle(), ...this.props.style(this.props.pageComponent) }}
-                className={`${this.getClassName()} ${this.props.className(this.props.pageComponent)}`}
-                propsEX={this.props.propsEX(this.props.pageComponent)}
-                ToolBtn={
-                    this.props.ToolBtn &&
-                    <this.props.ToolBtn
-                        sign={this.props.sign}
-                        pageId={this.props.pageId}
-                        pageDataId={this.props.pageDataId}
-                        pageComponent={this.props.pageComponent}
-                    />
-                }
+                style={{ ...this.getStyle() }}
+                className={`${this.getClassName()}`}
             >
                 {
                     this.componentDescribe.createComponent(
                         this.props.pageId,
                         this.props.os,
                         this.props.pageDataId,
-                        this.props.sign,
-                        this.createChildComponent())
+                        this.props.sign)
                 }
-            </this.props.ComponentContainerBoxShow>
+            </this.ComponentContainerBoxShow>
         );
     }
 }

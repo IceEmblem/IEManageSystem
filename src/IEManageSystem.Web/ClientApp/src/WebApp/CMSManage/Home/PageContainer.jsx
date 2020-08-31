@@ -9,6 +9,20 @@ import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBox
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
+import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
+import IocContainer from 'Core/IocContainer'
+
+class HomeComponentContainerBoxShow extends React.Component {
+    render() {
+        return <ComponentContainerBoxShow
+            style={this.props.style}
+            className={this.props.className}
+        >
+            {this.props.children}
+        </ComponentContainerBoxShow>
+    }
+}
+
 class PageContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -16,6 +30,10 @@ class PageContainer extends React.Component {
         this.state = {
             isFetching: false,
         };
+    }
+
+    componentWillMount(){
+        IocContainer.registerSingleIntances(IComponentContainerBoxShow, HomeComponentContainerBoxShow)
     }
 
     componentDidMount() {
@@ -64,7 +82,6 @@ class PageContainer extends React.Component {
                             pageId={this.props.pageId}
                             pageDataId={this.props.pageDataId}
                             os={this.props.rootPageComponent.os}
-                            ComponentContainerBoxShow={ComponentContainerBoxShow}
                         >
                         </ComponentContainerBox>)
                 }

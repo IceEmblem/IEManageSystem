@@ -38,6 +38,7 @@ class ToolBtns extends React.Component {
 
 ToolBtns.propTypes = {
     // 如下 3 个属性由父组件传入
+    os: PropTypes.string.isRequired,
     pageId: PropTypes.number.isRequired,
     pageDataId: PropTypes.number.isRequired,
     sign: PropTypes.string.isRequired,

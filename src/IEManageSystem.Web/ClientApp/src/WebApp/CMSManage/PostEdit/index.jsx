@@ -16,6 +16,29 @@ import { CloudUploadOutlined, UndoOutlined } from '@ant-design/icons'
 import Page from 'CMSManage/Home/Page'
 import ToolBtns from './ToolBtns'
 
+import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
+import IocContainer from 'Core/IocContainer'
+
+class EditComponentContainerBoxShow extends React.Component {
+    render() {
+        return <ComponentContainerBoxShow
+            style={this.props.style}
+            className={this.props.className}
+            ToolBtn={
+                <ToolBtns
+                    sign={this.props.sign}
+                    pageId={this.props.pageId}
+                    pageDataId={this.props.pageDataId}
+                    os={this.props.os}
+                    pageComponent={this.props.pageComponent}
+                />
+            }
+        >
+            {this.props.children}
+        </ComponentContainerBoxShow>
+    }
+}
+
 class ComponentData extends React.Component {
     constructor(props) {
         super(props);
@@ -27,6 +50,10 @@ class ComponentData extends React.Component {
         else if (!this.props.pageData) {
             this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
         }
+    }
+    
+    componentWillMount(){
+        IocContainer.registerSingleIntances(IComponentContainerBoxShow, EditComponentContainerBoxShow)
     }
 
     render() {
@@ -62,8 +89,6 @@ class ComponentData extends React.Component {
                                     pageId={this.props.pageId}
                                     pageDataId={this.props.pageDataId}
                                     os={this.props.rootPageComponent.os}
-                                    ComponentContainerBoxShow={ComponentContainerBoxShow}
-                                    ToolBtn={ToolBtns}
                                 >
                                 </ComponentContainerBox>)
                         }
