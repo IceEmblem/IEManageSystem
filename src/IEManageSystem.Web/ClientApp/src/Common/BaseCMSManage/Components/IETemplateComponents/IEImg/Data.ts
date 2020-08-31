@@ -42,4 +42,12 @@ export default class Data {
     set linkUrl(val){
         this.data.getDefauleData().field4 = val;
     }
+
+    get imgWidth(){
+        return this.data.getDefauleData().field5 || '100%';
+    }
+
+    set imgWidth(val){
+        this.data.getDefauleData().field5 = val;
+    }
 }

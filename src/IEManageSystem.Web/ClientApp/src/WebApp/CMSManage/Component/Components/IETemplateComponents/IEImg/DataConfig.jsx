@@ -72,6 +72,16 @@ class DataConfig extends IDataConfig {
                 }}
                 suffix={<Tag color="#55acee">链接 Url</Tag>}
             />
+            <Input
+                placeholder="示例：web端 300px, 30rem ... | App端 300"
+                className="mb-3"
+                value={this.data.imgWidth}
+                onChange={(e) => {
+                    this.data.imgWidth = e.currentTarget.value;
+                    this.props.setData(this.data.data);
+                }}
+                suffix={<Tag color="#55acee">图片宽度</Tag>}
+            />
         </div>)
     }
 }

@@ -11,7 +11,7 @@ class IEImg extends IComponent {
             <div className="w-100">
                 {
                     data.imgUrl ?
-                        <img className="w-100" alt="未找到图片" src={data.imgUrl} style={{ height: data.imgHeigth }}></img>
+                        <img className="w-100" alt="未找到图片" src={data.imgUrl} style={{ height: data.imgHeigth, width: data.imgWidth }}></img>
                         : <Empty />
                 }
                 <p style={{ textAlign: "center" }} className="mt-3">{data.text}</p>

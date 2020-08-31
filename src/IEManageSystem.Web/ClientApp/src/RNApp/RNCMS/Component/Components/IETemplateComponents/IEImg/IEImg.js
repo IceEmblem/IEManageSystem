@@ -15,6 +15,11 @@ class IEImg extends IComponent {
             height = 0;
         }
 
+        let width = new Number(data.imgWidth).valueOf();
+        if (isNaN(width)) {
+            width = '100%';
+        }
+
         return <TouchableHighlight to={data.linkUrl}
             style={[this.baseStyle]}
             onPress={()=>{
@@ -22,8 +27,8 @@ class IEImg extends IComponent {
             }}
             underlayColor='#0004'
         >
-            <View>
-                <Image source={{ uri: WebUrl.handleWeburl(data.imgUrl) }} style={{ height: height }} />
+            <View style={{alignItems: 'center'}}>
+                <Image source={{ uri: WebUrl.handleWeburl(data.imgUrl) }} style={{ height: height, width: width }} />
                 <Text style={{ textAlign: "center", lineHeight: 40 }}>{data.text}</Text>
             </View>
         </TouchableHighlight>
