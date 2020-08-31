@@ -3,8 +3,7 @@ import ModuleFactory from 'Core/Modules/ModuleFactory'
 import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import CoreModule from 'Core/Module';
 import BaseLayoutModule from 'BaseLayout/Module';
-import BasePersonModule from 'BasePerson/Module'
-import Person from './Person'
+import Setting from './Setting'
 
 export default class Module extends BaseModule
 {
@@ -12,23 +11,22 @@ export default class Module extends BaseModule
     {
         MenuProvider.registerMenu(
             {
-                id: "Personal",
-                text: "个人中心",
-                icon: 'user',
+                id: "Setting",
+                text: "设置中心",
+                icon: 'menufold',
                 default: true,
-                url: '/Personal',
+                url: '/Setting',
                 menuItems: [
                 ]
             },
-            "/Personal",
-            Person,
-            5
+            "/Setting",
+            Setting,
+            2
         );
     }
 }
 
 new ModuleFactory().register(Module, [
     CoreModule,
-    BasePersonModule,
     BaseLayoutModule
 ]);

@@ -38,7 +38,7 @@ class IEPostList extends IComponent {
                     setting.isShowImg == "true" &&
                     <CardItem button cardBody
                         onPress={() => {
-                            this.props.history.push(this.createUrl(post));
+                            this.props.history.push(this.props.createUrl(post));
                         }}
                     >
                         <Image
@@ -50,7 +50,7 @@ class IEPostList extends IComponent {
 
                 <CardItem button style={styles.itemTextArea}
                     onPress={() => {
-                        this.props.history.push(this.createUrl(post));
+                        this.props.history.push(this.props.createUrl(post));
                     }}
                 >
                     <View style={{width: '100%'}}>

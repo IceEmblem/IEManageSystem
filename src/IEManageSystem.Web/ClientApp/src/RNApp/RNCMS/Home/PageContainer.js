@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import { Text, View, ScrollView } from 'react-native';
 
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
@@ -8,11 +8,17 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { pageFetch, pageDataFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
 
 import ComponentContainerBoxShow from 'RNCMS/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
+import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
+import IocContainer from 'Core/IocContainer'
 
 class PageContainer extends Component {
   state = {
     isFetching: false,
   };
+
+  componentWillMount() {
+    IocContainer.registerSingleIntances(IComponentContainerBoxShow, ComponentContainerBoxShow)
+  }
 
   componentDidMount() {
     this.getPageFetch(this.props);
@@ -94,38 +100,38 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
   // pageName 即可能是 id, 也肯是 name
   let pageId = parseInt(pageName);
   if (isNaN(pageId)) {
-      // 如果为 NaN，那么 pageName 保存的应该是页面的 name
-      pageId = state.pageNameToIds[pageName];
+    // 如果为 NaN，那么 pageName 保存的应该是页面的 name
+    pageId = state.pageNameToIds[pageName];
   }
 
   // 获取根组件
   let rootPageComponent = undefined;
   if (state.pageComponents[pageId]) {
-      rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Native][RootComponentSign];
+    rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Native][RootComponentSign];
   }
 
   // 获取文章
   let postId = state.pageDataNameToIds[pageDataName];
 
   return {
-      pageId: pageId,
-      pageDataId: postId,
-      pageName: pageName,
-      pageDataName: pageDataName,
-      page: state.pages[pageId],
-      pageData: state.pageDatas[postId],
-      rootPageComponent: rootPageComponent,
+    pageId: pageId,
+    pageDataId: postId,
+    pageName: pageName,
+    pageDataName: pageDataName,
+    page: state.pages[pageId],
+    pageData: state.pageDatas[postId],
+    rootPageComponent: rootPageComponent,
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-      pageFetch: (name) => {
-          return dispatch(pageFetch(name));
-      },
-      pageDataFetch: (pageName, pageDataName) => {
-          return dispatch(pageDataFetch(pageName, pageDataName));
-      }
+    pageFetch: (name) => {
+      return dispatch(pageFetch(name));
+    },
+    pageDataFetch: (pageName, pageDataName) => {
+      return dispatch(pageDataFetch(pageName, pageDataName));
+    }
   }
 }
 

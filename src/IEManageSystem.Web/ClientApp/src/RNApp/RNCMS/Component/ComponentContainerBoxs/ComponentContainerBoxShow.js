@@ -35,10 +35,8 @@ export default class extends React.Component {
 
         return <View
             style={[styles.container, this.props.style]}
-            {...this.props.propsEX}
         >
             {this.props.children}
-            {this.props.ToolBtn}
         </View>
     }
 }
