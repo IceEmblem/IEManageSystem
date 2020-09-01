@@ -16,7 +16,13 @@ class PostListContain extends React.Component {
             searchKey: this.props.pageComponent.pageLeafSetting.searchKey,
             orderby: this.props.pageComponent.pageLeafSetting.orderby,
             pageIndex: 1,
-        }
+        },
+        isInvalid: false
+    }
+
+    constructor(props){
+        super(props);
+        this.getPostFetchs = this.getPostFetchs.bind(this);
     }
 
     componentDidMount() {
@@ -26,7 +32,14 @@ class PostListContain extends React.Component {
     componentWillReceiveProps(nextprops) {
         if (nextprops.curtag != this.props.curtag ||
             nextprops.searchKey != this.props.searchKey) {
+            this.setState({isInvalid: true});
+        }
+    }
+
+    componentDidUpdate(){
+        if(this.state.isInvalid){
             this.getPostFetchs(this.state.postData);
+            this.setState({isInvalid: false})
         }
     }
 
