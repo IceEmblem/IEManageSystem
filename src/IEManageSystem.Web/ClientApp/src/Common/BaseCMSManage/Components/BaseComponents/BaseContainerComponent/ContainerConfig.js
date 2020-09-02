@@ -3,13 +3,20 @@ import IEditConfig from '../BaseComponent/IEditConfig'
 import IocContainer from 'Core/IocContainer'
 import ComponentContainer from './ComponentContainer'
 
-export class IContainerConfigBtnComponent extends React.Component {}
+export class IContainerConfigBtnComponent extends React.Component { }
 IContainerConfigBtnComponent.iocKey = Symbol()
 
-export default class ContainerConfig extends IEditConfig{
+export default class ContainerConfig extends IEditConfig {
     ComponentContainer = ComponentContainer;
-    
-    bulidConfigBtnComponent(pageId, pageDataId, os, sign){
+
+    itemNum = undefined;
+
+    constructor(itemNum = 0) {
+        super()
+        this.itemNum = itemNum;
+    }
+
+    bulidConfigBtnComponent(pageId, pageDataId, os, sign) {
         let Component = IocContainer.getService(IContainerConfigBtnComponent);
 
         return <Component
@@ -17,6 +24,7 @@ export default class ContainerConfig extends IEditConfig{
             pageDataId={pageDataId}
             os={os}
             sign={sign}
+            itemNum={this.itemNum}
         />
     }
 }

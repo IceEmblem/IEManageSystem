@@ -1,5 +1,7 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
 
+const other = 'OtherSetting'
+
 export default class IEButtonSetting {
     setting: PageComponentSettingModel;
 
@@ -12,7 +14,7 @@ export default class IEButtonSetting {
     }
 
     get text() {
-        return this.setting.getDefauleData().field1 || "IE-按钮";
+        return this.setting.getDefauleData().field1 || '\n';
     }
 
     set text(val) {
@@ -49,6 +51,30 @@ export default class IEButtonSetting {
     
     set shape(val){
         this.setting.getDefauleData().field5 = val;
+    }
+
+    get bgcolor(){
+        return this.setting.getOrCreateSingleDate(other).field1;
+    }
+    
+    set bgcolor(val){
+        this.setting.getOrCreateSingleDate(other).field1 = val;
+    }
+
+    get color(){
+        return this.setting.getOrCreateSingleDate(other).field2;
+    }
+    
+    set color(val){
+        this.setting.getOrCreateSingleDate(other).field2 = val;
+    }
+
+    get icon(){
+        return this.setting.getOrCreateSingleDate(other).field3;
+    }
+    
+    set icon(val){
+        this.setting.getOrCreateSingleDate(other).field3 = val;
     }
 }
 

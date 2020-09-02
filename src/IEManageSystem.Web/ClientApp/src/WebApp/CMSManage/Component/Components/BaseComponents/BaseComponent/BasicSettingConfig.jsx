@@ -3,6 +3,7 @@ import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox';
 import IocContainer from 'Core/IocContainer';
 import { IBasicSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 import { RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
+import { SketchPicker } from 'react-color'
 
 import { Input, Tag, InputNumber, Button } from 'antd';
 
@@ -11,7 +12,8 @@ import { Input, Tag, InputNumber, Button } from 'antd';
 // 基本设置 配置
 class BasicSettingConfig extends IBasicSettingConfig {
     state = {
-        isShowPicturePopupBox: false
+        isShowPicturePopupBox: false,
+        isShowColorPicker: false
     }
 
     render() {
@@ -93,8 +95,24 @@ class BasicSettingConfig extends IBasicSettingConfig {
                                     this.props.setData(this.props.data)
                                 }
                             }
-                            suffix={<Tag color="#55acee">背景颜色</Tag>}
+                            suffix={<Button
+                                size='small' 
+                                type='primary'
+                                onClick={()=>this.setState({isShowColorPicker: !this.state.isShowColorPicker})}>选择颜色</Button>}
                         />
+                    </div>
+                    <div>
+                        <div style={{ position: 'absolute', zIndex: 999 }}>
+                            {
+                                this.state.isShowColorPicker &&
+                                <SketchPicker
+                                    color={this.props.data.pageComponentBaseSetting.backgroundColor || '#0000'}
+                                    onChange={(color, e) => {
+                                        this.props.data.pageComponentBaseSetting.backgroundColor = color.hex;
+                                        this.props.setData(this.props.data)
+                                    }} />
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className="col-md-6 float-left">

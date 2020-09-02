@@ -11,7 +11,6 @@ import IEDrawer from "./IEDrawer"
 import IEImg from "./IEImg"
 import IEInfoGroup from "./IEInfoGroup"
 import IELine from "./IELine"
-import IELink from "./IELink"
 import IELogo from "./IELogo"
 import IEMenu from "./IEMenu"
 import IEPlaceholder from './IEPlaceholder'
@@ -40,7 +39,6 @@ export default (register) => {
     IEImg(register)
     IEInfoGroup(register)
     IELine(register)
-    IELink(register)
     IELogo(register)
     IEMenu(register)
     IEPlaceholder(register)

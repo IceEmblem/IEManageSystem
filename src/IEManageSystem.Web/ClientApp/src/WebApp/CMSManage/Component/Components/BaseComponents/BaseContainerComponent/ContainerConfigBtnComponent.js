@@ -36,6 +36,11 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
     }
 
     render() {
+        // 如果子元素数目有限制
+        if(this.props.itemNum > 0 && this.props.pageComponent.pageComponentSigns.length >= this.props.itemNum){
+            return <></>
+        }
+
         return <>
             {
                 this.props.btnComponent ? 
@@ -68,6 +73,7 @@ ContainerConfigBtnComponent.propTypes = {
     pageDataId: PropTypes.number,
     os: PropTypes.string.isRequired,
     sign: PropTypes.string.isRequired,
+    itemNum: PropTypes.number.isRequired,
     // 显示的的按钮
     btnComponent: PropTypes.func,
 
