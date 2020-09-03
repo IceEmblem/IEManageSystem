@@ -118,7 +118,7 @@ class ComponentContainerBox extends React.Component {
                 style.borderRadius = this.props.pageComponent.pageComponentBaseSetting.borderRadius;
             }
         }
-        
+
         if (this.props.pageComponent.pageComponentBaseSetting.position) {
             style.position = this.props.pageComponent.pageComponentBaseSetting.position;
         }
@@ -168,9 +168,15 @@ class ComponentContainerBox extends React.Component {
         }
 
         if (this.props.pageComponent.pageComponentBaseSetting.backgroundImage) {
-            style.backgroundImage = `url(${this.props.pageComponent.pageComponentBaseSetting.backgroundImage})`;
-            style.backgroundRepeat = "no-repeat"
-            style.backgroundSize = "100% auto";
+            if (this.props.pageComponent.pageComponentBaseSetting.backgroundImage.startsWith('/') ||
+                this.props.pageComponent.pageComponentBaseSetting.backgroundImage.startsWith('http')) {
+                style.backgroundImage = `url(${this.props.pageComponent.pageComponentBaseSetting.backgroundImage})`;
+                style.backgroundRepeat = "no-repeat"
+                style.backgroundSize = "100% auto";
+            }
+            else{
+                style.backgroundImage = this.props.pageComponent.pageComponentBaseSetting.backgroundImage;
+            }
         }
 
         return style;

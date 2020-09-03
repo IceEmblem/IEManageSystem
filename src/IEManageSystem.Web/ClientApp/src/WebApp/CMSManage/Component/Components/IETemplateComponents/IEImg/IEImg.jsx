@@ -1,8 +1,7 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEImg/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEImg/Data'
-import { Empty } from 'antd'
-
+import nofindJpg from 'images/nofind480x300.jpg'
 import './index.css'
 
 class IEImg extends IComponent {
@@ -10,17 +9,20 @@ class IEImg extends IComponent {
         let data = new Data(this.props.componentData);
 
         let child;
-        if(this.props.children.length > 0){
+        if (this.props.children.length > 0) {
             child = this.props.children[0];
         }
 
-        return <a className='w-100 h-100' style={{overflow: 'hidden'}} href={data.linkUrl || 'javescript:void(0)'}>
-            <div className="w-100">
-                {
-                    data.imgUrl ?
-                        <img className="w-100" alt="未找到图片" src={data.imgUrl} style={{ height: data.imgHeigth, width: data.imgWidth }}></img>
-                        : <Empty />
-                }
+        return <a style={{ textDecoration: 'none', position: 'relative' }} className='w-100' href={data.linkUrl || 'javescript:void(0)'}>
+            <img className="w-100" alt="未找到图片" src={data.imgUrl || nofindJpg} style={{ height: data.imgHeigth, width: data.imgWidth }}></img>
+            <div style={{
+                left: 0,
+                top: 0,
+                width: '100%',
+                height: data.position == 'onimg' ? '100%' : 'auto',
+                position: data.position == 'onimg' ? 'absolute' : 'relative'
+            }}
+            >
                 {child}
             </div>
         </a>

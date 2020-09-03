@@ -194,13 +194,13 @@ function copyComponent(state: object, action: CopyComponentAction): object {
     return state;
 }
 
-function pageReceiveHandle(receivePageComponents) {
+function pageReceiveHandle(receivePageComponents, os: string) {
     // 页面组件列表
     let pageComponents = {};
 
     // 如果不存在根组件，则创建一个根组件
     if (!receivePageComponents.some(item => item.sign == RootComponentSign)) {
-        pageComponents[RootComponentSign] = CreatePageComponentService.createComponent(RootComponentSign, "");
+        pageComponents[RootComponentSign] = CreatePageComponentService.createComponent(RootComponentSign, "", os);
         // 将不存在父元素的组件指定到根组件
         receivePageComponents.forEach(element => {
             if (!element.parentSign) {
@@ -240,10 +240,8 @@ function pageReceive(state: object, action): object {
         }
     })
 
-    let webComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Web));
-    webComponents[RootComponentSign].os = PageComponentOSType.Web;
-    let nativeComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Native));
-    nativeComponents[RootComponentSign].os = PageComponentOSType.Native;
+    let webComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Web), PageComponentOSType.Web);
+    let nativeComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Native), PageComponentOSType.Native);
 
     let newState = { ...state };
     newState[action.data.page.id] = {

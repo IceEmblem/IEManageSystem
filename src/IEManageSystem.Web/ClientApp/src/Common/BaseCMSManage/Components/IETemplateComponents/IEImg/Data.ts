@@ -19,11 +19,11 @@ export default class Data {
         this.data.getDefauleData().field1 = val;
     }
 
-    get text(){
-        return this.data.getDefauleData().field2;
+    get position(){
+        return this.data.getDefauleData().field2 || 'onbottom';
     }
 
-    set text(val){
+    set position(val){
         this.data.getDefauleData().field2 = val;
     }
 
@@ -44,7 +44,7 @@ export default class Data {
     }
 
     get imgWidth(){
-        return this.data.getDefauleData().field5 || '100%';
+        return this.data.getDefauleData().field5;
     }
 
     set imgWidth(val){
