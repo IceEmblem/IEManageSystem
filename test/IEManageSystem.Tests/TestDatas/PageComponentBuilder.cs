@@ -25,7 +25,7 @@ namespace IEManageSystem.Tests.TestDatas
             _context.PageComponents.AddRange(new List<PageComponent>() {
                     new PageComponent("ComponentName1"){
                         Sign = "ContentPage1_Component1Sign",
-                        PageComponentBaseSetting = new PageComponentBaseSetting(1, "12", "27rem", null, null, null, null, null),
+                        PageComponentBaseSetting = new PageComponentBaseSetting(),
                         ComponentOSType = ComponentOSType.WebComponent,
                         PageComponentSettings = new List<PageComponentSetting>(){
                             new PageComponentSetting(){

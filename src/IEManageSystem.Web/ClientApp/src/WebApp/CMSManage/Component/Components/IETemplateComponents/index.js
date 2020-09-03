@@ -1,5 +1,6 @@
 // 注册各个模板所需的部件
 import Container from "./Container"
+import IEAnimation from './IEAnimation'
 import IEBottomNav from "./IEBottomNav"
 import IEButton from "./IEButton"
 import IECalendar from "./IECalendar"
@@ -28,6 +29,7 @@ import Text from "./Text"
 
 export default (register) => {
     Container(register)
+    IEAnimation(register)
     IEBottomNav(register)
     IEButton(register)
     IECalendar(register)

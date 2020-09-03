@@ -1,5 +1,6 @@
 import React from 'react'
 import BaseComponentSettingConfig from './BaseComponentSettingConfig' 
+import {DefaultSettingName} from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
 
 export default class ComponentSettingConfig extends BaseComponentSettingConfig {
     constructor(
@@ -9,8 +10,8 @@ export default class ComponentSettingConfig extends BaseComponentSettingConfig {
     {
         super();
         
-        this.name = name;
-        this.displayName = displayName;
+        this.name = name || DefaultSettingName;
+        this.displayName = displayName || this.name;
         this.ConfigComponent = (props) => {
             let {data : pageComponent, setData, ...other} = props;
 

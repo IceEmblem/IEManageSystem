@@ -10,47 +10,55 @@ namespace IEManageSystem.CMS.DomainModel.PageComponents
     /// </summary>
     public class PageComponentBaseSetting:ValueObject
     {
-        protected PageComponentBaseSetting() { }
+        public int SortIndex { get; set; }
 
-        public PageComponentBaseSetting(int sortIndex, string width, string height, string padding, string margin, string backgroundImage,string backgroundColor, string className)
-        {
-            SortIndex = sortIndex;
-            Width = width;
-            Height = height;
-            Padding = padding;
-            Margin = margin;
-            BackgroundColor = backgroundColor;
-            BackgroundImage = backgroundImage;
-            ClassName = className;
-        }
+        public string Width { get; set; }
 
-        public int SortIndex { get; protected set; }
+        public string Height { get; set; }
 
-        public string Width { get; protected set; }
+        public string Padding { get; set; }
 
-        public string Height { get; protected set; }
+        public int? PaddingLeft { get; set; }
 
-        public string Padding { get; protected set; }
+        public int? PaddingRight { get; set; }
 
-        public string Margin { get; protected set; }
+        public int? PaddingTop { get; set; }
 
-        public string BackgroundColor { get; protected set; }
+        public int? PaddingBottom { get; set; }
 
-        public string BackgroundImage { get; protected set; }
+        public string Margin { get; set; }
 
-        public string ClassName { get; protected set; }
+        public int? MarginLeft { get; set; }
+
+        public int? MarginRight { get; set; }
+
+        public int? MarginTop { get; set; }
+
+        public int? MarginBottom { get; set; }
+
+        public string Border { get; set; }
+
+        public string BorderRadius { get; set; }
+
+        public string Position { get; set; }
+
+        public string Left { get; set; }
+
+        public string Right { get; set; }
+
+        public string Top { get; set; }
+
+        public string Bottom { get; set; }
+
+        public string BackgroundColor { get; set; }
+
+        public string BackgroundImage { get; set; }
+
+        public string ClassName { get; set; }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-
-            yield return SortIndex;
-            yield return Width;
-            yield return Height;
-            yield return Padding;
-            yield return Margin;
-            yield return BackgroundColor;
-            yield return BackgroundImage;
-            yield return ClassName;
+            return new List<object>();
         }
     }
 }

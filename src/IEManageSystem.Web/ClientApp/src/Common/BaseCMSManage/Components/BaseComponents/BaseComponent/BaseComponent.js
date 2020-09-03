@@ -1,4 +1,5 @@
 import React from 'react'
+import { DefaultSettingName } from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
 
 export class BaseComponentProps{
     constructor(){
@@ -16,7 +17,12 @@ export class BaseComponentProps{
 
 export default class BaseComponent extends React.Component {
     baseStyle = { width: '100%',}
+
     getSetting(name){
         return this.props.pageComponent.getOrCreatePageComponentSetting(name);
+    }
+
+    getDefaultSetting(){
+        return this.props.pageComponent.getOrCreatePageComponentSetting(DefaultSettingName);
     }
 }

@@ -9,6 +9,7 @@ import Chart from './Chart.json'
 
 // 导出的组件
 import Container from "./Container"
+import IEAnimation from './IEAnimation'
 import IEBottomNav from "./IEBottomNav"
 import IEButton from "./IEButton"
 import IECalendar from "./IECalendar"
@@ -45,7 +46,7 @@ template.templatePages.push(new TemplatePage(PostList));
 template.templatePages.push(new TemplatePage(Post));
 template.templatePages.push(new TemplatePage(Chart));
 template.componentBuilders = [
-    Container, IEBottomNav, IEButton, IECalendar, IECard, IECarousel, IECategoryLabel, IEComment, IEDrawer, IEImg, IEInfoGroup, IELine, IELogo, IEMenu, IEPlaceholder, IEPostContent, IEPostDescribe, IEPostList, IEPostTitle, IERankingList, IERate, IESearch, IESelect, NotFind, RichTextEditor, Text
+    Container, IEAnimation, IEBottomNav, IEButton, IECalendar, IECard, IECarousel, IECategoryLabel, IEComment, IEDrawer, IEImg, IEInfoGroup, IELine, IELogo, IEMenu, IEPlaceholder, IEPostContent, IEPostDescribe, IEPostList, IEPostTitle, IERankingList, IERate, IESearch, IESelect, NotFind, RichTextEditor, Text
 ]
 
 export default template;

@@ -1,5 +1,6 @@
-import SingleDataModel from "../SingleDataModel";
 import DataCollectionBase from "../DataCollectionBase";
+
+export const DefaultSettingName = 'DefaultSetting'
 
 export default class PageComponentSettingModel extends DataCollectionBase 
 {

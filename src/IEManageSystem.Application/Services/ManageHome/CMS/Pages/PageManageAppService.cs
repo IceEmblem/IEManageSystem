@@ -171,16 +171,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             pageComponent.ComponentOSType = ComponentOSType.CreateOSType(dto.OS);
             pageComponent.Sign = dto.Sign;
             pageComponent.ParentSign = dto.ParentSign;
-            pageComponent.PageComponentBaseSetting = new PageComponentBaseSetting(
-                dto.PageComponentBaseSetting.SortIndex,
-                dto.PageComponentBaseSetting.Width,
-                dto.PageComponentBaseSetting.Height,
-                dto.PageComponentBaseSetting.Padding,
-                dto.PageComponentBaseSetting.Margin,
-                dto.PageComponentBaseSetting.BackgroundImage,
-                dto.PageComponentBaseSetting.BackgroundColor,
-                dto.PageComponentBaseSetting.ClassName
-                );
+            pageComponent.PageComponentBaseSetting = _objectMapper.Map<PageComponentBaseSetting>(dto.PageComponentBaseSetting);
 
             var pageComponentSettings = new List<PageComponentSetting>();
             foreach (var item in dto.PageComponentSettings ?? new List<PageComponentSettingDto>()) {
