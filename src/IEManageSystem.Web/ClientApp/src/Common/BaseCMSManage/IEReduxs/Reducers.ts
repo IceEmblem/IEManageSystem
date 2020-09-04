@@ -21,11 +21,6 @@ function activePageComponentSign(state: "", action: any) {
         return action.activePageComponentSign
     }
 
-    // 添加组件
-    if (action.type == PageAddComponent) {
-        return action.pageComponent.sign;
-    }
-
     return state;
 }
 

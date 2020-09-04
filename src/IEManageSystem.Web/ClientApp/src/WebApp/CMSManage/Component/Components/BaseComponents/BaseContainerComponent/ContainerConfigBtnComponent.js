@@ -4,6 +4,7 @@ import { IContainerConfigBtnComponent } from 'BaseCMSManage/Components/BaseCompo
 import { Button, Tooltip } from 'antd';
 import { AppstoreAddOutlined } from '@ant-design/icons';
 import {
+    setActiveComponent,
     AddComponentAction,
 } from 'BaseCMSManage/IEReduxs/Actions'
 import IocContainer from 'Core/IocContainer';
@@ -33,6 +34,9 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
             this.props.os,
             pageComponent
         ));
+
+        // 页面渲染结束后，设置新添加的组件为活跃组件
+        setTimeout(()=>this.props.setActiveComponent(pageComponent.sign), 0);
     }
 
     render() {
@@ -92,7 +96,10 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         addComponent: (addComponentAction) => {
-            dispatch(addComponentAction);
+            return dispatch(addComponentAction);
+        },
+        setActiveComponent: (sign) => {
+            return dispatch(setActiveComponent(sign));
         }
     }
 }
