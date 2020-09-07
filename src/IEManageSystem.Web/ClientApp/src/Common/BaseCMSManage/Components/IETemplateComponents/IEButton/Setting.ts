@@ -14,7 +14,7 @@ export default class IEButtonSetting {
     }
 
     get text() {
-        return this.setting.getDefauleData().field1 || '\n';
+        return this.setting.getDefauleData().field1 || '';
     }
 
     set text(val) {

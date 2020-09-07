@@ -13,8 +13,32 @@ class IEImg extends IComponent {
             child = this.props.children[0];
         }
 
+        let imgHeigth
+        if(data.imgHeigth){
+            imgHeigth = new Number(data.imgHeigth).valueOf();
+            if (isNaN(imgHeigth)) {
+                imgHeigth = data.imgHeigth;
+            }
+        }
+        else{
+            imgHeigth = '100%'
+        }
+
+        let imgWidth
+        if(data.imgWidth){
+            imgWidth = new Number(data.imgWidth).valueOf();
+            if (isNaN(imgWidth)) {
+                imgWidth = data.imgWidth;
+            }
+        }
+        else{
+            imgWidth = '100%'
+        }
+
         return <a style={{ textDecoration: 'none', position: 'relative' }} className='w-100' href={data.linkUrl || 'javescript:void(0)'}>
-            <img className="w-100" alt="未找到图片" src={data.imgUrl || nofindJpg} style={{ height: data.imgHeigth, width: data.imgWidth }}></img>
+            <div className='w-100 d-flex justify-content-center'>
+                <img alt="未找到图片" src={data.imgUrl || nofindJpg} style={{ height: imgHeigth, width: imgWidth }}></img>
+            </div>
             <div style={{
                 left: 0,
                 top: 0,

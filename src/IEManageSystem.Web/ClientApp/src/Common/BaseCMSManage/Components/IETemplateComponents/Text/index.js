@@ -1,5 +1,6 @@
 import BaseComponentObject, {ComponentSettingConfig} from '../../BaseComponents/BaseComponent'
 import ComponentDataConfig from '../../BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
+import ContainerConfig from  '../../BaseComponents/BaseContainerComponent/ContainerConfig'
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
 
 import IocContainer from 'Core/IocContainer';
@@ -10,6 +11,7 @@ import ISettingConfig from './ISettingConfig'
 
 class ComponentObject extends BaseComponentObject {
     ComponentSettingConfigs = [
+        new ContainerConfig(1),
         new ComponentSettingConfig("Setting", "文本设置", IocContainer.getService(ISettingConfig))
     ];
     ComponentDataConfig = new ComponentDataConfig(IocContainer.getService(IDataConfig))

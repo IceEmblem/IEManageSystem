@@ -17,20 +17,29 @@ class Text extends IComponent {
         let setting = new Setting(this.getSetting("Setting"));
         this.data.setData(this.props.componentData);
 
+        let component;
         if (setting.textType == "h1") {
-            return (<Title className="mb-0" level={1} style={{ color: setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
+            component =  (<Title className="mb-0" level={1} style={{ color: setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
         }
-        if (setting.textType == "h2") {
-            return (<Title className="mb-0" level={2} style={{ color: setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
+        else if (setting.textType == "h2") {
+            component =  (<Title className="mb-0" level={2} style={{ color: setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
         }
-        if (setting.textType == "h3") {
-            return (<Title className="mb-0" level={3} style={{ color: setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
+        else if (setting.textType == "h3") {
+            component =  (<Title className="mb-0" level={3} style={{ color: setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
         }
-        if (setting.textType == "h4") {
-            return (<Title className="mb-0" level={4} style={{ color: setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
+        else if (setting.textType == "h4") {
+            component =  (<Title className="mb-0" level={4} style={{ color: setting.fontColor }} >{this.data.text} <small>{this.data.smallText}</small> </Title>)
         }
-
-        return (<p className="mb-0" style={{ color: setting.fontColor }}>{this.data.text} <small>{this.data.smallText}</small></p>);
+        else{
+            component =  (<p className="mb-0" style={{ color: setting.fontColor }}>{this.data.text} <small>{this.data.smallText}</small></p>);
+        }
+        
+        return <div className='d-flex align-items-center'>
+            <div>
+                {this.props.children}
+            </div>
+            {component}
+        </div>
     }
 }
 

@@ -108,9 +108,11 @@ const getQueryVariable = (variable, search) => {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     let curtag = getQueryVariable("tag", ownProps.location.search);
+    let searchKey = getQueryVariable("search", ownProps.location.search);
 
     return {
-        curtag
+        curtag,
+        searchKey
     }
 }
 

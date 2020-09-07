@@ -10,7 +10,7 @@ class CreatePageComponentService{
             pageComponentBaseSetting: {
                 id: 0,
                 sortIndex: 0,
-                width: null,
+                width: '100%',
                 height: null,
                 padding: null,
                 margin: null,

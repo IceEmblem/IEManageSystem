@@ -12,7 +12,6 @@ import IEDrawer from "./IEDrawer"
 import IEImg from "./IEImg"
 import IEInfoGroup from "./IEInfoGroup"
 import IELine from "./IELine"
-import IELogo from "./IELogo"
 import IEMenu from "./IEMenu"
 import IEPlaceholder from './IEPlaceholder'
 import IEPostContent from "./IEPostContent"
@@ -41,7 +40,6 @@ export default (register) => {
     IEImg(register)
     IEInfoGroup(register)
     IELine(register)
-    IELogo(register)
     IEMenu(register)
     IEPlaceholder(register)
     IEPostContent(register)
