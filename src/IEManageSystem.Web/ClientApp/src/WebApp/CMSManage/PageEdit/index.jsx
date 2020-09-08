@@ -9,7 +9,6 @@ import PageEditCompontContainer from './ComponentContainer'
 
 import {
     pageFetch,
-    RootComponentSign,
 } from 'BaseCMSManage/IEReduxs/Actions'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import RegisterTemplateManager from 'CMSManage/Component/Components/RegisterTemplateManager'
@@ -34,7 +33,7 @@ class PageContainer extends React.Component {
     }
 
     render() {
-        if (!this.props.rootPageComponent) {
+        if (!this.props.page) {
             return <div></div>
         }
 
@@ -42,12 +41,11 @@ class PageContainer extends React.Component {
             <div className="w-100 h-100">
                 <PageEditCompontContainer
                     pageId={this.props.pageId}
-                    pageDataId={this.props.pageDataId}
-                    rootPageComponent={this.props.rootPageComponent}
+                    os={this.props.os}
                 />
                 <BtnLists
                     pageId={this.props.pageId}
-                    os={this.props.rootPageComponent.os}
+                    os={this.props.os}
                 />
             </div>
         );
@@ -58,8 +56,8 @@ PageContainer.propTypes = {
     pageName: PropTypes.string.isRequired,
     pageId: PropTypes.number,
     page: PropTypes.object,
-    rootPageComponent: PropTypes.object,
     pageFetch: PropTypes.func.isRequired,
+    os: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -74,17 +72,11 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
         pageId = state.pageNameToIds[pageName];
     }
 
-    // 获取根组件
-    let rootPageComponent = undefined;
-    if (state.pageComponents[pageId]) {
-        rootPageComponent = state.pageComponents[pageId][os][RootComponentSign];
-    }
-
     return {
         pageName: pageName,
         pageId: pageId,
         page: state.pages[pageId],
-        rootPageComponent: rootPageComponent,
+        os: os
     }
 }
 

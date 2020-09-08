@@ -19,6 +19,9 @@ namespace IEManageSystem.CMS.DomainModel.PageComponents
 
         public string ParentSign { get; set; }
 
+        // 组别，划分基于父组件
+        public string Group { get; set; }
+
         public string MenuName { get; set; }
 
         public PageLeafSetting PageLeafSetting { get; set; }

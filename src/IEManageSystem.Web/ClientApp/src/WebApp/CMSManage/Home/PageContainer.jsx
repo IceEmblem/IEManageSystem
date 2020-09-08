@@ -6,11 +6,12 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { pageFetch, pageDataFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
 import Page from './Page'
 import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
-import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
-import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
 import IocContainer from 'Core/IocContainer'
+
+import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 
 class HomeComponentContainerBoxShow extends React.Component {
     render() {
@@ -32,7 +33,7 @@ class PageContainer extends React.Component {
         };
     }
 
-    componentWillMount(){
+    componentWillMount() {
         IocContainer.registerSingleIntances(IComponentContainerBoxShow, HomeComponentContainerBoxShow)
     }
 
@@ -68,23 +69,17 @@ class PageContainer extends React.Component {
     }
 
     render() {
-        if (!this.props.rootPageComponent) {
+        if (!this.props.page) {
             return <div></div>;
         }
 
         return (
             <Page>
-                {
-                    this.props.rootPageComponent.pageComponentSigns.map(sign =>
-                        <ComponentContainerBox
-                            key={sign}
-                            sign={sign}
-                            pageId={this.props.pageId}
-                            pageDataId={this.props.pageDataId}
-                            os={this.props.rootPageComponent.os}
-                        >
-                        </ComponentContainerBox>)
-                }
+                <RootComponentContainerBox
+                    pageId={this.props.pageId}
+                    pageDataId={this.props.pageDataId}
+                    os={this.props.os}
+                />
             </Page>
         );
     }
@@ -97,9 +92,9 @@ PageContainer.propTypes = {
     pageDataName: PropTypes.string,
 
     page: PropTypes.object,
-    rootPageComponent: PropTypes.object,
     pageFetch: PropTypes.func.isRequired,
     pageDataFetch: PropTypes.func.isRequired,
+    os: PropTypes.string.isRequired,
 }
 
 PageContainer.defaultProps = {
@@ -117,12 +112,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
         pageId = state.pageNameToIds[pageName];
     }
 
-    // 获取根组件
-    let rootPageComponent = undefined;
-    if (state.pageComponents[pageId]) {
-        rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Web][RootComponentSign];
-    }
-
     // 获取文章
     let postId = state.pageDataNameToIds[pageDataName];
 
@@ -133,7 +122,7 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
         pageDataName: pageDataName,
         page: state.pages[pageId],
         pageData: state.pageDatas[postId],
-        rootPageComponent: rootPageComponent,
+        os: PageComponentOSType.Web,
     }
 }
 

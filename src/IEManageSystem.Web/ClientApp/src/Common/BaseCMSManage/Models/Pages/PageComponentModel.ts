@@ -12,6 +12,7 @@ export default class PageComponentModel {
     public name: string;
     public sign: string;
     public parentSign: string | null;
+    public group: string | null;
     public menuName: string | null;
     public componentTypes: number;
     public os: string;
@@ -31,6 +32,7 @@ export default class PageComponentModel {
         pageComponentSettingModel.name = name;
         pageComponentSettingModel.displayName = name;
         pageComponentSettingModel.singleDatas = [];
+        this.pageComponentSettings.push(pageComponentSettingModel);
 
         return pageComponentSettingModel;
     }

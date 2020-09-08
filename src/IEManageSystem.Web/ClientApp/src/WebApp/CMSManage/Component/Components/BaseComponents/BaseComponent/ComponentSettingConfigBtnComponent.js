@@ -69,7 +69,7 @@ ComponentSettingConfigBtnComponent.propTypes = {
     ConfigComponent: PropTypes.func.isRequired,
 
     pageComponent: PropTypes.object.isRequired,
-    addComponent: PropTypes.func.isRequired
+    editComponent: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props

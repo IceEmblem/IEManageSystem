@@ -17,6 +17,8 @@ namespace IEManageSystem.Dtos.CMS
 
         public string ParentSign { get; set; }
 
+        public string Group { get; set; }
+
         public PageComponentBaseSettingDto PageComponentBaseSetting { get; set; }
 
         public PageLeafSettingDto PageLeafSetting { get; set; }

@@ -6,9 +6,7 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import './index.css'
 
 import { pageFetch, pageDataFetch, componentDataUpdateFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
-import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
-import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
-import {PageComponentOSType} from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import { Button } from 'antd';
 import { CloudUploadOutlined, UndoOutlined } from '@ant-design/icons'
@@ -18,6 +16,9 @@ import ToolBtns from './ToolBtns'
 
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
 import IocContainer from 'Core/IocContainer'
+
+import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
+import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
 
 class EditComponentContainerBoxShow extends React.Component {
     render() {
@@ -51,13 +52,13 @@ class ComponentData extends React.Component {
             this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
         }
     }
-    
-    componentWillMount(){
+
+    componentWillMount() {
         IocContainer.registerSingleIntances(IComponentContainerBoxShow, EditComponentContainerBoxShow)
     }
 
     render() {
-        if (!this.props.rootPageComponent) {
+        if (!this.props.page) {
             return (<div className="postedit-page-container"></div>);
         }
 
@@ -81,17 +82,11 @@ class ComponentData extends React.Component {
                 </div>
                 <div>
                     <Page>
-                        {
-                            this.props.rootPageComponent.pageComponentSigns.map(sign =>
-                                <ComponentContainerBox
-                                    key={sign}
-                                    sign={sign}
-                                    pageId={this.props.pageId}
-                                    pageDataId={this.props.pageDataId}
-                                    os={this.props.rootPageComponent.os}
-                                >
-                                </ComponentContainerBox>)
-                        }
+                        <RootComponentContainerBox
+                            pageId={this.props.pageId}
+                            pageDataId={this.props.pageDataId}
+                            os={this.props.os}
+                        />
                     </Page>
                 </div>
             </div>
@@ -109,6 +104,7 @@ ComponentData.propTypes = {
     pageFetch: PropTypes.func.isRequired,
     pageDataFetch: PropTypes.func.isRequired,
     componentDataUpdateFetch: PropTypes.func.isRequired,
+    os: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -121,12 +117,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
         pageId = state.pageNameToIds[pageName];
     }
 
-    // 获取根组件
-    let rootPageComponent = undefined;
-    if (state.pageComponents[pageId]) {
-        rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Web][RootComponentSign];
-    }
-
     let postName = ownProps.match.params.pageDataName;
     // 获取文章
     let postId = state.pageDataNameToIds[postName];
@@ -137,9 +127,9 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
         pageName: pageName,
         pageDataName: postName,
         page: state.pages[pageId],
-        rootPageComponent: rootPageComponent,
         pageData: state.pageDatas[postId],
         contentComponentDatas: state.contentComponentDatas[postId],
+        os: PageComponentOSType.Web,
     }
 }
 

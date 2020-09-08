@@ -1,31 +1,19 @@
 import React from 'react'
 import IEditConfig from '../BaseComponent/IEditConfig'
+import ComponentContainer from './ContainerComponentContainer'
+import ContainerConfig, {IContainerConfigBtnComponent} from '../BaseContainerComponent/ContainerConfig'
 import IocContainer from 'Core/IocContainer'
-import ComponentContainer from './ComponentContainer'
 
-export class IContainerConfigBtnComponent extends React.Component { }
-IContainerConfigBtnComponent.iocKey = Symbol()
-
-export default class ContainerConfig extends IEditConfig {
+export default class InteractiveContainerConfig extends IEditConfig {
     ComponentContainer = undefined;
-
-    itemNum = undefined;
 
     // { name: string, displayName: string }
     configs = undefined;
 
-    constructor(configs = 0) {
+    constructor(configs) {
         super()
 
-        if(configs == undefined || configs == null){
-            this.itemNum = 0;
-        }
-        else if(configs instanceof Object){
-            this.configs = configs;
-        }
-        else{
-            this.itemNum = configs;
-        }
+        this.configs = configs;
 
         this.ComponentContainer = (component) => (props) => {
             return <ComponentContainer 
@@ -44,7 +32,7 @@ export default class ContainerConfig extends IEditConfig {
             pageDataId={pageDataId}
             os={os}
             sign={sign}
-            itemNum={this.itemNum}
+            itemNum={1}
             containerConfigs={this.configs}
         />
     }

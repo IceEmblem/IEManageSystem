@@ -20,6 +20,10 @@ class IEButton extends IComponent {
             style={{backgroundColor: setting.bgcolor, color: setting.color}} 
             shape={setting.shape} type={setting.btnType} size={setting.size}
             onClick={()=>{
+                if(this.props.interactivClick){
+                    this.props.interactivClick();
+                    return;
+                }
                 if(setting.url.startsWith('http')){
                     window.location.href = setting.url;
                     return;
@@ -27,7 +31,7 @@ class IEButton extends IComponent {
                 this.props.history.push(setting.url);
             }}
         >
-            {setting.text}
+            {this.props.interactivText || setting.text}
         </Button>
         );
     }

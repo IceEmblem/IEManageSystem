@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, ScrollView } from 'react-native';
 
-import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { pageFetch, pageDataFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
@@ -10,6 +9,8 @@ import { pageFetch, pageDataFetch, RootComponentSign, } from 'BaseCMSManage/IERe
 import ComponentContainerBoxShow from 'RNCMS/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
 import IocContainer from 'Core/IocContainer'
+
+import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 
 class PageContainer extends Component {
   state = {
@@ -52,24 +53,13 @@ class PageContainer extends Component {
   }
 
   render() {
-    if (!this.props.rootPageComponent) {
-      return <View></View>;
-    }
-
     return (
       <ScrollView>
-        {
-          this.props.rootPageComponent.pageComponentSigns.map(sign =>
-            <ComponentContainerBox
-              key={sign}
-              sign={sign}
-              pageId={this.props.pageId}
-              pageDataId={this.props.pageDataId}
-              os={this.props.rootPageComponent.os}
-              ComponentContainerBoxShow={ComponentContainerBoxShow}
-            >
-            </ComponentContainerBox>)
-        }
+        <RootComponentContainerBox
+          pageId={this.props.pageId}
+          pageDataId={this.props.pageDataId}
+          os={PageComponentOSType.Native}
+        />
       </ScrollView>
     )
   }
@@ -83,7 +73,6 @@ PageContainer.propTypes = {
 
   page: PropTypes.object,
   pageData: PropTypes.object,
-  rootPageComponent: PropTypes.object,
   pageFetch: PropTypes.func.isRequired,
   pageDataFetch: PropTypes.func.isRequired,
 }
@@ -104,12 +93,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     pageId = state.pageNameToIds[pageName];
   }
 
-  // 获取根组件
-  let rootPageComponent = undefined;
-  if (state.pageComponents[pageId]) {
-    rootPageComponent = state.pageComponents[pageId][PageComponentOSType.Native][RootComponentSign];
-  }
-
   // 获取文章
   let postId = state.pageDataNameToIds[pageDataName];
 
@@ -120,7 +103,6 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     pageDataName: pageDataName,
     page: state.pages[pageId],
     pageData: state.pageDatas[postId],
-    rootPageComponent: rootPageComponent,
   }
 }
 

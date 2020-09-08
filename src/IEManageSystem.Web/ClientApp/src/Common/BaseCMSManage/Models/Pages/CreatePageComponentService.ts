@@ -6,6 +6,7 @@ class CreatePageComponentService{
             sign: sign,
             name: name,
             parentSign: null,
+            group: null,
             os: os,
             pageComponentBaseSetting: {
                 id: 0,
