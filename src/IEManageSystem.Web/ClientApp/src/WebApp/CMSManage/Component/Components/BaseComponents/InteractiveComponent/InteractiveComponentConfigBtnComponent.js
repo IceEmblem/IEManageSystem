@@ -16,6 +16,8 @@ import {
 } from 'BaseCMSManage/IEReduxs/Actions'
 
 class InteractiveComponentConfigBtnComponent extends IInteractiveComponentConfigBtnComponent {
+    static contextType = ComponentContext;
+
     state = {
         show: false,
         clonePageComponent: IETool.deepCopy(this.props.pageComponent),
@@ -26,7 +28,7 @@ class InteractiveComponentConfigBtnComponent extends IInteractiveComponentConfig
     }
 
     render() {
-        let interactivConfigFeature = ComponentContext.current.get(InteractivConfigFeature);
+        let interactivConfigFeature = this.context.interactivConfigFeature;
         if (!interactivConfigFeature) {
             return <></>
         }
@@ -104,6 +106,7 @@ class InteractiveComponentConfigBtnComponent extends IInteractiveComponentConfig
                     okText='提交'
                     cancelText='取消'
                     width={1200}
+                    zIndex={9999}
                 >
                     <div className='d-flex flex-wrap'>
                         {texts}

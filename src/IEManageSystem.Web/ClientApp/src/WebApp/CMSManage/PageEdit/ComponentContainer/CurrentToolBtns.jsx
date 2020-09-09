@@ -45,7 +45,7 @@ class CurrentToolBtns extends React.Component {
 
         return (
             <div>
-                <span style={{ right: 80, bottom: 120, position: "fixed" }} >
+                <span style={{ right: 80, bottom: 150, position: "fixed" }} >
                     {
                         signs.map(item => (
                             <div
@@ -61,6 +61,7 @@ class CurrentToolBtns extends React.Component {
                                     pageDataId={this.props.pageDataId}
                                     style={{ opacity: 1, marginBottom: "5px" }}
                                     placement={'left'}
+                                    cancelActiveShow={true}
                                 />
                             </div>
                         ))

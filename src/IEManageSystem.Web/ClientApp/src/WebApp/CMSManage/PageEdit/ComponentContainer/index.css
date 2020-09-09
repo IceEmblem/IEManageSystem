@@ -1,7 +1,3 @@
-.pageedit-componentcontainer:hover>.pageedit-componentcontainer-btns {
-    opacity: 1;
-}
-
 /* react-native-web */
 .css-view-1dbjc4n{
     z-index: auto;
@@ -12,25 +8,17 @@
     /* background-color: #1890ff20 !important; */
 }
 
-.pageedit-componentcontainer>.pageedit-componentcontainer-btns{
-    position: absolute;
-}
-
 .pageedit-componentcontainer-btns {
-    z-index: 999;
-    display: flex;
     opacity: 0.1;
     transition: 0.5s;
     -webkit-transition: 0.5s;
-}
+    display: flex;
 
-.pageedit-componentcontainer-btns-popover button {
-    margin: 0px 0px 0px 5px;
-}
-
-.pageedit-componentcontainer-btns-transform {
     transform-origin:50% 50%;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari 与 Chrome */
 }
 
+.pageedit-componentcontainer:hover>.pageedit-componentcontainer-btns {
+    opacity: 1;
+}

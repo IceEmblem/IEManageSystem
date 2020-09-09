@@ -1,12 +1,41 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/IETemplateComponents/IEImg/IComponent'
 import Data from 'BaseCMSManage/Components/IETemplateComponents/IEImg/Data'
+import Setting from 'BaseCMSManage/Components/IETemplateComponents/IEImg/Setting'
+import { withRouter } from 'react-router-dom'
 import nofindJpg from 'images/nofind480x300.jpg'
 import './index.css'
 
 class IEImg extends IComponent {
+    constructor(props){
+        super(props);
+
+        this.click = this.click.bind(this);
+    }
+
+    click(){
+        let data = new Data(this.props.componentData);
+
+        if(this.props.interactivClick){
+            this.props.interactivClick();
+            return;
+        }
+
+        if(data.linkUrl){
+            if(data.linkUrl.startsWith('http')){
+                window.location.href = data.linkUrl
+            }
+            else{
+                this.props.history.push(data.linkUrl);
+            }
+
+            return;
+        }
+    }
+
     render() {
         let data = new Data(this.props.componentData);
+        let setting = new Setting(this.getDefaultSetting());
 
         let child;
         if (this.props.children.length > 0) {
@@ -14,10 +43,10 @@ class IEImg extends IComponent {
         }
 
         let imgHeigth
-        if(data.imgHeigth){
-            imgHeigth = new Number(data.imgHeigth).valueOf();
+        if(setting.imgHeigth){
+            imgHeigth = new Number(setting.imgHeigth).valueOf();
             if (isNaN(imgHeigth)) {
-                imgHeigth = data.imgHeigth;
+                imgHeigth = setting.imgHeigth;
             }
         }
         else{
@@ -25,26 +54,28 @@ class IEImg extends IComponent {
         }
 
         let imgWidth
-        if(data.imgWidth){
-            imgWidth = new Number(data.imgWidth).valueOf();
+        if(setting.imgWidth){
+            imgWidth = new Number(setting.imgWidth).valueOf();
             if (isNaN(imgWidth)) {
-                imgWidth = data.imgWidth;
+                imgWidth = setting.imgWidth;
             }
         }
         else{
             imgWidth = '100%'
         }
 
-        return <a style={{ textDecoration: 'none', position: 'relative' }} className='w-100' href={data.linkUrl || 'javescript:void(0)'}>
+        return <a style={{cursor: 'pointer', position: 'relative' }} className='w-100'
+            onClick={this.click}
+        >
             <div className='w-100 d-flex justify-content-center'>
-                <img alt="未找到图片" src={data.imgUrl || nofindJpg} style={{ height: imgHeigth, width: imgWidth }}></img>
+                <img alt="未找到图片" src={this.props.interactivText || data.imgUrl || nofindJpg} style={{ height: imgHeigth, width: imgWidth }}></img>
             </div>
             <div style={{
                 left: 0,
                 top: 0,
                 width: '100%',
-                height: data.position == 'onimg' ? '100%' : 'auto',
-                position: data.position == 'onimg' ? 'absolute' : 'relative'
+                height: setting.position == 'onimg' ? '100%' : 'auto',
+                position: setting.position == 'onimg' ? 'absolute' : 'relative'
             }}
             >
                 {child}
@@ -53,4 +84,4 @@ class IEImg extends IComponent {
     }
 }
 
-export default (register) => register(IComponent, IEImg);
+export default (register) => register(IComponent, withRouter(IEImg));

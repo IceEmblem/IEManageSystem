@@ -49,6 +49,10 @@ class PageEditCompontContainer extends React.Component {
                         />
                     </Page>
                 </div>
+                {/* 这是一个 react 插槽，不要随意更改 id */}
+                <div id='PageEditPortals'>
+
+                </div>
                 <CurrentToolBtns
                     pageId={this.props.pageId}
                     pageDataId={undefined}

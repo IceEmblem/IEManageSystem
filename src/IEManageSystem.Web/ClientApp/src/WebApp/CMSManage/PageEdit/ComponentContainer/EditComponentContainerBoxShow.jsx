@@ -35,6 +35,7 @@ class EditComponentContainerBoxShow extends React.Component {
                     pageId={this.props.pageId}
                     pageDataId={this.props.pageDataId}
                     os={this.props.os}
+                    style={{position: 'absolute', zIndex: 999}}
                 />
             }
         >

@@ -45,41 +45,6 @@ class DataConfig extends IDataConfig {
                     suffix={<Tag color="#55acee">链接 Url</Tag>}
                 />
             </div>
-            <div className='col-md-6 mb-3'>
-                <Input
-                    placeholder="示例：web端 300px, 30rem ... | App端 300"
-                    value={data.imgHeigth}
-                    onChange={(e) => {
-                        data.imgHeigth = e.currentTarget.value;
-                        this.props.setData(data.data);
-                    }}
-                    suffix={<Tag color="#55acee">图片高度</Tag>}
-                />
-            </div>
-            <div className='col-md-6 mb-3'>
-                <Input
-                    placeholder="示例：web端 300px, 30rem ... | App端 300"
-                    value={data.imgWidth}
-                    onChange={(e) => {
-                        data.imgWidth = e.currentTarget.value;
-                        this.props.setData(data.data);
-                    }}
-                    suffix={<Tag color="#55acee">图片宽度</Tag>}
-                />
-            </div>
-            <div className='col-md-6 mb-3'>
-                <Tag color="#55acee">内容位置</Tag>
-                <Radio.Group
-                    value={data.position}
-                    onChange={e => {
-                        data.position = e.target.value;
-                        this.props.setData(data.data);
-                    }}
-                >
-                    <Radio value='onimg'>在图片上</Radio>
-                    <Radio value='onbottom'>在图片底部</Radio>
-                </Radio.Group>
-            </div>
         </div>)
     }
 }

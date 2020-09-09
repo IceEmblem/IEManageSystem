@@ -1,6 +1,7 @@
 import BaseComponentObject, {ComponentSettingConfig} from '../../BaseComponents/BaseComponent'
 import ComponentDataConfig from '../../BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
 import ComponentDescribe, {componentType} from '../../ComponentDescribe'
+import InteractiveContainerConfig from '../../BaseComponents/InteractiveComponent/InteractiveContainerConfig'
 
 import IocContainer from 'Core/IocContainer';
 import IComponent from './IComponent'
@@ -10,6 +11,7 @@ import ISettingConfig from './ISettingConfig'
 
 class ComponentObject extends BaseComponentObject {
     ComponentSettingConfigs = [
+        new InteractiveContainerConfig(),
         new ComponentSettingConfig("DefaultSetting", "幻灯片设置", IocContainer.getService(ISettingConfig))
     ];
     ComponentDataConfig = new ComponentDataConfig(IocContainer.getService(IDataConfig));

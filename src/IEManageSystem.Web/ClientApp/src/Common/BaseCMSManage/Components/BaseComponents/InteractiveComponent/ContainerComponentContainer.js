@@ -1,38 +1,34 @@
 import React from 'react'
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import ComponentContext from 'BaseCMSManage/ComponentContext'
-import InteractivConfigFeature from './InteractivConfigFeature'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
-
-const ClearInteractivConfigFeature = (props) => {
-    ComponentContext.current.set(InteractivConfigFeature, undefined);
-    return <></>
-}
 
 class ContainerContain extends React.Component {
     render() {
         let { _containerComponent: Component, containerConfigs, ...props } = this.props;
 
-        ComponentContext.current.set(InteractivConfigFeature, undefined);
-
         if (!containerConfigs) {
             let childs = ({ interactivConfigFeature }) => {
-                ComponentContext.current.set(InteractivConfigFeature, interactivConfigFeature);
-
-                return this.props.pageComponent.pageComponentSigns.map(sign => (
-                    <ComponentContainerBox
-                        key={sign + this.props.pageComponent.os}
-                        sign={sign}
-                        pageId={this.props.pageId}
-                        pageDataId={this.props.pageDataId}
-                        os={this.props.os}
-                    >
-                    </ComponentContainerBox>)
-                )
+                return <ComponentContext.Provider
+                    value={{
+                        ...this.context,
+                        interactivConfigFeature: interactivConfigFeature
+                    }}
+                >
+                    {
+                        this.props.pageComponent.pageComponentSigns.map(sign => (
+                            <ComponentContainerBox
+                                key={sign + this.props.pageComponent.os}
+                                sign={sign}
+                                pageId={this.props.pageId}
+                                pageDataId={this.props.pageDataId}
+                                os={this.props.os}
+                            >
+                            </ComponentContainerBox>))
+                    }
+                </ComponentContext.Provider>
             };
-
-            ComponentContext.current.set(InteractivConfigFeature, undefined);
 
             return <>
                 <Component
@@ -41,7 +37,6 @@ class ContainerContain extends React.Component {
                     ChildComponent={childs}
                 >
                 </Component>
-                <ClearInteractivConfigFeature />
             </>;
         }
         else {
@@ -53,16 +48,21 @@ class ContainerContain extends React.Component {
                 }
 
                 childs[group] = ({ interactivConfigFeature }) => {
-                    ComponentContext.current.set(InteractivConfigFeature, interactivConfigFeature);
-
-                    return <ComponentContainerBox
-                        key={sign + this.props.pageComponent.os}
-                        sign={sign}
-                        pageId={this.props.pageId}
-                        pageDataId={this.props.pageDataId}
-                        os={this.props.os}
+                    return <ComponentContext.Provider
+                        value={{
+                            ...this.context,
+                            interactivConfigFeature: interactivConfigFeature
+                        }}
                     >
-                    </ComponentContainerBox>
+                        <ComponentContainerBox
+                            key={sign + this.props.pageComponent.os}
+                            sign={sign}
+                            pageId={this.props.pageId}
+                            pageDataId={this.props.pageDataId}
+                            os={this.props.os}
+                        >
+                        </ComponentContainerBox>
+                    </ComponentContext.Provider>
                 };
             })
 
@@ -73,7 +73,6 @@ class ContainerContain extends React.Component {
                     ChildComponent={childs}
                 >
                 </Component>
-                <ClearInteractivConfigFeature />
             </>;
         }
     }

@@ -124,7 +124,7 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
                 cancelText='取消'
                 okButtonProps={{disabled: true}}
             >
-                <div className='d-flex'>
+                <div className='d-flex flex-wrap'>
                     {
                         this.props.containerConfigs.map(item => {
                             let disabled = false;

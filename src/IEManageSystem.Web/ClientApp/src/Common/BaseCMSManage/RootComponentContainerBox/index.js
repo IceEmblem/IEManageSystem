@@ -8,13 +8,9 @@ import {
 import ComponentContext from '../ComponentContext'
 
 class RootComponentContainerBox extends React.Component {
-    componentWillMount(){
-        ComponentContext.current = new ComponentContext();
-    }
-
     render() {
         return (
-            <>
+            <ComponentContext.Provider value={{}}>
                 {
                     this.props.rootPageComponent.pageComponentSigns.map(sign => (
                         <>
@@ -29,7 +25,7 @@ class RootComponentContainerBox extends React.Component {
                         </>
                     ))
                 }
-            </>
+            </ComponentContext.Provider>
         );
     }
 }
