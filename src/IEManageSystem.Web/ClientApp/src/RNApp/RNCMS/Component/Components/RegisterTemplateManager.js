@@ -1,17 +1,11 @@
-import RegisterTemplateParts from './RegisterTemplateParts'
 import IocContainer from 'Core/IocContainer'
-import {IInvalidOSComponent} from 'BaseCMSManage/Components/ComponentFactory'
+import ComponentFactory, {IInvalidOSComponent} from 'BaseCMSManage/Components/ComponentFactory'
 import InvalidOSComponent from './InvalidOSComponent'
+import Templates from './Templates'
 
 class RegisterTemplateManager {
     init(){
-        RegisterTemplateParts.forEach(item => {
-            item((type, single)=>{
-                IocContainer.registerSingleIntances(type, single);
-            })
-        })
-
-        IocContainer.registerSingleIntances(IInvalidOSComponent, InvalidOSComponent);
+        ComponentFactory.register(Templates, InvalidOSComponent)
     }
 }
 

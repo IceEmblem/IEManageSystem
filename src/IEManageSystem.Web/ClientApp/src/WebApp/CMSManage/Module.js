@@ -118,7 +118,7 @@ export default class Module extends BaseModule {
         // 向 Layout 注册工具
         NavToolProvider.registerToolOfLeft(1, <SearchBoxTool />);
         
-        // 向依赖注入容器注册组件的各个部件
+        // 注册模板
         RegisterTemplateManager.init();
 
         // 注册页面

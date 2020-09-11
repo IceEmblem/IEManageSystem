@@ -15,12 +15,7 @@ class ComponentListBox extends React.Component {
         super(props);
 
         this.componentDescribes = ComponentFactory.getComponentDescribes();
-        this.Preview = new Map();
-        this.componentDescribes.map(item=>{
-            if(item.componentObject.Preview){
-                this.Preview[item.name] = <item.componentObject.Preview />;
-            }
-        });
+        this.Preview = ComponentFactory.getPreviews();
 
         this.state = {
             selectedComponentDescribe: undefined,

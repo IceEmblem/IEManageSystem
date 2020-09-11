@@ -8,8 +8,6 @@ import CoreModule from 'Core/Module';
 import { reducer } from 'BaseCMSManage/IEReduxs/Reducers'
 import IERedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
-import ComponentFactory from './Components/ComponentFactory'
-
 export default class Module extends BaseModule {
     initialize() {
         IERedux.setReducer(reducer);
@@ -17,7 +15,6 @@ export default class Module extends BaseModule {
     }
 
     postInitialize(){
-        ComponentFactory.init();
     }
 }
 

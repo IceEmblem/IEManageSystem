@@ -18,20 +18,6 @@ createModulesFile(
   "",
   "src/Common/ModuleList.js"
 )
-createModulesFile(
-  "src/Common/BaseCMSManage/Components",
-  ["BaseComponents"],
-  "index.js",
-  "BaseCMSManage/Components/",
-  "src/Common/BaseCMSManage/Components/TemplateList.js"
-)
-createModulesFile(
-  "src/WebApp/CMSManage/Component/Components",
-  [],
-  "index.js",
-  "CMSManage/Component/Components/",
-  "src/WebApp/CMSManage/Component/Components/RegisterTemplateParts.js"
-)
 
 const fs = require('fs');
 const path = require('path');

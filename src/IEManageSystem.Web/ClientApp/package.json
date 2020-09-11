@@ -4,7 +4,8 @@
   "workspaces": [
     "src/Common/*",
     "src/RNApp/*",
-    "src/WebApp/*"
+    "src/WebApp/*",
+    "src/Templates/*"
   ],
   "version": "0.1.0",
   "dependencies": {

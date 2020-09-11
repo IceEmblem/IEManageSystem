@@ -236,7 +236,6 @@ BtnLists.propTypes = {
     currentPageAndPost: PropTypes.object.isRequired,
 
     page: PropTypes.object.isRequired,
-    addComponent: PropTypes.func.isRequired,
     pageComponentUpdateFetch: PropTypes.func.isRequired,
     exportPage: PropTypes.func.isRequired,
     setPage: PropTypes.func.isRequired,

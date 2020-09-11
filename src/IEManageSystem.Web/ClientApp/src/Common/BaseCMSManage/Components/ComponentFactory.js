@@ -1,8 +1,5 @@
 import React from 'react'
 import ComponentDescribe, {componentType} from './ComponentDescribe'
-import TemplateList from './TemplateList'
-import IocContainer from 'Core/IocContainer'
-
 
 export const componentTypes = [
     { name: componentType.container, text: "容器组件", icon: "oi-box" },
@@ -18,30 +15,44 @@ export class IInvalidOSComponent extends React.Component {}
 IInvalidOSComponent.iocKey = Symbol()
 
 class ComponentFactory {
+    Previews = undefined;
     TemplateList = [];
     ComponentDescribes = [];
     ComponentDescribeMaps = new Map();
 
-    init(){
-        this.TemplateList = TemplateList;
+    register(templateList, invalidOSComponent){
+        this.Previews = undefined;
+
+        this.TemplateList = templateList;
+
+        this.ComponentDescribes = [];
+        this.ComponentDescribeMaps = new Map();
+        
         this.TemplateList.forEach(item => {
-            item.componentBuilders.forEach(
-                componentBuilder => this.ComponentDescribes.push(componentBuilder())
-            );
+            this.ComponentDescribes = this.ComponentDescribes.concat(item.componentDescribes);
         })
         
         this.ComponentDescribes.forEach(item => { 
             this.ComponentDescribeMaps[item.name] = item;
         })
 
-        ComponentDescribe.setInvalidOSComponentType(IocContainer.getService(IInvalidOSComponent));
+        ComponentDescribe.setInvalidOSComponentType(invalidOSComponent);
     }
 
-    reLoad(){
-        this.TemplateList = [];
-        this.ComponentDescribes = [];
-        this.ComponentDescribeMaps = new Map();
-        this.init();
+    getPreviews(){
+        if(this.Previews){
+            return this.Previews;
+        }
+
+        this.Previews = {};
+
+        this.ComponentDescribes.map(item=>{
+            if(item.componentObject.Preview){
+                this.Previews[item.name] = <item.componentObject.Preview />;
+            }
+        });
+
+        return this.Previews;
     }
 
     getComponentDescribes() {
