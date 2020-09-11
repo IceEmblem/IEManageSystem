@@ -1,9 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
-import { pageFetch, pageDataFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch, setCurrentPageAndPost, } from 'BaseCMSManage/IEReduxs/Actions'
 import Page from './Page'
 import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
@@ -27,10 +25,6 @@ class HomeComponentContainerBoxShow extends React.Component {
 class PageContainer extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            isFetching: false,
-        };
     }
 
     componentWillMount() {
@@ -41,64 +35,30 @@ class PageContainer extends React.Component {
         this.getPageFetch(this.props);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return !nextState.isFetching;
-    }
-
-    componentWillUpdate(nextProps) {
+    componentWillReceiveProps(nextProps){
         this.getPageFetch(nextProps);
     }
 
-    getPageFetch(props) {
-        let waits = [];
-
-        if (!props.page && props.pageName) {
-            waits.push(this.props.pageFetch(props.pageName));
-        }
-
-        if (!props.pageData && props.pageDataName) {
-            waits.push(this.props.pageDataFetch(props.pageName, props.pageDataName));
-        }
-
-        if (waits.length > 0) {
-            this.setState({ isFetching: true });
-            Promise.all(waits).then(() => {
-                this.setState({ isFetching: false });
-            });
+    getPageFetch(props) 
+    {
+        if (props.isNeedDataFetch) {
+            props.dataFetch();
         }
     }
 
     render() {
-        if (!this.props.page) {
-            return <div></div>;
-        }
-
         return (
             <Page>
-                <RootComponentContainerBox
-                    pageId={this.props.pageId}
-                    pageDataId={this.props.pageDataId}
-                    os={this.props.os}
+                <RootComponentContainerBox 
+                    currentPageAndPost={{
+                        pageId: this.props.pageId,
+                        pageDataId: this.props.pageDataId,
+                        os: this.props.os
+                    }}
                 />
             </Page>
         );
     }
-}
-
-PageContainer.propTypes = {
-    pageId: PropTypes.number,
-    pageDataId: PropTypes.number,
-    pageName: PropTypes.string.isRequired,
-    pageDataName: PropTypes.string,
-
-    page: PropTypes.object,
-    pageFetch: PropTypes.func.isRequired,
-    pageDataFetch: PropTypes.func.isRequired,
-    os: PropTypes.string.isRequired,
-}
-
-PageContainer.defaultProps = {
-    pageName: "Home"
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -116,30 +76,61 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     let postId = state.pageDataNameToIds[pageDataName];
 
     return {
+        // store 没有页面数据
+        isExistPage: state.pages[pageId] != undefined,
+        // 路由上具有文章名但 store 中没有文章数据
+        isExistPageData: !(pageDataName && state.pageDatas[postId] != undefined),
         pageId: pageId,
-        pageDataId: postId,
-        pageName: pageName,
-        pageDataName: pageDataName,
-        page: state.pages[pageId],
-        pageData: state.pageDatas[postId],
-        os: PageComponentOSType.Web,
+        pageDataId: postId
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    let pageName = ownProps.match.params.pageName || "Home";
+    let pageDataName = ownProps.match.params.pageDataName;
+
     return {
-        pageFetch: (name) => {
-            return dispatch(pageFetch(name));
+        pageFetch: () => {
+            return dispatch(pageFetch(pageName));
         },
-        pageDataFetch: (pageName, pageDataName) => {
+        pageDataFetch: () => {
+            if(!pageDataName){
+                return Promise.resolve();
+            }
             return dispatch(pageDataFetch(pageName, pageDataName));
+        },
+        setCurrentPageAndPost: (pageId, pageDataId, os) => {
+            return dispatch(setCurrentPageAndPost(pageId, pageDataId, os));
+        }
+    }
+}
+
+const megre = (stateProps, dispatchToProps, ownProps) => {
+    return {
+        isNeedDataFetch: !(stateProps.isExistPage && stateProps.isExistPageData),
+        pageId: stateProps.pageId,
+        pageDataId: stateProps.pageDataId,
+        os: PageComponentOSType.Web,
+        dataFetch: () => {
+            let waits = [];
+
+            if(!stateProps.isExistPage){
+                waits.push(dispatchToProps.pageFetch())
+            }
+
+            if(!stateProps.isExistPageData){
+                waits.push(dispatchToProps.pageDataFetch())
+            }
+
+            return Promise.all(waits);
         }
     }
 }
 
 const Contain = CmsRedux.connect(
     mapStateToProps, // 关于state
-    mapDispatchToProps
+    mapDispatchToProps,
+    megre
 )(PageContainer)
 
 export default Contain;

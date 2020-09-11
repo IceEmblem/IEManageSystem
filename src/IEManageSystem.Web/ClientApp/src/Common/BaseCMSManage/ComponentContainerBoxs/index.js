@@ -191,21 +191,15 @@ class ComponentContainerBox extends React.Component {
     render() {
         return (
             <this.ComponentContainerBoxShow
+                key={this.props.sign + this.props.pageComponent.os}
                 sign={this.props.sign}
-                pageId={this.props.pageId}
-                pageDataId={this.props.pageDataId}
-                os={this.props.os}
-                pageComponent={this.props.pageComponent}
+                currentPageAndPost={this.props.currentPageAndPost}
 
                 style={{ ...this.getStyle() }}
                 className={`${this.getClassName()}`}
             >
                 {
-                    this.componentDescribe.createComponent(
-                        this.props.pageId,
-                        this.props.os,
-                        this.props.pageDataId,
-                        this.props.sign)
+                    this.componentDescribe.createComponent(this.props.sign, this.props.currentPageAndPost)
                 }
             </this.ComponentContainerBoxShow>
         );
@@ -214,11 +208,8 @@ class ComponentContainerBox extends React.Component {
 
 ComponentContainerBox.propTypes = {
     // 如下属性由父组件传入
-    pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number,
     sign: PropTypes.string.isRequired,
-    os: PropTypes.string.isRequired,
-    ComponentContainerBoxShow: PropTypes.func.isRequired,
+    currentPageAndPost: PropTypes.object.isRequired,
 
     // 如下属性为父组件传入，为可选熟悉
     style: PropTypes.func,
@@ -237,10 +228,12 @@ ComponentContainerBox.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let os = ownProps.currentPageAndPost.os;
 
     return {
-        pageComponent: pageComponent,
+        pageComponent: state.pageComponents[pageId][os][ownProps.sign],
+        currentPageAndPost: ownProps.currentPageAndPost,
     }
 }
 

@@ -47,7 +47,7 @@ export default class ComponentDescribe {
     }
 
     // 生成 React 组件
-    createComponent(pageId, os, pageDataId, sign) {
+    createComponent(sign, currentPageAndPost) {
         let ComponentContainer = this.componentObject.getComponentContainer();
 
         if (!ComponentContainer) {
@@ -55,10 +55,8 @@ export default class ComponentDescribe {
         }
 
         return <ComponentContainer
-            pageId={pageId}
-            os={os}
-            pageDataId={pageDataId}
             sign={sign}
+            currentPageAndPost={currentPageAndPost}
         >
         </ComponentContainer>
     }

@@ -28,10 +28,7 @@ class EditComponentContainerBoxShow extends React.Component {
             ToolBtn={
                 <ToolBtns
                     sign={this.props.sign}
-                    pageId={this.props.pageId}
-                    pageDataId={this.props.pageDataId}
-                    os={this.props.os}
-                    pageComponent={this.props.pageComponent}
+                    currentPageAndPost={this.props.currentPageAndPost}
                 />
             }
         >
@@ -43,13 +40,11 @@ class EditComponentContainerBoxShow extends React.Component {
 class ComponentData extends React.Component {
     constructor(props) {
         super(props);
+    }
 
-        if (!this.props.page) {
-            this.props.pageFetch(this.props.pageName);
-            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
-        }
-        else if (!this.props.pageData) {
-            this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)
+    componentDidMount(){
+        if(this.props.isNeedDataFetch){
+            this.props.dataFetch();
         }
     }
 
@@ -58,8 +53,8 @@ class ComponentData extends React.Component {
     }
 
     render() {
-        if (!this.props.page) {
-            return (<div className="postedit-page-container"></div>);
+        if (this.props.isNeedDataFetch) {
+            return (<></>);
         }
 
         return (
@@ -68,14 +63,14 @@ class ComponentData extends React.Component {
                     <Button
                         className="mr-2"
                         icon={<UndoOutlined />}
-                        onClick={() => this.props.pageDataFetch(this.props.pageName, this.props.pageDataName)}
+                        onClick={() => this.props.reloadData()}
                     >
                         取消修改
                     </Button>
                     <Button
                         type="primary"
                         icon={<CloudUploadOutlined />}
-                        onClick={() => this.props.componentDataUpdateFetch(this.props.pageName, this.props.pageDataName, this.props.contentComponentDatas)}
+                        onClick={() => this.props.componentDataUpdateFetch()}
                     >
                         提交文章
                     </Button>
@@ -83,28 +78,17 @@ class ComponentData extends React.Component {
                 <div>
                     <Page>
                         <RootComponentContainerBox
-                            pageId={this.props.pageId}
-                            pageDataId={this.props.pageDataId}
-                            os={this.props.os}
+                            currentPageAndPost={{
+                                pageId: this.props.pageId,
+                                pageDataId: this.props.pageDataId,
+                                os: this.props.os
+                            }}
                         />
                     </Page>
                 </div>
             </div>
         );
     }
-}
-
-ComponentData.propTypes = {
-    pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number.isRequired,
-    pageName: PropTypes.string.isRequired,
-    pageDataName: PropTypes.string.isRequired,
-    page: PropTypes.object,
-    pageData: PropTypes.object,
-    pageFetch: PropTypes.func.isRequired,
-    pageDataFetch: PropTypes.func.isRequired,
-    componentDataUpdateFetch: PropTypes.func.isRequired,
-    os: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -122,34 +106,67 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     let postId = state.pageDataNameToIds[postName];
 
     return {
+        // store 没有页面数据
+        isExistPage: state.pages[pageId] != undefined,
+        // 路由上具有文章名但 store 中没有文章数据
+        isExistPageData: state.pageDatas[postId] != undefined,
         pageId: pageId,
         pageDataId: postId,
-        pageName: pageName,
-        pageDataName: postName,
-        page: state.pages[pageId],
-        pageData: state.pageDatas[postId],
         contentComponentDatas: state.contentComponentDatas[postId],
-        os: PageComponentOSType.Web,
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        pageFetch: (name) => {
-            return dispatch(pageFetch(name));
+        pageFetch: () => {
+            return dispatch(pageFetch(ownProps.match.params.pageName));
         },
-        pageDataFetch: (pageName, pageDataName) => {
-            return dispatch(pageDataFetch(pageName, pageDataName));
+        pageDataFetch: () => {
+            return dispatch(pageDataFetch(ownProps.match.params.pageName, ownProps.match.params.pageDataName));
         },
-        componentDataUpdateFetch: (pageName, pageDataName, componentDatas) => {
-            return dispatch(componentDataUpdateFetch(pageName, pageDataName, componentDatas));
+        componentDataUpdateFetch: (componentDatas) => {
+            return dispatch(componentDataUpdateFetch(
+                ownProps.match.params.pageName, 
+                ownProps.match.params.pageDataName, 
+                componentDatas));
+        }
+    }
+}
+
+const meger = (stateProps, dispatchProps, ownProps) => {
+    return {
+        pageId: stateProps.pageId,
+        pageDataId: stateProps.pageDataId,
+        os: PageComponentOSType.Web,
+        isNeedDataFetch: !(stateProps.isExistPage && stateProps.isExistPageData),
+        dataFetch: () => {
+            let waits = [];
+
+            if(!stateProps.isExistPage){
+                waits.push(dispatchProps.pageFetch())
+            }
+
+            if(!stateProps.isExistPageData){
+                waits.push(dispatchProps.pageDataFetch())
+            }
+
+            return Promise.all(waits);
+        },
+        reloadData: () => {
+            let waits = [dispatchProps.pageFetch(), dispatchProps.pageDataFetch()];
+
+            return Promise.all(waits);
+        },
+        componentDataUpdateFetch: () => {
+            return dispatchProps.componentDataUpdateFetch(stateProps.contentComponentDatas);
         }
     }
 }
 
 const ComponentDataContain = CmsRedux.connect(
     mapStateToProps, // 关于state
-    mapDispatchToProps
+    mapDispatchToProps,
+    meger
 )(ComponentData)
 
 export default ComponentDataContain;

@@ -1,7 +1,7 @@
 export default class IEditConfig {
     ComponentContainer = undefined;
     
-    bulidConfigBtnComponent(pageId, pageDataId, os, sign){
+    bulidConfigBtnComponent(sign, currentPageAndPost){
         return undefined;
     }
 }

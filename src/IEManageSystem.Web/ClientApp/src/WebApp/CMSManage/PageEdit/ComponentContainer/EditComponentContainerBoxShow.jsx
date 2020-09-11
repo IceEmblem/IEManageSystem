@@ -32,9 +32,7 @@ class EditComponentContainerBoxShow extends React.Component {
             ToolBtn={
                 <ToolBtns
                     sign={this.props.sign}
-                    pageId={this.props.pageId}
-                    pageDataId={this.props.pageDataId}
-                    os={this.props.os}
+                    currentPageAndPost={this.props.currentPageAndPost}
                     style={{position: 'absolute', zIndex: 999}}
                 />
             }

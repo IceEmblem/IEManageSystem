@@ -5,8 +5,6 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 import './index.css'
 
-import PageEditCompontContainer from './ComponentContainer'
-
 import {
     pageFetch,
 } from 'BaseCMSManage/IEReduxs/Actions'
@@ -15,49 +13,79 @@ import RegisterTemplateManager from 'CMSManage/Component/Components/RegisterTemp
 
 import BtnLists from './BtnLists'
 
+
+import Page from 'CMSManage/Home/Page'
+import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
+import IocContainer from 'Core/IocContainer'
+
+import EditComponentContainerBoxShow from './ComponentContainer/EditComponentContainerBoxShow'
+import SignSquareFrame from './ComponentContainer/SignSquareFrame'
+import CurrentToolBtns from './ComponentContainer/CurrentToolBtns'
+
+import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
+
 class PageContainer extends React.Component {
     constructor(props) {
         super(props);
+    }
 
-        this.state = {
-            // 要将组件添加到那个父组件下，undefined 表示没有父组件
-            curParentComponentSign: undefined,
-            showComponentListBox: false,
-        }
+    componentWillMount() {
+        IocContainer.registerSingleIntances(IComponentContainerBoxShow, EditComponentContainerBoxShow)
     }
 
     componentDidMount() {
-        if (!this.props.page) {
-            this.props.pageFetch(this.props.pageName)
+        if (this.props.isNeedDataFetch) {
+            this.props.pageFetch()
         }
     }
 
     render() {
-        if (!this.props.page) {
+        if (this.props.isNeedDataFetch) {
             return <div></div>
         }
 
+        let style = {};
+        if (this.props.os == PageComponentOSType.Native) {
+            style.width = "400px"
+            style.margin = "auto"
+        }
+
+        let currentPageAndPost = {
+            pageId: this.props.pageId,
+            pageDataId: undefined,
+            os: this.props.os
+        };
+
         return (
             <div className="w-100 h-100">
-                <PageEditCompontContainer
-                    pageId={this.props.pageId}
-                    os={this.props.os}
-                />
+                <div
+                    className="w-100 h-100"
+                    style={{ overflowY: "auto" }}
+                >
+                    <div className="w-100 h-100">
+                        <Page style={style}>
+                            <RootComponentContainerBox
+                                currentPageAndPost={currentPageAndPost}
+                            />
+                            <SignSquareFrame
+                                color="#13c2c2"
+                                os={this.props.os}
+                            />
+                        </Page>
+                    </div>
+                    {/* 这是一个 react 插槽，不要随意更改 id */}
+                    <div id='PageEditPortals'>
+                    </div>
+                    <CurrentToolBtns
+                        currentPageAndPost={currentPageAndPost}
+                    />
+                </div>
                 <BtnLists
-                    pageId={this.props.pageId}
-                    os={this.props.os}
+                    currentPageAndPost={currentPageAndPost}
                 />
             </div>
         );
     }
-}
-
-PageContainer.propTypes = {
-    pageName: PropTypes.string.isRequired,
-    pageId: PropTypes.number,
-    page: PropTypes.object,
-    pageFetch: PropTypes.func.isRequired,
-    os: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -73,17 +101,18 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     }
 
     return {
-        pageName: pageName,
+        isNeedDataFetch: state.pages[pageId] == undefined,
         pageId: pageId,
-        page: state.pages[pageId],
         os: os
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    let pageName = ownProps.match.params.pageName;
+
     return {
-        pageFetch: (name) => {
-            return dispatch(pageFetch(name));
+        pageFetch: () => {
+            return dispatch(pageFetch(pageName));
         }
     }
 }

@@ -12,7 +12,7 @@ class CurrentToolBtns extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.os != this.props.os ||
+        if (nextProps.currentPageAndPost.os != this.props.currentPageAndPost.os ||
             nextProps.activePageComponentSign != this.props.activePageComponentSign) 
         {
             this.setState({curSign: undefined});
@@ -55,10 +55,8 @@ class CurrentToolBtns extends React.Component {
                             >
                                 <ToolBtns
                                     key={item}
-                                    os={this.props.os}
+                                    currentPageAndPost={this.props.currentPageAndPost}
                                     sign={item}
-                                    pageId={this.props.pageId}
-                                    pageDataId={this.props.pageDataId}
                                     style={{ opacity: 1, marginBottom: "5px" }}
                                     placement={'left'}
                                     cancelActiveShow={true}
@@ -69,7 +67,7 @@ class CurrentToolBtns extends React.Component {
                 </span>
                 <SignSquareFrame
                     activePageComponentSign={this.state.curSign}
-                    os={this.props.os}
+                    os={this.props.currentPageAndPost.os}
                     color="#ff7a45"
                 />
             </div>
@@ -79,15 +77,15 @@ class CurrentToolBtns extends React.Component {
 
 CurrentToolBtns.propTypes = {
     // 如下属性由父组件传入
-    pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number,
-    os: PropTypes.string.isRequired,
+    currentPageAndPost: PropTypes.object.isRequired,
+
+    activePageComponentSign: PropTypes.string,
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
         activePageComponentSign: state.activePageComponentSign,
-        pageComponents: state.pageComponents[ownProps.pageId][ownProps.os]
+        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageId][ownProps.currentPageAndPost.os]
     }
 }
 

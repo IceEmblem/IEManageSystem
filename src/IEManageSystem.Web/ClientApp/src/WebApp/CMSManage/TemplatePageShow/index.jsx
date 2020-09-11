@@ -30,7 +30,7 @@ class TemplateComponentContainerBoxShow extends React.Component {
 }
 
 class TemplatePageShow extends React.Component {
-    state={
+    state = {
         show: false
     }
 
@@ -47,20 +47,22 @@ class TemplatePageShow extends React.Component {
 
     componentDidMount() {
         this.props.setPage({ ...this.templatePage.page, ...{ id: pageId, name: `TemplatePageShow_${this.templatePage.page}` } }, this.templatePage.pageComponents, this.templatePage.defaultComponentDatas)
-        this.setState({show: true});
+        this.setState({ show: true });
     }
 
     render() {
-        if(!this.state.show){
+        if (!this.state.show) {
             return <></>;
         }
 
         return (
             <Page>
                 <RootComponentContainerBox
-                    pageId={pageId}
-                    pageDataId={undefined}
-                    os={this.props.os}
+                    currentPageAndPost={{
+                        pageId: pageId,
+                        pageDataId: undefined,
+                        os: this.props.os
+                    }}
                 />
             </Page>
         );

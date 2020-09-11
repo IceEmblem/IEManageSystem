@@ -29,37 +29,29 @@ class ToolBtns extends React.Component {
         return <>
             {
                 this.componentDescribe.componentObject.BasicComponentSettingConfig.bulidConfigBtnComponent(
-                    this.props.pageId,
-                    this.props.pageDataId,
-                    this.props.os,
                     this.props.sign,
+                    this.props.currentPageAndPost,
                 )
             }
             {
                 this.componentDescribe.componentObject.ComponentDataConfig &&
                 this.componentDescribe.componentObject.ComponentDataConfig.bulidConfigBtnComponent(
-                    this.props.pageId,
-                    this.props.pageDataId,
-                    this.props.os,
                     this.props.sign,
+                    this.props.currentPageAndPost,
                 )
             }
             {
                 this.componentDescribe.componentObject.ComponentSettingConfigs.map(item =>
                     item.bulidConfigBtnComponent(
-                        this.props.pageId,
-                        this.props.pageDataId,
-                        this.props.os,
                         this.props.sign,
+                        this.props.currentPageAndPost,
                     )
                 )
             }
             {
                 this.componentDescribe.componentObject.DeleteConfig.bulidConfigBtnComponent(
-                    this.props.pageId,
-                    this.props.pageDataId,
-                    this.props.os,
                     this.props.sign,
+                    this.props.currentPageAndPost,
                 )
             }
         </>
@@ -137,10 +129,8 @@ class ToolBtns extends React.Component {
 
 ToolBtns.propTypes = {
     // 如下属性由父组件传入
-    pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number,
-    os: PropTypes.string.isRequired,
     sign: PropTypes.string.isRequired,
+    currentPageAndPost: PropTypes.object.isRequired,
     style: PropTypes.object,
     placement: PropTypes.string,
     cancelActiveShow: PropTypes.bool,   // 取消活跃显示（默认情况下，如果组件被选择，会显示组件编辑按钮列表，如果想点击的时候再显示，则设为true）
@@ -152,7 +142,11 @@ ToolBtns.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let os = ownProps.currentPageAndPost.os;
+
+    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
+
     return {
         isActive: state.activePageComponentSign == pageComponent.sign,
         pageComponent: pageComponent,

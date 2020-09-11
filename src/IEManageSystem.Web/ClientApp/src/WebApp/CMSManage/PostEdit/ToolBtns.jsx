@@ -25,10 +25,8 @@ class ToolBtns extends React.Component {
             >
                 {
                     this.componentDescribe.componentObject.ComponentDataConfig.bulidConfigBtnComponent(
-                        this.props.pageId,
-                        this.props.pageDataId,
-                        this.props.pageComponent.os,
                         this.props.sign,
+                        this.props.currentPageAndPost,
                     )
                 }
             </div>
@@ -37,16 +35,18 @@ class ToolBtns extends React.Component {
 }
 
 ToolBtns.propTypes = {
-    // 如下 3 个属性由父组件传入
-    os: PropTypes.string.isRequired,
-    pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number.isRequired,
+    // 如下个属性由父组件传入
     sign: PropTypes.string.isRequired,
+
     pageComponent: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let os = ownProps.currentPageAndPost.os;
+
     return {
+        pageComponent: state.pageComponents[pageId][os][ownProps.sign],
     }
 }
 

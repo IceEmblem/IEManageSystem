@@ -33,13 +33,9 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
     }
 
     addComponent(componentDescribe) {
-        let pageComponent = componentDescribe.createPageComponent(this.props.sign, this.props.os);
+        let pageComponent = componentDescribe.createPageComponent(this.props.sign, this.props.currentPageAndPost.os);
 
-        this.props.addComponent(new AddComponentAction(
-            this.props.pageId,
-            this.props.os,
-            pageComponent
-        ));
+        this.props.addComponent(pageComponent);
 
         // 页面渲染结束后，设置新添加的组件为活跃组件
         setTimeout(() => this.props.setActiveComponent(pageComponent.sign), 0);
@@ -78,14 +74,10 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
     }
 
     addComponentCustomize(componentDescribe) {
-        let pageComponent = componentDescribe.createPageComponent(this.props.sign, this.props.os);
+        let pageComponent = componentDescribe.createPageComponent(this.props.sign, this.props.currentPageAndPost.os);
         pageComponent.group = this.state.configName
 
-        this.props.addComponent(new AddComponentAction(
-            this.props.pageId,
-            this.props.os,
-            pageComponent
-        ));
+        this.props.addComponent(pageComponent);
 
         // 页面渲染结束后，设置新添加的组件为活跃组件
         setTimeout(() => this.props.setActiveComponent(pageComponent.sign), 0);
@@ -172,10 +164,8 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
 }
 
 ContainerConfigBtnComponent.propTypes = {
-    pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number,
-    os: PropTypes.string.isRequired,
     sign: PropTypes.string.isRequired,
+    currentPageAndPost: PropTypes.object.isRequired,
     itemNum: PropTypes.number.isRequired,
     // 显示的的按钮
     btnComponent: PropTypes.func,
@@ -185,18 +175,25 @@ ContainerConfigBtnComponent.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let os = ownProps.currentPageAndPost.os;
+
+    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
 
     return {
         pageComponent: pageComponent,
-        pageComponents: state.pageComponents[ownProps.pageId][ownProps.os]
+        pageComponents: state.pageComponents[pageId][os],
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        addComponent: (addComponentAction) => {
-            return dispatch(addComponentAction);
+        addComponent: (pageComponent) => {
+            return dispatch(new AddComponentAction(
+                ownProps.currentPageAndPost.pageId,
+                ownProps.currentPageAndPost.os,
+                pageComponent
+            ));
         },
         setActiveComponent: (sign) => {
             return dispatch(setActiveComponent(sign));

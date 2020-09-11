@@ -24,14 +24,12 @@ export default class InteractiveContainerConfig extends IEditConfig {
         }
     }
 
-    bulidConfigBtnComponent(pageId, pageDataId, os, sign) {
+    bulidConfigBtnComponent(sign, currentPageAndPost) {
         let Component = IocContainer.getService(IContainerConfigBtnComponent);
 
         return <Component
-            pageId={pageId}
-            pageDataId={pageDataId}
-            os={os}
             sign={sign}
+            currentPageAndPost={currentPageAndPost}
             itemNum={1}
             containerConfigs={this.configs}
         />

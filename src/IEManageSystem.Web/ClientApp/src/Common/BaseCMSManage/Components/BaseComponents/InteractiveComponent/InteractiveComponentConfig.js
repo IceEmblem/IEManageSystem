@@ -21,14 +21,12 @@ export default class InteractiveComponentConfig extends IEditConfig {
         this._interactiveTypes = interactiveTypes;
     }
 
-    bulidConfigBtnComponent(pageId, pageDataId, os, sign) {
+    bulidConfigBtnComponent(sign, currentPageAndPost) {
         let Component = IocContainer.getService(IInteractiveComponentConfigBtnComponent);
 
         return <Component
-            pageId={pageId}
-            pageDataId={pageDataId}
-            os={os}
             sign={sign}
+            currentPageAndPost={currentPageAndPost}
             interactiveTypes={this._interactiveTypes}
         />
     }

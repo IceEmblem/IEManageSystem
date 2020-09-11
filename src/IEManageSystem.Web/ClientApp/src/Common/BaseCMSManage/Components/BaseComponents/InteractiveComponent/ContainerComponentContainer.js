@@ -21,9 +21,7 @@ class ContainerContain extends React.Component {
                             <ComponentContainerBox
                                 key={sign + this.props.pageComponent.os}
                                 sign={sign}
-                                pageId={this.props.pageId}
-                                pageDataId={this.props.pageDataId}
-                                os={this.props.os}
+                                currentPageAndPost={this.props.currentPageAndPost}
                             >
                             </ComponentContainerBox>))
                     }
@@ -57,9 +55,7 @@ class ContainerContain extends React.Component {
                         <ComponentContainerBox
                             key={sign + this.props.pageComponent.os}
                             sign={sign}
-                            pageId={this.props.pageId}
-                            pageDataId={this.props.pageDataId}
-                            os={this.props.os}
+                            currentPageAndPost={this.props.currentPageAndPost}
                         >
                         </ComponentContainerBox>
                     </ComponentContext.Provider>
@@ -79,8 +75,11 @@ class ContainerContain extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let os = ownProps.currentPageAndPost.os;
+
     return {
-        pageComponents: state.pageComponents[ownProps.pageId][ownProps.os],
+        pageComponents: state.pageComponents[pageId][os],
     }
 }
 

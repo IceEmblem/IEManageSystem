@@ -13,14 +13,12 @@ export default class BaseComponentSettingConfig extends IEditConfig{
         this.ConfigComponent = ConfigComponent;
     }
 
-    bulidConfigBtnComponent(pageId, pageDataId, os, sign){
+    bulidConfigBtnComponent(sign, currentPageAndPost){
         let Component = IocContainer.getService(IComponentSettingConfigBtnComponent);
 
         return <Component
-            pageId={pageId}
-            pageDataId={pageDataId}
-            os={os}
             sign={sign}
+            currentPageAndPost={currentPageAndPost}
             ConfigComponent={this.ConfigComponent}
 
             displayName={this.displayName}

@@ -2,11 +2,14 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let defaultComponentData = state.defaultComponentDatas[ownProps.pageId][ownProps.sign];
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageDataId = ownProps.currentPageAndPost.pageDataId;
+
+    let defaultComponentData = state.defaultComponentDatas[pageId][ownProps.sign];
     let contentComponentData = undefined;
 
-    if (ownProps.pageDataId) {
-        contentComponentData = state.contentComponentDatas[ownProps.pageDataId][ownProps.sign]
+    if (pageDataId) {
+        contentComponentData = state.contentComponentDatas[pageDataId][ownProps.sign]
     }
 
     return {

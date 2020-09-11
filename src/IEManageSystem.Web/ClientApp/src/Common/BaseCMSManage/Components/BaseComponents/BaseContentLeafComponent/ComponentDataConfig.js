@@ -15,7 +15,7 @@ export default class ComponentDataConfig extends IEditConfig {
         this.ConfigComponent = ConfigComponent;
     }
 
-    bulidConfigBtnComponent(pageId, pageDataId, os, sign) {
+    bulidConfigBtnComponent(sign, currentPageAndPost) {
         if(!this.ConfigComponent){
             return undefined
         }
@@ -23,10 +23,8 @@ export default class ComponentDataConfig extends IEditConfig {
         let Component = IocContainer.getService(IComponentDataConfigBtnComponent);
 
         return <Component
-            pageId={pageId}
-            pageDataId={pageDataId}
-            os={os}
             sign={sign}
+            currentPageAndPost={currentPageAndPost}
             ConfigComponent={this.ConfigComponent}
         />
     }

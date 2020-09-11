@@ -36,14 +36,12 @@ export default class ContainerConfig extends IEditConfig {
         }
     }
 
-    bulidConfigBtnComponent(pageId, pageDataId, os, sign) {
+    bulidConfigBtnComponent(sign, currentPageAndPost) {
         let Component = IocContainer.getService(IContainerConfigBtnComponent);
 
         return <Component
-            pageId={pageId}
-            pageDataId={pageDataId}
-            os={os}
             sign={sign}
+            currentPageAndPost={currentPageAndPost}
             itemNum={this.itemNum}
             containerConfigs={this.configs}
         />

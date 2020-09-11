@@ -9,20 +9,26 @@ import ComponentContext from '../ComponentContext'
 
 class RootComponentContainerBox extends React.Component {
     render() {
+        if (!this.props.rootPageComponent) {
+            return <></>
+        }
+
         return (
-            <ComponentContext.Provider value={{}}>
+            <ComponentContext.Provider
+                value={{
+                    // 可交互配置特征
+                    interactivConfigFeature: undefined,
+                    // 页面配置特征
+                    pageConfigFeature: undefined,
+                }}
+            >
                 {
                     this.props.rootPageComponent.pageComponentSigns.map(sign => (
-                        <>
-                            <ComponentContainerBox
-                                key={sign + this.props.rootPageComponent.os}
-                                sign={sign}
-                                pageId={this.props.pageId}
-                                pageDataId={this.props.pageDataId}
-                                os={this.props.os}
-                            >
-                            </ComponentContainerBox>
-                        </>
+                        <ComponentContainerBox
+                            sign={sign}
+                            currentPageAndPost={this.props.currentPageAndPost}
+                        >
+                        </ComponentContainerBox>
                     ))
                 }
             </ComponentContext.Provider>
@@ -31,17 +37,19 @@ class RootComponentContainerBox extends React.Component {
 }
 
 RootComponentContainerBox.propTypes = {
-    pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number,
-    os: PropTypes.string.isRequired,
-
+    currentPageAndPost: PropTypes.object.isRequired,
+    
     rootPageComponent: PropTypes.object.isRequired,
 }
 
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let os = ownProps.currentPageAndPost.os;
+
     return {
-        rootPageComponent: state.pageComponents[ownProps.pageId][ownProps.os][RootComponentSign],
+        pageId: pageId,
+        rootPageComponent: state.pageComponents[pageId] && state.pageComponents[pageId][os][RootComponentSign],
     }
 }
 

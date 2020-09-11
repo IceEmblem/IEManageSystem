@@ -6,14 +6,12 @@ export class IDeleteConfigBtnComponent extends React.Component {}
 IDeleteConfigBtnComponent.iocKey = Symbol()
 
 export default class DeleteConfig extends IEditConfig{
-    bulidConfigBtnComponent(pageId, pageDataId, os, sign){
+    bulidConfigBtnComponent(sign, currentPageAndPost){
         let Component = IocContainer.getService(IDeleteConfigBtnComponent);
 
         return <Component
-            pageId={pageId}
-            pageDataId={pageDataId}
-            os={os}
             sign={sign}
+            currentPageAndPost={currentPageAndPost}
         />
     }
 }

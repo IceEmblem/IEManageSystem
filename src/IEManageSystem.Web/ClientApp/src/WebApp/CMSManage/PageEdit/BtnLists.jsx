@@ -130,7 +130,7 @@ class BtnLists extends React.Component {
         ieReduxFetch("/api/PageQuery/GetPage", {
             name: pageName
         }).then(value => {
-            this.props.setPage(this.props.page, value.pageComponents, value.defaultComponentDatas, this.props.os);
+            this.props.setPage(this.props.page, value.pageComponents, value.defaultComponentDatas, this.props.currentPageAndPost.os);
         });
     }
 
@@ -155,10 +155,8 @@ class BtnLists extends React.Component {
                             return (
                                 <div className="d-flex justify-content-end overflow-hidden-x" style={{ width: `${x}%` }}>
                                     <this.ContainerConfigBtnComponent
-                                        pageId={this.props.pageId}
-                                        pageDataId={undefined}
-                                        os={this.props.os}
                                         sign={RootComponentSign}
+                                        currentPageAndPost={this.props.currentPageAndPost}
                                         btnComponent={AddComponentBtn}
                                     />
                                     <Popover
@@ -190,16 +188,16 @@ class BtnLists extends React.Component {
                                         content={<OSType
                                             page={this.props.page}
                                             importWebComponent={() => {
-                                                if (this.props.os == PageComponentOSType.Web) {
+                                                if (this.props.currentPageAndPost.os == PageComponentOSType.Web) {
                                                     return;
                                                 }
-                                                this.props.copyComponent(this.props.os, PageComponentOSType.Web)
+                                                this.props.copyComponent(this.props.currentPageAndPost.os, PageComponentOSType.Web)
                                             }}
                                             importNativeComponent={() => {
-                                                if (this.props.os == PageComponentOSType.Native) {
+                                                if (this.props.currentPageAndPost.os == PageComponentOSType.Native) {
                                                     return;
                                                 }
-                                                this.props.copyComponent(this.props.os, PageComponentOSType.Native)
+                                                this.props.copyComponent(this.props.currentPageAndPost.os, PageComponentOSType.Native)
                                             }}
                                         />}
                                         title="平台信息"
@@ -235,8 +233,7 @@ class BtnLists extends React.Component {
 }
 
 BtnLists.propTypes = {
-    pageId: PropTypes.string.isRequired,
-    os: PropTypes.string.isRequired,
+    currentPageAndPost: PropTypes.object.isRequired,
 
     page: PropTypes.object.isRequired,
     addComponent: PropTypes.func.isRequired,
@@ -248,9 +245,9 @@ BtnLists.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        page: state.pages[ownProps.pageId],
-        pageComponents: state.pageComponents[ownProps.pageId],
-        defaultComponentDatas: state.defaultComponentDatas[ownProps.pageId],
+        page: state.pages[ownProps.currentPageAndPost.pageId],
+        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageId],
+        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageId],
     }
 }
 
@@ -260,7 +257,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(setPage(page, pageComponents, defaultComponentDatas, os));
         },
         copyComponent: (distOS, sourceOS) => {
-            dispatch(new CopyComponentAction(ownProps.pageId, distOS, sourceOS))
+            dispatch(new CopyComponentAction(ownProps.currentPageAndPost.pageId, distOS, sourceOS))
         },
         pageComponentUpdateFetch: (name, components, defaultComponentDatas) => {
             dispatch(pageComponentUpdateFetch(name, components, defaultComponentDatas));

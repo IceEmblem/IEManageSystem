@@ -31,8 +31,8 @@ class ComponentDataConfigBtnComponent extends IComponentDataConfigBtnComponent {
                     // type={"primary"}
                     icon={<FileTextOutlined />}
                     onClick={() => {
-                        this.setState({ 
-                            visible: true, 
+                        this.setState({
+                            visible: true,
                             cloneComponentData: IETool.deepCopy(this.props.contentComponentData)
                         })
                     }}
@@ -41,28 +41,28 @@ class ComponentDataConfigBtnComponent extends IComponentDataConfigBtnComponent {
             <Modal
                 title={`编辑组件数据`}
                 visible={this.state.visible}
-                onOk={()=>{
-                    if(!this.props.pageDataId){
-                        this.props.editDefaultComponentData(new DefaultComponentDataUpdateAction(this.props.pageId, this.props.sign, this.state.cloneComponentData))
+                onOk={() => {
+                    if (!this.props.currentPageAndPost.pageDataId) {
+                        this.props.editDefaultComponentData(new DefaultComponentDataUpdateAction(this.props.currentPageAndPost.pageId, this.props.sign, this.state.cloneComponentData))
                     }
-                    else{
-                        this.props.editComponentData(new ComponentDataUpdateAction(this.props.pageDataId, this.state.cloneComponentData))
+                    else {
+                        this.props.editComponentData(new ComponentDataUpdateAction(this.props.currentPageAndPost.pageDataId, this.state.cloneComponentData))
                     }
-                    this.setState({visible: false});
+                    this.setState({ visible: false });
                 }}
-                onCancel={()=>{
-                    this.setState({visible: false});
+                onCancel={() => {
+                    this.setState({ visible: false });
                 }}
                 width={1200}
                 zIndex={9999}
                 okText='提交'
                 cancelText='取消'
             >
-                <this.props.ConfigComponent 
+                <this.props.ConfigComponent
                     pageComponentSettings={this.props.pageComponent.pageComponentSettings}
                     data={this.state.cloneComponentData}
-                    setData={(data)=>{
-                        this.setState({cloneComponentData: data});
+                    setData={(data) => {
+                        this.setState({ cloneComponentData: data });
                     }}
                 />
             </Modal>
@@ -82,17 +82,22 @@ ComponentDataConfigBtnComponent.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
-        // 新增属性 parentSign
-        let defaultComponentData = state.defaultComponentDatas[ownProps.pageId][ownProps.sign];
-        let contentComponentData = undefined;
-        if (state.contentComponentDatas[ownProps.pageDataId]) {
-            contentComponentData = state.contentComponentDatas[ownProps.pageDataId][ownProps.sign];
-        }
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageDataId = ownProps.currentPageAndPost.pageDataId;
+    let os = ownProps.currentPageAndPost.os;
+
+    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
+    // 新增属性 parentSign
+    let defaultComponentData = state.defaultComponentDatas[pageId][ownProps.sign];
+    let contentComponentData = undefined;
+    if (state.contentComponentDatas[pageDataId]) {
+        contentComponentData = state.contentComponentDatas[pageDataId][ownProps.sign];
+    }
 
     return {
         pageComponent: pageComponent,
-        contentComponentData: contentComponentData || defaultComponentData || ComponentDataModel.CreateDefaultComponentData(ownProps.sign)
+        contentComponentData: contentComponentData || defaultComponentData || ComponentDataModel.CreateDefaultComponentData(ownProps.sign),
+        currentPageAndPost: ownProps.currentPageAndPost,
     }
 }
 

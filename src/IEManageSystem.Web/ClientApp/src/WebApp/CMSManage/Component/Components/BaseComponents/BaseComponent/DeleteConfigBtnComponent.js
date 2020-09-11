@@ -23,8 +23,8 @@ class DeleteConfigBtnComponent extends IDeleteConfigBtnComponent {
                 type='primary'
                 icon={<DeleteOutlined />}
                 danger
-                onClick={() => { 
-                    this.props.removeComponent(new RemoveComponentAction(this.props.pageId, this.props.os, this.props.sign));
+                onClick={() => {
+                    this.props.removeComponent();
                 }}
             />
         </Tooltip>
@@ -32,16 +32,15 @@ class DeleteConfigBtnComponent extends IDeleteConfigBtnComponent {
 }
 
 DeleteConfigBtnComponent.propTypes = {
-    pageId: PropTypes.number.isRequired,
-    pageDataId: PropTypes.number,
-    os: PropTypes.string.isRequired,
     sign: PropTypes.string.isRequired,
 
     removeComponent: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
+    let pageId = ownProps.currentPageAndPost.pageId;
+    let os = ownProps.currentPageAndPost.os;
+    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
 
     return {
         pageComponent: pageComponent,
@@ -50,8 +49,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        removeComponent: (removeComponentAction) => {
-            dispatch(removeComponentAction);
+        removeComponent: () => {
+            dispatch(new RemoveComponentAction(
+                ownProps.currentPageAndPost.pageId,
+                ownProps.currentPageAndPost.os,
+                ownProps.sign
+            ));
         }
     }
 }
