@@ -1,11 +1,10 @@
 import React from 'react'
 import {View} from 'react-native'
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
-import Setting from 'IETemplateComponents/Container/Setting'
+import IComponent from 'IETemplateComponents/Container/IComponent'
 
 class Component extends IComponent {
     render() {
-        let setting = new Setting(this.getSetting("FlexSetting"));
+        let setting = this.getCurrentSetting();
 
         return (
             <View

@@ -5,5 +5,5 @@ import DataConfig from './DataConfig'
 import describeBuilder from 'IETemplateComponents/IECarousel'
 import RNComponent from 'RNIETemplateComponents/IECarousel/Component'
 
-export const RNDescribe = (RNComponent, Preview, SettingConfig, DataConfig);
+export const RNDescribe = describeBuilder(RNComponent, Preview, SettingConfig, DataConfig);
 export default describeBuilder(Component, Preview, SettingConfig, DataConfig);

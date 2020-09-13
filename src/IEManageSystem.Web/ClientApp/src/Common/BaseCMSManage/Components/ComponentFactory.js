@@ -22,9 +22,7 @@ class ComponentFactory {
 
     register(templateList, invalidOSComponent){
         this.Previews = undefined;
-
         this.TemplateList = templateList;
-
         this.ComponentDescribes = [];
         this.ComponentDescribeMaps = new Map();
         

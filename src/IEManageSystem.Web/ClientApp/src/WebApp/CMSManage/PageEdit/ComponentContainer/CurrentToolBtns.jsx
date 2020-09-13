@@ -67,8 +67,9 @@ class CurrentToolBtns extends React.Component {
                 </span>
                 <SignSquareFrame
                     activePageComponentSign={this.state.curSign}
-                    os={this.props.currentPageAndPost.os}
+                    currentPageAndPost={this.props.currentPageAndPost}
                     color="#ff7a45"
+                    rootElementId={this.props.rootElementId}
                 />
             </div>
         );
@@ -78,6 +79,7 @@ class CurrentToolBtns extends React.Component {
 CurrentToolBtns.propTypes = {
     // 如下属性由父组件传入
     currentPageAndPost: PropTypes.object.isRequired,
+    rootElementId: PropTypes.object,
 
     activePageComponentSign: PropTypes.string,
 }

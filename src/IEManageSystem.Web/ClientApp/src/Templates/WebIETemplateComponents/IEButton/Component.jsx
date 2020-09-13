@@ -1,13 +1,12 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
-import { Button } from 'antd';
-import Setting from 'IETemplateComponents/IEButton/Setting'
+import IComponent from 'IETemplateComponents/IEButton/IComponent'
 import {getIconType} from 'Common/AntIcons'
 import {withRouter} from 'react-router-dom'
+import { Button } from 'antd';
 
 class Component extends IComponent {
     render() {
-        let setting = new Setting(this.getSetting("BtnSetting"));
+        let setting = this.getCurrentSetting();
         let Icon;
         if(setting.icon){
             let IconType = getIconType(setting.icon);
@@ -17,8 +16,10 @@ class Component extends IComponent {
         return (
         <Button 
             icon={Icon}
-            style={{backgroundColor: setting.bgcolor, color: setting.color}} 
-            shape={setting.shape} type={setting.btnType} size={setting.size}
+            style={{backgroundColor: setting.bgcolor, color: setting.color, fontSize: setting.fontSize, lineHeight: setting.fontSize}} 
+            shape={setting.shape} 
+            type={setting.btnType} 
+            size={setting.size}
             onClick={()=>{
                 if(this.props.interactivClick){
                     this.props.interactivClick();

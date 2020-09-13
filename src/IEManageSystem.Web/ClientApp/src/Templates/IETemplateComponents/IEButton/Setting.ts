@@ -76,5 +76,13 @@ export default class IEButtonSetting {
     set icon(val){
         this.setting.getOrCreateSingleDate(other).field3 = val;
     }
+
+    get fontSize(){
+        return this.setting.getOrCreateSingleDate(other).field4;
+    }
+    
+    set fontSize(val){
+        this.setting.getOrCreateSingleDate(other).field4 = val;
+    }
 }
 

@@ -22,3 +22,80 @@
 .pageedit-componentcontainer:hover>.pageedit-componentcontainer-btns {
     opacity: 1;
 }
+
+.phone {
+    position: fixed;
+    left: 200px;
+    top: 50px;
+}
+.phone-screen {
+    width: 320px;
+    height: 480px;
+    border-radius: 5px;
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.phone-screen>div{
+    width: 340px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.phone-screen>div>div{
+    position: relative;
+}
+
+.phone-cover {
+    position: relative;
+    border: 2px solid #ccc;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    background-color: #000;
+}
+.phone-camera {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: #ccc;
+    margin-left: 100px;
+    padding: 0px;
+    margin-bottom: 4px;
+}
+.phone-speaker {
+    position: relative;
+    width: 45px;
+    height: 5px;
+    border-radius: 4px;
+    background-color: #ccc;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -11px;
+    margin-bottom: 6px;
+}
+.phone-light {
+    position: relative;
+    ;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    background-color: #ccc;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 7px;
+}
+.phone-homebtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: 4px solid #ccc;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4px;
+}

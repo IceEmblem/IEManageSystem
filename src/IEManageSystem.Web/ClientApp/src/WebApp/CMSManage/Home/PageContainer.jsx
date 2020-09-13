@@ -11,6 +11,8 @@ import IocContainer from 'Core/IocContainer'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 
+import RegisterTemplateManager from 'CMSManage/Component/Components/RegisterTemplateManager'
+
 class HomeComponentContainerBoxShow extends React.Component {
     render() {
         return <ComponentContainerBoxShow
@@ -28,6 +30,7 @@ class PageContainer extends React.Component {
     }
 
     componentWillMount() {
+        RegisterTemplateManager.applyOSComponents(this.props.os);
         IocContainer.registerSingleIntances(IComponentContainerBoxShow, HomeComponentContainerBoxShow)
     }
 

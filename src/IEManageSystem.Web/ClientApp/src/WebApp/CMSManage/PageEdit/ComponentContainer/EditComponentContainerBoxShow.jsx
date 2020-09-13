@@ -12,7 +12,7 @@ class EditComponentContainerBoxShow extends React.Component {
             style={{ ...this.props.style }}
             className={`${this.props.className} pageedit-componentcontainer`}
             propsEX={{
-                id: `__component__${this.props.os}__${this.props.sign}`,
+                id: `__component__${this.props.currentPageAndPost.os}__${this.props.sign}`,
                 onClick: (e) => {
                     if (e.stopPropagation) 
                     { 

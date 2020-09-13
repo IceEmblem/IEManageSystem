@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 import './index.css'
@@ -23,6 +21,55 @@ import SignSquareFrame from './ComponentContainer/SignSquareFrame'
 import CurrentToolBtns from './ComponentContainer/CurrentToolBtns'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
+
+const RNPageRootId = '__PageEditRN__';
+const RNPage = (props) => {
+    return <div class="phone">
+        <div className="phone-cover">
+            <div className="phone-light"></div>
+            <div className="phone-camera"></div>
+            <div className="phone-speaker"></div>
+            <div class="phone-screen">
+                <div>
+                    <div id={RNPageRootId}>
+                        <Page>
+                            <RootComponentContainerBox
+                                currentPageAndPost={props.currentPageAndPost}
+                            />
+                        </Page>
+                        <SignSquareFrame
+                            color="#13c2c2"
+                            currentPageAndPost={props.currentPageAndPost}
+                            rootElementId={RNPageRootId}
+                        />
+                        <CurrentToolBtns
+                            currentPageAndPost={props.currentPageAndPost}
+                            rootElementId={RNPageRootId}
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className="phone-homebtn"></div>
+        </div>
+    </div>
+}
+
+const WebPage = (props) => {
+    return <>
+        <Page>
+            <RootComponentContainerBox
+                currentPageAndPost={props.currentPageAndPost}
+            />
+        </Page>
+        <SignSquareFrame
+            color="#13c2c2"
+            currentPageAndPost={props.currentPageAndPost}
+        />
+        <CurrentToolBtns
+            currentPageAndPost={props.currentPageAndPost}
+        />
+    </>
+}
 
 class PageContainer extends React.Component {
     constructor(props) {
@@ -57,28 +104,18 @@ class PageContainer extends React.Component {
         };
 
         return (
-            <div className="w-100 h-100">
-                <div
-                    className="w-100 h-100"
-                    style={{ overflowY: "auto" }}
-                >
-                    <div className="w-100 h-100">
-                        <Page style={style}>
-                            <RootComponentContainerBox
-                                currentPageAndPost={currentPageAndPost}
-                            />
-                            <SignSquareFrame
-                                color="#13c2c2"
-                                os={this.props.os}
-                            />
-                        </Page>
-                    </div>
-                    {/* 这是一个 react 插槽，不要随意更改 id */}
-                    <div id='PageEditPortals'>
-                    </div>
-                    <CurrentToolBtns
-                        currentPageAndPost={currentPageAndPost}
-                    />
+            <div>
+                {
+                    this.props.os == PageComponentOSType.Native ?
+                        <RNPage
+                            currentPageAndPost={currentPageAndPost}
+                        /> :
+                        <WebPage
+                            currentPageAndPost={currentPageAndPost}
+                        />
+                }
+                {/* 这是一个 react 插槽，不要随意更改 id */}
+                <div id='PageEditPortals'>
                 </div>
                 <BtnLists
                     currentPageAndPost={currentPageAndPost}

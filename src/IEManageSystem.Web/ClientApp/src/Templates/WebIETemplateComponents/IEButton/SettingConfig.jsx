@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Setting from 'IETemplateComponents/IEButton/Setting'
-import { Input, Tag, Radio, Button } from 'antd'
+import { Input, Tag, Radio, Button, InputNumber } from 'antd'
 
 import { SketchPicker } from 'react-color'
 import { icons } from 'Common/AntIcons'
@@ -68,6 +68,16 @@ class SettingConfig extends React.Component {
                     }} />
             </div>
             <div className='col-md-6'>
+                <div className="mb-3">
+                    <Input
+                        value={buttonSetting.fontSize}
+                        onChange={(e) => {
+                            buttonSetting.fontSize = e.currentTarget.value;
+                            this.props.setData(buttonSetting.setting);
+                        }}
+                        suffix={<Tag color="#55acee">字体大小</Tag>}
+                    />
+                </div>
                 <div className="mb-3">
                     <Tag color="#55acee">按钮类型</Tag>
                     <Radio.Group

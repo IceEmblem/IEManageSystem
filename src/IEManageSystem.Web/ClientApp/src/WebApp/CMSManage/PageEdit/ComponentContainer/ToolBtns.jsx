@@ -6,7 +6,7 @@ import { setActiveComponent, RootComponentSign } from 'BaseCMSManage/IEReduxs/Ac
 
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import { Button, Popover, Input, Tag, Select, Tooltip } from 'antd'
-import { BranchesOutlined, ArrowUpOutlined, EditOutlined } from "@ant-design/icons"
+import { BranchesOutlined, ArrowUpOutlined, EditOutlined, ArrowDownOutlined } from "@ant-design/icons"
 
 class ToolBtns extends React.Component {
     state = {
@@ -100,6 +100,28 @@ class ToolBtns extends React.Component {
                             {
                                 this.getBtns()
                             }
+                            {/* 选择子组件按钮 */}
+                            {
+                                this.props.pageComponent.pageComponentSigns.map(sign => {
+                                    return (<Button
+                                        key={sign}
+                                        className='ml-3'
+                                        size='small'
+                                        shape='circle'
+                                        icon={<ArrowDownOutlined />}
+                                        onClick={(e) => {
+                                            // 停止冒泡是必须的，不然会触发组件的点击事件，当前组件又会变为活跃组件
+                                            e.stopPropagation();
+                                            e.cancelable = true;
+
+                                            this.props.setActiveComponent(sign);
+
+                                            return false
+                                        }}
+                                    ></Button>)
+                                })
+                            }
+                            {/* 选择父组件按钮 */}
                             <Button
                                 className='ml-3'
                                 size='small'

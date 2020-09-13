@@ -1,30 +1,40 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
+import IComponent from 'IETemplateComponents/IEButton/IComponent'
 import { StyleSheet } from 'react-native'
-import { Link, withRouter } from 'react-router-native'
+import { withRouter } from 'react-router-native'
 import { Button, Text } from 'native-base'
-import Setting from 'IETemplateComponents/IEButton/Setting'
+import StyleCheck from 'RNCMS/StyleCheck'
 
 class Component extends IComponent {
     render() {
-        let setting = new Setting(this.getSetting("BtnSetting"));
+        let setting = this.getCurrentSetting();
 
         return (
             <Button
-                style={[this.baseStyle, styles.btn]}
+                style={[this.baseStyle, styles.btn, StyleCheck.handle({backgroundColor: setting.bgcolor})]}
 
+                // 按钮形状，只有方向和有点圆
                 rounded={setting.shape && setting.shape != ''}
-                primary={setting.btnType == "primary"}
-                warning={setting.btnType == "warning"}
-                light={setting.btnType != "primary" && setting.btnType != "warning"}
 
+                // 按钮类型，
+                primary={setting.btnType == "primary"}
+                light={setting.btnType == "default"}
+                transparent={setting.btnType == 'link'}
+
+                // 按钮大小
                 small={setting.size == 'small'}
                 large={setting.size == 'large'}
+
                 onPress={()=>{
+                    if(this.props.interactivClick){
+                        this.props.interactivClick();
+                        return;
+                    }
+
                     this.props.history.push(setting.url);
                 }}
             >
-                <Text>{setting.text}</Text>
+                <Text style={[StyleCheck.handle({color: setting.color, fontSize: setting.fontSize})]}>{this.props.interactivText || setting.text}</Text>
             </Button>
         );
 

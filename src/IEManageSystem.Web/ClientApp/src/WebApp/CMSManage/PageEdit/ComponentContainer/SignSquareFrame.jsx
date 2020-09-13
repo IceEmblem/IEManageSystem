@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 export class SignSquareFrame extends React.Component {
@@ -6,7 +7,12 @@ export class SignSquareFrame extends React.Component {
         var actualLeft = element.offsetLeft;
         var current = element.offsetParent;
 
-        while (current !== null) {
+        while (current !== null) 
+        {
+            if(this.props.rootElementId && current.id == this.props.rootElementId){
+                break;
+            }
+
             actualLeft += current.offsetLeft;
             current = current.offsetParent;
         }
@@ -18,7 +24,12 @@ export class SignSquareFrame extends React.Component {
         var actualTop = element.offsetTop;
         var current = element.offsetParent;
 
-        while (current !== null) {
+        while (current !== null) 
+        {
+            if(this.props.rootElementId && current.id == this.props.rootElementId){
+                break;
+            }
+
             actualTop += current.offsetTop;
             current = current.offsetParent;
         }
@@ -27,7 +38,7 @@ export class SignSquareFrame extends React.Component {
     }
 
     render() {
-        let targetElement = document.getElementById(`__component__${this.props.os}__${this.props.activePageComponentSign}`);
+        let targetElement = document.getElementById(`__component__${this.props.currentPageAndPost.os}__${this.props.activePageComponentSign}`);
         if (!targetElement) {
             return <div></div>
         }
@@ -51,10 +62,17 @@ export class SignSquareFrame extends React.Component {
     }
 }
 
+SignSquareFrame.propTypes = {
+    // 如下属性由父组件传入
+    currentPageAndPost: PropTypes.object.isRequired,
+    rootElementId: PropTypes.object,
+
+    activePageComponentSign: PropTypes.string,
+}
+
 const mapStateToProps = (state, ownProps) => {
     return {
-        os: ownProps.os,
-        activePageComponentSign: state.activePageComponentSign
+        activePageComponentSign: ownProps.activePageComponentSign || state.activePageComponentSign
     }
 }
 
