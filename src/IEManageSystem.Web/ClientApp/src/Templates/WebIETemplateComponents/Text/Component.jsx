@@ -28,7 +28,7 @@ class Component extends IComponent {
             </Title> :
             <p className="mb-0" style={{ color: setting.fontColor }}>{text} <small>{data.smallText}</small></p>
 
-        return <div className='d-flex align-items-center'>
+        return <div className='d-flex align-items-center' style={{justifyContent: setting.align}}>
             <div>
                 {this.props.children}
             </div>

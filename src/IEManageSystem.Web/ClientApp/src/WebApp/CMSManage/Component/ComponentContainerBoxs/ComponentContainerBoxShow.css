@@ -4,7 +4,6 @@
     align-items: stretch;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
-    overflow: hidden;
 }
 
 /* 前面的元素是工具按钮，最后一个元素是组件 */

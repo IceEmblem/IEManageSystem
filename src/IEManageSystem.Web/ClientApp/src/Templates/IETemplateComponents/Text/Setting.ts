@@ -34,4 +34,12 @@ export default class Setting {
     set textSource(val){
         this.setting.getDefauleData().field3 = val;
     }
+
+    get align(){
+        return this.setting.getDefauleData().field4 || 'flex-start';
+    }
+
+    set align(val){
+        this.setting.getDefauleData().field4 = val;
+    }
 }

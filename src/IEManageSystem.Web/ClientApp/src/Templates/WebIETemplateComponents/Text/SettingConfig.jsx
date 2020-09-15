@@ -40,16 +40,32 @@ class SettingConfig extends React.Component {
                     <Radio value="CText">组件文本</Radio>
                 </Radio.Group>
             </div>
-            <Input
-                placeholder="示例：#ffffff"
-                className="mb-3"
-                value={setting.fontColor}
-                onChange={(e) => {
-                    setting.fontColor = e.currentTarget.value;
-                    this.props.setData(setting.setting);
-                }}
-                suffix={<Tag color="#55acee">字体颜色</Tag>}
-            />
+            <div>
+                <Input
+                    placeholder="示例：#ffffff"
+                    className="mb-3"
+                    value={setting.fontColor}
+                    onChange={(e) => {
+                        setting.fontColor = e.currentTarget.value;
+                        this.props.setData(setting.setting);
+                    }}
+                    suffix={<Tag color="#55acee">字体颜色</Tag>}
+                />
+            </div>
+            <div className="mb-3">
+                <Tag color="#55acee">内容对齐</Tag>
+                <Radio.Group
+                    value={setting.align}
+                    onChange={(e) => {
+                        setting.align = e.target.value;
+                        this.props.setData(setting.setting);
+                    }}
+                >
+                    <Radio value="flex-start">左边</Radio>
+                    <Radio value="center">中间</Radio>
+                    <Radio value="flex-end">右边</Radio>
+                </Radio.Group>
+            </div>
         </div>)
     }
 }

@@ -36,10 +36,13 @@ class Component extends IComponent {
         }
 
         return (
-            <View style={[this.baseStyle, styles.view]}>
+            <View style={[this.baseStyle, styles.view, {justifyContent: setting.align}]}>
                 <View>{this.props.children}</View>
                 <Text style={[styles.text, style]}>{this.getText()}</Text>
-                <Text style={[styles.textSmall, smallStyle]}>{data.smallText}</Text>
+                {
+                    data.smallText &&
+                    <Text style={[styles.textSmall, smallStyle]}>{data.smallText}</Text>
+                }
             </View>
         )
     }

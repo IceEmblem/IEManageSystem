@@ -29,7 +29,7 @@ class Component extends IComponent {
                     >
                         <Body>
                             {
-                                this.props.children['middle'] || <Text>卡片内容</Text>
+                                this.props.children['middle']
                             }
                         </Body>
                     </CardItem>
