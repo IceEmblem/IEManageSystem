@@ -11,16 +11,12 @@ import IECard, { RNDescribe as RNIECard } from "./IECard"
 import IECarousel, { RNDescribe as RNIECarousel } from "./IECarousel"
 import IECategoryLabel, { RNDescribe as RNIECategoryLabel } from "./IECategoryLabel"
 import IEComment, { RNDescribe as RNIEComment } from "./IEComment"
-import IEDrawer, { RNDescribe as RNIEDrawer } from "./IEDrawer"
 import IEImg, { RNDescribe as RNIEImg } from "./IEImg"
 import IEInfoGroup, { RNDescribe as RNIEInfoGroup } from "./IEInfoGroup"
 import IELine, { RNDescribe as RNIELine } from "./IELine"
 import IEMenu, { RNDescribe as RNIEMenu } from "./IEMenu"
 import IEPlaceholder, { RNDescribe as RNIEPlaceholder } from './IEPlaceholder'
-import IEPostContent, { RNDescribe as RNIEPostContent } from "./IEPostContent"
-import IEPostDescribe, { RNDescribe as RNIEPostDescribe } from "./IEPostDescribe"
 import IEPostList, { RNDescribe as RNIEPostList } from "./IEPostList"
-import IEPostTitle, { RNDescribe as RNIEPostTitle } from "./IEPostTitle"
 import IERankingList, { RNDescribe as RNIERankingList } from "./IERankingList"
 // 评分组件，rn 没有
 import IERate from "./IERate"
@@ -43,16 +39,12 @@ const describes = [
     IECarousel,
     IECategoryLabel,
     IEComment,
-    IEDrawer,
     IEImg,
     IEInfoGroup,
     IELine,
     IEMenu,
     IEPlaceholder,
-    IEPostContent,
-    IEPostDescribe,
     IEPostList,
-    IEPostTitle,
     IERankingList,
     IERate,
     IESearch,
@@ -71,16 +63,12 @@ const rnDescribes = [
     RNIECarousel,
     RNIECategoryLabel,
     RNIEComment,
-    RNIEDrawer,
     RNIEImg,
     RNIEInfoGroup,
     RNIELine,
     RNIEMenu,
     RNIEPlaceholder,
-    RNIEPostContent,
-    RNIEPostDescribe,
     RNIEPostList,
-    RNIEPostTitle,
     RNIERankingList,
     RNIESearch,
     RNNotFind,

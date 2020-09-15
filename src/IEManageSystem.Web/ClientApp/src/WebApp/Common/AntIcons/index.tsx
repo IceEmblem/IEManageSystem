@@ -78,5 +78,5 @@ export function getIconType(name: IconNameType) {
         return iconType;
     }
 
-    return iconType['QuestionCircleOutlined'];
+    return icons['QuestionCircleOutlined'];
 }

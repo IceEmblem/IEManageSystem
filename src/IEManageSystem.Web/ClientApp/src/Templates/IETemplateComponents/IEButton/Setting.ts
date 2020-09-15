@@ -84,5 +84,13 @@ export default class IEButtonSetting {
     set fontSize(val){
         this.setting.getOrCreateSingleDate(other).field4 = val;
     }
+
+    get btnHeight(){
+        return this.setting.getOrCreateSingleDate(other).field5;
+    }
+    
+    set btnHeight(val){
+        this.setting.getOrCreateSingleDate(other).field5 = val;
+    }
 }
 

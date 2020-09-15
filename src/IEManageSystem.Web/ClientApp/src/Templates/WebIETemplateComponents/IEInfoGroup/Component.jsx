@@ -1,39 +1,45 @@
 import React from 'react'
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import { List } from 'antd'
 import Setting from 'IETemplateComponents/IEInfoGroup/Setting'
 import Data from 'IETemplateComponents/IEInfoGroup/Data'
+import IComponent from 'IETemplateComponents/IEInfoGroup/IComponent'
+
 
 class Component extends IComponent {
-    createItem(settingField, dataField, color) {
-        return <List.Item style={{ color: color }} className="mb-0 pt-2 pb-2" >
-            <span>{settingField}</span>
-            <span>{dataField}</span>
-        </List.Item>
+    createItem(data) {
+        let Item = this.props.ChildComponent['item'];
+        return Item ?
+            <Item
+                key={data.key}
+                interactivConfigFeature={this.getItemInteractivConfigFeature(data)}
+            /> :
+            <List.Item key={data.key} style={{ color: data.color }} className="mb-0 pt-2 pb-2" >
+                <span>{data.settingField}</span>
+                <span>{data.dataField}</span>
+            </List.Item>
+    }
+
+    createTitle(setting) {
+        let Title = this.props.ChildComponent['title'];
+        return Title ?
+            <Title
+                interactivConfigFeature={this.getTitleInteractivConfigFeature(setting)}
+            /> :
+            setting.title ?
+                <div style={{ color: setting.color }}>{setting.title}</div> :
+                undefined
     }
 
     render() {
-        let setting = new Setting(this.getSetting("DefaultSetting"));
-        let data = new Data(this.props.componentData);
-
-        let itemDatas = [];
-        if (setting.field1)
-            itemDatas.push({ settingField: setting.field1, dataField: data.field1 });
-        if (setting.field2)
-            itemDatas.push({ settingField: setting.field2, dataField: data.field2 });
-        if (setting.field3)
-            itemDatas.push({ settingField: setting.field3, dataField: data.field3 });
-        if (setting.field4)
-            itemDatas.push({ settingField: setting.field4, dataField: data.field4 });
-        if (setting.field5)
-            itemDatas.push({ settingField: setting.field5, dataField: data.field5 });
+        let setting = this.getCurrentSetting();
+        let itemDatas = this.getItemDatas();
 
         return <List
             bordered={setting.bordered}
             grid={{ column: setting.col }}
-            header={setting.title ? <div style={{ color: setting.color }}>{setting.title}</div> : ""}
+            header={this.createTitle(setting)}
             dataSource={itemDatas}
-            renderItem={item => this.createItem(item.settingField, item.dataField, setting.color)}
+            renderItem={item => this.createItem(item)}
         />
     }
 }

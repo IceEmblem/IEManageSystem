@@ -10,7 +10,8 @@
 }
 
 .IERankingList-item:first-child{
-    background-color: #66cd74;
+    background-color:#1890ff;
+    box-shadow: 0px 0px 3px#1890ff;
 }
 
 .IERankingList-item:first-child a{

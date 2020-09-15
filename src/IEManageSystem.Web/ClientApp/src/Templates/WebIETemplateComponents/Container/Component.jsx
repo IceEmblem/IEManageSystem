@@ -15,7 +15,8 @@ class Component extends IComponent {
                     justifyContent: setting.justifyContent,
                     alignItems: setting.alignItems,
                     alignContent: setting.alignContent,
-                    flexWrap: setting.wrap
+                    flexWrap: setting.wrap,
+                    overflowY: 'hidden'
                 }}
             >
                 {this.props.children}

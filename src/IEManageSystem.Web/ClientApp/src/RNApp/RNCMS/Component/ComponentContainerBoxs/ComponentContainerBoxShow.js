@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'stretch',
-        flexWrap: 'nowrap'
+        flexWrap: 'nowrap',
+        overflow: 'hidden'
     }
 })

@@ -1,29 +1,10 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import { StyleSheet, View, Image } from 'react-native'
 import defaultAvatar from 'images/default_avatar.png'
 import { Form, Textarea, Button, Text, Thumbnail } from 'native-base'
+import IComponent from 'IETemplateComponents/IEComment/IComponent'
 
 class Component extends IComponent {
-    state = {
-        submitting: false,
-        value: '',
-    };
-
-    constructor(props){
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleSubmit = () => {
-        this.setState({ submitting: true });
-        this.props.execLogic(this.state.value)
-            .then(value => {
-                this.setState({ submitting: false, value: '' });
-                this.props.pageFreshen();
-            });
-    };
-
     createItem(comment) {
         return (
             <View style={styles.item}>

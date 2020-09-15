@@ -26,7 +26,15 @@ class ToolBtns extends React.Component {
     }
 
     getBtns() {
-        return <>
+        return <div 
+        onClick={(e) => {
+            // 停止冒泡是必须的，不然会触发组件的点击事件，当前组件又会变为活跃组件
+            e.stopPropagation();
+            e.cancelable = true;
+
+            return false
+        }}
+        >
             {
                 this.componentDescribe.componentObject.BasicComponentSettingConfig.bulidConfigBtnComponent(
                     this.props.sign,
@@ -54,7 +62,7 @@ class ToolBtns extends React.Component {
                     this.props.currentPageAndPost,
                 )
             }
-        </>
+        </div>
     }
 
     render() {
@@ -84,16 +92,25 @@ class ToolBtns extends React.Component {
                     </Popover>
                 </div>
                 {
-                    this.props.cancelActiveShow != true && this.props.isActive &&
+                    this.props.cancelActiveShow != true && this.props.isActive && domNode &&
                     ReactDOM.createPortal(
-                        <div style={{
-                            position: 'fixed',
-                            display: 'flex',
-                            right: 80,
-                            bottom: 110,
-                            alignItems: 'center',
-                            borderRadius: 20
-                        }}>
+                        <div style={
+                            {
+                                position: 'fixed',
+                                display: 'flex',
+                                right: 80,
+                                bottom: 110,
+                                alignItems: 'center',
+                                borderRadius: 20
+                            }}
+                            onClick={(e) => {
+                                // 停止冒泡是必须的，不然会触发组件的点击事件，当前组件又会变为活跃组件
+                                e.stopPropagation();
+                                e.cancelable = true;
+
+                                return false
+                            }}
+                        >
                             <Tag className='mr-3' icon={<EditOutlined />} color="#55acee">
                                 {this.componentDescribe.displayName}
                             </Tag>
@@ -110,13 +127,7 @@ class ToolBtns extends React.Component {
                                         shape='circle'
                                         icon={<ArrowDownOutlined />}
                                         onClick={(e) => {
-                                            // 停止冒泡是必须的，不然会触发组件的点击事件，当前组件又会变为活跃组件
-                                            e.stopPropagation();
-                                            e.cancelable = true;
-
                                             this.props.setActiveComponent(sign);
-
-                                            return false
                                         }}
                                     ></Button>)
                                 })
@@ -128,17 +139,11 @@ class ToolBtns extends React.Component {
                                 shape='circle'
                                 icon={<ArrowUpOutlined />}
                                 onClick={(e) => {
-                                    // 停止冒泡是必须的，不然会触发组件的点击事件，当前组件又会变为活跃组件
-                                    e.stopPropagation();
-                                    e.cancelable = true;
-
                                     if (RootComponentSign == this.props.pageComponent.parentSign) {
                                         return false;
                                     }
 
                                     this.props.setActiveComponent(this.props.pageComponent.parentSign);
-
-                                    return false
                                 }}
                             ></Button>
                         </div>,

@@ -28,7 +28,7 @@ export default class Setting {
     }
 
     get width(){
-        return this.setting.getDefauleData().field3 || "35%";
+        return this.setting.getDefauleData().field3 || "200";
     }
 
     set width(val){

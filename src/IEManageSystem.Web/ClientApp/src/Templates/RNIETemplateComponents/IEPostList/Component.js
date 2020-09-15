@@ -1,18 +1,30 @@
 import React from 'react'
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
-import Setting from 'IETemplateComponents/IEPostList/Setting'
+import IComponent from 'IETemplateComponents/IEPostList/IComponent'
 import defaultImg from 'images/default_post_img.jpg'
-import { Link, withRouter } from 'react-router-native'
+import { withRouter } from 'react-router-native'
 import { StyleSheet, Image, View } from 'react-native'
 
 import { Button, Text, Card, CardItem } from 'native-base'
 
 class Component extends IComponent {
-    constructor(props) {
-        super(props);
+    header() {
+        return <View style={styles.sortView}>
+            <Text>排序：</Text>
+            <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Date" }) }}>
+                <Text>发表时间</Text>
+            </Button>
+            <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Click" }) }}>
+                <Text>点击量</Text>
+            </Button>
+            <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Score" }) }}>
+                <Text>评分</Text>
+            </Button>
+        </View>
     }
 
-    createItem(post, setting) {
+    createItem(post) {
+        let setting = this.getCurrentSetting();
+
         let width = 100;
         if (setting.col > 0) {
             width = 100 / setting.col;
@@ -42,7 +54,7 @@ class Component extends IComponent {
                     >
                         <Image
                             style={{ height: heigth, width: "100%" }}
-                            source={defaultImg}
+                            source={source}
                         />
                     </CardItem>
                 }
@@ -52,7 +64,7 @@ class Component extends IComponent {
                         this.props.history.push(this.props.createUrl(post));
                     }}
                 >
-                    <View style={{width: '100%'}}>
+                    <View style={{ width: '100%' }}>
                         <View>
                             <Text style={styles.itemTitle}>{post.title}</Text>
                             <Text style={styles.itemDescribe}>{post.describe || "暂无简介"}</Text>
@@ -68,35 +80,39 @@ class Component extends IComponent {
         </View>
     }
 
+    footer() {
+        return <View style={styles.pageBtnView}>
+            <Button small style={styles.pageBtn} disabled={this.props.postData.pageIndex <= 1} onPress={() => this.props.getPostFetchs({ ...this.props.postData, pageIndex: this.props.postData.pageIndex - 1 })}>
+                <Text>上一页</Text>
+            </Button>
+            <Text style={styles.pageBtnText}>{`第 ${this.props.postData.pageIndex} 页`}</Text>
+            <Button small style={styles.pageBtn} disabled={this.props.posts.length < this.props.postData.pageSize} onPress={() => this.props.getPostFetchs({ ...this.props.postData, pageIndex: this.props.postData.pageIndex + 1 })}>
+                <Text>下一页</Text>
+            </Button>
+        </View>
+    }
+
     render() {
-        let setting = new Setting(this.getSetting("DefaultSetting"));
+        let Head = this.props.ChildComponent['head'];
+        let ListItem = this.props.ChildComponent['listItem'];
 
         return (
             <View style={[this.baseStyle]}>
-                <View style={styles.sortView}>
-                    <Text>排序：</Text>
-                    <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({...this.props.postData, orderby: "Date"}) }}>
-                        <Text>发表时间</Text>
-                    </Button>
-                    <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({...this.props.postData, orderby: "Click"}) }}>
-                        <Text>点击量</Text>
-                    </Button>
-                    <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({...this.props.postData, orderby: "Score"}) }}>
-                        <Text>评分</Text>
-                    </Button>
-                </View>
+                {
+                    Head ?
+                        <Head interactivConfigFeature={this.getHeadInteractivConfigFeature()} />
+                        : this.header()
+                }
                 <View style={styles.list}>
-                    {this.props.posts.map(item => this.createItem(item, setting))}
+                    {this.props.posts.map(item => {
+                        return ListItem ?
+                            <ListItem interactivConfigFeature={this.getItemInteractivConfigFeature(item)} />
+                            : this.createItem(item)
+                    })}
                 </View>
-                <View style={styles.pageBtnView}>
-                    <Button small style={styles.pageBtn} disabled={this.props.postData.pageIndex <= 1} onPress={() => this.props.getPostFetchs({...this.props.postData, pageIndex: this.props.postData.pageIndex - 1})}>
-                        <Text>上一页</Text>
-                    </Button>
-                    <Text style={styles.pageBtnText}>{`第 ${this.props.postData.pageIndex} 页`}</Text>
-                    <Button small style={styles.pageBtn} disabled={this.props.posts.length < this.props.postData.pageSize} onPress={() => this.props.getPostFetchs({...this.props.postData, pageIndex: this.props.postData.pageIndex + 1})}>
-                        <Text>下一页</Text>
-                    </Button>
-                </View>
+                {
+                    this.footer()
+                }
             </View>
         )
     }

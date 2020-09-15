@@ -1,23 +1,37 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
+import IComponent from 'IETemplateComponents/IESearch/IComponent'
+import { withRouter } from 'react-router-dom'
 import { View, StyleSheet } from 'react-native'
-import { Item, Icon, Input } from 'native-base'
+import { Item, Icon, Input, Button } from 'native-base'
 
 class Component extends IComponent {
-    state = {
-        text: ''
-    }
-
     constructor(props) {
         super(props);
     }
 
     render() {
+        let setting = this.getCurrentSetting();
+        let icon = <Button
+            type='link'
+            onClick={this.onClick}
+            transparent
+        >
+            <Icon style={{ color: setting.fontColor }} name="search1" type='AntDesign' />
+        </Button>;
+
         return (
-            <View style={[this.baseStyle, styles.view]}>
-                <Item style={[this.baseStyle, styles.view]}>
-                    <Icon name="search1" type='AntDesign' />
-                    <Input placeholder="Search" />
+            <View style={[this.baseStyle, styles.view, {borderWidth: setting.showBorder != 'false' && 1}]}>
+                <Item style={[{borderBottomWidth: 0}]}>
+                    {setting.iconPos == 'left' && icon}
+                    <Input 
+                        style={{ color: setting.fontColor }} 
+                        placeholder="搜索文章" 
+                        value={this.state.search}
+                        onChange={(e) => {
+                            this.setState({ search: e.target.value });
+                        }}
+                    />
+                    {setting.iconPos == 'right' && icon}
                 </Item>
             </View>
         );
@@ -29,4 +43,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Component;
+export default withRouter(Component);

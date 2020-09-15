@@ -14,12 +14,10 @@ class ComponentListBox extends React.Component {
     constructor(props) {
         super(props);
 
-        this.componentDescribes = ComponentFactory.getComponentDescribes();
-        this.Preview = ComponentFactory.getPreviews();
-
         this.state = {
             selectedComponentDescribe: undefined,
             activeIndex: 0,
+            searchValue: '',
             componentDescribes: this.componentDescribes
         }
     }
@@ -36,6 +34,8 @@ class ComponentListBox extends React.Component {
     }
 
     createComponent(item) {
+        let Preview = ComponentFactory.getPreviews();
+
         return (
             <ComponentFrame
                 key={item.name}
@@ -43,15 +43,13 @@ class ComponentListBox extends React.Component {
                 active={this.state.selectedComponentDescribe && this.state.selectedComponentDescribe.name == item.name}
                 componentOnClick={() => this.componentFrameClick(item)}
             >
-                {this.Preview[item.name]}
+                {Preview[item.name]}
             </ComponentFrame>);
     }
 
-    createComponentGroup(componentType) {
-        let componentDescribes = this.state.componentDescribes;
+    createComponentGroup(componentType, componentDescribes) {
         let childComponentDescribes = componentDescribes.filter(e => e.componentType == componentType.name)
         let childComponents = childComponentDescribes.map(item => this.createComponent(item))
-        componentDescribes = componentDescribes.filter(e => e.componentType != componentType.name)
 
         if (childComponents.length == 0) {
             return undefined;
@@ -64,8 +62,17 @@ class ComponentListBox extends React.Component {
     }
 
     render() {
+        let componentDescribes;
+
+        if (this.state.searchValue) {
+            componentDescribes = ComponentFactory.getComponentDescribes().filter(item => item.displayName.indexOf(this.state.searchValue) >= 0);
+        }
+        else {
+            componentDescribes = ComponentFactory.getComponentDescribes();
+        }
+
         let list = componentTypes.map((componentType) => {
-            return this.createComponentGroup(componentType);
+            return this.createComponentGroup(componentType, componentDescribes);
         });
 
         return (
@@ -76,14 +83,7 @@ class ComponentListBox extends React.Component {
                         <div style={{ marginRight: "30px" }}>
                             <Search placeholder="搜索组件"
                                 onSearch={value => {
-                                    let componentDescribes;
-                                    if (value) {
-                                        componentDescribes = this.componentDescribes.filter(item => item.displayName.indexOf(value) >= 0);
-                                    }
-                                    else {
-                                        componentDescribes = this.componentDescribes;
-                                    }
-                                    this.setState({componentDescribes: componentDescribes});
+                                    this.setState({searchValue: value});
                                 }}
                                 enterButton />
                         </div>

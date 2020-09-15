@@ -1,6 +1,6 @@
 const Middlewares:Array<any> = []
 
-export default class MiddlewareFactory
+class MiddlewareFactory
 {
     register(middleware:any){
         Middlewares.push(middleware);
@@ -10,3 +10,5 @@ export default class MiddlewareFactory
         return Middlewares;
     }
 }
+
+export default new MiddlewareFactory();

@@ -6,23 +6,17 @@ import { Input, Tag, Radio } from 'antd';
 class SettingConfig extends React.Component {
     setting = null;
 
-    constructor(props) {
-        super(props);
-
-        this.setting = new Setting(props.data);
-    }
-
     render() {
-        this.setting.setSetting(this.props.data);
+        let setting = new Setting(this.props.data);
 
         return (<div>
             <div className="mb-3">
                 <Tag color="#55acee">文本类型</Tag>
                 <Radio.Group
-                    value={this.setting.textType}
+                    value={setting.textType}
                     onChange={(e) => {
-                        this.setting.textType = e.target.value;
-                        this.props.setData(this.setting.setting);
+                        setting.textType = e.target.value;
+                        this.props.setData(setting.setting);
                     }}
                 >
                     <Radio value="h1">H1</Radio>
@@ -32,13 +26,27 @@ class SettingConfig extends React.Component {
                     <Radio value="text">普通文本</Radio>
                 </Radio.Group>
             </div>
+            <div className="mb-3">
+                <Tag color="#55acee">文本来源</Tag>
+                <Radio.Group
+                    value={setting.textSource}
+                    onChange={(e) => {
+                        setting.textSource = e.target.value;
+                        this.props.setData(setting.setting);
+                    }}
+                >
+                    <Radio value="PTitle">文章标题</Radio>
+                    <Radio value="PDescribe">文章描述</Radio>
+                    <Radio value="CText">组件文本</Radio>
+                </Radio.Group>
+            </div>
             <Input
                 placeholder="示例：#ffffff"
                 className="mb-3"
-                value={this.setting.fontColor}
+                value={setting.fontColor}
                 onChange={(e) => {
-                    this.setting.fontColor = e.currentTarget.value;
-                    this.props.setData(this.setting.setting);
+                    setting.fontColor = e.currentTarget.value;
+                    this.props.setData(setting.setting);
                 }}
                 suffix={<Tag color="#55acee">字体颜色</Tag>}
             />

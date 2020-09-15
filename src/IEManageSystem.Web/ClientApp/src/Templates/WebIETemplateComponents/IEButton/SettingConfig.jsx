@@ -69,16 +69,6 @@ class SettingConfig extends React.Component {
             </div>
             <div className='col-md-6'>
                 <div className="mb-3">
-                    <Input
-                        value={buttonSetting.fontSize}
-                        onChange={(e) => {
-                            buttonSetting.fontSize = e.currentTarget.value;
-                            this.props.setData(buttonSetting.setting);
-                        }}
-                        suffix={<Tag color="#55acee">字体大小</Tag>}
-                    />
-                </div>
-                <div className="mb-3">
                     <Tag color="#55acee">按钮类型</Tag>
                     <Radio.Group
                         value={buttonSetting.btnType}
@@ -119,6 +109,26 @@ class SettingConfig extends React.Component {
                         <Radio value="round">有点方</Radio>
                         <Radio value="">正方</Radio>
                     </Radio.Group>
+                </div>
+                <div className="mb-3">
+                    <Input
+                        value={buttonSetting.fontSize}
+                        onChange={(e) => {
+                            buttonSetting.fontSize = e.currentTarget.value;
+                            this.props.setData(buttonSetting.setting);
+                        }}
+                        suffix={<Tag color="#55acee">字体大小</Tag>}
+                    />
+                </div>
+                <div className="mb-3">
+                    <Input
+                        value={buttonSetting.btnHeight}
+                        onChange={(e) => {
+                            buttonSetting.btnHeight = e.currentTarget.value;
+                            this.props.setData(buttonSetting.setting);
+                        }}
+                        suffix={<Tag color="#55acee">按钮高度</Tag>}
+                    />
                 </div>
             </div>
             <div className="mb-3 col-md-6">

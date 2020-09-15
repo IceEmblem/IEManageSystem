@@ -9,7 +9,7 @@ var ieStore: Store;
 export function createIEStore() {
     var middlewares = [
         thunkMiddleware, // 这里添加了一个thunk中间件，他会处理thunk action
-        ...(new MiddlewareFactory().getMiddlewares())
+        ...(MiddlewareFactory.getMiddlewares())
     ];
     
     if(process.env.NODE_ENV != "production"){

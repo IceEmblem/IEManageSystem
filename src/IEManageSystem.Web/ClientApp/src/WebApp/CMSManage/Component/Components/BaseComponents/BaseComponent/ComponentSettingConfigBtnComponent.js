@@ -16,10 +16,6 @@ class ComponentSettingConfigBtnComponent extends IComponentSettingConfigBtnCompo
         clonePageComponent: IETool.deepCopy(this.props.pageComponent),
     }
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return <>
             <Tooltip

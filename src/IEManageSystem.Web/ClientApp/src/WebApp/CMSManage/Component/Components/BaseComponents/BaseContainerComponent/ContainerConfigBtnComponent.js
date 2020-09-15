@@ -114,21 +114,23 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
                 zIndex={9999}
                 okText='提交'
                 cancelText='取消'
-                okButtonProps={{disabled: true}}
+                okButtonProps={{ disabled: true }}
             >
                 <div className='d-flex flex-wrap'>
                     {
+                        this.props.describe
+                    }
+                    {
                         this.props.containerConfigs.map(item => {
                             let disabled = false;
-                            let a=this.props.pageComponent.pageComponentSigns;
-                            this.props.pageComponent.pageComponentSigns.forEach(e=>{
+                            this.props.pageComponent.pageComponentSigns.forEach(e => {
                                 let child = this.props.pageComponents[e];
-                                if(child.group == item.name){
+                                if (child.group == item.name) {
                                     disabled = true;
                                 }
                             })
 
-                            return <div className='col-md-6 mb-3'>
+                            return <div className='col-md-4 mb-3'>
                                 <Tag color="#55acee">{item.displayName}</Tag>
                                 <Button icon={<AppstoreAddOutlined />}
                                     disabled={disabled}
@@ -166,7 +168,9 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
 ContainerConfigBtnComponent.propTypes = {
     sign: PropTypes.string.isRequired,
     currentPageAndPost: PropTypes.object.isRequired,
-    itemNum: PropTypes.number.isRequired,
+    itemNum: PropTypes.number,
+    containerConfigs: PropTypes.object,
+    describe: PropTypes.object,
     // 显示的的按钮
     btnComponent: PropTypes.func,
 

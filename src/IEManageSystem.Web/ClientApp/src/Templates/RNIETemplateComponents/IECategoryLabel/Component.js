@@ -1,94 +1,11 @@
 import React from 'react'
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import { Link, withRouter } from 'react-router-native'
 import { StyleSheet, View, Text } from 'react-native'
-import Setting from 'IETemplateComponents/IECategoryLabel/Setting'
+import IComponent from 'IETemplateComponents/IECategoryLabel/IComponent'
 
 import { Button, Item } from 'native-base'
 
 class Component extends IComponent {
-
-    curSelectOtherTags = [];
-    curSelectTagName = undefined;
-    curSearchPrefix = "";
-
-    constructor(props) {
-        super(props);
-        this.createTags();
-    }
-
-    componentWillReceiveProps() {
-        this.createTags();
-    }
-
-    getPageComponentSetting() {
-        return this.getSetting("DefaultSetting");
-    }
-
-    createTags() {
-        if (!this.props.history.location.search || this.props.history.location.search == "") {
-            this.curSearchPrefix = "?";
-            return;
-        }
-
-        let search = decodeURI(this.props.history.location.search);
-
-        let tagRegex = /tag=([^&]*)/;
-        let result = tagRegex.exec(search);
-        if (!result || result.lenght == 0) {
-            this.curSearchPrefix = search + "&";
-            return;
-        }
-
-        let tagstr = result[1];
-        let tags = JSON.parse(tagstr);
-
-        let tagNames = new Setting(this.getPageComponentSetting()).getSettings().map(item => item.tagName);
-
-        this.curSelectTagName = tags.find(item => tagNames.some(e => e == item));
-        this.curSelectOtherTags = tags.filter(item => item != this.curSelectTagName);
-        this.curSearchPrefix = search.replace(tagRegex, '').replace("&&", "&");
-        if (this.curSearchPrefix[this.curSearchPrefix.length - 1] != '?'
-            && this.curSearchPrefix[this.curSearchPrefix.length - 1] != '&'
-        ) {
-            this.curSearchPrefix = this.curSearchPrefix + "&";
-        }
-    }
-
-    createUrl(tagName) {
-        let newtagString;
-        if (!tagName || tagName == "") {
-            newtagString = `tag=${JSON.stringify([...this.curSelectOtherTags])}`;
-        }
-        else {
-            newtagString = `tag=${JSON.stringify([...this.curSelectOtherTags, tagName])}`;
-        }
-        let search = this.curSearchPrefix + newtagString;
-
-        search = encodeURI(search);
-
-        return this.props.history.location.pathname + search;
-    }
-
-    getLinkStyle(tagName) {
-        let style = {
-            lineHeight: 30,
-            paddingTop: 4,
-            paddingBottom: 4,
-            paddingLeft: 15,
-            paddingRight: 15,
-            marginLeft: 5,
-            marginRight: 5,
-        };
-
-        if(this.curSelectTagName == tagName){
-            style.backgroundColor = "#309bff";
-            style.color = "#fff";
-        }
-
-        return style;
-    }
-
     createItem(singleData) {
         return (
             <Button
@@ -105,15 +22,50 @@ class Component extends IComponent {
         );
     }
 
-    render() {
-        let setting = new Setting(this.getPageComponentSetting());
+    defaultComponent(){
+        let datas = this.getTagDatas();
 
         return (
             <View style={[this.baseStyle, styles.view]}>
-                {this.createItem({tagName: undefined, displayName: '全部'})}
-                {setting.getSettings().map(item => this.createItem(item))}
+                {datas.map(item => this.createItem(item))}
             </View>
         );
+    }
+
+    interactiveComponent() {
+        let datas = this.getTagDatas();
+
+        return (
+            <View style={[this.baseStyle, styles.view]}>
+                {datas.map(item => {
+                    let Component;
+                    if (item.tagName == this.curSelectTagName) {
+                        Component = this.props.ChildComponent['selected'];
+                    }
+                    else{
+                        Component = this.props.ChildComponent['unselect'];
+                    }
+
+                    if (Component) {
+                        return <Component
+                            interactivConfigFeature={this.getInteractivConfigFeature(item)}
+                        />
+                    }
+                    else{
+                        return this.createItem(item);
+                    }
+                })}
+            </View>
+        );
+    }
+
+    render() {
+        if (!this.props.isExitChild) {
+            return this.defaultComponent();
+        }
+        else {
+            return this.interactiveComponent();
+        }
     }
 }
 

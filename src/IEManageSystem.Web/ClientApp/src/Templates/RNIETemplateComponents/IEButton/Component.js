@@ -11,7 +11,7 @@ class Component extends IComponent {
 
         return (
             <Button
-                style={[this.baseStyle, styles.btn, StyleCheck.handle({backgroundColor: setting.bgcolor})]}
+                style={[this.baseStyle, styles.btn, StyleCheck.handle({backgroundColor: setting.bgcolor, height: setting.btnHeight})]}
 
                 // 按钮形状，只有方向和有点圆
                 rounded={setting.shape && setting.shape != ''}

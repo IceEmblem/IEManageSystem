@@ -6,16 +6,12 @@ import IECard from "./IECard"
 import IECarousel from "./IECarousel"
 import IECategoryLabel from "./IECategoryLabel"
 import IEComment from "./IEComment"
-import IEDrawer from "./IEDrawer"
 import IEImg from "./IEImg"
 import IEInfoGroup from "./IEInfoGroup"
 import IELine from "./IELine"
 import IEMenu from "./IEMenu"
 import IEPlaceholder from './IEPlaceholder'
-import IEPostContent from "./IEPostContent"
-import IEPostDescribe from "./IEPostDescribe"
 import IEPostList from "./IEPostList"
-import IEPostTitle from "./IEPostTitle"
 import IERankingList from "./IERankingList"
 import IESearch from "./IESearch"
 import NotFind from "./NotFind"
@@ -32,16 +28,12 @@ const describes = [
     IECarousel,
     IECategoryLabel,
     IEComment,
-    IEDrawer,
     IEImg,
     IEInfoGroup,
     IELine,
     IEMenu,
     IEPlaceholder,
-    IEPostContent,
-    IEPostDescribe,
     IEPostList,
-    IEPostTitle,
     IERankingList,
     IESearch,
     NotFind,

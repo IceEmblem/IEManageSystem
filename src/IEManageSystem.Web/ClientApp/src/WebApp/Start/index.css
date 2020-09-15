@@ -4,7 +4,3 @@ html {
     font-size: 14px;
     line-height: 22px;
 }
-
-#root{
-    overflow-y: auto;
-}

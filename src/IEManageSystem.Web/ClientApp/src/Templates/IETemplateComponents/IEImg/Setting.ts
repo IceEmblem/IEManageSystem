@@ -24,7 +24,7 @@ export default class Setting {
     }
 
     get imgWidth(){
-        return this.setting.getDefauleData().field3;
+        return this.setting.getDefauleData().field3 || '100%';
     }
 
     set imgWidth(val){

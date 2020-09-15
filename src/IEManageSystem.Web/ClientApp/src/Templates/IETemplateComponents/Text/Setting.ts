@@ -26,4 +26,12 @@ export default class Setting {
     set fontColor(val){
         this.setting.getDefauleData().field2 = val;
     }
+
+    get textSource(){
+        return this.setting.getDefauleData().field3 || 'CText';
+    }
+
+    set textSource(val){
+        this.setting.getDefauleData().field3 = val;
+    }
 }

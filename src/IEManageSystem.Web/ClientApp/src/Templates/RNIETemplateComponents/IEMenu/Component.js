@@ -42,7 +42,7 @@ class Component extends IComponent {
                             console.log(menuItems[item].createUrl())
                         }}
                     >
-                        {icon && <Icon name={icon}></Icon>}
+                        {icon && <Icon name={icon} type='AntDesign'></Icon>}
                         <Text>
                             {menuItems[item].displayName}
                         </Text>

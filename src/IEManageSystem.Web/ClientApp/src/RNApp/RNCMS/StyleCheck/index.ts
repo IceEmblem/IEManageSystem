@@ -1,4 +1,6 @@
 
+import { ViewStyle, TextStyle, ImageStyle } from 'react-native'
+
 export default class StyleCheck {
     static pxRegex = /^([0-9]+?)px$/;
     static numRegex = /^[0-9]+$/
@@ -6,56 +8,99 @@ export default class StyleCheck {
 
     static readonly handles = {
         fontSize: (style) => {
-            if(typeof(style.fontSize) == 'string'){
-                style.fontSize = StyleCheck.pxToNum(style.fontSize);
+            let result = undefined;
+
+            result = StyleCheck.pxRegex.exec(style.fontSize);
+            if(result){
+                style.fontSize = new Number(result[1]).valueOf();
+                return;
             }
+
+            style.fontSize = undefined;
         },
         fontWeight: (style) => {
-            if(typeof(style.fontWeight) == 'string' && !StyleCheck.numRegex.test(style.fontWeight)){
-                style.fontWeight = undefined;
+            if(typeof(style.fontWeight) == 'string' && StyleCheck.numRegex.test(style.fontWeight)){
+                return;
             }
+
+            style.fontWeight = undefined;
         },
         width: (style) => {
-            if(typeof(style.width) == 'string' && !StyleCheck.percentageRegex.test(style.width)){
-                style.width = StyleCheck.pxToNum(style.width);
+            let result = undefined;
+
+            result = StyleCheck.percentageRegex.exec(style.width);
+            if(result){
+                return;
             }
+
+            result = StyleCheck.numRegex.exec(style.width);
+            if(result){
+                style.width = new Number(style.width).valueOf();
+                return;
+            }
+            
+            result = StyleCheck.pxRegex.exec(style.width);
+            if(result){
+                style.width = new Number(result[1]).valueOf();
+                return;
+            }
+
+            style.width = undefined;
         },
         height: (style) => {
-            if(typeof(style.height) == 'string' && !StyleCheck.percentageRegex.test(style.height)){
-                style.height = StyleCheck.pxToNum(style.height);
+            let result = undefined;
+
+            result = StyleCheck.percentageRegex.exec(style.height);
+            if(result){
+                return;
             }
+
+            result = StyleCheck.numRegex.exec(style.height);
+            if(result){
+                style.height = new Number(style.height).valueOf();
+                return;
+            }
+            
+            result = StyleCheck.pxRegex.exec(style.height);
+            if(result){
+                style.height = new Number(result[1]).valueOf();
+                return;
+            }
+
+            style.height = undefined;
         },
         padding: (style) => {
-            if(typeof(style.padding) == 'string'){
-                style.padding = StyleCheck.pxToNum(style.padding);
+            let result = undefined;
+
+            result = StyleCheck.pxRegex.exec(style.padding);
+            if(result){
+                style.padding = new Number(result[1]).valueOf();
+                return;
             }
+
+            style.padding = undefined;
         },
         margin: (style) => {
-            if(typeof(style.margin) == 'string'){
-                style.margin = StyleCheck.pxToNum(style.margin);
+            let result = undefined;
+
+            result = StyleCheck.pxRegex.exec(style.margin);
+            if(result){
+                style.margin = new Number(result[1]).valueOf();
+                return;
             }
+
+            style.margin = undefined;
         },
         backgroundColor: (style) => {
-            if(style.backgroundColor == ''){
-                style.backgroundColor = undefined;
+            if(style.backgroundColor){
+                return;
             }
+
+            style.backgroundColor = undefined;
         }
     }
 
-    static pxToNum(str: string){
-        if(this.numRegex.test(str)){
-            return new Number(str).valueOf();
-        }
-
-        let result = StyleCheck.pxRegex.exec(str);
-        if(result){
-            return new Number(result[1]).valueOf();
-        }
-        
-        return undefined;
-    }
-
-    static handle(input: any): any{
+    static handle(input: ViewStyle | TextStyle | ImageStyle): any{
         let style = {...input};
 
         Object.keys(style).forEach(key => {

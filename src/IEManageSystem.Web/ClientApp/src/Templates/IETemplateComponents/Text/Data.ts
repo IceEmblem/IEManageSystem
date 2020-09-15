@@ -12,7 +12,7 @@ export default class Data {
     }
 
     get text(){
-        return this.data.getDefauleData().field1 || "一个未知的标题";
+        return this.data.getDefauleData().field1;
     }
 
     set text(val){

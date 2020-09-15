@@ -7,7 +7,7 @@ import IocContainer from 'Core/IocContainer'
 export default class InteractiveContainerConfig extends IEditConfig {
     ComponentContainer = undefined;
 
-    // { name: string, displayName: string }
+    // [{ name: string, displayName: string }]
     configs = undefined;
 
     constructor(configs) {

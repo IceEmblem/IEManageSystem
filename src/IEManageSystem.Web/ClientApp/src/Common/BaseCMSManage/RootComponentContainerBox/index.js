@@ -25,6 +25,7 @@ class RootComponentContainerBox extends React.Component {
                 {
                     this.props.rootPageComponent.pageComponentSigns.map(sign => (
                         <ComponentContainerBox
+                            key={sign + this.props.currentPageAndPost.os}
                             sign={sign}
                             currentPageAndPost={this.props.currentPageAndPost}
                         >
@@ -38,7 +39,7 @@ class RootComponentContainerBox extends React.Component {
 
 RootComponentContainerBox.propTypes = {
     currentPageAndPost: PropTypes.object.isRequired,
-    
+
     rootPageComponent: PropTypes.object.isRequired,
 }
 

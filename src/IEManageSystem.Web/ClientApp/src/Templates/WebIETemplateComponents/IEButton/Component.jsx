@@ -16,7 +16,7 @@ class Component extends IComponent {
         return (
         <Button 
             icon={Icon}
-            style={{backgroundColor: setting.bgcolor, color: setting.color, fontSize: setting.fontSize, lineHeight: setting.fontSize}} 
+            style={{backgroundColor: setting.bgcolor, color: setting.color, fontSize: setting.fontSize, height: setting.btnHeight}} 
             shape={setting.shape} 
             type={setting.btnType} 
             size={setting.size}

@@ -10,7 +10,7 @@ import {reducer} from 'Core/IEReduxs/Reducer'
 export default class Module extends BaseModule
 {
     initialize(){
-        new MiddlewareFactory().register(fecth);
+        MiddlewareFactory.register(fecth);
         RootRedux.setReducer(reducer);
     }
 

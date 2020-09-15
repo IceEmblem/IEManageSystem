@@ -1,42 +1,19 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import { Input, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons'
-import Setting from 'IETemplateComponents/IESearch/Setting'
 import { withRouter } from 'react-router-dom'
+import IComponent from 'IETemplateComponents/IESearch/IComponent'
 
 import './IESearch.css'
 
-const searchRegex = /search=[^\&]*?/
 
 class Component extends IComponent {
-    state = {
-        search: undefined
-    }
-
     render() {
-        let setting = new Setting(this.getDefaultSetting());
+        let setting = this.getCurrentSetting();
         let icon = <Button
             style={{color: setting.fontColor}}
             type='link'
-            onClick={() => {
-                let params = this.props.location.search;
-                if(!searchRegex.test(params)){
-                    if(!params) {
-                        params = `?search=${this.state.search || ''}`
-                    }
-                    else {
-                        params = `${params}&search=${this.state.search || ''}`
-                    }
-                }
-                else{
-                    params = params.replace(searchRegex, `search=${this.state.search || ''}`)
-                }
-
-                this.props.history.push(
-                    setting.url + params
-                );
-            }}
+            onClick={this.onClick}
         >
             <SearchOutlined />
         </Button>;

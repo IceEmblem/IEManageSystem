@@ -1,44 +1,46 @@
 import React from 'react'
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import { View, StyleSheet } from 'react-native'
-import Setting from 'IETemplateComponents/IEInfoGroup/Setting'
-import Data from 'IETemplateComponents/IEInfoGroup/Data'
+import IComponent from 'IETemplateComponents/IEInfoGroup/IComponent'
 
 import { List, ListItem, Text, Icon, H3 } from 'native-base'
 
 class Component extends IComponent {
-    createItem(settingField, dataField, color) {
-        return <ListItem>
-            <Text style={{ color: color }}>{settingField}</Text>
-            <Text style={{ color: color }}>{dataField}</Text>
-        </ListItem>
+    createItem(data) {
+        let Item = this.props.ChildComponent['item'];
+        return Item ?
+            <Item
+                key={data.key}
+                interactivConfigFeature={this.getItemInteractivConfigFeature(data)}
+            /> :
+            <ListItem key={data.key}>
+                <Text style={{ color: data.color }}>{data.settingField}</Text>
+                <Text style={{ color: data.color }}>{data.dataField}</Text>
+            </ListItem>
+    }
+
+    createTitle(setting) {
+        let Title = this.props.ChildComponent['title'];
+        return Title ?
+            <Title
+                interactivConfigFeature={this.getTitleInteractivConfigFeature(setting)}
+            /> :
+            setting.title ?
+                <Text style={[styles.itemHeader, { color: setting.color }]}>{setting.title}</Text> :
+                undefined
     }
 
     render() {
-        let setting = new Setting(this.getSetting("DefaultSetting"));
-        let data = new Data(this.props.componentData);
-
-        let itemDatas = [];
-        if (setting.field1)
-            itemDatas.push({ settingField: setting.field1, dataField: data.field1 });
-        if (setting.field2)
-            itemDatas.push({ settingField: setting.field2, dataField: data.field2 });
-        if (setting.field3)
-            itemDatas.push({ settingField: setting.field3, dataField: data.field3 });
-        if (setting.field4)
-            itemDatas.push({ settingField: setting.field4, dataField: data.field4 });
-        if (setting.field5)
-            itemDatas.push({ settingField: setting.field5, dataField: data.field5 });
+        let setting = this.getCurrentSetting();
+        let itemDatas = this.getItemDatas();
 
         return <View style={this.baseStyle}>
             {
-                setting.title && 
-                <Text style={[styles.itemHeader, {color: setting.color}]}>{setting.title}</Text>
+                this.createTitle(setting)
             }
             <List
                 style={[{ borderColor: '#0004', borderStyle: 'solid', borderWidth: setting.bordered ? 1 : 0 }]}
             >
-                {itemDatas.map(item => this.createItem(item.settingField, item.dataField, setting.color))}
+                {itemDatas.map(item => this.createItem(item))}
             </List>
         </View>
     }

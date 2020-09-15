@@ -3,6 +3,8 @@ import ModuleFactory from 'Core/Modules/ModuleFactory'
 import CoreModule from 'Core/Module';
 import ModuleList from '../ModuleList';
 import IETool from 'Core/ToolLibrary/IETool'
+import MiddlewareFactory from 'Core/Middlewares/MiddlewareFactory'
+import ReduxErrorMiddleware from './Middlewares/ReduxErrorMiddleware'
 
 const getCookie = (name) => {
     return new Promise(function(resolve, reject){
@@ -38,6 +40,8 @@ export default class Module extends BaseModule
         IETool.getCookie = getCookie;
         IETool.setCookie = setCookie;
         IETool.delCookie = delCookie;
+
+        MiddlewareFactory.register(ReduxErrorMiddleware);
     }
 }
 

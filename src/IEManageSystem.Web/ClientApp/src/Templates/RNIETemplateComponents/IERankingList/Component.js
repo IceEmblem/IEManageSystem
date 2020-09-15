@@ -6,29 +6,19 @@ import { List, ListItem, Text, Icon } from 'native-base'
 
 // 排行组件
 class Component extends IComponent {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-
         return (
             <List style={[this.baseStyle]}>
                 {this.props.posts.map((item, index) => (
                     <ListItem
-                        style={
-                            index == 0 ? styles.firstLine :
-                                styles.line
-                        }
+                        noBorder
+                        style={[styles.line, index == 0 && styles.firstLine]}
                         onPress={() => {
                             this.props.history.push(this.props.createUrl(item));
                         }}
                     >
                         <View
-                            style={
-                                index == 0 ? styles.firstIcon :
-                                    styles.Icon
-                            }
+                            style={[styles.Icon, index == 0 && styles.firstIcon]}
                         >
                             <Icon name='rocket1' color='#fff' type='AntDesign' />
                         </View>
@@ -48,7 +38,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 15
+        padding: 10,
+        marginLeft: 0,
     },
     Icon: {
         backgroundColor: '#db3964',
@@ -59,20 +50,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     firstLine: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 15,
         backgroundColor: "#40a9ff",
         color: '#fff'
     },
     firstIcon: {
         backgroundColor: '#FFD700',
-        borderRadius: 15,
-        width: 30,
-        height: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     itemRight:{
         flexGrow: 1,

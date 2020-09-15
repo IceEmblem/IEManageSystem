@@ -1,6 +1,7 @@
 import React from 'react';
 import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import { Link } from 'react-router-dom'
+import {getIconType} from 'Common/AntIcons'
 import { Menu } from 'antd';
 const { SubMenu } = Menu;
 
@@ -23,13 +24,17 @@ class Component extends IComponent {
 
         let menuItems = menu.menus;
         for (let item in menuItems) {
-            let Icon = menuItems[item].icon;
+            let Icon = undefined;
+            if(menuItems[item].icon){
+                let IconType = getIconType(menuItems[item].icon);
+                Icon = <IconType />
+            }
 
             if (menuItems[item].isCompositeMenuType()) {
                 let childMenus = this.createMenusIteration(menuItems[item]);
 
                 let menu =
-                    <SubMenu key={menuItems[item].name} title={menuItems[item].displayName}>
+                    <SubMenu key={menuItems[item].name} title={menuItems[item].displayName} icon={Icon}>
                         {childMenus}
                     </SubMenu>
 
@@ -37,7 +42,7 @@ class Component extends IComponent {
             }
             else {
                 let menu =
-                    <Menu.Item key={menuItems[item].name}>
+                    <Menu.Item key={menuItems[item].name} icon={Icon}>
                         <Link to={menuItems[item].createUrl()} >{menuItems[item].displayName}</Link>
                     </Menu.Item>;
                 lis.push(menu);

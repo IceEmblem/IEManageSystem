@@ -1,7 +1,8 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import { Comment, Avatar, Form, Button, List, Input } from 'antd';
 import defaultAvatar from 'images/default_avatar.png'
+import IComponent from 'IETemplateComponents/IEComment/IComponent'
+
 
 const { TextArea } = Input;
 
@@ -28,20 +29,6 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 );
 
 class Component extends IComponent {
-    state = {
-        submitting: false,
-        value: '',
-    };
-
-    handleSubmit = () => {
-        this.setState({submitting: true});
-        this.props.execLogic(this.state.value)
-            .then(value => {
-                this.setState({submitting: false, value: ''});
-                this.props.pageFreshen();
-            });
-    };
-
     render() {
         let comments = this.props.componentData.getSingleDatas("commentData").map(item => ({
             author: item.field2,

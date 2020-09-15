@@ -1,18 +1,12 @@
 import React from 'react'
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
-import Setting from 'IETemplateComponents/Text/Setting'
-import Data from 'IETemplateComponents/Text/Data'
+import IComponent from 'IETemplateComponents/Text/IComponent'
 
 import {Text, View, StyleSheet} from 'react-native'
 
 class Component extends IComponent {
-    constructor(props) {
-        super(props);
-    }
-    
     render() {
-        let setting = new Setting(this.getSetting("Setting"));
-        let data  = new Data(this.props.componentData);
+        let setting = this.getCurrentSetting();
+        let data = this.getCurrentData();
 
         let style = { color: setting.fontColor }
         let smallStyle = { color: setting.fontColor, marginLeft: 10 }
@@ -43,8 +37,9 @@ class Component extends IComponent {
 
         return (
             <View style={[this.baseStyle, styles.view]}>
-                <Text style={StyleSheet.compose(styles.text, style)}>{data.text}</Text>
-                <Text style={StyleSheet.compose(styles.textSmall, smallStyle)}>{data.smallText}</Text>
+                <View>{this.props.children}</View>
+                <Text style={[styles.text, style]}>{this.getText()}</Text>
+                <Text style={[styles.textSmall, smallStyle]}>{data.smallText}</Text>
             </View>
         )
     }

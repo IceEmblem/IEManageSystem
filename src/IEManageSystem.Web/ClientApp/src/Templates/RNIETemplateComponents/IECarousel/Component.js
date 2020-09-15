@@ -1,7 +1,5 @@
 import React from 'react'
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
-import Data from 'IETemplateComponents/IECarousel/Data'
-import Setting from 'IETemplateComponents/IECarousel/Setting'
+import IComponent from 'IETemplateComponents/IECarousel/IComponent'
 import { StyleSheet, Text, View, Image } from 'react-native';
 import defaultImg from 'images/nofind.jpg'
 
@@ -12,64 +10,63 @@ import Weburl from 'Core/Weburl'
 
 // 走马灯
 class Component extends IComponent {
-    createItem(singleData, setting) {
+    defaultItem(singleData, setting) {
         let source = singleData.img ? { uri: Weburl.handleWeburl(singleData.img) } : defaultImg
 
         return (
             <View>
                 <Image
                     source={source}
-                    style={{ width: '100%', height: setting.height, position: 'absolute' }}
+                    style={[{ width: '100%' }, StyleCheck.handle({ height: setting.height })]}
                 />
                 <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        backgroundColor: setting.backgroundColor
-                    }}
+                    style={[
+                        {
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            position: 'absolute',
+                            width: '100%'
+                        },
+                        StyleCheck.handle({ backgroundColor: setting.shade })]}
                 >
                     <View
-                        style={{
-                            height: setting.height,
-                            width: setting.width,
+                        style={[{
                             justifyContent: 'center',
                             alignItems: 'center',
                             paddingBottom: 30
-                        }}
+                        },
+                        StyleCheck.handle({ height: setting.height, width: setting.width })]}
                     >
-                        <Text style={{ color: setting.fontColor, fontSize: 20, marginBottom: 10, fontWeight: '600' }}>{singleData.title}</Text>
-                        <Text style={{ color: setting.fontColor }}>{singleData.content}</Text>
+                        <Text style={[{ color: setting.fontColor, fontSize: 20, marginBottom: 10, fontWeight: '600' }, StyleCheck.handle({ color: setting.fontColor })]}>{singleData.title}</Text>
+                        <Text style={[StyleCheck.handle({ color: setting.fontColor })]}>{singleData.content}</Text>
                     </View>
                 </View>
             </View>
         );
     }
 
+    createItem(singleData, setting) {
+        return <View>
+            {
+                this.props.isExitChild ?
+                    <this.props.ChildComponent
+                        interactivConfigFeature={this.getInteractivConfigFeature(singleData)}
+                    />
+                    : this.defaultItem(singleData, setting)
+            }
+        </View>
+    }
+
     render() {
-        let data = new Data(this.props.componentData);
-        let setting = new Setting(this.getSetting("DefaultSetting"));
-
-        let style = StyleCheck.handle({
-            height: setting.height,
-            width: setting.width,
-            backgroundColor: setting.shade,
-            fontColor: setting.fontColor
-        });
-
-        if (!style.height) {
-            style.height = 300;
-        }
-
-        if (!style.width) {
-            style.width = 300;
-        }
+        let data = this.getCurrentData();
+        let setting = this.getCurrentSetting();
 
         return (
-            <View style={[this.baseStyle, {height: style.height}]}>
+            <View style={[this.baseStyle, StyleCheck.handle({ height: setting.height })]}>
                 <DeckSwiper
                     dataSource={data.getDatas()}
-                    renderItem={item=>{
-                        return this.createItem(item, style)
+                    renderItem={item => {
+                        return this.createItem(item, setting)
                     }}
                 />
             </View>

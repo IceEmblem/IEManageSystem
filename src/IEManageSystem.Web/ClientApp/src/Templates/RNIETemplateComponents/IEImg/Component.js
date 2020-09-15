@@ -1,35 +1,40 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
-import Data from 'IETemplateComponents/IEImg/Data'
+import IComponent from 'IETemplateComponents/IEImg/IComponent'
+
 import { View, Image, TouchableHighlight } from 'react-native'
 import { Text } from 'native-base'
 import WebUrl from 'Core/Weburl'
-import { Link, withRouter } from 'react-router-native'
+import { withRouter } from 'react-router-native'
+import StyleCheck from 'RNCMS/StyleCheck'
 
 class Component extends IComponent {
     render() {
-        let data = new Data(this.props.componentData);
-
-        let height = new Number(data.imgHeigth).valueOf();
-        if (isNaN(height)) {
-            height = 0;
-        }
-
-        let width = new Number(data.imgWidth).valueOf();
-        if (isNaN(width)) {
-            width = '100%';
-        }
+        let data = this.getCurrentData();
+        let setting = this.getCurrentSetting();
 
         return <TouchableHighlight to={data.linkUrl}
             style={[this.baseStyle]}
-            onPress={()=>{
+            onPress={() => {
                 this.props.history.push(data.linkUrl);
             }}
             underlayColor='#0004'
         >
-            <View style={{alignItems: 'center'}}>
-                <Image source={{ uri: WebUrl.handleWeburl(data.imgUrl) }} style={{ height: height, width: width }} />
-                <Text style={{ textAlign: "center", lineHeight: 40 }}>{data.text}</Text>
+            <View style={{ alignItems: 'center' }}>
+                <Image source={{ uri: WebUrl.handleWeburl(data.imgUrl) }} style={StyleCheck.handle(this.getImgStyle())} />
+                <View
+                    style={{
+                        left: 0,
+                        top: 0,
+                        width: '100%',
+                        height: setting.position == 'onimg' ? '100%' : 'auto',
+                        position: setting.position == 'onimg' ? 'absolute' : 'relative'
+                    }}
+                >
+                    {
+                        this.props.children.length > 0 &&
+                        this.props.children[0]
+                    }
+                </View>
             </View>
         </TouchableHighlight>
     }
