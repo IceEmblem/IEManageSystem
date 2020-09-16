@@ -26,19 +26,37 @@ class ContainerContain extends React.Component {
         }
 
         let childs = {};
+        containerConfigs.forEach(item => {
+            if(item.list == true){
+                childs[item.name] = [];
+            }
+            else{
+                childs[item.name] = undefined;
+            }
+        })
         this.props.pageComponent.pageComponentSigns.forEach(sign => {
             let group = this.props.pageComponents[sign].group;
             if(!group){
                 return;
             }
 
-            childs[group] = (
-                <ComponentContainerBox
+            if(childs[group]){
+                childs[group].push(<ComponentContainerBox
                     key={sign + this.props.pageComponent.os}
                     sign={sign}
                     currentPageAndPost={this.props.currentPageAndPost}
                 >
-                </ComponentContainerBox>)
+                </ComponentContainerBox>);
+            }
+            else{
+                childs[group] = (
+                    <ComponentContainerBox
+                        key={sign + this.props.pageComponent.os}
+                        sign={sign}
+                        currentPageAndPost={this.props.currentPageAndPost}
+                    >
+                    </ComponentContainerBox>)
+            }
         })
 
         return (<Component

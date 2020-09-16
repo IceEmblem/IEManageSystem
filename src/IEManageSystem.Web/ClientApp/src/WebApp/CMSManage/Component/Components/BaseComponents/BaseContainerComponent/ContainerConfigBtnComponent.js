@@ -13,6 +13,28 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import ComponentListBox from './ComponentListBox'
 import IETool from 'Core/ToolLibrary/IETool'
 
+const AddBtnComponent = (props) => {
+    return <Tooltip
+        title={`添加组件`}
+    >
+        <Button size='small' shape="round"
+            type={"default"}
+            icon={<AppstoreAddOutlined />}
+            onClick={props.onClick}
+        />
+    </Tooltip>
+}
+
+const CustomizeConfigBtn = (props) => {
+    return <div className='col-md-4 mb-3'>
+        <Tag color="#55acee">{props.displayName}</Tag>
+        <Button icon={<AppstoreAddOutlined />}
+            disabled={props.disabled}
+            onClick={props.onClick}
+        />
+    </div>
+}
+
 
 class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
     state = {
@@ -50,20 +72,8 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
         return <>
             {
                 this.props.btnComponent ?
-                    <this.props.btnComponent
-                        onClick={() => this.setState({ showComponentListBox: true })}
-                    /> :
-                    <Tooltip
-                        title={`添加组件`}
-                    >
-                        <Button size='small' shape="round"
-                            type={"default"}
-                            icon={<AppstoreAddOutlined />}
-                            onClick={() => {
-                                this.setState({ showComponentListBox: true })
-                            }}
-                        />
-                    </Tooltip>
+                    <this.props.btnComponent onClick={() => this.setState({ showComponentListBox: true })} /> :
+                    <AddBtnComponent onClick={() => this.setState({ showComponentListBox: true })} />
             }
             <ComponentListBox
                 show={this.state.showComponentListBox}
@@ -90,27 +100,13 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
                     <this.props.btnComponent
                         onClick={() => this.setState({ showCustomizeModal: true })}
                     /> :
-                    <Tooltip
-                        title={`添加组件`}
-                    >
-                        <Button size='small' shape="round"
-                            type={"default"}
-                            icon={<AppstoreAddOutlined />}
-                            onClick={() => {
-                                this.setState({ showCustomizeModal: true })
-                            }}
-                        />
-                    </Tooltip>
+                    <AddBtnComponent onClick={() => this.setState({ showCustomizeModal: true })} />
             }
             <Modal
                 title='选择组件'
                 visible={this.state.showCustomizeModal}
-                onCancel={() => {
-                    this.setState({ showCustomizeModal: false });
-                }}
-                onOk={() => {
-                    this.setState({ showCustomizeModal: false });
-                }}
+                onCancel={() => this.setState({ showCustomizeModal: false })}
+                onOk={() => this.setState({ showCustomizeModal: false })}
                 zIndex={9999}
                 okText='提交'
                 cancelText='取消'
@@ -123,26 +119,28 @@ class ContainerConfigBtnComponent extends IContainerConfigBtnComponent {
                     {
                         this.props.containerConfigs.map(item => {
                             let disabled = false;
-                            this.props.pageComponent.pageComponentSigns.forEach(e => {
-                                let child = this.props.pageComponents[e];
-                                if (child.group == item.name) {
-                                    disabled = true;
-                                }
-                            })
 
-                            return <div className='col-md-4 mb-3'>
-                                <Tag color="#55acee">{item.displayName}</Tag>
-                                <Button icon={<AppstoreAddOutlined />}
-                                    disabled={disabled}
-                                    onClick={() => {
-                                        this.setState({
-                                            showComponentListBox: true,
-                                            configName: item.name,
-                                            clonePageComponent: IETool.deepCopy(this.props.pageComponent),
-                                        })
-                                    }}
-                                />
-                            </div>
+                            if(item.list != true){
+                                for (let n = 0; n < this.props.pageComponent.pageComponentSigns.length; n++) {
+                                    let child = this.props.pageComponents[this.props.pageComponent.pageComponentSigns[n]];
+                                    if (child.group == item.name) {
+                                        disabled = true;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            return <CustomizeConfigBtn
+                                displayName={item.displayName}
+                                disabled={disabled}
+                                onClick={() => {
+                                    this.setState({
+                                        showComponentListBox: true,
+                                        configName: item.name,
+                                        clonePageComponent: IETool.deepCopy(this.props.pageComponent),
+                                    })
+                                }}
+                            />
                         })
                     }
                 </div>

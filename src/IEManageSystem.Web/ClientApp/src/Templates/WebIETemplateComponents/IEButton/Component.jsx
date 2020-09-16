@@ -21,15 +21,9 @@ class Component extends IComponent {
             type={setting.btnType} 
             size={setting.size}
             onClick={()=>{
-                if(this.props.interactivClick){
-                    this.props.interactivClick();
-                    return;
+                if(!this.onClick()){
+                    this.props.history.push(setting.url);
                 }
-                if(setting.url.startsWith('http')){
-                    window.location.href = setting.url;
-                    return;
-                }
-                this.props.history.push(setting.url);
             }}
         >
             {this.props.interactivText || setting.text}

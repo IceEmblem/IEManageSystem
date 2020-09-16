@@ -25,14 +25,7 @@ class Component extends IComponent {
                 small={setting.size == 'small'}
                 large={setting.size == 'large'}
 
-                onPress={()=>{
-                    if(this.props.interactivClick){
-                        this.props.interactivClick();
-                        return;
-                    }
-
-                    this.props.history.push(setting.url);
-                }}
+                onPress={this.onClick}
             >
                 <Text style={[StyleCheck.handle({color: setting.color, fontSize: setting.fontSize})]}>{this.props.interactivText || setting.text}</Text>
             </Button>

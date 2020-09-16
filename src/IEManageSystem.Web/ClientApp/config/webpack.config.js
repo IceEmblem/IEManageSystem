@@ -82,6 +82,13 @@ const includeModuless = [
   path.resolve('node_modules/react-router-native/'),
   path.resolve('node_modules/react-native-vector-icons/'),
   path.resolve('node_modules/react-native-htmlview/'),
+  
+  path.resolve('node_modules/react-navigation'),
+  path.resolve('node_modules/react-native-safe-area-view'),
+  path.resolve('node_modules/react-native-web'),
+  path.resolve('node_modules/react-native-tab-view'),
+  path.resolve('node_modules/static-container'),
+
   path.resolve('node_modules/BaseCMSManage/'),
   path.resolve('node_modules/Core/'),
   path.resolve('node_modules/RNCMS/'),

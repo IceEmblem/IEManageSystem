@@ -7,8 +7,8 @@ class ComponentObject extends BaseComponentObject {
         super();
         this.ComponentSettingConfigs = [
             new ContainerConfig([
-                { name: 'tab', displayName: '标签项' },
-                { name: 'content', displayName: '标签内容' },
+                { name: 'tabs', displayName: '标签项', list: true },
+                { name: 'contents', displayName: '标签内容', list: true },
             ]),
         ];
         this.Component = component;

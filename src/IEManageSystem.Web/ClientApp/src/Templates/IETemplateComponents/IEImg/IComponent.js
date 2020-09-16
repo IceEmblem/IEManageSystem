@@ -25,6 +25,10 @@ export default class Component extends IComponent{
             return true;
         }
 
+        if(!data.linkUrl){
+            return true;
+        }
+
         if(data.linkUrl && !data.linkUrl.startsWith('http')){
 
             this.props.history.push(data.linkUrl);
