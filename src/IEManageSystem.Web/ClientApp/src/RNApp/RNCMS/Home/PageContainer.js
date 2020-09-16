@@ -56,9 +56,11 @@ class PageContainer extends Component {
     return (
       <ScrollView>
         <RootComponentContainerBox
-          pageId={this.props.pageId}
-          pageDataId={this.props.pageDataId}
-          os={PageComponentOSType.Native}
+          currentPageAndPost={{
+            pageId: this.props.pageId,
+            pageDataId: this.props.pageDataId,
+            os: PageComponentOSType.Native
+          }}
         />
       </ScrollView>
     )

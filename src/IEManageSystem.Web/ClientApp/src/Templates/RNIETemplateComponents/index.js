@@ -1,7 +1,6 @@
 // 注册各个模板所需的部件
 import Container from "./Container"
 import IEButton from "./IEButton"
-import IECalendar from "./IECalendar"
 import IECard from "./IECard"
 import IECarousel from "./IECarousel"
 import IECategoryLabel from "./IECategoryLabel"
@@ -23,7 +22,6 @@ import TemplateBuilder from 'IETemplateComponents'
 const describes = [
     Container,
     IEButton,
-    IECalendar,
     IECard,
     IECarousel,
     IECategoryLabel,

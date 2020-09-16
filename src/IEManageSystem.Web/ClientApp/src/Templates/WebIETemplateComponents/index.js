@@ -23,6 +23,7 @@ import IERate from "./IERate"
 import IESearch, { RNDescribe as RNIESearch } from "./IESearch"
 // 选择框组件，rn 没有
 import IESelect from "./IESelect"
+import IETab from './IETab' // -----------
 import NotFind, { RNDescribe as RNNotFind } from "./NotFind"
 import RichTextEditor, { RNDescribe as RNRichTextEditor } from "./RichTextEditor"
 import Text, { RNDescribe as RNText } from "./Text"
@@ -49,6 +50,7 @@ const describes = [
     IERate,
     IESearch,
     IESelect,
+    IETab,
     NotFind,
     RichTextEditor,
     Text

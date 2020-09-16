@@ -1,7 +1,7 @@
 import React from 'react'
 import IComponent from 'IETemplateComponents/Text/IComponent'
 
-import {Text, View, StyleSheet} from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 
 class Component extends IComponent {
     render() {
@@ -35,14 +35,15 @@ class Component extends IComponent {
             smallStyle.fontSize = 8;
         }
 
+        let smallText = data.smallText ?
+            <Text style={[styles.textSmall, smallStyle]}>{data.smallText}</Text> :
+            undefined;
+
         return (
-            <View style={[this.baseStyle, styles.view, {justifyContent: setting.align}]}>
+            <View style={[this.baseStyle, styles.view, { justifyContent: setting.align }]}>
                 <View>{this.props.children}</View>
                 <Text style={[styles.text, style]}>{this.getText()}</Text>
-                {
-                    data.smallText &&
-                    <Text style={[styles.textSmall, smallStyle]}>{data.smallText}</Text>
-                }
+                {smallText}
             </View>
         )
     }
