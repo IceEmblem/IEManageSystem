@@ -1,3 +1,5 @@
+import Theme from 'BaseLayout/Theme'
+
 var moduleDatas = [];
 // 已排序的模块
 var sortedModuleDatas = [];
@@ -22,20 +24,29 @@ export default class ModuleFactory
             this.moduleSort(moduleDatas[n]);
         }
 
+        let exec = Promise.resolve();
         for(let n = 0; n < sortedModuleDatas.length; n++)
         {
-            this.preInitialize(sortedModuleDatas[n]);
+            exec = exec.then(()=>{
+                return this.preInitialize(sortedModuleDatas[n]);
+            })
         }
 
         for(let n = 0; n < sortedModuleDatas.length; n++)
         {
-            this.initialize(sortedModuleDatas[n]);
+            exec = exec.then(()=>{
+                return this.initialize(sortedModuleDatas[n]);
+            })
         }
 
         for(let n = 0; n < sortedModuleDatas.length; n++)
         {
-            this.postInitialize(sortedModuleDatas[n]);
+            exec = exec.then(()=>{
+                return this.postInitialize(sortedModuleDatas[n]);
+            })
         }
+
+        return exec;
     }
 
     moduleSort(moduleData){
@@ -69,7 +80,7 @@ export default class ModuleFactory
 
         moduleData.isPreInit = true;
 
-        moduleData.module.preInitialize();
+        return moduleData.module.preInitialize();
     }
 
     initialize(moduleData)
@@ -80,7 +91,7 @@ export default class ModuleFactory
 
         moduleData.isInit = true;
 
-        moduleData.module.initialize();
+        return moduleData.module.initialize();
     }
 
     postInitialize(moduleData)
@@ -91,6 +102,6 @@ export default class ModuleFactory
 
         moduleData.isPostInit = true;
 
-        moduleData.module.postInitialize();
+        return moduleData.module.postInitialize();
     }
 }

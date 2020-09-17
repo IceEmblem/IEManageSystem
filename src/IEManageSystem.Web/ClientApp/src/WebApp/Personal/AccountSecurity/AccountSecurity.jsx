@@ -7,6 +7,8 @@ import { Radio, Card, Upload, Input, Tooltip, Button, Tag, Modal } from 'antd';
 import { UploadOutlined, UserOutlined, InfoCircleOutlined, EditOutlined, ReloadOutlined, SmileOutlined } from '@ant-design/icons';
 
 import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
+import Theme from 'BaseLayout/Theme'
+
 
 const { Meta } = Card;
 
@@ -121,7 +123,7 @@ class AccountSecurity extends React.Component {
                                     <div className="input-group mb-3 w-75 float-left">
                                         <Input
                                             value={this.state.userName}
-                                            prefix={<Tag icon={<UserOutlined />} color="#55acee">账号</Tag>}
+                                            prefix={<Tag icon={<UserOutlined />} color={Theme.primary}>账号</Tag>}
                                             suffix={
                                                 <Button type="primary" icon={<EditOutlined />}
                                                     onClick={() => { this.setState({ isShowModal: true }) }}
@@ -134,7 +136,7 @@ class AccountSecurity extends React.Component {
                                     <div className="input-group mb-3">
                                         <Input
                                             value={this.state.name}
-                                            prefix={<Tag icon={<SmileOutlined />} color="#55acee">昵称</Tag>}
+                                            prefix={<Tag icon={<SmileOutlined />} color={Theme.primary}>昵称</Tag>}
                                             suffix={
                                                 <Tooltip title="昵称">
                                                     <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
@@ -145,7 +147,7 @@ class AccountSecurity extends React.Component {
                                     <div className="input-group mb-3">
                                         <Input
                                             value={this.state.phone}
-                                            prefix={<Tag color="#55acee">手机号&#8194;</Tag>}
+                                            prefix={<Tag color={Theme.primary}>手机号&#8194;</Tag>}
                                             suffix={
                                                 <Tooltip title="手机号">
                                                     <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
@@ -156,7 +158,7 @@ class AccountSecurity extends React.Component {
                                     <div className="input-group mb-3">
                                         <Input
                                             value={this.state.emailAddress}
-                                            prefix={<Tag color="#55acee">邮箱号&#8194;</Tag>}
+                                            prefix={<Tag color={Theme.primary}>邮箱号&#8194;</Tag>}
                                             suffix={
                                                 <Tooltip title="邮箱号">
                                                     <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
@@ -178,7 +180,7 @@ class AccountSecurity extends React.Component {
                                 <div className="input-group mb-3">
                                     <Input
                                         value={this.state.problem}
-                                        prefix={<Tag color="#55acee">安全问题</Tag>}
+                                        prefix={<Tag color={Theme.primary}>安全问题</Tag>}
                                         disabled={this.state.problemReadonly}
                                         suffix={
                                             <Button type="primary" icon={<EditOutlined />}
@@ -201,7 +203,7 @@ class AccountSecurity extends React.Component {
                                 <div className="input-group mb-3">
                                     <Input
                                         value={this.state.answer}
-                                        prefix={<Tag color="#55acee">答&#12288;&#12288;案</Tag>}
+                                        prefix={<Tag color={Theme.primary}>答&#12288;&#12288;案</Tag>}
                                         disabled={this.state.answerReadonly}
                                         suffix={
                                             <Button type="primary" icon={<EditOutlined />}
@@ -237,7 +239,7 @@ class AccountSecurity extends React.Component {
                         >
                             <div className="input-group mb-3">
                                 <Input.Password
-                                    prefix={<Tag color="#55acee">输入原密码</Tag>}
+                                    prefix={<Tag color={Theme.primary}>输入原密码</Tag>}
                                     value={this.state.oldPassword}
                                     onChange={(event) => {
                                         this.setState({ oldPassword: event.target.value });
@@ -246,7 +248,7 @@ class AccountSecurity extends React.Component {
                             </div>
                             <div className="input-group mb-3">
                                 <Input.Password
-                                    prefix={<Tag color="#55acee">输入新密码</Tag>}
+                                    prefix={<Tag color={Theme.primary}>输入新密码</Tag>}
                                     value={this.state.newPassword}
                                     onChange={(event) => {
                                         this.setState({ newPassword: event.target.value });

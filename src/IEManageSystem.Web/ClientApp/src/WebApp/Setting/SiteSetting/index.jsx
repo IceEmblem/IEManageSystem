@@ -4,6 +4,7 @@ import RootRedux from 'Core/IEReduxs/RootRedux';
 import { getSiteSettingsFetch } from 'Core/IEReduxs/Actions';
 import SiteSettingManager from 'Core/SiteSettings/SiteSettingManager';
 import { ieReduxFetch } from 'Core/IEReduxFetch';
+import Theme from 'BaseLayout/Theme'
 
 import { Card, Button, Input, Tag } from 'antd';
 import { SaveOutlined } from '@ant-design/icons'
@@ -39,7 +40,7 @@ class SiteSetting extends React.Component {
         return (
             <div key={siteSetting.key} className="input-group mb-3">
                 <Input
-                    suffix={<Tag color="#55acee">{siteSetting.displayName}</Tag>}
+                    suffix={<Tag color={Theme.primary}>{siteSetting.displayName}</Tag>}
                     placeholder={siteSetting.key}
                     value={siteSetting.value}
                     onChange={

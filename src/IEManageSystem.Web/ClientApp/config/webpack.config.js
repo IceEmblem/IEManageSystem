@@ -509,6 +509,23 @@ module.exports = function (webpackEnv) {
                 },
               }),
             },
+            {
+              test: /\.less$/,
+              use: [{
+                  loader: "style-loader" // creates style nodes from JS strings
+              }, {
+                  loader: "css-loader", // translates CSS into CommonJS
+              }, {
+                  loader: "less-loader", // compiles Less to CSS
+                  options: {
+                    lessOptions: { // 如果使用less-loader@5，请移除 lessOptions 这一级直接配置选项。
+                      modifyVars: {
+                      },
+                      javascriptEnabled: true,
+                    },
+                  },
+              }],
+            },
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
             // extensions .module.scss or .module.sass

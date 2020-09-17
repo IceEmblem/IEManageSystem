@@ -14,7 +14,7 @@ const getCookie = async (name) => {
     return AsyncStorage.getItem(name);
 }
 
-const setCookie = (name, value, expiredays, path = "/") => {
+const setCookie = (name, value, expiredays) => {
     return AsyncStorage.setItem(name, value);
 }
 

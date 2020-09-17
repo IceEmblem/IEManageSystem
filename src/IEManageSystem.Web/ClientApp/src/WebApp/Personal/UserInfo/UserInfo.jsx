@@ -4,6 +4,7 @@ import imgAvatar from 'images/default_avatar.png';
 import { getUserInfoFetch, setUserInfoFetch } from 'BasePerson/IEReduxs/Actions'
 import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
 import IETool from 'Core/ToolLibrary/IETool'
+import Theme from 'BaseLayout/Theme'
 
 import { Radio, Card, Upload, Input, Tooltip, Button, Skeleton, Tag, Calendar } from 'antd';
 import { UploadOutlined, UserOutlined, InfoCircleOutlined, EditOutlined, ReloadOutlined, SmileOutlined } from '@ant-design/icons';
@@ -143,7 +144,7 @@ class UserInfo extends React.Component {
                                         <div className="input-group mb-3 w-75 float-left">
                                             <Input
                                                 value={this.state.userName}
-                                                prefix={<Tag icon={<UserOutlined />} color="#55acee">账号</Tag>}
+                                                prefix={<Tag icon={<UserOutlined />} color={Theme.primary}>账号</Tag>}
                                                 suffix={
                                                     <Tooltip title="无法修改账号">
                                                         <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
@@ -154,7 +155,7 @@ class UserInfo extends React.Component {
                                         <div className="input-group mb-3">
                                             <Input
                                                 value={this.state.name}
-                                                prefix={<Tag icon={<SmileOutlined />} color="#55acee">昵称</Tag>}
+                                                prefix={<Tag icon={<SmileOutlined />} color={Theme.primary}>昵称</Tag>}
                                                 suffix={
                                                     <Tooltip title="昵称">
                                                         <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
@@ -170,7 +171,7 @@ class UserInfo extends React.Component {
                                         <div className="input-group mb-3">
                                             <Input
                                                 value={this.state.phone}
-                                                prefix={<Tag color="#55acee">手机号&#8194;</Tag>}
+                                                prefix={<Tag color={Theme.primary}>手机号&#8194;</Tag>}
                                                 suffix={
                                                     <Tooltip title="手机号">
                                                         <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
@@ -186,7 +187,7 @@ class UserInfo extends React.Component {
                                         <div className="input-group mb-3">
                                             <Input
                                                 value={this.state.emailAddress}
-                                                prefix={<Tag color="#55acee">邮箱号&#8194;</Tag>}
+                                                prefix={<Tag color={Theme.primary}>邮箱号&#8194;</Tag>}
                                                 suffix={
                                                     <Tooltip title="邮箱号">
                                                         <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
@@ -223,7 +224,7 @@ class UserInfo extends React.Component {
                                 <div className="input-group mb-3">
                                     <Input
                                         value={this.state.realName}
-                                        prefix={<Tag color="#55acee">真实姓名</Tag>}
+                                        prefix={<Tag color={Theme.primary}>真实姓名</Tag>}
                                         disabled={this.state.realNameReadonly}
                                         suffix={
                                             <Button type="primary" icon={<EditOutlined />}
@@ -246,7 +247,7 @@ class UserInfo extends React.Component {
                                 <div className="input-group mb-3">
                                     <Input
                                         value={this.state.idNumber}
-                                        prefix={<Tag color="#55acee">身份证号</Tag>}
+                                        prefix={<Tag color={Theme.primary}>身份证号</Tag>}
                                         disabled={this.state.idNumberReadonly}
                                         suffix={
                                             <Button type="primary" icon={<EditOutlined />}
@@ -269,7 +270,7 @@ class UserInfo extends React.Component {
                                 <div className="input-group mb-3">
                                     <Input
                                         value={this.state.address}
-                                        prefix={<Tag color="#55acee">地&#12288;&#12288;址</Tag>}
+                                        prefix={<Tag color={Theme.primary}>地&#12288;&#12288;址</Tag>}
                                         disabled={this.state.addressReadonly}
                                         suffix={
                                             <Button type="primary" icon={<EditOutlined />}
@@ -292,7 +293,7 @@ class UserInfo extends React.Component {
                                 <div className="input-group mb-3">
                                     <Input
                                         value={this.state.birthDate}
-                                        prefix={<Tag color="#55acee">出生日期</Tag>}
+                                        prefix={<Tag color={Theme.primary}>出生日期</Tag>}
                                         disabled={this.state.birthDateReadonly}
                                         suffix={
                                             <Button type="primary" icon={<EditOutlined />}
@@ -313,10 +314,8 @@ class UserInfo extends React.Component {
                                     />
                                 </div>
                                 <div className="input-group mb-3">
-                                    <div className="input-group-prepend userinfo-lable">
-                                        <span className="input-group-text bg-info text-white border-0">性别</span>
-                                    </div>
                                     <div className="ml-3 d-flex align-content-center align-items-center">
+                                        <Tag color={Theme.primary}>性&#12288;&#12288;别</Tag>
                                         <Radio.Group onChange={(event) => { this.setState({ sex: event.target.value }) }} value={this.state.sex}>
                                             <Radio value={true}>男</Radio>
                                             <Radio value={false}>女</Radio>

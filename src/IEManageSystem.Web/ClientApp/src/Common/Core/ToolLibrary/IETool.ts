@@ -3,7 +3,7 @@ export default class IETool {
     static getCookie : (name: string) => Promise<string>;
 
     //写cookies  
-    static setCookie : (name: string, value: string, expiredays: number, path: string) => Promise<void>;
+    static setCookie : (name: string, value: string, expiredays: number | undefined) => Promise<void>;
 
     //删除cookies
     static delCookie : (name: string) => Promise<void>;

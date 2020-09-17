@@ -2,17 +2,6 @@
     padding: 12px;
 }
 
-.picturemanage-picturebox .photobox {
-    display: inline-flex;
-    justify-items: center;
-    align-items: center;
-    width: 10rem;
-    height: 10rem;
-    --photoboxOverlay: rgba(72, 27, 174, .7);
-    padding: 0rem 1rem;
-    margin-bottom: 1rem;
-}
-
 .picturemanage-picturebox-piclist{
     flex-direction: row;
     flex-wrap: wrap;

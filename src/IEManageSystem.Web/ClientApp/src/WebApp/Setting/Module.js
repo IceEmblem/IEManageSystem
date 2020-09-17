@@ -32,6 +32,14 @@ export default class Module extends BaseModule
                             [
                                 AccessScope.SiteSetting(ApiScopeNodeType.manage)
                             ]
+                    },
+                    {
+                        id: "ThemeSetting",
+                        text: "主题设置",
+                        url: "/ManageHome/Setting/ThemeSetting",
+                        accessScope:
+                            [
+                            ]
                     }
                 ]
             },

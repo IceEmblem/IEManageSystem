@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import Theme from 'BaseLayout/Theme'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
-import Folder from './folder.png'
 
 import { Tag, Card } from 'antd';
 import { FolderOpenOutlined } from "@ant-design/icons"
@@ -115,7 +114,7 @@ export default class PictureBox extends React.Component {
 
         return (<div className="picturemanage-picturebox bg-white">
             <div className="w-100">
-                <Tag color="#55acee">
+                <Tag color={Theme.primary}>
                     <span className="float-left">当前路径：</span>
                     <span className="float-left">{this.state.curPath == "" ? " > " : this.state.curPath.replace(/\//g, " > ")}
                     </span>

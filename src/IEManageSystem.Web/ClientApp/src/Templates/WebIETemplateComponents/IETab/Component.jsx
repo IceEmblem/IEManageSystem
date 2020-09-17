@@ -16,14 +16,7 @@ class Component extends IComponent {
     }
 
     render() {
-        let listDatas = [];
-        this.props.children.tabs.forEach((item, index) => {
-            listDatas.push({
-                key: index,
-                tab: item,
-                content: this.props.children.contents.length > index ? this.props.children.contents[index] : undefined
-            });
-        });
+        let listDatas = this.getListDatas();
 
         return (
             <Tabs defaultActiveKey="2">

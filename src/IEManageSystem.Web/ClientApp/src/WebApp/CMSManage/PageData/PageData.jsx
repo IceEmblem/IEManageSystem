@@ -221,7 +221,7 @@ class PageData extends React.Component {
 		return (
 			<div className="col-md-12 bg-white pt-3 pb-3">
 				<div className="mb-3">
-					<span className="font-weight-bold mr-3">文章类型</span>
+					<span className="mr-3">文章类型</span>
 					<Select value={this.state.selectPageName} style={{ width: 200 }} onChange={(value) => { this.setState({ selectPageName: value }) }}>
 						<Option value="">全部</Option>
 						{this.state.queryPages.map(item => (<Option value={item.name}>{item.displayName}</Option>))}

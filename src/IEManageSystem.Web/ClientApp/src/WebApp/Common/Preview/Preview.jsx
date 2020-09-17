@@ -1,4 +1,5 @@
 import React from 'react';
+import Theme from 'BaseLayout/Theme'
 
 import { Tag, Input, Button } from 'antd';
 import {
@@ -31,8 +32,8 @@ export default class Preview extends React.Component {
                 <span className="mt-auto mb-auto">{this.props.previewResources[item][this.props.textName]}</span>
                 <span className="mt-auto mb-auto">
                     <Button
-                        className={this.state.selectPreviewResource == this.props.previewResources[item] ? "preview-selected" : ""}
                         size="small"
+                        type={this.state.selectPreviewResource == this.props.previewResources[item] && 'primary'}
                         icon={<ZoomInOutlined />}
                         onClick={() => {
                             this.props.previewOnClick(this.props.previewResources[item]);

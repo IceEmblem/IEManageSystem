@@ -6,7 +6,7 @@ export default class IEToken {
             return IETool.setCookie('ie_token', token, 7);
         }
         else{
-            return IETool.setCookie('ie_token', token);
+            return IETool.setCookie('ie_token', token, undefined);
         }
     }
 

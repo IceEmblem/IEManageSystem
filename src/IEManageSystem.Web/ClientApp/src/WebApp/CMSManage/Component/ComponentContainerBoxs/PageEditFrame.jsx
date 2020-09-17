@@ -101,7 +101,6 @@ class EditFrame extends React.Component {
                     <Tab
                         tabs={this.tabs}
                         nameField={this.nameField}
-                        selectIndex={this.state.selectTab == null ? 0 : this.state.selectTab.index}
                         selectOnclick={(data) => {
                             this.setState({ selectTab: data })
                         }}
