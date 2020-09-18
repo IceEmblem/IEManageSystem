@@ -2,5 +2,6 @@
   "react-native$": "src/WebApp/Adapters/IEReactNativeWeb",
   "react-native-webview$": "src/WebApp/Adapters/WebView",
   "react-native-htmlview$": "src/WebApp/Adapters/HtmlView",
+  "react-native-video$": "src/WebApp/Adapters/IEReactNativeVideo",
   "react-native/Libraries/Renderer/shims/ReactNativePropRegistry": "react-native-web/dist/modules/ReactNativePropRegistry"
 }

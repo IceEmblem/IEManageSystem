@@ -14,6 +14,7 @@ import IEPostList from "./IEPostList"
 import IERankingList from "./IERankingList"
 import IESearch from "./IESearch"
 import IETab from "./IETab"
+import IEVideo from './IEVideo'
 import NotFind from "./NotFind"
 import RichTextEditor from "./RichTextEditor"
 import Text from "./Text"
@@ -36,6 +37,7 @@ const describes = [
     IERankingList,
     IESearch,
     IETab,
+    IEVideo,
     NotFind,
     RichTextEditor,
     Text

@@ -24,7 +24,7 @@ import IESearch, { RNDescribe as RNIESearch } from "./IESearch"
 // 选择框组件，rn 没有
 import IESelect from "./IESelect"
 import IETab, { RNDescribe as RNIETab } from './IETab'
-import IEVideo from './IEVideo'     // ----------------
+import IEVideo, { RNDescribe as RNIEVideo } from './IEVideo'
 import NotFind, { RNDescribe as RNNotFind } from "./NotFind"
 import RichTextEditor, { RNDescribe as RNRichTextEditor } from "./RichTextEditor"
 import Text, { RNDescribe as RNText } from "./Text"
@@ -76,6 +76,7 @@ const rnDescribes = [
     RNIERankingList,
     RNIESearch,
     RNIETab,
+    RNIEVideo,
     RNNotFind,
     RNRichTextEditor,
     RNText

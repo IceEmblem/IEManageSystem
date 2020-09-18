@@ -16,6 +16,8 @@ target 'IceEmblem' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
   target 'IceEmblemTests' do
     inherit! :complete
     # Pods for testing
