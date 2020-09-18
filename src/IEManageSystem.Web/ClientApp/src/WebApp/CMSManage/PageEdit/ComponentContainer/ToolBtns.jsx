@@ -7,6 +7,7 @@ import { setActiveComponent, RootComponentSign } from 'BaseCMSManage/IEReduxs/Ac
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import { Button, Popover, Input, Tag, Select, Tooltip } from 'antd'
 import { BranchesOutlined, ArrowUpOutlined, EditOutlined, ArrowDownOutlined } from "@ant-design/icons"
+import Theme from 'BaseLayout/Theme'
 
 class ToolBtns extends React.Component {
     state = {
@@ -111,7 +112,7 @@ class ToolBtns extends React.Component {
                                 return false
                             }}
                         >
-                            <Tag className='mr-3' icon={<EditOutlined />} color="#55acee">
+                            <Tag className='mr-3' icon={<EditOutlined />} color={Theme.primary}>
                                 {this.componentDescribe.displayName}
                             </Tag>
                             {

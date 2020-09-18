@@ -22,6 +22,8 @@ import CurrentToolBtns from './ComponentContainer/CurrentToolBtns'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 
+import RNPageLayout from 'Adapters/RNPageLayout'
+
 const RNPageRootId = '__PageEditRN__';
 const RNPage = (props) => {
     return <div class="phone">
@@ -30,23 +32,25 @@ const RNPage = (props) => {
             <div className="phone-camera"></div>
             <div className="phone-speaker"></div>
             <div class="phone-screen">
-                <div>
-                    <div id={RNPageRootId}>
-                        <Page>
-                            <RootComponentContainerBox
+                <div className='h-100'>
+                    <RNPageLayout
+                        tools={<>
+                            <SignSquareFrame
+                                color="#13c2c2"
                                 currentPageAndPost={props.currentPageAndPost}
+                                rootElementId={RNPageRootId}
                             />
-                        </Page>
-                        <SignSquareFrame
-                            color="#13c2c2"
+                            <CurrentToolBtns
+                                currentPageAndPost={props.currentPageAndPost}
+                                rootElementId={RNPageRootId}
+                            />
+                        </>}
+                        rootId={RNPageRootId}
+                    >
+                        <RootComponentContainerBox
                             currentPageAndPost={props.currentPageAndPost}
-                            rootElementId={RNPageRootId}
                         />
-                        <CurrentToolBtns
-                            currentPageAndPost={props.currentPageAndPost}
-                            rootElementId={RNPageRootId}
-                        />
-                    </div>
+                    </RNPageLayout>
                 </div>
             </div>
             <div className="phone-homebtn"></div>

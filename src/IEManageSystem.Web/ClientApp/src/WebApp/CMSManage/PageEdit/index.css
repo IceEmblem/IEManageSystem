@@ -29,21 +29,21 @@
     top: 50px;
 }
 .phone-screen {
-    width: 320px;
-    height: 480px;
+    width: 360px;
+    height: 540px;
     border-radius: 5px;
     position: relative;
     display: inline-block;
     background-color: #fff;
-    margin-top: 15px;
-    overflow: hidden;
+    /* margin-top: 15px;
+    overflow: hidden; */
 }
-
+/* 
 .phone-screen>div{
     width: 340px;
     height: 100%;
     overflow-y: scroll;
-}
+} */
 
 .phone-screen>div>div{
     position: relative;

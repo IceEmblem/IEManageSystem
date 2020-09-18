@@ -19,6 +19,8 @@ import {
 import { IContainerConfigBtnComponent } from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
 import IocContainer from 'Core/IocContainer'
 
+import Theme from 'BaseLayout/Theme'
+
 import "./BtnLists.css";
 
 const { Option } = Select;
@@ -26,7 +28,7 @@ const { Option } = Select;
 const AddComponentBtn = (props) => {
     return <Button
         icon={<PlusCircleOutlined />}
-        className="bg-success border-success text-white"
+        style={{backgroundColor: Theme.color1, borderColor: Theme.color1}}
         onClick={props.onClick}
     >添加组件</Button>
 }
@@ -54,7 +56,7 @@ const PageInfo = (props) => (<div className="pageedit-page-container-header-info
             placeholder="背景颜色"
             value={props.page.displayName}
             disabled={true}
-            suffix={<Tag color="#55acee">显示名称</Tag>}
+            suffix={<Tag color={Theme.primary}>显示名称</Tag>}
         />
     </div>
     <div className="mb-3">
@@ -62,7 +64,7 @@ const PageInfo = (props) => (<div className="pageedit-page-container-header-info
             placeholder="背景颜色"
             value={props.page.name}
             disabled={true}
-            suffix={<Tag color="#55acee">页面名称</Tag>}
+            suffix={<Tag color={Theme.primary}>页面名称</Tag>}
         />
     </div>
     <div className="mb-3">
@@ -70,7 +72,7 @@ const PageInfo = (props) => (<div className="pageedit-page-container-header-info
             placeholder="背景颜色"
             value={props.page.description}
             disabled={true}
-            suffix={<Tag color="#55acee">页面描述</Tag>}
+            suffix={<Tag color={Theme.primary}>页面描述</Tag>}
         />
     </div>
 </div>)
@@ -168,18 +170,18 @@ class BtnLists extends React.Component {
                                         trigger="click">
                                         <Button
                                             icon={<VerticalAlignBottomOutlined />}
-                                            className="bg-secondary border-secondary text-white"
+                                            style={{backgroundColor: Theme.color2, borderColor: Theme.color2}}
                                         >导入模板</Button>
                                     </Popover>
                                     <Popover content={<PageInfo page={this.props.page} />} title="页面信息" trigger="click">
                                         <Button
                                             icon={<InfoCircleOutlined />}
-                                            className="bg-info border-info text-white"
+                                            style={{backgroundColor: Theme.color3, borderColor: Theme.color3}}
                                         >页面信息</Button>
                                     </Popover>
                                     <Button
                                         icon={<SyncOutlined />}
-                                        className="bg-warning border-warning text-white"
+                                        style={{backgroundColor: Theme.color4, borderColor: Theme.color4}}
                                         onClick={() => {
                                             this.props.exportPage();
                                         }}
@@ -205,7 +207,7 @@ class BtnLists extends React.Component {
                                     >
                                         <Button
                                             icon={<InfoCircleOutlined />}
-                                            className="bg-dark border-dark text-white"
+                                            style={{backgroundColor: Theme.color5, borderColor: Theme.color5}}
                                         >平台选择</Button>
                                     </Popover>
                                     <Button

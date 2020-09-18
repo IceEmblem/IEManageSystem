@@ -13,6 +13,9 @@ import Page from 'Core/Page/Page'
 // BaseCmsManage 模块依赖
 import BaseCmsManageModule from 'BaseCMSManage/Module';
 
+// Adapters 模块依赖
+import AdaptersModule from 'Adapters/Module'
+
 // 初始化时加载
 import Home from './Home'
 import SearchBoxTool from './SearchBoxTool'
@@ -132,5 +135,6 @@ export default class Module extends BaseModule {
 new ModuleFactory().register(Module, [
     CoreModule,
     BaseCmsManageModule,
-    BaseLayoutModule
+    BaseLayoutModule,
+    AdaptersModule
 ]);

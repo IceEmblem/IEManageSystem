@@ -1,4 +1,3 @@
-import React from 'react'
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import CoreModule from 'Core/Module'
@@ -9,10 +8,16 @@ import BaseLayoutModule from 'BaseLayout/Module'
 
 import LayoutComponent from './Layout'
 
+import Theme from './Theme'
+
 export default class Module extends BaseModule
 {
     initialize(){
         PageProvider.register(new Page("RNLayout", "/", LayoutComponent));
+    }
+
+    postInitialize(){
+        Theme.init();
     }
 }
 

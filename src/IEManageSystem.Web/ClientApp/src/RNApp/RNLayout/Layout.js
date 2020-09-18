@@ -1,11 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Switch, Route, withRouter } from 'react-router-native'
-import { Container, Header, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Item } from 'native-base'
+import { Container, Header, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Item, StyleProvider } from 'native-base'
 import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
 import IocContainer from 'Core/IocContainer'
 import ILayoutInstance from 'BaseLayout/ILayoutInstance'
+import Theme from './Theme'
 
 class Layout extends React.Component {
     state = {
@@ -26,72 +27,74 @@ class Layout extends React.Component {
         this.closeCustomizeView = this.closeCustomizeView.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         IocContainer.registerSingleIntances(ILayoutInstance, this);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         IocContainer.registerSingleIntances(ILayoutInstance, undefined);
     }
 
-    showCustomizeView(component){
-        this.setState({isShowCustomizeView: true, customizeView: component})
+    showCustomizeView(component) {
+        this.setState({ isShowCustomizeView: true, customizeView: component })
     }
 
-    closeCustomizeView(){
-        this.setState({isShowCustomizeView: false, customizeView: undefined})
+    closeCustomizeView() {
+        this.setState({ isShowCustomizeView: false, customizeView: undefined })
     }
 
     render() {
         return (
             <>
-                <Container style={this.state.isShowCustomizeView ? styles.none : undefined}>
-                    <Header>
-                        <Body style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Button style={{ marginRight: 15 }} transparent>
-                                <Text><Icon style={{ color: '#fff' }} name='menu' /></Text>
-                            </Button>
-                            {
-                                NavToolProvider.getLeftComponents()
-                            }
-                            {
-                                NavToolProvider.getRightComponents()
-                            }
-                            <Button style={{ marginLeft: 15 }} small transparent>
-                                <Text>
-                                    <Icon type='AntDesign' style={{ color: '#fff' }} name='message1' />
-                                </Text>
-                            </Button>
-                            <Button style={{ marginLeft: 15 }} small rounded transparent>
-                                <Text>
-                                    <Icon type='AntDesign' style={{ color: '#fff' }} name='ellipsis1' />
-                                </Text>
-                            </Button>
-                        </Body>
-                    </Header>
-                    <Content>
-                        <Switch>
-                            {this.navMenuComponentsForSort.map(
-                                (item, index) => <Route key={index} path={item.baseUrl} component={item.component} />)}
-                        </Switch>
-                    </Content>
-                    <Footer>
-                        <FooterTab>
-                            {this.navMenuComponents.map(
-                                (item, index) => <Button
-                                    active={index == this.state.activeIndex}
-                                    onPress={
-                                        () => {
-                                            this.setState({ activeIndex: index })
-                                            this.props.history.push(item.menu.url);
+                <StyleProvider style={Theme.getTheme()}>
+                    <Container style={this.state.isShowCustomizeView ? styles.none : undefined}>
+                        <Header>
+                            <Body style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <Button style={{ marginRight: 15 }} transparent>
+                                    <Text><Icon style={{ color: '#fff' }} name='menu' /></Text>
+                                </Button>
+                                {
+                                    NavToolProvider.getLeftComponents()
+                                }
+                                {
+                                    NavToolProvider.getRightComponents()
+                                }
+                                <Button style={{ marginLeft: 15 }} small transparent>
+                                    <Text>
+                                        <Icon type='AntDesign' style={{ color: '#fff' }} name='message1' />
+                                    </Text>
+                                </Button>
+                                <Button style={{ marginLeft: 15 }} small rounded transparent>
+                                    <Text>
+                                        <Icon type='AntDesign' style={{ color: '#fff' }} name='ellipsis1' />
+                                    </Text>
+                                </Button>
+                            </Body>
+                        </Header>
+                        <Content>
+                            <Switch>
+                                {this.navMenuComponentsForSort.map(
+                                    (item, index) => <Route key={index} path={item.baseUrl} component={item.component} />)}
+                            </Switch>
+                        </Content>
+                        <Footer>
+                            <FooterTab>
+                                {this.navMenuComponents.map(
+                                    (item, index) => <Button
+                                        active={index == this.state.activeIndex}
+                                        onPress={
+                                            () => {
+                                                this.setState({ activeIndex: index })
+                                                this.props.history.push(item.menu.url);
+                                            }
                                         }
-                                    }
-                                >
-                                    <Icon name={item.menu.icon} type='AntDesign' />
-                                </Button>)}
-                        </FooterTab>
-                    </Footer>
-                </Container>
+                                    >
+                                        <Icon name={item.menu.icon} type='AntDesign' />
+                                    </Button>)}
+                            </FooterTab>
+                        </Footer>
+                    </Container>
+                </StyleProvider>
                 <View style={!this.state.isShowCustomizeView ? styles.none : styles.customizeView}>
                     {
                         this.state.customizeView

@@ -19,8 +19,8 @@ export const themeName = {
 }
 
 class Theme {
-    private _currentTheme = Themes.blue;
-    themeName: string = themeName.blue;
+    private _currentTheme = Themes.cyan;
+    themeName: string = themeName.cyan;
 
     init(){
         return IETool.getCookie(saveName).then((value)=>{
