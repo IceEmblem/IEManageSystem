@@ -16,6 +16,7 @@
         "react-dom": "^16.13.1",
         "react-motion": "^0.5.2",
         "react-native-web": "^0.13.5",
-        "react-router-dom": "^5.2.0"
+        "react-router-dom": "^5.2.0",
+        "video-react": "^0.14.1"
     }
 }
