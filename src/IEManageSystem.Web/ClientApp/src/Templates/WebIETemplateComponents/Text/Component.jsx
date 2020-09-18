@@ -18,15 +18,17 @@ class Component extends IComponent {
 
         let text = this.getText();
 
+        let textStyle = { color: setting.fontColor, fontSize: setting.fontSize }
+
         let component = titleToLevel[setting.textType] ?
             <Title className="mb-0"
                 level={titleToLevel[setting.textType]}
-                style={{ color: setting.fontColor }}
+                style={textStyle}
             >
                 {text}
                 <small>{data.smallText}</small>
             </Title> :
-            <p className="mb-0" style={{ color: setting.fontColor }}>{text} <small>{data.smallText}</small></p>
+            <p className="mb-0" style={textStyle}>{text} <small>{data.smallText}</small></p>
 
         return <div className='d-flex align-items-center' style={{justifyContent: setting.align}}>
             <div>

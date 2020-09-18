@@ -1,5 +1,6 @@
 import React from 'react';
 import IComponent from 'IETemplateComponents/IETab/IComponent'
+import Setting from 'IETemplateComponents/IETab/Setting'
 import { Tabs } from 'antd';
 import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 
@@ -16,10 +17,11 @@ class Component extends IComponent {
     }
 
     render() {
+        let setting = this.getCurrentSetting();
         let listDatas = this.getListDatas();
 
         return (
-            <Tabs defaultActiveKey="2">
+            <Tabs defaultActiveKey="2" tabPosition={setting.tabPosition}>
                 {
                     listDatas.map(item => this.creactItem(item))
                 }

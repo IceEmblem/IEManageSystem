@@ -42,4 +42,12 @@ export default class Setting {
     set align(val){
         this.setting.getDefauleData().field4 = val;
     }
+
+    get fontSize(){
+        return this.setting.getDefauleData().field5;
+    }
+
+    set fontSize(val){
+        this.setting.getDefauleData().field5 = val;
+    }
 }

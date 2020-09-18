@@ -1,7 +1,15 @@
 import React from 'react'
 import IComponent from 'IETemplateComponents/Text/IComponent'
-
+import StyleCheck from 'RNCMS/StyleCheck'
 import { Text, View, StyleSheet } from 'react-native'
+
+const hToFontSize = {
+    h1: {text: 27, small: 19},
+    h2: {text: 24, small: 17},
+    h3: {text: 22, small: 14},
+    h4: {text: 18, small: 11},
+    other: {text: undefined, small: 8},
+}
 
 class Component extends IComponent {
     render() {
@@ -11,28 +19,16 @@ class Component extends IComponent {
         let style = { color: setting.fontColor }
         let smallStyle = { color: setting.fontColor, marginLeft: 10 }
 
-        if (setting.textType == "h1") {
-            style.fontSize = 27;
-
-            smallStyle.fontSize = 19;
+        if(hToFontSize[setting.textType]){
+            style.fontSize = hToFontSize[setting.textType].text;
+            smallStyle.fontSize = hToFontSize[setting.textType].small;
         }
-        else if (setting.textType == "h2") {
-            style.fontSize = 24;
-
-            smallStyle.fontSize = 17;
+        else{
+            smallStyle.fontSize = hToFontSize.other.small;
         }
-        else if (setting.textType == "h3") {
-            style.fontSize = 21;
 
-            smallStyle.fontSize = 14;
-        }
-        else if (setting.textType == "h4") {
-            style.fontSize = 18;
-
-            smallStyle.fontSize = 11;
-        }
-        else {
-            smallStyle.fontSize = 8;
+        if(setting.fontSize){
+            style.fontSize = setting.fontSize;
         }
 
         let smallText = data.smallText ?
@@ -42,7 +38,7 @@ class Component extends IComponent {
         return (
             <View style={[this.baseStyle, styles.view, { justifyContent: setting.align }]}>
                 <View>{this.props.children}</View>
-                <Text style={[styles.text, style]}>{this.getText()}</Text>
+                <Text style={[styles.text, StyleCheck.handle(style)]}>{this.getText()}</Text>
                 {smallText}
             </View>
         )

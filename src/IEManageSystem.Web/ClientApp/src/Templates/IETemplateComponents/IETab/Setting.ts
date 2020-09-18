@@ -7,11 +7,11 @@ export default class Setting {
         this.setting = pageComponentSetting;
     }
 
-    get textType(){
-        return this.setting.getDefauleData().field1 || "h4";
+    get tabPosition(){
+        return this.setting.getDefauleData().field1 || "top";
     }
 
-    set textType(val){
+    set tabPosition(val){
         this.setting.getDefauleData().field1 = val;
     }
 }

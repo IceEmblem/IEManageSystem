@@ -10,6 +10,7 @@ class ComponentObject extends BaseComponentObject {
                 { name: 'tabs', displayName: '标签项', list: true },
                 { name: 'contents', displayName: '标签内容', list: true },
             ]),
+            new ComponentSettingConfig(undefined, '标签设置', settingConfig),
         ];
         this.Component = component;
         this.Preview = preview;

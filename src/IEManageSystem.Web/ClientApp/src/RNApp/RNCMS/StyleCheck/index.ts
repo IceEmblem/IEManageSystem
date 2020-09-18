@@ -10,6 +10,12 @@ export default class StyleCheck {
         fontSize: (style) => {
             let result = undefined;
 
+            result = StyleCheck.numRegex.exec(style.fontSize);
+            if(result){
+                style.fontSize = new Number(style.fontSize).valueOf();
+                return;
+            }
+
             result = StyleCheck.pxRegex.exec(style.fontSize);
             if(result){
                 style.fontSize = new Number(result[1]).valueOf();
@@ -71,6 +77,12 @@ export default class StyleCheck {
         },
         padding: (style) => {
             let result = undefined;
+            
+            result = StyleCheck.numRegex.exec(style.padding);
+            if(result){
+                style.padding = new Number(style.padding).valueOf();
+                return;
+            }
 
             result = StyleCheck.pxRegex.exec(style.padding);
             if(result){
@@ -82,6 +94,12 @@ export default class StyleCheck {
         },
         margin: (style) => {
             let result = undefined;
+        
+            result = StyleCheck.numRegex.exec(style.margin);
+            if(result){
+                style.margin = new Number(style.margin).valueOf();
+                return;
+            }
 
             result = StyleCheck.pxRegex.exec(style.margin);
             if(result){
