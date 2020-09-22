@@ -1,7 +1,7 @@
 import React from 'react'
 import IComponent from 'IETemplateComponents/IEVideo/IComponent'
 import StyleCheck from 'RNCMS/StyleCheck'
-import { View, StyleSheet, TouchableHighlight, Platform } from 'react-native'
+import { View, StyleSheet, TouchableHighlight } from 'react-native'
 import { Button, Text, Icon } from 'native-base'
 import Video from 'react-native-video';
 import Device from 'RNInfrastructure/Device'
@@ -9,7 +9,7 @@ import Theme from 'BaseLayout/Theme'
 import Weburl from 'Core/Weburl'
 
 class Component extends IComponent {
-    videoHeight = Platform.OS != 'web' ? Device.width * 9 / 16 : 212;
+    videoHeight = Device.width * 9 / 16;
 
     state = {
         showTool: true,

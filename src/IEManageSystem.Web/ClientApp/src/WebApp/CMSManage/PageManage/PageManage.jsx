@@ -74,7 +74,12 @@ class PageManage extends React.Component {
 				valueType: ResourceDescribeValueType.radio,
 				valueTexts: [{ value: pageType.StaticPage, text: "单篇页面" }, { value: pageType.ContentPage, text: "文章页面" }],
 				isEditCanEdit: false
-			}
+			},
+			{ name: "field1Name", text: "字段1名称" },
+			{ name: "field2Name", text: "字段2名称" },
+			{ name: "field3Name", text: "字段3名称" },
+			{ name: "field4Name", text: "字段4名称" },
+			{ name: "field5Name", text: "字段5名称" },
 		];
 	}
 

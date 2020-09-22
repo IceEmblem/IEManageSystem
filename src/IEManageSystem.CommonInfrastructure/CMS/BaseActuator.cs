@@ -16,7 +16,7 @@ namespace IEManageSystem.CommonInfrastructure.CMS
     {
         protected ContentComponentData CreateContentComponentData(string sign, PageData pageData) 
         {
-            var componentDataRepository = IocManager.Instance.Resolve<IRepository<ContentComponentData>>();
+            var componentDataRepository = IocManager.Instance.Resolve<IRepository<ComponentData>>();
 
             ContentComponentData contentComponentData = new ContentComponentData()
             {

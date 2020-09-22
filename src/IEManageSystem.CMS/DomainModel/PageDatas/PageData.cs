@@ -39,6 +39,24 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         /// </summary>
         public int Click { get; protected set; }
 
+        // 扩展字段
+        public string Field1 { get; set; }
+
+        public string Field2 { get; set; }
+
+        public string Field3 { get; set; }
+
+        public string Field4 { get; set; }
+
+        public string Field5 { get; set; }
+
+        public EntityEdit Creator { get; set; }
+
+        public EntityEdit LastUpdater { get; set; }
+
+        /// <summary>
+        /// 即将删除-------------------------
+        /// </summary>
         public DateTime CreationTime { get; set; }
 
         public PageBase Page { get; set; }

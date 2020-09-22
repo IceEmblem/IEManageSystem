@@ -11,15 +11,13 @@ namespace IEManageSystem.Configures.CMS
     {
         public void Configure(EntityTypeBuilder<StaticPage> builder)
         {
-            builder.HasBaseType<PageBase>();
-
             builder.HasData(new
             {
                 Id = 1,
                 Name = "Home",
                 DisplayName = "首页",
                 Description = "这是一个首页",
-                Discriminator = "StaticPage"
+                Discriminator = StaticPage.DiscriminatorName
             });
         }
     }

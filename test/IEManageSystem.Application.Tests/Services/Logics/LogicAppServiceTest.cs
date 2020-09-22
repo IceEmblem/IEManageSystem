@@ -21,15 +21,6 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             _logicAppService = LocalIocManager.Resolve<ILogicAppService>();
         }
 
-        private void ReloadDB() {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageComponentBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
-            UsingDbContext(context => new LogicBuilder(context).Build());
-        }
-
         [Fact]
         public void Register_BaseTest()
         {

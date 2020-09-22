@@ -95,7 +95,7 @@
   },
   "scripts": {
     "start": "cross-env IEOS=web node scripts/start.js",
-    "start:server": "cross-env IEOS=web REACT_APP_SERVER=true node scripts/start.js",
+    "start:server": "set NODE_OPTIONS=--max_old_space_size=4096 && cross-env IEOS=web REACT_APP_SERVER=true node scripts/start.js",
     "build": "cross-env IEOS=web node scripts/build.js",
     "test": "node scripts/test.js",
     "android": "cross-env IEOS=android react-native run-android",

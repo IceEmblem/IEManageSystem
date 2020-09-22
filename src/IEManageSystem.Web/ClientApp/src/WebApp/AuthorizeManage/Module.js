@@ -25,7 +25,7 @@ export default class Module extends BaseModule {
         MenuProvider.registerMenu(
             {
                 id: "AuthorizeManage",
-                text: "站点授权管理",
+                text: "站点授权",
                 icon: SafetyCertificateOutlined,
                 menuItems:
                     [

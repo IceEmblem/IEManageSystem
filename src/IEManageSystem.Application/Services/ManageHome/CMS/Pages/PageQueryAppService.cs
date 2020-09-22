@@ -127,6 +127,13 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             pageDto.Name = page.Name;
             pageDto.DisplayName = page.DisplayName;
             pageDto.Description = page.Description;
+            pageDto.Field1Name = page.Field1Name;
+            pageDto.Field2Name = page.Field2Name;
+            pageDto.Field3Name = page.Field3Name;
+            pageDto.Field4Name = page.Field4Name;
+            pageDto.Field5Name = page.Field5Name;
+            pageDto.Creator = _objectMapper.Map<EntityEditDto>(page.Creator);
+            pageDto.LastUpdater = _objectMapper.Map<EntityEditDto>(page.LastUpdater);
 
             if (page is StaticPage)
             {

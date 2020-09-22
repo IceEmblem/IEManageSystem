@@ -17,6 +17,7 @@ namespace IEManageSystem.CMS.DomainModel.ComponentDatas
         /// </summary>
         public string Sign { get; set; }
 
+        public string Discriminator { get; protected set; }
 
         public ICollection<SingleComponentData> SingleDatas { get; set; }
 

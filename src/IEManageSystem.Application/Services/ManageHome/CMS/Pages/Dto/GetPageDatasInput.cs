@@ -30,5 +30,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
         public bool IsClick() => Orderby == "Click";
 
         public bool IsDate() => Orderby == "Date";
+
+        public string PageName { get; set; }
     }
 }

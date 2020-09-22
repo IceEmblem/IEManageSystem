@@ -1,4 +1,5 @@
 ﻿using Abp.Dependency;
+using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Repositorys;
 using IEManageSystem.Web;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace IEManageSystem.CMS.DomainModel.ComponentDatas
@@ -14,18 +16,18 @@ namespace IEManageSystem.CMS.DomainModel.ComponentDatas
     {
         private IIEMemoryCache _cache { get; }
 
-        public IEfRepository<DefaultComponentData, int> DefaultComponentDataRepository { get; }
+        public IEfRepository<ComponentData, int> ComponentDataRepository { get; }
 
-        public IEfRepository<ContentComponentData, int> ContentComponentDataRepository { get; }
+        public IQueryable<DefaultComponentData> DefaultComponentDataRepository { get { return ComponentDataRepository.GetAll().OfType<DefaultComponentData>(); } }
+
+        public IQueryable<ContentComponentData> ContentComponentDataRepository { get { return ComponentDataRepository.GetAll().OfType<ContentComponentData>(); } }
 
         public ComponentDataManager(
             IIEMemoryCache cache,
-            IEfRepository<DefaultComponentData, int> defaultDataRepository,
-            IEfRepository<ContentComponentData, int> contentComponentDataRepository) 
+            IEfRepository<ComponentData, int> componentDataRepository) 
         {
             _cache = cache;
-            DefaultComponentDataRepository = defaultDataRepository;
-            ContentComponentDataRepository = contentComponentDataRepository;
+            ComponentDataRepository = componentDataRepository;
         }
 
         private string GetCacheName(string pageName) => $"ComponentDataManager_DefaultComponentDatas_{pageName}_";
@@ -45,9 +47,9 @@ namespace IEManageSystem.CMS.DomainModel.ComponentDatas
 
                 cacheEntity.SetPriority(CacheItemPriority.NeverRemove);
 
-                DefaultComponentDataRepository.NoTracking();
-                var componentDatas = DefaultComponentDataRepository.GetAllIncluding(e => e.SingleDatas).Where(e => e.Page.Name == pageName).ToList();
-                DefaultComponentDataRepository.Tracking();
+                ComponentDataRepository.NoTracking();
+                var componentDatas = ComponentDataRepository.GetAllIncluding(e => e.SingleDatas).OfType<DefaultComponentData>().Where(e => e.Page.Name == pageName).ToList();
+                ComponentDataRepository.Tracking();
 
                 return componentDatas;
             });
@@ -64,29 +66,54 @@ namespace IEManageSystem.CMS.DomainModel.ComponentDatas
 
         public void UpdateDefaultComponentData(PageBase page, List<DefaultComponentData> defaultComponentDatas) 
         {
-            var oldDatas = DefaultComponentDataRepository.GetAllIncluding(e => e.SingleDatas).Where(e => e.PageId == page.Id).ToList();
+            var oldDatas = ComponentDataRepository.GetAllIncluding(e => e.SingleDatas).OfType<DefaultComponentData>().Where(e => e.PageId == page.Id).ToList();
 
             oldDatas.ForEach(item => {
-                DefaultComponentDataRepository.Delete(item);
+                ComponentDataRepository.Delete(item);
             });
 
             defaultComponentDatas.ForEach(item =>
             {
                 item.Page = page;
-                DefaultComponentDataRepository.Insert(item);
+                ComponentDataRepository.Insert(item);
             });
 
             SetInvalidForCache(page.Name);
         }
 
+        public void UpdateContentComponentData(PageData pageData, List<ContentComponentData> contentComponentDatas)
+        {
+            var oldDatas = ComponentDataRepository.GetAllIncluding(e => e.SingleDatas).OfType<ContentComponentData>().Where(e => e.PageDataId == pageData.Id).ToList();
+
+            oldDatas.ForEach(item => {
+                ComponentDataRepository.Delete(item);
+            });
+
+            contentComponentDatas.ForEach(item =>
+            {
+                item.PageData = pageData;
+                ComponentDataRepository.Insert(item);
+            });
+        }
+
         public void DeleteDefaultComponentData(PageBase page) 
         {
-            var oldDatas = DefaultComponentDataRepository.GetAllIncluding(e=>e.SingleDatas).Where(e => e.PageId == page.Id).ToList();
+            var oldDatas = ComponentDataRepository.GetAllIncluding(e=>e.SingleDatas).OfType<DefaultComponentData>().Where(e => e.PageId == page.Id).ToList();
+
             oldDatas.ForEach(item => {
-                DefaultComponentDataRepository.Delete(item);
+                ComponentDataRepository.Delete(item);
             });
 
             SetInvalidForCache(page.Name);
+        }
+
+        public void DeleteContentComponentData(PageData post) 
+        {
+            var oldDatas = ComponentDataRepository.GetAllIncluding(e => e.SingleDatas).OfType<ContentComponentData>().Where(e => e.PageDataId == post.Id).ToList();
+
+            oldDatas.ForEach(item => {
+                ComponentDataRepository.Delete(item);
+            });
         }
     }
 }

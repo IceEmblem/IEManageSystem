@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace IEManageSystem.Repositorys.CMSRepositorys
@@ -28,6 +29,27 @@ namespace IEManageSystem.Repositorys.CMSRepositorys
             }
 
             return page;
+        }
+
+        public IQueryable<ContentPage> GetContentPages()
+        {
+            return Context.Set<ContentPage>();
+        }
+
+        public IQueryable<ContentPage> GetContentPages<TProperty>(Expression<Func<ContentPage, TProperty>> navigationPropertyPath)
+        {
+            return Context.Set<ContentPage>().Include(navigationPropertyPath);
+        }
+
+        public IQueryable<ContentPage> GetContentPages<TProperty, TThenProperty>(Expression<Func<ContentPage, IQueryable
+            <TProperty>>> navigationPropertyPath, Expression<Func<TProperty, TThenProperty>> thenNavigationPropertyPath)
+        {
+            return Context.Set<ContentPage>().Include(navigationPropertyPath).ThenInclude(thenNavigationPropertyPath);
+        }
+
+        public IQueryable<ContentPage> GetContentPagesIncludePermissionCollection() 
+        {
+            return Context.Set<ContentPage>().Include(e => e.ContentPagePermissionCollection).ThenInclude(e => e.ContentPagePermissions);
         }
     }
 }

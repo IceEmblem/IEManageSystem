@@ -5,6 +5,7 @@ using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.Repositorys;
 using IEManageSystem.Entitys.Authorization.Permissions;
+using IEManageSystem.Entitys.Authorization.Users;
 using IEManageSystem.Repositorys;
 using IEManageSystem.Web;
 using Microsoft.Extensions.Caching.Memory;
@@ -20,18 +21,14 @@ namespace IEManageSystem.CMS.DomainModel.Pages
     {
         public const string HomeName = "home";
 
-        private IEfRepository<DefaultComponentData, int> _defaultDataRepository { get; }
-
         private IIEMemoryCache _cache { get; }
 
-        public PageManager(IPageRepository pageRepository,
-            IEfRepository<DefaultComponentData, int> defaultDataRepository,
-            IIEMemoryCache cache,
-            PageComponentManager pageComponentManager
+        public PageManager(
+            IPageRepository pageRepository,
+            IIEMemoryCache cache
             )
         {
             PageRepository = pageRepository;
-            _defaultDataRepository = defaultDataRepository;
             _cache = cache;
         }
 
@@ -104,7 +101,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         {
             IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
 
-            return PageRepository.GetAll().OfType<ContentPage>().Where(e => e.ContentPagePermissionCollection.ContentPagePermissions.Any(e => e.IsManage && permissionIds.Contains(e.Id)));
+            // 如果用户拥有该页面管理权限
+            return PageRepository.GetAll().OfType<ContentPage>().Where(e => e.ContentPagePermissionCollection.ContentPagePermissions.Any(e => e.IsManage && permissionIds.Contains(e.PermissionId)));
         }
 
         /// <summary>
@@ -116,9 +114,10 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         {
             IEnumerable<int> permissionIds = permissions.Select(e => e.Id);
 
+            // 如果页面未启用查询权限 || 如果用户拥有该页面查询权限
             return PageRepository.GetAll().OfType<ContentPage>().Where(e => 
                 e.ContentPagePermissionCollection.IsEnableQueryPermission == false
-                || e.ContentPagePermissionCollection.ContentPagePermissions.Any(e => permissionIds.Contains(e.Id))
+                || e.ContentPagePermissionCollection.ContentPagePermissions.Any(e => !e.IsManage && permissionIds.Contains(e.PermissionId))
             );
         }
 
@@ -167,39 +166,45 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             return false;
         }
 
-        public void AddPage(PageBase page)
+        public void AddPage(PageBase page, User user)
         {
             if (PageRepository.GetAll().Any(e => e.Name == page.Name))
             {
                 throw new UserFriendlyException($"已存在名为{page.Name}的页面，请重新命名");
             }
 
+            page.Creator = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
+            page.LastUpdater = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
+
             PageRepository.Insert(page);
         }
 
-        public void UpdatePage(PageBase page) 
+        public void UpdatePage(PageBase page, User user) 
         {
+            if (PageRepository.GetAll().Any(e => e.Name == page.Name && e.Id != page.Id))
+            {
+                throw new UserFriendlyException($"已存在名为{page.Name}的页面，请重新命名");
+            }
+
             PageRepository.Update(page);
+
+            page.LastUpdater = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
 
             SetPageInvalidForCache(page.Name);
         }
 
-        public void UpdateContentPagePermission(string name, ContentPagePermissionCollection contentPagePeimissionCollection) 
+        public void UpdateContentPagePermission(PageBase page, ContentPagePermissionCollection contentPagePeimissionCollection, User user) 
         {
-            var page = PageRepository.GetPageOfAllIncludes(name);
-
-            if (page == null)
-            {
-                throw new UserFriendlyException("未找到页面");
-            }
-
             if (!(page is ContentPage))
             {
                 throw new UserFriendlyException("无法更改页面权限，请确保页面属于内容页");
             }
 
+            PageRepository.GetContentPagesIncludePermissionCollection().FirstOrDefault(e => e.Id == page.Id);
+
             var contentPage = (ContentPage)page;
             contentPage.ContentPagePermissionCollection = contentPagePeimissionCollection;
+            contentPage.LastUpdater = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
 
             SetPageInvalidForCache(page.Name);
         }
@@ -211,7 +216,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
                 throw new UserFriendlyException("不能删除主页");
             }
 
-            // 加载 page 聚会所有实体
+            // 加载 page 聚和所有实体
             PageRepository.GetPageOfAllIncludes(page.Name);
 
             // 删除页面

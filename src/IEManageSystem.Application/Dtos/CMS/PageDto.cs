@@ -17,6 +17,20 @@ namespace IEManageSystem.Dtos.CMS
 
         public string Description { get; set; }
 
+        public string Field1Name { get; set; }
+
+        public string Field2Name { get; set; }
+
+        public string Field3Name { get; set; }
+
+        public string Field4Name { get; set; }
+
+        public string Field5Name { get; set; }
+
+        public EntityEditDto Creator { get; set; }
+
+        public EntityEditDto LastUpdater { get; set; }
+
         /// <summary>
         /// StaticPage || ContentPage
         /// </summary>
@@ -31,5 +45,7 @@ namespace IEManageSystem.Dtos.CMS
         public void SetContentPage() => PageType = "ContentPage";
 
         public bool IsContentPage() => PageType == "ContentPage";
+
+        public PageDto() { }
     }
 }

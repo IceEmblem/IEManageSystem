@@ -51,21 +51,7 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         }
 
         /// <summary>
-        /// 是否拥有访问权限
-        /// </summary>
-        /// <param name="pageName"></param>
-        /// <returns></returns>
-        private bool IsCanAccess(string pageName)
-        {
-            IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
-            var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
-
-            return _pageManager.IsCanQueryPost(pageName, permissions) ||
-                _checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions);
-        }
-
-        /// <summary>
-        /// 获取用户有文章访问权限的页面
+        /// 获取用户可以访问或者可以管理的文章的页面
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -76,18 +62,27 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
 
             IEnumerable<ContentPage> pages = null;
-            // 如果用户具有 Page域 的管理权限，则用户具有所有页面的管理权限
-            if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions))
+
+            if (input.QueryOrManage)
             {
-                pages = _pageManager.PageRepository.GetAll().OfType<ContentPage>().ToList();
-            }
-            else
-            {
-                if (input.QueryOrManage)
+                if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions))
+                {
+                    pages = _pageManager.PageRepository.GetAll().OfType<ContentPage>().ToList();
+                }
+                else
                 {
                     pages = _pageManager.GetPagesForManagePermission(permissions);
                 }
-                else 
+
+            }
+            else 
+            {
+                if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, true, permissions) ||
+                    _checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions))
+                {
+                    pages = _pageManager.PageRepository.GetAll().OfType<ContentPage>().ToList();
+                }
+                else
                 {
                     pages = _pageManager.GetPagesForQueryPermission(permissions);
                 }
@@ -95,15 +90,7 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
 
             List<PageDto> pageDtos = new List<PageDto>();
             foreach (var page in pages) {
-                var pageDto = new PageDto();
-
-                pageDto.Id = page.Id;
-                pageDto.Name = page.Name;
-                pageDto.DisplayName = page.DisplayName;
-                pageDto.Description = page.Description;
-
-                pageDto.SetContentPage();
-                pageDtos.Add(pageDto);
+                pageDtos.Add(CreatePageDtos(page));
             }
 
             return new GetPagesOfUserCanAccessPostOutput()
@@ -112,14 +99,47 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             };
         }
 
+        private PageDto CreatePageDtos(PageBase page)
+        {
+            var pageDto = new PageDto();
+            pageDto.Id = page.Id;
+            pageDto.Name = page.Name;
+            pageDto.DisplayName = page.DisplayName;
+            pageDto.Description = page.Description;
+            pageDto.Field1Name = page.Field1Name;
+            pageDto.Field2Name = page.Field2Name;
+            pageDto.Field3Name = page.Field3Name;
+            pageDto.Field4Name = page.Field4Name;
+            pageDto.Field5Name = page.Field5Name;
+            pageDto.Creator = _objectMapper.Map<EntityEditDto>(page.Creator);
+            pageDto.LastUpdater = _objectMapper.Map<EntityEditDto>(page.LastUpdater);
+
+            if (page is StaticPage)
+            {
+                pageDto.SetStaticPage();
+            }
+            else if (page is ContentPage)
+            {
+                pageDto.SetContentPage();
+
+                var contentPage = (ContentPage)page;
+                pageDto.ContentPagePeimissionCollection =
+                    contentPage.ContentPagePermissionCollection != null ?
+                        _objectMapper.Map<ContentPagePeimissionCollectionDto>(contentPage.ContentPagePermissionCollection)
+                        : null;
+            }
+
+            return pageDto;
+        }
+
+        /// <summary>
+        /// 获取用户可以访问的文章列表
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<GetPageDatasOutput> GetPageDatas([FromBody] Dto.GetPageDatasInput input)
         {
-            //if (!string.IsNullOrWhiteSpace(input.PageName) && !IsCanAccess(input.PageName))
-            //{
-            //    throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
-            //}
-
             IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
             var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
 
@@ -130,8 +150,10 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             appServiceInput.Top = input.Top;
             appServiceInput.Tags = input.Tags;
             appServiceInput.Orderby = input.Orderby;
-            // 如果用户具有 Page域 的管理权限，则用户具有所有页面的管理权限
-            if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions))
+            appServiceInput.PageName = input.PageName;
+
+            // 如果用户具有 Page 域 的权限，则用户具有所有页面的访问权限
+            if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, true, permissions))
             {
                 appServiceInput.EnablePageFilter = false;
             }
@@ -139,19 +161,17 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             {
                 appServiceInput.EnablePageFilter = true;
 
-                if (!string.IsNullOrWhiteSpace(input.PageName))
-                {
-                    appServiceInput.PageIds = _pageManager.GetPagesForQueryPermission(permissions).Where(e => e.Name == input.PageName).Select(e => e.Id).ToList();
-                }
-                else 
-                {
-                    appServiceInput.PageIds = _pageManager.GetPagesForQueryPermission(permissions).Select(e => e.Id).ToList();
-                }
+                appServiceInput.PageIds = _pageManager.GetPagesForQueryPermission(permissions).Select(e => e.Id).ToList();
             }
 
             return _pageDataQueryAppService.GetPageDatas(appServiceInput);
         }
 
+        /// <summary>
+        /// 获取文章
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<GetPageDataOutput> GetPageData([FromBody] GetPageDataInput input)
         {
@@ -165,9 +185,17 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
                 }
             }
 
-            if (!IsCanAccess(input.PageName))
+            IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
+            var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
+
+            if (_pageManager.IsCanQueryPost(input.PageName, permissions) ||
+                _checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, true, permissions))
             {
-                throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
+                input.IsCheckCreator = false;
+            }
+            else 
+            {
+                input.IsCheckCreator = true;
             }
 
             return _pageDataQueryAppService.GetPageData(input);

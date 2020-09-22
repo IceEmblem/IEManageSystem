@@ -3,6 +3,7 @@ using Abp.UI;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
+using IEManageSystem.Entitys.Authorization.Users;
 using IEManageSystem.Repositorys;
 using System;
 using System.Collections.Generic;
@@ -16,96 +17,70 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
     {
         public IEfRepository<PageData, int> PostRepository { get; set; }
 
-        public IEfRepository<ContentComponentData, int> ComponentDataRepository { get; set; }
-
-        public IPageRepository PageRepository { get; }
-
         public PageDataManager(
-            IEfRepository<PageData, int> repository,
-            IPageRepository pageRepository)
+            IEfRepository<PageData, int> repository)
         {
             PostRepository = repository;
-            PageRepository = pageRepository;
         }
 
-        public void AddPageData(string pageName, PageData pageData)
+        public void AddPageData(PageBase page, PageData pageData, User user)
         {
-            if (PostRepository.Count(e => e.Name == pageData.Name && e.Page.Name == pageName) > 0) 
+            if (PostRepository.Count(e => e.Name == pageData.Name && e.Page.Name == page.Name) > 0) 
             {
                 throw new UserFriendlyException("文章名称已重复");
             }
 
-            var page = PageRepository.GetAll().OfType<ContentPage>().FirstOrDefault(e => e.Name == pageName);
-
-            if (page == null) {
-                throw new UserFriendlyException("找不到要添加的文章页面");
-            }
-
             pageData.Page = page;
+            pageData.Creator = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
+            pageData.LastUpdater = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
 
             PostRepository.Insert(pageData);
         }
 
-        public void UpdatePageData(string pageName, PageData pageData) {
-            var posts = PostRepository.GetAllList(e=>e.Name == pageData.Name && e.Page.Name == pageName);
-            if (posts.Count > 1 || (posts.Count == 1 && posts[0].Id != pageData.Id)) {
+        /// <summary>
+        /// 更新文章最后修改者
+        /// </summary>
+        public void UpdatePageDataLastUpdater(PageData pageData, User user) 
+        {
+            pageData.LastUpdater = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
+        }
+
+        public void UpdatePageData(PageBase page, PageData pageData, User user) {
+            var posts = PostRepository.GetAllList(e=>e.Name == pageData.Name && e.Page.Name == page.Name);
+            if (posts.Count > 1 || (posts.Count == 1 && posts[0].Id != pageData.Id)) 
+            {
                 throw new UserFriendlyException("文章名称已重复");
             }
+
+            pageData.LastUpdater = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
 
             PostRepository.Update(pageData);
         }
 
-        public void DeletePageData(string pageName, string pageDataName)
+        public void UpdatePageDataOfCreator(PageBase page, PageData pageData, User user)
         {
-            var pageData = PostRepository.GetAllIncluding(new Expression<Func<PageData, object>>[] {
-                    e=>e.Tags
-                }).FirstOrDefault(e => e.Name == pageDataName && e.Page.Name == pageName);
-
-            if (pageData == null)
-            {
-                throw new UserFriendlyException("找不到要删除的文章");
+            if (pageData.Creator.EditorId != user.Id) {
+                throw new UserFriendlyException("你不是文章的创建者，没有权限修改文章");
             }
 
-            Expression<Func<ContentComponentData, object>>[] propertySelectors = {
-                e=>e.SingleDatas
-            };
-            ComponentDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageDataId == pageData.Id).ToList();
-            ComponentDataRepository.Delete(item => item.PageDataId == pageData.Id);
+            UpdatePageData(page, pageData, user);
+        }
+
+        public void DeletePageData(PageData pageData)
+        {
+            PostRepository.GetAllIncluding(e => e.Tags).First(e => e.Id == pageData.Id);
 
             PostRepository.Delete(pageData);
         }
 
-        /// <summary>
-        /// 删除页面的所有文章
-        /// </summary>
-        public void DeletePagePosts(PageBase page) 
+        public void DeletePageDataOrCreator(PageData pageData, User user)
         {
-            IEnumerable<int> postIds = PostRepository.GetAll().Where(e => e.PageId == page.Id).Select(e => e.Id);
-
-            Expression<Func<ContentComponentData, object>>[] propertySelectors = {
-                e=>e.SingleDatas
-            };
-            ComponentDataRepository.GetAllIncluding(propertySelectors).Where(e => e.PageDataId.HasValue && postIds.Contains(e.PageDataId.Value)).ToList();
-            ComponentDataRepository.Delete(item => item.PageDataId.HasValue && postIds.Contains(item.PageDataId.Value));
-
-            PostRepository.Delete(e=> postIds.Contains(e.Id));
-        }
-
-        public void SetContentComponentDatas(string pageName, string pageDataName, List<ContentComponentData> contentComponentDatas)
-        {
-            PageData pageData = PostRepository.FirstOrDefault(e => e.Page.Name == pageName && e.Name == pageDataName);
-
-            Expression<Func<ContentComponentData, object>>[] propertySelectors = { 
-                e=>e.SingleDatas
-            };
-            ComponentDataRepository.GetAllIncluding(propertySelectors).Where(e=>e.PageDataId == pageData.Id).ToList();
-            ComponentDataRepository.Delete(item => item.PageDataId == pageData.Id);
-
-            contentComponentDatas.ForEach(item =>
+            if (pageData.Creator.EditorId != user.Id)
             {
-                item.PageData = pageData;
-                ComponentDataRepository.Insert(item);
-            });
+                throw new UserFriendlyException("你不是文章的创建者，没有权限删除文章");
+            }
+
+            DeletePageData(pageData);
         }
     }
 }

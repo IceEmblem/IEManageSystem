@@ -16,10 +16,6 @@ namespace IEManageSystem.Application.Tests.Services.Pages
         public PageQueryAppServiceTest()
         {
             _appService = LocalIocManager.Resolve<IPageQueryAppService>();
-
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageComponentBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
         }
 
         [Fact]
@@ -47,7 +43,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             Assert.True(output.PageComponents.FirstOrDefault(e => e.Name == "ComponentName1").PageComponentSettings[0].SingleDatas.Count > 0);
 
             Assert.True(output.DefaultComponentDatas.Count > 0);
-            Assert.True(output.DefaultComponentDatas[0].SingleDatas.Count > 0);
+            Assert.True(output.DefaultComponentDatas.FirstOrDefault(e=>e.Sign == "ContentPage1_Component1Sign").SingleDatas.Count > 0);
         }
     }
 }

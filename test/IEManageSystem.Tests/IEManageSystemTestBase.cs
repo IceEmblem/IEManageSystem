@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Abp.Runtime.Session;
 using Abp.TestBase;
+using Abp.TestBase.Runtime.Session;
 using IEManageSystem.EntityFrameworkCore;
 using IEManageSystem.Tests.TestDatas;
+using Microsoft.EntityFrameworkCore;
 
 namespace IEManageSystem.Tests
 {
@@ -10,7 +13,19 @@ namespace IEManageSystem.Tests
     {
         public IEManageSystemTestBase()
         {
-            UsingDbContext(context => new TestDataBuilder(context).Build());
+            UsingDbContext(context => new DBBuilder(context).Build());
+        }
+
+        protected virtual void ApplyAbpSession() {
+            var testAbpSession = (TestAbpSession)Resolve<IAbpSession>();
+            testAbpSession.UserId = 1;
+            testAbpSession.TenantId = 1;
+        }
+
+        protected virtual void ReloadDB() {
+            UsingDbContext(context => context.Database.EnsureDeleted());
+
+            UsingDbContext(context => new DBBuilder(context).Build());
         }
 
         protected virtual void UsingDbContext(Action<IEManageSystemDbContext> action)

@@ -80,7 +80,7 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             ContentComponentData componentData = null;
             if (post != null) 
             {
-                componentData = _componentDataManager.ContentComponentDataRepository.GetAllIncluding(e => e.SingleDatas).FirstOrDefault(e => e.PageDataId == post.Id && e.Sign == contentComponentDataSign);
+                componentData = _componentDataManager.ComponentDataRepository.GetAllIncluding(e => e.SingleDatas).OfType<ContentComponentData>().FirstOrDefault(e => e.PageDataId == post.Id && e.Sign == contentComponentDataSign);
             }
 
             var actuator = _actuatorFactory.GetActuator(logic.Name);

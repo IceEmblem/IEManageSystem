@@ -11,6 +11,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 {
     public class ContentPage : PageBase
     {
+        public const  string DiscriminatorName = "ContentPage";
+
         public ContentPage(string name) : base(name)
         {
             ContentPagePermissionCollection = new ContentPagePermissionCollection();

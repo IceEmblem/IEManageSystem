@@ -1,5 +1,8 @@
 ﻿using Abp.Application.Services;
+using Abp.Authorization;
 using Abp.ObjectMapping;
+using Abp.Runtime.Session;
+using Abp.UI;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.Dtos.CMS;
@@ -22,10 +25,13 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         private IEfRepository<ContentComponentData, int> _componentDataRepository { get; set; }
 
+        private IAbpSession _abpSession { get; }
+
         public PageDataQueryAppService(
             IObjectMapper objectMapper,
             PageDataManager pageDataManager,
-            IEfRepository<ContentComponentData, int> componentDataRepository
+            IEfRepository<ContentComponentData, int> componentDataRepository,
+            IAbpSession abpSession
             )
         {
             _objectMapper = objectMapper;
@@ -33,6 +39,8 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             _pageDataManager = pageDataManager;
 
             _componentDataRepository = componentDataRepository;
+
+            _abpSession = abpSession;
         }
 
         /// <summary>
@@ -45,11 +53,16 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             IQueryable<PageData> pageDatas = null;
             if (input.EnablePageFilter)
             {
-                pageDatas = _pageDataManager.PostRepository.GetAllIncluding(e=>e.Tags).Where(e => input.PageIds.Contains(e.PageId));
+                // 除了可访问的页面文章之外，还有用户发表过的文章
+                pageDatas = _pageDataManager.PostRepository.GetAllIncluding(e => e.Tags).Where(e => input.PageIds.Contains(e.PageId) || (_abpSession.UserId != null && e.Creator.EditorId == _abpSession.UserId));
             }
             else
             {
                 pageDatas = _pageDataManager.PostRepository.GetAllIncluding(e => e.Tags);
+            }
+
+            if (!string.IsNullOrWhiteSpace(input.PageName)) {
+                pageDatas = pageDatas.Where(e => e.Page.Name == input.PageName);
             }
 
             if (!string.IsNullOrWhiteSpace(input.SearchKey)) {
@@ -94,6 +107,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         public GetPageDataOutput GetPageData(GetPageDataInput input)
         {
             var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Page.Name == input.PageName && e.Name == input.PageDataName);
+
+            if (input.IsCheckCreator == true && _abpSession.UserId != pageData.Creator.EditorId) {
+                throw new AbpAuthorizationException("未授权操作");
+            }
+
             pageData.ToClick();
 
             Expression<Func<ContentComponentData, object>>[] propertySelectors = {

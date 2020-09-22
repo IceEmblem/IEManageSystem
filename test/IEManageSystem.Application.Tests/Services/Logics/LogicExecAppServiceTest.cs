@@ -9,6 +9,7 @@ using Xunit;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Abp.UI;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 
 namespace IEManageSystem.Application.Tests.Services.Logics
 {
@@ -18,16 +19,6 @@ namespace IEManageSystem.Application.Tests.Services.Logics
 
         public LogicExecAppServiceTest() {
             _logicExecAppService = LocalIocManager.Resolve<ILogicExecAppService>();
-        }
-
-        private void ReloadDB()
-        {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageComponentBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
-            UsingDbContext(context => new LogicBuilder(context).Build());
         }
 
         [Fact]
@@ -45,7 +36,7 @@ namespace IEManageSystem.Application.Tests.Services.Logics
                 Request = ""
             });
 
-            var componentData = dbContext.ContentComponentDatas.Include(e => e.SingleDatas).FirstOrDefault(e => e.Sign == "ContentPage1_Component1Sign");
+            var componentData = dbContext.ComponentDatas.OfType<ContentComponentData>().Include(e => e.SingleDatas).FirstOrDefault(e => e.Sign == "ContentPage1_Component1Sign");
             Assert.True(componentData.SingleDatas.ElementAt(0).Field1 == "1");
         }
 

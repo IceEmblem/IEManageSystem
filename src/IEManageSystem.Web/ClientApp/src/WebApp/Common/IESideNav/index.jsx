@@ -56,7 +56,7 @@ export default class IESideNav extends React.Component {
         return (
             <Menu
                 // defaultSelectedKeys={['1']}
-                defaultOpenKeys={['Personal', 'AuthorizeManage']}
+                defaultOpenKeys={['Personal']}
                 className={this.props.className}
                 mode="inline"
                 theme="dark"

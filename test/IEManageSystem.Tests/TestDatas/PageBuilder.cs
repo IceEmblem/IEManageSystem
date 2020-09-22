@@ -11,7 +11,7 @@ using System.Text;
 namespace IEManageSystem.Tests.TestDatas
 {
     /// <summary>
-    /// 运行该生成请先运行 PermissionBuilder
+    /// 运行该生成请先运行 PermissionBuilder, UserBuilder
     /// </summary>
     public class PageBuilder
     {
@@ -24,6 +24,7 @@ namespace IEManageSystem.Tests.TestDatas
 
         public void Build()
         {
+            var user = _context.Users.FirstOrDefault(e => e.Name == "User1");
             var permission = _context.Permissions.FirstOrDefault(e=>e.Name == "Permission1");
 
             var contentPage = new ContentPage("ContentPage1Name")
@@ -36,12 +37,14 @@ namespace IEManageSystem.Tests.TestDatas
                         new ContentPagePermission(){ Permission = permission, IsManage = false },
                         new ContentPagePermission(){ Permission = permission, IsManage = true }
                     },
-                }
+                },
+                Creator = new CMS.DomainModel.EntityEdit(user.Id, user.Name, user.HeadSculpture),
+                LastUpdater = new CMS.DomainModel.EntityEdit(user.Id, user.Name, user.HeadSculpture),
             };
 
             _context.Pages.Add(contentPage);
 
-            _context.DefaultComponentDatas.AddRange(new List<DefaultComponentData>() {
+            _context.ComponentDatas.AddRange(new List<DefaultComponentData>() {
                 new DefaultComponentData(){
                     Sign = "ContentPage1_Component1Sign",
                     SingleDatas = new List<SingleComponentData>(){
@@ -57,6 +60,8 @@ namespace IEManageSystem.Tests.TestDatas
             {
                 DisplayName = "测试内容页",
                 Description = "用于测试的数据",
+                Creator = new CMS.DomainModel.EntityEdit(user.Id, user.Name, user.HeadSculpture),
+                LastUpdater = new CMS.DomainModel.EntityEdit(user.Id, user.Name, user.HeadSculpture),
             };
 
             _context.Pages.Add(staticPage);

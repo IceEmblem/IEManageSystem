@@ -50,18 +50,9 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             _pageDataManager = pageDataManager;
         }
 
-        /// <summary>
-        /// 是否拥有管理权限
-        /// </summary>
-        /// <param name="pageName"></param>
-        /// <returns></returns>
-        private bool IsCanManage(string pageName) 
-        {
+        private IEnumerable<Permission> GetUserPermissions() { 
             IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
-            var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
-
-            return _pageManager.IsCanManagePost(pageName, permissions) || 
-                _checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions);
+            return _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
         }
 
         /// <summary>
@@ -81,45 +72,59 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         [HttpPost]
         public ActionResult<AddPageDataOutput> AddPageData([FromBody] AddPageDataInput input)
         {
-            if (!IsCanManage(input.PageName))
+            if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, GetUserPermissions())
+                || _pageManager.IsCanManagePost(input.PageName, GetUserPermissions())) 
             {
-                throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
+                return _pageDataManageAppService.AddPageData(input);
             }
 
-            return _pageDataManageAppService.AddPageData(input);
+            throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
         }
 
         [HttpPost]
         public ActionResult<UpdatePageDataOutput> UpdatePageData([FromBody] UpdatePageDataInput input)
         {
-            if (!IsCanManage(input.PageName))
-            {
-                throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
+            if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, GetUserPermissions())) {
+                return _pageDataManageAppService.UpdatePageData(input);
             }
 
-            return _pageDataManageAppService.UpdatePageData(input);
+            if (_pageManager.IsCanManagePost(input.PageName, GetUserPermissions())) {
+                return _pageDataManageAppService.UpdatePageDataOfCreator(input);
+            }
+
+            throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
         }
 
         [HttpPost]
         public ActionResult<DeletePageDataOutput> DeletePageData([FromBody] DeletePageDataInput input)
         {
-            if (!IsCanManage(input.PageName))
+            if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, GetUserPermissions()))
             {
-                throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
+                return _pageDataManageAppService.DeletePageData(input);
             }
 
-            return _pageDataManageAppService.DeletePageData(input);
+            if (_pageManager.IsCanManagePost(input.PageName, GetUserPermissions()))
+            {
+                return _pageDataManageAppService.DeletePageDataOfCreator(input);
+            }
+
+            throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
         }
 
         [HttpPost]
         public ActionResult<UpdateComponentDataOutput> UpdateComponentData([FromBody] UpdateComponentDataInput input)
         {
-            if (!IsCanManage(input.PageName))
+            if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, GetUserPermissions()))
             {
-                throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
+                return _pageDataManageAppService.UpdateComponentData(input);
             }
 
-            return _pageDataManageAppService.UpdateComponentData(input);
+            if (_pageManager.IsCanManagePost(input.PageName, GetUserPermissions()))
+            {
+                return _pageDataManageAppService.UpdateComponentDataOfCreator(input);
+            }
+
+            throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
         }
 
         /// <summary>

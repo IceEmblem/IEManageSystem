@@ -5,16 +5,19 @@ using System.Linq.Expressions;
 using System.Text;
 using Abp.Domain.Repositories;
 using Abp.ObjectMapping;
+using Abp.Runtime.Session;
 using Abp.UI;
 using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.Attributes;
+using IEManageSystem.CMS.DomainModel;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
 using IEManageSystem.Dtos.CMS;
+using IEManageSystem.Entitys.Authorization.Users;
 using IEManageSystem.Repositorys;
 using IEManageSystem.Services.ManageHome.CMS.Pages.Dto;
 
@@ -27,29 +30,34 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         private PageManager _pageManager { get; }
 
-        private PageComponentManager _pageComponentManager { get; }
+        private UserManager _userManager { get; }
 
-        private ComponentDataManager _componentDataManager { get; }
+        private IAbpSession _abpSession { get; }
 
-        private PageDataManager _pageDataManager { get; }
+        private UpdatePageComponentService _updatePageComponentService { get; set; }
+
+        private DeletePageService _deletePageService { get; set; }
 
         public PageManageAppService(
             PageManager pageManager,
             IObjectMapper objectMapper,
-            PageComponentManager pageComponentManager,
-            ComponentDataManager componentDataManager,
-            PageDataManager pageDataManager
+            UserManager userManager,
+            IAbpSession abpSession,
+            UpdatePageComponentService updatePageComponentService,
+            DeletePageService deletePageService
             )
         {
             _pageManager = pageManager;
 
             _objectMapper = objectMapper;
 
-            _pageComponentManager = pageComponentManager;
+            _userManager = userManager;
 
-            _componentDataManager = componentDataManager;
+            _abpSession = abpSession;
 
-            _pageDataManager = pageDataManager;
+            _updatePageComponentService = updatePageComponentService;
+
+            _deletePageService = deletePageService;
         }
 
         public AddPageOutput AddPage(AddPageInput input)
@@ -65,10 +73,16 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             }
 
             page.DisplayName = input.DisplayName;
-
             page.Description = input.Description;
+            page.Field1Name = input.Field1Name;
+            page.Field2Name = input.Field2Name;
+            page.Field3Name = input.Field3Name;
+            page.Field4Name = input.Field4Name;
+            page.Field5Name = input.Field5Name;
 
-            _pageManager.AddPage(page);
+            var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
+
+            _pageManager.AddPage(page, editor);
 
             return new AddPageOutput();
         }
@@ -84,14 +98,28 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
             page.DisplayName = input.DisplayName;
             page.Description = input.Description;
+            page.Field1Name = input.Field1Name;
+            page.Field2Name = input.Field2Name;
+            page.Field3Name = input.Field3Name;
+            page.Field4Name = input.Field4Name;
+            page.Field5Name = input.Field5Name;
 
-            _pageManager.UpdatePage(page);
+            var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
+
+            _pageManager.UpdatePage(page, editor);
 
             return new UpdatePageOutput();
         }
 
         public UpdateContentPagePermissionOutput UpdateContentPagePermission(UpdateContentPagePermissionInput input) 
         {
+            var page = _pageManager.PageRepository.FirstOrDefault(item => item.Name == input.Name);
+
+            if (page == null)
+            {
+                throw new UserFriendlyException("未找到页面");
+            }
+
             ContentPagePermissionCollection contentPagePeimissionCollection = new ContentPagePermissionCollection();
 
             contentPagePeimissionCollection.IsEnableQueryPermission = input.ContentPagePeimissionCollection.IsEnableQueryPermission;
@@ -105,7 +133,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 });
             }
 
-            _pageManager.UpdateContentPagePermission(input.Name, contentPagePeimissionCollection);
+            var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
+
+            _pageManager.UpdateContentPagePermission(page, contentPagePeimissionCollection, editor);
 
             return new UpdateContentPagePermissionOutput();
         }
@@ -119,17 +149,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 throw new UserFriendlyException("未找到页面");
             }
 
-            // 删除页面
-            _pageManager.DeletePage(page);
-
-            // 删除所有文章
-            _pageDataManager.DeletePagePosts(page);
-
-            // 删除组件
-            _pageComponentManager.DeletePageComponents(page);
-
-            // 删除默认数据
-            _componentDataManager.DeleteDefaultComponentData(page);
+            _deletePageService.DeletePage(page);
 
             return new DeletePageOutput();
         }
@@ -155,9 +175,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
             var page = _pageManager.PageRepository.FirstOrDefault(e => e.Name == input.Name);
 
-            _pageComponentManager.UpdatePageComponents(page, pageComponents);
+            var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
 
-            _componentDataManager.UpdateDefaultComponentData(page, defaultComponentDatas);
+            _updatePageComponentService.UpdatePageComponents(page, pageComponents, defaultComponentDatas, editor);
 
             return new UpdatePageComponentOutput();
         }

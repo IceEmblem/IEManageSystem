@@ -21,16 +21,8 @@ namespace IEManageSystem.Application.Tests.Services.Pages
         private IPageManageAppService _appService { get; set; }
 
         public PageManageAppServiceTest() {
+            ApplyAbpSession();
             _appService = Resolve<IPageManageAppService>();
-        }
-
-        private void ReloadDB() {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PermissionBuilder(context).Build());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageComponentBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
         }
 
         [Fact]

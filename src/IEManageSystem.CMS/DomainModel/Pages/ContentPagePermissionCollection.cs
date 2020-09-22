@@ -19,7 +19,12 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         public int ContentPageId { get; set; }
 
         public ContentPage ContentPage { get; set; }
-        
+
+        /// <summary>
+        /// 是否可以管理该页面的文章，只有拥有管理权限才可以通过
+        /// </summary>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
         public bool IsCanManagePost(IEnumerable<Permission> permissions) 
         {
             foreach (var item in permissions) {
@@ -31,6 +36,11 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             return false;
         }
 
+        /// <summary>
+        /// 是否可以访问该页面的文章，只有未只有查询权限或者用户拥有查询权限才可访问（拥有管理权限不行）
+        /// </summary>
+        /// <param name="permissions"></param>
+        /// <returns></returns>
         public bool IsCanQueryPost(IEnumerable<Permission> permissions) 
         {
             if (!IsEnableQueryPermission) {
@@ -39,7 +49,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
             foreach (var item in permissions)
             {
-                if (ContentPagePermissions.Any(e => e.PermissionId == item.Id))
+                if (ContentPagePermissions.Any(e => e.PermissionId == item.Id && e.IsManage == false))
                 {
                     return true;
                 }

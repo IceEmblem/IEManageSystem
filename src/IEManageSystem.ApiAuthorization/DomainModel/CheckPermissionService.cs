@@ -34,6 +34,13 @@ namespace IEManageSystem.ApiAuthorization.DomainModel
             return IsAllowAccess(apiScopeName, isQueryAction, permissions);
         }
 
+        /// <summary>
+        /// 检查是否有权限访问该域
+        /// </summary>
+        /// <param name="apiScopeName">域名称</param>
+        /// <param name="isQueryAction">True：查询域，具有管理域或查询域权限都可通过，false：管理域，只有具有管理域权限才可通过检查</param>
+        /// <param name="permissions">当前用户用户的权限</param>
+        /// <returns></returns>
         public bool IsAllowAccess(string apiScopeName, bool isQueryAction, IEnumerable<Permission> permissions) 
         {
             // 获取要访问的Api域
@@ -48,7 +55,7 @@ namespace IEManageSystem.ApiAuthorization.DomainModel
 
             if (isQueryAction == true)
             {
-                return apiScope.ApiQueryScope.IsAllowAccess(permissions);
+                return apiScope.ApiQueryScope.IsAllowAccess(permissions) || apiScope.ApiManageScope.IsAllowAccess(permissions);
             }
 
             return apiScope.ApiManageScope.IsAllowAccess(permissions);

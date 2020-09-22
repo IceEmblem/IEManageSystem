@@ -16,39 +16,36 @@ namespace IEManageSystem.Configures.CMS
             builder.HasData(
                 new
                 {
-                    Id = 101,
-                    Name = "PCGame",
-                    DisplayName = "主机游戏",
-                    CompositeMenuId = 3,
+                    Id = 2,
+                    Name = "Home",
+                    DisplayName = "首页",
+                    Icon = "oi-home",
+                    CompositeMenuId = 1,
                     RootMenuId = 1,
-                    Discriminator = "LeafMenu"
+                    Discriminator = "LeafMenu",
+                    PageName = "Home"
                 },
                 new
                 {
-                    Id = 102,
-                    Name = "PhoneGame",
-                    DisplayName = "手机游戏",
-                    CompositeMenuId = 3,
+                    Id = 3,
+                    Name = "PostList",
+                    DisplayName = "文章列表",
+                    Icon = "oi-dial",
+                    CompositeMenuId = 1,
                     RootMenuId = 1,
-                    Discriminator = "LeafMenu"
+                    Discriminator = "LeafMenu",
+                    PageName = "PostList",
                 },
                 new
                 {
-                    Id = 103,
-                    Name = "Web",
-                    DisplayName = "站点技术",
-                    CompositeMenuId = 4,
+                    Id = 4,
+                    Name = "Chart",
+                    DisplayName = "图标演示",
+                    Icon = "oi-document",
+                    CompositeMenuId = 1,
                     RootMenuId = 1,
-                    Discriminator = "LeafMenu"
-                },
-                new
-                {
-                    Id = 104,
-                    Name = "Desktop",
-                    DisplayName = "桌面开发",
-                    CompositeMenuId = 4,
-                    RootMenuId = 1,
-                    Discriminator = "LeafMenu"
+                    Discriminator = "LeafMenu",
+                    PageName = "Chart",
                 });
         }
     }

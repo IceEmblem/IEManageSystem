@@ -67,13 +67,13 @@ export default class ResourceChildList extends React.Component {
                                 (pageIndex, pageSize, searchKey) => this.freshenResources()
                             }
                             addResource={
-                                (resource) => this.props.addResource(this.state.previewResource, resource, this.props.curTab.value)
+                                (resource) => this.props.addResource(this.state.previewResource, resource, this.state.curTab.value)
                             }
                             updateResource={
-                                (resource) => this.props.updateResource(this.state.previewResource, resource, this.props.curTab.value)
+                                (resource) => this.props.updateResource(this.state.previewResource, resource, this.state.curTab.value)
                             }
                             deleteResource={
-                                (resource) => this.props.deleteResource(this.state.previewResource, resource, this.props.curTab.value)
+                                (resource) => this.props.deleteResource(this.state.previewResource, resource, this.state.curTab.value)
                             }
                             hideAdd={this.props.hideAdd}
                             hideEdit={this.props.hideEdit}

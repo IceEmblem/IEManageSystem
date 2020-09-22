@@ -41,7 +41,6 @@ namespace IEManageSystem.EntityFrameworkCore
             // 配置CMS
             modelBuilder.ApplyConfiguration(new PageBaseConfigure());
             modelBuilder.ApplyConfiguration(new StaticPageConfigure());
-            modelBuilder.ApplyConfiguration(new ContentPageConfigure());
             modelBuilder.ApplyConfiguration(new ContentPagePeimissionCollectionConfigure());
             modelBuilder.ApplyConfiguration(new PageComponentConfigure());
 
@@ -52,8 +51,6 @@ namespace IEManageSystem.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new CompositeMenuConfigure());
 
             modelBuilder.ApplyConfiguration(new ComponentDataConfigure());
-            modelBuilder.ApplyConfiguration(new DefaultComponentDataConfigure());
-            modelBuilder.ApplyConfiguration(new ContentComponentDataConfigure());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -70,10 +67,6 @@ namespace IEManageSystem.EntityFrameworkCore
 
         public DbSet<PageBase> Pages { get; set; }
 
-        public DbSet<StaticPage> StaticPages { get; set; }
-
-        public DbSet<ContentPage> ContentPages { get; set; }
-
         public DbSet<PageComponent> PageComponents { get; set; }
 
         public DbSet<MenuBase> Menus { get; set; }
@@ -81,10 +74,6 @@ namespace IEManageSystem.EntityFrameworkCore
         public DbSet<PageData> PageDatas { get; set; }
 
         public DbSet<ComponentData> ComponentDatas { get; set; }
-
-        public DbSet<ContentComponentData> ContentComponentDatas { get; set; }
-
-        public DbSet<DefaultComponentData> DefaultComponentDatas { get; set; }
 
         public DbSet<SiteSetting> SiteSettings { get; set; }
 

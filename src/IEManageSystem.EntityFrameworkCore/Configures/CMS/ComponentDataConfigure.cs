@@ -12,6 +12,7 @@ namespace IEManageSystem.Configures.CMS
         public void Configure(EntityTypeBuilder<ComponentData> builder)
         {
             builder.HasIndex(e => e.Sign);
+            builder.HasDiscriminator(e => e.Discriminator).HasValue<DefaultComponentData>("DefaultComponentData").HasValue<ContentComponentData>("ContentComponentData");
         }
     }
 }

@@ -7,6 +7,8 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 {
     public class StaticPage : PageBase
     {
+        public const string DiscriminatorName = "StaticPage";
+
         public StaticPage(string name): base(name)
         {
         }

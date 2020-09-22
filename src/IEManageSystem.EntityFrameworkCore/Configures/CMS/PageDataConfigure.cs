@@ -12,6 +12,8 @@ namespace IEManageSystem.Configures.CMS
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<PageData> builder)
         {
             builder.HasIndex(e => e.Name);
+            builder.OwnsOne(e => e.Creator);
+            builder.OwnsOne(e => e.LastUpdater);
         }
     }
 }

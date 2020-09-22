@@ -1,3 +1,4 @@
+import EntityEdit from "../EntityEdit";
 import PageComponentBaseSettingModel from "./PageComponentBaseSettingModel";
 import PageComponentSettingModel from "./PageComponentSettingModel";
 import PageLeafSettingModel from "./PageLeafSettingModel";
@@ -20,6 +21,13 @@ export default class PageComponentModel {
     public pageLeafSetting: PageLeafSettingModel;
     public pageComponentSettings: Array<PageComponentSettingModel>;
     public pageComponentSigns: Array<string>;
+    public field1Name: string;
+    public field2Name: string;
+    public field3Name: string;
+    public field4Name: string;
+    public field5Name: string;
+    public creator: EntityEdit;
+    public lastUpdater: EntityEdit;
 
     getOrCreatePageComponentSetting(name: string): PageComponentSettingModel {
         let pageComponentSettingModel = this.pageComponentSettings.find(item=>item.name == name);
