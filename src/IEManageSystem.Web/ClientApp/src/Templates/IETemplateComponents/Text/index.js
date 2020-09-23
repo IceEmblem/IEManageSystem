@@ -1,4 +1,4 @@
-import BaseComponentObject, { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
+import BaseComponentObject, { ComponentSettingConfig, FontComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 import ComponentDataConfig from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
 import ContainerConfig from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
 import ComponentDescribe, { componentType } from 'BaseCMSManage/Components/ComponentDescribe'
@@ -11,6 +11,7 @@ class ComponentObject extends BaseComponentObject {
             new InteractiveComponentConfig([InteractiveType.text]),
             new ContainerConfig(1),
             new ComponentSettingConfig("Setting", "文本设置", settingConfig),
+            new FontComponentSettingConfig(),
         ];
         this.ComponentDataConfig = new ComponentDataConfig(dataConfig)
         this.Component = component;

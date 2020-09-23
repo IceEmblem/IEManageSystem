@@ -31,11 +31,11 @@ export default class Setting {
         this.setting.getDefauleData().field3 = val;
     }
 
-    get height(){
-        return this.setting.getDefauleData().field4;
+    get customizeHeight(){
+        return this.setting.getDefauleData().field4 || 'false';
     }
 
-    set height(val){
+    set customizeHeight(val){
         this.setting.getDefauleData().field4 = val;
     }
 }

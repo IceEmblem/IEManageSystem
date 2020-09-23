@@ -93,15 +93,18 @@ class Component extends IComponent {
     }
 
     render() {
+        let setting = this.getCurrentSetting();
+        
         let Head = this.props.ChildComponent['head'];
         let ListItem = this.props.ChildComponent['listItem'];
 
         return (
             <View style={[this.baseStyle]}>
                 {
-                    Head ?
+                    setting.hiddenSortBtn == 'false' &&
+                    (Head ?
                         <Head interactivConfigFeature={this.getHeadInteractivConfigFeature()} />
-                        : this.header()
+                        : this.header())
                 }
                 <View style={styles.list}>
                     {this.props.posts.map(item => {
@@ -111,7 +114,7 @@ class Component extends IComponent {
                     })}
                 </View>
                 {
-                    this.footer()
+                    setting.hiddenPageing == 'false' && this.footer()
                 }
             </View>
         )

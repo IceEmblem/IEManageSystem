@@ -31,6 +31,23 @@ export default class StyleCheck {
 
             style.fontWeight = undefined;
         },
+        lineHeight: (style) => {
+            let result = undefined;
+
+            result = StyleCheck.numRegex.exec(style.lineHeight);
+            if(result){
+                style.lineHeight = new Number(style.lineHeight).valueOf();
+                return;
+            }
+            
+            result = StyleCheck.pxRegex.exec(style.lineHeight);
+            if(result){
+                style.lineHeight = new Number(result[1]).valueOf();
+                return;
+            }
+
+            style.height = undefined;
+        },
         width: (style) => {
             let result = undefined;
 

@@ -10,6 +10,38 @@
     width: 80% !important;
 }
 
+.zindex{
+    z-index: 0;
+}
+
+.zindex-1 {
+    z-index: 1;
+}
+
+.zindex-2 {
+    z-index: 2;
+}
+
+.zindex-3 {
+    z-index: 3;
+}
+
+.zindex-991{
+    z-index: 991;
+}
+
+.zindex-992{
+    z-index: 992;
+}
+
+.zindex-993{
+    z-index: 993;
+}
+
+.overflow-h {
+    overflow: hidden;
+}
+
 .overflow-hidden-x {
     overflow-x: hidden;
 }
@@ -26,46 +58,6 @@
     overflow-y: auto;
 }
 
-.margin-top-1{
-	margin-top:1px;
-}
-
-.margin-bottom-1{
-	margin-bottom: 1px;
-}
-
-.margin-left-1{
-	margin-left: 1px;
-}
-
-.margin-right-1{
-	margin-right: 1px;
-}
-
-.padding-0{
-    padding: 0rem;
-}
-
-.padding-top-10{
-    padding-top: 10px;
-}
-
-.padding-bottom-10{
-    padding-bottom: 10px;
-}
-
-.padding-left-10{
-    padding-left: 10px;
-}
-
-.padding-right-10{
-    padding-right: 10px;
-}
-
-.hide{
-    display: none;
-}
-
 .hide-scroll{
     height: 100%;
     width: 100%;
@@ -77,130 +69,4 @@
     overflow-y: scroll;
     margin-right: -1.5rem;
     overflow-x: hidden;
-}
-
-@keyframes rotate90
-{
-    from {
-        transform: rotate(0deg);
-        -ms-transform: rotate(0deg); /* IE 9 */
-        -webkit-transform: rotate(0deg); /* Safari and Chrome */
-    }
-    to {
-        transform: rotate(90deg);
-        -ms-transform: rotate(90deg); /* IE 9 */
-        -webkit-transform: rotate(90deg); /* Safari and Chrome */
-    }
-}
- 
-@-webkit-keyframes rotate90 /* Safari 与 Chrome */
-{
-    from {
-        transform: rotate(0deg);
-        -ms-transform: rotate(0deg); /* IE 9 */
-        -webkit-transform: rotate(0deg); /* Safari and Chrome */
-    }
-    to {
-        transform: rotate(90deg);
-        -ms-transform: rotate(90deg); /* IE 9 */
-        -webkit-transform: rotate(90deg); /* Safari and Chrome */
-    }
-}
-
-.rotate90{
-    animation: rotate90 0.5s linear 0s 1 normal;
-    /* Safari 与 Chrome: */
-    -webkit-animation: rotate90 0.5s linear 0s 1 normal;
-
-    transform: rotate(90deg);
-    -ms-transform: rotate(90deg); /* IE 9 */
-    -webkit-transform: rotate(90deg); /* Safari and Chrome */
-}
-
-@keyframes rotate-90
-{
-    from {
-        transform: rotate(0deg);
-        -ms-transform: rotate(0deg); /* IE 9 */
-        -webkit-transform: rotate(0deg); /* Safari and Chrome */
-    }
-    to {
-        transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg); /* IE 9 */
-        -webkit-transform: rotate(-90deg); /* Safari and Chrome */
-    }
-}
- 
-@-webkit-keyframes rotate-90 /* Safari 与 Chrome */
-{
-    from {
-        transform: rotate(0deg);
-        -ms-transform: rotate(0deg); /* IE 9 */
-        -webkit-transform: rotate(0deg); /* Safari and Chrome */
-    }
-    to {
-        transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg); /* IE 9 */
-        -webkit-transform: rotate(-90deg); /* Safari and Chrome */
-    }
-}
-
-.rotate-90{
-    animation: rotate-90 0.5s linear 0s 1 normal;
-    /* Safari 与 Chrome: */
-    -webkit-animation: rotate-90 0.5s linear 0s 1 normal;
-
-    transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg); /* IE 9 */
-    -webkit-transform: rotate(-90deg); /* Safari and Chrome */
-}
-
-@keyframes fade-in 
-{
-    0% {opacity:0;}
-    100% {opacity:1;}
-}
-
-
-@-webkit-keyframes fade-in 
-{
-    0% {opacity:0;}
-    100% {opacity:1;}
-}
-
-.fade-in{
-    animation: fade-in 0.5s ease-out 0s 1 normal;
-    /* Safari 与 Chrome: */
-    -webkit-animation: fade-in 0.5s ease-out 0s 1 normal;
-}
-
-@keyframes toTop-fade-in
-{
-    0% {
-        opacity:0;
-        top: 10%;
-    }
-    100% {
-        opacity:1;
-        top: 0%;
-    }
-}
-
-
-@-webkit-keyframes toTop-fade-in 
-{
-    0% {
-        opacity:0;
-        top: 10%;
-    }
-    100% {
-        opacity:1;
-        top: 0%;
-    }
-}
-
-.toTop-fade-in{
-    animation: toTop-fade-in 1s ease-out 0s 1 normal;
-    /* Safari 与 Chrome: */
-    -webkit-animation: toTop-fade-in 1s ease-out 0s 1 normal;
 }

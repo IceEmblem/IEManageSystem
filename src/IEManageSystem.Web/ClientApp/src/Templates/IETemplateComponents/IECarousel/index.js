@@ -18,10 +18,6 @@ class ComponentObject extends BaseComponentObject {
 
 const componentDescribeBuilder = (component, preview, settingConfig, dataConfig) => {
     let componentDescribe = new ComponentDescribe("IECarousel", new ComponentObject(component, preview, settingConfig, dataConfig), componentType.text, "IE走马灯")
-    componentDescribe.defauleStyle = {
-        backgroundColor: "#364d79",
-        minHeight: 20
-    }
 
     return componentDescribe;
 }

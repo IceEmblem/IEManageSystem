@@ -49,17 +49,19 @@ class SettingConfig extends React.Component {
                     <Radio value="false">否</Radio>
                 </Radio.Group>
             </div>
-            {/* <div className="mb-3">
-                <Input 
-                    placeholder='示例：500px'
-                    value={setting.height}
-                    onChange={(e)=>{
-                        setting.height = e.target.value;
+            <div className="mb-3">
+                <Tag color="#55acee">使用自定义高度（在基本设置中设置，App 不支持）</Tag>
+                <Radio.Group
+                    value={setting.customizeHeight}
+                    onChange={(e) => {
+                        setting.customizeHeight = e.target.value;
                         this.props.setData(setting.setting);
                     }}
-                    suffix={<Tag color="#55acee">视频高度</Tag>}
-                />
-            </div> */}
+                >
+                    <Radio value="true">是</Radio>
+                    <Radio value="false">否</Radio>
+                </Radio.Group>
+            </div>
         </div>)
     }
 }

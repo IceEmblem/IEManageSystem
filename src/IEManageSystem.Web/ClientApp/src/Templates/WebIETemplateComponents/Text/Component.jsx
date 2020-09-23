@@ -18,7 +18,7 @@ class Component extends IComponent {
 
         let text = this.getText();
 
-        let textStyle = { color: setting.fontColor, fontSize: setting.fontSize }
+        let textStyle = this.getFontSetting().toStyle();
 
         let component = titleToLevel[setting.textType] ?
             <Title className="mb-0"

@@ -66,4 +66,12 @@ export default class Setting {
     set repeatTime(val){
         this.setting.getOrCreateSingleDate(otherSettingName).field1 = val;
     }
+
+    get endVal(){
+        return this.setting.getOrCreateSingleDate(otherSettingName).field2 || '100';
+    }
+
+    set endVal(val){
+        this.setting.getOrCreateSingleDate(otherSettingName).field2 = val;
+    }
 }

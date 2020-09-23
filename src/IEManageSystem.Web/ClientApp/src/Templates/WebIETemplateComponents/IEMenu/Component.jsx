@@ -1,15 +1,11 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
+import IComponent from 'IETemplateComponents/IEMenu/IComponent'
 import { Link } from 'react-router-dom'
 import {getIconType} from 'Common/AntIcons'
 import { Menu } from 'antd';
 const { SubMenu } = Menu;
 
 class Component extends IComponent {
-    constructor(props) {
-        super(props);
-    }
-
     createMenus() {
         let mainMenu = this.props.menu;
         if (!mainMenu) {
@@ -20,6 +16,7 @@ class Component extends IComponent {
     }
 
     createMenusIteration(menu) {
+        let fontStyle = this.getFontSetting().toStyle();
         let lis = Array();
 
         let menuItems = menu.menus;
@@ -27,7 +24,7 @@ class Component extends IComponent {
             let Icon = undefined;
             if(menuItems[item].icon){
                 let IconType = getIconType(menuItems[item].icon);
-                Icon = <IconType />
+                Icon = <IconType style={fontStyle} />
             }
 
             if (menuItems[item].isCompositeMenuType()) {
@@ -43,7 +40,9 @@ class Component extends IComponent {
             else {
                 let menu =
                     <Menu.Item key={menuItems[item].name} icon={Icon}>
-                        <Link to={menuItems[item].createUrl()} >{menuItems[item].displayName}</Link>
+                        <Link to={menuItems[item].createUrl()} >
+                            <span style={fontStyle}>{menuItems[item].displayName}</span>
+                        </Link>
                     </Menu.Item>;
                 lis.push(menu);
             }

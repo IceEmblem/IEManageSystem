@@ -1,6 +1,7 @@
 import './BaseComponent/BasicSettingConfig'
 import './BaseComponent/ComponentSettingConfigBtnComponent'
 import './BaseComponent/DeleteConfigBtnComponent'
+import './BaseComponent/FontComponentSettingConfig/FontConfigComponent'
 import './BaseMenuComponent/MenuSettingConfig'
 import './BasePageLeafComponent/PageLeafSettingConfig'
 import './BaseContainerComponent/ContainerConfigBtnComponent'

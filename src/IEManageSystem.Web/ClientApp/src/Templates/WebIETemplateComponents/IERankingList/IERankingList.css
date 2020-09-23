@@ -9,11 +9,6 @@
     color: #262626;
 }
 
-.IERankingList-item:first-child{
-    background-color:#1890ff;
-    box-shadow: 0px 0px 3px#1890ff;
-}
-
 .IERankingList-item:first-child a{
     color:#fff;
 }

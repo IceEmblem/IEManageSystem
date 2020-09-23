@@ -38,25 +38,25 @@ const defaultMenuData = function(){
 class MenuContain extends React.Component
 {
     componentDidMount(){
-        this.getMenus(this.props.pageComponent.menuName);
+        this.getMenus(this.props);
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.pageComponent.menuName != this.props.pageComponent.menuName){
-            this.getMenus(nextProps.pageComponent.menuName);
+            this.getMenus(nextProps);
         }
     }
 
-    getMenus(menuName) {
-        if(!menuName){
+    getMenus(props) {
+        if(!props.pageComponent.menuName){
             return;
         }
 
-        if(!this.props.isDefaultMenu){
+        if(!props.isDefaultMenu){
             return;
         }
 
-        this.props.dispatchMenuFetch();
+        props.dispatchMenuFetch();
     }
 
     render(){

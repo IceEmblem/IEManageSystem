@@ -265,7 +265,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     </div>
                 }
                 <div className="col-md-6 bg-light mb-3">
-                    <label>背景颜色（例：#ffffff）</label>
+                    <label>背景颜色（例：#ffffff，主题颜色请输入 theme）</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="背景颜色"

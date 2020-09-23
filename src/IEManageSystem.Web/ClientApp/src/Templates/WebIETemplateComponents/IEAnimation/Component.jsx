@@ -20,8 +20,12 @@ class Component extends IComponent {
 
         let setting = new Setting(this.getDefaultSetting());
         this.initVal = new Number(setting.initValue).valueOf();
+        this.endVal = new Number(setting.endVal).valueOf();
         if (isNaN(this.initVal)) {
             this.initVal = 0;
+        }
+        if(isNaN(this.endVal)){
+            this.endVal = 100;
         }
 
         this.state = {
@@ -36,7 +40,7 @@ class Component extends IComponent {
     componentDidMount() {
         let setting = new Setting(this.getDefaultSetting());
         if (setting.time == 'init') {
-            this.setState({ value: 100 });
+            this.setState({ value: this.endVal });
         }
 
         if (setting.time == 'scroll') {
@@ -74,11 +78,11 @@ class Component extends IComponent {
         let max = window.innerHeight - 200;
 
         // 向下滚动场景
-        if (pos.top < max && this.state.value != 100) {
+        if (pos.top < max && this.state.value != this.endVal) {
             if (pos.bottom < min) {
                 return;
             }
-            this.setState({ value: 100 });
+            this.setState({ value: this.endVal });
             return;
         }
         if (pos.bottom < min && this.state.value != this.initVal) {
@@ -87,11 +91,11 @@ class Component extends IComponent {
         }
 
         // 向上滚动场景
-        if (pos.bottom > min && this.state.value != 100) {
+        if (pos.bottom > min && this.state.value != this.endVal) {
             if (pos.top > max) {
                 return;
             }
-            this.setState({ value: 100 });
+            this.setState({ value: this.endVal });
             return;
         }
         if (pos.top > max && this.state.value != this.initVal) {
@@ -102,7 +106,7 @@ class Component extends IComponent {
 
     repeat(){
         if(this.state.value == this.initVal){
-            this.setState({value: 100});
+            this.setState({value: this.endVal});
         }
         else{
             this.setState({value: this.initVal});
@@ -133,7 +137,7 @@ class Component extends IComponent {
             style={{ position: 'relative', overflow: setting.isOverHidden == 'true' ? 'hidden' : 'visible' }}
             ref={(r) => { this._ref = r }}
             onMouseEnter={setting.time == 'hover' ? () => {
-                this.setState({ value: 100 });
+                this.setState({ value: this.endVal });
             } : undefined}
             onMouseLeave={setting.time == 'hover' ? () => {
                 this.setState({ value: this.initVal });
@@ -154,7 +158,7 @@ class Component extends IComponent {
                     return <>
                         {
                             interpolatingStyles.map((e, i)=>(
-                                <div style={createStyle(e.childVal)}>
+                                <div style={createStyle(e.childVal, this.endVal)}>
                                     {
                                         this.props.children[i]
                                     }

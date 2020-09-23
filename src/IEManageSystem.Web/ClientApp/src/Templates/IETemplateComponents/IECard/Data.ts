@@ -12,7 +12,7 @@ export default class Data {
     }
 
     get link(){
-        return this.data.getDefauleData().field1 || "/";
+        return this.data.getDefauleData().field1;
     }
 
     set link(val){

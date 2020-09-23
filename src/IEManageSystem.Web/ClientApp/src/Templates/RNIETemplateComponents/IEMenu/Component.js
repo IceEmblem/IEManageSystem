@@ -1,5 +1,7 @@
 import React from 'react';
-import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
+import IComponent from 'IETemplateComponents/IEMenu/IComponent'
+import StyleCheck from 'RNCMS/StyleCheck'
+import Theme from 'BaseLayout/Theme'
 import { View, StyleSheet } from 'react-native'
 import { withRouter } from 'react-router-native'
 import { Button, Icon, Text } from 'native-base'
@@ -19,6 +21,7 @@ class Component extends IComponent {
     }
 
     createMenusIteration(menu) {
+        let textStyle = StyleCheck.handle(this.getFontSetting().toStyle());
         let lis = Array();
 
         let menuItems = menu.menus;
@@ -35,15 +38,16 @@ class Component extends IComponent {
                     <Button
                         small
                         full
-                        style={styles.button}
+                        style={[styles.button, {backgroundColor: Theme.primary}, {height: textStyle.lineHeight}]}
                         key={menuItems[item].name}
                         onPress={() => {
                             this.props.history.push(menuItems[item].createUrl());
                             console.log(menuItems[item].createUrl())
                         }}
+                        transparent
                     >
-                        {icon && <Icon name={icon} type='AntDesign'></Icon>}
-                        <Text>
+                        {icon && <Icon style={textStyle} name={icon} type='AntDesign'></Icon>}
+                        <Text style={textStyle}>
                             {menuItems[item].displayName}
                         </Text>
                     </Button>

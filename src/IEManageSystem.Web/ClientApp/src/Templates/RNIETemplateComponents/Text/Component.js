@@ -16,23 +16,22 @@ class Component extends IComponent {
         let setting = this.getCurrentSetting();
         let data = this.getCurrentData();
 
-        let style = { color: setting.fontColor }
-        let smallStyle = { color: setting.fontColor, marginLeft: 10 }
+        let style = this.getFontSetting().toStyle();
+        let smallStyle = { ...style }
 
-        if(hToFontSize[setting.textType]){
-            style.fontSize = hToFontSize[setting.textType].text;
-            smallStyle.fontSize = hToFontSize[setting.textType].small;
-        }
-        else{
-            smallStyle.fontSize = hToFontSize.other.small;
-        }
-
-        if(setting.fontSize){
-            style.fontSize = setting.fontSize;
+        if(!style.fontSize){
+            if(hToFontSize[setting.textType]){
+                style.fontSize = hToFontSize[setting.textType].text;
+                smallStyle.fontSize = hToFontSize[setting.textType].small;
+            }
+            else{
+                style.fontSize = hToFontSize.other.text;
+                smallStyle.fontSize = hToFontSize.other.small;
+            }
         }
 
         let smallText = data.smallText ?
-            <Text style={[styles.textSmall, smallStyle]}>{data.smallText}</Text> :
+            <Text style={[styles.textSmall, StyleCheck.handle(smallStyle)]}>{data.smallText}</Text> :
             undefined;
 
         return (

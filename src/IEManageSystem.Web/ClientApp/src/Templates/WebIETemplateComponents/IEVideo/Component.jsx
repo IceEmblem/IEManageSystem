@@ -6,6 +6,11 @@ import './index.css'
 
 class Component extends IComponent {
     player = undefined;
+    ele = undefined;
+
+    state = {
+        height: undefined
+    }
 
     componentDidMount(){
         let setting = this.getCurrentSetting();
@@ -17,19 +22,27 @@ class Component extends IComponent {
                 }
             })
         }
+
+        if(setting.customizeHeight == 'true'){
+            setTimeout(()=>{
+                this.setState({height: this.ele.clientHeight});
+            }, 0);
+        }
     }
 
     render() {
         let data = this.getCurrentData();
         let setting = this.getCurrentSetting();
 
-        return <div style={{overflow: 'hidden'}} className={setting.hiddenTool == 'true' && 'ievideo-control-hidden'}>
+        return <div ref={e=>{this.ele = e}} style={{overflow: 'hidden', height: '100%'}} className={setting.hiddenTool == 'true' && 'ievideo-control-hidden'}>
             <Player
                 ref={c => {
                     this.player = c;
                 }}
                 autoPlay={setting.autoPlay == 'true'}
                 poster={data.img}
+                fluid={setting.customizeHeight == 'false'}
+                height={this.state.height}
             >
                 <source src={data.url} />
                 <source src={data.url2} />

@@ -5,6 +5,8 @@ import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import IocContainer from 'Core/IocContainer'
 
+import Theme from 'BaseLayout/Theme'
+
 export class IComponentContainerBoxShow extends React.Component { }
 IComponentContainerBoxShow.iocKey = Symbol()
 
@@ -164,7 +166,12 @@ class ComponentContainerBox extends React.Component {
         }
 
         if (this.props.pageComponent.pageComponentBaseSetting.backgroundColor) {
-            style.backgroundColor = this.props.pageComponent.pageComponentBaseSetting.backgroundColor;
+            if(this.props.pageComponent.pageComponentBaseSetting.backgroundColor == 'theme'){
+                style.backgroundColor = Theme.primary;
+            }
+            else{
+                style.backgroundColor = this.props.pageComponent.pageComponentBaseSetting.backgroundColor;
+            }
         }
 
         if (this.props.pageComponent.pageComponentBaseSetting.backgroundImage) {

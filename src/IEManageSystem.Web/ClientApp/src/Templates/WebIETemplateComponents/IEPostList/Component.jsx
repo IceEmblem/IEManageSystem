@@ -69,9 +69,10 @@ class Component extends IComponent {
         return (
             <div>
                 {
-                    Head ?
+                    setting.hiddenSortBtn == 'false' &&
+                    (Head ?
                         <Head interactivConfigFeature={this.getHeadInteractivConfigFeature()} />
-                        : this.header()
+                        : this.header())
                 }
                 <List
                     grid={{ column: setting.col }}
@@ -83,7 +84,7 @@ class Component extends IComponent {
                     }}
                 />
                 {
-                    this.footer()
+                    setting.hiddenPageing == 'false' && this.footer()
                 }
             </div>
         )

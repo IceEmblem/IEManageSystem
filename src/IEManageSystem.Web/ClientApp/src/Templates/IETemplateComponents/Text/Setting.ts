@@ -19,14 +19,6 @@ export default class Setting {
         this.setting.getDefauleData().field1 = val;
     }
 
-    get fontColor(){
-        return this.setting.getDefauleData().field2;
-    }
-
-    set fontColor(val){
-        this.setting.getDefauleData().field2 = val;
-    }
-
     get textSource(){
         return this.setting.getDefauleData().field3 || 'CText';
     }
@@ -41,13 +33,5 @@ export default class Setting {
 
     set align(val){
         this.setting.getDefauleData().field4 = val;
-    }
-
-    get fontSize(){
-        return this.setting.getDefauleData().field5;
-    }
-
-    set fontSize(val){
-        this.setting.getDefauleData().field5 = val;
     }
 }

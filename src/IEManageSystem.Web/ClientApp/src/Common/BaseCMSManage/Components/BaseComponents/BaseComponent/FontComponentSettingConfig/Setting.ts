@@ -7,47 +7,53 @@ export default class Setting {
         this.setting = pageComponentSetting;
     }
 
-    setSetting(pageComponentSetting:PageComponentSettingModel){
-        this.setting = pageComponentSetting;
+    get fontSize(){
+        return this.setting.getDefauleData().field1;
     }
 
-    get col(){
-        return this.setting.getDefauleData().field1 || 5;
-    }
-
-    set col(val){
+    set fontSize(val){
         this.setting.getDefauleData().field1 = val;
     }
 
-    get heigth(){
+    get lineHeight(){
         return this.setting.getDefauleData().field2;
     }
 
-    set heigth(val){
+    set lineHeight(val){
         this.setting.getDefauleData().field2 = val;
     }
 
-    get isShowImg(){
-        return this.setting.getDefauleData().field3 || "true";
+    get color(){
+        return this.setting.getDefauleData().field3;
     }
 
-    set isShowImg(val){
+    set color(val){
         this.setting.getDefauleData().field3 = val;
     }
 
-    get hiddenSortBtn(){
-        return this.setting.getDefauleData().field4 || "false";
+    get fontWeight(){
+        return this.setting.getDefauleData().field4;
     }
 
-    set hiddenSortBtn(val){
+    set fontWeight(val){
         this.setting.getDefauleData().field4 = val;
     }
-    
-    get hiddenPageing(){
-        return this.setting.getDefauleData().field5 || "false";
+
+    get fontStyle(){
+        return this.setting.getDefauleData().field5;
     }
 
-    set hiddenPageing(val){
+    set fontStyle(val){
         this.setting.getDefauleData().field5 = val;
+    }
+
+    toStyle(){
+        return {
+            fontSize: this.fontSize,
+            lineHeight: this.lineHeight,
+            color: this.color,
+            fontWeight: this.fontWeight,
+            fontStyle: this.fontStyle
+        }
     }
 }

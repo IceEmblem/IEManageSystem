@@ -4,6 +4,7 @@ import DeleteConfig, {IDeleteConfigBtnComponent} from './DeleteConfig'
 import BaseConfig from './BaseConfig'
 import BasicComponentSettingConfig, {IBasicSettingConfig} from './BasicComponentSettingConfig'
 import ComponentSettingConfig from './ComponentSettingConfig'
+import FontComponentSettingConfig from './FontComponentSettingConfig'
 
 // 组件对象
 export default class BaseComponentObject {
@@ -53,4 +54,5 @@ export {
     BaseComponent, 
     BaseComponentProps,
     IBasicSettingConfig,
+    FontComponentSettingConfig,
 }

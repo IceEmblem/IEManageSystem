@@ -68,6 +68,16 @@ class SettingConfig extends React.Component {
                     }}
                 />
             </div>
+            <div className='mb-3 col-md-6'>
+                <Tag color="#55acee">终点值 0 - 100</Tag>
+                <InputNumber
+                    value={setting.endVal}
+                    onChange={(value) => {
+                        setting.endVal = value;
+                        this.props.setData(setting.setting);
+                    }}
+                />
+            </div>
             <div className="mb-3 col-md-6">
                 <Tag color="#55acee">是否隐藏溢出部分</Tag>
                 <Radio.Group

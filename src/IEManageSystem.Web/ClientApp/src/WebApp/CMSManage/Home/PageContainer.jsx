@@ -82,7 +82,7 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
         // store 没有页面数据
         isExistPage: state.pages[pageId] != undefined,
         // 路由上具有文章名但 store 中没有文章数据
-        isExistPageData: !(pageDataName && state.pageDatas[postId] != undefined),
+        isExistPageData: !(pageDataName && state.pageDatas[postId] == undefined),
         pageId: pageId,
         pageDataId: postId
     }

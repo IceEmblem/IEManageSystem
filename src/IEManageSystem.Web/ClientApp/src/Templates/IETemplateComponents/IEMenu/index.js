@@ -1,4 +1,4 @@
-import BaseComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
+import BaseComponentObject, {ComponentSettingConfig, FontComponentSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import MenuComponentSettingConfig from 'BaseCMSManage/Components/BaseComponents/BaseMenuComponent/MenuComponentSettingConfig'
 import ComponentDescribe, { componentType } from 'BaseCMSManage/Components/ComponentDescribe'
 
@@ -6,7 +6,9 @@ class ComponentObject extends BaseComponentObject {
     constructor(component, preview, settingConfig, dataConfig) {
         super();
         this.ComponentSettingConfigs = [
-            new MenuComponentSettingConfig()
+            new MenuComponentSettingConfig(),
+            new ComponentSettingConfig(undefined, '组件配置', settingConfig),
+            new FontComponentSettingConfig(),
         ];
         this.Component = component;
         this.Preview = preview;
