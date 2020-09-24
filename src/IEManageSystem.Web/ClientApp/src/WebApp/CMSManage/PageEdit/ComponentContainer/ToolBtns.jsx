@@ -2,12 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import { setActiveComponent } from 'BaseCMSManage/IEReduxs/Actions'
-import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
-import { Button, Popover, Input, Tag, Select, Tooltip } from 'antd'
-import { BranchesOutlined, ArrowUpOutlined, EditOutlined, ArrowDownOutlined } from "@ant-design/icons"
+import { Button, Popover, Tag } from 'antd'
+import { BranchesOutlined, EditOutlined } from "@ant-design/icons"
 import Theme from 'BaseLayout/Theme'
 
 class ToolBtns extends React.Component {
@@ -119,35 +117,6 @@ class ToolBtns extends React.Component {
                             {
                                 this.getBtns()
                             }
-                            {/* 选择子组件按钮 */}
-                            {
-                                this.props.pageComponent.pageComponentSigns.map(sign => {
-                                    return (<Button
-                                        key={sign}
-                                        className='ml-3'
-                                        size='small'
-                                        shape='circle'
-                                        icon={<ArrowDownOutlined />}
-                                        onClick={(e) => {
-                                            this.props.setActiveComponent(sign);
-                                        }}
-                                    ></Button>)
-                                })
-                            }
-                            {/* 选择父组件按钮 */}
-                            <Button
-                                className='ml-3'
-                                size='small'
-                                shape='circle'
-                                icon={<ArrowUpOutlined />}
-                                onClick={(e) => {
-                                    if (PageComponentModel.RootComponentSign == this.props.pageComponent.parentSign) {
-                                        return false;
-                                    }
-
-                                    this.props.setActiveComponent(this.props.pageComponent.parentSign);
-                                }}
-                            ></Button>
                         </div>,
                         domNode,
                     )
@@ -167,7 +136,6 @@ ToolBtns.propTypes = {
     // redux state
     pageComponent: PropTypes.object.isRequired,
     isActive: PropTypes.string,
-    setActiveComponent: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -184,9 +152,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        setActiveComponent: (sign) => {
-            return dispatch(setActiveComponent(sign));
-        }
     }
 }
 

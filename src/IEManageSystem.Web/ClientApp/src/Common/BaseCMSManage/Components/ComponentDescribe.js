@@ -34,12 +34,13 @@ export default class ComponentDescribe {
         this.displayName = displayName || name;
         this.logicCode = undefined;
         this.defauleStyle = { minHeight: 20 };
+        this.pageComponentBaseSetting = undefined;
     }
 
     createPageComponent(parentSign, os) {
         var timetamp = new Date().getTime();
 
-        let pageComponent = CreatePageComponentService.createComponent(timetamp, this.name, os);
+        let pageComponent = CreatePageComponentService.createComponent(timetamp, this.name, os, this.pageComponentBaseSetting);
 
         pageComponent.parentSign = parentSign;
 

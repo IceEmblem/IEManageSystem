@@ -2,8 +2,8 @@
     position: fixed !important;
     display: flex;
     justify-content: flex-end;
-    right: 5rem;
-    bottom: 4rem;
+    right: 80px;
+    bottom: 60px;
     opacity: 0.9;
     z-index: 9999;
     justify-content: flex-end;

@@ -1,6 +1,5 @@
-class CreatePageComponentService{
-    createComponent(sign:string, name:string, os: string)
-    {
+class CreatePageComponentService {
+    createComponent(sign: string, name: string, os: string, pageComponentBaseSetting: any = {}) {
         return {
             id: 0,
             sign: sign,
@@ -9,15 +8,18 @@ class CreatePageComponentService{
             group: null,
             os: os,
             pageComponentBaseSetting: {
-                id: 0,
-                sortIndex: 0,
-                width: '100%',
-                height: null,
-                padding: null,
-                margin: null,
-                backgroundColor: null,
-                backgroundImage: null,
-                className: null,
+                ...{
+                    id: 0,
+                    sortIndex: 0,
+                    width: '100%',
+                    height: null,
+                    padding: null,
+                    margin: null,
+                    backgroundColor: null,
+                    backgroundImage: null,
+                    className: null,
+                },
+                ...pageComponentBaseSetting
             },
             pageLeafSetting: {
                 pageName: "",

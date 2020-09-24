@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import ToolBtns from './ToolBtns'
 import SignSquareFrame from './SignSquareFrame'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import { setActiveComponent } from 'BaseCMSManage/IEReduxs/Actions'
+
+import { Button } from 'antd'
+import { ShareAltOutlined, ArrowLeftOutlined } from "@ant-design/icons"
 
 
 class CurrentToolBtns extends React.Component {
@@ -14,9 +16,8 @@ class CurrentToolBtns extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.currentPageAndPost.os != this.props.currentPageAndPost.os ||
-            nextProps.activePageComponentSign != this.props.activePageComponentSign) 
-        {
-            this.setState({curSign: undefined});
+            nextProps.activePageComponentSign != this.props.activePageComponentSign) {
+            this.setState({ curSign: undefined });
         }
     }
 
@@ -46,26 +47,28 @@ class CurrentToolBtns extends React.Component {
 
         return (
             <div>
-                <span style={{ right: 80, bottom: 150, position: "fixed" }} >
+                <div style={{ right: 80, bottom: 150, position: "fixed", display: 'flex' }} >
                     {
                         signs.map(item => (
                             <div
+                                style={{display: 'flex', alignItems: 'center'}}
                                 onMouseEnter={() => {
                                     this.setState({ curSign: item });
                                 }}
                             >
-                                <ToolBtns
-                                    key={item}
-                                    currentPageAndPost={this.props.currentPageAndPost}
-                                    sign={item}
-                                    style={{ opacity: 1, marginBottom: "5px" }}
-                                    placement={'left'}
-                                    cancelActiveShow={true}
-                                />
+                                <Button 
+                                    type='primary'
+                                    size='small'
+                                    icon={<ShareAltOutlined />}
+                                    onClick={() => {
+                                        this.props.setActiveComponent(item);
+                                    }}
+                                ></Button>
+                                <ArrowLeftOutlined className='ml-2 mr-2' />
                             </div>
                         ))
                     }
-                </span>
+                </div>
                 <SignSquareFrame
                     activePageComponentSign={this.state.curSign}
                     currentPageAndPost={this.props.currentPageAndPost}
@@ -94,6 +97,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        setActiveComponent: (sign) => {
+            return dispatch(setActiveComponent(sign));
+        }
     }
 }
 

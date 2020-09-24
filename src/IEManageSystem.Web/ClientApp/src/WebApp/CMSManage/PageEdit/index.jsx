@@ -24,6 +24,8 @@ import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 
 import RNPageLayout from 'Adapters/RNPageLayout'
 
+import Hotkey from './Hotkey'
+
 const RNPageRootId = '__PageEditRN__';
 const RNPage = (props) => {
     return <div class="phone">
@@ -122,6 +124,9 @@ class PageContainer extends React.Component {
                 <div id='PageEditPortals'>
                 </div>
                 <BtnLists
+                    currentPageAndPost={currentPageAndPost}
+                />
+                <Hotkey 
                     currentPageAndPost={currentPageAndPost}
                 />
             </div>
