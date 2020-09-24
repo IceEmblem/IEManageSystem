@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ToolBtns from './ToolBtns'
-import { SignSquareFrame } from './SignSquareFrame'
+import SignSquareFrame from './SignSquareFrame'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import {RootComponentSign} from 'BaseCMSManage/IEReduxs/Actions'
+import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
+
 
 class CurrentToolBtns extends React.Component {
     state = {
@@ -28,7 +29,7 @@ class CurrentToolBtns extends React.Component {
 
         let signs = [this.props.activePageComponentSign];
 
-        while (this.props.pageComponents[cur.parentSign] && cur.parentSign != RootComponentSign) {
+        while (this.props.pageComponents[cur.parentSign] && cur.parentSign != PageComponentModel.RootComponentSign) {
             signs.push(cur.parentSign);
             cur = this.props.pageComponents[cur.parentSign];
         }

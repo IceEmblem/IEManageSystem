@@ -5,7 +5,6 @@ import {
     AddComponentAction,
     RemoveComponentAction,
     EditComponentAction,
-    RootComponentSign,
     CopyComponent,
     CopyComponentAction,
 } from './Action';
@@ -37,11 +36,6 @@ function getChildComponents(pageComponents: object, sign): object {
     }
 
     return result;
-}
-
-// 获取父组件
-function getParentComponent(pageComponents: object, sign): object {
-    return pageComponents[pageComponents[sign].parentSign];
 }
 
 // 组件是否有效
@@ -199,12 +193,12 @@ function pageReceiveHandle(receivePageComponents, os: string) {
     let pageComponents = {};
 
     // 如果不存在根组件，则创建一个根组件
-    if (!receivePageComponents.some(item => item.sign == RootComponentSign)) {
-        pageComponents[RootComponentSign] = CreatePageComponentService.createComponent(RootComponentSign, "", os);
+    if (!receivePageComponents.some(item => item.sign == PageComponentModel.RootComponentSign)) {
+        pageComponents[PageComponentModel.RootComponentSign] = CreatePageComponentService.createComponent(PageComponentModel.RootComponentSign, "", os);
         // 将不存在父元素的组件指定到根组件
         receivePageComponents.forEach(element => {
             if (!element.parentSign) {
-                element.parentSign = RootComponentSign;
+                element.parentSign = PageComponentModel.RootComponentSign;
             }
         });
     }
@@ -300,6 +294,7 @@ export default function reducer(state = {}, action) {
         return pageReceive(state, action);
     }
 
+    // 设置页面，执行逻辑与 页面接收动作 相似，但可针对不同平台
     if(action.type == SetPage){
         return setPage(state, action);
     }

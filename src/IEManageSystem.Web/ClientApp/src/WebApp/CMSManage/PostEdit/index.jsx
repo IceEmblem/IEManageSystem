@@ -5,7 +5,7 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 import './index.css'
 
-import { pageFetch, pageDataFetch, componentDataUpdateFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch, componentDataUpdateFetch } from 'BaseCMSManage/IEReduxs/Actions'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import { Button } from 'antd';

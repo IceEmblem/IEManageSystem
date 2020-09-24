@@ -1,11 +1,10 @@
-export const RootComponentSign = "__Root__";
-
 // 组件动作
 export abstract class ComponentAction {
   abstract type: string;
   abstract pageId: number;
 }
 
+// 页面添加组件
 export const PageAddComponent = 'PageAddComponent'
 export class AddComponentAction extends ComponentAction {
   type = PageAddComponent;

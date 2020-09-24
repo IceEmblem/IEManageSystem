@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import { setPage, RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
+import { setPage } from 'BaseCMSManage/IEReduxs/Actions'
 import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
-import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import Page from '../Home/Page'

@@ -4,7 +4,7 @@ import { Text, View, ScrollView } from 'react-native';
 
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import { pageFetch, pageDataFetch, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
+import { pageFetch, pageDataFetch } from 'BaseCMSManage/IEReduxs/Actions'
 
 import ComponentContainerBoxShow from 'RNCMS/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'

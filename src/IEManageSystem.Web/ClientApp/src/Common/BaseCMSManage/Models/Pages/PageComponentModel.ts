@@ -54,4 +54,14 @@ export default class PageComponentModel {
 
         this.pageComponentSettings.splice(findIndex, 1, setting);
     }
+
+    getPageComponentId(){
+        return `__component__${this.os}__${this.sign}`
+    }
+
+    static createPageComponentId(os: string, sign: string){
+        return `__component__${os}__${sign}`
+    }
+
+    static readonly RootComponentSign = "__Root__";
 }

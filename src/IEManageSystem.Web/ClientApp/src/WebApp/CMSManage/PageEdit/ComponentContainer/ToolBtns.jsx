@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import { setActiveComponent, RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
+import { setActiveComponent } from 'BaseCMSManage/IEReduxs/Actions'
+import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import { Button, Popover, Input, Tag, Select, Tooltip } from 'antd'
@@ -140,7 +141,7 @@ class ToolBtns extends React.Component {
                                 shape='circle'
                                 icon={<ArrowUpOutlined />}
                                 onClick={(e) => {
-                                    if (RootComponentSign == this.props.pageComponent.parentSign) {
+                                    if (PageComponentModel.RootComponentSign == this.props.pageComponent.parentSign) {
                                         return false;
                                     }
 

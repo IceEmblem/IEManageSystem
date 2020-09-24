@@ -2,7 +2,7 @@ import React from 'react';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox';
 import IocContainer from 'Core/IocContainer';
 import { IBasicSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
-import { RootComponentSign } from 'BaseCMSManage/IEReduxs/Actions'
+import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import { SketchPicker } from 'react-color'
 
 import { Input, Tag, InputNumber, Button, Radio } from 'antd';
@@ -353,7 +353,7 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     </div>
                 </div>
                 <div className="col-md-6 bg-light mb-3">
-                    <label>父组件标识 <small style={{ color: "#0005" }}>如果想把组件放在在根下面，请填写 {RootComponentSign}</small> ：</label>
+                    <label>父组件标识 <small style={{ color: "#0005" }}>如果想把组件放在在根下面，请填写 {PageComponentModel.RootComponentSign}</small> ：</label>
                     <div className="input-group mb-3">
                         <Input
                             placeholder="父组件标识"

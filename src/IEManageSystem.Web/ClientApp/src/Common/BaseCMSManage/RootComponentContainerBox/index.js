@@ -2,9 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ComponentContainerBox from '../ComponentContainerBoxs'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import {
-    RootComponentSign,
-} from 'BaseCMSManage/IEReduxs/Actions'
+import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import ComponentContext from '../ComponentContext'
 
 class RootComponentContainerBox extends React.Component {
@@ -50,7 +48,7 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
     return {
         pageId: pageId,
-        rootPageComponent: state.pageComponents[pageId] && state.pageComponents[pageId][os][RootComponentSign],
+        rootPageComponent: state.pageComponents[pageId] && state.pageComponents[pageId][os][PageComponentModel.RootComponentSign],
     }
 }
 

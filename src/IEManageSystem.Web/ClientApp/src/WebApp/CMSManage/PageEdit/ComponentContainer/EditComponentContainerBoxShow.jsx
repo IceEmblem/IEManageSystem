@@ -5,6 +5,7 @@ import ToolBtns from './ToolBtns';
 
 import { setActiveComponent } from 'BaseCMSManage/IEReduxs/Actions'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
+import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 class EditComponentContainerBoxShow extends React.Component {
     render() {
@@ -12,7 +13,7 @@ class EditComponentContainerBoxShow extends React.Component {
             style={{ ...this.props.style }}
             className={`${this.props.className} pageedit-componentcontainer`}
             propsEX={{
-                id: `__component__${this.props.currentPageAndPost.os}__${this.props.sign}`,
+                id: PageComponentModel.createPageComponentId(this.props.currentPageAndPost.os, this.props.sign),
                 onClick: (e) => {
                     if (e.stopPropagation) 
                     { 

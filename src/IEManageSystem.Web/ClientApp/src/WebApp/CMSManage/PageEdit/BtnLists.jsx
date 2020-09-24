@@ -2,16 +2,14 @@ import React from 'react';
 import ListBtn from 'Common/ListBtn'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Animate } from 'react-move'
-import { easeCubicInOut } from 'd3-ease'
 
 import { Button, Popover, Input, Tag, Select, Tooltip } from 'antd';
 import { PlusCircleOutlined, InfoCircleOutlined, SyncOutlined, SaveOutlined, VerticalAlignBottomOutlined, CopyOutlined } from "@ant-design/icons"
 
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import { setPage, CopyComponentAction, RootComponentSign, } from 'BaseCMSManage/IEReduxs/Actions'
+import { setPage, CopyComponentAction, } from 'BaseCMSManage/IEReduxs/Actions'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import PageComponentModel, { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import {
     pageComponentUpdateFetch,
@@ -21,6 +19,8 @@ import IocContainer from 'Core/IocContainer'
 
 import Theme from 'BaseLayout/Theme'
 
+import { Motion, spring, presets } from 'react-motion'
+
 import "./BtnLists.css";
 
 const { Option } = Select;
@@ -28,7 +28,7 @@ const { Option } = Select;
 const AddComponentBtn = (props) => {
     return <Button
         icon={<PlusCircleOutlined />}
-        style={{backgroundColor: Theme.color1, borderColor: Theme.color1}}
+        style={{ backgroundColor: Theme.color1, borderColor: Theme.color1 }}
         onClick={props.onClick}
     >添加组件</Button>
 }
@@ -138,96 +138,82 @@ class BtnLists extends React.Component {
 
     render() {
         return (
-            <div className="PageContainer-btnlists">
-                <div className="PageContainer-btnlists-bnts d-flex">
-                    <Animate
-                        start={() => ({
-                            x: this.state.open ? 100 : 0,
-                        })}
-
-                        update={[
-                            {
-                                x: [this.state.open ? 100 : 0],
-                                timing: { duration: 500, ease: easeCubicInOut },
-                            }
-                        ]}
-                    >
-                        {(state) => {
-                            const { x } = state
-                            return (
-                                <div className="d-flex justify-content-end overflow-hidden-x" style={{ width: `${x}%` }}>
-                                    <this.ContainerConfigBtnComponent
-                                        sign={RootComponentSign}
-                                        currentPageAndPost={this.props.currentPageAndPost}
-                                        btnComponent={AddComponentBtn}
-                                    />
-                                    <Popover
-                                        content={<Layout
-                                            pages={this.state.pages}
-                                            onChange={this.selectPageLayout}
-                                        />}
-                                        title="Title"
-                                        trigger="click">
-                                        <Button
-                                            icon={<VerticalAlignBottomOutlined />}
-                                            style={{backgroundColor: Theme.color2, borderColor: Theme.color2}}
-                                        >导入模板</Button>
-                                    </Popover>
-                                    <Popover content={<PageInfo page={this.props.page} />} title="页面信息" trigger="click">
-                                        <Button
-                                            icon={<InfoCircleOutlined />}
-                                            style={{backgroundColor: Theme.color3, borderColor: Theme.color3}}
-                                        >页面信息</Button>
-                                    </Popover>
+            <div className="PageContainer-btnlists align-items-center d-flex">
+                <Motion style={{ x: spring(this.state.open ? 660 : 0, presets.gentle), }}>
+                    {interpolatingStyle => {
+                        return (
+                            <div className="d-flex justify-content-between overflow-hidden-x" style={{ width: `${interpolatingStyle.x}px` }}>
+                                <this.ContainerConfigBtnComponent
+                                    sign={PageComponentModel.RootComponentSign}
+                                    currentPageAndPost={this.props.currentPageAndPost}
+                                    btnComponent={AddComponentBtn}
+                                />
+                                <Popover
+                                    content={<Layout
+                                        pages={this.state.pages}
+                                        onChange={this.selectPageLayout}
+                                    />}
+                                    title="Title"
+                                    trigger="click">
                                     <Button
-                                        icon={<SyncOutlined />}
-                                        style={{backgroundColor: Theme.color4, borderColor: Theme.color4}}
-                                        onClick={() => {
-                                            this.props.exportPage();
-                                        }}
-                                    >导出页面</Button>
-                                    <Popover
-                                        content={<OSType
-                                            page={this.props.page}
-                                            importWebComponent={() => {
-                                                if (this.props.currentPageAndPost.os == PageComponentOSType.Web) {
-                                                    return;
-                                                }
-                                                this.props.copyComponent(this.props.currentPageAndPost.os, PageComponentOSType.Web)
-                                            }}
-                                            importNativeComponent={() => {
-                                                if (this.props.currentPageAndPost.os == PageComponentOSType.Native) {
-                                                    return;
-                                                }
-                                                this.props.copyComponent(this.props.currentPageAndPost.os, PageComponentOSType.Native)
-                                            }}
-                                        />}
-                                        title="平台信息"
-                                        trigger="click"
-                                    >
-                                        <Button
-                                            icon={<InfoCircleOutlined />}
-                                            style={{backgroundColor: Theme.color5, borderColor: Theme.color5}}
-                                        >平台选择</Button>
-                                    </Popover>
+                                        icon={<VerticalAlignBottomOutlined />}
+                                        style={{ backgroundColor: Theme.color2, borderColor: Theme.color2 }}
+                                    >导入模板</Button>
+                                </Popover>
+                                <Popover content={<PageInfo page={this.props.page} />} title="页面信息" trigger="click">
                                     <Button
-                                        type="primary"
-                                        icon={<SaveOutlined />}
-                                        onClick={() => {
-                                            this.props.pageComponentUpdateFetch();
+                                        icon={<InfoCircleOutlined />}
+                                        style={{ backgroundColor: Theme.color3, borderColor: Theme.color3 }}
+                                    >页面信息</Button>
+                                </Popover>
+                                <Button
+                                    icon={<SyncOutlined />}
+                                    style={{ backgroundColor: Theme.color4, borderColor: Theme.color4 }}
+                                    onClick={() => {
+                                        this.props.exportPage();
+                                    }}
+                                >导出页面</Button>
+                                <Popover
+                                    content={<OSType
+                                        page={this.props.page}
+                                        importWebComponent={() => {
+                                            if (this.props.currentPageAndPost.os == PageComponentOSType.Web) {
+                                                return;
+                                            }
+                                            this.props.copyComponent(this.props.currentPageAndPost.os, PageComponentOSType.Web)
                                         }}
-                                    >提交页面</Button>
-                                </div>
-                            )
-                        }}
-                    </Animate>
-                    <div className="d-flex align-items-center">
-                        <ListBtn
-                            open={this.state.open}
-                            className=""
-                            onClick={() => { this.setState({ open: !this.state.open }) }}
-                        />
-                    </div>
+                                        importNativeComponent={() => {
+                                            if (this.props.currentPageAndPost.os == PageComponentOSType.Native) {
+                                                return;
+                                            }
+                                            this.props.copyComponent(this.props.currentPageAndPost.os, PageComponentOSType.Native)
+                                        }}
+                                    />}
+                                    title="平台信息"
+                                    trigger="click"
+                                >
+                                    <Button
+                                        icon={<InfoCircleOutlined />}
+                                        style={{ backgroundColor: Theme.color5, borderColor: Theme.color5 }}
+                                    >平台选择</Button>
+                                </Popover>
+                                <Button
+                                    type="primary"
+                                    icon={<SaveOutlined />}
+                                    onClick={() => {
+                                        this.props.pageComponentUpdateFetch();
+                                    }}
+                                >提交页面</Button>
+                            </div>
+                        )
+                    }}
+                </Motion>
+                <div className="d-flex align-items-center">
+                    <ListBtn
+                        open={this.state.open}
+                        className=""
+                        onClick={() => { this.setState({ open: !this.state.open }) }}
+                    />
                 </div>
             </div>
         );
