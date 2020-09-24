@@ -20,6 +20,8 @@ const componentDescribeBuilder = (component, preview, settingConfig, dataConfig)
         height: '100px'
     }
 
+    componentDescribe.paste = (pastePageComponent, curPageComponent, curPageComponentChilds) => ({message: "", isPass: true});
+
     return componentDescribe;
 }
 export default componentDescribeBuilder;

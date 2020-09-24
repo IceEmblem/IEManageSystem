@@ -34,7 +34,13 @@ export default class ComponentDescribe {
         this.displayName = displayName || name;
         this.logicCode = undefined;
         this.defauleStyle = { minHeight: 20 };
+        // 基本设置初始值
         this.pageComponentBaseSetting = undefined;
+        // 粘贴操作
+        // 当有组件要粘贴到当前组件时, 我们将会调用该方法, 返回 false 表示不运行粘贴
+        // 你可以在该方法中修改要粘贴的 pageComponent
+        // 参数: pastePageComponent 要粘贴的组件, curPageComponent 当前组件, currentPageComponentChilds 当前组件所拥有的子组件
+        this.paste = (pastePageComponent, curPageComponent, curPageComponentChilds) => ({message: "当前组件不支持粘贴操作", isPass: false});
     }
 
     createPageComponent(parentSign, os) {

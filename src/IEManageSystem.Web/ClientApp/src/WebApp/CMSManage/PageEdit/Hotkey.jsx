@@ -16,27 +16,30 @@ class Hotkey extends React.Component {
     }
 
     keyDown = (e) => {
-        e.preventDefault();
         var ctrlKey = e.ctrlKey || e.metaKey;
+        if(!ctrlKey){
+            return;
+        }
 
-        if (ctrlKey && e.keyCode == 37) {
+        if (e.keyCode == 37) {
+            e.preventDefault();
             this.toLeft();
-            return false;
+            return;
         }
-
-        if (ctrlKey && e.keyCode == 38) {
+        else if (e.keyCode == 38) {
+            e.preventDefault();
             this.toUp();
-            return false;
+            return;
         }
-
-        if (ctrlKey && e.keyCode == 39) {
+        else if (e.keyCode == 39) {
+            e.preventDefault();
             this.toRight();
-            return false;
+            return;
         }
-
-        if (ctrlKey && e.keyCode == 40) {
+        else if (e.keyCode == 40) {
+            e.preventDefault();
             this.toDown();
-            return false;
+            return;
         }
     }
 
@@ -112,7 +115,7 @@ class Hotkey extends React.Component {
             return <></>
         }
 
-        return <div style={{position: 'fixed', bottom: 60, left: 40}}>
+        return <div>
             <Popover content={<>
                 <div className='mb-1'>向上：Ctrl + Up</div>
                 <div className='mb-1'>向下：Ctrl + Down</div>

@@ -25,6 +25,7 @@ import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 import RNPageLayout from 'Adapters/RNPageLayout'
 
 import Hotkey from './Hotkey'
+import ClipBoard from './ClipBoard'
 
 const RNPageRootId = '__PageEditRN__';
 const RNPage = (props) => {
@@ -126,9 +127,15 @@ class PageContainer extends React.Component {
                 <BtnLists
                     currentPageAndPost={currentPageAndPost}
                 />
-                <Hotkey 
-                    currentPageAndPost={currentPageAndPost}
-                />
+                <div style={{ display: 'flex', position: 'fixed', bottom: 60, left: 40 }}>
+                    <ClipBoard
+                        currentPageAndPost={currentPageAndPost}
+                    />
+                    <Hotkey
+                        currentPageAndPost={currentPageAndPost}
+                    />
+                </div>
+
             </div>
         );
     }
