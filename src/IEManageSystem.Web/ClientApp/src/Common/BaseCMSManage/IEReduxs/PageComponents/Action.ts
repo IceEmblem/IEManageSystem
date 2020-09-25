@@ -40,6 +40,16 @@ export class EditComponentAction extends ComponentAction {
   }
 }
 
+// 直接设置页面组件数据
+export const SetPageComponents = "SetPageComponents"
+export class SetPageComponentsAction extends ComponentAction {
+  type = SetPageComponents;
+
+  constructor(public pageId: number, public os: string, public pageComponents: any) {
+    super();
+  }
+}
+
 // 从一个平台拷贝组件到另一个平台
 export const CopyComponent = "CopyComponent"
 export class CopyComponentAction extends ComponentAction {

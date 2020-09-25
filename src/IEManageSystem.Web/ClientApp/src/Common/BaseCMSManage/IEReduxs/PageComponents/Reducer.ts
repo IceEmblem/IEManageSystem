@@ -7,6 +7,8 @@ import {
     EditComponentAction,
     CopyComponent,
     CopyComponentAction,
+    SetPageComponents,
+    SetPageComponentsAction,
 } from './Action';
 import { PageReceive, SetPage } from '../Actions'
 import CreatePageComponentService from '../../Models/Pages/CreatePageComponentService'
@@ -107,7 +109,7 @@ function addComponent(state: object, action: AddComponentAction): object {
     pageComponents[action.pageComponent.parentSign] = setChildComponentSigns(pageComponents, pageComponents[action.pageComponent.parentSign]);
     setPageComponentModel(pageComponents[action.pageComponent.parentSign]);
 
-    // 更新页面组件数组
+    // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
     state[action.pageId][action.os] = pageComponents;
 
     return state;
@@ -128,6 +130,7 @@ function removeComponent(state: object, action: RemoveComponentAction): object {
     pageComponents[parentSign] = setChildComponentSigns(pageComponents, pageComponents[parentSign]);
     setPageComponentModel(pageComponents[parentSign]);
 
+    // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
     state[action.pageId][action.os] = pageComponents;
 
     return state;
@@ -168,6 +171,7 @@ function editComponent(state: object, action: EditComponentAction): object {
     pageComponents[newParentSign] = setChildComponentSigns(pageComponents, pageComponents[newParentSign]);
     setPageComponentModel(pageComponents[newParentSign]);
 
+    // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
     state[action.pageId][action.os] = pageComponents;
 
     return state;
@@ -268,6 +272,13 @@ function setPage(state: object, action){
     return state;
 }
 
+// 设置页面组件 case reducer
+function setPageComponents(state: object, action: SetPageComponentsAction){
+    state[action.pageId][action.os] = action.pageComponents;
+
+    return state;
+}
+
 export default function reducer(state = {}, action) {
     // 添加组件
     if (action.type == PageAddComponent) {
@@ -297,6 +308,10 @@ export default function reducer(state = {}, action) {
     // 设置页面，执行逻辑与 页面接收动作 相似，但可针对不同平台
     if(action.type == SetPage){
         return setPage(state, action);
+    }
+
+    if(action.type == SetPageComponents){
+        return setPageComponents(state, action);
     }
 
     return state;

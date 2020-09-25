@@ -1,10 +1,12 @@
 import {
     DefaultComponentDataUpdate,
-    DefaultComponentDataUpdateAction
+    DefaultComponentDataUpdateAction,
+    SetDefaultComponentDatas,
+    SetDefaultComponentDatasAction
 } from './Action'
 import {
     PageReceive,
-    SetPage
+    SetPage,
 } from '../Actions'
 import {
     FetchAction
@@ -20,10 +22,11 @@ function setComponentDataModel(componentDataData: any) {
 }
 
 function defaultComponentDataUpdate(state, action: DefaultComponentDataUpdateAction) {
-    let defaultComponentDatas = state[action.pageId];
+    let defaultComponentDatas = {...state[action.pageId]};
     defaultComponentDatas[action.sign] = { ...defaultComponentDatas[action.sign], ...action.componentData };
     setComponentDataModel(defaultComponentDatas[action.sign]);
 
+    state[action.pageId] = defaultComponentDatas;
     return state;
 }
 
@@ -64,6 +67,16 @@ function setPage(state, action) {
     return state;
 }
 
+// 设置页面默认数据 case reducer
+function setDefaultComponentDatas(state, action: SetDefaultComponentDatasAction) {
+    // Object.keys(action.defaultComponentDatas).forEach(key => {
+    //     setComponentDataModel(action.defaultComponentDatas[key]);
+    // })
+    state[action.pageId] = action.defaultComponentDatas;
+
+    return state;
+}
+
 export default function Reducer(state = {}, action) {
     // 组件数据更新
     if (action.type == DefaultComponentDataUpdate) {
@@ -78,6 +91,11 @@ export default function Reducer(state = {}, action) {
     // 设置页面
     if (action.type == SetPage) {
         return setPage(state, action)
+    }
+
+    // 设置默认数据
+    if(action.type == SetDefaultComponentDatas){
+        return setDefaultComponentDatas(state, action);
     }
 
     return state;

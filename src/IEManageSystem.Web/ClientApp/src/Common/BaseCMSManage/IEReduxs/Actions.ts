@@ -1,27 +1,8 @@
 import { createIEThunkAction } from 'Core/IEReduxs/Actions'
-import { ComponentDataUpdateAction } from './ContentComponentDatas/Action';
-import { DefaultComponentDataUpdateAction } from './DefaultComponentDatas/Action';
-import {
-  AddComponentAction,
-  RemoveComponentAction,
-  EditComponentAction,
-  CopyComponentAction,
-} from './PageComponents/Action';
-import {
-  menuFetch,
-  UpdateMenuAction
-} from './Menus/Action'
-
-export {
-  ComponentDataUpdateAction,
-  DefaultComponentDataUpdateAction,
-  AddComponentAction,
-  RemoveComponentAction,
-  EditComponentAction,
-  CopyComponentAction,
-  menuFetch,
-  UpdateMenuAction
-}
+export * from './ContentComponentDatas/Action';
+export * from './DefaultComponentDatas/Action';
+export * from './PageComponents/Action';
+export * from './Menus/Action'
 
 // 设置当前活跃的组件
 export const SetActiveComponent = "SetActiveComponent";

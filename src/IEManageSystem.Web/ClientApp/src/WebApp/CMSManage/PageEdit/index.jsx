@@ -26,6 +26,7 @@ import RNPageLayout from 'Adapters/RNPageLayout'
 
 import Hotkey from './Hotkey'
 import ClipBoard from './ClipBoard'
+import CancelAndReload from './CancelAndReload'
 
 const RNPageRootId = '__PageEditRN__';
 const RNPage = (props) => {
@@ -128,6 +129,9 @@ class PageContainer extends React.Component {
                     currentPageAndPost={currentPageAndPost}
                 />
                 <div style={{ display: 'flex', position: 'fixed', bottom: 60, left: 40 }}>
+                    <CancelAndReload 
+                        currentPageAndPost={currentPageAndPost}
+                    />
                     <ClipBoard
                         currentPageAndPost={currentPageAndPost}
                     />
