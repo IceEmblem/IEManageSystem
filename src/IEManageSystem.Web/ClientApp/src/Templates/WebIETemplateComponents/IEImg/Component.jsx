@@ -22,7 +22,7 @@ class Component extends IComponent {
             }}
         >
             <div className='w-100 d-flex justify-content-center'>
-                <img alt="未找到图片" src={this.props.interactivText || data.imgUrl || nofindJpg} style={this.getImgStyle()}></img>
+                <img alt="未找到图片" src={this.props.interactivText || data.imgUrl || nofindJpg} style={{...this.getImgStyle(), ...{objectFit: 'cover'}}}></img>
             </div>
             <div style={{
                 left: 0,
