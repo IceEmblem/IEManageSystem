@@ -20,7 +20,7 @@ class Component extends IComponent {
             underlayColor='#0004'
         >
             <View style={{ alignItems: 'center' }}>
-                <Image source={{ uri: WebUrl.handleWeburl(data.imgUrl) }} style={StyleCheck.handle(this.getImgStyle())} />
+                <Image source={{ uri: WebUrl.handleWeburl(this.getImgUrl()) }} style={StyleCheck.handle(this.getImgStyle())} />
                 <View
                     style={{
                         left: 0,

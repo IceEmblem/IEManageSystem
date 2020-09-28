@@ -29,28 +29,19 @@ class Component extends IComponent {
         </div>
     }
 
-    createItem(singleData, setting) {
-        return (
-            <div>
-                {
-                    this.props.isExitChild ?
-                        <this.props.ChildComponent
-                            interactivConfigFeature={this.getInteractivConfigFeature(singleData)}
-                        />
-                        : this.defaultItem(singleData, setting)
-                }
-            </div>
-        );
-    }
-
     render() {
         let data = this.getCurrentData();
         let setting = this.getCurrentSetting();
+        let ChildComponents = this.props.children;
 
         return (
             <div style={{ width: "0px", flexGrow: 1 }}>
                 <Carousel autoplay>
-                    {data.getDatas().map(item => this.createItem(item, setting))}
+                    {
+                        ChildComponents.length > 0 ?
+                            ChildComponents.map(item => (<div>{item}</div>)) :
+                            data.getDatas().map(item => (<div>{this.defaultItem(item, setting)}</div>))
+                    }
                 </Carousel >
             </div>
         );

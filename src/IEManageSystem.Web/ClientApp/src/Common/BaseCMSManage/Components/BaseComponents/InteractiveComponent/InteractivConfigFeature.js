@@ -1,24 +1,52 @@
 export class InteractivConfigFeatureTextItem {
     name = undefined;
     displayName = undefined;
-    getText = undefined;
+    // (data) => string
+    getData = undefined;
 
-    constructor(name, displayName, getText){
+    constructor(name, displayName, getData){
         this.name = name;
         this.displayName = displayName;
-        this.getText = getText;
+        this.getData = getData;
+    }
+}
+
+export class InteractivConfigFeatureUrlItem {
+    name = undefined;
+    displayName = undefined;
+    // (data) => string
+    getData = undefined;
+
+    constructor(name, displayName, getData){
+        this.name = name;
+        this.displayName = displayName;
+        this.getData = getData;
     }
 }
 
 export class InteractivConfigFeatureClickItem {
     name = undefined;
     displayName = undefined;
-    getClick = undefined;
+    // (data) => return () => void;
+    getData = undefined;
 
-    constructor(name, displayName, getClick){
+    constructor(name, displayName, getData){
         this.name = name;
         this.displayName = displayName;
-        this.getClick = getClick;
+        this.getData = getData;
+    }
+}
+
+export class InteractivConfigFeatureInputItem {
+    name = undefined;
+    displayName = undefined;
+    // (data) => return (value) => void;
+    getData = undefined;
+
+    constructor(name, displayName, getData){
+        this.name = name;
+        this.displayName = displayName;
+        this.getData = getData;
     }
 }
 
@@ -35,12 +63,8 @@ export default class InteractivConfigFeature {
         this.data = data;
     }
 
-    getText(name){
-        return this._items[name].getText(this.data);
-    }
-
-    getClick(name){
-        return this._items[name].getClick(this.data);
+    getData(name){
+        return this._items[name].getData(this.data);
     }
 
     getClicks(){
@@ -49,6 +73,14 @@ export default class InteractivConfigFeature {
 
     getTexts(){
         return Object.values(this._items).filter(e=>e instanceof InteractivConfigFeatureTextItem);
+    }
+
+    getUrls(){
+        return Object.values(this._items).filter(e=>e instanceof InteractivConfigFeatureUrlItem);
+    }
+    
+    getInputs(){
+        return Object.values(this._items).filter(e=>e instanceof InteractivConfigFeatureInputItem);
     }
 }
 

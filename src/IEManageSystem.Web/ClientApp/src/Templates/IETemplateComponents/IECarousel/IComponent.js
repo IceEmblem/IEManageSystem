@@ -4,7 +4,8 @@ import Data from './Data'
 import defaultImg from 'images/nofind.jpg'
 
 import InteractivConfigFeature, {
-    InteractivConfigFeatureTextItem
+    InteractivConfigFeatureTextItem,
+    InteractivConfigFeatureUrlItem
 } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractivConfigFeature'
 
 export default class Component extends IComponent{
@@ -18,7 +19,7 @@ export default class Component extends IComponent{
 
     getInteractivConfigFeature(singleData){
         return new InteractivConfigFeature([
-            new InteractivConfigFeatureTextItem('imgurl', '走马灯-图片Url', (data) => data.img || defaultImg),
+            new InteractivConfigFeatureUrlItem('imgurl', '走马灯-图片Url', (data) => data.img || defaultImg),
             new InteractivConfigFeatureTextItem('title', '走马灯-标题', (data) => data.title),
             new InteractivConfigFeatureTextItem('content', '走马灯-内容', (data) => data.content),
         ], singleData)

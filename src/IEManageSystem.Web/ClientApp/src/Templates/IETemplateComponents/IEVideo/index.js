@@ -2,7 +2,7 @@ import BaseComponentObject, { ComponentSettingConfig } from 'BaseCMSManage/Compo
 import ComponentDataConfig from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
 import ContainerConfig from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
 import ComponentDescribe, { componentType } from 'BaseCMSManage/Components/ComponentDescribe'
-import InteractiveComponentConfig, { InteractiveType } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
+import InteractiveComponentConfig from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
 
 class ComponentObject extends BaseComponentObject {
     constructor(component, preview, settingConfig, dataConfig) {

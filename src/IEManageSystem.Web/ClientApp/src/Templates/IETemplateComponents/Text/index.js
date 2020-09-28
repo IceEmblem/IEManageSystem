@@ -2,13 +2,14 @@ import BaseComponentObject, { ComponentSettingConfig, FontComponentSettingConfig
 import ComponentDataConfig from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
 import ContainerConfig from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
 import ComponentDescribe, { componentType } from 'BaseCMSManage/Components/ComponentDescribe'
-import InteractiveComponentConfig, { InteractiveType } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
+import InteractiveComponentConfig from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
+import InteractiveType from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveType'
 
 class ComponentObject extends BaseComponentObject {
     constructor(component, preview, settingConfig, dataConfig) {
         super();
         this.ComponentSettingConfigs = [
-            new InteractiveComponentConfig([InteractiveType.text]),
+            new InteractiveComponentConfig([InteractiveType.text()]),
             new ContainerConfig(1),
             new ComponentSettingConfig("Setting", "文本设置", settingConfig),
             new FontComponentSettingConfig(),

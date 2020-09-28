@@ -4,12 +4,14 @@ import ComponentDescribe, { componentType } from 'BaseCMSManage/Components/Compo
 import ContainerConfig from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
 import InteractiveComponentConfig from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
 import ComponentSettingConfig from 'BaseCMSManage/Components/BaseComponents/BaseComponent/ComponentSettingConfig'
+import InteractiveType from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveType'
+
 
 class ComponentObject extends BaseComponentObject {
     constructor(component, preview, settingConfig, dataConfig) {
         super();
         this.ComponentSettingConfigs = [
-            new InteractiveComponentConfig(),
+            new InteractiveComponentConfig([InteractiveType.url(), InteractiveType.click()]),
             new ContainerConfig(1),
             new ComponentSettingConfig(undefined, "图片配置", settingConfig),
         ];

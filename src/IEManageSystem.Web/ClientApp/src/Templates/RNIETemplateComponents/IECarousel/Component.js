@@ -60,15 +60,25 @@ class Component extends IComponent {
     render() {
         let data = this.getCurrentData();
         let setting = this.getCurrentSetting();
+        let ChildComponents = this.props.children;
 
         return (
             <View style={[this.baseStyle, StyleCheck.handle({ height: setting.height })]}>
-                <DeckSwiper
-                    dataSource={data.getDatas()}
-                    renderItem={item => {
-                        return this.createItem(item, setting)
-                    }}
-                />
+                {
+                    ChildComponents.length > 0 ?
+                        <DeckSwiper
+                            dataSource={ChildComponents}
+                            renderItem={item => {
+                                return item;
+                            }}
+                        /> :
+                        <DeckSwiper
+                            dataSource={data.getDatas()}
+                            renderItem={item => {
+                                return this.createItem(item, setting)
+                            }}
+                        />
+                }
             </View>
         );
     }

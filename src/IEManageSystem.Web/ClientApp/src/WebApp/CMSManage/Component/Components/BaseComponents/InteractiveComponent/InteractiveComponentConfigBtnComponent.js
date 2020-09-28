@@ -1,13 +1,11 @@
 import React from 'react';
 import IocContainer from 'Core/IocContainer';
-import { IInteractiveComponentConfigBtnComponent, InteractiveType } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
-import { InteractiveComponentConfigName } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/ComponentComponentContainer'
+import { IInteractiveComponentConfigBtnComponent } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
 
 import { Button, Tooltip, Radio, Modal, Tag } from 'antd';
 
 import { ApiOutlined } from '@ant-design/icons';
 import ComponentContext from 'BaseCMSManage/ComponentContext'
-import InteractivConfigFeature from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractivConfigFeature'
 
 import IETool from 'Core/ToolLibrary/IETool'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
@@ -33,49 +31,25 @@ class InteractiveComponentConfigBtnComponent extends IInteractiveComponentConfig
             return <></>
         }
 
-        let pageComponentSettingData = this.state.clonePageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName).getDefauleData();
-        let texts = undefined;
-        if (this.props.interactiveTypes.some(e => e == InteractiveType.text)) {
-            texts = <div className='col-md-12 mb-3'>
-                <Tag color="#55acee">使用的文本</Tag>
+        let items = this.props.interactiveTypes.map(interactiveType => {
+            return <div className='col-md-12 mb-3'>
+                <Tag color="#55acee">{interactiveType.title}</Tag>
                 <Radio.Group
-                    value={pageComponentSettingData.field1}
+                    value={interactiveType.getConfigFeatureItemName(this.state.clonePageComponent)}
                     onChange={(e) => {
-                        pageComponentSettingData.field1 = e.target.value;
+                        interactiveType.setConfigFeatureItemName(this.state.clonePageComponent, e.target.value);
                         this.setState({});
                     }}
                 >
                     <Radio value=''>不使用</Radio>
                     {
-                        interactivConfigFeature.getTexts().map(item => {
-                            return <Radio value={item.name}>{item.displayName}</Radio>
+                        interactiveType.getInteractivConfigFeatureItems(interactivConfigFeature).map(configFeatureItem => {
+                            return <Radio value={configFeatureItem.name}>{configFeatureItem.displayName}</Radio>
                         })
                     }
                 </Radio.Group>
             </div>
-        }
-
-        let clicks = undefined;
-        if (this.props.interactiveTypes.some(e => e == InteractiveType.click)) {
-            clicks =
-                <div className='col-md-12'>
-                    <Tag color="#55acee">使用的点击</Tag>
-                    <Radio.Group
-                        value={pageComponentSettingData.field2}
-                        onChange={(e) => {
-                            pageComponentSettingData.field2 = e.target.value;
-                            this.setState({});
-                        }}
-                    >
-                        <Radio value=''>不使用</Radio>
-                        {
-                            interactivConfigFeature.getClicks().map(item => {
-                                return <Radio value={item.name}>{item.displayName}</Radio>
-                            })
-                        }
-                    </Radio.Group>
-                </div>
-        }
+        })
 
         return (
             <>
@@ -109,8 +83,7 @@ class InteractiveComponentConfigBtnComponent extends IInteractiveComponentConfig
                     zIndex={9999}
                 >
                     <div className='d-flex flex-wrap'>
-                        {texts}
-                        {clicks}
+                        {items}
                     </div>
                 </Modal>
             </>

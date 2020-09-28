@@ -1,6 +1,7 @@
 import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import Data from './Data'
 import Setting from './Setting'
+import nofindJpg from 'images/nofind480x300.jpg'
 
 export default class Component extends IComponent{
     getCurrentData(){
@@ -15,6 +16,10 @@ export default class Component extends IComponent{
         let setting = this.getCurrentSetting();
 
         return { height: setting.imgHeigth, width: setting.imgWidth };
+    }
+
+    getImgUrl(){
+        return this.props.interactivUrl || new Data(this.props.componentData).imgUrl || nofindJpg;
     }
 
     click = () => {

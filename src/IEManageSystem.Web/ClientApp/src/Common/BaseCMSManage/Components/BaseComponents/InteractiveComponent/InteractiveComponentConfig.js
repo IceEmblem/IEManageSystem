@@ -6,19 +6,22 @@ import ComponentContainer from './ComponentComponentContainer'
 export class IInteractiveComponentConfigBtnComponent extends React.Component { }
 IInteractiveComponentConfigBtnComponent.iocKey = Symbol()
 
-export const InteractiveType = {
-    text: 0,
-    click: 1,
-}
-
 export default class InteractiveComponentConfig extends IEditConfig {
-    ComponentContainer = ComponentContainer;
+    ComponentContainer = undefined;
     _interactiveTypes = undefined;
 
-    constructor(interactiveTypes = [InteractiveType.text, InteractiveType.click]){
+    constructor(interactiveTypes = []){
         super();
 
         this._interactiveTypes = interactiveTypes;
+
+        this.ComponentContainer = (component) => (props) => {
+            return <ComponentContainer
+                _containerComponent={component}
+                interactiveTypes={interactiveTypes}
+                {...props}
+            />
+        }
     }
 
     bulidConfigBtnComponent(sign, currentPageAndPost) {

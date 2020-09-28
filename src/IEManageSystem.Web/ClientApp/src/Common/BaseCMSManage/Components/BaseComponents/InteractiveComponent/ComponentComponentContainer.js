@@ -1,9 +1,7 @@
 import React from 'react'
 import ComponentContext from 'BaseCMSManage/ComponentContext'
 
-export const InteractiveComponentConfigName = '__InteractiveComponentConfig__';
-
-class ContainerContain extends React.Component {
+export default class ContainerContain extends React.Component {
     static contextType = ComponentContext;
 
     render() {
@@ -19,22 +17,16 @@ class ContainerContain extends React.Component {
             </Component>
         }
 
-        // 否则获取对应的文本和点击
-        let getTextName = this.props.pageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName).getDefauleData().field1;
-        let getClickName = this.props.pageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName).getDefauleData().field2;
+        // 否则获取对应的数据
+        let propsData = {};
+        this.props.interactiveTypes.forEach(item => {
+            item.setComponentPropsData(this.props.pageComponent, interactivConfigFeature, propsData);
+        });
 
         return <Component
             {...props}
-            interactivText={getTextName && interactivConfigFeature.getText(getTextName)}
-            interactivClick={getClickName && interactivConfigFeature.getClick(getClickName)}
+            {...propsData}
         >
         </Component>
     }
-}
-
-export default (component) => (props) => {
-    return <ContainerContain
-        _containerComponent={component}
-        {...props}
-    />
 }

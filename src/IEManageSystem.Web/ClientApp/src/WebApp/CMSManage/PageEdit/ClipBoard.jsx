@@ -33,7 +33,7 @@ class ClipBoard extends React.Component {
             return;
         }
 
-        if (e.keyCode == 86 && (e.target.localName == 'button' || e.target.localName == 'body')) {
+        if (e.keyCode == 86 && (e.target.localName == 'button' || e.target.localName == 'body' || e.target.localName == 'div')) {
             this.paste();
             return;
         }

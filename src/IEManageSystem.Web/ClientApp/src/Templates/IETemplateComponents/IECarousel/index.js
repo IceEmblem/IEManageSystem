@@ -2,12 +2,13 @@ import BaseComponentObject, {ComponentSettingConfig} from 'BaseCMSManage/Compone
 import ComponentDataConfig from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
 import ComponentDescribe, {componentType} from 'BaseCMSManage/Components/ComponentDescribe'
 import InteractiveContainerConfig from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveContainerConfig'
+import ContainerConfig from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
 
 class ComponentObject extends BaseComponentObject {
     constructor(component, preview, settingConfig, dataConfig) {
         super();
         this.ComponentSettingConfigs = [
-            new InteractiveContainerConfig(),
+            new ContainerConfig(),
             new ComponentSettingConfig(undefined, "幻灯片设置", settingConfig),
         ];
         this.ComponentDataConfig = new ComponentDataConfig(dataConfig);
@@ -18,6 +19,8 @@ class ComponentObject extends BaseComponentObject {
 
 const componentDescribeBuilder = (component, preview, settingConfig, dataConfig) => {
     let componentDescribe = new ComponentDescribe("IECarousel", new ComponentObject(component, preview, settingConfig, dataConfig), componentType.text, "IE走马灯")
+
+    componentDescribe.paste = (pastePageComponent, curPageComponent, curPageComponentChilds) => ({message: "", isPass: true});
 
     return componentDescribe;
 }

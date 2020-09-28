@@ -1,12 +1,14 @@
 import BaseComponentObject, { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent';
 import ComponentDescribe, { componentType } from 'BaseCMSManage/Components/ComponentDescribe'
 import InteractiveComponentConfig from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
+import InteractiveType from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveType'
+
 
 class ComponentObject extends BaseComponentObject {
     constructor(component, preview, settingConfig, dataConfig) {
         super();
         this.ComponentSettingConfigs = [
-            new InteractiveComponentConfig(),
+            new InteractiveComponentConfig([InteractiveType.text(), InteractiveType.click()]),
             new ComponentSettingConfig("BtnSetting", "按钮设置", settingConfig),
         ];
         this.Component = component;

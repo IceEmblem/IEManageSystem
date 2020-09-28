@@ -1,7 +1,8 @@
 import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/BaseComponent'
 import InteractivConfigFeature, {
     InteractivConfigFeatureClickItem,
-    InteractivConfigFeatureTextItem
+    InteractivConfigFeatureTextItem,
+    InteractivConfigFeatureUrlItem,
 } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractivConfigFeature'
 import Setting from 'IETemplateComponents/IEPostList/Setting'
 import defaultImg from 'images/default_post_img.jpg'
@@ -22,7 +23,7 @@ export default class Component extends IComponent{
 
     getItemInteractivConfigFeature(data){
         return new InteractivConfigFeature([
-            new InteractivConfigFeatureTextItem('imgUrl', '图标地址', (data) => (data.imageList.length > 0 && data.imageList[0] ? data.imageList[0] : defaultImg)),
+            new InteractivConfigFeatureUrlItem('imgUrl', '图标地址', (data) => (data.imageList.length > 0 && data.imageList[0] ? data.imageList[0] : defaultImg)),
             new InteractivConfigFeatureTextItem('postTitle', '文章标题', (data) => data.title),
             new InteractivConfigFeatureTextItem('postDescribe', '文章描述', (data) => data.describe || "暂无简介"),
             new InteractivConfigFeatureTextItem('postScore', '文章评分', (data) => data.score || '0'),
