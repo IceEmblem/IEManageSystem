@@ -29,10 +29,9 @@ namespace IEManageSystem.Tests.TestDatas
             new ApiScopeBuilder(_context).Build();
             _context.SaveChanges();
 
-            new PageBuilder(_context).Build();
+            new ContentPagePermissionCollectionBuilder(_context).Build();
             _context.SaveChanges();
-            new PageComponentBuilder(_context).Build();
-            _context.SaveChanges();
+
             new PageDataBuilder(_context).Build();
             _context.SaveChanges();
 

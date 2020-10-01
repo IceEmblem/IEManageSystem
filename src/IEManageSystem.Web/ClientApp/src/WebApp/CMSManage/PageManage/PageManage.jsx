@@ -5,7 +5,7 @@ import { ResourceDescribeValueType } from 'Common/ResourceForm/ResourceDescribeV
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 import PostPermissionEdit from './PostPermissionEdit'
 
-import { Modal, Button } from 'antd'
+import { Modal, Button, message } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 
 const pageType = {
@@ -66,11 +66,11 @@ class PageManage extends React.Component {
 	getDescribes() {
 		return [
 			{ name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: false },
-			{ name: "name", text: "页面名称", isEditCanEdit: false, isName: true, isShowOnList: true },
+			{ name: "name", text: "页面名称", isId: true, isEditCanEdit: false, isName: true, isShowOnList: true },
 			{ name: "displayName", text: "显示名称", isShowOnList: true },
 			{ name: "description", text: "页面描述", isShowOnList: true },
 			{
-				name: "pageType", text: "页面类型", isShowOnList: true,
+				name: "discriminator", text: "页面类型", isShowOnList: true,
 				valueType: ResourceDescribeValueType.radio,
 				valueTexts: [{ value: pageType.StaticPage, text: "单篇页面" }, { value: pageType.ContentPage, text: "文章页面" }],
 				isEditCanEdit: false
@@ -98,7 +98,8 @@ class PageManage extends React.Component {
 
 	// Resource组件添加资源通知
 	addResource(resource) {
-		if (!resource.pageType) {
+		if (!resource.discriminator) {
+			message.error("页面类型是必须的")
 			return;
 		}
 
@@ -113,7 +114,10 @@ class PageManage extends React.Component {
 
 	// Resource组件更新资源通知
 	updateResource(resource) {
-		let postData = resource;
+		let postData = {
+			page: resource,
+			pageCompleteJson: null
+		};
 
 		ieReduxFetch("/api/PageManage/UpdatePage", postData)
 			.then(value => {

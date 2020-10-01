@@ -43,7 +43,7 @@ class ComponentDataConfigBtnComponent extends IComponentDataConfigBtnComponent {
                 visible={this.state.visible}
                 onOk={() => {
                     if (!this.props.currentPageAndPost.pageDataId) {
-                        this.props.editDefaultComponentData(new DefaultComponentDataUpdateAction(this.props.currentPageAndPost.pageId, this.props.sign, this.state.cloneComponentData))
+                        this.props.editDefaultComponentData(new DefaultComponentDataUpdateAction(this.props.currentPageAndPost.pageName, this.props.sign, this.state.cloneComponentData))
                     }
                     else {
                         this.props.editComponentData(new ComponentDataUpdateAction(this.props.currentPageAndPost.pageDataId, this.state.cloneComponentData))
@@ -71,7 +71,7 @@ class ComponentDataConfigBtnComponent extends IComponentDataConfigBtnComponent {
 }
 
 ComponentDataConfigBtnComponent.propTypes = {
-    pageId: PropTypes.number.isRequired,
+    pageName: PropTypes.string.isRequired,
     pageDataId: PropTypes.number,
     os: PropTypes.string.isRequired,
     sign: PropTypes.string.isRequired,
@@ -82,13 +82,13 @@ ComponentDataConfigBtnComponent.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let pageDataId = ownProps.currentPageAndPost.pageDataId;
     let os = ownProps.currentPageAndPost.os;
 
-    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
+    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
     // 新增属性 parentSign
-    let defaultComponentData = state.defaultComponentDatas[pageId][ownProps.sign];
+    let defaultComponentData = state.defaultComponentDatas[pageName][ownProps.sign];
     let contentComponentData = undefined;
     if (state.contentComponentDatas[pageDataId]) {
         contentComponentData = state.contentComponentDatas[pageDataId][ownProps.sign];

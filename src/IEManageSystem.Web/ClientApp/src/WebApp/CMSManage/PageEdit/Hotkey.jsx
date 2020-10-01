@@ -158,7 +158,7 @@ class Hotkey extends React.Component {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
         activePageComponentSign: state.activePageComponentSign,
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageId][ownProps.currentPageAndPost.os],
+        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os],
     }
 }
 

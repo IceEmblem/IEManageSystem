@@ -59,10 +59,7 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         /// </summary>
         public DateTime CreationTime { get; set; }
 
-        public PageBase Page { get; set; }
-
-        [ForeignKey("Page")]
-        public int PageId { get; set; }
+        public string PageName { get; set; }
 
         public ICollection<Tag> Tags { get; set; }
 

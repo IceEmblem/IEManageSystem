@@ -43,12 +43,12 @@ RootComponentContainerBox.propTypes = {
 
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let os = ownProps.currentPageAndPost.os;
 
     return {
-        pageId: pageId,
-        rootPageComponent: state.pageComponents[pageId] && state.pageComponents[pageId][os][PageComponentModel.RootComponentSign],
+        pageName: pageName,
+        rootPageComponent: state.pageComponents[pageName] && state.pageComponents[pageName][os][PageComponentModel.RootComponentSign],
     }
 }
 

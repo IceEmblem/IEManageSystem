@@ -6,15 +6,15 @@ import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
 const pageDataModel = PageDataModel.CreatePageDataModel();
 
 export const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let pageDataId = ownProps.currentPageAndPost.pageDataId;
     let os = ownProps.currentPageAndPost.os;
 
-    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
+    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
 
     return {
         pageComponent: pageComponent,
-        page: state.pages[pageId],
+        page: state.pages[pageName],
         pageData: state.pageDatas[pageDataId] || pageDataModel,
     }
 }

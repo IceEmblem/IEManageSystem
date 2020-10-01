@@ -1,4 +1,3 @@
-import EntityEdit from "../EntityEdit";
 import PageComponentBaseSettingModel from "./PageComponentBaseSettingModel";
 import PageComponentSettingModel from "./PageComponentSettingModel";
 import PageLeafSettingModel from "./PageLeafSettingModel";
@@ -9,13 +8,11 @@ export const PageComponentOSType = {
 }
 
 export default class PageComponentModel {
-    public id: number;
     public name: string;
     public sign: string;
     public parentSign: string | null;
     public group: string | null;
     public menuName: string | null;
-    public componentTypes: number;
     public os: string;
     public pageComponentBaseSetting: PageComponentBaseSettingModel;
     public pageLeafSetting: PageLeafSettingModel;
@@ -26,8 +23,6 @@ export default class PageComponentModel {
     public field3Name: string;
     public field4Name: string;
     public field5Name: string;
-    public creator: EntityEdit;
-    public lastUpdater: EntityEdit;
 
     getOrCreatePageComponentSetting(name: string): PageComponentSettingModel {
         let pageComponentSettingModel = this.pageComponentSettings.find(item=>item.name == name);
@@ -36,7 +31,6 @@ export default class PageComponentModel {
         }
 
         pageComponentSettingModel = new PageComponentSettingModel();
-        pageComponentSettingModel.id = 0;
         pageComponentSettingModel.name = name;
         pageComponentSettingModel.displayName = name;
         pageComponentSettingModel.singleDatas = [];

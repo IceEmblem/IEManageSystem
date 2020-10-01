@@ -106,7 +106,7 @@ class PageContainer extends React.Component {
         }
 
         let currentPageAndPost = {
-            pageId: this.props.pageId,
+            pageName: this.props.pageName,
             pageDataId: undefined,
             os: this.props.os
         };
@@ -150,16 +150,9 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     let os = ownProps.match.params.os || PageComponentOSType.Web;
     RegisterTemplateManager.applyOSComponents(os);
 
-    // pageName 即可能是 id, 也肯是 name
-    let pageId = parseInt(pageName);
-    if (isNaN(pageId)) {
-        // 如果为 NaN，那么 pageName 保存的应该是页面的 name
-        pageId = state.pageNameToIds[pageName];
-    }
-
     return {
-        isNeedDataFetch: state.pages[pageId] == undefined,
-        pageId: pageId,
+        isNeedDataFetch: state.pages[pageName] == undefined,
+        pageName: pageName,
         os: os
     }
 }

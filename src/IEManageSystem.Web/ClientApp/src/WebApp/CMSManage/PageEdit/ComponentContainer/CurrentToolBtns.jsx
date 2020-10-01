@@ -91,7 +91,7 @@ CurrentToolBtns.propTypes = {
 const mapStateToProps = (state, ownProps) => {
     return {
         activePageComponentSign: state.activePageComponentSign,
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageId][ownProps.currentPageAndPost.os]
+        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os]
     }
 }
 

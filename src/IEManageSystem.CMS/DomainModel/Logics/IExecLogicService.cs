@@ -12,7 +12,6 @@ namespace IEManageSystem.CMS.DomainModel.Logics
         void Exec(
             Logic logic,
             string pageName,
-            string pageComponentBaseSign,
             string pageDataName,
             string contentComponentDataSign,
             int userId,

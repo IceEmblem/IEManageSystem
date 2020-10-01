@@ -177,14 +177,14 @@ ContainerConfigBtnComponent.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let os = ownProps.currentPageAndPost.os;
 
-    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
+    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
 
     return {
         pageComponent: pageComponent,
-        pageComponents: state.pageComponents[pageId][os],
+        pageComponents: state.pageComponents[pageName][os],
     }
 }
 
@@ -192,7 +192,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         addComponent: (pageComponent) => {
             return dispatch(new AddComponentAction(
-                ownProps.currentPageAndPost.pageId,
+                ownProps.currentPageAndPost.pageName,
                 ownProps.currentPageAndPost.os,
                 pageComponent
             ));

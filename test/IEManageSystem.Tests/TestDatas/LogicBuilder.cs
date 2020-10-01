@@ -20,7 +20,7 @@ namespace IEManageSystem.Tests.TestDatas
             var logic = new Logic() {
                 Name = "ComponentName1",
                 Code = @"
-        public override void Exec(ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request)
+        public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
         {
             componentData.SingleDatas.ElementAt(0).Field1 = ""1"";
         }

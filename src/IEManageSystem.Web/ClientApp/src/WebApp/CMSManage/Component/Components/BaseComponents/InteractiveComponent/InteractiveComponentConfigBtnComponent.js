@@ -71,7 +71,7 @@ class InteractiveComponentConfigBtnComponent extends IInteractiveComponentConfig
                     title='请选择要使用的数据'
                     visible={this.state.show}
                     onOk={() => {
-                        this.props.editComponent(new EditComponentAction(this.props.currentPageAndPost.pageId, this.props.currentPageAndPost.os, this.props.sign, this.state.clonePageComponent));
+                        this.props.editComponent(new EditComponentAction(this.props.currentPageAndPost.pageName, this.props.currentPageAndPost.os, this.props.sign, this.state.clonePageComponent));
                         this.setState({ show: false })
                     }}
                     onCancel={() => {
@@ -92,10 +92,10 @@ class InteractiveComponentConfigBtnComponent extends IInteractiveComponentConfig
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let os = ownProps.currentPageAndPost.os;
 
-    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
+    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
 
     return {
         pageComponent: pageComponent,

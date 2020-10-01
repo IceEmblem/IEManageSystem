@@ -16,14 +16,12 @@ export function setActiveComponent(activePageComponentSign: string) {
 // 页面组件请求
 export const PageReceive = "PageReceive"
 export function pageFetch(name: string) {
-  let postData = {
-    name: name
-  };
-
   return createIEThunkAction(
-    "/api/PageQuery/GetPage",
-    postData,
-    PageReceive
+    `/Pages/${name}.json`,
+    null,
+    PageReceive,
+    "get",
+    false
   );
 }
 
@@ -43,7 +41,7 @@ export function setPage(page: any, pageComponents: Array<any>, defaultComponentD
 
 // 页面组件更新请求
 export const PageComponentUpdateReceive = "PageComponentUpdateReceive"
-export function pageComponentUpdateFetch(name: string, components: object, defaultComponentDatas: object) {
+export function pageComponentUpdateFetch(page: any, components: object, defaultComponentDatas: object) {
   // 清理失效的默认组件数据
   let fetchPageComponents = [];
   Object.values(components).forEach(osComponents => {
@@ -52,13 +50,16 @@ export function pageComponentUpdateFetch(name: string, components: object, defau
   let fetchDefaultComponentDatas = Object.values(defaultComponentDatas).filter(item => fetchPageComponents.some(e => e.sign == item.sign) && item.singleDatas.length > 0);
 
   let postData = {
-    name: name,
-    pageComponents: fetchPageComponents,
-    defaultComponentDatas: fetchDefaultComponentDatas
+    page: page,
+    pageCompleteJson: JSON.stringify({
+      page: page,
+      pageComponents: fetchPageComponents,
+      defaultComponentDatas: fetchDefaultComponentDatas
+    })
   };
 
   return createIEThunkAction(
-    "/api/PageManage/UpdatePageComponent",
+    "/api/PageManage/UpdatePage",
     postData,
     PageComponentUpdateReceive
   );

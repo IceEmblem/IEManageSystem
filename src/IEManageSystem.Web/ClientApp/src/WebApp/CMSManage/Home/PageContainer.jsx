@@ -54,7 +54,7 @@ class PageContainer extends React.Component {
             <Page>
                 <RootComponentContainerBox 
                     currentPageAndPost={{
-                        pageId: this.props.pageId,
+                        pageName: this.props.pageName,
                         pageDataId: this.props.pageDataId,
                         os: this.props.os
                     }}
@@ -68,22 +68,15 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     let pageName = ownProps.match.params.pageName || "Home";
     let pageDataName = ownProps.match.params.pageDataName;
 
-    // pageName 即可能是 id, 也肯是 name
-    let pageId = parseInt(pageName);
-    if (isNaN(pageId)) {
-        // 如果为 NaN，那么 pageName 保存的应该是页面的 name
-        pageId = state.pageNameToIds[pageName];
-    }
-
     // 获取文章
     let postId = state.pageDataNameToIds[pageDataName];
 
     return {
         // store 没有页面数据
-        isExistPage: state.pages[pageId] != undefined,
+        isExistPage: state.pages[pageName] != undefined,
         // 路由上具有文章名但 store 中没有文章数据
         isExistPageData: !(pageDataName && state.pageDatas[postId] == undefined),
-        pageId: pageId,
+        pageName: pageName,
         pageDataId: postId
     }
 }
@@ -102,8 +95,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             }
             return dispatch(pageDataFetch(pageName, pageDataName));
         },
-        setCurrentPageAndPost: (pageId, pageDataId, os) => {
-            return dispatch(setCurrentPageAndPost(pageId, pageDataId, os));
+        setCurrentPageAndPost: (pageName, pageDataId, os) => {
+            return dispatch(setCurrentPageAndPost(pageName, pageDataId, os));
         }
     }
 }
@@ -111,7 +104,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const megre = (stateProps, dispatchToProps, ownProps) => {
     return {
         isNeedDataFetch: !(stateProps.isExistPage && stateProps.isExistPageData),
-        pageId: stateProps.pageId,
+        pageName: stateProps.pageName,
         pageDataId: stateProps.pageDataId,
         os: PageComponentOSType.Web,
         dataFetch: () => {

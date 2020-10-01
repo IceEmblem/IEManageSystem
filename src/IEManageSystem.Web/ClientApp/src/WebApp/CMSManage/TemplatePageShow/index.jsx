@@ -15,7 +15,7 @@ import IocContainer from 'Core/IocContainer'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 
-const pageId = 999999;
+const pageName = "999999";
 
 class TemplateComponentContainerBoxShow extends React.Component {
     render() {
@@ -45,7 +45,7 @@ class TemplatePageShow extends React.Component {
     }
 
     componentDidMount() {
-        this.props.setPage({ ...this.templatePage.page, ...{ id: pageId, name: `TemplatePageShow_${this.templatePage.page}` } }, this.templatePage.pageComponents, this.templatePage.defaultComponentDatas)
+        this.props.setPage({ ...this.templatePage.page, ...{ name: pageName } }, this.templatePage.pageComponents, this.templatePage.defaultComponentDatas)
         this.setState({ show: true });
     }
 
@@ -58,7 +58,7 @@ class TemplatePageShow extends React.Component {
             <Page>
                 <RootComponentContainerBox
                     currentPageAndPost={{
-                        pageId: pageId,
+                        pageName: pageName,
                         pageDataId: undefined,
                         os: this.props.os
                     }}

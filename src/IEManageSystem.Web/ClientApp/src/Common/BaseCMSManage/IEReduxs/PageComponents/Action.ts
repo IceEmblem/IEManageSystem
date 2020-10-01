@@ -1,7 +1,7 @@
 // 组件动作
 export abstract class ComponentAction {
   abstract type: string;
-  abstract pageId: number;
+  abstract pageName: string;
 }
 
 // 页面添加组件
@@ -10,7 +10,7 @@ export class AddComponentAction extends ComponentAction {
   type = PageAddComponent;
 
   constructor(
-    public pageId: number,
+    public pageName: string,
     public os: string,
     public pageComponent: any) {
     super();
@@ -23,7 +23,7 @@ export class RemoveComponentAction extends ComponentAction {
   type = PageRemoveComponent;
 
   constructor(
-    public pageId: number,
+    public pageName: string,
     public os: string,
     public pageComponentSign: string) {
     super();
@@ -35,7 +35,7 @@ export const PageEditComponent = "PageEditComponent"
 export class EditComponentAction extends ComponentAction {
   type = PageEditComponent;
 
-  constructor(public pageId: number, public os: string, public pageComponentSign: string, public pageComponent: any) {
+  constructor(public pageName: string, public os: string, public pageComponentSign: string, public pageComponent: any) {
     super();
   }
 }
@@ -45,7 +45,7 @@ export const SetPageComponents = "SetPageComponents"
 export class SetPageComponentsAction extends ComponentAction {
   type = SetPageComponents;
 
-  constructor(public pageId: number, public os: string, public pageComponents: any) {
+  constructor(public pageName: string, public os: string, public pageComponents: any) {
     super();
   }
 }
@@ -55,7 +55,7 @@ export const CopyComponent = "CopyComponent"
 export class CopyComponentAction extends ComponentAction {
   type = CopyComponent;
 
-  constructor(public pageId: number, public distOS: string, public sourceOS) {
+  constructor(public pageName: string, public distOS: string, public sourceOS) {
     super();
   }
 }

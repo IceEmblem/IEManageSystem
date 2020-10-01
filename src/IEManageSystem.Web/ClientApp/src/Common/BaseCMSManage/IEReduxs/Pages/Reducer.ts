@@ -9,8 +9,8 @@ function setPageModel(pageData: any){
 // 页面接收 case reducer
 function pageReceive(state, action: FetchAction){
     let newPages = {...state};
-    newPages[action.data.page.id] = action.data.page;
-    setPageModel(newPages[action.data.page.id]);
+    newPages[action.data.page.name] = action.data.page;
+    setPageModel(newPages[action.data.page.name]);
     
     return newPages;
 }

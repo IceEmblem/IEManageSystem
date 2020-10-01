@@ -148,7 +148,7 @@ class ClipBoard extends React.Component {
         // 循环将组件添加到页面
         copys.copyPageComponents.forEach(item => {
             this.props.addComponent(new AddComponentAction(
-                this.props.currentPageAndPost.pageId,
+                this.props.currentPageAndPost.pageName,
                 this.props.currentPageAndPost.os,
                 item
             ));
@@ -157,7 +157,7 @@ class ClipBoard extends React.Component {
         // 循环将默认数据添加到页面
         copys.copyDefaultComponentDatas.forEach(item => {
             this.props.addDefaultComponentData(new DefaultComponentDataUpdateAction(
-                this.props.currentPageAndPost.pageId,
+                this.props.currentPageAndPost.pageName,
                 item.sign,
                 item
             ));
@@ -179,8 +179,8 @@ class ClipBoard extends React.Component {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
         activePageComponentSign: state.activePageComponentSign,
-        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageId],
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageId][ownProps.currentPageAndPost.os],
+        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageName],
+        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os],
     }
 }
 

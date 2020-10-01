@@ -68,7 +68,7 @@ function receivePack(actionType:string, data: any) : FetchAction
 // 发生请求标识，每发生一个请求，会增加 1
 var fecthSign = 0;
 // 生成ieThunkAcion，如果请求成功，会分发receiveActionFun生成的动作
-export function createIEThunkAction(url:string, postData:any, actionType:string) {
+export function createIEThunkAction(url:string, postData:any, actionType:string, method: string = 'post', isPackage: boolean = true) {
   return async function (dispatch:any) {
     let curFecthSign = fecthSign++;
     let requestAction = request(postData);
@@ -87,9 +87,9 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
     let fullUrl = Weburl.handleWeburl(url);
 
     return await fetch(fullUrl, {
-      method: 'post',
+      method: method,
       headers: headers,
-      body: JSON.stringify(postData)
+      body: postData && JSON.stringify(postData)
     }).then(
       response => {
         if (response.status >= 200 && response.status < 300) {
@@ -107,6 +107,10 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
       }
     ).then(
       data => {
+        if(!isPackage){
+          return data;
+        }
+
         if (data.success == true){
           return data.result;
         }

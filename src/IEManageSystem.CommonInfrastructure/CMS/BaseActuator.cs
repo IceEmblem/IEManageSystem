@@ -2,7 +2,6 @@
 using Abp.Domain.Repositories;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Logics;
-using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Entitys.Authorization.Users;
@@ -16,13 +15,13 @@ namespace IEManageSystem.CommonInfrastructure.CMS
     {
         protected ContentComponentData CreateContentComponentData(string sign, PageData pageData) 
         {
-            var componentDataRepository = IocManager.Instance.Resolve<IRepository<ComponentData>>();
+            var componentDataRepository = IocManager.Instance.Resolve<IRepository<ContentComponentData>>();
 
             ContentComponentData contentComponentData = new ContentComponentData()
             {
                 Sign = sign,
                 PageData = pageData,
-                SingleDatas = new List<SingleComponentData>()
+                SingleDatas = new List<ComponentSingleData>()
             };
 
             componentDataRepository.Insert(contentComponentData);
@@ -30,6 +29,6 @@ namespace IEManageSystem.CommonInfrastructure.CMS
             return contentComponentData;
         }
 
-        public abstract void Exec(ContentComponentData componentData, PageComponent pageComponent, PageData pageData, PageBase page, User user, string request);
+        public abstract void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request);
     }
 }

@@ -78,7 +78,7 @@ function setChildComponentSigns(pageComponents: object, pageComponent: any): any
 // 添加组件 case reducer
 function addComponent(state: object, action: AddComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId][action.os] };
+    let pageComponents = { ...state[action.pageName][action.os] };
     if (pageComponents[action.pageComponent.sign]) {
         throw new Error("组件标识已存在");
     }
@@ -110,7 +110,7 @@ function addComponent(state: object, action: AddComponentAction): object {
     setPageComponentModel(pageComponents[action.pageComponent.parentSign]);
 
     // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
-    state[action.pageId][action.os] = pageComponents;
+    state[action.pageName][action.os] = pageComponents;
 
     return state;
 }
@@ -118,7 +118,7 @@ function addComponent(state: object, action: AddComponentAction): object {
 // 移除组件 case reducer
 function removeComponent(state: object, action: RemoveComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId][action.os] };
+    let pageComponents = { ...state[action.pageName][action.os] };
 
     let parentSign = pageComponents[action.pageComponentSign].parentSign;
 
@@ -131,7 +131,7 @@ function removeComponent(state: object, action: RemoveComponentAction): object {
     setPageComponentModel(pageComponents[parentSign]);
 
     // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
-    state[action.pageId][action.os] = pageComponents;
+    state[action.pageName][action.os] = pageComponents;
 
     return state;
 }
@@ -139,7 +139,7 @@ function removeComponent(state: object, action: RemoveComponentAction): object {
 // 编辑组件 case reducer
 function editComponent(state: object, action: EditComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId][action.os] };
+    let pageComponents = { ...state[action.pageName][action.os] };
 
     let parentSign = pageComponents[action.pageComponentSign].parentSign;
     // 删除原组件
@@ -172,7 +172,7 @@ function editComponent(state: object, action: EditComponentAction): object {
     setPageComponentModel(pageComponents[newParentSign]);
 
     // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
-    state[action.pageId][action.os] = pageComponents;
+    state[action.pageName][action.os] = pageComponents;
 
     return state;
 }
@@ -180,14 +180,14 @@ function editComponent(state: object, action: EditComponentAction): object {
 // 拷贝数据 case reducer
 function copyComponent(state: object, action: CopyComponentAction): object {
     // 要操作的页面
-    let page = { ...state[action.pageId] };
+    let page = { ...state[action.pageName] };
 
     page[action.distOS] = IETool.deepCopy(page[action.sourceOS]);
     Object.values(page[action.distOS]).forEach((item: any) => {
         item.os = action.distOS;
     });
 
-    state[action.pageId] = page;
+    state[action.pageName] = page;
 
     return state;
 }
@@ -242,7 +242,7 @@ function pageReceive(state: object, action): object {
     let nativeComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Native), PageComponentOSType.Native);
 
     let newState = { ...state };
-    newState[action.data.page.id] = {
+    newState[action.data.page.name] = {
         Web: webComponents,
         Native: nativeComponents
     };
@@ -257,24 +257,24 @@ function setPage(state: object, action){
         return pageReceive(state, action);
     }
 
-    let newPage = {...state[action.data.page.id]}
+    let newPage = {...state[action.data.page.name]}
 
     // 否则只更新对应的平台
     let pages = pageReceive(state, action);
     if(action.data.os == PageComponentOSType.Web){
-        newPage.Web = pages[action.data.page.id].Web
+        newPage.Web = pages[action.data.page.name].Web
     }
     else{
-        newPage.Native = pages[action.data.page.id].Native
+        newPage.Native = pages[action.data.page.name].Native
     }
 
-    state[action.data.page.id] = newPage;
+    state[action.data.page.name] = newPage;
     return state;
 }
 
 // 设置页面组件 case reducer
 function setPageComponents(state: object, action: SetPageComponentsAction){
-    state[action.pageId][action.os] = action.pageComponents;
+    state[action.pageName][action.os] = action.pageComponents;
 
     return state;
 }

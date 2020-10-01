@@ -44,7 +44,7 @@ class PostListContain extends React.Component {
     }
 
     createUrl(pageData) {
-        return `/Page/${pageData.pageId}/${pageData.name}`
+        return `/Page/${pageData.pageName}/${pageData.name}`
     }
 
     getPostFetchs(postData) {

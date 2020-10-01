@@ -78,7 +78,7 @@ class PostModal extends React.Component {
 			return;
 		}
 
-		if (!this.state.post.pageId) {
+		if (!this.state.post.pageName) {
 			message.error('必须选择文章类型');
 			return;
 		}
@@ -102,7 +102,7 @@ class PostModal extends React.Component {
 
 	render() {
 		let ShowButton = this.props.showButton;
-		let curPage = this.props.pages.find(e => e.id == this.state.post.pageId) || {};
+		let curPage = this.props.pages.find(e => e.id == this.state.post.pageName) || {};
 
 		return <>
 			<ShowButton onClick={this.onShowBtnClick} />
@@ -139,13 +139,13 @@ class PostModal extends React.Component {
 							<Select
 								placeholder='文章类型'
 								style={{ width: '100%' }}
-								value={this.state.post.pageId}
+								value={this.state.post.pageName}
 								onChange={(value) => {
-									this.state.post.pageId = value;
+									this.state.post.pageName = value;
 									this.setState({});
 								}}
 							>
-								{this.props.pages.map(item => (<Option value={item.id}>{item.displayName}</Option>))}
+								{this.props.pages.map(item => (<Option value={item.name}>{item.displayName}</Option>))}
 							</Select>
 						</div>
 					</div>
@@ -374,7 +374,7 @@ class PageData extends React.Component {
 
 	// 删除文章
 	deletePost(post) {
-		let page = this.state.managePages.find(e => e.id == post.pageId)
+		let page = this.state.managePages.find(e => e.id == post.pageName)
 
 		let postData = {
 			name: post.name,
@@ -389,7 +389,7 @@ class PageData extends React.Component {
 
 	// 添加文章
 	addPost(post) {
-		let page = this.state.managePages.find(e => e.id == post.pageId)
+		let page = this.state.managePages.find(e => e.id == post.pageName)
 
 		let postData = {
 			...post, ...{
@@ -405,7 +405,7 @@ class PageData extends React.Component {
 
 	// 更新文章
 	updatePost(post) {
-		let page = this.state.managePages.find(e => e.id == post.pageId)
+		let page = this.state.managePages.find(e => e.id == post.pageName)
 
 		let postData = {
 			...post, ...{
@@ -455,7 +455,7 @@ class PageData extends React.Component {
 	}
 
 	createListItem(post) {
-		let isCanEdit = this.state.managePages.some(e => e.id == post.pageId);
+		let isCanEdit = this.state.managePages.some(e => e.id == post.pageName);
 		let editBtns = [];
 		if (isCanEdit) {
 			editBtns = [
@@ -470,7 +470,7 @@ class PageData extends React.Component {
 				/>,
 				<Button size='small' icon={<LoginOutlined />} type='primary'
 					onClick={() => {
-						let page = this.state.visitPages.find(e => e.id == post.pageId);
+						let page = this.state.visitPages.find(e => e.id == post.pageName);
 						this.props.history.push(`/ManageHome/CMSManage/PostEdit/${page.name}/${post.name}`);
 					}}
 				></Button>,
@@ -493,7 +493,7 @@ class PageData extends React.Component {
 				...editBtns,
 				<Button size='small' icon={<EyeOutlined />} type='primary'
 					onClick={() => {
-						let page = this.state.visitPages.find(e => e.id == post.pageId);
+						let page = this.state.visitPages.find(e => e.id == post.pageName);
 						this.props.history.push(`/Page/${page.name}/${post.name}`);
 					}}
 				></Button>,
@@ -516,7 +516,7 @@ class PageData extends React.Component {
 					<Avatar size='large' src={post.creator ? (post.creator.headSculpture || defaultAvatar) : defaultAvatar} />
 					<span className='mt-3'>{post.creator && post.creator.name}</span>
 				</div>}
-				title={<Link to={`/Page/${post.pageId}/${post.name}`}>{post.title}</Link>}
+				title={<Link to={`/Page/${post.pageName}/${post.name}`}>{post.title}</Link>}
 				description={post.describe}
 			/>
 		</List.Item>

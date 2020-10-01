@@ -95,7 +95,7 @@ SignSquareFrame.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
     let activePageComponentSign = ownProps.activePageComponentSign || state.activePageComponentSign;
-    let pageComponent = state.pageComponents[ownProps.currentPageAndPost.pageId][ownProps.currentPageAndPost.os][activePageComponentSign];
+    let pageComponent = state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os][activePageComponentSign];
 
     return {
         pageComponent,

@@ -10,6 +10,6 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
     {
         GetPagesOutput GetPages(GetPagesInput input);
 
-        GetPageOutput GetPage(GetPageInput input);
+        GetPagePermissionsOutput GetPagePermissions(GetPagePermissionsInput input);
     }
 }

@@ -178,7 +178,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
 
             Assert.True(!dbContext.Set<PageData>().Any(e => e.Name == "PageData1Name"));
             Assert.True(!dbContext.Set<ContentComponentData>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
-            Assert.True(!dbContext.Set<SingleComponentData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
+            Assert.True(!dbContext.Set<ComponentSingleData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace IEManageSystem.Application.Tests.Services.Pages
 
             Assert.True(!dbContext.Set<PageData>().Any(e => e.Name == "PageData1Name"));
             Assert.True(!dbContext.Set<ContentComponentData>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
-            Assert.True(!dbContext.Set<SingleComponentData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
+            Assert.True(!dbContext.Set<ComponentSingleData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
         }
 
         /// <summary>
@@ -266,11 +266,11 @@ namespace IEManageSystem.Application.Tests.Services.Pages
 
             // 移除所有旧的数据
             Assert.True(!dbContext.Set<ContentComponentData>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
-            Assert.True(!dbContext.Set<SingleComponentData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
+            Assert.True(!dbContext.Set<ComponentSingleData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
 
             // 添加新的数据
             Assert.True(dbContext.Set<ContentComponentData>().Any(e => e.Sign == "UpdateComponentData_BaseTest_ContentComponentDataSign"));
-            Assert.True(dbContext.Set<SingleComponentData>().Any(e => e.Name == "UpdateComponentData_BaseTest_SingleComponentDataName"));
+            Assert.True(dbContext.Set<ComponentSingleData>().Any(e => e.Name == "UpdateComponentData_BaseTest_SingleComponentDataName"));
         }
 
         /// <summary>
@@ -300,11 +300,11 @@ namespace IEManageSystem.Application.Tests.Services.Pages
 
             // 移除所有旧的数据
             Assert.True(!dbContext.Set<ContentComponentData>().Any(e => e.Sign == "ContentPage1_Component1Sign"));
-            Assert.True(!dbContext.Set<SingleComponentData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
+            Assert.True(!dbContext.Set<ComponentSingleData>().Any(e => e.Name == "PageData1_ContentComponentData1_SingleComponentData2Name"));
 
             // 添加新的数据
             Assert.True(dbContext.Set<ContentComponentData>().Any(e => e.Sign == "UpdateComponentData_BaseTest_ContentComponentDataSign"));
-            Assert.True(dbContext.Set<SingleComponentData>().Any(e => e.Name == "UpdateComponentData_BaseTest_SingleComponentDataName"));
+            Assert.True(dbContext.Set<ComponentSingleData>().Any(e => e.Name == "UpdateComponentData_BaseTest_SingleComponentDataName"));
         }
 
         /// <summary>

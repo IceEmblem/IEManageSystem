@@ -19,7 +19,10 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
 
         public bool EnablePageFilter { get; set; }
 
-        public List<int> PageIds { get; set; }
+        /// <summary>
+        /// EnablePageFilter 为 true，则给字段生效
+        /// </summary>
+        public List<string> FilterPageNames { get; set; }
 
         public List<string> Tags { get; set; }
 

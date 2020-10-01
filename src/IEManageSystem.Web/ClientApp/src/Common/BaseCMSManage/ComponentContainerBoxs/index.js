@@ -222,7 +222,7 @@ ComponentContainerBox.propTypes = {
     style: PropTypes.func,
     className: PropTypes.func,
     propsEX: PropTypes.func,        // (PageComponent) => {}
-    ToolBtn: PropTypes.func,      // react 组件 ({pageId, pageDataId, sign}) => {}
+    ToolBtn: PropTypes.func,      // react 组件 ({pageName, pageDataId, sign}) => {}
 
     // 如下熟悉为 redux
     pageComponent: PropTypes.object.isRequired,
@@ -235,11 +235,11 @@ ComponentContainerBox.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let os = ownProps.currentPageAndPost.os;
 
     return {
-        pageComponent: state.pageComponents[pageId][os][ownProps.sign],
+        pageComponent: state.pageComponents[pageName][os][ownProps.sign],
         currentPageAndPost: ownProps.currentPageAndPost,
     }
 }

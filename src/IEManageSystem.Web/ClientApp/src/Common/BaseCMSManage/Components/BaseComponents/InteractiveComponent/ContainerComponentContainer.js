@@ -75,11 +75,11 @@ class ContainerContain extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let os = ownProps.currentPageAndPost.os;
 
     return {
-        pageComponents: state.pageComponents[pageId][os],
+        pageComponents: state.pageComponents[pageName][os],
     }
 }
 

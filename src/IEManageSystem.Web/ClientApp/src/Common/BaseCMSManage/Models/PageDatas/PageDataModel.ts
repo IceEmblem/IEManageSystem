@@ -6,7 +6,7 @@ export default class PageDataModel {
     public name: string;
     public title: string | null;
     public describe: string | null;
-    public pageId: number;
+    public pageName: number;
     public content: string | null;
     public tags: Array<TagModel>;
     public images: string | null;

@@ -139,10 +139,10 @@ ToolBtns.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let os = ownProps.currentPageAndPost.os;
 
-    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
+    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
 
     return {
         isActive: state.activePageComponentSign == pageComponent.sign,

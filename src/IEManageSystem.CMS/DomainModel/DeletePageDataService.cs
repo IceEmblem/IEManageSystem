@@ -39,9 +39,9 @@ namespace IEManageSystem.CMS.DomainModel
             _pageDataManager.DeletePageDataOrCreator(pageData, user);
         }
 
-        public void DeletePagePosts(PageBase page)
+        public void DeletePagePosts(string pageName)
         {
-            var posts = _pageDataManager.PostRepository.GetAll().Where(e => e.PageId == page.Id).ToList();
+            var posts = _pageDataManager.PostRepository.GetAll().Where(e => e.PageName == pageName).ToList();
 
             posts.ForEach(item => {
                 _componentDataManager.DeleteContentComponentData(item);

@@ -30,13 +30,12 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             _logicExecAppService.ExecLogic(new IEManageSystem.Services.ManageHome.CMS.Logics.Dto.ExecLogicInput() { 
                 LogicName = "ComponentName1",
                 PageName = "ContentPage1Name",
-                PageComponentSign = "ContentPage1_Component1Sign",
                 PageDataName = "PageData1Name",
                 ContentComponentDataSign = "ContentPage1_Component1Sign",
                 Request = ""
             });
 
-            var componentData = dbContext.ComponentDatas.OfType<ContentComponentData>().Include(e => e.SingleDatas).FirstOrDefault(e => e.Sign == "ContentPage1_Component1Sign");
+            var componentData = dbContext.ContentComponentDatas.Include(e => e.SingleDatas).FirstOrDefault(e => e.Sign == "ContentPage1_Component1Sign");
             Assert.True(componentData.SingleDatas.ElementAt(0).Field1 == "1");
         }
 
@@ -53,7 +52,6 @@ namespace IEManageSystem.Application.Tests.Services.Logics
                 {
                     LogicName = "AAAAAAAAAAAAAAA",
                     PageName = "ContentPage1Name",
-                    PageComponentSign = "ContentPage1_Component1Sign",
                     PageDataName = "PageData",
                     ContentComponentDataSign = "ContentPage1_Component1Sign",
                     Request = ""

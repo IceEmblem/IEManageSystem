@@ -6,6 +6,8 @@ import Home from './Home.json'
 import PostList from './PostList.json'
 import Post from './Post.json'
 import Chart from './Chart.json'
+import Tencent from './Tencent.json'
+import WBolt from './WBolt.json'
 
 export default (componentDescribes) => {
     const template = new Template();
@@ -17,6 +19,8 @@ export default (componentDescribes) => {
     template.templatePages.push(new TemplatePage(PostList));
     template.templatePages.push(new TemplatePage(Post));
     template.templatePages.push(new TemplatePage(Chart));
+    template.templatePages.push(new TemplatePage(Tencent));
+    template.templatePages.push(new TemplatePage(WBolt));
     template.componentDescribes = componentDescribes;
 
     return template;

@@ -1,7 +1,6 @@
 class CreatePageComponentService {
     createComponent(sign: string, name: string, os: string, pageComponentBaseSetting: any = {}) {
         return {
-            id: 0,
             sign: sign,
             name: name,
             parentSign: null,
@@ -9,7 +8,6 @@ class CreatePageComponentService {
             os: os,
             pageComponentBaseSetting: {
                 ...{
-                    id: 0,
                     sortIndex: 0,
                     width: '100%',
                     height: null,
@@ -28,7 +26,6 @@ class CreatePageComponentService {
                 searchKey: "",
             },
             menuName: null,
-            componentTypes: 0,
             pageComponentSettings: []
         };
     }

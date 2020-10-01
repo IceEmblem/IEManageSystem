@@ -48,7 +48,7 @@ class CancelAndReload extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.currentPageAndPost.pageId != this.props.currentPageAndPost.pageId
+        if (nextProps.currentPageAndPost.pageName != this.props.currentPageAndPost.pageName
             || nextProps.currentPageAndPost.os != this.props.currentPageAndPost.os) 
         {
             this.setState({
@@ -85,11 +85,11 @@ class CancelAndReload extends React.Component {
         this.setState({ index: this.state.index - 1, isListen: false }, () => {
             let componentAndData = this.state.componentAndDatas[this.state.index];
             this.props.dispatchAction(new SetDefaultComponentDatasAction(
-                this.props.currentPageAndPost.pageId,
+                this.props.currentPageAndPost.pageName,
                 componentAndData.defaultComponentDatas
             ));
             this.props.dispatchAction(new SetPageComponentsAction(
-                this.props.currentPageAndPost.pageId,
+                this.props.currentPageAndPost.pageName,
                 this.props.currentPageAndPost.os,
                 componentAndData.pageComponents
             ));
@@ -107,11 +107,11 @@ class CancelAndReload extends React.Component {
         this.setState({ index: this.state.index + 1, isListen: false }, () => {
             let componentAndData = this.state.componentAndDatas[this.state.index];
             this.props.dispatchAction(new SetDefaultComponentDatasAction(
-                this.props.currentPageAndPost.pageId,
+                this.props.currentPageAndPost.pageName,
                 componentAndData.defaultComponentDatas
             ));
             this.props.dispatchAction(new SetPageComponentsAction(
-                this.props.currentPageAndPost.pageId,
+                this.props.currentPageAndPost.pageName,
                 this.props.currentPageAndPost.os,
                 componentAndData.pageComponents
             ));
@@ -134,8 +134,8 @@ class CancelAndReload extends React.Component {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageId],
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageId][ownProps.currentPageAndPost.os],
+        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageName],
+        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os],
     }
 }
 

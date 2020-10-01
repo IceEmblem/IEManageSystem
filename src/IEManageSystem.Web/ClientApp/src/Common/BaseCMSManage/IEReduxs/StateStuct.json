@@ -1,10 +1,10 @@
 {
     // 以下数据与服务器相关
     "pages": {
-        "id": {}
+        "pageName": {}
     },
     "pageComponents": {
-        "pageId": {
+        "pageName": {
             "Web":{
                 "sign": {
                     "pageComponentSigns": [
@@ -32,7 +32,7 @@
         }
     },
     "defaultComponentDatas": {
-        "pageId": {
+        "pageName": {
             "sign": {}
         }
     },
@@ -49,9 +49,6 @@
         ...
     },
     // 以下数据与前端数据相关
-    "pageNameToIds": {
-        "pageName": 1
-    },
     "pageDataNameToIds": {
         "pageDataId": 1
     },

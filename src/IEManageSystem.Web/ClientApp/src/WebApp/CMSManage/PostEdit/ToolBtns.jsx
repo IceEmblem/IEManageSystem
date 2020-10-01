@@ -42,11 +42,11 @@ ToolBtns.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let os = ownProps.currentPageAndPost.os;
 
     return {
-        pageComponent: state.pageComponents[pageId][os][ownProps.sign],
+        pageComponent: state.pageComponents[pageName][os][ownProps.sign],
     }
 }
 

@@ -22,11 +22,11 @@ function setComponentDataModel(componentDataData: any) {
 }
 
 function defaultComponentDataUpdate(state, action: DefaultComponentDataUpdateAction) {
-    let defaultComponentDatas = {...state[action.pageId]};
+    let defaultComponentDatas = {...state[action.pageName]};
     defaultComponentDatas[action.sign] = { ...defaultComponentDatas[action.sign], ...action.componentData };
     setComponentDataModel(defaultComponentDatas[action.sign]);
 
-    state[action.pageId] = defaultComponentDatas;
+    state[action.pageName] = defaultComponentDatas;
     return state;
 }
 
@@ -43,7 +43,7 @@ function pageReceive(state, action: FetchAction) {
         }
     });
 
-    newState[action.data.page.id] = defaultComponentDatas;
+    newState[action.data.page.name] = defaultComponentDatas;
 
     return newState;
 }
@@ -55,14 +55,14 @@ function setPage(state, action) {
         return pageReceive(state, action);
     }
 
-    let newdatas = {...state[action.data.page.id]}
+    let newdatas = {...state[action.data.page.name]}
 
     // 否则直接数据添加进去即可
     let datas = pageReceive(state, action);
     // 导入的数据不应该覆盖之前的数据，所以旧数据放在后面
-    newdatas = {...datas[action.data.page.id], ...newdatas}
+    newdatas = {...datas[action.data.page.name], ...newdatas}
 
-    state[action.data.page.id] = newdatas;
+    state[action.data.page.name] = newdatas;
 
     return state;
 }
@@ -72,7 +72,7 @@ function setDefaultComponentDatas(state, action: SetDefaultComponentDatasAction)
     // Object.keys(action.defaultComponentDatas).forEach(key => {
     //     setComponentDataModel(action.defaultComponentDatas[key]);
     // })
-    state[action.pageId] = action.defaultComponentDatas;
+    state[action.pageName] = action.defaultComponentDatas;
 
     return state;
 }

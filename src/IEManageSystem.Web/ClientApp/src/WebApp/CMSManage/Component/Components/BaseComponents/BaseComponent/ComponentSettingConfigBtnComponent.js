@@ -36,7 +36,7 @@ class ComponentSettingConfigBtnComponent extends IComponentSettingConfigBtnCompo
                 title={`编辑 ${this.props.displayName}`}
                 visible={this.state.visible}
                 onOk={()=>{
-                    this.props.editComponent(new EditComponentAction(this.props.currentPageAndPost.pageId, this.props.currentPageAndPost.os, this.props.sign, this.state.clonePageComponent));
+                    this.props.editComponent(new EditComponentAction(this.props.currentPageAndPost.pageName, this.props.currentPageAndPost.os, this.props.sign, this.state.clonePageComponent));
                     this.setState({visible: false});
                 }}
                 onCancel={()=>{
@@ -59,19 +59,18 @@ class ComponentSettingConfigBtnComponent extends IComponentSettingConfigBtnCompo
 }
 
 ComponentSettingConfigBtnComponent.propTypes = {
-    pageId: PropTypes.number.isRequired,
-    os: PropTypes.string.isRequired,
     sign: PropTypes.string.isRequired,
     ConfigComponent: PropTypes.func.isRequired,
+    currentPageAndPost: PropTypes.object.isRequired,
 
     pageComponent: PropTypes.object.isRequired,
     editComponent: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageId = ownProps.currentPageAndPost.pageId;
+    let pageName = ownProps.currentPageAndPost.pageName;
     let os = ownProps.currentPageAndPost.os;
-    let pageComponent = state.pageComponents[pageId][os][ownProps.sign];
+    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
 
     return {
         pageComponent: pageComponent,

@@ -15,10 +15,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public ICollection<ContentPagePermission> ContentPagePermissions { get; set; }
 
-        [ForeignKey("ContentPage")]
-        public int ContentPageId { get; set; }
-
-        public ContentPage ContentPage { get; set; }
+        public string PageName { get; set; }
 
         /// <summary>
         /// 是否可以管理该页面的文章，只有拥有管理权限才可以通过

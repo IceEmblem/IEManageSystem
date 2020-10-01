@@ -8,15 +8,20 @@ using System.Linq;
 
 namespace IEManageSystem.CMS.DomainModel.Pages
 {
-    public abstract class PageBase : Entity
+    public class Page
     {
-        public PageBase(string name)
+        public const string ContentPageDiscriminatorName = "ContentPage";
+
+        public const string StaticPageDiscriminatorName = "StaticPage";
+
+        protected Page() { }
+
+        public Page(string name)
         {
             Name = name;
         }
 
-        [Required]
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
         public string DisplayName { get; set; }
 
@@ -36,6 +41,6 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
         public EntityEdit LastUpdater { get; set; }
 
-        public string Discriminator { get; protected set; }
+        public string Discriminator { get; set; }
     }
 }

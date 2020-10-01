@@ -232,9 +232,9 @@ BtnLists.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        page: state.pages[ownProps.currentPageAndPost.pageId],
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageId],
-        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageId],
+        page: state.pages[ownProps.currentPageAndPost.pageName],
+        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName],
+        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageName],
     }
 }
 
@@ -244,10 +244,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(setPage(page, pageComponents, defaultComponentDatas, os));
         },
         copyComponent: (distOS, sourceOS) => {
-            dispatch(new CopyComponentAction(ownProps.currentPageAndPost.pageId, distOS, sourceOS))
+            dispatch(new CopyComponentAction(ownProps.currentPageAndPost.pageName, distOS, sourceOS))
         },
-        pageComponentUpdateFetch: (name, components, defaultComponentDatas) => {
-            dispatch(pageComponentUpdateFetch(name, components, defaultComponentDatas));
+        pageComponentUpdateFetch: (page, components, defaultComponentDatas) => {
+            dispatch(pageComponentUpdateFetch(page, components, defaultComponentDatas));
         },
     }
 }
@@ -259,7 +259,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         setPage: dispatchProps.setPage,
         copyComponent: dispatchProps.copyComponent,
         pageComponentUpdateFetch: () => {
-            dispatchProps.pageComponentUpdateFetch(stateProps.page.name, stateProps.pageComponents, stateProps.defaultComponentDatas)
+            dispatchProps.pageComponentUpdateFetch(stateProps.page, stateProps.pageComponents, stateProps.defaultComponentDatas)
         },
         exportPage: () => {
             if (!stateProps.page) {

@@ -54,7 +54,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             if (input.EnablePageFilter)
             {
                 // 除了可访问的页面文章之外，还有用户发表过的文章
-                pageDatas = _pageDataManager.PostRepository.GetAllIncluding(e => e.Tags).Where(e => input.PageIds.Contains(e.PageId) || (_abpSession.UserId != null && e.Creator.EditorId == _abpSession.UserId));
+                pageDatas = _pageDataManager.PostRepository.GetAllIncluding(e => e.Tags).Where(e => input.FilterPageNames.Contains(e.PageName) || (_abpSession.UserId != null && e.Creator.EditorId == _abpSession.UserId));
             }
             else
             {
@@ -62,7 +62,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             }
 
             if (!string.IsNullOrWhiteSpace(input.PageName)) {
-                pageDatas = pageDatas.Where(e => e.Page.Name == input.PageName);
+                pageDatas = pageDatas.Where(e => e.PageName == input.PageName);
             }
 
             if (!string.IsNullOrWhiteSpace(input.SearchKey)) {
@@ -106,7 +106,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         /// <returns>如果不存在文章，需返回 null</returns>
         public GetPageDataOutput GetPageData(GetPageDataInput input)
         {
-            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Page.Name == input.PageName && e.Name == input.PageDataName);
+            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.PageName == input.PageName && e.Name == input.PageDataName);
 
             if (input.IsCheckCreator == true && _abpSession.UserId != pageData.Creator.EditorId) {
                 throw new AbpAuthorizationException("未授权操作");

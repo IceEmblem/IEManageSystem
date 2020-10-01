@@ -23,14 +23,14 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             PostRepository = repository;
         }
 
-        public void AddPageData(PageBase page, PageData pageData, User user)
+        public void AddPageData(string pageName, PageData pageData, User user)
         {
-            if (PostRepository.Count(e => e.Name == pageData.Name && e.Page.Name == page.Name) > 0) 
+            if (PostRepository.Count(e => e.Name == pageData.Name && e.PageName == pageName) > 0) 
             {
                 throw new UserFriendlyException("文章名称已重复");
             }
 
-            pageData.Page = page;
+            pageData.PageName = pageName;
             pageData.Creator = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
             pageData.LastUpdater = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
 
@@ -45,8 +45,8 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             pageData.LastUpdater = new EntityEdit(user.Id, user.Name, user.HeadSculpture);
         }
 
-        public void UpdatePageData(PageBase page, PageData pageData, User user) {
-            var posts = PostRepository.GetAllList(e=>e.Name == pageData.Name && e.Page.Name == page.Name);
+        public void UpdatePageData(string pageName, PageData pageData, User user) {
+            var posts = PostRepository.GetAllList(e=>e.Name == pageData.Name && e.PageName == pageName);
             if (posts.Count > 1 || (posts.Count == 1 && posts[0].Id != pageData.Id)) 
             {
                 throw new UserFriendlyException("文章名称已重复");
@@ -57,13 +57,13 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
             PostRepository.Update(pageData);
         }
 
-        public void UpdatePageDataOfCreator(PageBase page, PageData pageData, User user)
+        public void UpdatePageDataOfCreator(string pageName, PageData pageData, User user)
         {
             if (pageData.Creator.EditorId != user.Id) {
                 throw new UserFriendlyException("你不是文章的创建者，没有权限修改文章");
             }
 
-            UpdatePageData(page, pageData, user);
+            UpdatePageData(pageName, pageData, user);
         }
 
         public void DeletePageData(PageData pageData)

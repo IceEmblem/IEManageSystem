@@ -25,7 +25,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
     {
         private PageDataManager _pageDataManager { get; set; }
 
-        private IRepository<PageBase> _pageRepository { get; }
+        private PageManager _pageManager { get; set; }
 
         private UpdateContentComponentDataService _updateContentComponentDataService { get; set; }
 
@@ -37,7 +37,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public PageDataManageAppService(
             PageDataManager pageDataManager,
-            IRepository<PageBase> pageRepository,
+            PageManager pageManager,
             UpdateContentComponentDataService updateContentComponentDataService,
             DeletePageDataService deletePageDataService,
             UserManager userManager,
@@ -45,7 +45,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             )
         {
             _pageDataManager = pageDataManager;
-            _pageRepository = pageRepository;
+            _pageManager = pageManager;
             _updateContentComponentDataService = updateContentComponentDataService;
             _deletePageDataService = deletePageDataService;
             _abpSession = abpSession;
@@ -74,16 +74,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 Field5 = input.Field5,
             };
 
-            var page = _pageRepository.GetAll().OfType<ContentPage>().FirstOrDefault(e => e.Name == input.PageName);
-
-            if (page == null)
-            {
-                throw new UserFriendlyException("找不到要添加的文章页面");
-            }
-
             var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
 
-            _pageDataManager.AddPageData(page, pageData, editor);
+            _pageDataManager.AddPageData(input.PageName, pageData, editor);
 
             return new AddPageDataOutput();
         }
@@ -111,16 +104,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             post.Field4 = input.Field4;
             post.Field5 = input.Field5;
 
-            var page = _pageRepository.GetAll().OfType<ContentPage>().FirstOrDefault(e => e.Name == input.PageName);
-
-            if (page == null)
-            {
-                throw new UserFriendlyException("找不到要添加的文章页面");
-            }
-
             var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
 
-            _pageDataManager.UpdatePageData(page, post, editor);
+            _pageDataManager.UpdatePageData(input.PageName, post, editor);
 
             return new UpdatePageDataOutput();
         }
@@ -148,16 +134,9 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
             post.Field4 = input.Field4;
             post.Field5 = input.Field5;
 
-            var page = _pageRepository.GetAll().OfType<ContentPage>().FirstOrDefault(e => e.Name == input.PageName);
-
-            if (page == null)
-            {
-                throw new UserFriendlyException("找不到要添加的文章页面");
-            }
-
             var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
 
-            _pageDataManager.UpdatePageDataOfCreator(page, post, editor);
+            _pageDataManager.UpdatePageDataOfCreator(input.PageName, post, editor);
 
             return new UpdatePageDataOutput();
         }
@@ -169,7 +148,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         /// <returns></returns>
         public DeletePageDataOutput DeletePageData(DeletePageDataInput input)
         {
-            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.Name && e.Page.Name == input.PageName);
+            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.Name && e.PageName == input.PageName);
 
             if (pageData == null)
             {
@@ -188,7 +167,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         /// <returns></returns>
         public DeletePageDataOutput DeletePageDataOfCreator(DeletePageDataInput input)
         {
-            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.Name && e.Page.Name == input.PageName);
+            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.Name && e.PageName == input.PageName);
 
             if (pageData == null)
             {
@@ -217,11 +196,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                     Sign = item.Sign,
 
                 };
-                componentData.SingleDatas = new List<SingleComponentData>();
+                componentData.SingleDatas = new List<ComponentSingleData>();
 
                 foreach (var singleData in item.SingleDatas)
                 {
-                    componentData.SingleDatas.Add(new SingleComponentData()
+                    componentData.SingleDatas.Add(new ComponentSingleData()
                     {
                         Name = singleData.Name,
                         SortIndex = singleData.SortIndex,
@@ -236,7 +215,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 contentComponentDatas.Add(componentData);
             }
 
-            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.Page.Name == input.PageName);
+            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.PageName == input.PageName);
 
             var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
 
@@ -260,11 +239,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                     Sign = item.Sign,
 
                 };
-                componentData.SingleDatas = new List<SingleComponentData>();
+                componentData.SingleDatas = new List<ComponentSingleData>();
 
                 foreach (var singleData in item.SingleDatas)
                 {
-                    componentData.SingleDatas.Add(new SingleComponentData()
+                    componentData.SingleDatas.Add(new ComponentSingleData()
                     {
                         Name = singleData.Name,
                         SortIndex = singleData.SortIndex,
@@ -279,7 +258,7 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
                 contentComponentDatas.Add(componentData);
             }
 
-            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.Page.Name == input.PageName);
+            var pageData = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.PageName == input.PageName);
 
             var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
 

@@ -136,17 +136,6 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         [ApiAuthorization]
         public ActionResult<ScorePageDataOutput> ScorePageData([FromBody] ScorePageDataInput input) 
         {
-            int pageId;
-            if (int.TryParse(input.PageName, out pageId))
-            {
-                string pageName = _pageManager.GetPageNameCache(pageId);
-
-                if (!string.IsNullOrWhiteSpace(pageName))
-                {
-                    input.PageName = pageName;
-                }
-            }
-
             if (!IsQueryAccess(input.PageName))
             {
                 throw new Abp.Authorization.AbpAuthorizationException("未授权操作");
@@ -155,7 +144,7 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             var userInfo = _claimManager.CreateUserClaimInfo(User.Claims);
             int userId;
             int.TryParse(userInfo.Subject, out userId);
-            var post = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.Page.Name == input.PageName);
+            var post = _pageDataManager.PostRepository.FirstOrDefault(e => e.Name == input.PageDataName && e.PageName == input.PageName);
             post.ToScore(input.Score, userId);
 
             return new ScorePageDataOutput();

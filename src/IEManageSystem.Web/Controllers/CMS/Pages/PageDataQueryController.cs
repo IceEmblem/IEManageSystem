@@ -61,13 +61,13 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
             var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
 
-            IEnumerable<ContentPage> pages = null;
+            IEnumerable<Page> pages = null;
 
             if (input.QueryOrManage)
             {
                 if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions))
                 {
-                    pages = _pageManager.PageRepository.GetAll().OfType<ContentPage>().ToList();
+                    pages = _pageManager.GetPagesForCache().Where(e => e.Discriminator == Page.ContentPageDiscriminatorName).ToList();
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
                 if (_checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, true, permissions) ||
                     _checkPermissionService.IsAllowAccess(ApiScopeProvider.Page, false, permissions))
                 {
-                    pages = _pageManager.PageRepository.GetAll().OfType<ContentPage>().ToList();
+                    pages = _pageManager.GetPagesForCache().Where(e => e.Discriminator == Page.ContentPageDiscriminatorName).ToList();
                 }
                 else
                 {
@@ -90,46 +90,13 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
 
             List<PageDto> pageDtos = new List<PageDto>();
             foreach (var page in pages) {
-                pageDtos.Add(CreatePageDtos(page));
+                pageDtos.Add(_objectMapper.Map<PageDto>(page));
             }
 
             return new GetPagesOfUserCanAccessPostOutput()
             {
                 Pages = pageDtos
             };
-        }
-
-        private PageDto CreatePageDtos(PageBase page)
-        {
-            var pageDto = new PageDto();
-            pageDto.Id = page.Id;
-            pageDto.Name = page.Name;
-            pageDto.DisplayName = page.DisplayName;
-            pageDto.Description = page.Description;
-            pageDto.Field1Name = page.Field1Name;
-            pageDto.Field2Name = page.Field2Name;
-            pageDto.Field3Name = page.Field3Name;
-            pageDto.Field4Name = page.Field4Name;
-            pageDto.Field5Name = page.Field5Name;
-            pageDto.Creator = _objectMapper.Map<EntityEditDto>(page.Creator);
-            pageDto.LastUpdater = _objectMapper.Map<EntityEditDto>(page.LastUpdater);
-
-            if (page is StaticPage)
-            {
-                pageDto.SetStaticPage();
-            }
-            else if (page is ContentPage)
-            {
-                pageDto.SetContentPage();
-
-                var contentPage = (ContentPage)page;
-                pageDto.ContentPagePeimissionCollection =
-                    contentPage.ContentPagePermissionCollection != null ?
-                        _objectMapper.Map<ContentPagePeimissionCollectionDto>(contentPage.ContentPagePermissionCollection)
-                        : null;
-            }
-
-            return pageDto;
         }
 
         /// <summary>
@@ -161,7 +128,7 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
             {
                 appServiceInput.EnablePageFilter = true;
 
-                appServiceInput.PageIds = _pageManager.GetPagesForQueryPermission(permissions).Select(e => e.Id).ToList();
+                appServiceInput.FilterPageNames = _pageManager.GetPagesForQueryPermission(permissions).Select(e => e.Name).ToList();
             }
 
             return _pageDataQueryAppService.GetPageDatas(appServiceInput);
@@ -175,16 +142,6 @@ namespace IEManageSystem.Web.Controllers.CMS.Pages
         [HttpPost]
         public ActionResult<GetPageDataOutput> GetPageData([FromBody] GetPageDataInput input)
         {
-            int pageId;
-            if (int.TryParse(input.PageName, out pageId)) 
-            {
-                string pageName = _pageManager.GetPageNameCache(pageId);
-
-                if (!string.IsNullOrWhiteSpace(pageName)) {
-                    input.PageName = pageName;
-                }
-            }
-
             IEnumerable<string> permissionNames = _claimManager.GetPermissionsForClaims(User.Claims);
             var permissions = _permissionManager.GetPermissionsForCache().Where(e => permissionNames.Contains(e.Name));
 

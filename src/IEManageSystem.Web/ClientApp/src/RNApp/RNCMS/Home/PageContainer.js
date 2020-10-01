@@ -57,7 +57,7 @@ class PageContainer extends Component {
       <ScrollView>
         <RootComponentContainerBox
           currentPageAndPost={{
-            pageId: this.props.pageId,
+            pageName: this.props.pageName,
             pageDataId: this.props.pageDataId,
             os: PageComponentOSType.Native
           }}
@@ -68,7 +68,6 @@ class PageContainer extends Component {
 }
 
 PageContainer.propTypes = {
-  pageId: PropTypes.number,
   pageDataId: PropTypes.number,
   pageName: PropTypes.string.isRequired,
   pageDataName: PropTypes.string,
@@ -88,22 +87,14 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
   let pageName = ownProps.match.params.pageName || "Home";
   let pageDataName = ownProps.match.params.pageDataName;
 
-  // pageName 即可能是 id, 也肯是 name
-  let pageId = parseInt(pageName);
-  if (isNaN(pageId)) {
-    // 如果为 NaN，那么 pageName 保存的应该是页面的 name
-    pageId = state.pageNameToIds[pageName];
-  }
-
   // 获取文章
   let postId = state.pageDataNameToIds[pageDataName];
 
   return {
-    pageId: pageId,
     pageDataId: postId,
     pageName: pageName,
     pageDataName: pageDataName,
-    page: state.pages[pageId],
+    page: state.pages[pageName],
     pageData: state.pageDatas[postId],
   }
 }
