@@ -1,6 +1,7 @@
 import React from 'react'
-import { DefaultSettingName, IEFontSetting } from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
-import Setting from './FontComponentSettingConfig/Setting'
+import { DefaultSettingName, IEFontSetting, IECommonStyleSetting } from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
+import FontComponentSetting from './FontComponentSettingConfig/Setting'
+import CommonStyleSetting from './CommonStyleSettingConfig/Setting'
 
 export class BaseComponentProps{
     constructor(){
@@ -29,6 +30,11 @@ export default class BaseComponent extends React.Component {
 
     // 如要使用字体配置，请添加 FontComponentSettingConfig 到你的组件
     getFontSetting(){
-        return new Setting(this.props.pageComponent.getOrCreatePageComponentSetting(IEFontSetting));
+        return new FontComponentSetting(this.props.pageComponent.getOrCreatePageComponentSetting(IEFontSetting));
+    }
+
+    // 如要使用通用样式配置，请添加 CommonStyleSettingConfig 到你的组件
+    getCommonStyleSetting(){
+        return new CommonStyleSetting(this.props.pageComponent.getOrCreatePageComponentSetting(IECommonStyleSetting))
     }
 }

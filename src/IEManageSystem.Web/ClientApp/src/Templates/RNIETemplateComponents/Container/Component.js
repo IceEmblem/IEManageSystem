@@ -1,6 +1,7 @@
 import React from 'react'
 import {View} from 'react-native'
 import IComponent from 'IETemplateComponents/Container/IComponent'
+import StyleCheck from 'RNCMS/StyleCheck'
 
 class Component extends IComponent {
     render() {
@@ -16,7 +17,8 @@ class Component extends IComponent {
                         alignItems: setting.alignItems,
                         alignContent: setting.alignContent,
                         flexWrap: setting.wrap,
-                    }
+                    },
+                    StyleCheck.handle(this.getCommonStyleSetting().toStyle())
                 ]}
             >
                 {this.props.children}

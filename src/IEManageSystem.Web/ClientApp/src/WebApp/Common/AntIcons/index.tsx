@@ -1,3 +1,4 @@
+import React from 'react'
 import {
     GithubOutlined,
     AccountBookFilled,
@@ -32,10 +33,13 @@ import {
     ZhihuOutlined,
     ZoomInOutlined,
     QuestionCircleOutlined,
+    SearchOutlined,
+    MenuOutlined,
+    MessageFilled,
+    EllipsisOutlined
 } from '@ant-design/icons';
 
-type IconNameType = 'GithubOutlined' | 'AccountBookFilled' | 'CaretDownOutlined' | 'CaretLeftFilled' | 'CaretRightFilled' | 'CaretUpFilled' | 'HighlightTwoTone' | 'HomeFilled' | 'IdcardOutlined' | 'RollbackOutlined' | 'SafetyCertificateFilled' | 'StarTwoTone' | 'StepBackwardFilled' | 'StepBackwardOutlined' | 'StepForwardFilled' | 'StepForwardOutlined' | 'StockOutlined' | 'StopOutlined' | 'UploadOutlined' | 'UsbFilled' | 'UserAddOutlined' | 'UserDeleteOutlined' | 'UsergroupAddOutlined' | 'UsergroupDeleteOutlined' | 'UserOutlined' | 'WeiboSquareFilled' | 'WhatsAppOutlined' | 'WifiOutlined' | 'WindowsFilled' | 'WomanOutlined' | 'ZhihuOutlined' | 'ZoomInOutlined' | 'QuestionCircleOutlined';
-export const icons = {
+const iconsTypes = {
     'GithubOutlined': GithubOutlined,
     'AccountBookFilled': AccountBookFilled,
     'CaretDownOutlined': CaretDownOutlined,
@@ -68,15 +72,30 @@ export const icons = {
     'WomanOutlined': WomanOutlined,
     'ZhihuOutlined': ZhihuOutlined,
     'ZoomInOutlined': ZoomInOutlined,
-    'QuestionCircleOutlined': QuestionCircleOutlined
+    'QuestionCircleOutlined': QuestionCircleOutlined,
+    'SearchOutlined': SearchOutlined,
+    'MenuOutlined': MenuOutlined,
+    'MessageFilled': MessageFilled,
+    'EllipsisOutlined': EllipsisOutlined
 }
 
-export function getIconType(name: IconNameType) {
-    let iconType = icons[name];
-    
-    if(iconType){
-        return iconType;
+var iconComponents = new Map<string, React.Component>();
+
+Object.keys(iconsTypes).forEach(IconsTypeKey=>{
+    let IconsType = iconsTypes[IconsTypeKey];
+    iconComponents[IconsTypeKey] = <IconsType />;
+})
+
+export const icons = iconComponents;
+
+export const getIcon = (name: string, style: any) => {
+    let IconType = iconsTypes[name];
+
+    if(IconType){
+        return <IconType style={style} />
     }
 
-    return icons['QuestionCircleOutlined'];
+    let QuestionCircleType = iconsTypes['QuestionCircleOutlined'];
+
+    return <QuestionCircleType style={style} />
 }

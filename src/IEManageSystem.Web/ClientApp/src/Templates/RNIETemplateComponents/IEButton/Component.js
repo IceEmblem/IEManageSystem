@@ -1,17 +1,24 @@
 import React from 'react';
 import IComponent from 'IETemplateComponents/IEButton/IComponent'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import { withRouter } from 'react-router-native'
-import { Button, Text } from 'native-base'
+import { Button } from 'native-base'
 import StyleCheck from 'RNCMS/StyleCheck'
+import AntIcons from 'BaseCommon/AntIcons'
 
 class Component extends IComponent {
     render() {
         let setting = this.getCurrentSetting();
+        let commonSetting = StyleCheck.handle(this.getCommonStyleSetting().toStyle());
+        let icon;
+        if (setting.icon) {
+            icon = <Text style={[styles.text]}>{AntIcons.getIcon(setting.icon, { color: setting.color, fontSize: setting.fontSize })}</Text>;
+        }
 
+        let text = this.getText() ? <Text style={[styles.text, StyleCheck.handle({ color: setting.color, fontSize: setting.fontSize })]}>{this.getText()}</Text> : undefined;
         return (
             <Button
-                style={[this.baseStyle, styles.btn, StyleCheck.handle({backgroundColor: setting.bgcolor, height: setting.btnHeight})]}
+                style={[this.baseStyle, styles.btn, StyleCheck.handle({ backgroundColor: setting.bgcolor, height: setting.btnHeight }), commonSetting]}
 
                 // 按钮形状，只有方向和有点圆
                 rounded={setting.shape && setting.shape != ''}
@@ -27,7 +34,8 @@ class Component extends IComponent {
 
                 onPress={this.onClick}
             >
-                <Text style={[StyleCheck.handle({color: setting.color, fontSize: setting.fontSize})]}>{this.props.interactivText || setting.text}</Text>
+                {icon}
+                {text}
             </Button>
         );
 
@@ -38,6 +46,8 @@ const styles = StyleSheet.create({
     btn: {
         flexDirection: 'row',
         justifyContent: 'center',
+    },
+    text: {
     }
 })
 

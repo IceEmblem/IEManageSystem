@@ -42,9 +42,7 @@ namespace IEManageSystem.Dtos.CMS
 
         public EntityEditDto LastUpdater { get; set; }
 
-        public DateTime CreationTime { get; set; }
-
-        public int PageId { get; set; }
+        public string PageName { get; set; }
 
         public List<TagDto> Tags { get; set; }
     }

@@ -10,7 +10,7 @@ import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
 import TagModel from 'BaseCMSManage/Models/PageDatas/TagModel'
 
 import Theme from 'BaseLayout/Theme'
-import IETool from 'Core/ToolLibrary/IETool'
+import IETool from 'BaseCommon/ToolLibrary/IETool'
 import defaultAvatar from 'images/default_avatar.png'
 
 import IEBraftEditor from 'Common/IEBraftEditor'
@@ -102,7 +102,7 @@ class PostModal extends React.Component {
 
 	render() {
 		let ShowButton = this.props.showButton;
-		let curPage = this.props.pages.find(e => e.id == this.state.post.pageName) || {};
+		let curPage = this.props.pages.find(e => e.name == this.state.post.pageName) || {};
 
 		return <>
 			<ShowButton onClick={this.onShowBtnClick} />
@@ -374,7 +374,7 @@ class PageData extends React.Component {
 
 	// 删除文章
 	deletePost(post) {
-		let page = this.state.managePages.find(e => e.id == post.pageName)
+		let page = this.state.managePages.find(e => e.name == post.pageName)
 
 		let postData = {
 			name: post.name,
@@ -389,7 +389,7 @@ class PageData extends React.Component {
 
 	// 添加文章
 	addPost(post) {
-		let page = this.state.managePages.find(e => e.id == post.pageName)
+		let page = this.state.managePages.find(e => e.name == post.pageName)
 
 		let postData = {
 			...post, ...{
@@ -405,7 +405,7 @@ class PageData extends React.Component {
 
 	// 更新文章
 	updatePost(post) {
-		let page = this.state.managePages.find(e => e.id == post.pageName)
+		let page = this.state.managePages.find(e => e.name == post.pageName)
 
 		let postData = {
 			...post, ...{
@@ -455,7 +455,7 @@ class PageData extends React.Component {
 	}
 
 	createListItem(post) {
-		let isCanEdit = this.state.managePages.some(e => e.id == post.pageName);
+		let isCanEdit = this.state.managePages.some(e => e.name == post.pageName);
 		let editBtns = [];
 		if (isCanEdit) {
 			editBtns = [
@@ -470,7 +470,7 @@ class PageData extends React.Component {
 				/>,
 				<Button size='small' icon={<LoginOutlined />} type='primary'
 					onClick={() => {
-						let page = this.state.visitPages.find(e => e.id == post.pageName);
+						let page = this.state.visitPages.find(e => e.name == post.pageName);
 						this.props.history.push(`/ManageHome/CMSManage/PostEdit/${page.name}/${post.name}`);
 					}}
 				></Button>,
@@ -493,7 +493,7 @@ class PageData extends React.Component {
 				...editBtns,
 				<Button size='small' icon={<EyeOutlined />} type='primary'
 					onClick={() => {
-						let page = this.state.visitPages.find(e => e.id == post.pageName);
+						let page = this.state.visitPages.find(e => e.name == post.pageName);
 						this.props.history.push(`/Page/${page.name}/${post.name}`);
 					}}
 				></Button>,

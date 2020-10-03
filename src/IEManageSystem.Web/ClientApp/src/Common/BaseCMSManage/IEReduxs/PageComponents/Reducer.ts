@@ -15,7 +15,7 @@ import CreatePageComponentService from '../../Models/Pages/CreatePageComponentSe
 import PageComponentModel, { PageComponentOSType } from '../../Models/Pages/PageComponentModel'
 import PageComponentSettingModel from '../../Models/Pages/PageComponentSettingModel'
 import SingleDataModel from '../../Models/SingleDataModel'
-import IETool from 'Core/ToolLibrary/IETool'
+import IETool from 'BaseCommon/ToolLibrary/IETool'
 import SpecsChecker from './Specs/SpecsChecker'
 
 function setPageComponentModel(pageComponentData: any) {

@@ -337,6 +337,21 @@ class BasicSettingConfig extends IBasicSettingConfig {
                     </div>
                 </div>
                 <div className="col-md-6 bg-light mb-3">
+                    <label>{'自定义样式（Json 格式，示例：{"width": "100%"}'}</label>
+                    <div className="input-group mb-3">
+                        <Input.TextArea
+                            placeholder="自定义样式"
+                            value={this.props.data.pageComponentBaseSetting.style}
+                            onChange={
+                                (event) => {
+                                    this.props.data.pageComponentBaseSetting.style = event.target.value;
+                                    this.props.setData(this.props.data)
+                                }
+                            }
+                        />
+                    </div>
+                </div>
+                <div className="col-md-6 bg-light mb-3">
                     <label>请输入排序索引(必须是数字)：</label>
                     <div className="input-group mb-3">
                         <InputNumber

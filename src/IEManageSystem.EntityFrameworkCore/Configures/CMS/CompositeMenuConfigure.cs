@@ -16,10 +16,19 @@ namespace IEManageSystem.Configures.CMS
             builder.HasMany(e => e.Menus).WithOne().HasForeignKey(e=>e.CompositeMenuId);
 
             builder.HasData(
-                new {
+                new
+                {
                     Id = 1,
                     Name = "Main",
                     DisplayName = "主菜单",
+                    Icon = "",
+                    Discriminator = "CompositeMenu"
+                },
+                new
+                {
+                    Id = 2,
+                    Name = "RNMain",
+                    DisplayName = "App主菜单",
                     Icon = "",
                     Discriminator = "CompositeMenu"
                 });

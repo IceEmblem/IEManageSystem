@@ -1,6 +1,6 @@
 import React from 'react'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
-import IETool from 'Core/ToolLibrary/IETool'
+import IETool from 'BaseCommon/ToolLibrary/IETool'
 
 import PictureBox from './PictureBox';
 

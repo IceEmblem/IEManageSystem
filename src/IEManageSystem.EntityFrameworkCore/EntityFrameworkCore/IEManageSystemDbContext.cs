@@ -32,10 +32,13 @@ namespace IEManageSystem.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new ApiScopeNodeConfigure());
 
             // 配置Core
-            modelBuilder.ApplyConfiguration(new UserConfigure());
-            modelBuilder.ApplyConfiguration(new AccountConfigure());
-            modelBuilder.ApplyConfiguration(new RoleConfigure());
             modelBuilder.ApplyConfiguration(new PermissionConfigure());
+            modelBuilder.ApplyConfiguration(new RoleConfigure());
+            modelBuilder.ApplyConfiguration(new RolePermissionConfigure());
+            modelBuilder.ApplyConfiguration(new AccountConfigure());
+            modelBuilder.ApplyConfiguration(new UserConfigure());
+            modelBuilder.ApplyConfiguration(new UserRoleConfigure());
+            
 
             // 配置CMS
             modelBuilder.ApplyConfiguration(new ContentPagePeimissionCollectionConfigure());

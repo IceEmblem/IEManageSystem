@@ -7,7 +7,7 @@ import { Button, Tooltip, Radio, Modal, Tag } from 'antd';
 import { ApiOutlined } from '@ant-design/icons';
 import ComponentContext from 'BaseCMSManage/ComponentContext'
 
-import IETool from 'Core/ToolLibrary/IETool'
+import IETool from 'BaseCommon/ToolLibrary/IETool'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import {
     EditComponentAction,

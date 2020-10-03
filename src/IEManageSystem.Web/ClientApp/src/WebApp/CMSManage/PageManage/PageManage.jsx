@@ -25,7 +25,7 @@ function EditComponent(props) {
 }
 
 function EditPageData(props) {
-	if (props.resource.pageType == pageType.ContentPage) {
+	if (props.resource.discriminator == pageType.ContentPage) {
 		return (
 			<NavLink className="ant-btn ant-btn-sm mr-1"
 				to={`/ManageHome/CMSManage/PageData/${props.resource.name}`}
@@ -73,7 +73,6 @@ class PageManage extends React.Component {
 				name: "discriminator", text: "页面类型", isShowOnList: true,
 				valueType: ResourceDescribeValueType.radio,
 				valueTexts: [{ value: pageType.StaticPage, text: "单篇页面" }, { value: pageType.ContentPage, text: "文章页面" }],
-				isEditCanEdit: false
 			},
 			{ name: "field1Name", text: "字段1名称" },
 			{ name: "field2Name", text: "字段2名称" },
@@ -103,7 +102,14 @@ class PageManage extends React.Component {
 			return;
 		}
 
-		let postData = resource;
+		let postData = {
+			page: resource,
+			pageCompleteJson: JSON.stringify({
+				page: resource,
+				pageComponents: [],
+				defaultComponentDatas: []
+			})
+		};
 
 		ieReduxFetch("/api/PageManage/AddPage", postData)
 			.then(value => {
@@ -151,13 +157,13 @@ class PageManage extends React.Component {
 		customizeOperateBtns.push(EditComponent);
 		customizeOperateBtns.push(EditPageData);
 		customizeOperateBtns.push((props) => {
-			if (props.resource.pageType != pageType.ContentPage) {
+			if (props.resource.discriminator != pageType.ContentPage) {
 				return (<span></span>);
 			}
-		
+
 			return (<Button
 				icon={<EditOutlined />}
-				onClick={() => this.setState({postPermissionEdit:{ show: true, pageName: props.resource.name }})}
+				onClick={() => this.setState({ postPermissionEdit: { show: true, pageName: props.resource.name } })}
 				size="small"
 			>编辑权限</Button>);
 		});
@@ -176,10 +182,10 @@ class PageManage extends React.Component {
 					updateResource={this.updateResource}
 					customizeOperateBtns={customizeOperateBtns}
 				/>
-				<PostPermissionEdit 
+				<PostPermissionEdit
 					show={this.state.postPermissionEdit.show}
 					pageName={this.state.postPermissionEdit.pageName}
-					close={()=>{this.setState({postPermissionEdit:{ show: false, pageName: null }})}}
+					close={() => { this.setState({ postPermissionEdit: { show: false, pageName: null } }) }}
 				/>
 			</div>
 		);

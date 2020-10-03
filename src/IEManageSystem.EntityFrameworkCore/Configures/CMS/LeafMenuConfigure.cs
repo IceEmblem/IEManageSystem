@@ -16,10 +16,10 @@ namespace IEManageSystem.Configures.CMS
             builder.HasData(
                 new
                 {
-                    Id = 2,
+                    Id = 11,
                     Name = "Home",
                     DisplayName = "首页",
-                    Icon = "oi-home",
+                    Icon = "home",
                     CompositeMenuId = 1,
                     RootMenuId = 1,
                     Discriminator = "LeafMenu",
@@ -27,10 +27,10 @@ namespace IEManageSystem.Configures.CMS
                 },
                 new
                 {
-                    Id = 3,
+                    Id = 12,
                     Name = "PostList",
                     DisplayName = "文章列表",
-                    Icon = "oi-dial",
+                    Icon = "",
                     CompositeMenuId = 1,
                     RootMenuId = 1,
                     Discriminator = "LeafMenu",
@@ -38,14 +38,36 @@ namespace IEManageSystem.Configures.CMS
                 },
                 new
                 {
-                    Id = 4,
+                    Id = 13,
                     Name = "Chart",
-                    DisplayName = "图标演示",
-                    Icon = "oi-document",
+                    DisplayName = "图表演示",
+                    Icon = "",
                     CompositeMenuId = 1,
                     RootMenuId = 1,
                     Discriminator = "LeafMenu",
                     PageName = "Chart",
+                },
+                new
+                {
+                    Id = 14,
+                    Name = "RNHome",
+                    DisplayName = "首页",
+                    Icon = "home",
+                    CompositeMenuId = 2,
+                    RootMenuId = 2,
+                    Discriminator = "LeafMenu",
+                    PageName = "Home"
+                },
+                new
+                {
+                    Id = 15,
+                    Name = "RNPostList",
+                    DisplayName = "文章列表",
+                    Icon = "",
+                    CompositeMenuId = 2,
+                    RootMenuId = 2,
+                    Discriminator = "LeafMenu",
+                    PageName = "PostList",
                 });
         }
     }

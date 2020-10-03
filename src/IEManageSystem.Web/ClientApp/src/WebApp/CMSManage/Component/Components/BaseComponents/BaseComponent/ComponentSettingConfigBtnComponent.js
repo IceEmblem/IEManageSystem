@@ -7,7 +7,7 @@ import {
     EditComponentAction,
 } from 'BaseCMSManage/IEReduxs/Actions'
 import IocContainer from 'Core/IocContainer';
-import IETool from 'Core/ToolLibrary/IETool'
+import IETool from 'BaseCommon/ToolLibrary/IETool'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 class ComponentSettingConfigBtnComponent extends IComponentSettingConfigBtnComponent {

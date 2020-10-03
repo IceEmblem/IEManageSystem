@@ -1,6 +1,6 @@
 import React from 'react'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import IETool from 'Core/ToolLibrary/IETool'
+import IETool from 'BaseCommon/ToolLibrary/IETool'
 import { AddComponentAction, DefaultComponentDataUpdateAction } from 'BaseCMSManage/IEReduxs/Actions'
 import { Button, message, Popover } from 'antd'
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'

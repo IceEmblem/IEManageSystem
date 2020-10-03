@@ -186,6 +186,18 @@ class ComponentContainerBox extends React.Component {
             }
         }
 
+        if (this.props.pageComponent.pageComponentBaseSetting.style) {
+            let customizeStyle = {};
+            try{
+                customizeStyle = JSON.parse(this.props.pageComponent.pageComponentBaseSetting.style);
+            }
+            catch(ex){
+                console.error('自定义样式错误\n' + ex.message);
+            }
+
+            style = {...style, ...customizeStyle};
+        }
+
         return style;
     }
 

@@ -6,6 +6,7 @@ import './Container.css'
 class Component extends IComponent {
     render() {
         let setting = this.getCurrentSetting();
+        let cusStyle = this.getCommonStyleSetting().toStyle();
 
         return (
             <div
@@ -16,7 +17,8 @@ class Component extends IComponent {
                     alignItems: setting.alignItems,
                     alignContent: setting.alignContent,
                     flexWrap: setting.wrap,
-                    overflowY: 'hidden'
+                    overflowY: 'hidden',
+                    ...cusStyle
                 }}
             >
                 {this.props.children}

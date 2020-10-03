@@ -136,7 +136,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
         {
             var contentPagePermissionCollection = _contentPagePermissionCollectionRepository.GetAllIncluding(e => e.ContentPagePermissions).FirstOrDefault(e => e.PageName == pageName);
 
-            if (contentPagePermissionCollection.IsCanQueryPost(permissions))
+            if (contentPagePermissionCollection == null || contentPagePermissionCollection.IsCanQueryPost(permissions))
             {
                 return true;
             }
@@ -162,7 +162,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             return false;
         }
 
-        public void AddPage(Page page, User user)
+        public void AddPage(Page page, User user, string pageCompleteJson)
         {
             if (GetPagesForCache().Any(e => e.Name == page.Name))
             {
@@ -178,7 +178,7 @@ namespace IEManageSystem.CMS.DomainModel.Pages
 
             // 更新页面完整文件
             string pageCompleteJsonFilePath = $"{PageDirPath}/{page.Name}.{PageCompleteJsonFileFuffix}";
-            File.WriteAllText(pageCompleteJsonFilePath, "{}");
+            File.WriteAllText(pageCompleteJsonFilePath, pageCompleteJson);
         }
 
         public void UpdatePage(Page page, User user, string pageCompleteJson) 

@@ -31,4 +31,10 @@ export default class IComponent extends BaseComponent{
 
         return false;
     }
+
+    getText(){
+        let setting = this.getCurrentSetting();
+
+        return this.props.interactivText || setting.text;
+    }
 }

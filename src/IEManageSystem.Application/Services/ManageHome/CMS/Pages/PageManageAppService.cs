@@ -56,11 +56,11 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
 
         public AddPageOutput AddPage(AddPageInput input)
         {
-            Page page = _objectMapper.Map<Page>(input);
+            Page page = _objectMapper.Map<Page>(input.Page);
 
             var editor = _userManager.GetUser((int)_abpSession.UserId.Value);
 
-            _pageManager.AddPage(page, editor);
+            _pageManager.AddPage(page, editor, input.PageCompleteJson);
 
             return new AddPageOutput();
         }

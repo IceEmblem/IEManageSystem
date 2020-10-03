@@ -4,7 +4,7 @@ import Setting from 'IETemplateComponents/IEButton/Setting'
 import { Input, Tag, Radio, Button, InputNumber } from 'antd'
 
 import { SketchPicker } from 'react-color'
-import { icons } from 'Common/AntIcons'
+import AntIcons from 'BaseCommon/AntIcons'
 
 class SettingConfig extends React.Component {
     constructor(props) {
@@ -142,9 +142,8 @@ class SettingConfig extends React.Component {
                 >
                     <Radio>无</Radio>
                     {
-                        Object.keys(icons).map(key => {
-                            let IconType = icons[key];
-                            return <Radio value={key}><IconType /></Radio>
+                        Object.keys(AntIcons.icons).map(key => {
+                            return <Radio value={key}>{AntIcons.icons[key]}</Radio>
                         })
                     }
                 </Radio.Group>

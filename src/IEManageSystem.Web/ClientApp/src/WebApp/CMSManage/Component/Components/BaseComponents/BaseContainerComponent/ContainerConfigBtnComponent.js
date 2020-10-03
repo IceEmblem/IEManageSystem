@@ -11,7 +11,7 @@ import IocContainer from 'Core/IocContainer';
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import ComponentListBox from './ComponentListBox'
-import IETool from 'Core/ToolLibrary/IETool'
+import IETool from 'BaseCommon/ToolLibrary/IETool'
 
 const AddBtnComponent = (props) => {
     return <Tooltip

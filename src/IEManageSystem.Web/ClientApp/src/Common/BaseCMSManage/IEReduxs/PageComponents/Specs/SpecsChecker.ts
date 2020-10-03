@@ -2,9 +2,10 @@ import ISpec from './ISpec'
 import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import SpecResult from './SpecResult'
 import RNSpec from './RNSpec'
+import BindSpec from './BindSpec'
 
 class SpecsChecker{
-    specs : ISpec[] = [new RNSpec()];
+    specs : ISpec[] = [new RNSpec(), new BindSpec()];
 
     // 是否适用于所有规格
     isSuitAllSpecs(pageComponent: PageComponentModel):SpecResult{

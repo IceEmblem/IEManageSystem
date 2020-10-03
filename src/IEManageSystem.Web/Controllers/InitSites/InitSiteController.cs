@@ -110,11 +110,7 @@ namespace IEManageSystem.Web.Controllers.InitSites
                 Component.For(typeof(DbContextOptions<IEManageSystemDbContext>)).Instance(dbOptionsBuilder.Options).LifestyleSingleton()
                 );
 
-            // 初始化数据库
             IocManager.Instance.Resolve<IEManageSystemDbContext>().Database.EnsureCreated();
-
-            // 初始化超级管理员
-            IocManager.Instance.Resolve<InitializeSuperAdmin>().Initialize();
 
             // 动态添加Api域
             IocManager.Instance.Resolve<ApiScopeProvider>().Register();

@@ -43,10 +43,12 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             ReloadDB();
 
             _appService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput() { 
-                Name = "AddContentPage_BaseTest",
-                Description = "Description1",
-                DisplayName = "DisplayName1",
-                Discriminator = Page.ContentPageDiscriminatorName
+                Page = new PageDto() {
+                    Name = "AddContentPage_BaseTest",
+                    Description = "Description1",
+                    DisplayName = "DisplayName1",
+                    Discriminator = Page.ContentPageDiscriminatorName
+                }
             });
 
             var pageManager = LocalIocManager.Resolve<PageManager>();
@@ -69,10 +71,12 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             ReloadDB();
 
             _appService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput() {
-                Name = "AddStaticPage_BaseTest",
-                Description = "Description1",
-                DisplayName = "DisplayName1",
-                Discriminator = Page.StaticPageDiscriminatorName
+                Page = new PageDto() {
+                    Name = "AddStaticPage_BaseTest",
+                    Description = "Description1",
+                    DisplayName = "DisplayName1",
+                    Discriminator = Page.StaticPageDiscriminatorName
+                }
             });
 
             var pageManager = LocalIocManager.Resolve<PageManager>();
@@ -96,10 +100,12 @@ namespace IEManageSystem.Application.Tests.Services.Pages
 
             _appService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput()
             {
-                Name = "UpdatePage_BaseTest",
-                Description = "Description1",
-                DisplayName = "DisplayName1",
-                Discriminator = Page.ContentPageDiscriminatorName
+                Page = new PageDto() {
+                    Name = "UpdatePage_BaseTest",
+                    Description = "Description1",
+                    DisplayName = "DisplayName1",
+                    Discriminator = Page.ContentPageDiscriminatorName
+                }
             });
 
             _appService.UpdatePage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.UpdatePageInput() {
@@ -134,10 +140,12 @@ namespace IEManageSystem.Application.Tests.Services.Pages
 
             _appService.AddPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.AddPageInput()
             {
-                Name = "DeletePage_BaseTest",
-                Description = "Description1",
-                DisplayName = "DisplayName1",
-                Discriminator = Page.ContentPageDiscriminatorName
+                Page = new PageDto() {
+                    Name = "DeletePage_BaseTest",
+                    Description = "Description1",
+                    DisplayName = "DisplayName1",
+                    Discriminator = Page.ContentPageDiscriminatorName
+                }
             });
 
             // 期望生成两个文件

@@ -13,6 +13,7 @@ import IECategoryLabel, { RNDescribe as RNIECategoryLabel } from "./IECategoryLa
 import IEComment, { RNDescribe as RNIEComment } from "./IEComment"
 import IEImg, { RNDescribe as RNIEImg } from "./IEImg"
 import IEInfoGroup, { RNDescribe as RNIEInfoGroup } from "./IEInfoGroup"
+import {RNDescribe as RNIELayout} from './IELayout'
 import IELine, { RNDescribe as RNIELine } from "./IELine"
 import IEMenu, { RNDescribe as RNIEMenu } from "./IEMenu"
 import IEPlaceholder, { RNDescribe as RNIEPlaceholder } from './IEPlaceholder'
@@ -69,6 +70,7 @@ const rnDescribes = [
     RNIEComment,
     RNIEImg,
     RNIEInfoGroup,
+    RNIELayout,
     RNIELine,
     RNIEMenu,
     RNIEPlaceholder,

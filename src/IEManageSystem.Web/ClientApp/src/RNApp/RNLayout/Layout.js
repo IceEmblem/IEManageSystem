@@ -10,7 +10,6 @@ import Theme from './Theme'
 
 class Layout extends React.Component {
     state = {
-        activeIndex: 0,
         isShowCustomizeView: false,
         customizeView: undefined,
     }
@@ -47,53 +46,12 @@ class Layout extends React.Component {
         return (
             <>
                 <StyleProvider style={Theme.getTheme()}>
-                    <Container style={this.state.isShowCustomizeView ? styles.none : undefined}>
-                        <Header>
-                            <Body style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Button style={{ marginRight: 15 }} transparent>
-                                    <Text><Icon style={{ color: '#fff' }} name='menu' /></Text>
-                                </Button>
-                                {
-                                    NavToolProvider.getLeftComponents()
-                                }
-                                {
-                                    NavToolProvider.getRightComponents()
-                                }
-                                <Button style={{ marginLeft: 15 }} small transparent>
-                                    <Text>
-                                        <Icon type='AntDesign' style={{ color: '#fff' }} name='message1' />
-                                    </Text>
-                                </Button>
-                                <Button style={{ marginLeft: 15 }} small rounded transparent>
-                                    <Text>
-                                        <Icon type='AntDesign' style={{ color: '#fff' }} name='ellipsis1' />
-                                    </Text>
-                                </Button>
-                            </Body>
-                        </Header>
-                        <Content>
-                            <Switch>
-                                {this.navMenuComponentsForSort.map(
-                                    (item, index) => <Route key={index} path={item.baseUrl} component={item.component} />)}
-                            </Switch>
-                        </Content>
-                        <Footer>
-                            <FooterTab>
-                                {this.navMenuComponents.map(
-                                    (item, index) => <Button
-                                        active={index == this.state.activeIndex}
-                                        onPress={
-                                            () => {
-                                                this.setState({ activeIndex: index })
-                                                this.props.history.push(item.menu.url);
-                                            }
-                                        }
-                                    >
-                                        <Icon name={item.menu.icon} type='AntDesign' />
-                                    </Button>)}
-                            </FooterTab>
-                        </Footer>
-                    </Container>
+                    <View style={this.state.isShowCustomizeView ? styles.none : undefined}>
+                        <Switch>
+                            {this.navMenuComponentsForSort.map(
+                                (item, index) => <Route key={index} path={item.baseUrl} component={item.component} />)}
+                        </Switch>
+                    </View>
                 </StyleProvider>
                 <View style={!this.state.isShowCustomizeView ? styles.none : styles.customizeView}>
                     {

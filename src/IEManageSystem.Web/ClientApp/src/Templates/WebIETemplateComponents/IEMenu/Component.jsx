@@ -1,7 +1,7 @@
 import React from 'react';
 import IComponent from 'IETemplateComponents/IEMenu/IComponent'
 import { Link } from 'react-router-dom'
-import {getIconType} from 'Common/AntIcons'
+import AntIcons from 'BaseCommon/AntIcons'
 import { Menu } from 'antd';
 const { SubMenu } = Menu;
 
@@ -23,8 +23,7 @@ class Component extends IComponent {
         for (let item in menuItems) {
             let Icon = undefined;
             if(menuItems[item].icon){
-                let IconType = getIconType(menuItems[item].icon);
-                Icon = <IconType style={fontStyle} />
+                Icon = AntIcons.getIcon(menuItems[item].icon, fontStyle);
             }
 
             if (menuItems[item].isCompositeMenuType()) {

@@ -15,7 +15,7 @@ using System.Text.Json;
 
 namespace IEManageSystem.CMS.DomainModel.PageDatas
 {
-    public class PageData:Entity, IHasCreationTime
+    public class PageData:Entity
     {
         public string Name { get; set; }
 
@@ -53,11 +53,6 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         public EntityEdit Creator { get; set; }
 
         public EntityEdit LastUpdater { get; set; }
-
-        /// <summary>
-        /// 即将删除-------------------------
-        /// </summary>
-        public DateTime CreationTime { get; set; }
 
         public string PageName { get; set; }
 
