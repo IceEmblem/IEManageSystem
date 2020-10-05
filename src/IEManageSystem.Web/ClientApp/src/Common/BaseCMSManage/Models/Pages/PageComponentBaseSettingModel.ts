@@ -1,31 +1,31 @@
 export default class PageComponentBaseSettingModel{
     public id: number;
     public sortIndex: number;
-    public width: string | null;
-    public height: string | null;
+    public width: string | undefined;
+    public height: string | undefined;
 
-    public padding: string | null;
-    public paddingLeft: number | null;
-    public paddingRight: number | null;
-    public paddingTop: number | null;
-    public paddingBottom: number | null;
+    public padding: string | undefined;
+    public paddingLeft: number | undefined;
+    public paddingRight: number | undefined;
+    public paddingTop: number | undefined;
+    public paddingBottom: number | undefined;
 
-    public margin: string | null;
-    public marginLeft: number | null;
-    public marginRight: number | null;
-    public marginTop: number | null;
-    public marginBottom: number | null;
+    public margin: string | undefined;
+    public marginLeft: number | undefined;
+    public marginRight: number | undefined;
+    public marginTop: number | undefined;
+    public marginBottom: number | undefined;
 
-    public border: string | null;
-    public borderRadius: string | null;
-    public position: string | null;
-    public left: string | null;
-    public right: string | null;
-    public top: string | null;
-    public bottom: string | null;
+    public border: string | undefined;
+    public borderRadius: string | undefined;
+    public position: string | undefined;
+    public left: string | undefined;
+    public right: string | undefined;
+    public top: string | undefined;
+    public bottom: string | undefined;
 
-    public backgroundColor: string | null;
-    public backgroundImage: string | null;
-    public className: string | null;
-    public style: string | null;
+    public backgroundColor: string | undefined;
+    public backgroundImage: string | undefined;
+    public className: string | undefined;
+    public style: string | undefined;
 }

@@ -35,7 +35,9 @@ type IconNameType = 'GithubOutlined'
 | 'SearchOutlined'
 | 'MenuOutlined'
 | 'MessageFilled'
-| 'EllipsisOutlined';
+| 'EllipsisOutlined'
+| 'FireOutlined'
+| 'HeartOutlined';
 
 class AntIcons {
     icons : Map<string, React.Component>;

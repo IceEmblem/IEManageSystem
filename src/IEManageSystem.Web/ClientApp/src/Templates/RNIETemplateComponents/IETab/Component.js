@@ -125,9 +125,6 @@ export default class Component extends IComponent {
 
 const styles = StyleSheet.create({
     tabItem: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        marginRight: 20,
         borderBottomWidth: 2,
         borderBottomColor: '#0000',
     },

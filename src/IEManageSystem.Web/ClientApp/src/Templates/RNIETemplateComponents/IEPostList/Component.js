@@ -9,14 +9,13 @@ import { Button, Text, Card, CardItem } from 'native-base'
 class Component extends IComponent {
     header() {
         return <View style={styles.sortView}>
-            <Text>排序：</Text>
-            <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Date" }) }}>
+            <Button rounded small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Date" }) }}>
                 <Text>发表时间</Text>
             </Button>
-            <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Click" }) }}>
+            <Button rounded small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Click" }) }}>
                 <Text>点击量</Text>
             </Button>
-            <Button small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Score" }) }}>
+            <Button rounded small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Score" }) }}>
                 <Text>评分</Text>
             </Button>
         </View>
@@ -43,7 +42,7 @@ class Component extends IComponent {
             source = defaultImg;
         }
 
-        return <View style={{ width: `${width}%`, paddingLeft: 5, paddingRight: 5, marginBottom: 10 }}>
+        return <View style={{ width: `${width}%`, marginBottom: 10 }}>
             <Card>
                 {
                     setting.isShowImg == "true" &&
@@ -71,7 +70,7 @@ class Component extends IComponent {
                         </View>
                         <View style={styles.itemMeta}>
                             <Text style={styles.itemMetaText}>{`评分：${post.score} | 点击量：${post.click}`}</Text>
-                            <Text style={[styles.itemMetaText, { textAlign: 'right' }]}>{new Date(post.creationTime).toLocaleDateString()}</Text>
+                            <Text style={[styles.itemMetaText, { textAlign: 'right' }]}>{new Date(post.creator.time).toLocaleDateString()}</Text>
                         </View>
                     </View>
                 </CardItem>
@@ -82,19 +81,15 @@ class Component extends IComponent {
 
     footer() {
         return <View style={styles.pageBtnView}>
-            <Button small style={styles.pageBtn} disabled={this.props.postData.pageIndex <= 1} onPress={() => this.props.getPostFetchs({ ...this.props.postData, pageIndex: this.props.postData.pageIndex - 1 })}>
-                <Text>上一页</Text>
-            </Button>
-            <Text style={styles.pageBtnText}>{`第 ${this.props.postData.pageIndex} 页`}</Text>
-            <Button small style={styles.pageBtn} disabled={this.props.posts.length < this.props.postData.pageSize} onPress={() => this.props.getPostFetchs({ ...this.props.postData, pageIndex: this.props.postData.pageIndex + 1 })}>
-                <Text>下一页</Text>
+            <Button block small style={styles.pageBtn} disabled={this.props.posts.length < this.props.postData.pageSize} onPress={() => this.props.getPostFetchs({ ...this.props.postData, pageIndex: this.props.postData.pageIndex + 1 })}>
+                <Text>更多</Text>
             </Button>
         </View>
     }
 
     render() {
         let setting = this.getCurrentSetting();
-        
+
         let Head = this.props.ChildComponent['head'];
         let ListItem = this.props.ChildComponent['listItem'];
 
@@ -161,13 +156,16 @@ const styles = StyleSheet.create({
     },
     pageBtnView: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10
     },
     pageBtnText: {
         marginLeft: 10,
         marginRight: 10,
     },
     pageBtn: {
+        width: 200
     }
 })
 

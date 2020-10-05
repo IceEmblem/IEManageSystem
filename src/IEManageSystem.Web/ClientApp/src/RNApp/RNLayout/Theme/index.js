@@ -1,4 +1,4 @@
-import BaseTheme, {themeName} from 'BaseLayout/Theme';
+import BaseTheme from 'BaseLayout/Theme';
 import getTheme from './NativeBaseTheme/components';
 import material from './NativeBaseTheme/variables/material';
 

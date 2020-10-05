@@ -46,7 +46,7 @@ class Layout extends React.Component {
         return (
             <>
                 <StyleProvider style={Theme.getTheme()}>
-                    <View style={this.state.isShowCustomizeView ? styles.none : undefined}>
+                    <View style={[styles.view, this.state.isShowCustomizeView ? styles.none : undefined]}>
                         <Switch>
                             {this.navMenuComponentsForSort.map(
                                 (item, index) => <Route key={index} path={item.baseUrl} component={item.component} />)}
@@ -67,10 +67,13 @@ const styles = StyleSheet.create({
     none: {
         display: 'none'
     },
+    view: {
+        height: '100%',
+        width: '100%',
+    },
     customizeView: {
         height: '100%',
         width: '100%',
-        backgroundColor: '#0002'
     }
 })
 

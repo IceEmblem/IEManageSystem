@@ -86,7 +86,7 @@ class DataConfig extends React.Component {
     }
 
     getPageComponentSetting() {
-        return this.props.pageComponentSettings.find(e => e.name == "DefaultSetting");
+        return this.props.pageComponentSettings["DefaultSetting"];
     }
 
     render() {

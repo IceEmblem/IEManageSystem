@@ -28,9 +28,9 @@ function pageDataReceive(state, action: any){
 
     let contentComponentDatas = {};
     action.data.contentComponentDatas.forEach((element: any) => {
-        element.singleDatas.sort((l, r)=> l.sortIndex - r.sortIndex);
         contentComponentDatas[element.sign] = element;
         setComponentDataModel(contentComponentDatas[element.sign]);
+        contentComponentDatas[element.sign].sort();
     });
 
     newState[action.data.pageData.id] = contentComponentDatas;

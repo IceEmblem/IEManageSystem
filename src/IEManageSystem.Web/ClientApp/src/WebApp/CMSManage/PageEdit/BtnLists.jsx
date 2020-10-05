@@ -1,7 +1,7 @@
 import React from 'react';
 import ListBtn from 'Common/ListBtn'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import { Button, Popover, Input, Tag, Select, Tooltip } from 'antd';
 import { PlusCircleOutlined, InfoCircleOutlined, SyncOutlined, SaveOutlined, VerticalAlignBottomOutlined, CopyOutlined } from "@ant-design/icons"
@@ -33,7 +33,7 @@ const AddComponentBtn = (props) => {
     >添加组件</Button>
 }
 
-const Layout = (props) => {
+const PageSelect = (props) => {
     return (
         <div>
             <Select
@@ -108,6 +108,7 @@ class BtnLists extends React.Component {
         }
 
         this.selectPageLayout = this.selectPageLayout.bind(this);
+        this.changePage = this.changePage.bind(this);
         this.ContainerConfigBtnComponent = IocContainer.getService(IContainerConfigBtnComponent);
     }
 
@@ -129,17 +130,24 @@ class BtnLists extends React.Component {
     }
 
     selectPageLayout(pageName) {
-        ieReduxFetch("/api/PageQuery/GetPage", {
-            name: pageName
-        }).then(value => {
+        ieReduxFetch(
+            `/Pages/${pageName}.json`,
+            null,
+            "get",
+            false
+        ).then(value => {
             this.props.setPage(this.props.page, value.pageComponents, value.defaultComponentDatas, this.props.currentPageAndPost.os);
         });
+    }
+
+    changePage(pageName) {
+        this.props.history.push(`/ManageHome/CMSManage/PageEdit/${pageName}`);
     }
 
     render() {
         return (
             <div className="PageContainer-btnlists align-items-center d-flex">
-                <Motion style={{ x: spring(this.state.open ? 660 : 0, presets.gentle), }}>
+                <Motion style={{ x: spring(this.state.open ? 660 : 0, presets.gentle), }}>
                     {interpolatingStyle => {
                         return (
                             <div className="d-flex justify-content-between overflow-hidden-x" style={{ width: `${interpolatingStyle.x}px` }}>
@@ -149,7 +157,7 @@ class BtnLists extends React.Component {
                                     btnComponent={AddComponentBtn}
                                 />
                                 <Popover
-                                    content={<Layout
+                                    content={<PageSelect
                                         pages={this.state.pages}
                                         onChange={this.selectPageLayout}
                                     />}
@@ -166,13 +174,18 @@ class BtnLists extends React.Component {
                                         style={{ backgroundColor: Theme.color3, borderColor: Theme.color3 }}
                                     >页面信息</Button>
                                 </Popover>
-                                <Button
-                                    icon={<SyncOutlined />}
-                                    style={{ backgroundColor: Theme.color4, borderColor: Theme.color4 }}
-                                    onClick={() => {
-                                        this.props.exportPage();
-                                    }}
-                                >导出页面</Button>
+                                <Popover
+                                    content={<PageSelect
+                                        pages={this.state.pages}
+                                        onChange={this.changePage}
+                                    />}
+                                    title="Title"
+                                    trigger="click">
+                                    <Button
+                                        icon={<SyncOutlined />}
+                                        style={{ backgroundColor: Theme.color4, borderColor: Theme.color4 }}
+                                    >切换页面</Button>
+                                </Popover>
                                 <Popover
                                     content={<OSType
                                         page={this.props.page}
@@ -293,4 +306,4 @@ const Contain = CmsRedux.connect(
     mergeProps
 )(BtnLists)
 
-export default Contain;
+export default withRouter(Contain);

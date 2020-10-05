@@ -121,11 +121,11 @@ namespace IEManageSystem.CMS.DomainModel.Pages
             List<string> pageNames = _contentPagePermissionCollectionRepository
                 .GetAll()
                 .Where(e =>
-                    e.IsEnableQueryPermission == false
-                    || e.ContentPagePermissions.Any(e => !e.IsManage && permissionIds.Contains(e.PermissionId)))
+                    !(e.IsEnableQueryPermission == false
+                    || e.ContentPagePermissions.Any(e => !e.IsManage && permissionIds.Contains(e.PermissionId))))
                 .Select(e => e.PageName).ToList();
 
-            return GetPagesForCache().Where(page => pageNames.Contains(page.Name));
+            return GetPagesForCache().Where(page => !pageNames.Contains(page.Name));
         }
 
         /// <summary>

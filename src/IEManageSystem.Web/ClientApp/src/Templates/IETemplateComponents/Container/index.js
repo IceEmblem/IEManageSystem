@@ -18,7 +18,7 @@ class ComponentObject extends BaseComponentObject {
 const componentDescribeBuilder = (component, preview, settingConfig, dataConfig) => {
     let componentDescribe = new ComponentDescribe("Container", new ComponentObject(component, preview, settingConfig, dataConfig), componentType.container, "组件容器");
     componentDescribe.pageComponentBaseSetting = {
-        height: '100px'
+        height: 100
     }
 
     componentDescribe.paste = (pastePageComponent, curPageComponent, curPageComponentChilds) => ({message: "", isPass: true});

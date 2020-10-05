@@ -37,9 +37,9 @@ function pageReceive(state, action: FetchAction) {
     action.data.defaultComponentDatas.forEach((element: any) => {
         let signs = action.data.pageComponents.map(e => e.sign);
         if (signs.some(e => e == element.sign)) {
-            element.singleDatas.sort((l, r) => l.sortIndex - r.sortIndex);
             defaultComponentDatas[element.sign] = element;
             setComponentDataModel(defaultComponentDatas[element.sign]);
+            defaultComponentDatas[element.sign].sort();
         }
     });
 

@@ -5,6 +5,7 @@ import Theme from 'BaseLayout/Theme'
 import { View, StyleSheet } from 'react-native'
 import { withRouter } from 'react-router-native'
 import { Button, Icon, Text } from 'native-base'
+import AntIcons from 'BaseCommon/AntIcons'
 
 class Component extends IComponent {
     constructor(props) {
@@ -26,7 +27,7 @@ class Component extends IComponent {
 
         let menuItems = menu.menus;
         for (let item in menuItems) {
-            let icon = menuItems[item].icon;
+            let icon = menuItems[item].icon ? AntIcons.getIcon(menuItems[item].icon, textStyle) : undefined;
 
             if (menuItems[item].isCompositeMenuType()) {
                 let childMenus = this.createMenusIteration(menuItems[item]);
@@ -46,7 +47,7 @@ class Component extends IComponent {
                         }}
                         transparent
                     >
-                        {icon && <Icon style={textStyle} name={icon} type='AntDesign'></Icon>}
+                        {icon}
                         <Text style={textStyle}>
                             {menuItems[item].displayName}
                         </Text>

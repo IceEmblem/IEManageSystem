@@ -21,7 +21,7 @@ const pageComponent = {
         "padding": "0rem"
     },
     "componentType": "PageLeafComponent",
-    "pageComponentSettings": [],
+    "pageComponentSettings": {},
     "pageLeafSetting": null
 };
 const editComponent = (pageComponent) => { };

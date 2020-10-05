@@ -24,6 +24,10 @@ class Component extends IComponent {
                     }
                     <CardItem button cardBody
                         onPress={() => {
+                            debugger
+                            if(!data.link){
+                                return;
+                            }
                             this.props.history.push(data.link);
                         }}
                     >

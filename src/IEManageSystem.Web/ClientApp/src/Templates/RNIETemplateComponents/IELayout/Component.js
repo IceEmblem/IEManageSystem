@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import IComponent from 'IETemplateComponents/IELayout/IComponent'
 import Device from 'RNInfrastructure/Device'
 
@@ -15,7 +15,7 @@ class Component extends IComponent {
         let middles = this.props.children["middle"];
         let bottoms = this.props.children["bottom"];
 
-        return <Container style={{ height: Device.height, width: Device.width }}>
+        return <Container style={[this.baseStyle, styles.container]}>
             {
                 tops.length > 0 &&
                 <Header>
@@ -26,15 +26,15 @@ class Component extends IComponent {
                     </Body>
                 </Header>
             }
-            <Content>
+            <View style={{ flexBasis: '0%', flexGrow: 1 }}>
                 {
                     middles
                 }
-            </Content>
+            </View>
             {
                 bottoms.length > 0 &&
-                <Footer>
-                    <FooterTab>
+                <Footer style={{width: '100%'}}>
+                    <FooterTab style={{width: '100%', flexWrap: 'nowrap', flexDirection: 'row'}}>
                         {
                             bottoms
                         }
@@ -46,6 +46,10 @@ class Component extends IComponent {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        height: '100%', 
+        width: '100%'
+    }
 });
 
 

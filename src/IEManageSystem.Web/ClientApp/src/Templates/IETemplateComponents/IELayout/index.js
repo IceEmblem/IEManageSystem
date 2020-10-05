@@ -19,6 +19,15 @@ class ComponentObject extends BaseComponentObject {
 
 const componentDescribeBuilder = (component, preview, settingConfig, dataConfig) => {
     let componentDescribe = new ComponentDescribe("IELayout", new ComponentObject(component, preview, settingConfig, dataConfig), componentType.container, "IEApp框架")
+    componentDescribe.defauleStyle = {
+        width: "100%",
+        height: "100%",
+    }
+
+    componentDescribe.paste = (pastePageComponent, curPageComponent, curPageComponentChilds) => {
+        pastePageComponent.group = "middle";
+        return {message: "", isPass: true}
+    };
 
     return componentDescribe;
 

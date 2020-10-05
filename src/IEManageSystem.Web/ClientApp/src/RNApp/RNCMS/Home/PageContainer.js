@@ -54,15 +54,13 @@ class PageContainer extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <RootComponentContainerBox
-          currentPageAndPost={{
-            pageName: this.props.pageName,
-            pageDataId: this.props.pageDataId,
-            os: PageComponentOSType.Native
-          }}
-        />
-      </ScrollView>
+      <RootComponentContainerBox
+        currentPageAndPost={{
+          pageName: this.props.pageName,
+          pageDataId: this.props.pageDataId,
+          os: PageComponentOSType.Native
+        }}
+      />
     )
   }
 }

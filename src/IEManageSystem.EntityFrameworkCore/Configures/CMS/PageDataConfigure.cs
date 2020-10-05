@@ -13,8 +13,90 @@ namespace IEManageSystem.Configures.CMS
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<PageData> builder)
         {
             builder.HasIndex(e => e.Name);
-            builder.OwnsOne(e => e.Creator);
-            builder.OwnsOne(e => e.LastUpdater);
+            builder.OwnsOne(e => e.Creator).HasData(
+                new
+                {
+                    PageDataId = 1,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                },
+                new
+                {
+                    PageDataId = 2,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                },
+                new
+                {
+                    PageDataId = 3,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                },
+                new
+                {
+                    PageDataId = 4,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                },
+                new
+                {
+                    PageDataId = 5,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                }
+                );
+            builder.OwnsOne(e => e.LastUpdater).HasData(
+                new
+                {
+                    PageDataId = 1,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                },
+                new
+                {
+                    PageDataId = 2,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                },
+                new
+                {
+                    PageDataId = 3,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                },
+                new
+                {
+                    PageDataId = 4,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                },
+                new
+                {
+                    PageDataId = 5,
+                    EditorId = 1,
+                    Name = "超级管理员",
+                    HeadSculpture = "",
+                    Time = DateTime.Now,
+                }
+                );
 
             builder.HasData(
                 new {
@@ -27,14 +109,6 @@ namespace IEManageSystem.Configures.CMS
                     Score = (double)0,
                     ScoreNum = 0,
                     Click = 0,
-                    Creator_EditorId = 1,
-                    Creator_Name = "超级管理员",
-                    Creator_HeadSculpture = "",
-                    Creator_Time = DateTime.Now,
-                    LastUpdater_EditorId = 1,
-                    LastUpdater_Name = "超级管理员",
-                    LastUpdater_HeadSculpture = "",
-                    LastUpdater_Time = DateTime.Now,
                 },
                 new {
                     Id = 2,
@@ -46,14 +120,6 @@ namespace IEManageSystem.Configures.CMS
                     Score = (double)0,
                     ScoreNum = 0,
                     Click = 0,
-                    Creator_EditorId = 1,
-                    Creator_Name = "超级管理员",
-                    Creator_HeadSculpture = "",
-                    Creator_Time = DateTime.Now,
-                    LastUpdater_EditorId = 1,
-                    LastUpdater_Name = "超级管理员",
-                    LastUpdater_HeadSculpture = "",
-                    LastUpdater_Time = DateTime.Now,
                 },
                 new {
                     Id = 3,
@@ -65,14 +131,6 @@ namespace IEManageSystem.Configures.CMS
                     Score = (double)0,
                     ScoreNum = 0,
                     Click = 0,
-                    Creator_EditorId = 1,
-                    Creator_Name = "超级管理员",
-                    Creator_HeadSculpture = "",
-                    Creator_Time = DateTime.Now,
-                    LastUpdater_EditorId = 1,
-                    LastUpdater_Name = "超级管理员",
-                    LastUpdater_HeadSculpture = "",
-                    LastUpdater_Time = DateTime.Now,
                 },
                 new {
                     Id = 4,
@@ -84,14 +142,6 @@ namespace IEManageSystem.Configures.CMS
                     Score = (double)0,
                     ScoreNum = 0,
                     Click = 0,
-                    Creator_EditorId = 1,
-                    Creator_Name = "超级管理员",
-                    Creator_HeadSculpture = "",
-                    Creator_Time = DateTime.Now,
-                    LastUpdater_EditorId = 1,
-                    LastUpdater_Name = "超级管理员",
-                    LastUpdater_HeadSculpture = "",
-                    LastUpdater_Time = DateTime.Now,
                 },
                 new {
                     Id = 5,
@@ -103,14 +153,6 @@ namespace IEManageSystem.Configures.CMS
                     Score = (double)0,
                     ScoreNum = 0,
                     Click = 0,
-                    Creator_EditorId = 1,
-                    Creator_Name = "超级管理员",
-                    Creator_HeadSculpture = "",
-                    Creator_Time = DateTime.Now,
-                    LastUpdater_EditorId = 1,
-                    LastUpdater_Name = "超级管理员",
-                    LastUpdater_HeadSculpture = "",
-                    LastUpdater_Time = DateTime.Now,
                 }
             );
         }

@@ -21,10 +21,12 @@ import IEPostList, { RNDescribe as RNIEPostList } from "./IEPostList"
 import IERankingList, { RNDescribe as RNIERankingList } from "./IERankingList"
 // 评分组件，rn 没有
 import IERate from "./IERate"
+import {RNDescribe as RNIEScrollbar} from './IEScrollbar'
 import IESearch, { RNDescribe as RNIESearch } from "./IESearch"
 // 选择框组件，rn 没有
 import IESelect from "./IESelect"
 import IETab, { RNDescribe as RNIETab } from './IETab'
+import IETheme, { RNDescribe as RNIETheme } from './IETheme'
 import IEVideo, { RNDescribe as RNIEVideo } from './IEVideo'
 import NotFind, { RNDescribe as RNNotFind } from "./NotFind"
 import RichTextEditor, { RNDescribe as RNRichTextEditor } from "./RichTextEditor"
@@ -53,6 +55,7 @@ const describes = [
     IESearch,
     IESelect,
     IETab,
+    IETheme,
     IEVideo,
     NotFind,
     RichTextEditor,
@@ -76,8 +79,10 @@ const rnDescribes = [
     RNIEPlaceholder,
     RNIEPostList,
     RNIERankingList,
+    RNIEScrollbar,
     RNIESearch,
     RNIETab,
+    RNIETheme,
     RNIEVideo,
     RNNotFind,
     RNRichTextEditor,

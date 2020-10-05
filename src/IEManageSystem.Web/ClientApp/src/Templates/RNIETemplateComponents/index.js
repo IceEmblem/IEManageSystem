@@ -7,13 +7,16 @@ import IECategoryLabel from "./IECategoryLabel"
 import IEComment from "./IEComment"
 import IEImg from "./IEImg"
 import IEInfoGroup from "./IEInfoGroup"
+import IELayout from './IELayout'
 import IELine from "./IELine"
 import IEMenu from "./IEMenu"
 import IEPlaceholder from './IEPlaceholder'
 import IEPostList from "./IEPostList"
 import IERankingList from "./IERankingList"
+import IEScrollbar from './IEScrollbar'
 import IESearch from "./IESearch"
 import IETab from "./IETab"
+import IETheme from './IETheme'
 import IEVideo from './IEVideo'
 import NotFind from "./NotFind"
 import RichTextEditor from "./RichTextEditor"
@@ -30,13 +33,16 @@ const describes = [
     IEComment,
     IEImg,
     IEInfoGroup,
+    IELayout,
     IELine,
     IEMenu,
     IEPlaceholder,
     IEPostList,
     IERankingList,
+    IEScrollbar,
     IESearch,
     IETab,
+    IETheme,
     IEVideo,
     NotFind,
     RichTextEditor,

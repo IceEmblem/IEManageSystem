@@ -10,12 +10,14 @@ class Component extends IComponent {
     render() {
         let setting = this.getCurrentSetting();
         let commonSetting = StyleCheck.handle(this.getCommonStyleSetting().toStyle());
-        let icon;
-        if (setting.icon) {
-            icon = <Text style={[styles.text]}>{AntIcons.getIcon(setting.icon, { color: setting.color, fontSize: setting.fontSize })}</Text>;
-        }
 
         let text = this.getText() ? <Text style={[styles.text, StyleCheck.handle({ color: setting.color, fontSize: setting.fontSize })]}>{this.getText()}</Text> : undefined;
+
+        let icon;
+        if (setting.icon) {
+            icon = <Text style={[styles.text, {paddingRight: text && 8}]}>{AntIcons.getIcon(setting.icon, { color: setting.color, fontSize: setting.fontSize })}</Text>;
+        }
+        
         return (
             <Button
                 style={[this.baseStyle, styles.btn, StyleCheck.handle({ backgroundColor: setting.bgcolor, height: setting.btnHeight }), commonSetting]}
@@ -46,6 +48,7 @@ const styles = StyleSheet.create({
     btn: {
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     text: {
     }

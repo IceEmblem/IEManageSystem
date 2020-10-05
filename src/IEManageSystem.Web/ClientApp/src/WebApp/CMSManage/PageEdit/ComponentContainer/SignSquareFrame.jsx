@@ -35,6 +35,8 @@ class SignSquareFrame extends React.Component {
                 break;
             }
 
+            actualTop = actualTop - current.scrollTop;
+
             actualTop += current.offsetTop;
             current = current.offsetParent;
         }

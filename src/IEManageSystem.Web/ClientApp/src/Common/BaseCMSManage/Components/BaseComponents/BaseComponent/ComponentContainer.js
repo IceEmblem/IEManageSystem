@@ -22,7 +22,7 @@ export const mapStateToProps = (state, ownProps) => { // ownProps为当前组件
 export const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         dispatchPageFreshen: (pageName, pageDataName) => {
-            let promises = [dispatch(pageFetch(pageName))];
+            let promises = [dispatch(pageFetch(pageName, true))];
             if (pageDataName && pageDataName != "") {
                 promises.push(dispatch(pageDataFetch(pageName, pageDataName)));
             }

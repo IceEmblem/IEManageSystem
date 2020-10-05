@@ -4,11 +4,11 @@ import StyleCheck from 'RNCMS/StyleCheck'
 import { Text, View, StyleSheet } from 'react-native'
 
 const hToFontSize = {
-    h1: {text: 27, small: 19},
-    h2: {text: 24, small: 17},
-    h3: {text: 22, small: 14},
-    h4: {text: 18, small: 11},
-    other: {text: undefined, small: 8},
+    h1: {text: 38, small: 31, fontWeight: '600'},
+    h2: {text: 30, small: 24, fontWeight: '600'},
+    h3: {text: 24, small: 20, fontWeight: '600'},
+    h4: {text: 20, small: 16, fontWeight: '600'},
+    other: {text: 14, small: 12, fontWeight: '400'},
 }
 
 class Component extends IComponent {
@@ -22,11 +22,13 @@ class Component extends IComponent {
         if(!style.fontSize){
             if(hToFontSize[setting.textType]){
                 style.fontSize = hToFontSize[setting.textType].text;
+                style.fontWeight = hToFontSize[setting.textType].fontWeight;
                 smallStyle.fontSize = hToFontSize[setting.textType].small;
             }
             else{
                 style.fontSize = hToFontSize.other.text;
                 smallStyle.fontSize = hToFontSize.other.small;
+                style.fontWeight = hToFontSize.other.fontWeight;
             }
         }
 

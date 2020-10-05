@@ -3,19 +3,19 @@ class CreatePageComponentService {
         return {
             sign: sign,
             name: name,
-            parentSign: null,
-            group: null,
+            parentSign: undefined,
+            group: undefined,
             os: os,
             pageComponentBaseSetting: {
                 ...{
                     sortIndex: 0,
                     width: '100%',
-                    height: null,
-                    padding: null,
-                    margin: null,
-                    backgroundColor: null,
-                    backgroundImage: null,
-                    className: null,
+                    height: undefined,
+                    padding: undefined,
+                    margin: undefined,
+                    backgroundColor: undefined,
+                    backgroundImage: undefined,
+                    className: undefined,
                 },
                 ...pageComponentBaseSetting
             },
@@ -25,8 +25,8 @@ class CreatePageComponentService {
                 top: 0,
                 searchKey: "",
             },
-            menuName: null,
-            pageComponentSettings: []
+            menuName: undefined,
+            pageComponentSettings: {}
         };
     }
 }

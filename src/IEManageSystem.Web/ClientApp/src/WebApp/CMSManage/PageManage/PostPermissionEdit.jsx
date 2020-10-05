@@ -2,6 +2,7 @@ import React from 'react'
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 import { Modal, Button, Checkbox, Switch, Typography, Card } from 'antd'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
+import ContentPagePermissionCollection from 'BaseCMSManage/Models/ContentPagePermissionCollection'
 
 export default class PostPermissionEdit extends React.Component {
     state = {
@@ -43,7 +44,7 @@ export default class PostPermissionEdit extends React.Component {
             name: props.pageName
         }).then(value => {
             this.setState({
-                contentPagePeimissionCollection: value.contentPagePeimissionCollection
+                contentPagePeimissionCollection: value.contentPagePeimissionCollection || new ContentPagePermissionCollection(props.pageName)
             });
         });
     }

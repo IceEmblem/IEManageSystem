@@ -80,8 +80,8 @@ const WebPage = (props) => {
 }
 
 class PageContainer extends React.Component {
-    constructor(props) {
-        super(props);
+    state = {
+        isFetching: false
     }
 
     componentWillMount() {
@@ -89,9 +89,25 @@ class PageContainer extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.isNeedDataFetch) {
-            this.props.pageFetch()
+        if (this.props.isNeedDataFetch && !this.state.isFetching) {
+            this.setState({isFetching: true})
+            this.props.pageFetch().then(()=>{
+                this.setState({isFetching: false});
+            })
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isNeedDataFetch && !this.state.isFetching) {
+            this.setState({isFetching: true})
+            nextProps.pageFetch().then(()=>{
+                this.setState({isFetching: false});
+            })
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !nextProps.isNeedDataFetch;
     }
 
     render() {
@@ -129,7 +145,7 @@ class PageContainer extends React.Component {
                     currentPageAndPost={currentPageAndPost}
                 />
                 <div style={{ display: 'flex', position: 'fixed', bottom: 60, left: 40 }}>
-                    <CancelAndReload 
+                    <CancelAndReload
                         currentPageAndPost={currentPageAndPost}
                     />
                     <ClipBoard
@@ -139,7 +155,6 @@ class PageContainer extends React.Component {
                         currentPageAndPost={currentPageAndPost}
                     />
                 </div>
-
             </div>
         );
     }

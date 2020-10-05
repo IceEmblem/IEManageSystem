@@ -36,7 +36,10 @@ import {
     SearchOutlined,
     MenuOutlined,
     MessageFilled,
-    EllipsisOutlined
+    EllipsisOutlined,
+    FireOutlined,
+    StarOutlined,
+    HeartOutlined,
 } from '@ant-design/icons';
 
 const iconsTypes = {
@@ -51,7 +54,6 @@ const iconsTypes = {
     'IdcardOutlined': IdcardOutlined,
     'RollbackOutlined': RollbackOutlined,
     'SafetyCertificateFilled': SafetyCertificateFilled,
-    'StarTwoTone': StarTwoTone,
     'StepBackwardFilled': StepBackwardFilled,
     'StepBackwardOutlined': StepBackwardOutlined,
     'StepForwardFilled': StepForwardFilled,
@@ -76,7 +78,10 @@ const iconsTypes = {
     'SearchOutlined': SearchOutlined,
     'MenuOutlined': MenuOutlined,
     'MessageFilled': MessageFilled,
-    'EllipsisOutlined': EllipsisOutlined
+    'EllipsisOutlined': EllipsisOutlined,
+    'FireOutlined': FireOutlined,
+    'StarOutlined': StarOutlined,
+    'HeartOutlined': HeartOutlined,
 }
 
 var iconComponents = new Map<string, React.Component>();

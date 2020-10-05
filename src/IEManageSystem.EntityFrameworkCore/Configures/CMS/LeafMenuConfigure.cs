@@ -19,7 +19,7 @@ namespace IEManageSystem.Configures.CMS
                     Id = 11,
                     Name = "Home",
                     DisplayName = "首页",
-                    Icon = "home",
+                    Icon = "",
                     CompositeMenuId = 1,
                     RootMenuId = 1,
                     Discriminator = "LeafMenu",
@@ -50,9 +50,31 @@ namespace IEManageSystem.Configures.CMS
                 new
                 {
                     Id = 14,
+                    Name = "Tencent",
+                    DisplayName = "腾讯官网",
+                    Icon = "",
+                    CompositeMenuId = 1,
+                    RootMenuId = 1,
+                    Discriminator = "LeafMenu",
+                    PageName = "Tencent",
+                },
+                new
+                {
+                    Id = 15,
+                    Name = "WBolt",
+                    DisplayName = "WBolt官网",
+                    Icon = "",
+                    CompositeMenuId = 1,
+                    RootMenuId = 1,
+                    Discriminator = "LeafMenu",
+                    PageName = "WBolt",
+                },
+                new
+                {
+                    Id = 20,
                     Name = "RNHome",
-                    DisplayName = "首页",
-                    Icon = "home",
+                    DisplayName = "推荐",
+                    Icon = "",
                     CompositeMenuId = 2,
                     RootMenuId = 2,
                     Discriminator = "LeafMenu",
@@ -60,14 +82,47 @@ namespace IEManageSystem.Configures.CMS
                 },
                 new
                 {
-                    Id = 15,
+                    Id = 21,
                     Name = "RNPostList",
-                    DisplayName = "文章列表",
+                    DisplayName = "文章",
                     Icon = "",
                     CompositeMenuId = 2,
                     RootMenuId = 2,
                     Discriminator = "LeafMenu",
-                    PageName = "PostList",
+                    PageName = "",
+                },
+                new
+                {
+                    Id = 22,
+                    Name = "RNChart",
+                    DisplayName = "图表",
+                    Icon = "",
+                    CompositeMenuId = 2,
+                    RootMenuId = 2,
+                    Discriminator = "LeafMenu",
+                    PageName = "",
+                },
+                new
+                {
+                    Id = 23,
+                    Name = "RNMenu4",
+                    DisplayName = "关注",
+                    Icon = "",
+                    CompositeMenuId = 2,
+                    RootMenuId = 2,
+                    Discriminator = "LeafMenu",
+                    PageName = "",
+                },
+                new
+                {
+                    Id = 24,
+                    Name = "RNMenu5",
+                    DisplayName = "视频",
+                    Icon = "",
+                    CompositeMenuId = 2,
+                    RootMenuId = 2,
+                    Discriminator = "LeafMenu",
+                    PageName = "",
                 });
         }
     }

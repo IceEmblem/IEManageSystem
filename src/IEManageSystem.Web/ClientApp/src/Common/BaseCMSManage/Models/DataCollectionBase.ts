@@ -51,4 +51,8 @@ export default abstract class DataCollectionBase {
         }
         return single;
     }
+
+    sort(){
+        this.singleDatas.sort((l, r) => l.sortIndex - r.sortIndex);
+    }
 }

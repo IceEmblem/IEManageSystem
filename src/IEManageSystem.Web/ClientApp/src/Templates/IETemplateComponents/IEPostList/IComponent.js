@@ -5,7 +5,6 @@ import InteractivConfigFeature, {
     InteractivConfigFeatureUrlItem,
 } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractivConfigFeature'
 import Setting from 'IETemplateComponents/IEPostList/Setting'
-import defaultImg from 'images/default_post_img.jpg'
 
 
 export default class Component extends IComponent{
@@ -22,16 +21,20 @@ export default class Component extends IComponent{
     }
 
     getItemInteractivConfigFeature(data){
+        let creator = data.creator || {};
+
         return new InteractivConfigFeature([
-            new InteractivConfigFeatureUrlItem('imgUrl', '图标地址', (data) => (data.imageList.length > 0 && data.imageList[0] ? data.imageList[0] : defaultImg)),
+            new InteractivConfigFeatureUrlItem('imgUrl', '图标地址', (data) => (data.imageList.length > 0 && data.imageList[0] ? data.imageList[0] : "/Picture/SheJi/post/post4.jpg")),
             new InteractivConfigFeatureTextItem('postTitle', '文章标题', (data) => data.title),
             new InteractivConfigFeatureTextItem('postDescribe', '文章描述', (data) => data.describe || "暂无简介"),
             new InteractivConfigFeatureTextItem('postScore', '文章评分', (data) => data.score || '0'),
-            new InteractivConfigFeatureTextItem('postClick', '文章点击量', (data) => data.click),
-            new InteractivConfigFeatureTextItem('postTime', '文章发表时间', (data) => new Date(data.creationTime).toLocaleDateString()),
+            new InteractivConfigFeatureTextItem('postClick', '文章点击量', (data) => data.click || '0'),
+            new InteractivConfigFeatureTextItem('postTime', '文章发表时间', (data) => new Date(creator.time).toLocaleDateString()),
             new InteractivConfigFeatureClickItem('postLink', '文章点击', (data) => ()=>{
                 this.props.history.push(this.props.createUrl(data));
             }),
+            new InteractivConfigFeatureUrlItem('userHead', '用户头像', (data) => creator.headSculpture || "/Picture/SheJi/default_avatar.png"),
+            new InteractivConfigFeatureTextItem('userName', '用户名称', (data) => creator.name),
         ], data)
     }
 }

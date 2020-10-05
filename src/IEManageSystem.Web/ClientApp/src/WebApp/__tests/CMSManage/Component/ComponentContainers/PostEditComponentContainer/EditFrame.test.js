@@ -22,7 +22,7 @@ const pageComponent = {
     },
     "pageLeafSetting": null,
     "componentType": "LeafComponent",
-    "pageComponentSettings": []
+    "pageComponentSettings": {}
 };
 const componentData = {
     id: 1, 

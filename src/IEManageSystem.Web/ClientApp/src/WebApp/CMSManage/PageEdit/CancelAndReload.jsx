@@ -47,6 +47,7 @@ class CancelAndReload extends React.Component {
         }
     }
 
+    ctime = undefined;
     componentWillReceiveProps(nextProps) {
         if (nextProps.currentPageAndPost.pageName != this.props.currentPageAndPost.pageName
             || nextProps.currentPageAndPost.os != this.props.currentPageAndPost.os) 
@@ -65,14 +66,24 @@ class CancelAndReload extends React.Component {
         }
 
         if (nextProps.pageComponents != this.props.pageComponents
-            || nextProps.defaultComponentDatas != this.props.defaultComponentDatas) {
-            let olds = this.state.componentAndDatas.splice(0, this.state.index + 1);
-            olds.push({
-                pageComponents: nextProps.pageComponents,
-                defaultComponentDatas: nextProps.defaultComponentDatas,
-            });
-            this.state.componentAndDatas = olds;
-            this.state.index = this.state.componentAndDatas.length - 1;
+            || nextProps.defaultComponentDatas != this.props.defaultComponentDatas) 
+        {
+            // 多次连续渲染时，取消前面的保存
+            if(this.ctime != undefined){
+                clearTimeout(this.ctime);
+            }
+
+            this.ctime = setTimeout(()=>{
+                let olds = this.state.componentAndDatas.splice(0, this.state.index + 1);
+                olds.push({
+                    pageComponents: nextProps.pageComponents,
+                    defaultComponentDatas: nextProps.defaultComponentDatas,
+                });
+                this.state.componentAndDatas = olds;
+                this.state.index = this.state.componentAndDatas.length - 1;
+
+                this.ctime = undefined;
+            }, 0);
         }
     }
 
@@ -84,14 +95,14 @@ class CancelAndReload extends React.Component {
 
         this.setState({ index: this.state.index - 1, isListen: false }, () => {
             let componentAndData = this.state.componentAndDatas[this.state.index];
-            this.props.dispatchAction(new SetDefaultComponentDatasAction(
-                this.props.currentPageAndPost.pageName,
-                componentAndData.defaultComponentDatas
-            ));
             this.props.dispatchAction(new SetPageComponentsAction(
                 this.props.currentPageAndPost.pageName,
                 this.props.currentPageAndPost.os,
                 componentAndData.pageComponents
+            ));
+            this.props.dispatchAction(new SetDefaultComponentDatasAction(
+                this.props.currentPageAndPost.pageName,
+                componentAndData.defaultComponentDatas
             ));
 
             setTimeout(() => this.setState({ isListen: true }), 0);

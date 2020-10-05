@@ -2,7 +2,6 @@ import React from 'react';
 import IComponent from 'IETemplateComponents/IEImg/IComponent'
 
 import { View, Image, TouchableHighlight } from 'react-native'
-import { Text } from 'native-base'
 import WebUrl from 'Core/Weburl'
 import { withRouter } from 'react-router-native'
 import StyleCheck from 'RNCMS/StyleCheck'
@@ -14,9 +13,7 @@ class Component extends IComponent {
 
         return <TouchableHighlight to={data.linkUrl}
             style={[this.baseStyle]}
-            onPress={() => {
-                this.props.history.push(data.linkUrl);
-            }}
+            onPress={this.click}
             underlayColor='#0004'
         >
             <View style={{ alignItems: 'center' }}>

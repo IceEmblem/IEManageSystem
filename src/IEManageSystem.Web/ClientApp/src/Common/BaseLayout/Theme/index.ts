@@ -15,8 +15,24 @@ export const themeName = {
     geekblue: 'geekblue',
     purple: 'purple',
     magenta: 'magenta',
-    grey: 'grey',
+    // grey: 'grey',
 }
+
+export const allThemeColors = [
+    {name: 'red', color: Themes.red.primary},
+    {name: 'volcano', color: Themes.volcano.primary},
+    {name: 'orange', color: Themes.orange.primary},
+    {name: 'gold', color: Themes.gold.primary},
+    {name: 'yellow', color: Themes.yellow.primary},
+    {name: 'lime', color: Themes.lime.primary},
+    {name: 'green', color: Themes.green.primary},
+    {name: 'cyan', color: Themes.cyan.primary},
+    {name: 'blue', color: Themes.blue.primary},
+    {name: 'geekblue', color: Themes.geekblue.primary},
+    {name: 'purple', color: Themes.purple.primary},
+    {name: 'magenta', color: Themes.magenta.primary},
+    // {name: 'grey', color: Themes.grey.primary},
+]
 
 class Theme {
     private _currentTheme = Themes.cyan;
@@ -28,170 +44,156 @@ class Theme {
                 return;
             }
 
-            this.themeName = value;
-            if(this.themeName == themeName.blue){
-                this._currentTheme = Themes.blue;
-                return;
-            }
-            
-            if(this.themeName == themeName.cyan){
-                this._currentTheme = Themes.cyan;
-                return;
-            }
-    
-            if(this.themeName == themeName.geekblue){
-                this._currentTheme = Themes.geekblue;
-                return;
-            }
-    
-            if(this.themeName == themeName.gold){
-                this._currentTheme = Themes.gold;
-                return;
-            }
-    
-            if(this.themeName == themeName.green){
-                this._currentTheme = Themes.green;
-                return;
-            }
-    
-            if(this.themeName == themeName.grey){
-                this._currentTheme = Themes.grey;
-                return;
-            }
-    
-            if(this.themeName == themeName.lime){
-                this._currentTheme = Themes.lime;
-                return;
-            }
-    
-            if(this.themeName == themeName.magenta){
-                this._currentTheme = Themes.magenta;
-                return;
-            }
-    
-            if(this.themeName == themeName.orange){
-                this._currentTheme = Themes.orange;
-                return;
-            }
-    
-            if(this.themeName == themeName.purple){
-                this._currentTheme = Themes.purple;
-                return;
-            }
-    
-            if(this.themeName == themeName.red){
-                this._currentTheme = Themes.red;
-                return;
-            }
-    
-            if(this.themeName == themeName.volcano){
-                this._currentTheme = Themes.volcano;
-                return;
-            }
-    
-            if(this.themeName == themeName.yellow){
-                this._currentTheme = Themes.yellow;
-                return;
-            }
+            this.setTheme(value);
         });
     }
 
-    applyDefault() {
+    setTheme = (name) => {
+        this.themeName = name;
+
+        if(this.themeName == themeName.blue){
+            this._currentTheme = Themes.blue;
+            return;
+        }
+        
+        if(this.themeName == themeName.cyan){
+            this._currentTheme = Themes.cyan;
+            return;
+        }
+
+        if(this.themeName == themeName.geekblue){
+            this._currentTheme = Themes.geekblue;
+            return;
+        }
+
+        if(this.themeName == themeName.gold){
+            this._currentTheme = Themes.gold;
+            return;
+        }
+
+        if(this.themeName == themeName.green){
+            this._currentTheme = Themes.green;
+            return;
+        }
+
+        // if(this.themeName == themeName.grey){
+        //     this._currentTheme = Themes.grey;
+        //     return;
+        // }
+
+        if(this.themeName == themeName.lime){
+            this._currentTheme = Themes.lime;
+            return;
+        }
+
+        if(this.themeName == themeName.magenta){
+            this._currentTheme = Themes.magenta;
+            return;
+        }
+
+        if(this.themeName == themeName.orange){
+            this._currentTheme = Themes.orange;
+            return;
+        }
+
+        if(this.themeName == themeName.purple){
+            this._currentTheme = Themes.purple;
+            return;
+        }
+
+        if(this.themeName == themeName.red){
+            this._currentTheme = Themes.red;
+            return;
+        }
+
+        if(this.themeName == themeName.volcano){
+            this._currentTheme = Themes.volcano;
+            return;
+        }
+
+        if(this.themeName == themeName.yellow){
+            this._currentTheme = Themes.yellow;
+            return;
+        }
+
+        this._currentTheme = Themes.blue;
+    }
+
+    applyTheme = (name) => {
+        IETool.setCookie(saveName, name, 365);
+        this.setTheme(name);
+    }
+
+    applyDefault = () => {
         this._currentTheme = Themes.blue;
         this.themeName = themeName.blue;
         IETool.setCookie(saveName, undefined, 0);
     }
 
     // 应用红色
-    applyRed() {
-        this._currentTheme = Themes.red;
-        this.themeName = themeName.red;
-        IETool.setCookie(saveName, themeName.red, 365);
+    applyRed = () => {
+        this.applyTheme(themeName.red);
     }
 
     // 应用火山色
-    applyVolcano() {
-        this._currentTheme = Themes.volcano;
-        this.themeName = themeName.volcano;
-        IETool.setCookie(saveName, themeName.volcano, 365);
+    applyVolcano = () => {
+        this.applyTheme(themeName.volcano);
     }
 
     // 应用日暮色
-    applyOrange() {
-        this._currentTheme = Themes.orange;
-        this.themeName = themeName.orange;
-        IETool.setCookie(saveName, themeName.orange, 365);
+    applyOrange = () => {
+        this.applyTheme(themeName.orange);
     }
 
     // 应用金盏花
-    applyGold() {
-        this._currentTheme = Themes.gold;
-        this.themeName = themeName.gold;
-        IETool.setCookie(saveName, themeName.gold, 365);
+    applyGold = () => {
+        this.applyTheme(themeName.gold);
     }
 
     // 应用日出色
-    applyYellow() {
-        this._currentTheme = Themes.yellow;
-        this.themeName = themeName.yellow;
-        IETool.setCookie(saveName, themeName.yellow, 365);
+    applyYellow = () => {
+        this.applyTheme(themeName.yellow);
     }
 
     // 应用青柠色
-    applyLime() {
-        this._currentTheme = Themes.lime;
-        this.themeName = themeName.lime;
-        IETool.setCookie(saveName, themeName.lime, 365);
+    applyLime = () => {
+        this.applyTheme(themeName.lime);
     }
 
     // 应用极光绿色
-    applyGreen() {
-        this._currentTheme = Themes.green;
-        this.themeName = themeName.green;
-        IETool.setCookie(saveName, themeName.green, 365);
+    applyGreen = () => {
+        this.applyTheme(themeName.green);
     }
 
     // 应用明青色
-    applyCyan() {
-        this._currentTheme = Themes.cyan;
-        this.themeName = themeName.cyan;
-        IETool.setCookie(saveName, themeName.cyan, 365);
+    applyCyan = () => {
+        this.applyTheme(themeName.cyan);
     }
 
     // 应用拂晓蓝色
-    applyBlue() {
-        this._currentTheme = Themes.blue;
-        this.themeName = themeName.blue;
-        IETool.setCookie(saveName, themeName.blue, 365);
+    applyBlue = () => {
+        this.applyTheme(themeName.blue);
     }
 
     // 应用极客蓝色
-    applyGeekBlue() {
-        this._currentTheme = Themes.geekblue;
-        this.themeName = themeName.geekblue;
-        IETool.setCookie(saveName, themeName.geekblue, 365);
+    applyGeekBlue = () => {
+        this.applyTheme(themeName.geekblue);
     }
 
     // 应用酱紫色
-    applyPurple(){
-        this._currentTheme = Themes.purple;
-        this.themeName = themeName.purple;
-        IETool.setCookie(saveName, themeName.purple, 365);
+    applyPurple = () => {
+        this.applyTheme(themeName.purple);
     }
 
     // 应用法式洋红色
-    applyMagenta(){
-        this._currentTheme = Themes.magenta;
-        this.themeName = themeName.magenta;
-        IETool.setCookie(saveName, themeName.magenta, 365);
+    applyMagenta = () => {
+        this.applyTheme(themeName.magenta);
     }
 
-    // 应用灰白色
-    applyGrey(){
-        this._currentTheme = Themes.grey;
-        this.themeName = themeName.grey;
-        IETool.setCookie(saveName, themeName.grey, 365);
-    }
+    // // 应用灰白色
+    // applyGrey(){
+    //     this.applyTheme(themeName.grey);
+    // }
 
     get color1() {
         return this._currentTheme[0];
