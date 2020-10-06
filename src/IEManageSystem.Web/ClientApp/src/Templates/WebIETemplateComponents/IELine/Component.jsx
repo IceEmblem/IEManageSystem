@@ -17,6 +17,7 @@ class Component extends IComponent {
         const chartData = data.getDatas().map(item => ({ x: item.x, line: item.line, y: Number(item.y) }))
 
         return (
+            <div style={{...this.baseStyle, height: setting.height || "100%"}}>
             <Chart key={setting.type} scale={{}} padding={[10, 20, 50, 40]} autoFit data={chartData} >
                 <Axis
                     name="y"
@@ -72,6 +73,7 @@ class Component extends IComponent {
                     }
                 }} />
             </Chart>
+            </div>
         );
     }
 }

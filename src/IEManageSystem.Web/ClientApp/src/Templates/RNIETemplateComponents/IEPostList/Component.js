@@ -7,6 +7,16 @@ import { StyleSheet, Image, View } from 'react-native'
 import { Button, Text, Card, CardItem } from 'native-base'
 
 class Component extends IComponent {
+    state = {
+        posts: []
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(this.state.posts.length == 0 && nextProps.posts.length > 0){
+            this.setState({posts: [...nextProps.posts]});
+        }
+    }
+
     header() {
         return <View style={styles.sortView}>
             <Button rounded small style={styles.sortBtn} onPress={() => { this.props.getPostFetchs({ ...this.props.postData, orderby: "Date" }) }}>
@@ -81,7 +91,13 @@ class Component extends IComponent {
 
     footer() {
         return <View style={styles.pageBtnView}>
-            <Button block small style={styles.pageBtn} disabled={this.props.posts.length < this.props.postData.pageSize} onPress={() => this.props.getPostFetchs({ ...this.props.postData, pageIndex: this.props.postData.pageIndex + 1 })}>
+            <Button block small style={styles.pageBtn} disabled={this.props.posts.length < this.props.postData.pageSize} onPress={() => {
+                this.props.getPostFetchs({ ...this.props.postData, pageIndex: this.props.postData.pageIndex + 1 }).then(
+                    (posts)=>{
+                        this.setState({posts: this.state.posts.concat(posts)});
+                    }
+                );
+            }}>
                 <Text>更多</Text>
             </Button>
         </View>
@@ -102,7 +118,7 @@ class Component extends IComponent {
                         : this.header())
                 }
                 <View style={styles.list}>
-                    {this.props.posts.map(item => {
+                    {this.state.posts.map(item => {
                         return ListItem ?
                             <ListItem interactivConfigFeature={this.getItemInteractivConfigFeature(item)} />
                             : this.createItem(item)

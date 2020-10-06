@@ -48,11 +48,22 @@ export default class Setting {
     }
 
     toStyle(){
-        let style = {
-            height: this.height,
-            width: this.width,
-            padding: this.padding,
-            margin: this.margin,
+        let style : any = {};
+
+        if(this.height){
+            style.height = this.height;
+        }
+
+        if(this.width){
+            style.width = this.width;
+        }
+
+        if(this.padding){
+            style.padding = this.padding;
+        }
+
+        if(this.margin){
+            style.margin = this.margin;
         }
 
         if(this.style){

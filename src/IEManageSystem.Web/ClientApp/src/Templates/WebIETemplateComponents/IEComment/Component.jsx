@@ -39,7 +39,7 @@ class Component extends IComponent {
         const { submitting, value } = this.state;
 
         return (
-            <div>
+            <div style={this.baseStyle}>
                 <Comment
                     avatar={
                         <Avatar

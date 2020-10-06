@@ -15,7 +15,7 @@ class Component extends IComponent {
         let style = { color: setting.color };
 
         return (
-            <div className="iebottomnav">
+            <div style={this.baseStyle} className="iebottomnav">
                 <div className="d-flex justify-content-center" style={style}>
                     <small className="mr-3">
                         {setting.copyright}

@@ -9,7 +9,7 @@ class Component extends IComponent {
         let setting = new Setting(this.getSetting("Select"));
 
         return (
-            <Select defaultValue="No Select" size={setting.size} >
+            <Select style={this.baseStyle} defaultValue="No Select" size={setting.size} >
                 {setting.getSeleteDatas().map((item,index)=>(
                 <Option key={index} value={item.url}><a href={item.url}>{item.text}</a></Option>))}
             </Select>

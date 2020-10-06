@@ -44,8 +44,5 @@ export default class extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'stretch',
-        flexWrap: 'nowrap',
     }
 })

@@ -10,4 +10,9 @@ export default class Component extends IComponent {
     getCurrentSetting(){
         return new Setting(this.getDefaultSetting());
     }
+
+    getUrl(){
+        let data = this.getCurrentData();
+        return this.props.interactivUrl || data.url || data.url2;
+    }
 }

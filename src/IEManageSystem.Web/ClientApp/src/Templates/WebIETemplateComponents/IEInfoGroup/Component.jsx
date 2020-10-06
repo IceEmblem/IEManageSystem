@@ -35,6 +35,7 @@ class Component extends IComponent {
         let itemDatas = this.getItemDatas();
 
         return <List
+            style={this.baseStyle}
             bordered={setting.bordered}
             grid={{ column: setting.col }}
             header={this.createTitle(setting)}

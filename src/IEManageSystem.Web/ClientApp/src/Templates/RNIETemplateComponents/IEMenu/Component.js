@@ -27,7 +27,20 @@ class Component extends IComponent {
 
         let menuItems = menu.menus;
         for (let item in menuItems) {
-            let icon = menuItems[item].icon ? AntIcons.getIcon(menuItems[item].icon, textStyle) : undefined;
+            let curTextStyle = textStyle;
+            let isActive = this.props.currentPageAndPost.pageName == menuItems[item].pageName;
+            if(isActive){
+                curTextStyle = {...curTextStyle};
+
+                if(curTextStyle.fontSize){
+                    curTextStyle.fontSize = curTextStyle.fontSize + 2;
+                }
+                else{
+                    curTextStyle.fontSize = 16;
+                }
+            }
+
+            let icon = menuItems[item].icon ? AntIcons.getIcon(menuItems[item].icon, curTextStyle) : undefined;
 
             if (menuItems[item].isCompositeMenuType()) {
                 let childMenus = this.createMenusIteration(menuItems[item]);
@@ -39,16 +52,15 @@ class Component extends IComponent {
                     <Button
                         small
                         full
-                        style={[styles.button, {backgroundColor: Theme.primary}, {height: textStyle.lineHeight}]}
+                        style={[styles.button, {height: curTextStyle.lineHeight}]}
                         key={menuItems[item].name}
                         onPress={() => {
                             this.props.history.push(menuItems[item].createUrl());
-                            console.log(menuItems[item].createUrl())
                         }}
                         transparent
                     >
                         {icon}
-                        <Text style={textStyle}>
+                        <Text style={curTextStyle}>
                             {menuItems[item].displayName}
                         </Text>
                     </Button>
@@ -62,7 +74,7 @@ class Component extends IComponent {
 
     render() {
         return (
-            <View style={[this.baseStyle, { flexDirection: 'row', backgroundColor: '#0008' }]}>
+            <View style={[this.baseStyle, { flexDirection: 'row', backgroundColor: Theme.primary }]}>
                 {this.createMenus()}
             </View>
         )
@@ -71,7 +83,10 @@ class Component extends IComponent {
 
 const styles = StyleSheet.create({
     button:{
-        flexGrow: 1
+        flexGrow: 1,
+        borderRadius: 15,
+        // borderTopLeftRadius: 10,
+        // borderTopRightRadius: 10,
     }
 })
 

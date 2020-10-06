@@ -9,6 +9,7 @@ class Component extends IComponent {
     defaultItem(singleData, setting) {
         return <div
             style={{
+                ...this.baseStyle,
                 backgroundImage: `url(${singleData.img || defaultImg})`,
                 backgroundSize: "100% auto",
                 backgroundRepeat: "no-repeat",

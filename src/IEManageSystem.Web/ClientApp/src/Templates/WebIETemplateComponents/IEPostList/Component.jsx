@@ -67,7 +67,7 @@ class Component extends IComponent {
         let ListItem = this.props.ChildComponent['listItem'];
 
         return (
-            <div>
+            <div style={this.baseStyle}>
                 {
                     setting.hiddenSortBtn == 'false' &&
                     (Head ?

@@ -18,7 +18,9 @@ export class BaseComponentProps{
 }
 
 export default class BaseComponent extends React.Component {
-    baseStyle = { width: '100%'}
+    baseStyle = { 
+        width: this.props.pageComponent.pageComponentBaseSetting.width ? '100%' : undefined
+    }
 
     getSetting(name){
         return this.props.pageComponent.getOrCreatePageComponentSetting(name);

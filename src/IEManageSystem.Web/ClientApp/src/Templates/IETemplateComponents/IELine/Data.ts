@@ -1,5 +1,5 @@
-import ComponentDataModel from '../../../../Models/ComponentDataModel'
-import SingleDataModel from '../../../../Models/SingleDataModel'
+import ComponentDataModel from "BaseCmsManage/Models/ComponentDataModel";
+import SingleDataModel from "BaseCmsManage/Models/SingleDataModel";
 
 class SingleData {
     private _componentSignData : SingleDataModel;

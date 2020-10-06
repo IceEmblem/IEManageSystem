@@ -37,7 +37,7 @@ export default class extends React.Component {
             style={[styles.container, this.props.style]}
             {...this.props.propsEX}
         >
-            <View style={{position: 'absolute'}}>{this.props.ToolBtn}</View>
+            {this.props.ToolBtn}
             {this.props.children}
         </View>
     }

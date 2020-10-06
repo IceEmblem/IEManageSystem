@@ -7,18 +7,22 @@ import WebView from 'react-native-webview'
 import { View } from 'react-native'
 
 class Component extends IComponent {
+    state = {
+        webHeight: 0
+    }
+
     constructor(props) {
         super(props);
     }
 
     createHtml(chartData, setting) {
         return `
-        <div id="canvas" style=""></div>
-        <script src="https://unpkg.com/@antv/g2plot@latest/dist/g2plot.js"></script>
+        <div id="canvas" style="height: ${setting.height || "auto"}"></div>
+        <script src="https://unpkg.com/@antv/g2plot@1.1.19/dist/g2plot.js"></script>
         <script>
             window.onload = function () {
-                const xAlias = "${setting.xAlias}"
-                const yAlias = "${setting.yAlias}"
+                const xAlias = "${setting.xAlias || ""}"
+                const yAlias = "${setting.yAlias || ""}"
                 const type = "${setting.type}"
                 const suffix = "${setting.suffix}"
                 const lineShape = "${setting.lineShape}"
@@ -95,9 +99,28 @@ class Component extends IComponent {
                 }
         
                 chart.render();
+
+                setTimeout(()=>{
+                    let webHeight = document.getElementById("canvas").clientHeight;
+                    window.ReactNativeWebView.postMessage(webHeight);
+                }, 1)
             }
         </script>
         `
+    }
+
+    onMessage = (msg) => {
+        if (msg.nativeEvent.data !== undefined && msg.nativeEvent.data !== null) {
+            console.log("--------------------------");
+            console.log(msg.nativeEvent.data);
+            let height = parseInt(msg.nativeEvent.data);
+            if(isNaN(height)){
+                height = 0;
+            }
+            this.setState({
+                webHeight: height
+            });
+        }
     }
 
     render() {
@@ -107,9 +130,13 @@ class Component extends IComponent {
         const chartData = data.getDatas().map(item => ({ x: item.x, line: item.line, y: Number(item.y) }))
 
         return (
-            <View style={[this.baseStyle, {height: '100%'}]}>
+            <View style={[this.baseStyle]}>
                 <WebView
+                    style={{ width: '100%', height: this.state.webHeight }}
+                    javaScriptEnabled={true}
                     source={{ html: this.createHtml(chartData, setting) }}
+                    onMessage={this.onMessage}
+                    scalesPageToFit={false}
                 />
             </View>
         );

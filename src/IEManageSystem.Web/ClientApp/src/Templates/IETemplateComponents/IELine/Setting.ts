@@ -76,6 +76,14 @@ export default class Setting {
         this.setting.getDefauleData().field5 = val;
     }
 
+    get height() {
+        return this.setting.getDefauleData().height;
+    }
+
+    set height(val) {
+        this.setting.getDefauleData().height = val;
+    }
+
     /// 折线图配置
     get lineShape() {
         return this.setting.getOrCreateSingleDate(Setting.lineSettingName).field1 || "";

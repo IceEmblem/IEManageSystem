@@ -30,7 +30,7 @@ class Component extends IComponent {
             </Title> :
             <p className="mb-0" style={textStyle}>{text} <small>{data.smallText}</small></p>
 
-        return <div className='d-flex align-items-center' style={{justifyContent: setting.align}}>
+        return <div className='d-flex align-items-center' style={{...this.baseStyle, justifyContent: setting.align}}>
             <div>
                 {this.props.children}
             </div>

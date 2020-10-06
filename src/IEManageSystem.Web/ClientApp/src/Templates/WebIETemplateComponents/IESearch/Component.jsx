@@ -19,7 +19,7 @@ class Component extends IComponent {
         </Button>;
 
         return (
-            <div className="ie-search">
+            <div style={this.baseStyle} className="ie-search">
                 <Input
                     placeholder="在 IceEmblem 中搜索"
                     style={{ border: setting.showBorder == 'false' && "0px", backgroundColor: "fff0", color: setting.fontColor }}

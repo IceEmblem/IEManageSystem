@@ -6,7 +6,7 @@ class Component extends IComponent {
     render() {
         let text = this.getText();
 
-        return (<div dangerouslySetInnerHTML={{ __html: text }}></div>);
+        return (<div style={this.baseStyle} dangerouslySetInnerHTML={{ __html: text }}></div>);
     }
 }
 

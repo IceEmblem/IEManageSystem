@@ -18,7 +18,7 @@ class Component extends IComponent {
         let datas = this.getTagDatas();
 
         return (
-            <div className="d-flex flex-wrap">
+            <div style={this.baseStyle} className="d-flex flex-wrap">
                 {datas.map(item => this.createItem(item))}
             </div>
         );

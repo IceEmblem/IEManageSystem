@@ -34,7 +34,7 @@ class Component extends IComponent {
         let data = this.getCurrentData();
         let setting = this.getCurrentSetting();
 
-        return <div ref={e=>{this.ele = e}} style={{overflow: 'hidden', height: '100%'}} className={setting.hiddenTool == 'true' && 'ievideo-control-hidden'}>
+        return <div ref={e=>{this.ele = e}} style={{...this.baseStyle, overflow: 'hidden', height: '100%'}} className={setting.hiddenTool == 'true' && 'ievideo-control-hidden'}>
             <Player
                 ref={c => {
                     this.player = c;
@@ -44,8 +44,7 @@ class Component extends IComponent {
                 fluid={setting.customizeHeight == 'false'}
                 height={this.state.height}
             >
-                <source src={data.url} />
-                <source src={data.url2} />
+                <source src={this.getUrl()} />
             </Player>
         </div>
     }

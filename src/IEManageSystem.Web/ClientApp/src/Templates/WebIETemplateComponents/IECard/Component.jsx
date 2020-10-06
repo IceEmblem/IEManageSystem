@@ -10,7 +10,7 @@ class Component extends IComponent {
         let data = new Data(this.props.componentData);
 
         return (
-            <a href='javascript:void(0)' onClick={()=>{
+            <a style={this.baseStyle} href='javascript:void(0)' onClick={()=>{
                 if(!data.link){
                     return;
                 }

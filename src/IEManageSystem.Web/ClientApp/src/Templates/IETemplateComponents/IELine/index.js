@@ -16,9 +16,9 @@ class ComponentObject extends BaseComponentObject {
 
 const componentDescribeBuilder = (component, preview, settingConfig, dataConfig) => {
     let componentDescribe = new ComponentDescribe("IELine", new ComponentObject(component, preview, settingConfig, dataConfig), componentType.graph, "IE-折线|柱状|条形");
-    componentDescribe.defauleStyle = {
-        height: 250
-    }
+    componentDescribe.pageComponentBaseSetting = {
+        height: 300
+    };
     return componentDescribe;
 }
 export default componentDescribeBuilder;

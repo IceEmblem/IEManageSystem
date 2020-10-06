@@ -1,45 +1,62 @@
 import React from 'react'
 
 import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
+import RNComponentContainerBoxShow from 'Adapters/RNComponentContainerBoxShow'
 import ToolBtns from './ToolBtns';
 
 import { setActiveComponent } from 'BaseCMSManage/IEReduxs/Actions'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
+import PageComponentModel, { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 class EditComponentContainerBoxShow extends React.Component {
+    oldBackgroundColor = undefined;
     render() {
-        return <ComponentContainerBoxShow
+        let ContainerBoxShow = undefined;
+        // if (PageComponentOSType.Web == this.props.currentPageAndPost.os) {
+        //     ContainerBoxShow = ComponentContainerBoxShow;
+        // }
+        // else {
+        //     ContainerBoxShow = RNComponentContainerBoxShow
+        // }
+
+        ContainerBoxShow = ComponentContainerBoxShow;
+
+        return <ContainerBoxShow
             style={{ ...this.props.style }}
-            className={`${this.props.className} pageedit-componentcontainer`}
+            className={this.props.className}
             propsEX={{
                 id: PageComponentModel.createPageComponentId(this.props.currentPageAndPost.os, this.props.sign),
                 onClick: (e) => {
-                    if (e.stopPropagation) 
-                    { 
+                    if (e.stopPropagation) {
                         // W3C阻止冒泡方法 
                         e.stopPropagation();
-                    } 
-                    else 
-                    {
+                    }
+                    else {
                         // IE阻止冒泡方法
-                        e.cancelBubble = true; 
+                        e.cancelBubble = true;
                     }
                     this.props.setActiveComponent();
 
                     return false;
+                },
+                onMouseEnter: (e) => {
+                    this.oldBackgroundColor = e.currentTarget.style.backgroundColor;
+                    e.currentTarget.style.backgroundColor = "#1890ff20";
+                },
+                onMouseLeave: (e) => {
+                    e.currentTarget.style.backgroundColor = this.oldBackgroundColor;
                 }
             }}
             ToolBtn={
                 <ToolBtns
                     sign={this.props.sign}
                     currentPageAndPost={this.props.currentPageAndPost}
-                    style={{position: 'absolute', zIndex: 999}}
+                    style={{ position: 'absolute', zIndex: 999 }}
                 />
             }
         >
             {this.props.children}
-        </ComponentContainerBoxShow>
+        </ContainerBoxShow>
     }
 }
 

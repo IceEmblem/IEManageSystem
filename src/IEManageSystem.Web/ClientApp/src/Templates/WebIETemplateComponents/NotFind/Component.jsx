@@ -3,7 +3,7 @@ import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/Ba
 
 class Component extends IComponent{
     render() {
-        return <div>未找到组件，请确保组件存在</div>;
+        return <div style={this.baseStyle}>未找到组件，请确保组件存在</div>;
     }
 }
 

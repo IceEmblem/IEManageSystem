@@ -7,7 +7,7 @@ class Component extends IComponent {
     render() {
         let style = this.getCommonStyleSetting();
 
-        return <div>
+        return <div style={this.baseStyle}>
             <Popover
                 content={
                     <div>

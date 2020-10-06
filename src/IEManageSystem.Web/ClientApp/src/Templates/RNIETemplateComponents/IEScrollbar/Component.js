@@ -22,7 +22,7 @@ export default class Component extends IComponent {
 
         return (
             <ScrollView
-                style={[this.baseStyle, style]}
+                style={[this.baseStyle, styles.scrollView, style]}
                 refreshControl={
                     <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                 }
@@ -36,4 +36,7 @@ export default class Component extends IComponent {
 }
 
 const styles = StyleSheet.create({
+    scrollView: {
+        height: '100%'
+    }
 })

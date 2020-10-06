@@ -21,7 +21,7 @@ class Component extends IComponent {
         let listDatas = this.getListDatas();
 
         return (
-            <Tabs defaultActiveKey="2" tabPosition={setting.tabPosition}>
+            <Tabs style={this.baseStyle} defaultActiveKey="2" tabPosition={setting.tabPosition}>
                 {
                     listDatas.map(item => this.creactItem(item))
                 }

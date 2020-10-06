@@ -10,6 +10,7 @@ moment.locale('zh-cn');
 class Component extends IComponent {
     render() {
         return <Calendar
+            style={this.baseStyle}
             fullscreen={false}
             headerRender={({ value, type, onChange, onTypeChange }) => {
                 const start = 0;

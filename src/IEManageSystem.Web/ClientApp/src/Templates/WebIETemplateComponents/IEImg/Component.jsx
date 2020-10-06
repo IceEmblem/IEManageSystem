@@ -14,7 +14,7 @@ class Component extends IComponent {
             child = this.props.children[0];
         }
 
-        return <a style={{cursor: 'pointer', position: 'relative' }} className='w-100'
+        return <div style={{...this.baseStyle, cursor: 'pointer', position: 'relative' }} className='w-100'
             onClick={()=>{
                 if(!this.click()){
                     window.location.href = data.linkUrl
@@ -34,7 +34,7 @@ class Component extends IComponent {
             >
                 {child}
             </div>
-        </a>
+        </div>
     }
 }
 

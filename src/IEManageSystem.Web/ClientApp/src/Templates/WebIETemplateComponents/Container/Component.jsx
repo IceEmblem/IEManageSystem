@@ -11,6 +11,8 @@ class Component extends IComponent {
         return (
             <div
                 style={{
+                    ...this.baseStyle,
+                    height: '100%',
                     display: "flex",
                     flexDirection: setting.direction,
                     justifyContent: setting.justifyContent,

@@ -52,7 +52,7 @@ class Component extends IComponent {
 
     render() {
         return (
-            <Menu className="m-0 border-0" style={{backgroundColor:"#fff0"}} mode="horizontal">
+            <Menu className="m-0 border-0" style={{...this.baseStyle, backgroundColor:"#fff0"}} mode="horizontal">
                 {this.createMenus()}
             </Menu>
         );

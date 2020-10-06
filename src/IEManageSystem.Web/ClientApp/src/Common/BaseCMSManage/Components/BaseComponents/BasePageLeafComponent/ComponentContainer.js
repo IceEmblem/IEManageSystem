@@ -77,6 +77,8 @@ class PostListContain extends React.Component {
                     ...postData
                 }
             });
+
+            return value.pageDatas;
         });
     }
 

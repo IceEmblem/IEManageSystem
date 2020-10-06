@@ -3,13 +3,8 @@
     z-index: auto;
 }
 
-.pageedit-componentcontainer:hover{
-    background-color: #1890ff20;
-    /* background-color: #1890ff20 !important; */
-}
-
 .pageedit-componentcontainer-btns {
-    opacity: 0.1;
+    opacity: 0.2;
     transition: 0.5s;
     -webkit-transition: 0.5s;
     display: flex;

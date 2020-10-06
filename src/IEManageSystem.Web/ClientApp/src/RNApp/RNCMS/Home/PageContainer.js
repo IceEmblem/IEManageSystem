@@ -53,6 +53,15 @@ class PageContainer extends Component {
   }
 
   render() {
+    // return <View style={{ flexDirection: 'row', width: '100%' }}>
+    //     <View style={{ flexDirection: 'row', flexBasis: 'auto' }}>
+    //         <Text style={[{ width: '100%' }]}>aaaa</Text>
+    //     </View>
+    //     <View style={{ flexDirection: 'row', flexBasis: 'auto' }}>
+    //         <Text style={[{ width: '100%' }]}>bbbb</Text>
+    //     </View>
+    // </View>
+
     return (
       <RootComponentContainerBox
         currentPageAndPost={{

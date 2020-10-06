@@ -54,6 +54,17 @@ class SettingConfig extends React.Component {
                     suffix={<Tag color="#55acee">Y 轴别名</Tag>}
                 />
             </div>
+            <div className="mb-3">
+                <Input
+                    placeholder="示例：200px"
+                    value={setting.height}
+                    onChange={(e) => {
+                        setting.height = e.currentTarget.value;
+                        this.props.setData(setting.setting);
+                    }}
+                    suffix={<Tag color="#55acee">图表高度</Tag>}
+                />
+            </div>
             <Tabs 
                 className="mb-3"
                 defaultActiveKey={setting.type}

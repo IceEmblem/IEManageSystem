@@ -1,5 +1,4 @@
 import React from 'react'
-import './ComponentContainerBoxShow.css'
 
 export default class extends React.Component {
     constructor(props) {
@@ -35,8 +34,8 @@ export default class extends React.Component {
 
         return (
             <div
-                style={this.props.style}
-                className={`cms-componentcontainerboxshow ${this.props.className}`}
+                style={{...this.props.style, showStyle}}
+                className={this.props.className}
                 {...this.props.propsEX}
             >
                 {this.props.ToolBtn}
@@ -44,4 +43,9 @@ export default class extends React.Component {
             </div>
         )
     }
+}
+
+const showStyle = {
+    display: 'flex',
+    flexDirection: 'row',
 }

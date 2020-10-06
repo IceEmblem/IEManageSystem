@@ -15,7 +15,7 @@ export function setActiveComponent(activePageComponentSign: string) {
 
 // 页面组件请求
 export const PageReceive = "PageReceive"
-export function pageFetch(name: string, random: boolean = true) {
+export function pageFetch(name: string, random: boolean = false) {
   let url = `/Pages/${name}.json`;
   if(random){
     url = url + `?random=${Math.random()*10000}`;

@@ -28,7 +28,7 @@ class Component extends IComponent {
             >
                 <View style={[styles.view, { height: this.videoHeight }]}>
                     <Video
-                        source={{ uri: data.url }}          // Can be a URL or a local file.
+                        source={{ uri: this.getUrl() }}          // Can be a URL or a local file.
                         ref={(ref) => {
                             this.player = ref
                         }}
