@@ -11,7 +11,6 @@ import {
     IdcardOutlined,
     RollbackOutlined,
     SafetyCertificateFilled,
-    StarTwoTone,
     StepBackwardFilled,
     StepBackwardOutlined,
     StepForwardFilled,
@@ -40,6 +39,9 @@ import {
     FireOutlined,
     StarOutlined,
     HeartOutlined,
+    PauseOutlined,
+    FullscreenOutlined,
+    FullscreenExitOutlined,
 } from '@ant-design/icons';
 
 const iconsTypes = {
@@ -82,6 +84,9 @@ const iconsTypes = {
     'FireOutlined': FireOutlined,
     'StarOutlined': StarOutlined,
     'HeartOutlined': HeartOutlined,
+    'PauseOutlined': PauseOutlined,
+    'FullscreenOutlined': FullscreenOutlined,
+    'FullscreenExitOutlined': FullscreenExitOutlined
 }
 
 var iconComponents = new Map<string, React.Component>();

@@ -12,6 +12,9 @@ import IocContainer from 'Core/IocContainer'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 
+import Video from 'react-native-video';
+
+
 class PageContainer extends Component {
   state = {
     isFetching: false,
@@ -53,14 +56,28 @@ class PageContainer extends Component {
   }
 
   render() {
-    // return <View style={{ flexDirection: 'row', width: '100%' }}>
-    //     <View style={{ flexDirection: 'row', flexBasis: 'auto' }}>
-    //         <Text style={[{ width: '100%' }]}>aaaa</Text>
-    //     </View>
-    //     <View style={{ flexDirection: 'row', flexBasis: 'auto' }}>
-    //         <Text style={[{ width: '100%' }]}>bbbb</Text>
-    //     </View>
-    // </View>
+    // return <Video
+    //   source={{ uri: "https://www.w3school.com.cn/example/html5/mov_bbb.mp4" }}          // Can be a URL or a local file.
+    //   ref={(ref) => {
+    //     this.player = ref
+    //   }}
+    //   // 缩放模式
+    //   resizeMode='contain'
+    //   // 是否暂停
+    //   paused={false}
+    //   // 是否全屏
+    //   fullscreen={true}
+    //   onBuffer={this.onBuffer}                // Callback when remote video is buffering
+    //   onError={this.videoError}               // Callback when video cannot be loaded
+    //   style={{
+    //     position: 'absolute',
+    //     top: 0,
+    //     left: 0,
+    //     bottom: 0,
+    //     right: 0,
+    //   }}
+    //   controls
+    // />
 
     return (
       <RootComponentContainerBox

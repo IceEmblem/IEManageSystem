@@ -2,6 +2,7 @@
 import Container, { RNDescribe as RNContainer } from "./Container"
 // 动画组件，rn 没有
 import IEAnimation from './IEAnimation'
+import IEAudio, { RNDescribe as RNIEAudio} from './IEAudio'
 // 底部导航栏，rn 没有
 import IEBottomNav from "./IEBottomNav"
 import IEButton, { RNDescribe as RNIEButton } from "./IEButton"
@@ -37,6 +38,7 @@ import TemplateBuilder from 'IETemplateComponents'
 const describes = [
     Container,
     IEAnimation,
+    IEAudio,
     IEBottomNav,
     IEButton,
     IECalendar,
@@ -66,6 +68,7 @@ export default TemplateBuilder(describes);
 
 const rnDescribes = [
     RNContainer,
+    RNIEAudio,
     RNIEButton,
     RNIECard,
     RNIECarousel,

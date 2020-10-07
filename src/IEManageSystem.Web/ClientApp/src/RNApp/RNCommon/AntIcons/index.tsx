@@ -41,6 +41,9 @@ const iconsTypes = {
     'EllipsisOutlined': {name:'ellipsis1', type:'AntDesign'},
     'FireOutlined': {name:'fire', type:'FontAwesome'},
     'HeartOutlined': {name:'heart', type:'AntDesign'},
+    'PauseOutlined': {name:'pause', type:'AntDesign'},
+    'FullscreenOutlined': {name:'fullscreen', type: 'MaterialCommunityIcons'},
+    'FullscreenExitOutlined': {name:'fullscreen-exit', type: 'MaterialCommunityIcons'},
 }
 
 var iconComponents = new Map<string, React.Component>();

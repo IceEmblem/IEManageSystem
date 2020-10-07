@@ -1,5 +1,6 @@
 // 注册各个模板所需的部件
 import Container from "./Container"
+import IEAudio from "./IEAudio"
 import IEButton from "./IEButton"
 import IECard from "./IECard"
 import IECarousel from "./IECarousel"
@@ -26,6 +27,7 @@ import TemplateBuilder from 'IETemplateComponents'
 
 const describes = [
     Container,
+    IEAudio,
     IEButton,
     IECard,
     IECarousel,
