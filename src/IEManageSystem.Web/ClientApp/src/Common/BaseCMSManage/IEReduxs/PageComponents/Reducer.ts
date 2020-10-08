@@ -170,6 +170,14 @@ function editComponent(state: object, action: EditComponentAction): object {
     pageComponents[action.pageComponent.sign] = action.pageComponent;
     setPageComponentModel(pageComponents[action.pageComponent.sign]);
 
+    // 原先的子组件移到当前组件
+    if(action.pageComponentSign != action.pageComponent.sign){
+        action.pageComponent.pageComponentSigns.forEach(sign => {
+            pageComponents[sign] = {...pageComponents[sign], parentSign: action.pageComponent.sign};
+            setPageComponentModel(pageComponents[sign]);
+        })
+    }
+
     // 检查是否满足规格
     let specResult = SpecsChecker.isSuitAllSpecs(pageComponents[action.pageComponent.sign]);
     if (specResult.isPass == false) {

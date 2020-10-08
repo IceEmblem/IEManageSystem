@@ -1,30 +1,13 @@
-import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
+import React from 'react'
 import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
 
-const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageName = ownProps.currentPageAndPost.pageName;
-    let pageDataId = ownProps.currentPageAndPost.pageDataId;
+export default (Component) => (props) => {
+    let defaultComponentData = props.currentPageAndPost.defaultComponentDatas[props.sign];
+    let contentComponentData = props.currentPageAndPost.contentComponentDatas[props.sign];
+    let componentData = contentComponentData || defaultComponentData || ComponentDataModel.CreateDefaultComponentData(props.sign);
 
-    let defaultComponentData = state.defaultComponentDatas[pageName][ownProps.sign];
-    let contentComponentData = undefined;
-
-    if (pageDataId) {
-        contentComponentData = state.contentComponentDatas[pageDataId][ownProps.sign]
-    }
-
-    return {
-        componentData: contentComponentData || defaultComponentData || ComponentDataModel.CreateDefaultComponentData(ownProps.sign)
-    }
+    return <Component 
+        {...props}
+        componentData={componentData}
+    />
 }
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-    }
-}
-
-const Contain = CmsRedux.connect(
-    mapStateToProps, // 关于state
-    mapDispatchToProps,
-)
-
-export default Contain;

@@ -11,15 +11,7 @@ import PageComponentModel, { PageComponentOSType } from 'BaseCMSManage/Models/Pa
 class EditComponentContainerBoxShow extends React.Component {
     oldBackgroundColor = undefined;
     render() {
-        let ContainerBoxShow = undefined;
-        // if (PageComponentOSType.Web == this.props.currentPageAndPost.os) {
-        //     ContainerBoxShow = ComponentContainerBoxShow;
-        // }
-        // else {
-        //     ContainerBoxShow = RNComponentContainerBoxShow
-        // }
-
-        ContainerBoxShow = ComponentContainerBoxShow;
+        let ContainerBoxShow = ComponentContainerBoxShow;
 
         return <ContainerBoxShow
             style={{ ...this.props.style }}

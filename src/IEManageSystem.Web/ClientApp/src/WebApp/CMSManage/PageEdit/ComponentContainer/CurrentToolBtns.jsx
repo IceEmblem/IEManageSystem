@@ -15,7 +15,7 @@ class CurrentToolBtns extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.currentPageAndPost.os != this.props.currentPageAndPost.os ||
+        if (nextProps.pageInfos.os != this.props.pageInfos.os ||
             nextProps.activePageComponentSign != this.props.activePageComponentSign) {
             this.setState({ curSign: undefined });
         }
@@ -71,7 +71,7 @@ class CurrentToolBtns extends React.Component {
                 </div>
                 <SignSquareFrame
                     activePageComponentSign={this.state.curSign}
-                    currentPageAndPost={this.props.currentPageAndPost}
+                    pageInfos={this.props.pageInfos}
                     color="#ff7a45"
                     rootElementId={this.props.rootElementId}
                 />
@@ -82,7 +82,7 @@ class CurrentToolBtns extends React.Component {
 
 CurrentToolBtns.propTypes = {
     // 如下属性由父组件传入
-    currentPageAndPost: PropTypes.object.isRequired,
+    pageInfos: PropTypes.object.isRequired,
     rootElementId: PropTypes.object,
 
     activePageComponentSign: PropTypes.string,
@@ -91,7 +91,7 @@ CurrentToolBtns.propTypes = {
 const mapStateToProps = (state, ownProps) => {
     return {
         activePageComponentSign: state.activePageComponentSign,
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os]
+        pageComponents: state.pageComponents[ownProps.pageInfos.pageName][ownProps.pageInfos.os]
     }
 }
 

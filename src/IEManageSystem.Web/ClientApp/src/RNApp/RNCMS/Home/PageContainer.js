@@ -81,11 +81,9 @@ class PageContainer extends Component {
 
     return (
       <RootComponentContainerBox
-        currentPageAndPost={{
-          pageName: this.props.pageName,
-          pageDataId: this.props.pageDataId,
-          os: PageComponentOSType.Native
-        }}
+        pageName={this.props.pageName}
+        pageDataId={this.props.pageDataId}
+        os={PageComponentOSType.Native}
       />
     )
   }

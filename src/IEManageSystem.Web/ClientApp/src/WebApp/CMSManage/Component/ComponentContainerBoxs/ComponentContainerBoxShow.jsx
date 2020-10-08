@@ -34,7 +34,7 @@ export default class extends React.Component {
 
         return (
             <div
-                style={{...this.props.style, showStyle}}
+                style={{...this.props.style, ...showStyle}}
                 className={this.props.className}
                 {...this.props.propsEX}
             >

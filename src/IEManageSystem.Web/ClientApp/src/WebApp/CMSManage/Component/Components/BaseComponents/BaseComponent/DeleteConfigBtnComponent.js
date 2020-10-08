@@ -38,12 +38,8 @@ DeleteConfigBtnComponent.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let pageName = ownProps.currentPageAndPost.pageName;
-    let os = ownProps.currentPageAndPost.os;
-    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
-
     return {
-        pageComponent: pageComponent,
+        pageComponent: ownProps.currentPageAndPost.pageComponents[ownProps.sign],
     }
 }
 
@@ -51,7 +47,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         removeComponent: () => {
             dispatch(new RemoveComponentAction(
-                ownProps.currentPageAndPost.pageName,
+                ownProps.currentPageAndPost.page.name,
                 ownProps.currentPageAndPost.os,
                 ownProps.sign
             ));

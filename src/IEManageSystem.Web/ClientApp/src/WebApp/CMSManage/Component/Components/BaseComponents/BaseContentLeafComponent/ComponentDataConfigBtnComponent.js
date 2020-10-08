@@ -42,11 +42,11 @@ class ComponentDataConfigBtnComponent extends IComponentDataConfigBtnComponent {
                 title={`编辑组件数据`}
                 visible={this.state.visible}
                 onOk={() => {
-                    if (!this.props.currentPageAndPost.pageDataId) {
-                        this.props.editDefaultComponentData(new DefaultComponentDataUpdateAction(this.props.currentPageAndPost.pageName, this.props.sign, this.state.cloneComponentData))
+                    if (!this.props.currentPageAndPost.isExistPageData) {
+                        this.props.editDefaultComponentData(new DefaultComponentDataUpdateAction(this.props.currentPageAndPost.page.name, this.props.sign, this.state.cloneComponentData))
                     }
                     else {
-                        this.props.editComponentData(new ComponentDataUpdateAction(this.props.currentPageAndPost.pageDataId, this.state.cloneComponentData))
+                        this.props.editComponentData(new ComponentDataUpdateAction(this.props.currentPageAndPost.pageData.id, this.state.cloneComponentData))
                     }
                     this.setState({ visible: false });
                 }}
@@ -82,22 +82,13 @@ ComponentDataConfigBtnComponent.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageName = ownProps.currentPageAndPost.pageName;
-    let pageDataId = ownProps.currentPageAndPost.pageDataId;
-    let os = ownProps.currentPageAndPost.os;
-
-    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
-    // 新增属性 parentSign
-    let defaultComponentData = state.defaultComponentDatas[pageName][ownProps.sign];
-    let contentComponentData = undefined;
-    if (state.contentComponentDatas[pageDataId]) {
-        contentComponentData = state.contentComponentDatas[pageDataId][ownProps.sign];
-    }
+    let pageComponent = ownProps.currentPageAndPost.pageComponents[ownProps.sign];
+    let defaultComponentData = ownProps.currentPageAndPost.defaultComponentDatas[ownProps.sign];
+    let contentComponentData = ownProps.currentPageAndPost.contentComponentDatas[ownProps.sign];
 
     return {
         pageComponent: pageComponent,
         contentComponentData: contentComponentData || defaultComponentData || ComponentDataModel.CreateDefaultComponentData(ownProps.sign),
-        currentPageAndPost: ownProps.currentPageAndPost,
     }
 }
 

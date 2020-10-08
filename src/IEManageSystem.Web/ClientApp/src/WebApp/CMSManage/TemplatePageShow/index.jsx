@@ -57,11 +57,9 @@ class TemplatePageShow extends React.Component {
         return (
             <Page>
                 <RootComponentContainerBox
-                    currentPageAndPost={{
-                        pageName: pageName,
-                        pageDataId: undefined,
-                        os: this.props.os
-                    }}
+                    pageName={pageName}
+                    pageDataId={undefined}
+                    os={this.props.os}
                 />
             </Page>
         );

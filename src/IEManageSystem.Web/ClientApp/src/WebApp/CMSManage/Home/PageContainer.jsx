@@ -38,12 +38,11 @@ class PageContainer extends React.Component {
         this.getPageFetch(this.props);
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps(nextProps) {
         this.getPageFetch(nextProps);
     }
 
-    getPageFetch(props) 
-    {
+    getPageFetch(props) {
         if (props.isNeedDataFetch) {
             props.dataFetch();
         }
@@ -52,12 +51,10 @@ class PageContainer extends React.Component {
     render() {
         return (
             <Page>
-                <RootComponentContainerBox 
-                    currentPageAndPost={{
-                        pageName: this.props.pageName,
-                        pageDataId: this.props.pageDataId,
-                        os: this.props.os
-                    }}
+                <RootComponentContainerBox
+                    pageName={this.props.pageName}
+                    pageDataId={this.props.pageDataId}
+                    os={this.props.os}
                 />
             </Page>
         );
@@ -90,7 +87,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             return dispatch(pageFetch(pageName));
         },
         pageDataFetch: () => {
-            if(!pageDataName){
+            if (!pageDataName) {
                 return Promise.resolve();
             }
             return dispatch(pageDataFetch(pageName, pageDataName));
@@ -110,11 +107,11 @@ const megre = (stateProps, dispatchToProps, ownProps) => {
         dataFetch: () => {
             let waits = [];
 
-            if(!stateProps.isExistPage){
+            if (!stateProps.isExistPage) {
                 waits.push(dispatchToProps.pageFetch())
             }
 
-            if(!stateProps.isExistPageData){
+            if (!stateProps.isExistPageData) {
                 waits.push(dispatchToProps.pageDataFetch())
             }
 

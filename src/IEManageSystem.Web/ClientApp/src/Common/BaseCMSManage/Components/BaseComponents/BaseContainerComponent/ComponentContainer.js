@@ -1,6 +1,5 @@
 import React from 'react'
 import ComponentContainerBox from 'BaseCMSManage/ComponentContainerBoxs'
-import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 export const ContainerSettingName = '__ContainerSetting__';
 
@@ -67,23 +66,9 @@ class ContainerContain extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageName = ownProps.currentPageAndPost.pageName;
-    let os = ownProps.currentPageAndPost.os;
-
-    return {
-        pageComponents: state.pageComponents[pageName][os],
-    }
+export default (props) => {
+    return <ContainerContain 
+        {...props}
+        pageComponents={props.currentPageAndPost.pageComponents}
+    />
 }
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-    }
-}
-
-const Contain = CmsRedux.connect(
-    mapStateToProps, // 关于state
-    mapDispatchToProps
-)
-
-export default Contain(ContainerContain);

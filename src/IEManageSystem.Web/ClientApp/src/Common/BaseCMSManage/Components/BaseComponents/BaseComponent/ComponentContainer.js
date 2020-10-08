@@ -1,21 +1,12 @@
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 import { pageFetch, pageDataFetch } from 'BaseCMSManage/IEReduxs/Actions'
-import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
 
-const pageDataModel = PageDataModel.CreatePageDataModel();
-
-export const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageName = ownProps.currentPageAndPost.pageName;
-    let pageDataId = ownProps.currentPageAndPost.pageDataId;
-    let os = ownProps.currentPageAndPost.os;
-
-    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
-
+export const mapStateToProps = (state, ownProps) => {
     return {
-        pageComponent: pageComponent,
-        page: state.pages[pageName],
-        pageData: state.pageDatas[pageDataId] || pageDataModel,
+        pageComponent: ownProps.currentPageAndPost.pageComponents[ownProps.sign],
+        page: ownProps.currentPageAndPost.page,
+        pageData: ownProps.currentPageAndPost.pageData,
     }
 }
 

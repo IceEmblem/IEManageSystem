@@ -173,18 +173,15 @@ ContainerConfigBtnComponent.propTypes = {
     btnComponent: PropTypes.func,
 
     pageComponent: PropTypes.object.isRequired,
-    addComponent: PropTypes.func.isRequired
+    pageComponents: PropTypes.array.isRequired,
+    addComponent: PropTypes.func.isRequired,
+    setActiveComponent: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageName = ownProps.currentPageAndPost.pageName;
-    let os = ownProps.currentPageAndPost.os;
-
-    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
-
     return {
-        pageComponent: pageComponent,
-        pageComponents: state.pageComponents[pageName][os],
+        pageComponent: ownProps.currentPageAndPost.pageComponents[ownProps.sign],
+        pageComponents: ownProps.currentPageAndPost.pageComponents,
     }
 }
 
@@ -192,7 +189,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         addComponent: (pageComponent) => {
             return dispatch(new AddComponentAction(
-                ownProps.currentPageAndPost.pageName,
+                ownProps.currentPageAndPost.page.name,
                 ownProps.currentPageAndPost.os,
                 pageComponent
             ));

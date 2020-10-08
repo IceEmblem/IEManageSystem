@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
-import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import IocContainer from 'Core/IocContainer'
 
 import Theme from 'BaseLayout/Theme'
@@ -17,7 +16,6 @@ class ComponentContainerBox extends React.Component {
         this.componentDescribe = ComponentFactory.getComponentDescribeForName(this.props.pageComponent.name);
         this.ComponentContainerBoxShow = IocContainer.getService(IComponentContainerBoxShow);
     }
-
 
     getStyle() {
         let style =
@@ -246,24 +244,9 @@ ComponentContainerBox.defaultProps = {
     propsEX: (pageComponent) => ({}),
 };
 
-const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageName = ownProps.currentPageAndPost.pageName;
-    let os = ownProps.currentPageAndPost.os;
-
-    return {
-        pageComponent: state.pageComponents[pageName][os][ownProps.sign],
-        currentPageAndPost: ownProps.currentPageAndPost,
-    }
+export default (props) => {
+    return <ComponentContainerBox 
+        {...props}
+        pageComponent={props.currentPageAndPost.pageComponents[props.sign]}
+    />
 }
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-    }
-}
-
-const Contain = CmsRedux.connect(
-    mapStateToProps, // 关于state
-    mapDispatchToProps
-)(ComponentContainerBox)
-
-export default Contain;

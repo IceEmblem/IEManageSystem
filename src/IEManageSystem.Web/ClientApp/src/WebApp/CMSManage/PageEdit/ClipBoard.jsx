@@ -94,7 +94,7 @@ class ClipBoard extends React.Component {
             copyPageComponents: this.props.pageComponents,
             copyPageComponentSign: this.props.activePageComponentSign,
             copyDefaultComponentDatas: this.props.defaultComponentDatas,
-            os: this.props.currentPageAndPost.os
+            os: this.props.pageInfos.os
         });
     }
 
@@ -105,7 +105,7 @@ class ClipBoard extends React.Component {
         }
 
         // 平台不同，不支持拷贝
-        if (this.state.os != this.props.currentPageAndPost.os) {
+        if (this.state.os != this.props.pageInfos.os) {
             return;
         }
 
@@ -148,8 +148,8 @@ class ClipBoard extends React.Component {
         // 循环将组件添加到页面
         copys.copyPageComponents.forEach(item => {
             this.props.addComponent(new AddComponentAction(
-                this.props.currentPageAndPost.pageName,
-                this.props.currentPageAndPost.os,
+                this.props.pageInfos.pageName,
+                this.props.pageInfos.os,
                 item
             ));
         });
@@ -157,7 +157,7 @@ class ClipBoard extends React.Component {
         // 循环将默认数据添加到页面
         copys.copyDefaultComponentDatas.forEach(item => {
             this.props.addDefaultComponentData(new DefaultComponentDataUpdateAction(
-                this.props.currentPageAndPost.pageName,
+                this.props.pageInfos.pageName,
                 item.sign,
                 item
             ));
@@ -179,8 +179,8 @@ class ClipBoard extends React.Component {
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
         activePageComponentSign: state.activePageComponentSign,
-        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageName],
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os],
+        defaultComponentDatas: state.defaultComponentDatas[ownProps.pageInfos.pageName],
+        pageComponents: state.pageComponents[ownProps.pageInfos.pageName][ownProps.pageInfos.os],
     }
 }
 

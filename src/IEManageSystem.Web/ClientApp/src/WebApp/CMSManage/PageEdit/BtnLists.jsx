@@ -136,7 +136,7 @@ class BtnLists extends React.Component {
             "get",
             false
         ).then(value => {
-            this.props.setPage(this.props.page, value.pageComponents, value.defaultComponentDatas, this.props.currentPageAndPost.os);
+            this.props.setPage(this.props.page, value.pageComponents, value.defaultComponentDatas, this.props.pageInfos.os);
         });
     }
 
@@ -153,7 +153,15 @@ class BtnLists extends React.Component {
                             <div className="d-flex justify-content-between overflow-hidden-x" style={{ width: `${interpolatingStyle.x}px` }}>
                                 <this.ContainerConfigBtnComponent
                                     sign={PageComponentModel.RootComponentSign}
-                                    currentPageAndPost={this.props.currentPageAndPost}
+                                    currentPageAndPost={{
+                                        os: this.props.pageInfos.os,
+                                        page: this.props.page,
+                                        pageData: undefined,
+                                        isExistPageData: false,
+                                        pageComponents: this.props.pageComponents,
+                                        defaultComponentDatas: undefined,
+                                        contentComponentDatas: undefined,
+                                    }}
                                     btnComponent={AddComponentBtn}
                                 />
                                 <Popover
@@ -190,16 +198,16 @@ class BtnLists extends React.Component {
                                     content={<OSType
                                         page={this.props.page}
                                         importWebComponent={() => {
-                                            if (this.props.currentPageAndPost.os == PageComponentOSType.Web) {
+                                            if (this.props.pageInfos.os == PageComponentOSType.Web) {
                                                 return;
                                             }
-                                            this.props.copyComponent(this.props.currentPageAndPost.os, PageComponentOSType.Web)
+                                            this.props.copyComponent(this.props.pageInfos.os, PageComponentOSType.Web)
                                         }}
                                         importNativeComponent={() => {
-                                            if (this.props.currentPageAndPost.os == PageComponentOSType.Native) {
+                                            if (this.props.pageInfos.os == PageComponentOSType.Native) {
                                                 return;
                                             }
-                                            this.props.copyComponent(this.props.currentPageAndPost.os, PageComponentOSType.Native)
+                                            this.props.copyComponent(this.props.pageInfos.os, PageComponentOSType.Native)
                                         }}
                                     />}
                                     title="平台信息"
@@ -234,7 +242,7 @@ class BtnLists extends React.Component {
 }
 
 BtnLists.propTypes = {
-    currentPageAndPost: PropTypes.object.isRequired,
+    pageInfos: PropTypes.object.isRequired,
 
     page: PropTypes.object.isRequired,
     pageComponentUpdateFetch: PropTypes.func.isRequired,
@@ -245,9 +253,9 @@ BtnLists.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        page: state.pages[ownProps.currentPageAndPost.pageName],
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName],
-        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageName],
+        page: state.pages[ownProps.pageInfos.pageName],
+        pageComponents: state.pageComponents[ownProps.pageInfos.pageName],
+        defaultComponentDatas: state.defaultComponentDatas[ownProps.pageInfos.pageName],
     }
 }
 
@@ -257,7 +265,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(setPage(page, pageComponents, defaultComponentDatas, os));
         },
         copyComponent: (distOS, sourceOS) => {
-            dispatch(new CopyComponentAction(ownProps.currentPageAndPost.pageName, distOS, sourceOS))
+            dispatch(new CopyComponentAction(ownProps.pageInfos.pageName, distOS, sourceOS))
         },
         pageComponentUpdateFetch: (page, components, defaultComponentDatas) => {
             dispatch(pageComponentUpdateFetch(page, components, defaultComponentDatas));
@@ -268,6 +276,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return {
         page: stateProps.page,
+        pageComponents: stateProps.pageComponents[ownProps.pageInfos.os],
         ...ownProps,
         setPage: dispatchProps.setPage,
         copyComponent: dispatchProps.copyComponent,

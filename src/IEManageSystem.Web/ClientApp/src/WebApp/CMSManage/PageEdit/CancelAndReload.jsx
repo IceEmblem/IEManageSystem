@@ -49,8 +49,8 @@ class CancelAndReload extends React.Component {
 
     ctime = undefined;
     componentWillReceiveProps(nextProps) {
-        if (nextProps.currentPageAndPost.pageName != this.props.currentPageAndPost.pageName
-            || nextProps.currentPageAndPost.os != this.props.currentPageAndPost.os) 
+        if (nextProps.pageInfos.pageName != this.props.pageInfos.pageName
+            || nextProps.pageInfos.os != this.props.pageInfos.os) 
         {
             this.setState({
                 componentAndDatas: [{
@@ -96,12 +96,12 @@ class CancelAndReload extends React.Component {
         this.setState({ index: this.state.index - 1, isListen: false }, () => {
             let componentAndData = this.state.componentAndDatas[this.state.index];
             this.props.dispatchAction(new SetPageComponentsAction(
-                this.props.currentPageAndPost.pageName,
-                this.props.currentPageAndPost.os,
+                this.props.pageInfos.pageName,
+                this.props.pageInfos.os,
                 componentAndData.pageComponents
             ));
             this.props.dispatchAction(new SetDefaultComponentDatasAction(
-                this.props.currentPageAndPost.pageName,
+                this.props.pageInfos.pageName,
                 componentAndData.defaultComponentDatas
             ));
 
@@ -118,12 +118,12 @@ class CancelAndReload extends React.Component {
         this.setState({ index: this.state.index + 1, isListen: false }, () => {
             let componentAndData = this.state.componentAndDatas[this.state.index];
             this.props.dispatchAction(new SetDefaultComponentDatasAction(
-                this.props.currentPageAndPost.pageName,
+                this.props.pageInfos.pageName,
                 componentAndData.defaultComponentDatas
             ));
             this.props.dispatchAction(new SetPageComponentsAction(
-                this.props.currentPageAndPost.pageName,
-                this.props.currentPageAndPost.os,
+                this.props.pageInfos.pageName,
+                this.props.pageInfos.os,
                 componentAndData.pageComponents
             ));
 
@@ -145,8 +145,8 @@ class CancelAndReload extends React.Component {
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
-        defaultComponentDatas: state.defaultComponentDatas[ownProps.currentPageAndPost.pageName],
-        pageComponents: state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os],
+        defaultComponentDatas: state.defaultComponentDatas[ownProps.pageInfos.pageName],
+        pageComponents: state.pageComponents[ownProps.pageInfos.pageName][ownProps.pageInfos.os],
     }
 }
 

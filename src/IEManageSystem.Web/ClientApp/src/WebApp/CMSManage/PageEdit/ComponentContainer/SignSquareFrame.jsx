@@ -89,7 +89,7 @@ class SignSquareFrame extends React.Component {
 
 SignSquareFrame.propTypes = {
     // 如下属性由父组件传入
-    currentPageAndPost: PropTypes.object.isRequired,
+    pageInfos: PropTypes.object.isRequired,
     rootElementId: PropTypes.object,
 
     pageComponent: PropTypes.object,
@@ -97,7 +97,7 @@ SignSquareFrame.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
     let activePageComponentSign = ownProps.activePageComponentSign || state.activePageComponentSign;
-    let pageComponent = state.pageComponents[ownProps.currentPageAndPost.pageName][ownProps.currentPageAndPost.os][activePageComponentSign];
+    let pageComponent = state.pageComponents[ownProps.pageInfos.pageName][ownProps.pageInfos.os][activePageComponentSign];
 
     return {
         pageComponent,

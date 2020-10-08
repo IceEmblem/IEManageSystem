@@ -36,7 +36,7 @@ class ComponentSettingConfigBtnComponent extends IComponentSettingConfigBtnCompo
                 title={`编辑 ${this.props.displayName}`}
                 visible={this.state.visible}
                 onOk={()=>{
-                    this.props.editComponent(new EditComponentAction(this.props.currentPageAndPost.pageName, this.props.currentPageAndPost.os, this.props.sign, this.state.clonePageComponent));
+                    this.props.editComponent(new EditComponentAction(this.props.currentPageAndPost.page.name, this.props.pageComponent.os, this.props.sign, this.state.clonePageComponent));
                     this.setState({visible: false});
                 }}
                 onCancel={()=>{
@@ -68,13 +68,8 @@ ComponentSettingConfigBtnComponent.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageName = ownProps.currentPageAndPost.pageName;
-    let os = ownProps.currentPageAndPost.os;
-    let pageComponent = state.pageComponents[pageName][os][ownProps.sign];
-
     return {
-        pageComponent: pageComponent,
-        currentPageAndPost: ownProps.currentPageAndPost,
+        pageComponent: ownProps.currentPageAndPost.pageComponents[ownProps.sign],
     }
 }
 

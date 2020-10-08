@@ -11,7 +11,7 @@ const defaultMenuData = function(){
     root.menuType = "CompositeMenu";
     root.addChildMenu({
         "id": 0,
-        icon: 'home',
+        "icon": '',
         "name": "home",
         "displayName": "首页",
         "menuType": "LeafMenu",
@@ -68,8 +68,9 @@ class MenuContain extends React.Component
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    let menu = state.menus[ownProps.pageComponent.menuName] || defaultMenuData;
     return {
-        menu: state.menus[ownProps.pageComponent.menuName] || defaultMenuData,
+        menu: menu,
         isDefaultMenu: state.menus[ownProps.pageComponent.menuName] == undefined,
     }
 }

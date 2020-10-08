@@ -42,8 +42,8 @@ class ComponentData extends React.Component {
         super(props);
     }
 
-    componentDidMount(){
-        if(this.props.isNeedDataFetch){
+    componentDidMount() {
+        if (this.props.isNeedDataFetch) {
             this.props.dataFetch();
         }
     }
@@ -78,11 +78,9 @@ class ComponentData extends React.Component {
                 <div>
                     <Page>
                         <RootComponentContainerBox
-                            currentPageAndPost={{
-                                pageName: this.props.pageName,
-                                pageDataId: this.props.pageDataId,
-                                os: this.props.os
-                            }}
+                            pageName={this.props.pageName}
+                            pageDataId={this.props.pageDataId}
+                            os={this.props.os}
                         />
                     </Page>
                 </div>
@@ -119,8 +117,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         componentDataUpdateFetch: (componentDatas) => {
             return dispatch(componentDataUpdateFetch(
-                ownProps.match.params.pageName, 
-                ownProps.match.params.pageDataName, 
+                ownProps.match.params.pageName,
+                ownProps.match.params.pageDataName,
                 componentDatas));
         }
     }
@@ -135,11 +133,11 @@ const meger = (stateProps, dispatchProps, ownProps) => {
         dataFetch: () => {
             let waits = [];
 
-            if(!stateProps.isExistPage){
+            if (!stateProps.isExistPage) {
                 waits.push(dispatchProps.pageFetch())
             }
 
-            if(!stateProps.isExistPageData){
+            if (!stateProps.isExistPageData) {
                 waits.push(dispatchProps.pageDataFetch())
             }
 

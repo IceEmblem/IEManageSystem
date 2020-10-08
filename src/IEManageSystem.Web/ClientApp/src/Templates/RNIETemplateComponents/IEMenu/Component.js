@@ -28,7 +28,7 @@ class Component extends IComponent {
         let menuItems = menu.menus;
         for (let item in menuItems) {
             let curTextStyle = textStyle;
-            let isActive = this.props.currentPageAndPost.pageName == menuItems[item].pageName;
+            let isActive = this.props.currentPageAndPost.page.name == menuItems[item].pageName;
             if(isActive){
                 curTextStyle = {...curTextStyle};
 

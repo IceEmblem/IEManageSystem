@@ -41,18 +41,20 @@ const RNPage = (props) => {
                         tools={<>
                             <SignSquareFrame
                                 color="#13c2c2"
-                                currentPageAndPost={props.currentPageAndPost}
+                                pageInfos={props.pageInfos}
                                 rootElementId={RNPageRootId}
                             />
                             <CurrentToolBtns
-                                currentPageAndPost={props.currentPageAndPost}
+                                pageInfos={props.pageInfos}
                                 rootElementId={RNPageRootId}
                             />
                         </>}
                         rootId={RNPageRootId}
                     >
                         <RootComponentContainerBox
-                            currentPageAndPost={props.currentPageAndPost}
+                            pageName={props.pageInfos.pageName}
+                            pageDataId={props.pageInfos.pageDataId}
+                            os={props.pageInfos.os}
                         />
                     </RNPageLayout>
                 </div>
@@ -66,15 +68,17 @@ const WebPage = (props) => {
     return <>
         <Page>
             <RootComponentContainerBox
-                currentPageAndPost={props.currentPageAndPost}
+                pageName={props.pageInfos.pageName}
+                pageDataId={props.pageInfos.pageDataId}
+                os={props.pageInfos.os}
             />
         </Page>
         <SignSquareFrame
             color="#13c2c2"
-            currentPageAndPost={props.currentPageAndPost}
+            pageInfos={props.pageInfos}
         />
         <CurrentToolBtns
-            currentPageAndPost={props.currentPageAndPost}
+            pageInfos={props.pageInfos}
         />
     </>
 }
@@ -90,23 +94,23 @@ class PageContainer extends React.Component {
 
     componentDidMount() {
         if (this.props.isNeedDataFetch && !this.state.isFetching) {
-            this.setState({isFetching: true})
-            this.props.pageFetch().then(()=>{
-                this.setState({isFetching: false});
+            this.setState({ isFetching: true })
+            this.props.pageFetch().then(() => {
+                this.setState({ isFetching: false });
             })
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.isNeedDataFetch && !this.state.isFetching) {
-            this.setState({isFetching: true})
-            nextProps.pageFetch().then(()=>{
-                this.setState({isFetching: false});
+            this.setState({ isFetching: true })
+            nextProps.pageFetch().then(() => {
+                this.setState({ isFetching: false });
             })
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps, nextState) {
         return !nextProps.isNeedDataFetch;
     }
 
@@ -121,7 +125,7 @@ class PageContainer extends React.Component {
             style.margin = "auto"
         }
 
-        let currentPageAndPost = {
+        let pageInfos = {
             pageName: this.props.pageName,
             pageDataId: undefined,
             os: this.props.os
@@ -132,27 +136,27 @@ class PageContainer extends React.Component {
                 {
                     this.props.os == PageComponentOSType.Native ?
                         <RNPage
-                            currentPageAndPost={currentPageAndPost}
+                            pageInfos={pageInfos}
                         /> :
                         <WebPage
-                            currentPageAndPost={currentPageAndPost}
+                            pageInfos={pageInfos}
                         />
                 }
                 {/* 这是一个 react 插槽，不要随意更改 id */}
                 <div id='PageEditPortals'>
                 </div>
                 <BtnLists
-                    currentPageAndPost={currentPageAndPost}
+                    pageInfos={pageInfos}
                 />
                 <div style={{ display: 'flex', position: 'fixed', bottom: 60, left: 40 }}>
                     <CancelAndReload
-                        currentPageAndPost={currentPageAndPost}
+                        pageInfos={pageInfos}
                     />
                     <ClipBoard
-                        currentPageAndPost={currentPageAndPost}
+                        pageInfos={pageInfos}
                     />
                     <Hotkey
-                        currentPageAndPost={currentPageAndPost}
+                        pageInfos={pageInfos}
                     />
                 </div>
             </div>

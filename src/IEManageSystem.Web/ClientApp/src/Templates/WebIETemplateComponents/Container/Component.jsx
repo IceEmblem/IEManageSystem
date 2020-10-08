@@ -12,6 +12,7 @@ class Component extends IComponent {
             <div
                 style={{
                     ...this.baseStyle,
+                    width: '100%',
                     height: '100%',
                     display: "flex",
                     flexDirection: setting.direction,
@@ -20,7 +21,7 @@ class Component extends IComponent {
                     alignContent: setting.alignContent,
                     flexWrap: setting.wrap,
                     overflowY: 'hidden',
-                    ...cusStyle
+                    ...cusStyle,
                 }}
             >
                 {this.props.children}
