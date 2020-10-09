@@ -40,7 +40,8 @@ type IconNameType = 'GithubOutlined'
 | 'HeartOutlined'
 | 'PauseOutlined'
 | 'FullscreenOutlined'
-| 'FullscreenExitOutlined';
+| 'FullscreenExitOutlined'
+| 'BgColorsOutlined';
 
 class AntIcons {
     icons : Map<string, React.Component>;

@@ -6,12 +6,12 @@ import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
 
 import imgAvatar from 'images/default_avatar.png'
 
-import { Thumbnail, Text, Button, Icon } from 'native-base'
+import { Container, Header, Left, Body, Right, Content, Thumbnail, Text, Button, Icon } from 'native-base'
 
 import IEToken from 'Core/IEToken'
 
 class UserInfo extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.logout = this.logout.bind(this);
@@ -35,11 +35,11 @@ class UserInfo extends React.Component {
         }
     }
 
-    logout(){
+    logout() {
         IEToken.clearToken()
-        .then(()=>{
-            this.props.history.push("/Personal");
-        })
+            .then(() => {
+                this.props.history.push("/Personal");
+            })
     }
 
     render() {
@@ -57,39 +57,54 @@ class UserInfo extends React.Component {
         let userInfo = this.getUserInfo();
         let source = userInfo.headSculpture ? { uri: userInfo.headSculpture } : imgAvatar
 
-        return (
-            <View style={styles.content}>
-                <View style={styles.header}>
-                    <Thumbnail style={styles.headerSculpture} source={source} />
+        return <Container>
+            <Header>
+                <Left>
+                    <Button transparent
+                        onPress={() => {
+                            this.props.history.push('/');
+                        }}
+                    >
+                        <Icon name='left' type='AntDesign' />
+                    </Button>
+                </Left>
+                <Body />
+                <Right />
+            </Header>
+            <Content>
+                <View style={styles.content}>
+                    <View style={styles.header}>
+                        <Thumbnail style={styles.headerSculpture} source={source} />
+                        <View>
+                            <Text>{userInfo.name || '昵称不见了'}</Text>
+                            <Text style={styles.headerPersonSignature}>{userInfo.personSignature || "哎呀，用户什么都不写"}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.icons}>
+                        <Button warning style={styles.iconsBtn} transparent>
+                            <Icon name='star' type='AntDesign' />
+                            <Text style={styles.iconsBtnText}>书签/收藏</Text>
+                        </Button>
+                        <Button success style={styles.iconsBtn} transparent>
+                            <Icon name='search1' type='AntDesign' />
+                            <Text style={styles.iconsBtnText}>历史记录</Text>
+                        </Button>
+                        <Button dark style={styles.iconsBtn} transparent>
+                            <Icon name='bulb1' type='AntDesign' />
+                            <Text style={styles.iconsBtnText}>夜间模式</Text>
+                        </Button>
+                    </View>
+                    <View style={styles.body}>
+                    </View>
                     <View>
-                        <Text>{userInfo.name || '昵称不见了'}</Text>
-                        <Text style={styles.headerPersonSignature}>{userInfo.personSignature || "哎呀，用户什么都不写"}</Text>
+                        <Button onPress={this.logout} full>
+                            <Text>退出登录</Text>
+                            <Icon name='logout' type='AntDesign' />
+                        </Button>
                     </View>
                 </View>
-                <View style={styles.icons}>
-                    <Button warning style={styles.iconsBtn} transparent>
-                        <Icon name='star' type='AntDesign' />
-                        <Text style={styles.iconsBtnText}>书签/收藏</Text>
-                    </Button>
-                    <Button success style={styles.iconsBtn} transparent>
-                        <Icon name='search1' type='AntDesign' />
-                        <Text style={styles.iconsBtnText}>历史记录</Text>
-                    </Button>
-                    <Button dark style={styles.iconsBtn} transparent>
-                        <Icon name='bulb1' type='AntDesign' />
-                        <Text style={styles.iconsBtnText}>夜间模式</Text>
-                    </Button>
-                </View>
-                <View style={styles.body}>
-                </View>
-                <View>
-                    <Button onPress={this.logout} info full>
-                        <Text>退出登录</Text>
-                        <Icon name='logout' type='AntDesign' />
-                    </Button>
-                </View>
-            </View>
-        );
+            </Content>
+        </Container>
     }
 }
 

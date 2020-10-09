@@ -116,7 +116,7 @@ class Theme {
             return;
         }
 
-        this._currentTheme = Themes.blue;
+        this._currentTheme = Themes.cyan;
     }
 
     applyTheme = (name) => {
@@ -125,9 +125,9 @@ class Theme {
     }
 
     applyDefault = () => {
-        this._currentTheme = Themes.blue;
-        this.themeName = themeName.blue;
-        IETool.setCookie(saveName, undefined, 0);
+        this._currentTheme = Themes.cyan;
+        this.themeName = themeName.cyan;
+        IETool.setCookie(saveName, "", 0);
     }
 
     // 应用红色

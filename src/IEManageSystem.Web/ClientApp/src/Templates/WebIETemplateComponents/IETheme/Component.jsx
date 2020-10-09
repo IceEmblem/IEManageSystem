@@ -5,7 +5,7 @@ import { Button, Popover } from 'antd'
 
 class Component extends IComponent {
     render() {
-        let style = this.getCommonStyleSetting();
+        let style = this.getCommonStyleSetting().toStyle();
 
         return <div style={this.baseStyle}>
             <Popover
@@ -27,7 +27,11 @@ class Component extends IComponent {
                     </div>
                 }
             >
-                <Button style={style} type='primary'>主题</Button>
+                {
+                    this.props.children.length >= 1 ?
+                        this.props.children :
+                        <Button style={style} type='primary'>主题</Button>
+                }
             </Popover>
         </div>
     }

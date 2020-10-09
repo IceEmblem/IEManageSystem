@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Platform, BackHandler } from 'react-native'
 import { Switch, Route, withRouter } from 'react-router-native'
-import { Container, Header, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Item, StyleProvider } from 'native-base'
+import { StyleProvider } from 'native-base'
 import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
 import IocContainer from 'Core/IocContainer'
@@ -28,10 +28,18 @@ class Layout extends React.Component {
 
     componentDidMount() {
         IocContainer.registerSingleIntances(ILayoutInstance, this);
+        
+        if (Platform.OS === 'android') {
+            BackHandler.addEventListener('hardwareBackPress', this.back);
+        }
     }
 
     componentWillUnmount() {
         IocContainer.registerSingleIntances(ILayoutInstance, undefined);
+
+        if (Platform.OS === 'android') {
+            BackHandler.removeEventListener('hardwareBackPress', this.back);
+        }
     }
 
     showCustomizeView(component) {
@@ -40,6 +48,16 @@ class Layout extends React.Component {
 
     closeCustomizeView() {
         this.setState({ isShowCustomizeView: false, customizeView: undefined })
+    }
+
+    // 返回键
+    back = () => {
+        if(this.props.history.index <= 0){
+            return false;
+        }
+
+        this.props.history.goBack()
+        return true;
     }
 
     render() {

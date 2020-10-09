@@ -141,7 +141,7 @@ class BtnLists extends React.Component {
     }
 
     changePage(pageName) {
-        this.props.history.push(`/ManageHome/CMSManage/PageEdit/${pageName}`);
+        this.props.history.push(`/ManageHome/CMSManage/PageEdit/${pageName}/${this.props.pageInfos.os}`);
     }
 
     render() {

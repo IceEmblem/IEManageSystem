@@ -15,7 +15,7 @@ class Component extends IComponent {
 
         let icon;
         if (setting.icon) {
-            icon = <Text style={[styles.text, {paddingRight: text && 8}]}>{AntIcons.getIcon(setting.icon, { color: setting.color, fontSize: setting.fontSize })}</Text>;
+            icon = <Text style={[styles.text, {paddingRight: text && 8}]}>{AntIcons.getIcon(setting.icon, StyleCheck.handle({ color: setting.color, fontSize: setting.fontSize }))}</Text>;
         }
         
         return (

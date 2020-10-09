@@ -44,6 +44,7 @@ const iconsTypes = {
     'PauseOutlined': {name:'pause', type:'AntDesign'},
     'FullscreenOutlined': {name:'fullscreen', type: 'MaterialCommunityIcons'},
     'FullscreenExitOutlined': {name:'fullscreen-exit', type: 'MaterialCommunityIcons'},
+    'BgColorsOutlined': {name:'format-color-fill', type: 'MaterialCommunityIcons'},
 }
 
 var iconComponents = new Map<string, React.Component>();
