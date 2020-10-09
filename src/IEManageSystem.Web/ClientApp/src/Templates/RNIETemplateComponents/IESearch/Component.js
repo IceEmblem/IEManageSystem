@@ -15,7 +15,7 @@ class Component extends IComponent {
         let icon = <Button
             type='link'
             style={{alignSelf: 'center'}}
-            onClick={this.onClick}
+            onPress={this.onClick}
             transparent
             small
         >
@@ -34,8 +34,8 @@ class Component extends IComponent {
                         style={[styles.input, { color: setting.fontColor }]}
                         placeholder="搜索文章"
                         value={this.state.search}
-                        onChange={(e) => {
-                            this.setState({ search: e.target.value });
+                        onChangeText={(text)=>{
+                            this.setState({ search: text });
                         }}
                     />
                     {setting.iconPos == 'right' && icon}

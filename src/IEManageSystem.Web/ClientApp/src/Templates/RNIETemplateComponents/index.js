@@ -18,6 +18,7 @@ import IEScrollbar from './IEScrollbar'
 import IESearch from "./IESearch"
 import IETab from "./IETab"
 import IETheme from './IETheme'
+import IETwoDimensionalCode from './IETwoDimensionalCode'
 import IEVideo from './IEVideo'
 import NotFind from "./NotFind"
 import RichTextEditor from "./RichTextEditor"
@@ -44,6 +45,7 @@ const describes = [
     IEScrollbar,
     IESearch,
     IETab,
+    IETwoDimensionalCode,
     IETheme,
     IEVideo,
     NotFind,

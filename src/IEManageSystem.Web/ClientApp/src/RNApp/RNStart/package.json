@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "dependencies": {
         "@ant-design/react-native": "^3.3.0",
-        "react-router-native": "^5.2.0",
-        "react-native-htmlview": "^0.15.0"
+        "@types/react-native": "^0.63.25",
+        "react-native-htmlview": "^0.15.0",
+        "react-router-native": "^5.2.0"
     }
 }

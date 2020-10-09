@@ -2,7 +2,7 @@
 import Container, { RNDescribe as RNContainer } from "./Container"
 // 动画组件，rn 没有
 import IEAnimation from './IEAnimation'
-import IEAudio, { RNDescribe as RNIEAudio} from './IEAudio'
+import IEAudio, { RNDescribe as RNIEAudio } from './IEAudio'
 // 底部导航栏，rn 没有
 import IEBottomNav from "./IEBottomNav"
 import IEButton, { RNDescribe as RNIEButton } from "./IEButton"
@@ -14,7 +14,7 @@ import IECategoryLabel, { RNDescribe as RNIECategoryLabel } from "./IECategoryLa
 import IEComment, { RNDescribe as RNIEComment } from "./IEComment"
 import IEImg, { RNDescribe as RNIEImg } from "./IEImg"
 import IEInfoGroup, { RNDescribe as RNIEInfoGroup } from "./IEInfoGroup"
-import {RNDescribe as RNIELayout} from './IELayout'
+import { RNDescribe as RNIELayout } from './IELayout'
 import IELine, { RNDescribe as RNIELine } from "./IELine"
 import IEMenu, { RNDescribe as RNIEMenu } from "./IEMenu"
 import IEPlaceholder, { RNDescribe as RNIEPlaceholder } from './IEPlaceholder'
@@ -22,12 +22,13 @@ import IEPostList, { RNDescribe as RNIEPostList } from "./IEPostList"
 import IERankingList, { RNDescribe as RNIERankingList } from "./IERankingList"
 // 评分组件，rn 没有
 import IERate from "./IERate"
-import {RNDescribe as RNIEScrollbar} from './IEScrollbar'
+import { RNDescribe as RNIEScrollbar } from './IEScrollbar'
 import IESearch, { RNDescribe as RNIESearch } from "./IESearch"
 // 选择框组件，rn 没有
 import IESelect from "./IESelect"
 import IETab, { RNDescribe as RNIETab } from './IETab'
 import IETheme, { RNDescribe as RNIETheme } from './IETheme'
+import { RNDescribe as RNIETwoDimensionalCode } from './IETwoDimensionalCode'
 import IEVideo, { RNDescribe as RNIEVideo } from './IEVideo'
 import NotFind, { RNDescribe as RNNotFind } from "./NotFind"
 import RichTextEditor, { RNDescribe as RNRichTextEditor } from "./RichTextEditor"
@@ -86,6 +87,7 @@ const rnDescribes = [
     RNIESearch,
     RNIETab,
     RNIETheme,
+    RNIETwoDimensionalCode,
     RNIEVideo,
     RNNotFind,
     RNRichTextEditor,
