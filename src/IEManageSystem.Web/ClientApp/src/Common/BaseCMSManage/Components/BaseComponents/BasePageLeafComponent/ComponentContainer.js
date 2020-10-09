@@ -48,13 +48,15 @@ class PostListContain extends React.Component {
     }
 
     getPostFetchs(postData) {
-        let tags;
-        try {
-            let tagstr = this.props.curtag;
-            tags = JSON.parse(decodeURI(tagstr));
-        }
-        catch (ex) {
-            tags = []
+        let tags = [];
+        if(this.props.curtag){
+            try {
+                let tagstr = this.props.curtag;
+                tags = JSON.parse(decodeURI(tagstr));
+            }
+            catch (ex) {
+                tags = []
+            }
         }
 
         return ieReduxFetch("/api/PageDataQuery/GetPageDatas", {

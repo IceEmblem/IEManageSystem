@@ -6,6 +6,7 @@ import BasicComponentSettingConfig, {IBasicSettingConfig} from './BasicComponent
 import ComponentSettingConfig from './ComponentSettingConfig'
 import FontComponentSettingConfig from './FontComponentSettingConfig'
 import CommonStyleSettingConfig from './CommonStyleSettingConfig'
+import PostFieldSettingConfig from './PostFieldSettingConfig'
 
 // 组件对象
 export default class BaseComponentObject {
@@ -57,4 +58,5 @@ export {
     IBasicSettingConfig,
     FontComponentSettingConfig,
     CommonStyleSettingConfig,
+    PostFieldSettingConfig,
 }

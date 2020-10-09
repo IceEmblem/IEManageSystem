@@ -79,7 +79,14 @@ class Component extends IComponent {
                     dataSource={this.props.posts}
                     renderItem={item => {
                         return ListItem ?
-                            <ListItem interactivConfigFeature={this.getItemInteractivConfigFeature(item)} />
+                            <ListItem 
+                                interactivConfigFeature={this.getItemInteractivConfigFeature(item)} 
+                                // 在这里替换掉文章的数据
+                                currentPageAndPost={{
+                                    ...this.props.currentPageAndPost,
+                                    pageData: item,
+                                }}
+                            />
                             : this.createItem(item)
                     }}
                 />

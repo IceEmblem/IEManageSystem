@@ -1,4 +1,4 @@
-import BaseComponentObject, { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
+import BaseComponentObject, { PostFieldSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 import ComponentDataConfig from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
 import ComponentDescribe, { componentType } from 'BaseCMSManage/Components/ComponentDescribe'
 import InteractiveComponentConfig from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
@@ -8,7 +8,8 @@ class ComponentObject extends BaseComponentObject {
     constructor(component, preview, settingConfig, dataConfig) {
         super();
         this.ComponentSettingConfigs = [
-            new InteractiveComponentConfig([InteractiveType.url]),
+            new PostFieldSettingConfig([{ fieldName: "audioUrl", displayName: "音频 url" }]),
+            new InteractiveComponentConfig([InteractiveType.url()]),
         ];
         this.ComponentDataConfig = new ComponentDataConfig(dataConfig)
         this.Component = component;

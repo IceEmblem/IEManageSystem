@@ -19,7 +19,7 @@ export default class Component extends IComponent{
     }
 
     getImgUrl(){
-        return this.props.interactivUrl || new Data(this.props.componentData).imgUrl || nofindJpg;
+        return this.props.interactivUrl || new Data(this.props.componentData).imgUrl || "/Picture/SheJi";
     }
 
     click = () => {

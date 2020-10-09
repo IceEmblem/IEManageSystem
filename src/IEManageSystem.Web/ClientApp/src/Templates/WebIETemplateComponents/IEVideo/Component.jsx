@@ -40,11 +40,11 @@ class Component extends IComponent {
                     this.player = c;
                 }}
                 autoPlay={setting.autoPlay == 'true'}
-                poster={data.img}
+                poster={this.getImgUrl()}
                 fluid={setting.customizeHeight == 'false'}
                 height={this.state.height}
             >
-                <source src={this.getUrl()} />
+                <source src={this.getVideoUrl()} />
             </Player>
         </div>
     }

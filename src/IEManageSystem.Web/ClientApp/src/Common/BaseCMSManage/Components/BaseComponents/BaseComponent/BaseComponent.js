@@ -1,7 +1,8 @@
 import React from 'react'
-import { DefaultSettingName, IEFontSetting, IECommonStyleSetting } from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
+import { DefaultSettingName, IEFontSetting, IECommonStyleSetting, IEPostFieldSetting } from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
 import FontComponentSetting from './FontComponentSettingConfig/Setting'
 import CommonStyleSetting from './CommonStyleSettingConfig/Setting'
+import PostFieldSetting from './PostFieldSettingConfig/Setting'
 
 export class BaseComponentProps{
     constructor(){
@@ -19,7 +20,7 @@ export class BaseComponentProps{
 
 export default class BaseComponent extends React.Component {
     baseStyle = { 
-        width: this.props.pageComponent.pageComponentBaseSetting.width ? '100%' : undefined
+        width: this.props.pageComponent.pageComponentBaseSetting.width ? '100%' : undefined,
     }
 
     constructor(props){
@@ -42,5 +43,10 @@ export default class BaseComponent extends React.Component {
     // 如要使用通用样式配置，请添加 CommonStyleSettingConfig 到你的组件
     getCommonStyleSetting(){
         return new CommonStyleSetting(this.props.pageComponent.getOrCreatePageComponentSetting(IECommonStyleSetting))
+    }
+
+    // 如要使用文章字段配置，请添加 PostFieldSettingConfig 到你的组件
+    getPostFieldSetting(){
+        return new PostFieldSetting(this.props.pageComponent.getOrCreatePageComponentSetting(IEPostFieldSetting))
     }
 }

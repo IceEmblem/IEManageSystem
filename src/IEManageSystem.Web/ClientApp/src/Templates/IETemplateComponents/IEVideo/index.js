@@ -1,4 +1,4 @@
-import BaseComponentObject, { ComponentSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
+import BaseComponentObject, { ComponentSettingConfig, PostFieldSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 import ComponentDataConfig from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent/ComponentDataConfig'
 import ContainerConfig from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
 import ComponentDescribe, { componentType } from 'BaseCMSManage/Components/ComponentDescribe'
@@ -9,7 +9,8 @@ class ComponentObject extends BaseComponentObject {
     constructor(component, preview, settingConfig, dataConfig) {
         super();
         this.ComponentSettingConfigs = [
-            new InteractiveComponentConfig([InteractiveType.url]),
+            new PostFieldSettingConfig([{ fieldName: "videoUrl", displayName: "视频 url" }, { fieldName: "imgUrl", displayName: "图片 url" }]),
+            new InteractiveComponentConfig([InteractiveType.url("视频 url", "videoUrl"), InteractiveType.url("图片 url", "imgUrl")]),
             new ComponentSettingConfig(undefined, '视频设置', settingConfig)
         ];
         this.ComponentDataConfig = new ComponentDataConfig(dataConfig)

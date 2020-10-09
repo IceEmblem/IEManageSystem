@@ -29,7 +29,7 @@ class Component extends IComponent {
 
 const styles = StyleSheet.create({
     view: {
-        height: '100%'
+        height: '100%',
     }
 });
 

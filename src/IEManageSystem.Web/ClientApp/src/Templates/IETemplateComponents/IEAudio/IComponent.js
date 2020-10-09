@@ -8,6 +8,6 @@ export default class Component extends IComponent {
 
     getUrl(){
         let data = this.getCurrentData();
-        return this.props.interactivUrl || data.url || data.url2;
+        return this.props.interactivUrl || this.getPostFieldSetting().getFieldValue("audioUrl", this.props.pageData) || data.url || data.url2;
     }
 }

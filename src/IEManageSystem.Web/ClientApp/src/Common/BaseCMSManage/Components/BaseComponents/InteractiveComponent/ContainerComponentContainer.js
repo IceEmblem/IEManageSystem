@@ -7,7 +7,7 @@ export default class ContainerContain extends React.Component {
         let { _containerComponent: Component, containerConfigs, ...props } = this.props;
 
         if (!containerConfigs) {
-            let childs = ({ interactivConfigFeature }) => {
+            let childs = ({ interactivConfigFeature, currentPageAndPost }) => {
                 return <ComponentContext.Provider
                     value={{
                         ...this.context,
@@ -19,7 +19,7 @@ export default class ContainerContain extends React.Component {
                             <ComponentContainerBox
                                 key={sign + this.props.pageComponent.os}
                                 sign={sign}
-                                currentPageAndPost={this.props.currentPageAndPost}
+                                currentPageAndPost={currentPageAndPost || this.props.currentPageAndPost}
                             >
                             </ComponentContainerBox>))
                     }
@@ -45,7 +45,7 @@ export default class ContainerContain extends React.Component {
                     return;
                 }
 
-                childs[group] = ({ interactivConfigFeature }) => {
+                childs[group] = ({ interactivConfigFeature, currentPageAndPost }) => {
                     return <ComponentContext.Provider
                         value={{
                             ...this.context,
@@ -55,7 +55,7 @@ export default class ContainerContain extends React.Component {
                         <ComponentContainerBox
                             key={sign + this.props.pageComponent.os}
                             sign={sign}
-                            currentPageAndPost={this.props.currentPageAndPost}
+                            currentPageAndPost={currentPageAndPost || this.props.currentPageAndPost}
                         >
                         </ComponentContainerBox>
                     </ComponentContext.Provider>

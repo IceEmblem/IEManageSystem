@@ -1,6 +1,6 @@
 import SingleDataModel from "./SingleDataModel";
 
-const defaultDataName = "__default__";
+const defaultDataName = "_";
 
 export default abstract class DataCollectionBase {
     public singleDatas: Array<SingleDataModel>;

@@ -36,7 +36,7 @@ class Component extends IComponent {
         let ChildComponents = this.props.children;
 
         return (
-            <div style={{ width: "0px", flexGrow: 1 }}>
+            <div style={this.baseStyle}>
                 <Carousel autoplay>
                     {
                         ChildComponents.length > 0 ?

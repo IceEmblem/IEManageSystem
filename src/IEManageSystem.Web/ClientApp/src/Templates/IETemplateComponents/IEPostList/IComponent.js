@@ -24,7 +24,7 @@ export default class Component extends IComponent{
         let creator = data.creator || {};
 
         return new InteractivConfigFeature([
-            new InteractivConfigFeatureUrlItem('imgUrl', '图标地址', (data) => (data.imageList.length > 0 && data.imageList[0] ? data.imageList[0] : "/Picture/SheJi/post/post4.jpg")),
+            new InteractivConfigFeatureUrlItem('imgUrl', '图片地址', (data) => (data.imageList.length > 0 && data.imageList[0] ? data.imageList[0] : "/Picture/SheJi/post/post4.jpg")),
             new InteractivConfigFeatureTextItem('postTitle', '文章标题', (data) => data.title),
             new InteractivConfigFeatureTextItem('postDescribe', '文章描述', (data) => data.describe || "暂无简介"),
             new InteractivConfigFeatureTextItem('postScore', '文章评分', (data) => data.score || '0'),

@@ -11,8 +11,14 @@ export default class Component extends IComponent {
         return new Setting(this.getDefaultSetting());
     }
 
-    getUrl(){
+    getVideoUrl(){
         let data = this.getCurrentData();
-        return this.props.interactivUrl || data.url || data.url2;
+
+        return this.props.videoUrl || this.getPostFieldSetting().getFieldValue("videoUrl", this.props.pageData) || data.url || data.url2;
+    }
+
+    getImgUrl(){
+        let data = this.getCurrentData();
+        return this.props.imgUrl || this.getPostFieldSetting().getFieldValue("imgUrl", this.props.pageData) || data.img;
     }
 }

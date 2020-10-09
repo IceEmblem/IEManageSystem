@@ -31,7 +31,7 @@ class Component extends IComponent {
         let video = (
             <View style={[styles.view, this.state.fullscreen ? { height: "100%", width: "100%" } : { height: this.videoHeight }]}>
                 <Video
-                    source={{ uri: Weburl.handleWeburl(this.getUrl()) }}          // Can be a URL or a local file.
+                    source={{ uri: Weburl.handleWeburl(this.getVideoUrl()) }}          // Can be a URL or a local file.
                     ref={(ref) => {
                         this.player = ref
                     }}
@@ -44,7 +44,7 @@ class Component extends IComponent {
                     // 是否全屏
                     fullscreen={this.state.fullscreen}
                     // 未播放时显示的图片
-                    poster={Weburl.handleWeburl(data.img)}
+                    poster={Weburl.handleWeburl(this.getImgUrl())}
                     onBuffer={this.onBuffer}                // Callback when remote video is buffering
                     onError={this.videoError}               // Callback when video cannot be loaded
                     style={[styles.backgroundVideo]}
