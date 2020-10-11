@@ -8,14 +8,14 @@ export default class Setting {
     }
 
     setPostFieldName(componentFieldName, postField: "" | "field1" | "field2" | "field3" | "field4" | "field5" ){
-        this.setting.getDefauleData()[componentFieldName] = postField;
+        this.setting.postFields[componentFieldName] = postField;
     }
 
     getPostFieldName(componentFieldName){
-        return this.setting.getDefauleData()[componentFieldName];
+        return this.setting.postFields[componentFieldName];
     }
 
     getFieldValue(componentFieldName, post){
-        return post[this.setting.getDefauleData()[componentFieldName]];
+        return post[this.setting.postFields[componentFieldName]];
     }
 }

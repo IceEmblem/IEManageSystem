@@ -1,59 +1,25 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
-import SingleDataModel from "BaseCMSManage/Models/SingleDataModel"
-
-class Data {
-    singleData : SingleDataModel;
-
-    constructor(singleDataModel : SingleDataModel){
-        this.singleData = singleDataModel;
-    }
-
-    get text(){
-        return this.singleData.field1;
-    }
-
-    set text(val){
-        this.singleData.field1 = val;
-    }
-
-    get url(){
-        return this.singleData.field2;
-    }
-
-    set url(val){
-        this.singleData.field2 = val;
-    }
-}
 
 export default class Setting {
-    setting: PageComponentSettingModel;
+    setting: any;
     
     constructor(pageComponentSetting:PageComponentSettingModel){
         this.setting = pageComponentSetting;
     }
 
-    setSetting(pageComponentSetting:PageComponentSettingModel){
-        this.setting = pageComponentSetting;
-    }
-
     createSeleteData(){
-        this.setting.createSingleData("SeleteDatas")
+        this.setting.datas.push({text: '', url: ''});
     }
 
     getSeleteDatas(){
-        let dataList = [];
-        this.setting.getSingleDatas("SeleteDatas").forEach(element => {
-            dataList.push(new Data(element));
-        });
-
-        return dataList;
+        return this.setting.datas;
     }
 
     get size(){
-        return this.setting.getDefauleData().field1 || "false";
+        return this.setting.size;
     }
 
     set size(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.size = val;
     }
 }

@@ -87,8 +87,8 @@ class SettingConfig extends React.Component {
                         this.props.setData(setting.setting);
                     }}
                 >
-                    <Radio value="true">隐藏</Radio>
-                    <Radio value="false">不隐藏</Radio>
+                    <Radio value={true}>隐藏</Radio>
+                    <Radio value={false}>不隐藏</Radio>
                 </Radio.Group>
             </div>
             <div className='mb-3 col-md-6'>

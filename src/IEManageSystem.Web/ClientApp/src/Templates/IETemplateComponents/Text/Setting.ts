@@ -1,7 +1,7 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
 
 export default class Setting {
-    setting: PageComponentSettingModel;
+    setting: any;
     
     constructor(pageComponentSetting:PageComponentSettingModel){
         this.setting = pageComponentSetting;
@@ -12,26 +12,26 @@ export default class Setting {
     }
 
     get textType(){
-        return this.setting.getDefauleData().field1 || "h4";
+        return this.setting.textType || "h4";
     }
 
     set textType(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.textType = val;
     }
 
     get textSource(){
-        return this.setting.getDefauleData().field3 || 'CText';
+        return this.setting.textSource || 'CText';
     }
 
     set textSource(val){
-        this.setting.getDefauleData().field3 = val;
+        this.setting.textSource = val;
     }
 
     get align(){
-        return this.setting.getDefauleData().field4 || 'flex-start';
+        return this.setting.align || 'flex-start';
     }
 
     set align(val){
-        this.setting.getDefauleData().field4 = val;
+        this.setting.align = val;
     }
 }

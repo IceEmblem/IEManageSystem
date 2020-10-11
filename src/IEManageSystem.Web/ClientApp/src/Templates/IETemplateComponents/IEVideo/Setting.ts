@@ -1,41 +1,41 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
 
 export default class Setting {
-    setting: PageComponentSettingModel;
+    setting: any;
     
     constructor(pageComponentSetting:PageComponentSettingModel){
         this.setting = pageComponentSetting;
     }
 
     get autoPlay(){
-        return this.setting.getDefauleData().field1 || "false";
+        return this.setting.autoPlay == undefined ? false : this.setting.autoPlay;
     }
 
     set autoPlay(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.autoPlay = val;
     }
 
     get loopPlay(){
-        return this.setting.getDefauleData().field2 || 'false';
+        return this.setting.loopPlay == undefined ? false : this.setting.loopPlay;
     }
 
     set loopPlay(val){
-        this.setting.getDefauleData().field2 = val;
+        this.setting.loopPlay = val;
     }
 
     get hiddenTool(){
-        return this.setting.getDefauleData().field3 || 'false';
+        return this.setting.hiddenTool == undefined ? false : this.setting.hiddenTool;
     }
 
     set hiddenTool(val){
-        this.setting.getDefauleData().field3 = val;
+        this.setting.hiddenTool = val;
     }
 
     get customizeHeight(){
-        return this.setting.getDefauleData().field4 || 'false';
+        return this.setting.customizeHeight == undefined ? false : this.setting.customizeHeight;
     }
 
     set customizeHeight(val){
-        this.setting.getDefauleData().field4 = val;
+        this.setting.customizeHeight = val;
     }
 }

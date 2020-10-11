@@ -22,7 +22,7 @@ class Component extends IComponent {
                 cover={
                     <Link to={this.props.createUrl(item)}>
                         {
-                            setting.isShowImg == "true" &&
+                            setting.isShowImg == true &&
                             <img
                                 alt={item.title}
                                 height={setting.heigth}
@@ -69,7 +69,7 @@ class Component extends IComponent {
         return (
             <div style={this.baseStyle}>
                 {
-                    setting.hiddenSortBtn == 'false' &&
+                    setting.hiddenSortBtn == false &&
                     (Head ?
                         <Head interactivConfigFeature={this.getHeadInteractivConfigFeature()} />
                         : this.header())
@@ -91,7 +91,7 @@ class Component extends IComponent {
                     }}
                 />
                 {
-                    setting.hiddenPageing == 'false' && this.footer()
+                    setting.hiddenPageing == false && this.footer()
                 }
             </div>
         )

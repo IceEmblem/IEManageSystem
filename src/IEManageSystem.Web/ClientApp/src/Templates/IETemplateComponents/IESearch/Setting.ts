@@ -1,45 +1,41 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
 
 export default class Setting {
-    setting: PageComponentSettingModel;
+    setting: any;
     
     constructor(pageComponentSetting:PageComponentSettingModel){
         this.setting = pageComponentSetting;
     }
 
-    setSetting(pageComponentSetting:PageComponentSettingModel){
-        this.setting = pageComponentSetting;
-    }
-
     get url(){
-        return this.setting.getDefauleData().field1 || "/Page/PostList";
+        return this.setting.url || "/Page/PostList";
     }
 
     set url(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.url = val;
     }
 
     get fontColor(){
-        return this.setting.getDefauleData().field2;
+        return this.setting.fontColor;
     }
 
     set fontColor(val){
-        this.setting.getDefauleData().field2 = val;
+        this.setting.fontColor = val;
     }
 
     get iconPos(){
-        return this.setting.getDefauleData().field3 || 'left';
+        return this.setting.iconPos || 'left';
     }
 
     set iconPos(val){
-        this.setting.getDefauleData().field3 = val;
+        this.setting.iconPos = val;
     }
 
     get showBorder(){
-        return this.setting.getDefauleData().field4 || 'false';
+        return this.setting.showBorder == undefined ? false : this.setting.showBorder;
     }
 
     set showBorder(val){
-        this.setting.getDefauleData().field4 = val;
+        this.setting.showBorder = val;
     }
 }

@@ -16,7 +16,7 @@ class Component extends IComponent {
 
     state = {
         showTool: true,
-        paused: this.getCurrentSetting().autoPlay != 'true',
+        paused: this.getCurrentSetting().autoPlay != true,
         progressSecond: 0,
         progress: "0%",
         minute: 0,
@@ -38,7 +38,7 @@ class Component extends IComponent {
                     // 缩放模式
                     resizeMode='contain'
                     // 是否循环播放
-                    repeat={setting.loopPlay == 'true'}
+                    repeat={setting.loopPlay == true}
                     // 是否暂停
                     paused={this.state.paused}
                     // 是否全屏
@@ -68,7 +68,7 @@ class Component extends IComponent {
                     }}
                 />
                 <View style={{ height: '100%', justifyContent: 'flex-end' }}>
-                    <View style={[styles.toolBar, { display: setting.hiddenTool == 'false' && this.state.showTool ? 'flex' : 'none' }]}>
+                    <View style={[styles.toolBar, { display: setting.hiddenTool == false && this.state.showTool ? 'flex' : 'none' }]}>
                         <Button small transparent
                             onPress={() => {
                                 this.setState({ paused: !this.state.paused })

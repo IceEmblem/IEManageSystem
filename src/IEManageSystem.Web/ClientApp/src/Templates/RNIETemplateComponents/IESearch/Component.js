@@ -27,7 +27,7 @@ class Component extends IComponent {
         </Button>;
 
         return (
-            <View style={[this.baseStyle, styles.view, { borderWidth: setting.showBorder != 'false' ? 1 : 0 }]}>
+            <View style={[this.baseStyle, styles.view, { borderWidth: setting.showBorder != false ? 1 : 0 }]}>
                 <Item style={[styles.item]}>
                     {setting.iconPos == 'left' && icon}
                     <Input

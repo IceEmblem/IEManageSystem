@@ -8,26 +8,18 @@ class SettingConfig extends React.Component {
     state = {
         isShowPicturePopupBox: false
     }
-
-    setting = null;
-
-    constructor(props) {
-        super(props);
-
-        this.setting = new Setting(props.data);
-    }
-
+    
     render() {
-        this.setting.setSetting(this.props.data);
+        let setting = new Setting(this.props.data);
 
         return (<div>
             <div className="mb-3">
                 <Tag color="#55acee">排序（主轴）方向</Tag>
                 <Radio.Group
-                    value={this.setting.direction}
+                    value={setting.direction}
                     onChange={(e) => {
-                        this.setting.direction = e.target.value;
-                        this.props.setData(this.setting.setting);
+                        setting.direction = e.target.value;
+                        this.props.setData(setting.setting);
                     }}
                 >
                     <Radio value="row">对平</Radio>
@@ -39,10 +31,10 @@ class SettingConfig extends React.Component {
             <div className="mb-3">
                 <Tag color="#55acee">主轴内容对齐</Tag>
                 <Radio.Group
-                    value={this.setting.justifyContent}
+                    value={setting.justifyContent}
                     onChange={(e) => {
-                        this.setting.justifyContent = e.target.value;
-                        this.props.setData(this.setting.setting);
+                        setting.justifyContent = e.target.value;
+                        this.props.setData(setting.setting);
                     }}
                 >
                     <Radio value="flex-start">头部</Radio>
@@ -55,10 +47,10 @@ class SettingConfig extends React.Component {
             <div className="mb-3">
                 <Tag color="#55acee">副轴（单行）内容对齐</Tag>
                 <Radio.Group
-                    value={this.setting.alignItems}
+                    value={setting.alignItems}
                     onChange={(e) => {
-                        this.setting.alignItems = e.target.value;
-                        this.props.setData(this.setting.setting);
+                        setting.alignItems = e.target.value;
+                        this.props.setData(setting.setting);
                     }}
                 >
                     <Radio value="flex-start">头部</Radio>
@@ -71,10 +63,10 @@ class SettingConfig extends React.Component {
             <div className="mb-3">
                 <Tag color="#55acee">是否换行</Tag>
                 <Radio.Group
-                    value={this.setting.wrap}
+                    value={setting.wrap}
                     onChange={(e) => {
-                        this.setting.wrap = e.target.value;
-                        this.props.setData(this.setting.setting);
+                        setting.wrap = e.target.value;
+                        this.props.setData(setting.setting);
                     }}
                 >
                     <Radio value="wrap">换行</Radio>
@@ -84,10 +76,10 @@ class SettingConfig extends React.Component {
             <div className="mb-3">
                 <Tag color="#55acee">副轴（多行）内容对齐</Tag>
                 <Radio.Group
-                    value={this.setting.alignContent}
+                    value={setting.alignContent}
                     onChange={(e) => {
-                        this.setting.alignContent = e.target.value;
-                        this.props.setData(this.setting.setting);
+                        setting.alignContent = e.target.value;
+                        this.props.setData(setting.setting);
                     }}
                 >
                     <Radio value="flex-start">头部</Radio>

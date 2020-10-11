@@ -22,7 +22,7 @@ class Component extends IComponent {
             <div style={this.baseStyle} className="ie-search">
                 <Input
                     placeholder="在 IceEmblem 中搜索"
-                    style={{ border: setting.showBorder == 'false' && "0px", backgroundColor: "fff0", color: setting.fontColor }}
+                    style={{ border: setting.showBorder == false && "0px", backgroundColor: "fff0", color: setting.fontColor }}
                     prefix={setting.iconPos == 'left' && icon}
                     suffix={setting.iconPos == 'right' && icon}
                     value={this.state.search}

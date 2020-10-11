@@ -8,10 +8,10 @@ export default class Data {
     }
 
     get url(){
-        return this.data.getDefauleData().url;
+        return this.data.getDefauleData().field1;
     }
 
     set url(val){
-        this.data.getDefauleData().url = val;
+        this.data.getDefauleData().field1 = val;
     }
 }

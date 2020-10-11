@@ -33,7 +33,6 @@ export default class PageComponentModel {
         pageComponentSettingModel = new PageComponentSettingModel();
         pageComponentSettingModel.name = name;
         pageComponentSettingModel.displayName = name;
-        pageComponentSettingModel.singleDatas = [];
         this.pageComponentSettings[name] = pageComponentSettingModel;
 
         return pageComponentSettingModel;

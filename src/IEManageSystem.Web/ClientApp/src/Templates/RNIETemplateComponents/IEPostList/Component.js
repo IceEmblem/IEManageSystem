@@ -55,7 +55,7 @@ class Component extends IComponent {
         return <View style={{ width: `${width}%`, marginBottom: 10 }}>
             <Card>
                 {
-                    setting.isShowImg == "true" &&
+                    setting.isShowImg == true &&
                     <CardItem button cardBody
                         onPress={() => {
                             this.props.history.push(this.props.createUrl(post));
@@ -112,7 +112,7 @@ class Component extends IComponent {
         return (
             <View style={[this.baseStyle]}>
                 {
-                    setting.hiddenSortBtn == 'false' &&
+                    setting.hiddenSortBtn == false &&
                     (Head ?
                         <Head interactivConfigFeature={this.getHeadInteractivConfigFeature()} />
                         : this.header())
@@ -132,7 +132,7 @@ class Component extends IComponent {
                     })}
                 </View>
                 {
-                    setting.hiddenPageing == 'false' && this.footer()
+                    setting.hiddenPageing == false && this.footer()
                 }
             </View>
         )

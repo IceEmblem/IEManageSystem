@@ -1,77 +1,71 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
 
-const otherSettingName = 'OtherSetting'
-
 export default class Setting {
-    setting: PageComponentSettingModel;
+    setting: any;
     
     constructor(pageComponentSetting:PageComponentSettingModel){
         this.setting = pageComponentSetting;
     }
 
-    setSetting(pageComponentSetting:PageComponentSettingModel){
-        this.setting = pageComponentSetting;
-    }
-
     get time(){
-        return this.setting.getDefauleData().field1 || 'init';
+        return this.setting.time || 'init';
     }
 
     set time(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.time = val;
     }
 
     get direction(){
-        return this.setting.getDefauleData().field2;
+        return this.setting.direction;
     }
 
     set direction(val){
-        this.setting.getDefauleData().field2 = val;
+        this.setting.direction = val;
     }
 
     get initValue(){
-        return this.setting.getDefauleData().field3 || '0';
+        return this.setting.initValue || 0;
     }
 
     set initValue(val){
         let num = new Number(val).valueOf();
         if(num < 0 || num > 100){
-            this.setting.getDefauleData().field3 = '0';
+            this.setting.initValue = 0;
         }
         else{
-            this.setting.getDefauleData().field3 = val;
+            this.setting.initValue = val;
         }
     }
 
     get isOverHidden(){
-        return this.setting.getDefauleData().field4 || 'true';
+        return this.setting.isOverHidden === undefined ? true : this.setting.isOverHidden;
     }
 
     set isOverHidden(val){
-        this.setting.getDefauleData().field4 = val;
+        this.setting.isOverHidden = val;
     }
 
     get speed(){
-        return this.setting.getDefauleData().field5 || '180';
+        return this.setting.speed || 180;
     }
 
     set speed(val){
-        this.setting.getDefauleData().field5 = val;
+        this.setting.speed = val;
     }
 
     get repeatTime(){
-        return this.setting.getOrCreateSingleDate(otherSettingName).field1 || '3';
+        return this.setting.repeatTime || 3;
     }
 
     set repeatTime(val){
-        this.setting.getOrCreateSingleDate(otherSettingName).field1 = val;
+        this.setting.repeatTime = val;
     }
 
     get endVal(){
-        return this.setting.getOrCreateSingleDate(otherSettingName).field2 || '100';
+        return this.setting.endVal || 100;
     }
 
     set endVal(val){
-        this.setting.getOrCreateSingleDate(otherSettingName).field2 = val;
+        this.setting.endVal = val;
     }
 }

@@ -134,7 +134,7 @@ class Component extends IComponent {
         }
 
         return (<div
-            style={{ ...this.baseStyle, position: 'relative', overflow: setting.isOverHidden == 'true' ? 'hidden' : 'visible' }}
+            style={{ ...this.baseStyle, position: 'relative', overflow: setting.isOverHidden == true ? 'hidden' : 'visible' }}
             ref={(r) => { this._ref = r }}
             onMouseEnter={setting.time == 'hover' ? () => {
                 this.setState({ value: this.endVal });

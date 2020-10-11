@@ -8,43 +8,43 @@ export default class Setting {
     }
 
     get height(){
-        return this.setting.getDefauleData().field1;
+        return this.setting.height;
     }
 
     set height(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.height = val;
     }
 
     get width(){
-        return this.setting.getDefauleData().field2;
+        return this.setting.width;
     }
 
     set width(val){
-        this.setting.getDefauleData().field2 = val;
+        this.setting.width = val;
     }
 
     get padding(){
-        return this.setting.getDefauleData().field3;
+        return this.setting.padding;
     }
 
     set padding(val){
-        this.setting.getDefauleData().field3 = val;
+        this.setting.padding = val;
     }
 
     get margin(){
-        return this.setting.getDefauleData().field4;
+        return this.setting.margin;
     }
 
     set margin(val){
-        this.setting.getDefauleData().field4 = val;
+        this.setting.margin = val;
     }
 
     get style(){
-        return this.setting.getDefauleData().field5;
+        return this.setting.style;
     }
 
     set style(val){
-        this.setting.getDefauleData().field5 = val;
+        this.setting.style = val;
     }
 
     toStyle(){

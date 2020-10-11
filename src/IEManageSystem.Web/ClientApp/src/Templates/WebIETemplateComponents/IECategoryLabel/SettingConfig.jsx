@@ -26,7 +26,7 @@ class SettingConfig extends React.Component {
                         value={singleData.displayName}
                         onChange={(e) => {
                             singleData.displayName = e.currentTarget.value;
-                            this.props.setData(setting.componentSetting);
+                            this.props.setData(setting.setting);
                         }}
                         prefix={<Tag color="#55acee">标签显示名称</Tag>}
                     />
@@ -36,7 +36,7 @@ class SettingConfig extends React.Component {
                         value={singleData.tagName}
                         onChange={(e) => {
                             singleData.tagName = e.currentTarget.value;
-                            this.props.setData(setting.componentSetting);
+                            this.props.setData(setting.setting);
                         }}
                         prefix={<Tag color="#55acee">标签名称</Tag>}
                     />

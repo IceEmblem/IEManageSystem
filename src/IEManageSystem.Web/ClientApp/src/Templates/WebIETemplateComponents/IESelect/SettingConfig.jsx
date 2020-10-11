@@ -8,30 +8,22 @@ class SettingConfig extends React.Component {
         isShowPicturePopupBox: false
     }
 
-    setting = null;
-
-    constructor(props) {
-        super(props);
-
-        this.setting = new Setting(props.data);
-    }
-
     render() {
-        this.setting.setSetting(this.props.data);
+        let setting = new Setting(this.props.data);
 
-        let seleteDatas = this.setting.getSeleteDatas();
+        let seleteDatas = setting.getSeleteDatas();
 
         return (<div>
             <div className="mb-3">
                 <Tag color="#55acee">按钮大小</Tag>
                 <Radio.Group
-                    value={this.setting.size}
+                    value={setting.size}
                     onChange={(e) => {
-                        this.setting.size = e.target.value;
+                        setting.size = e.target.value;
                         this.setState({})
                     }}
                     onBlur={(e) => {
-                        this.props.setData(this.setting.setting);
+                        this.props.setData(setting.setting);
                     }}
                 >
                     <Radio value="large">大</Radio>
@@ -51,7 +43,7 @@ class SettingConfig extends React.Component {
                                     this.setState({})
                                 }}
                                 onBlur={(e) => {
-                                    this.props.setData(this.setting.setting);
+                                    this.props.setData(setting.setting);
                                 }}
                                 suffix={<Tag color="#55acee">名称</Tag>}
                             />
@@ -65,7 +57,7 @@ class SettingConfig extends React.Component {
                                     this.setState({})
                                 }}
                                 onBlur={(e) => {
-                                    this.props.setData(this.setting.setting);
+                                    this.props.setData(setting.setting);
                                 }}
                                 suffix={<Tag color="#55acee">链接 Url</Tag>}
                             />
@@ -75,8 +67,8 @@ class SettingConfig extends React.Component {
                 ))
             }
             <Button type="primary" onClick={() => {
-                this.setting.createSeleteData();
-                this.props.setData(this.setting.setting);
+                setting.createSeleteData();
+                this.props.setData(setting.setting);
             }}>添加数据</Button>
         </div>)
     }

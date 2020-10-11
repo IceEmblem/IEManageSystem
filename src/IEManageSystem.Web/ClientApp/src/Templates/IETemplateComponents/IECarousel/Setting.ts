@@ -1,46 +1,42 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
 
 export default class Setting {
-    setting: PageComponentSettingModel;
+    setting: any;
     
     constructor(pageComponentSetting:PageComponentSettingModel){
         this.setting = pageComponentSetting;
     }
 
-    setSetting(pageComponentSetting:PageComponentSettingModel){
-        this.setting = pageComponentSetting;
-    }
-
     get fontColor(){
-        return this.setting.getDefauleData().field1 || "#fff";
+        return this.setting.fontColor || "#fff";
     }
 
     set fontColor(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.fontColor = val;
     }
 
     get height(){
-        return this.setting.getDefauleData().field2 || "300";
+        return this.setting.height || 300;
     }
 
     set height(val){
-        this.setting.getDefauleData().field2 = val;
+        this.setting.height = val;
     }
 
     get width(){
-        return this.setting.getDefauleData().field3 || "200";
+        return this.setting.width || 200;
     }
 
     set width(val){
-        this.setting.getDefauleData().field3 = val;
+        this.setting.width = val;
     }
 
     // 遮罩颜色
     get shade(){
-        return this.setting.getDefauleData().field4 || "#0000";
+        return this.setting.shade || "#0000";
     }
 
     set shade(val){
-        this.setting.getDefauleData().field4 = val;
+        this.setting.shade = val;
     }
 }

@@ -11,19 +11,31 @@ export default class InteractiveType {
     }
 
     setConfigFeatureItemName = (pageComponent, interactivConfigFeatureItemName) => {
-        let pageComponentSettingData = pageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName).getDefauleData();
-        // pageComponentSettingData.field1 = interactivConfigFeatureItemName;
+        let pageComponentSetting = pageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName);
+        if(!pageComponentSetting.config){
+            pageComponentSetting.config = {};
+        }
+        let pageComponentSettingData = pageComponentSetting.config;
+
         pageComponentSettingData[this.fieldName] = interactivConfigFeatureItemName;
     }
 
     getConfigFeatureItemName = (pageComponent) => {
-        let pageComponentSettingData = pageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName).getDefauleData();
-        // return pageComponentSettingData.field1;
+        let pageComponentSetting = pageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName);
+        if(!pageComponentSetting.config){
+            pageComponentSetting.config = {};
+        }
+        let pageComponentSettingData = pageComponentSetting.config;
+
         return pageComponentSettingData[this.fieldName];
     }
 
     setComponentPropsData = (pageComponent, interactivConfigFeature, componentProps) => {
-        let pageComponentSettingData = pageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName).getDefauleData();
+        let pageComponentSetting = pageComponent.getOrCreatePageComponentSetting(InteractiveComponentConfigName);
+        if(!pageComponentSetting.config){
+            pageComponentSetting.config = {};
+        }
+        let pageComponentSettingData = pageComponentSetting.config;
         
         if(!pageComponentSettingData[this.fieldName]){
             return;

@@ -15,7 +15,7 @@ class Component extends IComponent {
     componentDidMount(){
         let setting = this.getCurrentSetting();
 
-        if(setting.loopPlay == 'true'){
+        if(setting.loopPlay == true){
             this.player.subscribeToStateChange((state, prevState)=>{
                 if(state.ended){
                     this.player.play();
@@ -23,7 +23,7 @@ class Component extends IComponent {
             })
         }
 
-        if(setting.customizeHeight == 'true'){
+        if(setting.customizeHeight == true){
             setTimeout(()=>{
                 this.setState({height: this.ele.clientHeight});
             }, 0);
@@ -34,14 +34,14 @@ class Component extends IComponent {
         let data = this.getCurrentData();
         let setting = this.getCurrentSetting();
 
-        return <div ref={e=>{this.ele = e}} style={{...this.baseStyle, overflow: 'hidden', height: '100%'}} className={setting.hiddenTool == 'true' && 'ievideo-control-hidden'}>
+        return <div ref={e=>{this.ele = e}} style={{...this.baseStyle, overflow: 'hidden', height: '100%'}} className={setting.hiddenTool == true && 'ievideo-control-hidden'}>
             <Player
                 ref={c => {
                     this.player = c;
                 }}
-                autoPlay={setting.autoPlay == 'true'}
+                autoPlay={setting.autoPlay == true}
                 poster={this.getImgUrl()}
-                fluid={setting.customizeHeight == 'false'}
+                fluid={setting.customizeHeight == false}
                 height={this.state.height}
             >
                 <source src={this.getVideoUrl()} />

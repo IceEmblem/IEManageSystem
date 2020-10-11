@@ -7,47 +7,43 @@ export default class Setting {
         this.setting = pageComponentSetting;
     }
 
-    setSetting(pageComponentSetting:PageComponentSettingModel){
-        this.setting = pageComponentSetting;
-    }
-
     get copyright(){
-        return this.setting.getDefauleData().field1 || "Copyright © 2019 by IceEmblem. All rights reserved.";
+        return this.setting.copyright || "Copyright © 2019 by IceEmblem. All rights reserved.";
     }
 
     set copyright(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.copyright = val;
     }
 
     get text(){
-        return this.setting.getDefauleData().field2 || "由 IceEmblem 开发";
+        return this.setting.text || "由 IceEmblem 开发";
     }
 
     set text(val){
-        this.setting.getDefauleData().field2 = val;
+        this.setting.text = val;
     }
 
     get beianIcon(){
-        return this.setting.getDefauleData().field3;
+        return this.setting.beianIcon;
     }
 
     set beianIcon(val){
-        this.setting.getDefauleData().field3 = val;
+        this.setting.beianIcon = val;
     }
 
     get code(){
-        return this.setting.getDefauleData().field4;
+        return this.setting.code;
     }
 
     set code(val){
-        this.setting.getDefauleData().field4 = val;
+        this.setting.code = val;
     }
 
     get color(){
-        return this.setting.getDefauleData().field5;
+        return this.setting.color;
     }
 
     set color(val){
-        this.setting.getDefauleData().field5 = val;
+        this.setting.color = val;
     }
 }

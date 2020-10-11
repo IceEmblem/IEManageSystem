@@ -20,25 +20,12 @@ import SpecsChecker from './Specs/SpecsChecker'
 
 function setPageComponentModel(pageComponentData: any) {
     pageComponentData.__proto__ = PageComponentModel.prototype;
-    if(Array.isArray(pageComponentData.pageComponentSettings)){
-        let pageComponentSettings = pageComponentData.pageComponentSettings;
-        pageComponentData.pageComponentSettings = {};
-        pageComponentSettings.forEach(pageComponentSetting => {
-            pageComponentSetting.__proto__ = PageComponentSettingModel.prototype;
-            pageComponentSetting.singleDatas.forEach(singleData => {
-                singleData.__proto__ = SingleDataModel.prototype;
-            });
-            pageComponentData.pageComponentSettings[pageComponentSetting.name] = pageComponentSetting;
-        });
-    }
-    else{
-        Object.values(pageComponentData.pageComponentSettings).forEach((pageComponentSetting:any) => {
-            pageComponentSetting.__proto__ = PageComponentSettingModel.prototype;
-            pageComponentSetting.singleDatas.forEach(singleData => {
-                singleData.__proto__ = SingleDataModel.prototype;
-            });
-        });
-    }
+    Object.values(pageComponentData.pageComponentSettings).forEach((pageComponentSetting:any) => {
+        pageComponentSetting.__proto__ = PageComponentSettingModel.prototype;
+        // pageComponentSetting.singleDatas.forEach(singleData => {
+        //     singleData.__proto__ = SingleDataModel.prototype;
+        // });
+    });
 }
 
 // 获取子组件
@@ -238,10 +225,6 @@ function pageReceiveHandle(receivePageComponents, os: string) {
     for (let key of Object.keys(pageComponents)) {
         pageComponents[key] = setChildComponentSigns(pageComponents, pageComponents[key]);
         setPageComponentModel(pageComponents[key]);
-        // 对 singleDatas 进行排序
-        Object.values(pageComponents[key].pageComponentSettings).forEach((item: any) => {
-            item.sort();
-        });
     }
 
     return pageComponents;

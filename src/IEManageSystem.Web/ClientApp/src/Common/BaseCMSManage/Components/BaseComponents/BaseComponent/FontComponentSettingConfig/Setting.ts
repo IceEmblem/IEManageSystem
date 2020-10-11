@@ -8,43 +8,43 @@ export default class Setting {
     }
 
     get fontSize(){
-        return this.setting.getDefauleData().field1;
+        return this.setting.fontSize;
     }
 
     set fontSize(val){
-        this.setting.getDefauleData().field1 = val;
+        this.setting.fontSize = val;
     }
 
     get lineHeight(){
-        return this.setting.getDefauleData().field2;
+        return this.setting.lineHeight;
     }
 
     set lineHeight(val){
-        this.setting.getDefauleData().field2 = val;
+        this.setting.lineHeight = val;
     }
 
     get color(){
-        return this.setting.getDefauleData().field3;
+        return this.setting.color;
     }
 
     set color(val){
-        this.setting.getDefauleData().field3 = val;
+        this.setting.color = val;
     }
 
     get fontWeight(){
-        return this.setting.getDefauleData().field4;
+        return this.setting.fontWeight;
     }
 
     set fontWeight(val){
-        this.setting.getDefauleData().field4 = val;
+        this.setting.fontWeight = val;
     }
 
     get fontStyle(){
-        return this.setting.getDefauleData().field5;
+        return this.setting.fontStyle;
     }
 
     set fontStyle(val){
-        this.setting.getDefauleData().field5 = val;
+        this.setting.fontStyle = val;
     }
 
     toStyle(){

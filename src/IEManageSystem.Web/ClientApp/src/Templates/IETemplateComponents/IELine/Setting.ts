@@ -1,48 +1,40 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
 
 export default class Setting {
-    static readonly lineSettingName: string = "line";
-    static readonly zhuzhuangSettingName: string = "zhuzhuang";
-    static readonly tiaoxingSettingName: string = "tiaoxing";
-
-    setting: PageComponentSettingModel;
+    setting: any;
 
     constructor(pageComponentSetting: PageComponentSettingModel) {
         this.setting = pageComponentSetting;
     }
 
-    setSetting(pageComponentSetting: PageComponentSettingModel) {
-        this.setting = pageComponentSetting;
-    }
-
     get lines() {
-        return this.setting.getDefauleData().field1;
+        return this.setting.lines;
     }
 
     set lines(val) {
-        this.setting.getDefauleData().field1 = val;
+        this.setting.lines = val;
     }
 
     getLines(): Array<string> {
-        return this.setting.getDefauleData().field1 ?
-            this.setting.getDefauleData().field1.split("|")
+        return this.setting.lines ?
+            this.setting.lines.split("|")
             : []
     }
 
     get suffix() {
-        return this.setting.getDefauleData().field2 || "";
+        return this.setting.suffix || "";
     }
 
     set suffix(val) {
-        this.setting.getDefauleData().field2 = val;
+        this.setting.suffix = val;
     }
 
     get type() {
-        return this.setting.getDefauleData().field3 || "zz";
+        return this.setting.type || "zz";
     }
 
     set type(val) {
-        this.setting.getDefauleData().field3 = val;
+        this.setting.type = val;
     }
 
     // 是否是折线
@@ -61,47 +53,47 @@ export default class Setting {
     }
 
     get xAlias() {
-        return this.setting.getDefauleData().field4;
+        return this.setting.xAlias;
     }
 
     set xAlias(val) {
-        this.setting.getDefauleData().field4 = val;
+        this.setting.xAlias = val;
     }
 
     get yAlias() {
-        return this.setting.getDefauleData().field5;
+        return this.setting.yAlias;
     }
 
     set yAlias(val) {
-        this.setting.getDefauleData().field5 = val;
+        this.setting.yAlias = val;
     }
 
     get height() {
-        return this.setting.getDefauleData().height;
+        return this.setting.height;
     }
 
     set height(val) {
-        this.setting.getDefauleData().height = val;
+        this.setting.height = val;
     }
 
     /// 折线图配置
     get lineShape() {
-        return this.setting.getOrCreateSingleDate(Setting.lineSettingName).field1 || "";
+        return this.setting.lineShape || "";
     }
 
     set lineShape(val) {
-        this.setting.getOrCreateSingleDate(Setting.lineSettingName).field1 = val;
+        this.setting.lineShape = val;
     }
 
 
 
     /// 柱状图配置
     get zhuzhuangShape() {
-        return this.setting.getOrCreateSingleDate(Setting.zhuzhuangSettingName).field1 || "";
+        return this.setting.zhuzhuangShape || "";
     }
 
     set zhuzhuangShape(val) {
-        this.setting.getOrCreateSingleDate(Setting.zhuzhuangSettingName).field1 = val;
+        this.setting.zhuzhuangShape = val;
     }
 
     // 是否为条形
@@ -116,11 +108,11 @@ export default class Setting {
 
     // 显示类型
     get dodgeOfzhuzhuang() {
-        return this.setting.getOrCreateSingleDate(Setting.zhuzhuangSettingName).field2 || "dodge";
+        return this.setting.dodgeOfzhuzhuang || "dodge";
     }
 
     set dodgeOfzhuzhuang(val) {
-        this.setting.getOrCreateSingleDate(Setting.zhuzhuangSettingName).field2 = val;
+        this.setting.dodgeOfzhuzhuang = val;
     }
 
 
@@ -129,10 +121,10 @@ export default class Setting {
     
     // 显示类型
     get dodgeOfTiaoxing() {
-        return this.setting.getOrCreateSingleDate(Setting.tiaoxingSettingName).field2 || "dodge";
+        return this.setting.dodgeOfTiaoxing || "dodge";
     }
 
     set dodgeOfTiaoxing(val) {
-        this.setting.getOrCreateSingleDate(Setting.tiaoxingSettingName).field2 = val;
+        this.setting.dodgeOfTiaoxing = val;
     }
 }
