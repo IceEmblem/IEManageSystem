@@ -1,5 +1,10 @@
 import EntityEdit from "../EntityEdit";
 
+export const Discriminator = {
+    page: "StaticPage",
+    post: "ContentPage"
+}
+
 export default class PageModel {
     public name: string;
     public displayName: string;

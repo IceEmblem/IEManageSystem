@@ -28,7 +28,15 @@ export default class PageDataModel {
         // 不能更改页面名称，否则一些方法会认定为这是一个正常页面
         page.name = null;
         page.tags = [];
+        page.images = "";
+        page.creator = {} as any;
+        page.lastUpdater = {} as any;
+
         return page;
+    }
+
+    public createUrl(){
+        return `/Page/${this.pageName}/${this.name}`
     }
 
     public get imageList() {

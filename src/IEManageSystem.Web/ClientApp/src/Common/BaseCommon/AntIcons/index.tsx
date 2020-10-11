@@ -42,7 +42,11 @@ type IconNameType = 'GithubOutlined'
 | 'FullscreenOutlined'
 | 'FullscreenExitOutlined'
 | 'BgColorsOutlined'
-| 'MinusSquareOutlined';
+| 'MinusSquareOutlined'
+| 'LeftOutlined'
+| 'RightOutlined'
+| 'UpOutlined'
+| 'DownOutlined';
 
 class AntIcons {
     icons : Map<string, React.Component>;

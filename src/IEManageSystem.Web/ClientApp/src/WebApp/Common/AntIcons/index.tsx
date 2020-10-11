@@ -44,6 +44,10 @@ import {
     FullscreenExitOutlined,
     BgColorsOutlined,
     MinusSquareOutlined,
+    LeftOutlined,
+    RightOutlined,
+    UpOutlined,
+    DownOutlined,
 } from '@ant-design/icons';
 
 const iconsTypes = {
@@ -90,7 +94,11 @@ const iconsTypes = {
     'FullscreenOutlined': FullscreenOutlined,
     'FullscreenExitOutlined': FullscreenExitOutlined,
     'BgColorsOutlined': BgColorsOutlined,
-    'MinusSquareOutlined': MinusSquareOutlined
+    'MinusSquareOutlined': MinusSquareOutlined,
+    LeftOutlined,
+    RightOutlined,
+    UpOutlined,
+    DownOutlined,
 }
 
 var iconComponents = new Map<string, React.Component>();

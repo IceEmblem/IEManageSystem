@@ -46,6 +46,10 @@ const iconsTypes = {
     'FullscreenExitOutlined': {name:'fullscreen-exit', type: 'MaterialCommunityIcons'},
     'BgColorsOutlined': {name:'format-color-fill', type: 'MaterialCommunityIcons'},
     'MinusSquareOutlined': {name:'minussquareo', type: 'AntDesign'},
+    'LeftOutlined': {name:'left', type: 'AntDesign'},
+    'RightOutlined': {name:'right', type: 'AntDesign'},
+    'UpOutlined': {name:'up', type: 'AntDesign'},
+    'DownOutlined': {name:'down', type: 'AntDesign'},
 }
 
 var iconComponents = new Map<string, React.Component>();
