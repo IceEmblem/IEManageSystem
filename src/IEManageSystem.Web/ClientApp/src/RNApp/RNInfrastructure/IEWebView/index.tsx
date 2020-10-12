@@ -41,9 +41,6 @@ export default class IEWebView extends React.Component<Props> {
     }
 
     onMessage = (msg) => {
-        console.log("--------------------------")
-        console.log(msg.nativeEvent)
-
         if (msg.nativeEvent.data !== undefined && msg.nativeEvent.data !== null) {
             let height = parseInt(msg.nativeEvent.data);
             if (isNaN(height)) {
@@ -56,7 +53,6 @@ export default class IEWebView extends React.Component<Props> {
     }
 
     render() {
-        console.log(this.createHtml(this.props.html));
         return (
             <WebView
                 style={{ width: '100%', height: this.state.webHeight }}
