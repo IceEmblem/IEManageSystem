@@ -72,6 +72,9 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 // IE 模块别名
 const pathMap = require('./pathmap.json');
 
+let modulePahts = require.resolve.paths('babel-loader'); //返回被查询的路径
+console.log(modulePahts);
+
 // 要编译的 node_modules 路径
 const includeModuless = [
   path.resolve('node_modules/@codler/react-native-keyboard-aware-scroll-view/'),

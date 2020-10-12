@@ -1,7 +1,7 @@
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 import CoreModule from 'Core/Module';
-import ModuleList from '../ModuleList';
+import ModuleList from '../../ModuleList';
 import MiddlewareFactory from 'Core/Middlewares/MiddlewareFactory'
 import ReduxErrorMiddleware from './Middlewares/ReduxErrorMiddleware'
 

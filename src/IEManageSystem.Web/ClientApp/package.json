@@ -9,12 +9,17 @@
   ],
   "version": "0.1.0",
   "dependencies": {
+    "@babel/core": "7.9.0",
+    "@babel/runtime": "7.9.0",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.6.0",
+    "jest": "24.9.0"
   },
   "scripts": {
-    "start": "cross-env IEOS=web node scripts/start.js",
-    "start:server": "set NODE_OPTIONS=--max_old_space_size=4096 && cross-env IEOS=web REACT_APP_SERVER=true node scripts/start.js",
-    "build": "cross-env IEOS=web node scripts/build.js",
-    "test": "node scripts/test.js",
+    "start": "cross-env IEOS=web node src/WebApp/Start/scripts/start.js",
+    "start:server": "set NODE_OPTIONS=--max_old_space_size=4096 && cross-env IEOS=web REACT_APP_SERVER=true node src/WebApp/Start/scripts/start.js",
+    "build": "cross-env IEOS=web node src/WebApp/Start/scripts/build.js",
+    "test": "node src/WebApp/Start/scripts/test.js",
     "android": "cross-env IEOS=android react-native run-android",
     "android:releaseTest": "cross-env IEOS=android react-native run-android --variant=release",
     "ios": "cross-env IEOS=ios react-native run-ios",

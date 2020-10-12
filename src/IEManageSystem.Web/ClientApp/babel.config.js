@@ -21,9 +21,6 @@ module.exports = {
             "module-resolver",
             {
                 "root": [
-                    // "src/Common",
-                    // "src/RNApp",
-                    // "src/WebApp",
                     "src/Assets"
                 ],
                 "extensions": [
