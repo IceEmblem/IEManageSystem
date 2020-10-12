@@ -2,9 +2,20 @@
     "name": "RNStart",
     "version": "1.0.0",
     "dependencies": {
-        "@ant-design/react-native": "^3.3.0",
-        "@types/react-native": "^0.63.25",
-        "react-native-htmlview": "^0.15.0",
-        "react-router-native": "^5.2.0"
+        "@react-native-community/eslint-config": "0.0.5",
+        "metro-react-native-babel-preset": "0.58.0",
+
+        "babel-jest": "24.9.0",
+        "eslint": "6.6.0",
+        "jest": "24.9.0",
+        "react-test-renderer": "^16.13.1",
+        
+        "native-base": "^2.13.14",
+        "react-native": "0.62.2",
+        "react-native-camera": "^3.37.0",
+        "react-native-fs": "^2.16.6",
+        "react-native-vector-icons": "^7.0.0",
+        "react-native-video": "^5.1.0-alpha8",
+        "react-native-webview": "^10.4.1"
     }
 }

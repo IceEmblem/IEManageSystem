@@ -2,5 +2,8 @@
     "name": "RNLayout",
     "version": "1.0.0",
     "dependencies": {
+        "BaseLayout": "1.0.0",
+        "Core": "1.0.0",
+        "RNCommon": "1.0.0"
     }
 }

@@ -5,6 +5,7 @@ import CoreModule from 'Core/Module';
 import BaseLayoutModule from 'BaseLayout/Module';
 import BasePersonModule from 'BasePerson/Module'
 import Person from './Person'
+import RNCommonModule from 'RNCommon/Module'
 
 export default class Module extends BaseModule
 {
@@ -30,5 +31,6 @@ export default class Module extends BaseModule
 new ModuleFactory().register(Module, [
     CoreModule,
     BasePersonModule,
-    BaseLayoutModule
+    BaseLayoutModule,
+    RNCommonModule
 ]);

@@ -4,6 +4,7 @@ import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import CoreModule from 'Core/Module';
 import BaseLayoutModule from 'BaseLayout/Module';
 import Setting from './Setting'
+import RNCommonModule from 'RNCommon/Module'
 
 export default class Module extends BaseModule
 {
@@ -28,5 +29,6 @@ export default class Module extends BaseModule
 
 new ModuleFactory().register(Module, [
     CoreModule,
-    BaseLayoutModule
+    BaseLayoutModule,
+    RNCommonModule
 ]);

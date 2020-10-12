@@ -14,6 +14,8 @@ import {
     SafetyOutlined
 } from '@ant-design/icons';
 
+import CommonModule from 'Common/Module'
+
 // 动态加载
 const Personal = React.lazy(() => import('./Personal'));
 
@@ -53,5 +55,6 @@ export default class Module extends BaseModule
 new ModuleFactory().register(Module, [
     CoreModule,
     BasePersonModule,
-    BaseLayoutModule
+    BaseLayoutModule,
+    CommonModule
 ]);

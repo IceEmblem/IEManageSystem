@@ -21,4 +21,5 @@ export default class Module extends BaseModule
     }
 }
 
-new ModuleFactory().register(Module, null);
+new ModuleFactory().register(Module, [
+]);

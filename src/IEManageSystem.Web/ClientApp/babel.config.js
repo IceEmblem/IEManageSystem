@@ -12,12 +12,6 @@ module.exports = {
         [
             "import",
             {
-                "libraryName": "@ant-design/react-native"
-            }
-        ],
-        [
-            "import",
-            {
                 "libraryName": "antd",
                 "libraryDirectory": "lib"
             },

@@ -20,6 +20,7 @@ import RegisterTemplateManager from './Component/Components/RegisterTemplateMana
 
 import SearchBar from './SearchBar'
 
+import RNCommonModule from 'RNCommon/Module'
 
 export default class Module extends BaseModule {
     initialize() {
@@ -45,4 +46,5 @@ new ModuleFactory().register(Module, [
     CoreModule,
     BaseLayoutModule,
     BaseCmsManageModule,
+    RNCommonModule
 ]);

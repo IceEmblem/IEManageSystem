@@ -8,6 +8,8 @@ import Page from 'Core/Page/Page'
 import BaseLayoutModule from 'BaseLayout/Module'
 import Theme from './Theme'
 
+import CommonModule from 'Common/Module'
+
 // 动态加载
 const ManageHome = React.lazy(() => import('./ManageHome'));
 
@@ -24,5 +26,6 @@ export default class Module extends BaseModule
 
 new ModuleFactory().register(Module, [
     BaseLayoutModule,
-    CoreModule
+    CoreModule,
+    CommonModule
 ]);

@@ -3,5 +3,8 @@
     "version": "1.0.0",
   
     "dependencies": {
+        "BaseLayout": "1.0.0",
+        "Core": "1.0.0",
+        "Common": "1.0.0"
     }
 }

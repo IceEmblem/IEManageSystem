@@ -1,8 +1,7 @@
 import BaseModule from 'Core/Modules/BaseModule'
 import ModuleFactory from 'Core/Modules/ModuleFactory'
 
-import BaseLayoutModule from 'BaseLayout/Module'
-
+import CommonModule from 'Common/Module'
 import Theme from 'RNLayout/Theme'
 
 // 本模块用于适配 Web 显示 App 的内容
@@ -17,5 +16,5 @@ export default class Module extends BaseModule
 }
 
 new ModuleFactory().register(Module, [
-    BaseLayoutModule
+    CommonModule
 ]);

@@ -32,6 +32,8 @@ import {
     FileTextOutlined
 } from '@ant-design/icons';
 
+import CommonModule from 'Common/Module'
+
 // 动态加载
 const PageEdit = React.lazy(() => import('./PageEdit'));
 const PostEdit = React.lazy(() => import('./PostEdit'));
@@ -136,5 +138,6 @@ new ModuleFactory().register(Module, [
     CoreModule,
     BaseCmsManageModule,
     BaseLayoutModule,
-    AdaptersModule
+    AdaptersModule,
+    CommonModule
 ]);

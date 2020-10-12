@@ -9,6 +9,7 @@ import BaseLayoutModule from 'BaseLayout/Module'
 import LayoutComponent from './Layout'
 
 import Theme from './Theme'
+import RNCommonModule from 'RNCommon/Module'
 
 export default class Module extends BaseModule
 {
@@ -23,5 +24,6 @@ export default class Module extends BaseModule
 
 new ModuleFactory().register(Module, [
     BaseLayoutModule,
-    CoreModule
+    CoreModule,
+    RNCommonModule
 ]);

@@ -16,6 +16,7 @@ import {
     GlobalOutlined,
     BarsOutlined
 } from '@ant-design/icons';
+import CommonModule from 'Common/Module'
 
 // 动态加载
 const AuthorizeManage = React.lazy(() => import('./AuthorizeManage'));
@@ -139,5 +140,6 @@ export default class Module extends BaseModule {
 
 new ModuleFactory().register(Module, [
     CoreModule,
-    BaseLayoutModule
+    BaseLayoutModule,
+    CommonModule
 ]);

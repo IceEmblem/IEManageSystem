@@ -9,6 +9,7 @@ import Page from 'Core/Page/Page'
 
 import LogoutBtnNavTool from './LogoutBtnNavTool'
 import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
+import CommonModule from 'Common/Module'
 
 const Account = React.lazy(() => import('./account'));
 
@@ -22,5 +23,6 @@ export default class Module extends BaseModule
 
 new ModuleFactory().register(Module, [
     CoreModule,
-    BaseLayoutModule
+    BaseLayoutModule,
+    CommonModule
 ]);
