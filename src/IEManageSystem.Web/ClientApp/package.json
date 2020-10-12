@@ -13,7 +13,8 @@
     "@babel/runtime": "7.9.0",
     "babel-jest": "^24.9.0",
     "eslint": "^6.6.0",
-    "jest": "24.9.0"
+    "jest": "24.9.0",
+    "react-native": "0.62.2"
   },
   "scripts": {
     "start": "cross-env IEOS=web node src/WebApp/Start/scripts/start.js",

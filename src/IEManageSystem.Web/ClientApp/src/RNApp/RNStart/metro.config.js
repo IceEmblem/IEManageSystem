@@ -30,4 +30,5 @@ module.exports = {
       },
     }),
   },
+  // projectRoot: 'src/RNApp/RNStart'
 };

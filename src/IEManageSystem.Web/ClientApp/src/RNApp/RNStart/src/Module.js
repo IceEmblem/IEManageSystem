@@ -6,7 +6,7 @@ import ModuleFactory from 'Core/Modules/ModuleFactory'
 import CoreModule from 'Core/Module';
 import Weburl from 'Core/Weburl'
 
-import ModuleList from '../ModuleList'
+import ModuleList from '../../ModuleList'
 
 export default class Module extends BaseModule {
     initialize() {
