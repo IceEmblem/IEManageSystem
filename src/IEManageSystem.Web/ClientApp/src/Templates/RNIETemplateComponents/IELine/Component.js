@@ -3,14 +3,10 @@ import IComponent from 'BaseCMSManage/Components/BaseComponents/BaseComponent/Ba
 import Data from 'IETemplateComponents/IELine/Data'
 import Setting from 'IETemplateComponents/IELine/Setting'
 
-import WebView from 'react-native-webview'
+import WebView from 'RNInfrastructure/IEWebView'
 import { View } from 'react-native'
 
 class Component extends IComponent {
-    state = {
-        webHeight: 0
-    }
-
     constructor(props) {
         super(props);
     }
@@ -99,28 +95,9 @@ class Component extends IComponent {
                 }
         
                 chart.render();
-
-                setTimeout(()=>{
-                    let webHeight = document.getElementById("canvas").clientHeight;
-                    window.ReactNativeWebView.postMessage(webHeight);
-                }, 1)
             }
         </script>
         `
-    }
-
-    onMessage = (msg) => {
-        if (msg.nativeEvent.data !== undefined && msg.nativeEvent.data !== null) {
-            console.log("--------------------------");
-            console.log(msg.nativeEvent.data);
-            let height = parseInt(msg.nativeEvent.data);
-            if(isNaN(height)){
-                height = 0;
-            }
-            this.setState({
-                webHeight: height
-            });
-        }
     }
 
     render() {
@@ -132,11 +109,7 @@ class Component extends IComponent {
         return (
             <View style={[this.baseStyle]}>
                 <WebView
-                    style={{ width: '100%', height: this.state.webHeight }}
-                    javaScriptEnabled={true}
-                    source={{ html: this.createHtml(chartData, setting) }}
-                    onMessage={this.onMessage}
-                    scalesPageToFit={false}
+                    html={this.createHtml(chartData, setting)}
                 />
             </View>
         );

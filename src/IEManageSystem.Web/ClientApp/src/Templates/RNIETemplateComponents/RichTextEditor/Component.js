@@ -1,15 +1,13 @@
 import React from 'react'
 import IComponent from 'IETemplateComponents/RichTextEditor/IComponent'
-import WebView from 'react-native-webview'
+import WebView from 'RNInfrastructure/IEWebView'
 import { View } from 'react-native'
 
 class Component extends IComponent {
     render() {
-        let text = this.getText();
-
         return (<View style={[this.baseStyle]}>
             <WebView
-                source={{ html: text }}
+                html={this.getText()}
             />
         </View>);
     }
