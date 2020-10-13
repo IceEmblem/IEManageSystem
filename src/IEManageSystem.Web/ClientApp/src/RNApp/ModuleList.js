@@ -2,9 +2,10 @@
 
 import RNCMS from "RNCMS/Module.js";
 import RNCommon from "RNCommon/Module.js";
+import RNInfrastructure from "RNInfrastructure/Module.js";
 import RNLayout from "RNLayout/Module.js";
 import RNPerson from "RNPerson/Module.js";
 import RNSetting from "RNSetting/Module.js";
 
-const moduleList = [RNCMS,RNCommon,RNLayout,RNPerson,RNSetting,];
+const moduleList = [RNCMS,RNCommon,RNInfrastructure,RNLayout,RNPerson,RNSetting,];
 export default moduleList;

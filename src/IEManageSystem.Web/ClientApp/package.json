@@ -17,12 +17,13 @@
     "react-native": "0.62.2"
   },
   "scripts": {
-    "start": "cross-env IEOS=web node src/WebApp/Start/scripts/start.js",
+    "start": "set NODE_OPTIONS=--max_old_space_size=4096 && cross-env IEOS=web node src/WebApp/Start/scripts/start.js",
     "start:server": "set NODE_OPTIONS=--max_old_space_size=4096 && cross-env IEOS=web REACT_APP_SERVER=true node src/WebApp/Start/scripts/start.js",
-    "build": "cross-env IEOS=web node src/WebApp/Start/scripts/build.js",
+    "build": "set NODE_OPTIONS=--max_old_space_size=4096 && cross-env IEOS=web node src/WebApp/Start/scripts/build.js",
     "test": "node src/WebApp/Start/scripts/test.js",
     "android": "cross-env IEOS=android react-native run-android",
     "android:releaseTest": "cross-env IEOS=android react-native run-android --variant=release",
+    "android:build": "cd src/RNApp/RNStart/android/ && ./gradlew assembleRelease",
     "ios": "cross-env IEOS=ios react-native run-ios",
     "reactnative:start": "cross-env IEOS=android react-native start",
     "jest": "jest"
@@ -70,13 +71,9 @@
       "^.+\\.module\\.(css|sass|scss)$"
     ],
     "modulePaths": [
-      "<rootDir>/src/",
-      "<rootDir>/src/lib/",
-      "<rootDir>/src/Common/",
-      "<rootDir>/src/__tests/"
+      "<rootDir>/src/Assets"
     ],
     "moduleNameMapper": {
-      "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
       "^src/(.*)$": "<rootDir>/src/$1"
     },

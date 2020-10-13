@@ -3,7 +3,7 @@
 // require("./createComponentDescribesFile");
 // require("./createModuleListFile");
 // require("./createTemplateListFile");
-const createModulesFile = require('./createModulesFile').createModulesFile;
+const createModulesFile = require('../../../../createModulesFile').createModulesFile;
 createModulesFile(
   "src/WebApp",
   ["Start"],
@@ -11,13 +11,6 @@ createModulesFile(
   "",
   "src/WebApp/ModuleList.js"
 );
-createModulesFile(
-  "src/Common",
-  [],
-  "Module.js",
-  "",
-  "src/Common/ModuleList.js"
-)
 
 const fs = require('fs');
 const path = require('path');

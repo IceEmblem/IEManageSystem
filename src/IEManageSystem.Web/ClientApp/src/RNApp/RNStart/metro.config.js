@@ -5,20 +5,13 @@
  * @format
  */
 
-const createModulesFile = require('./config/createModulesFile').createModulesFile;
+const createModulesFile = require('../../../createModulesFile').createModulesFile;
 createModulesFile(
-  "src/RNApp",
+  "../",
   ["RNStart"],
   "Module.js",
   "",
-  "src/RNApp/ModuleList.js"
-);
-createModulesFile(
-  "src/Common",
-  [],
-  "Module.js",
-  "",
-  "src/Common/ModuleList.js"
+  "../ModuleList.js"
 );
 
 module.exports = {
@@ -30,5 +23,5 @@ module.exports = {
       },
     }),
   },
-  // projectRoot: 'src/RNApp/RNStart'
+  // projectRoot: __dirname + '../../../../'
 };

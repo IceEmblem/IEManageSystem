@@ -79,6 +79,8 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
+    // 指定项目的根路径
+    root: "../../../../../"
 ]
 
 apply from: "../../../../../node_modules/react-native/react.gradle"
