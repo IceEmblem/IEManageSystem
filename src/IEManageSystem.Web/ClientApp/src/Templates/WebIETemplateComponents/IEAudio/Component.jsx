@@ -6,10 +6,17 @@ class Component extends IComponent {
     }
 
     render() {
+        let src = this.getUrl();
+
         return <audio className='w-100' controls>
-            <source src={this.getUrl()} type="audio/mpeg" />
-            您的浏览器不支持 audio 元素。
-      </audio>
+            {
+                src &&
+                <>
+                    <source src={src} type="audio/mpeg" />
+                    您的浏览器不支持 audio 元素。
+                </>
+            }
+        </audio>
     }
 }
 

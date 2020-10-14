@@ -1,10 +1,13 @@
 import PageComponentSettingModel from "BaseCMSManage/Models/Pages/PageComponentSettingModel"
 
 export default class Setting {
-    setting: PageComponentSettingModel;
+    setting: any;
     
     constructor(pageComponentSetting:PageComponentSettingModel){
         this.setting = pageComponentSetting;
+        if(!this.setting.postFields){
+            this.setting.postFields = {};
+        }
     }
 
     setPostFieldName(componentFieldName, postField: "" | "field1" | "field2" | "field3" | "field4" | "field5" ){
