@@ -1,3 +1,4 @@
+import SiteSettingModel from '../Models/Common/SiteSettingModel';
 import { FetchAction, GetSiteSettingsReceive } from './Actions'
 
 function siteSettings(state: Array<SiteSettingModel> = [], action: FetchAction) {

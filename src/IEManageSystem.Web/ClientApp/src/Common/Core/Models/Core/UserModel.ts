@@ -1,4 +1,6 @@
-interface UserModel{
+import AccountModel from "./AccountModel";
+
+export default interface UserModel{
     id:number,
 
     account:AccountModel,

@@ -1,4 +1,4 @@
-interface SiteSettingModel {
+export default interface SiteSettingModel {
     id: string,
 
     key: string,

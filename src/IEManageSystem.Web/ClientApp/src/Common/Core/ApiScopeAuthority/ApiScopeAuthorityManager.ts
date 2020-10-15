@@ -1,4 +1,5 @@
 ﻿import AccessScope, { ApiScopeNodeType } from "./AccessScope";
+import UserScopeAccessAuthority from "./UserScopeAccessAuthority";
 
 export default class ApiScopeAuthorityManager
 {
