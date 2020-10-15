@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'antd'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 import red from './red.png'
 import volcano from './volcano.png'

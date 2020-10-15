@@ -1,7 +1,7 @@
 import React from 'react';
 import IComponent from 'IETemplateComponents/IEMenu/IComponent'
 import { Link } from 'react-router-dom'
-import AntIcons from 'BaseCommon/AntIcons'
+import {AntIcons} from 'ice-common'
 import { Menu } from 'antd';
 const { SubMenu } = Menu;
 

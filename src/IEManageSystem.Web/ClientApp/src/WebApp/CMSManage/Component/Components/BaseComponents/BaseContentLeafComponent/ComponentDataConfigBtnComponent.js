@@ -7,8 +7,8 @@ import {
     DefaultComponentDataUpdateAction,
     ComponentDataUpdateAction,
 } from 'BaseCMSManage/IEReduxs/Actions'
-import IocContainer from 'Core/IocContainer'
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IocContainer} from 'ice-common'
+import {IETool} from 'ice-common'
 import ComponentDataModel from 'BaseCMSManage/Models/ComponentDataModel'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 

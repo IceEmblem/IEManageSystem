@@ -1,5 +1,5 @@
 import ComponentSettingConfig from '../ComponentSettingConfig'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 import BaseConfig from '../BaseConfig'
 import { IEFontSetting } from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
 

@@ -9,8 +9,8 @@ import { EditOutlined, StarOutlined, LoginOutlined, DeleteOutlined, TagsOutlined
 import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
 import TagModel from 'BaseCMSManage/Models/PageDatas/TagModel'
 
-import Theme from 'BaseLayout/Theme'
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {Theme} from 'ice-common'
+import {IETool} from 'ice-common'
 import defaultAvatar from 'images/default_avatar.png'
 
 import IEBraftEditor from 'Common/IEBraftEditor'

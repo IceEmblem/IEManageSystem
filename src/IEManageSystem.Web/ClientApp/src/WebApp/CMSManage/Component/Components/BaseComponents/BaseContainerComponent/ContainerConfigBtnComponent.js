@@ -7,11 +7,11 @@ import {
     setActiveComponent,
     AddComponentAction,
 } from 'BaseCMSManage/IEReduxs/Actions'
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import ComponentListBox from './ComponentListBox'
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 const AddBtnComponent = (props) => {
     return <Tooltip

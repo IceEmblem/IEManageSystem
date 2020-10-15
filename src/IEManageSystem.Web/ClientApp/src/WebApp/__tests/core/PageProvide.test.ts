@@ -1,5 +1,5 @@
-import PageProvider from 'Core/Page/PageProvider'
-import Page from 'Core/Page/Page';
+import {PageProvider} from 'ice-common'
+import {Page} from 'ice-common';
 import React from 'react';
 
 class TestComponent extends React.Component{

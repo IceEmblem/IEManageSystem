@@ -3,8 +3,8 @@ import './UserInfo.css';
 import imgAvatar from 'images/default_avatar.png';
 import { getUserInfoFetch, setUserInfoFetch } from 'BasePerson/IEReduxs/Actions'
 import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
-import IETool from 'BaseCommon/ToolLibrary/IETool'
-import Theme from 'BaseLayout/Theme'
+import {IETool} from 'ice-common'
+import {Theme} from 'ice-common'
 
 import { Radio, Card, Upload, Input, Tooltip, Button, Skeleton, Tag, Calendar } from 'antd';
 import { UploadOutlined, UserOutlined, InfoCircleOutlined, EditOutlined, ReloadOutlined, SmileOutlined } from '@ant-design/icons';

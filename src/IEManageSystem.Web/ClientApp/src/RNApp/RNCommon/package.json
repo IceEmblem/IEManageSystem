@@ -3,9 +3,7 @@
     "version": "1.0.0",
   
     "dependencies": {
-        "Core": "1.0.0",
-        "BaseLayout": "1.0.0",
-        "BaseCommon": "1.0.0",
+        "ice-common": "1.0.0",
         "@types/react-native": "^0.63.25",
         "react-router-native": "^5.2.0"
     }

@@ -1,5 +1,5 @@
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
 
 import CommonModule from 'Common/Module'
 import Theme from 'RNLayout/Theme'

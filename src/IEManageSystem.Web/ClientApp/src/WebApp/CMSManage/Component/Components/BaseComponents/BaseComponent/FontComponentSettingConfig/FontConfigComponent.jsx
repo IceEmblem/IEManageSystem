@@ -1,11 +1,11 @@
 import React from 'react'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 import { IFontConfigComponent } from 'BaseCMSManage/Components/BaseComponents/BaseComponent/FontComponentSettingConfig'
 import Setting from 'BaseCMSManage/Components/BaseComponents/BaseComponent/FontComponentSettingConfig/Setting'
 
 import { Input, Tag, InputNumber, Button, Radio } from 'antd';
 import { SketchPicker } from 'react-color';
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 
 export default class FontConfigComponent extends IFontConfigComponent {
     state = {

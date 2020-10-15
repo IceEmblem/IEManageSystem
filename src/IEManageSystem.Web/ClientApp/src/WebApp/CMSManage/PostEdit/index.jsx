@@ -15,7 +15,7 @@ import Page from 'CMSManage/Home/Page'
 import ToolBtns from './ToolBtns'
 
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBoxs/ComponentContainerBoxShow'

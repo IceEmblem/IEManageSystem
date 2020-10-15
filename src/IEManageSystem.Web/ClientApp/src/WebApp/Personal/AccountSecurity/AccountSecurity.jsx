@@ -7,7 +7,7 @@ import { Radio, Card, Upload, Input, Tooltip, Button, Tag, Modal } from 'antd';
 import { UploadOutlined, UserOutlined, InfoCircleOutlined, EditOutlined, ReloadOutlined, SmileOutlined } from '@ant-design/icons';
 
 import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 
 const { Meta } = Card;

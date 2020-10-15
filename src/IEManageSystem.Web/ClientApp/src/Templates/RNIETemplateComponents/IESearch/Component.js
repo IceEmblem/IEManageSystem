@@ -3,7 +3,7 @@ import IComponent from 'IETemplateComponents/IESearch/IComponent'
 import { withRouter } from 'react-router-dom'
 import { View, StyleSheet, Text } from 'react-native'
 import { Item, Icon, Input, Button  } from 'native-base'
-import AntIcons from 'BaseCommon/AntIcons'
+import {AntIcons} from 'ice-common'
 
 class Component extends IComponent {
     constructor(props) {

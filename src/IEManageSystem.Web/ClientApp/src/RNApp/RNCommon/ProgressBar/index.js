@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 export default class extends React.Component {
     render() {

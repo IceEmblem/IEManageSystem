@@ -1,12 +1,11 @@
 import React from 'react'
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
 import CoreModule from 'Core/Module'
-import PageProvider from 'Core/Page/PageProvider'
-import Page from 'Core/Page/Page'
+import {PageProvider} from 'ice-common'
+import {Page} from 'ice-common'
 
 import BaseLayoutModule from 'BaseLayout/Module'
-import Theme from './Theme'
 
 import CommonModule from 'Common/Module'
 
@@ -17,10 +16,6 @@ export default class Module extends BaseModule
 {
     initialize(){
         PageProvider.register(new Page("AntManageHome", "/ManageHome", ManageHome));
-    }
-
-    postInitialize(){
-        Theme.init();
     }
 }
 

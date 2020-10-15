@@ -1,7 +1,7 @@
 import React from 'react';
 import {IMenuSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BaseMenuComponent/MenuComponentSettingConfig';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 
 import { Select } from 'antd';
 

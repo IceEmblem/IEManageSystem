@@ -1,6 +1,6 @@
 import SiteSettingGroupConfig from "./SiteSettingGroupConfig";
-import { ieReduxFetch } from "../IEReduxFetch"
 import SiteSettingConfig from "./SiteSettingConfig";
+import SiteSettingModel from "../Models/Common/SiteSettingModel";
 
 // 站点设置管理器
 export default class SiteSettingManager {

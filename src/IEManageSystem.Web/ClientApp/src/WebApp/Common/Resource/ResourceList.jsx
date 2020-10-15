@@ -7,7 +7,7 @@ import {
     EditOutlined,
     DeleteOutlined
 } from '@ant-design/icons';
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 const { Search } = Input;
 

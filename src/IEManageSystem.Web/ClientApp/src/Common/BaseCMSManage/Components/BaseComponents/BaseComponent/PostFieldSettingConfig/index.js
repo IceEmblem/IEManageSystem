@@ -1,6 +1,6 @@
 import React from 'react'
 import BaseComponentSettingConfig from '../BaseComponentSettingConfig'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 import { IEPostFieldSetting } from 'BaseCMSManage/Models/Pages/PageComponentSettingModel'
 
 export class IPostFieldConfigComponent extends React.Component { }

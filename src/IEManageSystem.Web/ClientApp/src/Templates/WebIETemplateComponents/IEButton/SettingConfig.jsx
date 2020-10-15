@@ -4,7 +4,7 @@ import Setting from 'IETemplateComponents/IEButton/Setting'
 import { Input, Tag, Radio, Button, InputNumber } from 'antd'
 
 import { SketchPicker } from 'react-color'
-import AntIcons from 'BaseCommon/AntIcons'
+import {AntIcons} from 'ice-common'
 
 class SettingConfig extends React.Component {
     constructor(props) {

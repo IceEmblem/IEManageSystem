@@ -15,9 +15,9 @@ import {
     pageComponentUpdateFetch,
 } from 'BaseCMSManage/IEReduxs/Actions'
 import { IContainerConfigBtnComponent } from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent/ContainerConfig'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 import { Motion, spring, presets } from 'react-motion'
 

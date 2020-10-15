@@ -84,22 +84,6 @@ const includeModuless = [
   path.resolve('node_modules/react-native-web'),
   path.resolve('node_modules/react-native-tab-view'),
   path.resolve('node_modules/static-container'),
-
-  path.resolve('node_modules/BaseCMSManage/'),
-  path.resolve('node_modules/Core/'),
-  path.resolve('node_modules/RNCMS/'),
-  path.resolve('node_modules/RNStart/'),
-  path.resolve('node_modules/Account/'),
-  path.resolve('node_modules/Adapters/'),
-  path.resolve('node_modules/AuthorizeManage/'),
-  path.resolve('node_modules/CMSManage/'),
-  path.resolve('node_modules/Common/'),
-  path.resolve('node_modules/Init/'),
-  path.resolve('node_modules/Layout/'),
-  path.resolve('node_modules/Personal/'),
-  path.resolve('node_modules/Setting/'),
-  path.resolve('node_modules/Start/'),
-  path.resolve('node_modules/Test/'),
 ]
 
 // This is the production and development configuration.

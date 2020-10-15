@@ -4,9 +4,9 @@ import { Switch, Route, withRouter } from 'react-router-native'
 import { StyleProvider } from 'native-base'
 import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 import ILayoutInstance from 'BaseLayout/ILayoutInstance'
-import Theme from './Theme'
+import {Theme} from 'ice-common'
 
 class Layout extends React.Component {
     state = {

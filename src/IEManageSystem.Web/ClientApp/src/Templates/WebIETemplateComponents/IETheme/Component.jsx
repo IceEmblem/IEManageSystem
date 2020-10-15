@@ -1,6 +1,6 @@
 import React from 'react'
 import IComponent from 'IETemplateComponents/IETheme/IComponent'
-import Theme, { allThemeColors } from 'BaseLayout/Theme'
+import { Theme, allThemeColors } from 'ice-common'
 import { Button, Popover } from 'antd'
 
 class Component extends IComponent {

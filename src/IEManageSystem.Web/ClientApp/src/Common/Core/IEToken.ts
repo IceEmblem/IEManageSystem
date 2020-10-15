@@ -1,4 +1,4 @@
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 export default class IEToken {
     static setToken(token: string, isRemember: boolean) {

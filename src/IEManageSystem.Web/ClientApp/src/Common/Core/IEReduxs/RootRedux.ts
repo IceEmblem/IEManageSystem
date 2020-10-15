@@ -1,4 +1,4 @@
-import BaseIERedux from './BaseIERedux'
+import {BaseIERedux} from 'ice-common'
 
 class Redux extends BaseIERedux
 {

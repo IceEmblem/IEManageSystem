@@ -8,33 +8,9 @@ import { View, Text } from 'react-native'
 // 导入入口模块
 import './Module'
 
-import ModuleFactory from 'Core/Modules/ModuleFactory'
-import { getIEStore } from 'Core/IEStore'
-import PageProvider from 'Core/Page/PageProvider'
-
-// let moduleFactory = new ModuleFactory();
-// moduleFactory.init().then(() => {
-//     let store = getIEStore();
-
-//     const fallback = (props) => (
-//         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-//             <Text>loading...</Text>
-//         </View>
-//     );
-
-//     const Start = (props) => <Provider store={store}>
-//         <NativeRouter>
-//             <Suspense fallback={fallback}>
-//                 <Switch>
-//                     {PageProvider.pages.map(item => (<Route key={item.url} path={item.url} component={item.component} />))}
-//                 </Switch>
-//             </Suspense>
-//         </NativeRouter>
-//     </Provider>
-
-
-//     AppRegistry.registerComponent('IceEmblem', () => Start);
-// })
+import {ModuleFactory} from 'ice-common'
+import {IEStore} from 'ice-common'
+import {PageProvider} from 'ice-common'
 
 class Start extends React.Component {
     state = {
@@ -53,7 +29,7 @@ class Start extends React.Component {
             return <></>;
         }
 
-        let store = getIEStore();
+        let store = IEStore.ieStore;
 
         const fallback = (props) => (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

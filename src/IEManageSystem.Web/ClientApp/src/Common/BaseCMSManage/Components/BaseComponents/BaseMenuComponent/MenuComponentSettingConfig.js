@@ -1,5 +1,5 @@
 import {BaseComponentSettingConfig} from '../BaseComponent'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 import ComponentContainer from './ComponentContainer'
 import {BaseConfig} from '../BaseComponent'
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 import { IPostFieldConfigComponent } from 'BaseCMSManage/Components/BaseComponents/BaseComponent/PostFieldSettingConfig'
 import Setting from 'BaseCMSManage/Components/BaseComponents/BaseComponent/PostFieldSettingConfig/Setting'
 
 import { Radio, Typography, Tag } from 'antd';
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 
 export default class PostFieldConfigComponent extends IPostFieldConfigComponent {
     render() {

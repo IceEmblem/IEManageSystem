@@ -8,7 +8,7 @@ import { pageFetch, pageDataFetch } from 'BaseCMSManage/IEReduxs/Actions'
 
 import ComponentContainerBoxShow from 'RNCMS/Component/ComponentContainerBoxs/ComponentContainerBoxShow'
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 

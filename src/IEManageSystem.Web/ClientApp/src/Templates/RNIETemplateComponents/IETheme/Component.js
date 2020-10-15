@@ -3,7 +3,7 @@ import IComponent from 'IETemplateComponents/IETheme/IComponent'
 import { Tabs, Tab, ScrollableTab, Button } from 'native-base'
 import { View, TouchableHighlight, StyleSheet, Modal, Text } from 'react-native'
 import StyleCheck from 'RNCMS/StyleCheck'
-import Theme, { allThemeColors } from 'BaseLayout/Theme'
+import { Theme, allThemeColors } from 'ice-common'
 
 // 无法使用 native-base 的 Tabs 组件
 export default class Component extends IComponent {

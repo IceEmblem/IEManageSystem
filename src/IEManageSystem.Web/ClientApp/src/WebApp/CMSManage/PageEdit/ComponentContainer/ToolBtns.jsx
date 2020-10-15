@@ -6,7 +6,7 @@ import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
 import { Button, Popover, Tag } from 'antd'
 import { BranchesOutlined, EditOutlined } from "@ant-design/icons"
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 class ToolBtns extends React.Component {
     state = {

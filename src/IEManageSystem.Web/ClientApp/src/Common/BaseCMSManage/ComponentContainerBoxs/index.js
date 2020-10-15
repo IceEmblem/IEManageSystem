@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ComponentFactory from 'BaseCMSManage/Components/ComponentFactory'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 export class IComponentContainerBoxShow extends React.Component { }
 IComponentContainerBoxShow.iocKey = Symbol()

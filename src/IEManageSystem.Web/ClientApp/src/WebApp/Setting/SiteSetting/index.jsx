@@ -4,7 +4,7 @@ import RootRedux from 'Core/IEReduxs/RootRedux';
 import { getSiteSettingsFetch } from 'Core/IEReduxs/Actions';
 import SiteSettingManager from 'Core/SiteSettings/SiteSettingManager';
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 import { Card, Button, Input, Tag } from 'antd';
 import { SaveOutlined } from '@ant-design/icons'

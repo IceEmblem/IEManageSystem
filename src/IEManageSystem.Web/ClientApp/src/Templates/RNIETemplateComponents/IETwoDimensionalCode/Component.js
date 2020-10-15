@@ -5,7 +5,7 @@ import { View, StyleSheet, Text } from 'react-native'
 import StyleCheck from 'RNCMS/StyleCheck'
 import Camera from 'RNInfrastructure/Camera'
 import {withRouter} from 'react-router-native'
-import AntIcons from 'BaseCommon/AntIcons'
+import {AntIcons} from 'ice-common'
 
 class Component extends IComponent {
     state = {

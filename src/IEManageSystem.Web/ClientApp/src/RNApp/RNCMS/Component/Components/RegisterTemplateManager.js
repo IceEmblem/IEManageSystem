@@ -1,4 +1,4 @@
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 import ComponentFactory, {IInvalidOSComponent} from 'BaseCMSManage/Components/ComponentFactory'
 import InvalidOSComponent from './InvalidOSComponent'
 import Templates from './Templates'

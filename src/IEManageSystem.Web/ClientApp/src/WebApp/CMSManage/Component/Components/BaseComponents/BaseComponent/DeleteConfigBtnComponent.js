@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { IDeleteConfigBtnComponent } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 import { Button, Tooltip } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import {
     RemoveComponentAction,

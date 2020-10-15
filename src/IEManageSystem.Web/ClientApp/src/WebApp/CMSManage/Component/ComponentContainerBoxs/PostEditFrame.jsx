@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Tab from 'Common/Tab/Tab.jsx'
 
 import { Modal, Button } from 'antd';
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 // props.submit
 // props.close    fun

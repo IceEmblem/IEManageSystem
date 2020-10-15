@@ -1,4 +1,4 @@
-import BaseTheme from 'BaseLayout/Theme';
+import {Theme as BaseTheme} from 'ice-common';
 import getTheme from './NativeBaseTheme/components';
 import material from './NativeBaseTheme/variables/material';
 

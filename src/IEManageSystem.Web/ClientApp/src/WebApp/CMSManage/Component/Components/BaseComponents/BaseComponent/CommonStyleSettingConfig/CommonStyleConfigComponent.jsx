@@ -1,10 +1,10 @@
 import React from 'react'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 import { ICommonStyleConfigComponent } from 'BaseCMSManage/Components/BaseComponents/BaseComponent/CommonStyleSettingConfig'
 import Setting from 'BaseCMSManage/Components/BaseComponents/BaseComponent/CommonStyleSettingConfig/Setting'
 
 import { Input, Tag, message } from 'antd';
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 
 export default class CommonStyleConfigComponent extends ICommonStyleConfigComponent {
     render() {

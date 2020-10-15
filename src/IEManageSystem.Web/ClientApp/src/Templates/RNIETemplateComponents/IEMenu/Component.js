@@ -1,11 +1,11 @@
 import React from 'react';
 import IComponent from 'IETemplateComponents/IEMenu/IComponent'
 import StyleCheck from 'RNCMS/StyleCheck'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 import { View, StyleSheet } from 'react-native'
 import { withRouter } from 'react-router-native'
 import { Button, Icon, Text } from 'native-base'
-import AntIcons from 'BaseCommon/AntIcons'
+import {AntIcons} from 'ice-common'
 
 class Component extends IComponent {
     constructor(props) {

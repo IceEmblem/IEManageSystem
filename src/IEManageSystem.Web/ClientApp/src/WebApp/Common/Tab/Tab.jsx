@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 import { Tabs } from 'antd'
 
 import './Tab.css';

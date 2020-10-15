@@ -4,7 +4,7 @@ import { StyleSheet, Text } from 'react-native'
 import { withRouter } from 'react-router-native'
 import { Button } from 'native-base'
 import StyleCheck from 'RNCMS/StyleCheck'
-import AntIcons from 'BaseCommon/AntIcons'
+import {AntIcons} from 'ice-common'
 
 class Component extends IComponent {
     render() {

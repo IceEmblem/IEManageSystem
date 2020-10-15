@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Tab from 'Common/Tab/Tab.jsx'
 
 import { Modal, notification, message } from 'antd';
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 class EditFrame extends React.Component {
     // props.close()

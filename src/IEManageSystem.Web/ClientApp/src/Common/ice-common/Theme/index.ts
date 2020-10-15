@@ -1,5 +1,5 @@
 import * as Themes from '@ant-design/colors';
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 const saveName = '__IEThemeName__';
 export const themeName = {

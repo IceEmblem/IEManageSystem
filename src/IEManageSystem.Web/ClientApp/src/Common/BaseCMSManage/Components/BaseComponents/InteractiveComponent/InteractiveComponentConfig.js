@@ -1,6 +1,6 @@
 import React from 'react'
 import IEditConfig from '../BaseComponent/IEditConfig'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 import ComponentContainer from './ComponentComponentContainer'
 
 export class IInteractiveComponentConfigBtnComponent extends React.Component { }

@@ -1,14 +1,14 @@
 import React from 'react'
 
 // 核心模块依赖
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
 import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 import CoreModule from 'Core/Module';
 import BaseLayoutModule from 'BaseLayout/Module';
-import PageProvider from 'Core/Page/PageProvider'
-import Page from 'Core/Page/Page'
+import {PageProvider} from 'ice-common'
+import {Page} from 'ice-common'
 
 // BaseCmsManage 模块依赖
 import BaseCmsManageModule from 'BaseCMSManage/Module';

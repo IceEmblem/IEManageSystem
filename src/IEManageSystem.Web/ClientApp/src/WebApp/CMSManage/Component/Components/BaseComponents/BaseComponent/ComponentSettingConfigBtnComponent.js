@@ -6,8 +6,8 @@ import { EditOutlined } from '@ant-design/icons';
 import {
     EditComponentAction,
 } from 'BaseCMSManage/IEReduxs/Actions'
-import IocContainer from 'Core/IocContainer';
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IocContainer} from 'ice-common';
+import {IETool} from 'ice-common'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 class ComponentSettingConfigBtnComponent extends IComponentSettingConfigBtnComponent {

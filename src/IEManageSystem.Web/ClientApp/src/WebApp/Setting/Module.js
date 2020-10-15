@@ -1,6 +1,6 @@
 import React from 'react'
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
 import CoreModule from 'Core/Module';
 import BaseLayoutModule from 'BaseLayout/Module';
 

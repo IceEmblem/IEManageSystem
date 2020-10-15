@@ -1,24 +1,19 @@
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
 import CoreModule from 'Core/Module'
-import PageProvider from 'Core/Page/PageProvider'
-import Page from 'Core/Page/Page'
+import {PageProvider} from 'ice-common'
+import {Page} from 'ice-common'
 
 import BaseLayoutModule from 'BaseLayout/Module'
 
 import LayoutComponent from './Layout'
 
-import Theme from './Theme'
 import RNCommonModule from 'RNCommon/Module'
 
 export default class Module extends BaseModule
 {
     initialize(){
         PageProvider.register(new Page("RNLayout", "/", LayoutComponent));
-    }
-
-    postInitialize(){
-        Theme.init();
     }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ieReduxFetch } from 'Core/IEReduxFetch'
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 import {IPageLeafSettingConfig} from 'BaseCMSManage/Components/BaseComponents/BasePageLeafComponent/PageLeafComponentSettingConfig'
 
 import { Select, Input, InputNumber, Tag } from 'antd';

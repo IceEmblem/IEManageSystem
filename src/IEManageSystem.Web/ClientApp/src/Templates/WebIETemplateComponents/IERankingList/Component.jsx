@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { TrophyFilled, UserOutlined } from '@ant-design/icons'
 import './IERankingList.css'
 import { Avatar } from 'antd';
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 class Component extends IComponent {
     render() {

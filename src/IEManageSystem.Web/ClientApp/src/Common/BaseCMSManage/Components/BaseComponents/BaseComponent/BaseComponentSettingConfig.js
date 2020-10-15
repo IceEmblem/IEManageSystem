@@ -1,6 +1,6 @@
 import React from 'react'
 import IEditConfig from './IEditConfig'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
 export class IComponentSettingConfigBtnComponent extends React.Component {}
 IComponentSettingConfigBtnComponent.iocKey = Symbol()

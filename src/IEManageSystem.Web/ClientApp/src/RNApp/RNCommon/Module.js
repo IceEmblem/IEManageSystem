@@ -1,14 +1,11 @@
 // 核心模块依赖
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
-import CoreModule from 'Core/Module'
-import BaseLayoutModule from 'BaseLayout/Module'
-
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
 import {getCookie, setCookie, delCookie} from './ToolLibrary/IETool'
-import IETool from 'BaseCommon/ToolLibrary/IETool'
-
-import AntIcons from 'BaseCommon/AntIcons'
+import {IETool} from 'ice-common'
+import {AntIcons} from 'ice-common'
 import {getIcon, icons} from './AntIcons'
+import Theme from './Theme'
 
 export default class Module extends BaseModule {
     initialize() {
@@ -19,9 +16,11 @@ export default class Module extends BaseModule {
         IETool.setCookie = setCookie;
         IETool.delCookie = delCookie;
     }
+
+    postInitialize(){
+        Theme.init();
+    }
 }
 
 new ModuleFactory().register(Module, [
-    CoreModule,
-    BaseLayoutModule,
 ]);

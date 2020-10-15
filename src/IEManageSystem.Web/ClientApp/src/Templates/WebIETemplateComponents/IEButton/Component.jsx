@@ -1,6 +1,6 @@
 import React from 'react';
 import IComponent from 'IETemplateComponents/IEButton/IComponent'
-import AntIcons from 'BaseCommon/AntIcons'
+import {AntIcons} from 'ice-common'
 import {withRouter} from 'react-router-dom'
 import { Button } from 'antd';
 

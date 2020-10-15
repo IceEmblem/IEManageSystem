@@ -1,4 +1,4 @@
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 var moduleDatas = [];
 // 已排序的模块

@@ -8,10 +8,10 @@ import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBox
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import Page from '../Home/Page'
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 

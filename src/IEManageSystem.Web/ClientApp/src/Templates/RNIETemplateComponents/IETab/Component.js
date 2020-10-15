@@ -2,7 +2,7 @@ import React from 'react';
 import IComponent from 'IETemplateComponents/IETab/IComponent'
 import { Tabs, Tab, ScrollableTab, Text, Button } from 'native-base'
 import { View, TouchableHighlight, StyleSheet, Animated, Platform, UIManager } from 'react-native'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 
 // 无法使用 native-base 的 Tabs 组件
 export default class Component extends IComponent {

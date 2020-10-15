@@ -1,6 +1,6 @@
 import React from 'react'
 import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 import { getUserInfoFetch } from 'BasePerson/IEReduxs/Actions'
 
 import { Tag, Badge } from 'antd';

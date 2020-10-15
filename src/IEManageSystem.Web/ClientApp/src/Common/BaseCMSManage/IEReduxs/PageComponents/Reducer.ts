@@ -14,8 +14,7 @@ import { PageReceive, SetPage } from '../Actions'
 import CreatePageComponentService from '../../Models/Pages/CreatePageComponentService'
 import PageComponentModel, { PageComponentOSType } from '../../Models/Pages/PageComponentModel'
 import PageComponentSettingModel from '../../Models/Pages/PageComponentSettingModel'
-import SingleDataModel from '../../Models/SingleDataModel'
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 import SpecsChecker from './Specs/SpecsChecker'
 
 function setPageComponentModel(pageComponentData: any) {

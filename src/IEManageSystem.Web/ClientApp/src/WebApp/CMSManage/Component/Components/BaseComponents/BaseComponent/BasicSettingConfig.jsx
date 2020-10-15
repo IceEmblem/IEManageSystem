@@ -1,6 +1,6 @@
 import React from 'react';
 import PicturePopupBox from 'CMSManage/PictureManage/PicturePopupBox';
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 import { IBasicSettingConfig } from 'BaseCMSManage/Components/BaseComponents/BaseComponent'
 import PageComponentModel from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import { SketchPicker } from 'react-color'

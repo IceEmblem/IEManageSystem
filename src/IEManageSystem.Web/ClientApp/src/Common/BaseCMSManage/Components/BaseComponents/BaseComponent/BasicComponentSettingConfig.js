@@ -1,6 +1,6 @@
 import BaseComponentSettingConfig from './BaseComponentSettingConfig' 
 import BaseConfig from './BaseConfig'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 import ComponentContainer from './ComponentContainer'
 
 export class IBasicSettingConfig extends BaseConfig{

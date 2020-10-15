@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 
 import { Tag, Card } from 'antd';

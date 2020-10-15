@@ -1,5 +1,5 @@
 import React from 'react';
-import IocContainer from 'Core/IocContainer';
+import {IocContainer} from 'ice-common';
 import { IInteractiveComponentConfigBtnComponent } from 'BaseCMSManage/Components/BaseComponents/InteractiveComponent/InteractiveComponentConfig'
 
 import { Button, Tooltip, Radio, Modal, Tag } from 'antd';
@@ -7,7 +7,7 @@ import { Button, Tooltip, Radio, Modal, Tag } from 'antd';
 import { ApiOutlined } from '@ant-design/icons';
 import ComponentContext from 'BaseCMSManage/ComponentContext'
 
-import IETool from 'BaseCommon/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import {
     EditComponentAction,

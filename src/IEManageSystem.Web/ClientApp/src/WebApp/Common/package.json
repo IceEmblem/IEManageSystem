@@ -3,6 +3,7 @@
     "version": "1.0.0",
   
     "dependencies": {
+        "ice-common": "1.0.0",
         "@ant-design/icons": "^4.1.0",
         "@antv/data-set": "^0.11.4",
         "@antv/g2plot": "^1.1.2",

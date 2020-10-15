@@ -14,7 +14,7 @@ import BtnLists from './BtnLists'
 
 import Page from 'CMSManage/Home/Page'
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
 import EditComponentContainerBoxShow from './ComponentContainer/EditComponentContainerBoxShow'
 import SignSquareFrame from './ComponentContainer/SignSquareFrame'

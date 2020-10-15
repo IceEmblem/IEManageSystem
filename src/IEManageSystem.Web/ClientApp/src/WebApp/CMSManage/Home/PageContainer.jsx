@@ -7,7 +7,7 @@ import ComponentContainerBoxShow from 'CMSManage/Component/ComponentContainerBox
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 
 import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
 import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
 

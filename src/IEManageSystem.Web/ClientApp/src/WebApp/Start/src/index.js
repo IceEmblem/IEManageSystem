@@ -6,9 +6,9 @@ import { Provider } from 'react-redux'
 // 导入入口模块
 import './Module'
 
-import ModuleFactory from 'Core/Modules/ModuleFactory'
-import {getIEStore} from 'Core/IEStore'
-import PageProvider from 'Core/Page/PageProvider'
+import {ModuleFactory} from 'ice-common'
+import {IEStore} from 'ice-common'
+import {PageProvider} from 'ice-common'
 
 // 部件
 import Error from './Parts/Error';
@@ -25,7 +25,7 @@ import {Spin} from 'antd'
 let moduleFactory = new ModuleFactory();
 moduleFactory.init().then(()=>{
 
-    let store = getIEStore();
+    let store = IEStore.ieStore;
 
     ReactDOM.render(
         <Provider store={store}>

@@ -2,7 +2,7 @@ import React from 'react'
 import IEditConfig from '../BaseComponent/IEditConfig'
 import ComponentContainer from './ContainerComponentContainer'
 import ContainerConfig, {IContainerConfigBtnComponent} from '../BaseContainerComponent/ContainerConfig'
-import IocContainer from 'Core/IocContainer'
+import {IocContainer} from 'ice-common'
 
 export default class InteractiveContainerConfig extends IEditConfig {
     ComponentContainer = undefined;

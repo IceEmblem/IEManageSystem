@@ -4,9 +4,9 @@ import { View, StyleSheet, TouchableHighlight, Text } from 'react-native'
 import { Button, Icon } from 'native-base'
 import Video from 'react-native-video';
 import Device from 'RNInfrastructure/Device'
-import Theme from 'BaseLayout/Theme'
+import {Theme} from 'ice-common'
 import ProgressBar from 'RNCommon/ProgressBar'
-import AntIcons from 'BaseCommon/AntIcons'
+import {AntIcons} from 'ice-common'
 
 class Component extends IComponent {
     videoHeight = Device.width * 9 / 16;
