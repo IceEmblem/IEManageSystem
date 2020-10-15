@@ -7,6 +7,7 @@ import {
     EditOutlined,
     DeleteOutlined
 } from '@ant-design/icons';
+import {Theme} from 'ice-common'
 
 const { Search } = Input;
 
@@ -175,7 +176,7 @@ export default class ResourceList extends React.Component {
                     </span>
                 </h6>
                 <table className="table table-hover">
-                    <thead>
+                    <thead style={{backgroundColor: Theme.color5}}>
                         {resourceHeadTr}
                     </thead>
                     <tbody>

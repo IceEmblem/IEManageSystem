@@ -11,6 +11,8 @@ namespace IEManageSystem.Dtos.CMS
     {
         public bool IsEnableQueryPermission { get; set; }
 
+        public string PageName { get; set; }
+
         public List<ContentPagePermissionDto> ContentPagePermissions { get; set; }
     }
 }

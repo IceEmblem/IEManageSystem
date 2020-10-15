@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RootRedux from 'Core/IEReduxs/RootRedux';
-import { getSiteSettingsFetch } from 'Core/IEReduxs/Actions';
-import SiteSettingManager from 'Core/SiteSettings/SiteSettingManager';
+import IERedux from 'BaseSetting/IEReduxs/IERedux';
+import { getSiteSettingsFetch } from 'BaseSetting/IEReduxs/Actions';
+import SiteSettingManager from 'BaseSetting/SiteSettings/SiteSettingManager';
 import { ieReduxFetch } from 'Core/IEReduxFetch';
+import {Theme} from 'ice-common'
 
 import { Card, Button, Input, Tag } from 'antd';
 import { SaveOutlined } from '@ant-design/icons'
@@ -23,9 +24,10 @@ class SiteSetting extends React.Component {
     }
     createSetting(props) {
         let arr = [];
-        props.siteSettingGroupConfigs.map(siteSettingGroupConfig => {
+        let siteSettingManager = new SiteSettingManager(props.siteSettings);
+        SiteSettingManager.siteSettingGroupConfigs.map(siteSettingGroupConfig => {
             let settings = siteSettingGroupConfig.siteSettingConfigs.map(item => {
-                let siteSetting = props.siteSettingManager.getSetting(siteSettingGroupConfig.name, item.key);
+                let siteSetting = siteSettingManager.getSetting(siteSettingGroupConfig.name, item.key);
 
                 return siteSetting || { key: item.key, value: "", displayName: item.displayName, group: siteSettingGroupConfig.name };
             });
@@ -39,7 +41,7 @@ class SiteSetting extends React.Component {
         return (
             <div key={siteSetting.key} className="input-group mb-3">
                 <Input
-                    suffix={<Tag color="#55acee">{siteSetting.displayName}</Tag>}
+                    suffix={<Tag color={Theme.primary}>{siteSetting.displayName}</Tag>}
                     placeholder={siteSetting.key}
                     value={siteSetting.value}
                     onChange={
@@ -76,23 +78,19 @@ class SiteSetting extends React.Component {
     render() {
         return (
             <div className="sitesetting">
-                {this.props.siteSettingGroupConfigs.map(item => this.createGroupSettingView(item))}
+                {SiteSettingManager.siteSettingGroupConfigs.map(item => this.createGroupSettingView(item))}
             </div>);
     }
 }
 
 SiteSetting.propTypes = {
     siteSettings: PropTypes.array.isRequired,
-    siteSettingGroupConfigs: PropTypes.array,
-    siteSettingManager: PropTypes.object.isRequired,
     getSiteSettingsFetch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
     return {
         siteSettings: state.siteSettings,
-        siteSettingGroupConfigs: SiteSettingManager.siteSettingGroupConfigs || [],
-        siteSettingManager: new SiteSettingManager(state.siteSettings)
     }
 }
 
@@ -104,7 +102,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const Container = RootRedux.connect(
+const Container = IERedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps
 )(SiteSetting)

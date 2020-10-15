@@ -1,18 +1,26 @@
 import React from 'react'
-import IERedux from '../IEReduxs/PersonalRedux'
+import IERedux from 'BasePerson/IEReduxs/PersonalRedux'
+import {Theme} from 'ice-common'
+import { getUserInfoFetch } from 'BasePerson/IEReduxs/Actions'
 
 import { Tag, Badge } from 'antd';
 import { UserOutlined, MessageOutlined, GithubOutlined } from '@ant-design/icons';
 import DefaultAvatar from 'images/default_avatar.png';
 
 class UserTagNavTools extends React.Component {
+    componentDidMount(){
+        if(!this.props.userInfoData.user){
+            this.props.getUserInfoFetch();
+        }
+    }
+
     render() {
         let { name, headSculpture } = this.props.userInfoData.user ? this.props.userInfoData.user : {};
 
         return (
             <>
                 <span className="">
-                    <Tag icon={<UserOutlined />} color="#55acee">
+                    <Tag icon={<UserOutlined />} color={Theme.primary}>
                         你好，{name}
                     </Tag>
                     <img className="rounded-circle nav-avatar"
@@ -37,6 +45,9 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        getUserInfoFetch: () => {
+            dispatch(getUserInfoFetch({}));
+        },
     }
 }
 

@@ -5,25 +5,25 @@ import {
     AddComponentAction,
     RemoveComponentAction,
     EditComponentAction,
-    RootComponentSign,
     CopyComponent,
     CopyComponentAction,
+    SetPageComponents,
+    SetPageComponentsAction,
 } from './Action';
 import { PageReceive, SetPage } from '../Actions'
 import CreatePageComponentService from '../../Models/Pages/CreatePageComponentService'
 import PageComponentModel, { PageComponentOSType } from '../../Models/Pages/PageComponentModel'
 import PageComponentSettingModel from '../../Models/Pages/PageComponentSettingModel'
-import SingleDataModel from '../../Models/SingleDataModel'
-import IETool from 'Core/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 import SpecsChecker from './Specs/SpecsChecker'
 
 function setPageComponentModel(pageComponentData: any) {
     pageComponentData.__proto__ = PageComponentModel.prototype;
-    pageComponentData.pageComponentSettings.forEach(pageComponentSetting => {
+    Object.values(pageComponentData.pageComponentSettings).forEach((pageComponentSetting:any) => {
         pageComponentSetting.__proto__ = PageComponentSettingModel.prototype;
-        pageComponentSetting.singleDatas.forEach(singleData => {
-            singleData.__proto__ = SingleDataModel.prototype;
-        });
+        // pageComponentSetting.singleDatas.forEach(singleData => {
+        //     singleData.__proto__ = SingleDataModel.prototype;
+        // });
     });
 }
 
@@ -37,11 +37,6 @@ function getChildComponents(pageComponents: object, sign): object {
     }
 
     return result;
-}
-
-// 获取父组件
-function getParentComponent(pageComponents: object, sign): object {
-    return pageComponents[pageComponents[sign].parentSign];
 }
 
 // 组件是否有效
@@ -82,7 +77,7 @@ function setChildComponentSigns(pageComponents: object, pageComponent: any): any
 // 添加组件 case reducer
 function addComponent(state: object, action: AddComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId][action.os] };
+    let pageComponents = { ...state[action.pageName][action.os] };
     if (pageComponents[action.pageComponent.sign]) {
         throw new Error("组件标识已存在");
     }
@@ -113,8 +108,8 @@ function addComponent(state: object, action: AddComponentAction): object {
     pageComponents[action.pageComponent.parentSign] = setChildComponentSigns(pageComponents, pageComponents[action.pageComponent.parentSign]);
     setPageComponentModel(pageComponents[action.pageComponent.parentSign]);
 
-    // 更新页面组件数组
-    state[action.pageId][action.os] = pageComponents;
+    // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
+    state[action.pageName][action.os] = pageComponents;
 
     return state;
 }
@@ -122,7 +117,7 @@ function addComponent(state: object, action: AddComponentAction): object {
 // 移除组件 case reducer
 function removeComponent(state: object, action: RemoveComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId][action.os] };
+    let pageComponents = { ...state[action.pageName][action.os] };
 
     let parentSign = pageComponents[action.pageComponentSign].parentSign;
 
@@ -134,7 +129,8 @@ function removeComponent(state: object, action: RemoveComponentAction): object {
     pageComponents[parentSign] = setChildComponentSigns(pageComponents, pageComponents[parentSign]);
     setPageComponentModel(pageComponents[parentSign]);
 
-    state[action.pageId][action.os] = pageComponents;
+    // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
+    state[action.pageName][action.os] = pageComponents;
 
     return state;
 }
@@ -142,7 +138,7 @@ function removeComponent(state: object, action: RemoveComponentAction): object {
 // 编辑组件 case reducer
 function editComponent(state: object, action: EditComponentAction): object {
     // 页面组件列表
-    let pageComponents = { ...state[action.pageId][action.os] };
+    let pageComponents = { ...state[action.pageName][action.os] };
 
     let parentSign = pageComponents[action.pageComponentSign].parentSign;
     // 删除原组件
@@ -160,6 +156,14 @@ function editComponent(state: object, action: EditComponentAction): object {
     pageComponents[action.pageComponent.sign] = action.pageComponent;
     setPageComponentModel(pageComponents[action.pageComponent.sign]);
 
+    // 原先的子组件移到当前组件
+    if(action.pageComponentSign != action.pageComponent.sign){
+        action.pageComponent.pageComponentSigns.forEach(sign => {
+            pageComponents[sign] = {...pageComponents[sign], parentSign: action.pageComponent.sign};
+            setPageComponentModel(pageComponents[sign]);
+        })
+    }
+
     // 检查是否满足规格
     let specResult = SpecsChecker.isSuitAllSpecs(pageComponents[action.pageComponent.sign]);
     if (specResult.isPass == false) {
@@ -174,7 +178,8 @@ function editComponent(state: object, action: EditComponentAction): object {
     pageComponents[newParentSign] = setChildComponentSigns(pageComponents, pageComponents[newParentSign]);
     setPageComponentModel(pageComponents[newParentSign]);
 
-    state[action.pageId][action.os] = pageComponents;
+    // 更新页面组件数组，这一步是必须的，因为有些 React 组件会监听数组是否变化来判断是否发生编辑操作
+    state[action.pageName][action.os] = pageComponents;
 
     return state;
 }
@@ -182,29 +187,29 @@ function editComponent(state: object, action: EditComponentAction): object {
 // 拷贝数据 case reducer
 function copyComponent(state: object, action: CopyComponentAction): object {
     // 要操作的页面
-    let page = { ...state[action.pageId] };
+    let page = { ...state[action.pageName] };
 
     page[action.distOS] = IETool.deepCopy(page[action.sourceOS]);
     Object.values(page[action.distOS]).forEach((item: any) => {
         item.os = action.distOS;
     });
 
-    state[action.pageId] = page;
+    state[action.pageName] = page;
 
     return state;
 }
 
-function pageReceiveHandle(receivePageComponents) {
+function pageReceiveHandle(receivePageComponents, os: string) {
     // 页面组件列表
     let pageComponents = {};
 
     // 如果不存在根组件，则创建一个根组件
-    if (!receivePageComponents.some(item => item.sign == RootComponentSign)) {
-        pageComponents[RootComponentSign] = CreatePageComponentService.createCompositeComponent(RootComponentSign, "");
+    if (!receivePageComponents.some(item => item.sign == PageComponentModel.RootComponentSign)) {
+        pageComponents[PageComponentModel.RootComponentSign] = CreatePageComponentService.createComponent(PageComponentModel.RootComponentSign, "", os);
         // 将不存在父元素的组件指定到根组件
         receivePageComponents.forEach(element => {
             if (!element.parentSign) {
-                element.parentSign = RootComponentSign;
+                element.parentSign = PageComponentModel.RootComponentSign;
             }
         });
     }
@@ -212,10 +217,6 @@ function pageReceiveHandle(receivePageComponents) {
     // 将组件实例 state
     for (let n = 0; n < receivePageComponents.length; n++) {
         let pageComponent = receivePageComponents[n];
-        // 对组件设置数据进行排序
-        pageComponent.pageComponentSettings.forEach(pageComponentSetting => {
-            pageComponentSetting.singleDatas.sort((l, r) => l.sortIndex - r.sortIndex)
-        });
         pageComponents[pageComponent.sign] = pageComponent;
     }
 
@@ -240,13 +241,11 @@ function pageReceive(state: object, action): object {
         }
     })
 
-    let webComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Web));
-    webComponents[RootComponentSign].os = PageComponentOSType.Web;
-    let nativeComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Native));
-    nativeComponents[RootComponentSign].os = PageComponentOSType.Native;
+    let webComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Web), PageComponentOSType.Web);
+    let nativeComponents = pageReceiveHandle(receivePageComponents.filter(item => item.os == PageComponentOSType.Native), PageComponentOSType.Native);
 
     let newState = { ...state };
-    newState[action.data.page.id] = {
+    newState[action.data.page.name] = {
         Web: webComponents,
         Native: nativeComponents
     };
@@ -261,18 +260,25 @@ function setPage(state: object, action){
         return pageReceive(state, action);
     }
 
-    let newPage = {...state[action.data.page.id]}
+    let newPage = {...state[action.data.page.name]}
 
     // 否则只更新对应的平台
     let pages = pageReceive(state, action);
     if(action.data.os == PageComponentOSType.Web){
-        newPage.Web = pages[action.data.page.id].Web
+        newPage.Web = pages[action.data.page.name].Web
     }
     else{
-        newPage.Native = pages[action.data.page.id].Native
+        newPage.Native = pages[action.data.page.name].Native
     }
 
-    state[action.data.page.id] = newPage;
+    state[action.data.page.name] = newPage;
+    return state;
+}
+
+// 设置页面组件 case reducer
+function setPageComponents(state: object, action: SetPageComponentsAction){
+    state[action.pageName][action.os] = action.pageComponents;
+
     return state;
 }
 
@@ -302,8 +308,13 @@ export default function reducer(state = {}, action) {
         return pageReceive(state, action);
     }
 
+    // 设置页面，执行逻辑与 页面接收动作 相似，但可针对不同平台
     if(action.type == SetPage){
         return setPage(state, action);
+    }
+
+    if(action.type == SetPageComponents){
+        return setPageComponents(state, action);
     }
 
     return state;

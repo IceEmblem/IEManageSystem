@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Tab from 'Common/Tab/Tab.jsx'
 
 import { Modal, notification, message } from 'antd';
-import IETool from 'Core/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 class EditFrame extends React.Component {
     // props.close()
@@ -101,7 +101,6 @@ class EditFrame extends React.Component {
                     <Tab
                         tabs={this.tabs}
                         nameField={this.nameField}
-                        selectIndex={this.state.selectTab == null ? 0 : this.state.selectTab.index}
                         selectOnclick={(data) => {
                             this.setState({ selectTab: data })
                         }}

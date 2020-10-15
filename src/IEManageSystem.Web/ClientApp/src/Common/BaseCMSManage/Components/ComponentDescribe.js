@@ -1,9 +1,4 @@
 import React from 'react'
-import ContainerComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseContainerComponent'
-import PageLeafComponentObject from 'BaseCMSManage/Components/BaseComponents/BasePageLeafComponent'
-import BaseLeafComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseLeafComponent'
-import BaseMenuComponentObject from 'BaseCMSManage/Components/BaseComponents/BaseMenuComponent'
-import BaseContentLeafComponent from 'BaseCMSManage/Components/BaseComponents/BaseContentLeafComponent'
 import CreatePageComponentService from 'BaseCMSManage/Models/Pages/CreatePageComponentService'
 
 export const componentType = {
@@ -38,54 +33,28 @@ export default class ComponentDescribe {
         this.componentType = type;
         this.displayName = displayName || name;
         this.logicCode = undefined;
-        this.defauleStyle = {};
+        this.defauleStyle = { minHeight: 20 };
+        // 基本设置初始值
+        this.pageComponentBaseSetting = undefined;
+        // 粘贴操作
+        // 当有组件要粘贴到当前组件时, 我们将会调用该方法, 返回 false 表示不运行粘贴
+        // 你可以在该方法中修改要粘贴的 pageComponent
+        // 参数: pastePageComponent 要粘贴的组件, curPageComponent 当前组件, currentPageComponentChilds 当前组件所拥有的子组件
+        this.paste = (pastePageComponent, curPageComponent, curPageComponentChilds) => ({message: "当前组件不支持粘贴操作", isPass: false});
     }
 
-    createPageComponent(parentSign) {
+    createPageComponent(parentSign, os) {
         var timetamp = new Date().getTime();
 
-        let pageComponent;
-        if (this.componentObject instanceof ContainerComponentObject) {
-            pageComponent = CreatePageComponentService.createCompositeComponent(timetamp, this.name)
-        }
-        else if (this.componentObject instanceof PageLeafComponentObject) {
-            pageComponent = CreatePageComponentService.createPageLeafComponent(timetamp, this.name)
-        }
-        else if ((this.componentObject instanceof BaseLeafComponentObject)) {
-            pageComponent = CreatePageComponentService.createLeafComponent(timetamp, this.name)
-        }
-        else if ((this.componentObject instanceof BaseMenuComponentObject)) {
-            pageComponent = CreatePageComponentService.createMenuComponent(timetamp, this.name)
-        }
-        else {
-            throw new Error("无法识别的组件类型");
-        }
+        let pageComponent = CreatePageComponentService.createComponent(timetamp, this.name, os, this.pageComponentBaseSetting);
 
         pageComponent.parentSign = parentSign;
-
-        this.componentObject.ComponentSettingConfigs.forEach(element => {
-            pageComponent.pageComponentSettings.push(
-                { id: 0, name: element.name, displayName: element.displayName, singleDatas: [] }
-            );
-        });
 
         return pageComponent;
     }
 
-    isExistComponentData() {
-        if (this.componentObject instanceof BaseContentLeafComponent) {
-            return true;
-        }
-
-        return false;
-    }
-
-    isExistChildComponent() {
-        return (this.componentObject instanceof ContainerComponentObject);
-    }
-
     // 生成 React 组件
-    createComponent(pageId, os, pageDataId, sign, childs) {
+    createComponent(sign, currentPageAndPost) {
         let ComponentContainer = this.componentObject.getComponentContainer();
 
         if (!ComponentContainer) {
@@ -93,12 +62,9 @@ export default class ComponentDescribe {
         }
 
         return <ComponentContainer
-            pageId={pageId}
-            os={os}
-            pageDataId={pageDataId}
             sign={sign}
+            currentPageAndPost={currentPageAndPost}
         >
-            {childs}
         </ComponentContainer>
     }
 }

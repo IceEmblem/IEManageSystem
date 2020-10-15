@@ -1,4 +1,5 @@
 import IEToken from '../IEToken'
+import Weburl from '../Weburl'
 
 export interface FetchAction {
   // 动作类型
@@ -66,15 +67,20 @@ function receivePack(actionType:string, data: any) : FetchAction
 
 // 发生请求标识，每发生一个请求，会增加 1
 var fecthSign = 0;
-var baseUrl = ""
-// 生成ieThunkAcion，如果请求成功，会分发receiveActionFun生成的动作
-export function createIEThunkAction(url:string, postData:any, actionType:string) {
+// 生成 ieThunkAcion，如果请求成功
+// url: 请求的 url
+// postData: 发送的数据
+// actionType: 数据接收成功后要分发的 action 类型
+// method: fetch 方法类型，默认 post
+// isPackage: 结果是否有包装有，一般后端都会包装 post 请求结果（如后端返回{ success: true, message: "", result: "正真的结果数据" }）
+export function createIEThunkAction(url:string, postData:any, actionType:string, method: string = 'post', isPackage: boolean = true) {
   return async function (dispatch:any) {
     let curFecthSign = fecthSign++;
     let requestAction = request(postData);
     requestAction.fecthSign = curFecthSign;
     dispatch(requestAction);
 
+    // 生成 fetch 请求数据结果
     let token = await IEToken.getToken();
     let headers : any = {
       'Content-Type': 'application/json'
@@ -84,17 +90,13 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
       headers.Authorization = "Bearer " + token;
     }
 
-    let fullUrl = url;
-    if(!fullUrl.startsWith("http")){
-      fullUrl = baseUrl + url;
-    }
-
-    return await fetch(fullUrl, {
-      method: 'post',
+    return await fetch(Weburl.handleWeburl(url), {
+      method: method,
       headers: headers,
-      body: JSON.stringify(postData)
+      body: postData && JSON.stringify(postData)
     }).then(
       response => {
+        // 再这里处理 html 异步请求结果，如 404 等问题
         if (response.status >= 200 && response.status < 300) {
           return response.json();
         }
@@ -104,12 +106,19 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
         }
 
         const error = new Error(response.statusText);
-        // error.response = response;
 
         throw error;
       }
     ).then(
       data => {
+        // 在这里处理后端的结果，如 后端返回 { success: false, message: "文章发表以达到上限", result: null }
+        // 如果后端处理通过，你应该将数据返回，如 return data.result;
+        // 否则，你应该抛出异常 throw new Error(data.message);
+        // 后续的处理流程由框架处理
+        if(!isPackage){
+          return data;
+        }
+
         if (data.success == true){
           return data.result;
         }
@@ -131,20 +140,9 @@ export function createIEThunkAction(url:string, postData:any, actionType:string)
       value => {
         let receiveAction = receivePack(actionType, value);
         receiveAction.fecthSign = curFecthSign;
-        dispatch(receiveAction)  // dispatch 响应动作
+        dispatch(receiveAction);
         return value;
       }
     )
   }
-}
-export function setBaseUrl(url) {
-  baseUrl = url;
-}
-
-export const GetSiteSettingsReceive = "GetSiteSettingsReceive";
-export function getSiteSettingsFetch(){
-  return createIEThunkAction(
-    "/api/SiteSettingQuery/GetSiteSettings",
-    {},
-    GetSiteSettingsReceive);
 }

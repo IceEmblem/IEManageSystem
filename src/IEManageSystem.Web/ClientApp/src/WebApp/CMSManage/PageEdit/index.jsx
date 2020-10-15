@@ -1,93 +1,167 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 
 import './index.css'
 
-import PageEditCompontContainer from './ComponentContainer'
-
 import {
     pageFetch,
-    AddComponentAction,
-    RootComponentSign,
 } from 'BaseCMSManage/IEReduxs/Actions'
 import { PageComponentOSType } from 'BaseCMSManage/Models/Pages/PageComponentModel'
 import RegisterTemplateManager from 'CMSManage/Component/Components/RegisterTemplateManager'
 
 import BtnLists from './BtnLists'
-import ComponentListBox from "./ComponentListBox"
+
+
+import Page from 'CMSManage/Home/Page'
+import { IComponentContainerBoxShow } from 'BaseCMSManage/ComponentContainerBoxs'
+import {IocContainer} from 'ice-common'
+
+import EditComponentContainerBoxShow from './ComponentContainer/EditComponentContainerBoxShow'
+import SignSquareFrame from './ComponentContainer/SignSquareFrame'
+import CurrentToolBtns from './ComponentContainer/CurrentToolBtns'
+
+import RootComponentContainerBox from 'BaseCMSManage/RootComponentContainerBox'
+
+import RNPageLayout from 'Adapters/RNPageLayout'
+
+import Hotkey from './Hotkey'
+import ClipBoard from './ClipBoard'
+import CancelAndReload from './CancelAndReload'
+
+const RNPageRootId = '__PageEditRN__';
+const RNPage = (props) => {
+    return <div class="phone">
+        <div className="phone-cover">
+            <div className="phone-light"></div>
+            <div className="phone-camera"></div>
+            <div className="phone-speaker"></div>
+            <div class="phone-screen">
+                <div className='h-100'>
+                    <RNPageLayout
+                        tools={<>
+                            <SignSquareFrame
+                                color="#13c2c2"
+                                pageInfos={props.pageInfos}
+                                rootElementId={RNPageRootId}
+                            />
+                            <CurrentToolBtns
+                                pageInfos={props.pageInfos}
+                                rootElementId={RNPageRootId}
+                            />
+                        </>}
+                        rootId={RNPageRootId}
+                    >
+                        <RootComponentContainerBox
+                            pageName={props.pageInfos.pageName}
+                            pageDataId={props.pageInfos.pageDataId}
+                            os={props.pageInfos.os}
+                        />
+                    </RNPageLayout>
+                </div>
+            </div>
+            <div className="phone-homebtn"></div>
+        </div>
+    </div>
+}
+
+const WebPage = (props) => {
+    return <>
+        <Page>
+            <RootComponentContainerBox
+                pageName={props.pageInfos.pageName}
+                pageDataId={props.pageInfos.pageDataId}
+                os={props.pageInfos.os}
+            />
+        </Page>
+        <SignSquareFrame
+            color="#13c2c2"
+            pageInfos={props.pageInfos}
+        />
+        <CurrentToolBtns
+            pageInfos={props.pageInfos}
+        />
+    </>
+}
 
 class PageContainer extends React.Component {
-    constructor(props) {
-        super(props);
+    state = {
+        isFetching: false
+    }
 
-        this.state = {
-            // 要将组件添加到那个父组件下，undefined 表示没有父组件
-            curParentComponentSign: undefined,
-            showComponentListBox: false,
-        }
-
-        this.addComponent = this.addComponent.bind(this);
+    componentWillMount() {
+        IocContainer.registerSingleIntances(IComponentContainerBoxShow, EditComponentContainerBoxShow)
     }
 
     componentDidMount() {
-        if (!this.props.page) {
-            this.props.pageFetch(this.props.pageName)
+        if (this.props.isNeedDataFetch && !this.state.isFetching) {
+            this.setState({ isFetching: true })
+            this.props.pageFetch().then(() => {
+                this.setState({ isFetching: false });
+            })
         }
     }
 
-    addComponent(selectedComponentDescribe) {
-        if (!selectedComponentDescribe) {
-            return;
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isNeedDataFetch && !this.state.isFetching) {
+            this.setState({ isFetching: true })
+            nextProps.pageFetch().then(() => {
+                this.setState({ isFetching: false });
+            })
         }
+    }
 
-        let pageComponent = selectedComponentDescribe.createPageComponent(this.state.curParentComponentSign);
-
-        this.props.addComponent(new AddComponentAction(
-            this.props.page.id,
-            this.props.rootPageComponent.os,
-            pageComponent
-        ));
+    shouldComponentUpdate(nextProps, nextState) {
+        return !nextProps.isNeedDataFetch;
     }
 
     render() {
-        if (!this.props.rootPageComponent) {
+        if (this.props.isNeedDataFetch) {
             return <div></div>
         }
 
+        let style = {};
+        if (this.props.os == PageComponentOSType.Native) {
+            style.width = "400px"
+            style.margin = "auto"
+        }
+
+        let pageInfos = {
+            pageName: this.props.pageName,
+            pageDataId: undefined,
+            os: this.props.os
+        };
+
         return (
-            <div className="w-100 h-100">
-                <PageEditCompontContainer
-                    pageId={this.props.pageId}
-                    pageDataId={this.props.pageDataId}
-                    rootPageComponent={this.props.rootPageComponent}
-                    addChildComponent={(curParentComponentSign) => {
-                        this.setState({ curParentComponentSign: curParentComponentSign, showComponentListBox: true });
-                    }}
-                />
+            <div>
+                {
+                    this.props.os == PageComponentOSType.Native ?
+                        <RNPage
+                            pageInfos={pageInfos}
+                        /> :
+                        <WebPage
+                            pageInfos={pageInfos}
+                        />
+                }
+                {/* 这是一个 react 插槽，不要随意更改 id */}
+                <div id='PageEditPortals'>
+                </div>
                 <BtnLists
-                    addComponent={() => { this.setState({ curParentComponentSign: RootComponentSign, showComponentListBox: true }) }}
-                    pageId={this.props.pageId}
-                    os={this.props.rootPageComponent.os}
+                    pageInfos={pageInfos}
                 />
-                <ComponentListBox
-                    show={this.state.showComponentListBox}
-                    close={() => { this.setState({ showComponentListBox: false }) }}
-                    addComponent={this.addComponent}
-                />
+                <div style={{ display: 'flex', position: 'fixed', bottom: 60, left: 40 }}>
+                    <CancelAndReload
+                        pageInfos={pageInfos}
+                    />
+                    <ClipBoard
+                        pageInfos={pageInfos}
+                    />
+                    <Hotkey
+                        pageInfos={pageInfos}
+                    />
+                </div>
             </div>
         );
     }
-}
-
-PageContainer.propTypes = {
-    pageName: PropTypes.string.isRequired,
-    pageId: PropTypes.number,
-    page: PropTypes.object,
-    rootPageComponent: PropTypes.object,
-    addComponent: PropTypes.func.isRequired,
-    pageFetch: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
@@ -95,34 +169,19 @@ const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的prop
     let os = ownProps.match.params.os || PageComponentOSType.Web;
     RegisterTemplateManager.applyOSComponents(os);
 
-    // pageName 即可能是 id, 也肯是 name
-    let pageId = parseInt(pageName);
-    if (isNaN(pageId)) {
-        // 如果为 NaN，那么 pageName 保存的应该是页面的 name
-        pageId = state.pageNameToIds[pageName];
-    }
-
-    // 获取根组件
-    let rootPageComponent = undefined;
-    if (state.pageComponents[pageId]) {
-        rootPageComponent = state.pageComponents[pageId][os][RootComponentSign];
-    }
-
     return {
+        isNeedDataFetch: state.pages[pageName] == undefined,
         pageName: pageName,
-        pageId: pageId,
-        page: state.pages[pageId],
-        rootPageComponent: rootPageComponent,
+        os: os
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    let pageName = ownProps.match.params.pageName;
+
     return {
-        addComponent: (addComponentAction) => {
-            dispatch(addComponentAction);
-        },
-        pageFetch: (name) => {
-            return dispatch(pageFetch(name));
+        pageFetch: () => {
+            return dispatch(pageFetch(pageName));
         }
     }
 }

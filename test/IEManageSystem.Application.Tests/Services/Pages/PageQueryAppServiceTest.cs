@@ -16,10 +16,6 @@ namespace IEManageSystem.Application.Tests.Services.Pages
         public PageQueryAppServiceTest()
         {
             _appService = LocalIocManager.Resolve<IPageQueryAppService>();
-
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageComponentBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
         }
 
         [Fact]
@@ -31,23 +27,6 @@ namespace IEManageSystem.Application.Tests.Services.Pages
             });
 
             Assert.True(output.Pages.FirstOrDefault(e=>e.Name == "ContentPage1Name") != null);
-        }
-
-        [Fact]
-        public void GetPage_BaseTest() 
-        {
-            var output = _appService.GetPage(new IEManageSystem.Services.ManageHome.CMS.Pages.Dto.GetPageInput() { 
-                Name = "ContentPage1Name"
-            });
-
-            Assert.True(output.Page != null);
-            Assert.True(output.PageComponents != null);
-            Assert.True(output.PageComponents.FirstOrDefault(e=>e.Name == "ComponentName1").PageComponentBaseSetting != null);
-            Assert.True(output.PageComponents.FirstOrDefault(e => e.Name == "ComponentName1").PageComponentSettings != null);
-            Assert.True(output.PageComponents.FirstOrDefault(e => e.Name == "ComponentName1").PageComponentSettings[0].SingleDatas.Count > 0);
-
-            Assert.True(output.DefaultComponentDatas.Count > 0);
-            Assert.True(output.DefaultComponentDatas[0].SingleDatas.Count > 0);
         }
     }
 }

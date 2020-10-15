@@ -1,4 +1,4 @@
-import BaseIERedux from "Core/IEReduxs/BaseIERedux";
+import {BaseIERedux} from 'ice-common'
 
 class TestIERedux extends BaseIERedux{
     getStateType(): string {

@@ -22,13 +22,15 @@ namespace IEManageSystem.Tests.TestDatas
 
         public void Build()
         {
-            var page = _context.Pages.First(e=>e.Name == "ContentPage1Name");
+            var user = _context.Users.FirstOrDefault(e => e.Name == "User1");
 
             var pageData = new CMS.DomainModel.PageDatas.PageData()
             {
                 Name = "PageData1Name",
                 Title = "文章测试标题",
-                Page = page
+                PageName = "ContentPage1Name",
+                Creator = new CMS.DomainModel.EntityEdit(user.Id, user.Name, user.HeadSculpture),
+                LastUpdater = new CMS.DomainModel.EntityEdit(user.Id, user.Name, user.HeadSculpture),
             };
 
             _context.PageDatas.Add(pageData);
@@ -36,13 +38,13 @@ namespace IEManageSystem.Tests.TestDatas
             _context.ContentComponentDatas.AddRange(new List<ContentComponentData>() {
                     new ContentComponentData(){
                         Sign = "ContentPage1_Component1Sign",
-                        SingleDatas = new List<SingleComponentData>(){
-                            new SingleComponentData(){ Name = "PageData1_ContentComponentData1_SingleComponentData1Name" },
-                            new SingleComponentData(){ Name = "PageData1_ContentComponentData1_SingleComponentData2Name" }
+                        SingleDatas = new List<ComponentSingleData>(){
+                            new ComponentSingleData(){ Name = "PageData1_ContentComponentData1_SingleComponentData1Name" },
+                            new ComponentSingleData(){ Name = "PageData1_ContentComponentData1_SingleComponentData2Name" }
                         },
-                        PageData = pageData
+                        PageData = pageData,
                     },
-                    new ContentComponentData(){ Sign = "ContentPage1_Component2Sign", PageData = pageData }
+                    new ContentComponentData(){ Sign = "ContentPage1_Component2Sign", PageData = pageData },
                 });
         }
     }

@@ -18,10 +18,6 @@ namespace IEManageSystem.Application.Tests.Services.Menus
 
         public MenuManageAppServiceTest() {
             _menuManageAppService = Resolve<IMenuManageAppService>();
-
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
-            UsingDbContext(context => new MenuBuilder(context).Build());
         }
 
         [Fact]
@@ -95,7 +91,7 @@ namespace IEManageSystem.Application.Tests.Services.Menus
                     Menu = new Dtos.CMS.MenuDto()
                     {
                         Id = 0,
-                        Name = "Main",
+                        Name = "CompositeMenu1",
                         DisplayName = "测试",
                         Icon = "",
                         MenuType = "CompositeMenu",
@@ -112,7 +108,7 @@ namespace IEManageSystem.Application.Tests.Services.Menus
             var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
             dbContext.SaveChanges();
 
-            var menus = dbContext.Menus.Where(e => e.Name == "Main").ToList();
+            var menus = dbContext.Menus.Where(e => e.Name == "CompositeMenu1").ToList();
 
             Assert.True(menus.Count == 1);
             Assert.True(menus[0].DisplayName == "主菜单");

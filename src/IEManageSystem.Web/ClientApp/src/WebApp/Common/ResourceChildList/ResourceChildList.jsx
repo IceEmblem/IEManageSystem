@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import ReactDOM from 'react-dom';
 import Resource from 'Common/Resource/Resource.jsx';
 import Preview from 'Common/Preview/Preview.jsx';
 import Tab from 'Common/Tab/Tab.jsx';
@@ -29,10 +28,8 @@ export default class ResourceChildList extends React.Component {
 
         this.state = {
             previewResource: null,	// 当前选择的预览资源
-            tabSelectIndex: 0
+            curTab: this.props.tabs[0]
         }
-
-        this.tabSelectIndex = 0;
     }
 
     // 刷新资源组件数据
@@ -40,13 +37,13 @@ export default class ResourceChildList extends React.Component {
         if(this.state.previewResource == null){
             return;
         }
-        this.props.freshenResources(this.state.previewResource, this.props.tabs[this.state.tabSelectIndex].value);
+        this.props.freshenResources(this.state.previewResource, this.state.curTab.value);
     }
 
     render() {
         return (
-            <div className="w-100 h-100">
-                <div className="left-preview float-left h-100 bg-white">
+            <div className="w-100 h-100 d-flex justify-content-between">
+                <div className="left-preview h-100 bg-white">
                     <Preview
                         title={this.props.previewTitle}
                         previewResources={this.props.previewResources}
@@ -55,12 +52,11 @@ export default class ResourceChildList extends React.Component {
                         operationName="查看"
                     />
                 </div>
-                <div className="right-resource float-right h-100 bg-white">
+                <div className="right-resource h-100 bg-white">
                     <Tab tabs={this.props.tabs}
                         nameField="text"
-                        selectIndex={this.state.tabSelectIndex}
-                        selectOnclick={(tab, index) => {
-                            this.setState({ tabSelectIndex: index }, () => this.freshenResources());
+                        selectOnclick={(tab) => {
+                            this.setState({ curTab: tab }, () => this.freshenResources());
                         }}
                     >
                         <Resource
@@ -71,13 +67,13 @@ export default class ResourceChildList extends React.Component {
                                 (pageIndex, pageSize, searchKey) => this.freshenResources()
                             }
                             addResource={
-                                (resource) => this.props.addResource(this.state.previewResource, resource, this.props.tabs[this.state.tabSelectIndex].value)
+                                (resource) => this.props.addResource(this.state.previewResource, resource, this.state.curTab.value)
                             }
                             updateResource={
-                                (resource) => this.props.updateResource(this.state.previewResource, resource, this.props.tabs[this.state.tabSelectIndex].value)
+                                (resource) => this.props.updateResource(this.state.previewResource, resource, this.state.curTab.value)
                             }
                             deleteResource={
-                                (resource) => this.props.deleteResource(this.state.previewResource, resource, this.props.tabs[this.state.tabSelectIndex].value)
+                                (resource) => this.props.deleteResource(this.state.previewResource, resource, this.state.curTab.value)
                             }
                             hideAdd={this.props.hideAdd}
                             hideEdit={this.props.hideEdit}

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace IEManageSystem.Dtos.CMS
 {
-    [AutoMap(typeof(SingleComponentData))]
+    [AutoMap(typeof(ComponentSingleData))]
     public class SingleComponentDataDto
     {
         public int Id { get; set; }

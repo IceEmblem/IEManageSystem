@@ -11,16 +11,14 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <View>
-                <Switch>
-                    <Route exact path="/Page/:pageName?/:pageDataName?"
-                        render={(props) => <PageContainer {...props} />}
-                    />
-                    <Route exact path="/"
-                        render={(props) => <PageContainer {...props} />}
-                    />
-                </Switch>
-            </View>
+            <Switch>
+                <Route exact path="/Page/:pageName?/:pageDataName?"
+                    render={(props) => <PageContainer {...props} />}
+                />
+                <Route exact path="/"
+                    render={(props) => <PageContainer {...props} />}
+                />
+            </Switch>
         );
     }
 }

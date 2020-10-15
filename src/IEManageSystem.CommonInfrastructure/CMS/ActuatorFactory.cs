@@ -2,7 +2,6 @@
 using IEManageSystem.CMS;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Logics;
-using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Entitys.Authorization.Users;
@@ -118,7 +117,6 @@ using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.Entitys.Authorization.Users;
 using IEManageSystem.CommonInfrastructure.CMS;
-using IEManageSystem.CMS.DomainModel.PageComponents;
 using Abp.UI;
 using Abp.Authorization;
 using System;
@@ -155,10 +153,10 @@ public class {CreateActuatorClassName(name)} : BaseActuator {{
 
                 MethodInfo mInfo = type.GetMethod("Exec");
 
-                Action<ContentComponentData, PageComponentBase, PageData, PageBase, User, string> action =
-                    (ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request) =>
+                Action<ContentComponentData, PageData, Page, User, string> action =
+                    (ContentComponentData componentData, PageData pageData, Page page, User user, string request) =>
                     {
-                        mInfo.Invoke(obj, new object[] { componentData, pageComponent, pageData, page, user, request });
+                        mInfo.Invoke(obj, new object[] { componentData, pageData, page, user, request });
                     };
 
                 var actuator = new Actuator(action);

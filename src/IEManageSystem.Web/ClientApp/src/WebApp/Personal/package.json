@@ -3,5 +3,9 @@
     "version": "1.0.0",
   
     "dependencies": {
+        "Core": "1.0.0",
+        "BasePerson": "1.0.0",
+        "BaseLayout": "1.0.0",
+        "Common": "1.0.0"
     }
 }

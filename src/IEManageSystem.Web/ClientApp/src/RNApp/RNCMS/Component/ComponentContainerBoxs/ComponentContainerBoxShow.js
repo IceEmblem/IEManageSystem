@@ -35,10 +35,8 @@ export default class extends React.Component {
 
         return <View
             style={[styles.container, this.props.style]}
-            {...this.props.propsEX}
         >
             {this.props.children}
-            {this.props.ToolBtn}
         </View>
     }
 }
@@ -46,8 +44,5 @@ export default class extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'stretch',
-        flexWrap: 'nowrap'
     }
 })

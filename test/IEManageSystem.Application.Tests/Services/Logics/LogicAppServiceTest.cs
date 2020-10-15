@@ -21,15 +21,6 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             _logicAppService = LocalIocManager.Resolve<ILogicAppService>();
         }
 
-        private void ReloadDB() {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageComponentBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
-            UsingDbContext(context => new LogicBuilder(context).Build());
-        }
-
         [Fact]
         public void Register_BaseTest()
         {
@@ -40,7 +31,7 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             _logicAppService.RegisterLogic(new IEManageSystem.Services.ManageHome.CMS.Logics.Dto.RegisterLogicInput() { 
                 Name = "LogicTest1",
                 Code = @"
-                    public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+                    public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
                     {
                         componentData.SingleDatas.ElementAt(0).Field1 = ""1"";
                     }
@@ -65,7 +56,7 @@ namespace IEManageSystem.Application.Tests.Services.Logics
                 {
                     Name = "RegisterFailTest",
                     Code = @"
-                    public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+                    public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
                     {
                         componentData.Field1 = ""1"";$$$$$$$$$$$$$$$$$$$$$$$$
                     }
@@ -91,7 +82,7 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             var dbContext = LocalIocManager.Resolve<IEManageSystemDbContext>();
 
             string code = @"
-                    public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+                    public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
                     {
                         componentData.SingleDatas.ElementAt(0).Field1 = ""100000099"";
                     }

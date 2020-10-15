@@ -4,7 +4,6 @@ using IEManageSystem.CMS.DomainModel;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Logics;
 using IEManageSystem.CMS.DomainModel.Menus;
-using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Common.DomainModel;
@@ -33,21 +32,16 @@ namespace IEManageSystem.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new ApiScopeNodeConfigure());
 
             // 配置Core
-            modelBuilder.ApplyConfiguration(new UserConfigure());
-            modelBuilder.ApplyConfiguration(new AccountConfigure());
-            modelBuilder.ApplyConfiguration(new RoleConfigure());
             modelBuilder.ApplyConfiguration(new PermissionConfigure());
+            modelBuilder.ApplyConfiguration(new RoleConfigure());
+            modelBuilder.ApplyConfiguration(new RolePermissionConfigure());
+            modelBuilder.ApplyConfiguration(new AccountConfigure());
+            modelBuilder.ApplyConfiguration(new UserConfigure());
+            modelBuilder.ApplyConfiguration(new UserRoleConfigure());
+            
 
             // 配置CMS
-            modelBuilder.ApplyConfiguration(new PageBaseConfigure());
-            modelBuilder.ApplyConfiguration(new StaticPageConfigure());
-            modelBuilder.ApplyConfiguration(new ContentPageConfigure());
             modelBuilder.ApplyConfiguration(new ContentPagePeimissionCollectionConfigure());
-            modelBuilder.ApplyConfiguration(new PageComponentBaseConfigure());
-            modelBuilder.ApplyConfiguration(new CompositeComponentConfigure());
-            modelBuilder.ApplyConfiguration(new LeafComponentConfigure());
-            modelBuilder.ApplyConfiguration(new MenuComponentConfigure());
-            modelBuilder.ApplyConfiguration(new PageLeafComponentConfigure());
 
             modelBuilder.ApplyConfiguration(new PageDataConfigure());
 
@@ -56,8 +50,6 @@ namespace IEManageSystem.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new CompositeMenuConfigure());
 
             modelBuilder.ApplyConfiguration(new ComponentDataConfigure());
-            modelBuilder.ApplyConfiguration(new DefaultComponentDataConfigure());
-            modelBuilder.ApplyConfiguration(new ContentComponentDataConfigure());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -72,23 +64,13 @@ namespace IEManageSystem.EntityFrameworkCore
 
         public DbSet<CmsComponent> CmsComponents { get; set; }
 
-        public DbSet<PageBase> Pages { get; set; }
-
-        public DbSet<StaticPage> StaticPages { get; set; }
-
-        public DbSet<ContentPage> ContentPages { get; set; }
-
-        public DbSet<PageComponentBase> PageComponents { get; set; }
+        public DbSet<ContentPagePermissionCollection> ContentPagePermissionCollections { get; set; }
 
         public DbSet<MenuBase> Menus { get; set; }
 
         public DbSet<PageData> PageDatas { get; set; }
 
-        public DbSet<ComponentData> ComponentDatas { get; set; }
-
         public DbSet<ContentComponentData> ContentComponentDatas { get; set; }
-
-        public DbSet<DefaultComponentData> DefaultComponentDatas { get; set; }
 
         public DbSet<SiteSetting> SiteSettings { get; set; }
 

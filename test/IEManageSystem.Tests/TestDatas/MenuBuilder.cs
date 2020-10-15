@@ -21,9 +21,7 @@ namespace IEManageSystem.Tests.TestDatas
 
         public void Build()
         {
-            var pageData = _context.PageDatas.FirstOrDefault(e=>e.Name == "PageData1Name");
-
-            var menu = new CompositeMenu("Main")
+            var menu = new CompositeMenu("CompositeMenu1")
             {
                 DisplayName = "主菜单",
                 Icon = "",
@@ -31,12 +29,10 @@ namespace IEManageSystem.Tests.TestDatas
                 RootMenuId = null,
                 PageName = null,
                 PageDataName = null,
-                Menus = new List<MenuBase>() { 
-                    
-                }
+                Menus = new List<MenuBase>()
             };
 
-            var homeMenu = new LeafMenu("Home")
+            var homeMenu = new LeafMenu("LeafMenu1")
             {
                 DisplayName = "主页",
                 Icon = "",
@@ -45,7 +41,7 @@ namespace IEManageSystem.Tests.TestDatas
                 PageDataName = "PageData1Name",
             };
 
-            var postMenu = new CompositeMenu("post")
+            var postMenu = new CompositeMenu("CompositeMenu2")
             {
                 DisplayName = "文章分类",
                 RootMenu = menu,

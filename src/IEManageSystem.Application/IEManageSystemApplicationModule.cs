@@ -6,6 +6,7 @@ using IEManageSystem.ApiAuthorization;
 using IEManageSystem.ApiAuthorization.DomainModel.ApiScopes;
 using IEManageSystem.ApiScopeProviders;
 using IEManageSystem.CMS;
+using Microsoft.Extensions.Configuration;
 
 namespace IEManageSystem
 {

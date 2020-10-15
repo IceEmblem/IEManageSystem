@@ -1,9 +1,2 @@
-/**
- * @format
- */
-
-import {AppRegistry} from 'react-native';
-import App from './src/RNApp/App';
-import {name as appName} from './app.json';
-
-AppRegistry.registerComponent(appName, () => App);
+// 该文件为 RN 的入口文件，我无法将该文件移动 src/RNApp/RNStart 下
+import './src/RNApp/RNStart/index';

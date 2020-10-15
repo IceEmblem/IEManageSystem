@@ -12,5 +12,10 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
         public string PageName { get; set; }
 
         public string PageDataName { get; set; }
+
+        /// <summary>
+        /// 如果为 true，则会检查当前者的身份是否为创造者
+        /// </summary>
+        public bool IsCheckCreator { get; set; }
     }
 }

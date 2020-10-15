@@ -1,9 +1,13 @@
-import SingleDataModel from "../SingleDataModel";
-import DataCollectionBase from "../DataCollectionBase";
+export const DefaultSettingName = 'DefaultSetting'
 
-export default class PageComponentSettingModel extends DataCollectionBase 
+export const IEFontSetting = 'IEFontSetting';
+
+export const IECommonStyleSetting = 'IECommonStyleSetting';
+
+export const IEPostFieldSetting = 'IEPostFieldSetting';
+
+export default class PageComponentSettingModel
 {
-    public id: number;
     public name:string;
     public displayName:string;
 }

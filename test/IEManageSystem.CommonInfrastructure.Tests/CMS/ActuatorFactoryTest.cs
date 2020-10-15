@@ -15,7 +15,7 @@ namespace IEManageSystem.CommonInfrastructure.Tests.CMS
         [Fact]
         public void Register_BaseTest() {
             string code = @"
-        public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+        public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
         {
             componentData.Id = 1;
         }
@@ -27,7 +27,7 @@ namespace IEManageSystem.CommonInfrastructure.Tests.CMS
 
             var actuator = actuatorFactory.GetActuator("Test");
             ContentComponentData componentData = new ContentComponentData();
-            actuator.Exec(componentData, null, null, null, null, null);
+            actuator.Exec(componentData, null, null, null, null);
 
             Assert.True(componentData.Id == 1);
         }
@@ -38,7 +38,7 @@ namespace IEManageSystem.CommonInfrastructure.Tests.CMS
             var actuatorFactory = LocalIocManager.Resolve<IActuatorFactory>();
 
             actuatorFactory.Register("RegisterFailTest1", @"
-        public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+        public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
         {
             componentData.Id = 1;
         }
@@ -47,7 +47,7 @@ namespace IEManageSystem.CommonInfrastructure.Tests.CMS
             try
             {
                 actuatorFactory.Register("RegisterFailTest2", @"
-        public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+        public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
         {
             componentData.Id = 1;$$$$$$$
         }
@@ -74,7 +74,7 @@ namespace IEManageSystem.CommonInfrastructure.Tests.CMS
             var actuatorFactory = LocalIocManager.Resolve<IActuatorFactory>();
 
             actuatorFactory.Register("Test1", @"
-        public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+        public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
         {
             componentData.Id = 1;
         }
@@ -82,18 +82,18 @@ namespace IEManageSystem.CommonInfrastructure.Tests.CMS
 
             var actuator = actuatorFactory.GetActuator("Test1");
             ContentComponentData componentData = new ContentComponentData();
-            actuator.Exec(componentData, null, null, null, null, null);
+            actuator.Exec(componentData, null, null, null, null);
             Assert.True(componentData.Id == 1);
 
             actuatorFactory.Register("Test2", @"
-        public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+        public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
         {
             componentData.Id = 2;
         }
 ");
 
             actuatorFactory.Register("Test3", @"
-        public override void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+        public override void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
         {
             componentData.Id = 3;
         }
@@ -101,17 +101,17 @@ namespace IEManageSystem.CommonInfrastructure.Tests.CMS
 
             actuator = actuatorFactory.GetActuator("Test1");
             componentData = new ContentComponentData();
-            actuator.Exec(componentData, null, null, null, null, null);
+            actuator.Exec(componentData, null, null, null, null);
             Assert.True(componentData.Id == 1);
 
             actuator = actuatorFactory.GetActuator("Test2");
             componentData = new ContentComponentData();
-            actuator.Exec(componentData, null, null, null, null, null);
+            actuator.Exec(componentData, null, null, null, null);
             Assert.True(componentData.Id == 2);
 
             actuator = actuatorFactory.GetActuator("Test3");
             componentData = new ContentComponentData();
-            actuator.Exec(componentData, null, null, null, null, null);
+            actuator.Exec(componentData, null, null, null, null);
             Assert.True(componentData.Id == 3);
         }
     }

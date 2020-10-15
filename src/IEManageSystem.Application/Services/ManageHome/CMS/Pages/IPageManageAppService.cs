@@ -15,7 +15,5 @@ namespace IEManageSystem.Services.ManageHome.CMS.Pages
         UpdatePageOutput UpdatePage(UpdatePageInput input);
 
         UpdateContentPagePermissionOutput UpdateContentPagePermission(UpdateContentPagePermissionInput input);
-
-        UpdatePageComponentOutput UpdatePageComponent(UpdatePageComponentInput input);
     }
 }

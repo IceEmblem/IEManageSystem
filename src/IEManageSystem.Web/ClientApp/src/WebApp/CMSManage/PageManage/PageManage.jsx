@@ -5,7 +5,7 @@ import { ResourceDescribeValueType } from 'Common/ResourceForm/ResourceDescribeV
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 import PostPermissionEdit from './PostPermissionEdit'
 
-import { Modal, Button } from 'antd'
+import { Modal, Button, message } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 
 const pageType = {
@@ -25,7 +25,7 @@ function EditComponent(props) {
 }
 
 function EditPageData(props) {
-	if (props.resource.pageType == pageType.ContentPage) {
+	if (props.resource.discriminator == pageType.ContentPage) {
 		return (
 			<NavLink className="ant-btn ant-btn-sm mr-1"
 				to={`/ManageHome/CMSManage/PageData/${props.resource.name}`}
@@ -66,15 +66,19 @@ class PageManage extends React.Component {
 	getDescribes() {
 		return [
 			{ name: "id", isId: true, isAddShow: false, isEditShow: false, isLookupShow: false },
-			{ name: "name", text: "页面名称", isEditCanEdit: false, isName: true, isShowOnList: true },
+			{ name: "name", text: "页面名称", isId: true, isEditCanEdit: false, isName: true, isShowOnList: true },
 			{ name: "displayName", text: "显示名称", isShowOnList: true },
 			{ name: "description", text: "页面描述", isShowOnList: true },
 			{
-				name: "pageType", text: "页面类型", isShowOnList: true,
+				name: "discriminator", text: "页面类型", isShowOnList: true,
 				valueType: ResourceDescribeValueType.radio,
 				valueTexts: [{ value: pageType.StaticPage, text: "单篇页面" }, { value: pageType.ContentPage, text: "文章页面" }],
-				isEditCanEdit: false
-			}
+			},
+			{ name: "field1Name", text: "字段1名称" },
+			{ name: "field2Name", text: "字段2名称" },
+			{ name: "field3Name", text: "字段3名称" },
+			{ name: "field4Name", text: "字段4名称" },
+			{ name: "field5Name", text: "字段5名称" },
 		];
 	}
 
@@ -93,11 +97,19 @@ class PageManage extends React.Component {
 
 	// Resource组件添加资源通知
 	addResource(resource) {
-		if (!resource.pageType) {
+		if (!resource.discriminator) {
+			message.error("页面类型是必须的")
 			return;
 		}
 
-		let postData = resource;
+		let postData = {
+			page: resource,
+			pageCompleteJson: JSON.stringify({
+				page: resource,
+				pageComponents: [],
+				defaultComponentDatas: []
+			})
+		};
 
 		ieReduxFetch("/api/PageManage/AddPage", postData)
 			.then(value => {
@@ -108,7 +120,10 @@ class PageManage extends React.Component {
 
 	// Resource组件更新资源通知
 	updateResource(resource) {
-		let postData = resource;
+		let postData = {
+			page: resource,
+			pageCompleteJson: null
+		};
 
 		ieReduxFetch("/api/PageManage/UpdatePage", postData)
 			.then(value => {
@@ -142,13 +157,13 @@ class PageManage extends React.Component {
 		customizeOperateBtns.push(EditComponent);
 		customizeOperateBtns.push(EditPageData);
 		customizeOperateBtns.push((props) => {
-			if (props.resource.pageType != pageType.ContentPage) {
+			if (props.resource.discriminator != pageType.ContentPage) {
 				return (<span></span>);
 			}
-		
+
 			return (<Button
 				icon={<EditOutlined />}
-				onClick={() => this.setState({postPermissionEdit:{ show: true, pageName: props.resource.name }})}
+				onClick={() => this.setState({ postPermissionEdit: { show: true, pageName: props.resource.name } })}
 				size="small"
 			>编辑权限</Button>);
 		});
@@ -167,10 +182,10 @@ class PageManage extends React.Component {
 					updateResource={this.updateResource}
 					customizeOperateBtns={customizeOperateBtns}
 				/>
-				<PostPermissionEdit 
+				<PostPermissionEdit
 					show={this.state.postPermissionEdit.show}
 					pageName={this.state.postPermissionEdit.pageName}
-					close={()=>{this.setState({postPermissionEdit:{ show: false, pageName: null }})}}
+					close={() => { this.setState({ postPermissionEdit: { show: false, pageName: null } }) }}
 				/>
 			</div>
 		);

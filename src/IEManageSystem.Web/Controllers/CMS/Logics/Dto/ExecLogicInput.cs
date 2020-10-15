@@ -11,8 +11,6 @@ namespace IEManageSystem.Web.Controllers.CMS.Logics.Dto
 
         public string PageName { get; set; }
 
-        public string PageComponentSign { get; set; }
-
         public string PageDataName { get; set; }
 
         public string ContentComponentDataSign { get; set; }

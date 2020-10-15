@@ -5,7 +5,7 @@ import Paging from './Paging.jsx';
 import ResourceDelete from './ResourceDelete.jsx';
 import ResourceForm from 'Common/ResourceForm/ResourceForm.jsx';
 
-require("./Resource.css");
+import './Resource.css'
 
 var operationState = {
 	none: "none",

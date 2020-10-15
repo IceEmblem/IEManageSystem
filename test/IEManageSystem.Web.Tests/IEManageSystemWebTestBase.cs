@@ -25,7 +25,7 @@ namespace IEManageSystem.Web.Tests
 
         protected IEManageSystemWebTestBase()
         {
-            UsingDbContext(context => new TestDataBuilder(context).Build());
+            UsingDbContext(context => new DBBuilder(context).Build());
         }
 
         protected override IWebHostBuilder CreateWebHostBuilder()

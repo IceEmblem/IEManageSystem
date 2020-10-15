@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import './BodyDiv.css';
-import MenuProvider from 'Layout/Menu/MenuProvider'
+import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 
 import Index from "./Index/index.jsx";
 import { Spin } from 'antd';

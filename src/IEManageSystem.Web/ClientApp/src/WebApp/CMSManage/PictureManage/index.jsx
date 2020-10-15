@@ -1,6 +1,6 @@
 import React from 'react'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
-import IETool from 'Core/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 import PictureBox from './PictureBox';
 
@@ -138,7 +138,7 @@ export default class PictureManage extends React.Component {
                 <div className="bg-white">
                     <div className="mb-3 d-flex">
                         <Upload
-                            className="w-100"
+                            className='pr-2'
                             name='file'
                             showUploadList={false}
                             beforeUpload={(file) => {
@@ -146,11 +146,11 @@ export default class PictureManage extends React.Component {
                                 return false;
                             }}
                         >
-                            <Button block>
+                            <Button type='primary'>
                                 <PlusCircleOutlined /> 添加图片
                             </Button>
                         </Upload>
-                        <Button onClick={this.deleteImage} danger>
+                        <Button type='primary' onClick={this.deleteImage} block danger>
                             <DeleteOutlined /> 图片
                         </Button>
                     </div>

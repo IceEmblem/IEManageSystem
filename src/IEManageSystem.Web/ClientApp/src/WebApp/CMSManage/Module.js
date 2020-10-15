@@ -1,22 +1,25 @@
 import React from 'react'
 
 // 核心模块依赖
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
-import MenuProvider from 'Layout/Menu/MenuProvider'
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
+import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import AccessScope, { ApiScopeNodeType } from "Core/ApiScopeAuthority/AccessScope";
 import CoreModule from 'Core/Module';
-import LayoutModule from 'Layout/Module';
-import PageProvider from 'Core/Page/PageProvider'
-import Page from 'Core/Page/Page'
+import BaseLayoutModule from 'BaseLayout/Module';
+import {PageProvider} from 'ice-common'
+import {Page} from 'ice-common'
 
 // BaseCmsManage 模块依赖
 import BaseCmsManageModule from 'BaseCMSManage/Module';
 
+// Adapters 模块依赖
+import AdaptersModule from 'Adapters/Module'
+
 // 初始化时加载
 import Home from './Home'
 import SearchBoxTool from './SearchBoxTool'
-import NavToolProvider from 'Layout/NavTools/NavToolProvider'
+import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
 import RegisterTemplateManager from './Component/Components/RegisterTemplateManager'
 
 import {
@@ -28,6 +31,8 @@ import {
     AppstoreOutlined,
     FileTextOutlined
 } from '@ant-design/icons';
+
+import CommonModule from 'Common/Module'
 
 // 动态加载
 const PageEdit = React.lazy(() => import('./PageEdit'));
@@ -118,7 +123,7 @@ export default class Module extends BaseModule {
         // 向 Layout 注册工具
         NavToolProvider.registerToolOfLeft(1, <SearchBoxTool />);
         
-        // 向依赖注入容器注册组件的各个部件
+        // 注册模板
         RegisterTemplateManager.init();
 
         // 注册页面
@@ -132,5 +137,7 @@ export default class Module extends BaseModule {
 new ModuleFactory().register(Module, [
     CoreModule,
     BaseCmsManageModule,
-    LayoutModule
+    BaseLayoutModule,
+    AdaptersModule,
+    CommonModule
 ]);

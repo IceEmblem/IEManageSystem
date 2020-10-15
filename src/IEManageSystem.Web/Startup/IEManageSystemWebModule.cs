@@ -66,5 +66,25 @@ namespace IEManageSystem.Web.Startup
         {
             IocManager.RegisterAssemblyByConvention(typeof(IEManageSystemWebModule).GetAssembly());
         }
+
+        public override void PostInitialize()
+        {
+            var a = _appConfiguration["ConnectionStrings:Default"];
+
+            if (string.IsNullOrWhiteSpace(_appConfiguration["ConnectionStrings:Default"]))
+            {
+                return;
+            }
+
+            IUnitOfWorkManager unitOfWorkManager = IocManager.Resolve<IUnitOfWorkManager>();
+
+            // 每次启动时，检查 ApiScope
+            using (var tran = unitOfWorkManager.Begin())
+            {
+                IocManager.Resolve<ApiScopeProvider>().Register();
+
+                tran.Complete();
+            }
+        }
     }
 }

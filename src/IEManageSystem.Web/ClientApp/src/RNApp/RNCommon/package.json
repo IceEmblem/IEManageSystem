@@ -1,0 +1,10 @@
+{
+    "name": "RNCommon",
+    "version": "1.0.0",
+  
+    "dependencies": {
+        "ice-common": "1.0.0",
+        "@types/react-native": "^0.63.25",
+        "react-router-native": "^5.2.0"
+    }
+}

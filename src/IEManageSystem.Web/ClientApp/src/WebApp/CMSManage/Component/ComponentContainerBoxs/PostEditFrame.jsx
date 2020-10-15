@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Tab from 'Common/Tab/Tab.jsx'
 
 import { Modal, Button } from 'antd';
-import IETool from 'Core/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 // props.submit
 // props.close    fun
@@ -14,7 +14,6 @@ class EditFrame extends React.Component {
 
         this.tabs = [{ index: 0, text: "基本设置" }];
         this.nameField = "text";
-        this.selectIndex = 0;
 
         // 新建一个副本，供取消时使用
         this.state = {
@@ -55,7 +54,6 @@ class EditFrame extends React.Component {
                     <Tab
                         tabs={this.tabs}
                         nameField={this.nameField}
-                        selectIndex={this.selectIndex}
                         selectOnclick={() => { }}
                     >
                         {

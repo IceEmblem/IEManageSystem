@@ -1,4 +1,4 @@
-import IETool from 'Core/ToolLibrary/IETool'
+import {IETool} from 'ice-common'
 
 export default class IEToken {
     static setToken(token: string, isRemember: boolean) {
@@ -6,7 +6,7 @@ export default class IEToken {
             return IETool.setCookie('ie_token', token, 7);
         }
         else{
-            return IETool.setCookie('ie_token', token);
+            return IETool.setCookie('ie_token', token, undefined);
         }
     }
 

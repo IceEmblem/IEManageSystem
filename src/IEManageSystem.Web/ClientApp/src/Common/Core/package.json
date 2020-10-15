@@ -3,5 +3,6 @@
     "version": "1.0.0",
   
     "dependencies": {
+        "ice-common": "1.0.0"
     }
 }

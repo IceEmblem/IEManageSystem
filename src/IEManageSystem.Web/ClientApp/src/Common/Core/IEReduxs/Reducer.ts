@@ -1,13 +1,3 @@
-import { FetchAction, GetSiteSettingsReceive } from './Actions'
-
-function siteSettings(state: Array<SiteSettingModel> = [], action: FetchAction) {
-    if (action.type == GetSiteSettingsReceive) {
-        return action.data.siteSettings;
-    }
-
-    return state;
-}
-
 export interface FetchData {
     fecthSign: number,
     isFecthing: boolean,
@@ -18,16 +8,13 @@ export interface FetchData {
 
 export function reducer(
     state: any = {
-        // 类型 FetchData
-        fecths: [],
-        // 站点设置
-        siteSettings: undefined
+        // 类型 FetchData，该数据由中间件赋值
+        fecths: new Array<FetchData>()
     }, action: any) {
     return {
         ...state,
         ...{
-            fecths: state.fecths,
-            siteSettings: siteSettings(state.siteSettings, action)
+            fecths: state.fecths
         }
     }
 }

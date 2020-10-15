@@ -1,14 +1,10 @@
 {
-    // 这是一个 reducer
+    // 以下数据与服务器相关
     "pages": {
-        "id": {}
+        "pageName": {}
     },
-    "pageNameToIds": {
-        "pageName": 1
-    },
-    // 这是一个 reducer
     "pageComponents": {
-        "pageId": {
+        "pageName": {
             "Web":{
                 "sign": {
                     "pageComponentSigns": [
@@ -35,28 +31,26 @@
             }
         }
     },
-    // 这是一个 reducer
     "defaultComponentDatas": {
-        "pageId": {
+        "pageName": {
             "sign": {}
         }
     },
-    // 这是一个 reducer
     "pageDatas": {
         "id": {}
     },
-    "pageDataNameToIds": {
-        "pageDataId": 1
-    },
-    // 这是一个 reducer
     "contentComponentDatas": {
         "pageDataId": {
             "sign": {}
         }
     },
-    "activePageComponentSign": "",
     "menus": {
         "menuName": {}
         ...
-    }
+    },
+    // 以下数据与前端数据相关
+    "pageDataNameToIds": {
+        "pageDataId": 1
+    },
+    "activePageComponentSign": ""
 }

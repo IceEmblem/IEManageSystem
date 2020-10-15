@@ -7,9 +7,9 @@ using System.Text;
 
 namespace IEManageSystem.Configures.CMS
 {
-    public class ComponentDataConfigure : IEntityTypeConfiguration<ComponentData>
+    public class ComponentDataConfigure : IEntityTypeConfiguration<ContentComponentData>
     {
-        public void Configure(EntityTypeBuilder<ComponentData> builder)
+        public void Configure(EntityTypeBuilder<ContentComponentData> builder)
         {
             builder.HasIndex(e => e.Sign);
         }

@@ -1,22 +1,23 @@
-class CreatePageComponentService{
-    private createComponent(sign:string, name:string, componentType:string)
-    {
+class CreatePageComponentService {
+    createComponent(sign: string, name: string, os: string, pageComponentBaseSetting: any = {}) {
         return {
-            id: 0,
             sign: sign,
             name: name,
-            parentSign: null,
-            os: null,
+            parentSign: undefined,
+            group: undefined,
+            os: os,
             pageComponentBaseSetting: {
-                id: 0,
-                sortIndex: 0,
-                width: null,
-                height: null,
-                padding: null,
-                margin: null,
-                backgroundColor: null,
-                backgroundImage: null,
-                className: null,
+                ...{
+                    sortIndex: 0,
+                    width: '100%',
+                    height: undefined,
+                    padding: undefined,
+                    margin: undefined,
+                    backgroundColor: undefined,
+                    backgroundImage: undefined,
+                    className: undefined,
+                },
+                ...pageComponentBaseSetting
             },
             pageLeafSetting: {
                 pageName: "",
@@ -24,30 +25,9 @@ class CreatePageComponentService{
                 top: 0,
                 searchKey: "",
             },
-            menuName: null,
-            componentType: componentType,
-            pageComponentSettings: []
+            menuName: undefined,
+            pageComponentSettings: {}
         };
-    }
-
-    createCompositeComponent(sign:string, name:string)
-    {
-        return this.createComponent(sign, name, "CompositeComponent")
-    }
-
-    createLeafComponent(sign:string, name:string)
-    {
-        return this.createComponent(sign, name, "LeafComponent")
-    }
-
-    createPageLeafComponent(sign:string, name:string)
-    {
-        return this.createComponent(sign, name, "PageLeafComponent")
-    }
-
-    createMenuComponent(sign:string, name:string)
-    {
-        return this.createComponent(sign, name, "MenuComponent")
     }
 }
 

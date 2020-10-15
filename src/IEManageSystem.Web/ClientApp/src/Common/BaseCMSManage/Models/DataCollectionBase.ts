@@ -1,6 +1,6 @@
 import SingleDataModel from "./SingleDataModel";
 
-const defaultDataName = "__default__";
+const defaultDataName = "_";
 
 export default abstract class DataCollectionBase {
     public singleDatas: Array<SingleDataModel>;
@@ -50,5 +50,9 @@ export default abstract class DataCollectionBase {
             single = this.singleDatas.find(item=>item.name == name);
         }
         return single;
+    }
+
+    sort(){
+        this.singleDatas.sort((l, r) => l.sortIndex - r.sortIndex);
     }
 }

@@ -4,7 +4,7 @@ import Tab from 'Common/Tab/Tab.jsx';
 
 import "./MenuPermission.css";
 import { ieReduxFetch } from 'Core/IEReduxFetch';
-import LayoutRedux from 'Layout/IEReduxs/LayoutRedux'
+import LayoutRedux from 'BaseLayout/IEReduxs/LayoutRedux'
 
 import IESideNav from 'Common/IESideNav';
 
@@ -112,8 +112,8 @@ class MenuPermission extends React.Component {
 			resources.push(resource);
 			if (this.selectMenuPermissions.length - 1 - item > 0) {
 				resources.push(
-					<div className="d-flex justify-content-center padding-bottom-10">
-						<span className="oi oi-medical-cross padding-bottom-10" title="icon name" aria-hidden="true"></span>
+					<div className="d-flex justify-content-center pb-2">
+						<span className="oi oi-medical-cross pb-2" title="icon name" aria-hidden="true"></span>
 					</div>);
 			}
 		}

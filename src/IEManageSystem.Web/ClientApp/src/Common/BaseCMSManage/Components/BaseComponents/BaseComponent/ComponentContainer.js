@@ -1,24 +1,19 @@
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
 import { ieReduxFetch } from 'Core/IEReduxFetch'
 import { pageFetch, pageDataFetch } from 'BaseCMSManage/IEReduxs/Actions'
-import PageDataModel from 'BaseCMSManage/Models/PageDatas/PageDataModel'
 
-const pageDataModel = PageDataModel.CreatePageDataModel();
-
-export const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let pageComponent = state.pageComponents[ownProps.pageId][ownProps.os][ownProps.sign];
-
+export const mapStateToProps = (state, ownProps) => {
     return {
-        pageComponent: pageComponent,
-        page: state.pages[ownProps.pageId],
-        pageData: state.pageDatas[ownProps.pageDataId] || pageDataModel,
+        pageComponent: ownProps.currentPageAndPost.pageComponents[ownProps.sign],
+        page: ownProps.currentPageAndPost.page,
+        pageData: ownProps.currentPageAndPost.pageData,
     }
 }
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         dispatchPageFreshen: (pageName, pageDataName) => {
-            let promises = [dispatch(pageFetch(pageName))];
+            let promises = [dispatch(pageFetch(pageName, true))];
             if (pageDataName && pageDataName != "") {
                 promises.push(dispatch(pageDataFetch(pageName, pageDataName)));
             }
@@ -27,7 +22,7 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export const mergeProps = (stateProps, dispatchProps, ownProps) => {
+export const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return {
         ...stateProps,
         ...dispatchProps,

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.UI;
 using IEManageSystem.CMS.DomainModel.ComponentDatas;
-using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.CMS.Repositorys;
@@ -27,15 +26,12 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 
         private ComponentDataManager _componentDataManager { get; }
 
-        private PageComponentManager _pageComponentManager { get; }
-
         private UserManager _userManager { get; }
 
         public ExecLogicService(
             IActuatorFactory actuatorFactory,
             PageManager pageManager,
             PageDataManager pageDataManager,
-            PageComponentManager pageComponentManager,
             ComponentDataManager componentDataManager,
             UserManager userManager) 
         {
@@ -45,8 +41,6 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 
             _pageDataManager = pageDataManager;
 
-            _pageComponentManager = pageComponentManager;
-
             _componentDataManager = componentDataManager;
 
             _userManager = userManager;
@@ -55,24 +49,17 @@ namespace IEManageSystem.CMS.DomainModel.Logics
         public void Exec(
             Logic logic,
             string pageName,
-            string pageComponentBaseSign,
             string pageDataName,
             string contentComponentDataSign,
             int userId,
             string request)
         {
-            var page = _pageManager.GetPageForCache(pageName);
+            var pages = _pageManager.GetPagesForCache();
+            var page = _pageManager.GetPagesForCache().FirstOrDefault(e => e.Name == pageName);
 
             if (page == null) 
             {
                 throw new UserFriendlyException($"指定的页面{pageName}不存在");
-            }
-
-            var pageComponent = _pageComponentManager.GetPageComponentsForCache(page.Name).FirstOrDefault(e => e.Sign == pageComponentBaseSign);
-
-            if (pageComponent == null)
-            {
-                throw new UserFriendlyException($"指定的组件{pageComponentBaseSign}不存在");
             }
 
             var post = _pageDataManager.PostRepository.GetAllIncluding(e => e.Tags).FirstOrDefault(e => e.Name == pageDataName);
@@ -80,7 +67,7 @@ namespace IEManageSystem.CMS.DomainModel.Logics
             ContentComponentData componentData = null;
             if (post != null) 
             {
-                componentData = _componentDataManager.ContentComponentDataRepository.GetAllIncluding(e => e.SingleDatas).FirstOrDefault(e => e.PageDataId == post.Id && e.Sign == contentComponentDataSign);
+                componentData = _componentDataManager.ComponentDataRepository.GetAllIncluding(e => e.SingleDatas).OfType<ContentComponentData>().FirstOrDefault(e => e.PageDataId == post.Id && e.Sign == contentComponentDataSign);
             }
 
             var actuator = _actuatorFactory.GetActuator(logic.Name);
@@ -107,9 +94,10 @@ namespace IEManageSystem.CMS.DomainModel.Logics
 
             try
             {
-                actuator.Exec(componentData, pageComponent, post, page, user, request);
+                actuator.Exec(componentData, post, page, user, request);
             }
-            catch (Exception ex) {
+            catch (Exception ex) 
+            {
                 throw ex.InnerException;
             }
         }

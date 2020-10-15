@@ -1,0 +1,9 @@
+{
+    "name": "RNInfrastructure",
+    "version": "1.0.0",
+  
+    "dependencies": {
+        "Core": "1.0.0",
+        "RNCommon": "1.0.0"
+    }
+}

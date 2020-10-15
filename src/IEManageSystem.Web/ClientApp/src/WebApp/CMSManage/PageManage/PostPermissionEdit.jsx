@@ -2,13 +2,14 @@ import React from 'react'
 import { ieReduxFetch } from 'Core/IEReduxFetch';
 import { Modal, Button, Checkbox, Switch, Typography, Card } from 'antd'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
+import ContentPagePermissionCollection from 'BaseCMSManage/Models/ContentPagePermissionCollection'
 
 export default class PostPermissionEdit extends React.Component {
     state = {
-        page: null,
         contentPagePeimissionCollection: {
             contentPagePermissions: [],
             isEnableQueryPermission: false,
+            pageName: null,
             queryPermissions: []
         },
         permissionOptions: [],
@@ -39,12 +40,11 @@ export default class PostPermissionEdit extends React.Component {
     }
 
     getPage(props) {
-        ieReduxFetch("/api/PageQuery/GetPage", {
+        ieReduxFetch("/api/PageQuery/GetPagePermissions", {
             name: props.pageName
         }).then(value => {
             this.setState({
-                page: value.page,
-                contentPagePeimissionCollection: value.page.contentPagePeimissionCollection
+                contentPagePeimissionCollection: value.contentPagePeimissionCollection || new ContentPagePermissionCollection(props.pageName)
             });
         });
     }
@@ -61,7 +61,7 @@ export default class PostPermissionEdit extends React.Component {
     render() {
 
         return (<Modal
-            title={`${this.state.page ? this.state.page.name : ""} 信息`}
+            title={`${this.props.pageName} 信息`}
             visible={this.props.show}
             onOk={() => this.updatePagePeimission()}
             onCancel={this.props.close}

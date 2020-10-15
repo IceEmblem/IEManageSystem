@@ -1,0 +1,15 @@
+
+{
+    "Name": "ContentPage1Name",
+    "DisplayName": "内容测试页",
+    "Description": "内容测试页描述",
+    "Creator": {
+        "EditorId": 1,
+        "Name": "测试用户"
+    },
+    "LastUpdater": {
+        "EditorId": 1,
+        "Name": "测试用户"
+    },
+    "Discriminator": "ContentPage"
+}

@@ -1,20 +1,20 @@
 import React from 'react'
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
-import MenuProvider from 'Layout/Menu/MenuProvider'
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
+import MenuProvider from 'BaseLayout/Menu/MenuProvider'
 import CoreModule from 'Core/Module';
-import LayoutModule from 'Layout/Module';
-import IERedux from './IEReduxs/PersonalRedux'
-import {reducer} from './IEReduxs/Reducers'
-import RootRedux from 'Core/IEReduxs/RootRedux'
+import BaseLayoutModule from 'BaseLayout/Module';
 import UserTagNavTools from './UserTagNavTools'
-import NavToolProvider from 'Layout/NavTools/NavToolProvider'
+import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
+import BasePersonModule from 'BasePerson/Module'
 
 import {
     UserOutlined,
     SolutionOutlined,
     SafetyOutlined
 } from '@ant-design/icons';
+
+import CommonModule from 'Common/Module'
 
 // 动态加载
 const Personal = React.lazy(() => import('./Personal'));
@@ -49,13 +49,12 @@ export default class Module extends BaseModule
             1
         );
         NavToolProvider.registerToolRight(1, <UserTagNavTools />);
-
-        IERedux.setReducer(reducer);
-        RootRedux.register(IERedux);
     }
 }
 
 new ModuleFactory().register(Module, [
     CoreModule,
-    LayoutModule
+    BasePersonModule,
+    BaseLayoutModule,
+    CommonModule
 ]);

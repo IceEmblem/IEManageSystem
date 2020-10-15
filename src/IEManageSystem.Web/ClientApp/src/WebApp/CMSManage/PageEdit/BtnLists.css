@@ -2,23 +2,13 @@
     position: fixed !important;
     display: flex;
     justify-content: flex-end;
-    right: 5rem;
-    bottom: 4rem;
-    width: 0rem !important;
+    right: 80px;
+    bottom: 60px;
     opacity: 0.9;
     z-index: 9999;
-}
-
-.PageContainer-btnlists-bnts{
     justify-content: flex-end;
 }
 
 .PageContainer-btnlists-pageInfoComponent{
     position: relative;
-}
-
-.PageContainer-btnlists-bnts>*{
-    padding: .2rem 0rem;
-    display: flex;
-    align-items: center;
 }

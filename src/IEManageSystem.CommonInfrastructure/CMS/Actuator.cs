@@ -1,6 +1,5 @@
 ﻿using IEManageSystem.CMS.DomainModel.ComponentDatas;
 using IEManageSystem.CMS.DomainModel.Logics;
-using IEManageSystem.CMS.DomainModel.PageComponents;
 using IEManageSystem.CMS.DomainModel.PageDatas;
 using IEManageSystem.CMS.DomainModel.Pages;
 using IEManageSystem.Entitys.Authorization.Users;
@@ -12,14 +11,14 @@ namespace IEManageSystem.CommonInfrastructure.CMS
 {
     public class Actuator : IActuator
     {
-        private Action<ContentComponentData, PageComponentBase, PageData, PageBase, User, string
+        private Action<ContentComponentData, PageData, Page, User, string
             > _action { get; }
 
-        public Actuator(Action<ContentComponentData, PageComponentBase, PageData, PageBase, User, string> action) => _action = action;
+        public Actuator(Action<ContentComponentData, PageData, Page, User, string> action) => _action = action;
 
-        public void Exec(ContentComponentData componentData, PageComponentBase pageComponent, PageData pageData, PageBase page, User user, string request)
+        public void Exec(ContentComponentData componentData, PageData pageData, Page page, User user, string request)
         {
-            _action(componentData, pageComponent, pageData, page, user, request);
+            _action(componentData, pageData, page, user, request);
         }
     }
 }

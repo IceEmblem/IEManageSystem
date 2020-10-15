@@ -1,5 +1,5 @@
+import React from 'react'
 import CmsRedux from 'BaseCMSManage/IEReduxs/CmsRedux'
-import * as BaseComponentContainer from '../BaseComponent/ComponentContainer'
 import { menuFetch } from 'BaseCMSManage/IEReduxs/Actions'
 import MenuModel from 'BaseCMSManage/Models/MenuModel'
 
@@ -11,7 +11,7 @@ const defaultMenuData = function(){
     root.menuType = "CompositeMenu";
     root.addChildMenu({
         "id": 0,
-        icon: 'home',
+        "icon": '',
         "name": "home",
         "displayName": "首页",
         "menuType": "LeafMenu",
@@ -35,29 +35,62 @@ const defaultMenuData = function(){
     return root;
 }()
 
-const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
-    let baseState = BaseComponentContainer.mapStateToProps(state, ownProps);
+class MenuContain extends React.Component
+{
+    componentDidMount(){
+        this.getMenus(this.props);
+    }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.pageComponent.menuName != this.props.pageComponent.menuName){
+            this.getMenus(nextProps);
+        }
+    }
+
+    getMenus(props) {
+        if(!props.pageComponent.menuName){
+            return;
+        }
+
+        if(!props.isDefaultMenu){
+            return;
+        }
+
+        props.dispatchMenuFetch();
+    }
+
+    render(){
+        let {_menuComponent : Component, ...props} = this.props
+        return <Component 
+            {...props}
+        />
+    }
+}
+
+const mapStateToProps = (state, ownProps) => { // ownProps为当前组件的props
+    let menu = state.menus[ownProps.pageComponent.menuName] || defaultMenuData;
     return {
-        menu: state.menus[baseState.pageComponent.menuName] || defaultMenuData,
-        isDefaultMenu: state.menus[baseState.pageComponent.menuName] == undefined,
-        ...baseState,
+        menu: menu,
+        isDefaultMenu: state.menus[ownProps.pageComponent.menuName] == undefined,
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        dispatchMenuFetch: (menuName) => {
-            return dispatch(menuFetch(menuName));
+        dispatchMenuFetch: () => {
+            return dispatch(menuFetch(ownProps.pageComponent.menuName));
         },
-        ...BaseComponentContainer.mapDispatchToProps(dispatch, ownProps)
     }
 }
 
 const Contain = CmsRedux.connect(
     mapStateToProps, // 关于state
     mapDispatchToProps,
-    BaseComponentContainer.mergeProps
-)
+)(MenuContain)
 
-export default Contain;
+export default (component) => (props) => {
+    return <Contain 
+        _menuComponent={component}
+        {...props}
+    />
+}

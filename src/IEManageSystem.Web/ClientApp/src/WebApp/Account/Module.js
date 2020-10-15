@@ -1,14 +1,15 @@
 import React from 'react'
-import BaseModule from 'Core/Modules/BaseModule'
-import ModuleFactory from 'Core/Modules/ModuleFactory'
+import {BaseModule} from 'ice-common'
+import {ModuleFactory} from 'ice-common'
 import CoreModule from 'Core/Module';
-import LayoutModule from 'Layout/Module';
+import BaseLayoutModule from 'BaseLayout/Module';
 
-import PageProvider from 'Core/Page/PageProvider'
-import Page from 'Core/Page/Page'
+import {PageProvider} from 'ice-common'
+import {Page} from 'ice-common'
 
 import LogoutBtnNavTool from './LogoutBtnNavTool'
-import NavToolProvider from 'Layout/NavTools/NavToolProvider'
+import NavToolProvider from 'BaseLayout/NavTools/NavToolProvider'
+import CommonModule from 'Common/Module'
 
 const Account = React.lazy(() => import('./account'));
 
@@ -22,5 +23,6 @@ export default class Module extends BaseModule
 
 new ModuleFactory().register(Module, [
     CoreModule,
-    LayoutModule
+    BaseLayoutModule,
+    CommonModule
 ]);

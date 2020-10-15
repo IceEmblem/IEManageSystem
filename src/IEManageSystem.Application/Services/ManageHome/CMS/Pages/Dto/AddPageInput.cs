@@ -6,7 +6,10 @@ using System.Text;
 
 namespace IEManageSystem.Services.ManageHome.CMS.Pages.Dto
 {
-    public class AddPageInput : PageDto
+    public class AddPageInput
     {
+        public PageDto Page { get; set; }
+
+        public string PageCompleteJson { get; set; }
     }
 }

@@ -1,0 +1,38 @@
+.IERankingList-item{
+    display: flex;
+    padding: 10px;
+    margin: 5px;
+    align-items: center;
+}
+
+.IERankingList-item a{
+    color: #262626;
+}
+
+.IERankingList-item:first-child a{
+    color:#fff;
+}
+
+
+.IERankingList-item-icon{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #db3964;
+}
+
+.IERankingList-item:first-child > .IERankingList-item-icon{
+    background-color: #FFD700;
+}
+
+.IERankingList-item:nth-child(2) > .IERankingList-item-icon{
+    background-color: #c0c0c0;
+}
+
+.IERankingList-item:nth-child(3) > .IERankingList-item-icon{
+    background-color: #824b2a;
+}

@@ -25,6 +25,10 @@ export default class RNSpec implements ISpec {
             return {isPass: false, message: "外边距必须是数字"};
         }
 
+        if(pageComponentBaseSetting.position && pageComponentBaseSetting.position != 'absolute' && pageComponentBaseSetting.position != 'relative'){
+            return {isPass: false, message: "App 只有 absolute 和 relative 定位"};
+        }
+
         return {isPass: true, message: null};
     }
 

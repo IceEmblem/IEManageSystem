@@ -5,16 +5,9 @@ else{
     presets = ["module:metro-react-native-babel-preset"]
 }
 
-
 module.exports = {
     presets: presets,
     plugins: [
-        [
-            "import",
-            {
-                "libraryName": "@ant-design/react-native"
-            }
-        ],
         [
             "import",
             {
@@ -27,9 +20,6 @@ module.exports = {
             "module-resolver",
             {
                 "root": [
-                    // "src/Common",
-                    // "src/RNApp",
-                    // "src/WebApp",
                     "src/Assets"
                 ],
                 "extensions": [

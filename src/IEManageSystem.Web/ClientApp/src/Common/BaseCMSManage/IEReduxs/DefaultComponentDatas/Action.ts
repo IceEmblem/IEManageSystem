@@ -2,5 +2,11 @@
 export const DefaultComponentDataUpdate = "DefaultComponentDataUpdate"
 export class DefaultComponentDataUpdateAction{
     type = DefaultComponentDataUpdate;
-    constructor(public pageId: number, public sign: string, public componentData: any){}
+    constructor(public pageName: string, public sign: string, public componentData: any){}
+}
+
+export const SetDefaultComponentDatas = "SetDefaultComponentDatas"
+export class SetDefaultComponentDatasAction {
+    type = SetDefaultComponentDatas;
+    constructor(public pageName: string, public defaultComponentDatas: any){}
 }

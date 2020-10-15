@@ -26,7 +26,6 @@ namespace IEManageSystem.Web.Controllers.CMS.Logics
             Services.ManageHome.CMS.Logics.Dto.ExecLogicInput appInput = new Services.ManageHome.CMS.Logics.Dto.ExecLogicInput();
             appInput.LogicName = input.LogicName;
             appInput.PageName = input.PageName;
-            appInput.PageComponentSign = input.PageComponentSign;
             appInput.PageDataName = input.PageDataName;
             appInput.ContentComponentDataSign = input.ContentComponentDataSign;
             appInput.Request = input.Request;

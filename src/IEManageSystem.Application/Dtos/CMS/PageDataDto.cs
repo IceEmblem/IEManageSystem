@@ -28,9 +28,21 @@ namespace IEManageSystem.Dtos.CMS
 
         public int Click { get; set; }
 
-        public DateTime CreationTime { get; set; }
+        public string Field1 { get; set; }
 
-        public int PageId { get; set; }
+        public string Field2 { get; set; }
+
+        public string Field3 { get; set; }
+
+        public string Field4 { get; set; }
+
+        public string Field5 { get; set; }
+
+        public EntityEditDto Creator { get; set; }
+
+        public EntityEditDto LastUpdater { get; set; }
+
+        public string PageName { get; set; }
 
         public List<TagDto> Tags { get; set; }
     }

@@ -15,7 +15,7 @@ using System.Text.Json;
 
 namespace IEManageSystem.CMS.DomainModel.PageDatas
 {
-    public class PageData:Entity, IHasCreationTime
+    public class PageData:Entity
     {
         public string Name { get; set; }
 
@@ -39,12 +39,22 @@ namespace IEManageSystem.CMS.DomainModel.PageDatas
         /// </summary>
         public int Click { get; protected set; }
 
-        public DateTime CreationTime { get; set; }
+        // 扩展字段
+        public string Field1 { get; set; }
 
-        public PageBase Page { get; set; }
+        public string Field2 { get; set; }
 
-        [ForeignKey("Page")]
-        public int PageId { get; set; }
+        public string Field3 { get; set; }
+
+        public string Field4 { get; set; }
+
+        public string Field5 { get; set; }
+
+        public EntityEdit Creator { get; set; }
+
+        public EntityEdit LastUpdater { get; set; }
+
+        public string PageName { get; set; }
 
         public ICollection<Tag> Tags { get; set; }
 

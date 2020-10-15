@@ -8,10 +8,16 @@ namespace IEManageSystem.Entitys.Authorization.Identitys
     {
         public int Id { get; set; }
 
+        /// <summary>
+        /// 账号
+        /// </summary>
         public string UserName { get; set; }
 
         public string EmailAddress { get; set; }
 
+        /// <summary>
+        /// 用户昵称
+        /// </summary>
         public string Name { get; set; }
 
         public string Phone { get; set; }

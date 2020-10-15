@@ -9,6 +9,7 @@ using Xunit;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Abp.UI;
+using IEManageSystem.CMS.DomainModel.ComponentDatas;
 
 namespace IEManageSystem.Application.Tests.Services.Logics
 {
@@ -20,16 +21,6 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             _logicExecAppService = LocalIocManager.Resolve<ILogicExecAppService>();
         }
 
-        private void ReloadDB()
-        {
-            UsingDbContext(context => context.Database.EnsureDeleted());
-            UsingDbContext(context => context.Database.EnsureCreated());
-            UsingDbContext(context => new PageBuilder(context).Build());
-            UsingDbContext(context => new PageComponentBuilder(context).Build());
-            UsingDbContext(context => new PageDataBuilder(context).Build());
-            UsingDbContext(context => new LogicBuilder(context).Build());
-        }
-
         [Fact]
         public void ExecLogic_BaseTest() {
             ReloadDB();
@@ -39,7 +30,6 @@ namespace IEManageSystem.Application.Tests.Services.Logics
             _logicExecAppService.ExecLogic(new IEManageSystem.Services.ManageHome.CMS.Logics.Dto.ExecLogicInput() { 
                 LogicName = "ComponentName1",
                 PageName = "ContentPage1Name",
-                PageComponentSign = "ContentPage1_Component1Sign",
                 PageDataName = "PageData1Name",
                 ContentComponentDataSign = "ContentPage1_Component1Sign",
                 Request = ""
@@ -62,7 +52,6 @@ namespace IEManageSystem.Application.Tests.Services.Logics
                 {
                     LogicName = "AAAAAAAAAAAAAAA",
                     PageName = "ContentPage1Name",
-                    PageComponentSign = "ContentPage1_Component1Sign",
                     PageDataName = "PageData",
                     ContentComponentDataSign = "ContentPage1_Component1Sign",
                     Request = ""

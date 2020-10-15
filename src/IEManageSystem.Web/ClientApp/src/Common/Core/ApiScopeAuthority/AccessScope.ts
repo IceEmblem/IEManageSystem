@@ -1,3 +1,5 @@
+import UserScopeAccessAuthority from './UserScopeAccessAuthority'
+
 export enum ApiScopeNodeType {
     manage,
     query
