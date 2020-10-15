@@ -5,6 +5,7 @@
     "dependencies": {
         "Core": "1.0.0",
         "BaseLayout": "1.0.0",
-        "Common": "1.0.0"
+        "Common": "1.0.0",
+        "BaseSetting": "1.0.0"
     }
 }

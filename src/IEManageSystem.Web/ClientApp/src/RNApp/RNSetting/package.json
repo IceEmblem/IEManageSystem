@@ -4,6 +4,7 @@
     "dependencies": {
         "Core": "1.0.0",
         "BaseLayout": "1.0.0",
-        "RNCommon": "1.0.0"
+        "RNCommon": "1.0.0",
+        "BaseSetting": "1.0.0"
     }
 }

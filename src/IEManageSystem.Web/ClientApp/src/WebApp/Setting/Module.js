@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 
 import CommonModule from 'Common/Module'
+import BaseSettingModule from 'BaseSetting/Module'
 
 // 动态加载
 const Setting = React.lazy(() => import('./Setting'));
@@ -55,5 +56,6 @@ export default class Module extends BaseModule
 new ModuleFactory().register(Module, [
     CoreModule,
     BaseLayoutModule,
-    CommonModule
+    CommonModule,
+    BaseSettingModule
 ]);

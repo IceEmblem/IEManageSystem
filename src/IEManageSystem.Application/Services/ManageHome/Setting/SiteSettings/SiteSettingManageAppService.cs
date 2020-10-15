@@ -30,18 +30,17 @@ namespace IEManageSystem.Services.ManageHome.Setting.SiteSettings
 
         public SetSiteSettingsOutput SetSiteSettings(SetSiteSettingsInput input)
         {
-            var groups = input.SiteSettings.GroupBy(e => new { e.Group, e.Key });
-            if (groups.Any(e => e.Count() > 1)) 
+            var groupBys = input.SiteSettings.GroupBy(e => new { e.Group, e.Key });
+            if (groupBys.Any(e => e.Count() > 1)) 
             {
                 throw new UserFriendlyException("设置未保存，不允许添加两个相同（组，键）的设置");
             }
 
-            var keys = groups.Select(e=>e.Key);
+            var groups = input.SiteSettings.Select(e => e.Group);
+            var keys = input.SiteSettings.Select(e => e.Key);
 
-            var siteSettings = from siteSetting in _repository.GetAll()
-                               from key in keys
-                               where siteSetting.Group == key.Group && siteSetting.Key == key.Key
-                               select siteSetting;
+            // 输出 Sql 没问题
+            var siteSettings = _repository.GetAll().Where(e => groups.Contains(e.Group) && keys.Contains(e.Key)).ToList();
 
             foreach (var dto in input.SiteSettings) 
             {

@@ -3,7 +3,6 @@ import {ModuleFactory} from 'ice-common'
 import {MiddlewareFactory} from 'ice-common'
 import {fecth} from 'Core/Middlewares/FecthMiddlewares'
 import {IEStore} from 'ice-common'
-import {getSiteSettingsFetch} from 'Core/IEReduxs/Actions'
 import RootRedux from 'Core/IEReduxs/RootRedux'
 import {reducer} from 'Core/IEReduxs/Reducer'
 
@@ -16,7 +15,6 @@ export default class Module extends BaseModule
 
     postInitialize(){
         IEStore.createIEStore(RootRedux.getReducer());
-        IEStore.ieStore.dispatch(getSiteSettingsFetch());
     }
 }
 

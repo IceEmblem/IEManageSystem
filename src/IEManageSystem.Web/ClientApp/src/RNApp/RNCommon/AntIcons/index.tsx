@@ -44,7 +44,7 @@ const iconsTypes = {
     'PauseOutlined': {name:'pause', type:'AntDesign'},
     'FullscreenOutlined': {name:'fullscreen', type: 'MaterialCommunityIcons'},
     'FullscreenExitOutlined': {name:'fullscreen-exit', type: 'MaterialCommunityIcons'},
-    'BgColorsOutlined': {name:'format-color-fill', type: 'MaterialCommunityIcons'},
+    'BgColorsOutlined': {name:'background-color', type: 'Foundation'},
     'MinusSquareOutlined': {name:'minussquareo', type: 'AntDesign'},
     'LeftOutlined': {name:'left', type: 'AntDesign'},
     'RightOutlined': {name:'right', type: 'AntDesign'},

@@ -1,5 +1,5 @@
 import React from 'react'
-import Theme from 'RNLayout/Theme'
+import Theme from 'RNCommon/Theme'
 import { Container, Header, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Item, StyleProvider, Text, Input } from 'native-base'
 import { MenuOutlined, HomeOutlined, UserOutlined, SearchOutlined, ScanOutlined, MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { ScrollView, View } from 'react-native'

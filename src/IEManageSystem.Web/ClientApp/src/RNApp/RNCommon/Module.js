@@ -18,7 +18,7 @@ export default class Module extends BaseModule {
     }
 
     postInitialize(){
-        Theme.init();
+        return Theme.init();
     }
 }
 
