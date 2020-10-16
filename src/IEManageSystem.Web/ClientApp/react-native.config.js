@@ -1,3 +1,4 @@
+const createModulesFile = require('./createModulesFile').createModulesFile;
 createModulesFile(
     "./src/RNApp",
     ["RNStart"],
