@@ -5,15 +5,6 @@
  * @format
  */
 
-const createModulesFile = require('../../../createModulesFile').createModulesFile;
-createModulesFile(
-  "../",
-  ["RNStart"],
-  "Module.js",
-  "",
-  "../ModuleList.js"
-);
-
 module.exports = {
   transformer: {
     getTransformOptions: async () => ({

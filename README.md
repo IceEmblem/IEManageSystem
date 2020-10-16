@@ -24,9 +24,9 @@ IEManageSystem
 <br>
 
 **开发文档**
-> 开发文档位于 Docs 目录下，但文档已过期，后续有时间我在更新 <br>
+> 开发文档位于 Docs 目录下，但文档已过期，后续有时间我再更新 <br>
 > 关于前端框架的介绍，请留意 https://blog.csdn.net/dabusidede/category_10348509.html <br>
-> 关于前端的三端框架有时间我会分离出来，请留意 github <br>
+> 关于前端的三端框架: https://github.com/IceEmblem/IceE <br>
 <br>
 
 ## CMS 演示地址
@@ -69,7 +69,7 @@ IEManageSystem
 **运行安卓App**
 前提：需要安卓安卓运行环境，如果不熟悉，请查阅 https://blog.csdn.net/dabusidede/article/details/107955721 <br>
 > 在运行前需要先更改 android\app\src\main\assets 下的 config.json 中的 baseUrl 中的 ip 为你的 ip地址（本来想使用 10.0.2.2 地址，但怎么试都不成功）<br>
-> cmd 下运行 yarn android 命令<br>
+> cmd 下运行 yarn run android 命令<br>
 <br>
 
 ## 加入项目：
