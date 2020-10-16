@@ -22,7 +22,7 @@ class Component extends IComponent {
             size={setting.size}
             onClick={()=>{
                 if(!this.onClick()){
-                    this.props.history.push(setting.url);
+                    document.location.href = setting.url;
                 }
             }}
         >
