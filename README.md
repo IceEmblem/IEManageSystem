@@ -2,18 +2,19 @@ IEManageSystem
 =============
 ## CMS 介绍
 **可视化页面编辑**
-> IEManageSystem 是一个CMS管理系统，完成前后端分离，通过`通过组件堆积生成页面`，你可以更改任何你想更改的地方<br>
-> IEManageSystem 目前有 Web端 和 安卓App端（是的App，不是浏览器），为了方便用户编辑，IEManageSystem 允许在浏览器对 App 进行编辑<br>
-> 由于个人开发的原因，目前提供的组件并不多，后续会提供更多组件<br>
-> 目前项目还属于开发阶段，bug 什么的一定会有的<br>
+> 1. IEManageSystem 是一个CMS管理系统，完成前后端分离，通过`通过组件堆积生成页面`，你可以更改任何你想更改的地方<br>
+> 2. IEManageSystem 目前有 Web端 和 安卓App端（是的App，不是浏览器），为了方便用户编辑，IEManageSystem 允许在浏览器对 App 进行编辑<br>
+> 3. 由于个人开发的原因，目前提供的组件并不多，后续会提供更多组件<br>
+> 4. 目前项目还属于开发阶段，bug 什么的一定会有的<br>
+
 
 **相对于其他 CMS 的优点**
-> 具有 Web端 和 安卓App端，后面会集成 苹果App端<br>
-> 页面编辑灵活，想编辑哪里就编辑哪里，后面考虑增加拖拽功能<br>
-> 组件具有灵活的配置和数据，包括图表等需要复杂配置和数据，IEManageSystem 都可以完成，添加图表展示只不过是点击页面而已<br>
-> IEManageSystem 允许每个组件都有自己的可执行逻辑，可执行逻辑会在服务器进行动态编译，完成一个业务逻辑不是问题<br>
-> 对于组件开发者而言，你不需要学习任何新的语法，你只需要了解IE组件的设计和React即可编辑出灵活的组件<br>
-> IEManageSystem 的目的不是只完成内容管理，IEManageSystem 组件之间可进行交互，而你要完成的业务逻则取决于你的交互容器组件的编写<br>
+> 1. 具有 Web端 和 安卓App端，后面会集成 苹果App端<br>
+> 2. 页面编辑灵活，想编辑哪里就编辑哪里，后面考虑增加拖拽功能<br>
+> 3. 组件具有灵活的配置和数据，包括图表等需要复杂配置和数据，IEManageSystem 都可以完成，添加图表展示只不过是点击页面而已<br>
+> 4. IEManageSystem 允许每个组件都有自己的可执行逻辑，可执行逻辑会在服务器进行动态编译，完成一个业务逻辑不是问题<br>
+> 5. 对于组件开发者而言，你不需要学习任何新的语法，你只需要了解IE组件的设计和React即可编辑出灵活的组件<br>
+> 6. IEManageSystem 的目的不是只完成内容管理，IEManageSystem 组件之间可进行交互，而你要完成的业务逻则取决于你的交互容器组件的编写<br>
 <br>
 
 **源码与功能**
@@ -28,6 +29,13 @@ IEManageSystem
 > 关于前端框架的介绍，请留意 https://blog.csdn.net/dabusidede/category_10348509.html <br>
 > 关于前端的三端框架: https://github.com/IceEmblem/IceE <br>
 <br>
+
+## 运行 CMS
+1. 下载 asp.net core 3.0 Runtime Hosting Bundle，并安装：https://dotnet.microsoft.com/download/dotnet-core/thank-you/runtime-aspnetcore-3.0.0-windows-hosting-bundle-installer  <br>
+2. 下载最后发布版本：https://github.com/IceEmblem/IEManageSystem/releases  <br>
+3. 解压下载的发布版本并运行 IEManageSystem.Web.exe （直接运行会使用 5000 端口，如果想指定端口，则在cmd下运行命令 dotnet IEManageSystem.Web.dll http://*:8080）  <br>
+ <br>
+
 
 ## CMS 演示地址
 > 没钱买服务器，有点慢<br>
@@ -49,10 +57,17 @@ IEManageSystem
 > asp.net core，abp框架，ORM框架Ef<br>
 <br>
 
-## 如何运行项目
+## 开发者运行项目
+如果你想对该项目进行二次开发，你可以按照如下步骤进行<br>
+
 **运行后端**
+<br>
+1. vs 运行后端：
 > vs2019 打开项目<br>
 > 直接启动项目即可，不推荐从 IIS Express 启动<br>
+
+2. 不使用 vs 运行后端
+> 如果你不会后端开发，那你不必从 Vs 运行，你只需要按照上面的"运行CMS"步骤即可将后端运行起来<br>
 <br>
 
 **运行前端**
